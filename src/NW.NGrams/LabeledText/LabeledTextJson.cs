@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace NW.NGrams
+﻿namespace NW.NGrams
 {
     public class LabeledTextJson
     {
 
         // Fields
         // Properties
-        public UInt64 LabeledTextId { get; set; }
+        public ulong LabeledTextId { get; set; }
         public string Label { get; set; }
         public string Text { get; set; }
 
@@ -18,7 +16,7 @@ namespace NW.NGrams
         public override string ToString()
         {
 
-            return String.Concat(
+            return string.Concat(
                 "{ \"",
                  nameof(LabeledTextId),
                  "\": \"",
@@ -30,15 +28,19 @@ namespace NW.NGrams
                  "\", \"",
                  nameof(Text),
                  "\": \"",
-                 CutText(Text),
+                 GetShorter(Text),
                  "\" }"); 
 
         }
-        private string CutText(string strText)
+
+        // Methods (private)
+        private string GetShorter(string text)
         {
 
-            if (String.IsNullOrEmpty(strText)) return strText;
-            if (strText.Length < 10) return strText;
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+            if (text.Length < 10)
+                return text;
 
             return Text.Substring(0, 10) + " [...]";
 
@@ -48,9 +50,8 @@ namespace NW.NGrams
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 15.01.2018 
- *  Description: It defines a JSON containing a labeled text.
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/
