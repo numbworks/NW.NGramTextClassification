@@ -1,4 +1,6 @@
-﻿namespace NW.NGrams
+﻿using System;
+
+namespace NW.NGrams
 {
     public class TokenizationStrategyMonograms : ITokenizationStrategy
     {
@@ -14,6 +16,9 @@
         public TokenizationStrategyMonograms
             (string pattern, string delimiter, bool convertAllToLowercase)
         {
+
+            if (string.IsNullOrWhiteSpace(pattern))
+                throw new ArgumentNullException(nameof(pattern));
 
             Pattern = pattern;
             Delimiter = delimiter;
