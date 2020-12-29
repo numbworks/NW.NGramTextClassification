@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NW.NGrams", "src\NW.NGrams\NW.NGrams.csproj", "{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NW.NGrams.UnitTests", "tests\NW.NGrams.UnitTests\NW.NGrams.UnitTests.csproj", "{DED71858-151D-46C5-89FD-03AF41A44CFD}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED71858-151D-46C5-89FD-03AF41A44CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED71858-151D-46C5-89FD-03AF41A44CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED71858-151D-46C5-89FD-03AF41A44CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED71858-151D-46C5-89FD-03AF41A44CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
