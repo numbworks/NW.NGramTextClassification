@@ -6,7 +6,7 @@ namespace NW.NGrams
     {
         string LabeledTextJson { get; }
         INGramsTextClassifier NGramsTextClassifier { get; set; }
-        ITokenizationStrategies TokenizationStrategies { get; }
+        ITokenizationStrategyManager TokenizationStrategies { get; }
 
         /// <summary>
         /// It creates a A List<LabeledTextNGrams> out of Resources/LabeledTextsJson.txt.

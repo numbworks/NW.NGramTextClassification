@@ -10,7 +10,7 @@ namespace NW.NGrams
         // Fields
         // Properties
         public INGramsTextClassifier NGramsTextClassifier { get; set; } = new NGramsTextClassifier();
-        public ITokenizationStrategies TokenizationStrategies { get; set; } = new DefaultTokenizationStrategies();
+        public ITokenizationStrategyManager TokenizationStrategies { get; set; } = new TokenizationStrategyManager();
 
         // Constructors
         public LanguageEstimator() { }

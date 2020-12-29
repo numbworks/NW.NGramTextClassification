@@ -7,7 +7,7 @@ namespace NW.NGrams
     {
 
         INGramsTextClassifier NGramsTextClassifier { get; set; }
-        ITokenizationStrategies TokenizationStrategies { get; set; }
+        ITokenizationStrategyManager TokenizationStrategies { get; set; }
 
         /// <summary>
         /// It returns a LanguageEstimationResult object for the provided text.

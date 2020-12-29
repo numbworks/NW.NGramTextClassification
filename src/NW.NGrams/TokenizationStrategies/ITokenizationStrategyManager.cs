@@ -2,7 +2,7 @@
 
 namespace NW.NGrams
 {
-    public interface ITokenizationStrategies
+    public interface ITokenizationStrategyManager
     {
 
         List<ITokenizationStrategy> Get();
@@ -11,8 +11,8 @@ namespace NW.NGrams
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 23.08.2018
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/

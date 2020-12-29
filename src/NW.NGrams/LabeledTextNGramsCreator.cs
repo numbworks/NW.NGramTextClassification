@@ -12,7 +12,7 @@ namespace NW.NGrams
         // Properties
         public INGramsTextClassifier NGramsTextClassifier { get; set; } = new NGramsTextClassifier();
         public string LabeledTextJson { get; }
-        public ITokenizationStrategies TokenizationStrategies { get; } = new DefaultTokenizationStrategies();
+        public ITokenizationStrategyManager TokenizationStrategies { get; } = new TokenizationStrategyManager();
 
         // Constructors
         public LabeledTextNGramsCreator(string strLabeledTextJson)
