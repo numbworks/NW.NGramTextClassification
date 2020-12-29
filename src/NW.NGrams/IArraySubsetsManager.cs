@@ -1,22 +1,19 @@
-﻿using RUBN.Shared;
-
-namespace NW.NGrams
+﻿namespace NW.NGrams
 {
     public interface IArraySubsetsManager
     {
 
-        IParametersValidator ParametersValidator { get; set; }
-
         /// <summary>
         /// It creates a subset of the provided length for the provided array. 
         /// </summary>
-        Outcome GetSubset(string[] arr, int intStartIndex, int intLength);
+        string[] GetSubset(string[] arr, uint startIndex, uint length);
+
     }
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 20.01.2018 
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/

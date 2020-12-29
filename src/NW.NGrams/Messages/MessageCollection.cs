@@ -9,6 +9,9 @@ namespace NW.NGrams
         public static Func<string, string> VariableContainsZeroItems { get; }
             = (variableName) => $"'{variableName}' contains zero items.";
 
+        // ArraySubsetsManager
+        public static Func<string, string> VariableCantBeLessThanOne { get; }
+            = (variableName) => $"'{variableName}' can't be less than one.";
 
 
     }
