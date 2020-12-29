@@ -20,6 +20,8 @@ namespace NW.NGrams
             RoundingStrategy = roundingStrategy;
 
         }
+        public JaccardIndexCalculator()
+            : this(RoundingStategies.TwoDecimalDigits) { }
 
         // Methods
         /// <summary>
