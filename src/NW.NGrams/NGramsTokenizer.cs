@@ -12,7 +12,7 @@ namespace NW.NGrams
         // Fields
         // Properties
         public IArraySubsetsManager ArraySubsetsManager { get; set; } = new ArraySubsetsManager();
-        public IArrayDelimiterManager ArrayDelimiterManager { get; set; } = new ArrayDelimiterManager();
+        public IArrayManager ArrayDelimiterManager { get; set; } = new ArrayManager();
         public IParametersValidator ParametersValidator { get; set; } = new ParametersValidator();
 
         // Constructors

@@ -4,7 +4,7 @@ namespace NW.NGrams
 {
     public interface INGramsTokenizer
     {
-        IArrayDelimiterManager ArrayDelimiterManager { get; set; }
+        IArrayManager ArrayDelimiterManager { get; set; }
         IArraySubsetsManager ArraySubsetsManager { get; set; }
         IParametersValidator ParametersValidator { get; set; }
 

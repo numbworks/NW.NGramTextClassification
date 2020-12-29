@@ -1,6 +1,6 @@
 ﻿namespace NW.NGrams
 {
-    public interface IArrayDelimiterManager
+    public interface IArrayManager
     {
 
         /// <summary>
@@ -10,13 +10,17 @@
         /// </summary>
         string[] AddDelimiter(string[] arr, string delimiter);
 
+        /// <summary>
+        /// It creates a subset of the provided length for the provided array. 
+        /// </summary>
+        string[] GetSubset(string[] arr, uint startIndex, uint length);
+
     }
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 02.02.2018 
- *  Description: It collects some useful methods related to delimiters among arrays' items.
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/
