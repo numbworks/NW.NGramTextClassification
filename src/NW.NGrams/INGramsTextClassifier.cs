@@ -12,11 +12,6 @@ namespace NW.NGrams
         IParametersValidator ParametersValidator { get; set; }
 
         /// <summary>
-        /// It expects the path to a labeled texts Json file, and it returns a List<LabeledTextJson>.
-        /// </summary>
-        Outcome GetLabeledTexts(ITextFile objTextFile);
-
-        /// <summary>
         /// It expects the content of a labeled texts Json file, and it returns a List<LabeledTextJson>.
         /// </summary>
         Outcome GetLabeledTexts(string strLabeledTextJson);

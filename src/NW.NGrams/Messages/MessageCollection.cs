@@ -11,6 +11,11 @@ namespace NW.NGrams
         public static Func<string, string> VariableCantBeLessThanOne { get; }
             = (variableName) => $"'{variableName}' can't be less than one.";
 
+        // NGramsTokenizer
+        public static Func<ITokenizationStrategy, string> TheProvidedTokenizationStrategyPatternReturnsZeroMatches =
+            (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
+
+
 
     }
 }

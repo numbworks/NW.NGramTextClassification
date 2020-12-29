@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RUBN.Shared;
 
 namespace NW.NGrams
 {
@@ -10,70 +9,56 @@ namespace NW.NGrams
 
         // Fields
         // Properties
-        public Func<double, double> RoundingStrategy { get; } = RoundingStategies.SixDecimalDigits;
-        public ILabeledTextJsonDeserializer LabeledTextJsonDeserializer { get; set; } = new LabeledTextJsonDeserializer();
-        public INGramsTokenizer NGramsTokenizer { get; set; } = new NGramsTokenizer();
-        public INGramsSimilarityCalculator NGramsSimilarityCalculator { get; set; } = new JaccardIndexCalculator();
-        public IParametersValidator ParametersValidator { get; set; } = new ParametersValidator();
-        public Func<List<LabeledTextSimilarityAverage>, Boolean> AreAllZerosStrategy { get; } = HighestAverageStrategies.AreAllZeros;
-        public Func<List<LabeledTextSimilarityAverage>, Boolean> AreDistinctStrategy { get; } = HighestAverageStrategies.AreDistinct;
-        public Func<List<LabeledTextSimilarityAverage>, LabeledTextSimilarityAverage> GetHighestStrategy { get; } = HighestAverageStrategies.GetHighest;
+        public Func<double, double> RoundingStrategy { get; }
+        public ILabeledTextJsonDeserializer LabeledTextJsonDeserializer { get; }
+        public INGramsTokenizer NGramsTokenizer { get; }
+        public INGramsSimilarityCalculator NGramsSimilarityCalculator { get; }
+        public Func<List<LabeledTextSimilarityAverage>, bool> AreAllZerosStrategy { get; }
+        public Func<List<LabeledTextSimilarityAverage>, bool> AreDistinctStrategy { get; }
+        public Func<List<LabeledTextSimilarityAverage>, LabeledTextSimilarityAverage> GetHighestStrategy { get; }
 
         // Constructors
-        public NGramsTextClassifier() { }
-
-        // Methods (public)
-        public Outcome GetLabeledTexts(ITextFile objTextFile)
+        public NGramsTextClassifier
+            (Func<double, double> roundingStrategy,
+            ILabeledTextJsonDeserializer labeledTextJsonDeserializer,
+            INGramsTokenizer nGramsTokenizer,
+            INGramsSimilarityCalculator nGramsSimilarityCalculator,
+            Func<List<LabeledTextSimilarityAverage>, bool> areAllZerosStrategy,
+            Func<List<LabeledTextSimilarityAverage>, bool> areDistinctStrategy,
+            Func<List<LabeledTextSimilarityAverage>, LabeledTextSimilarityAverage> getHighestStrategy)
         {
 
-            string msgSuccess = "The labeled text(s) for the provided file path has been obtained.";
-            string errFailure = "It hasn't been possible to obtain the labeled text(s) for the provided file path.";
-
-            try
-            {
-
-                Outcome objReturn = ParametersValidator.IsNullOrEmpty(objTextFile);
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-
-                objReturn = objTextFile.DoesFilePathExist();
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-
-                objReturn = objTextFile.Read();
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-
-                string strLabeledTextJson = objReturn.Result.ToString();
-                objReturn = GetLabeledTexts(strLabeledTextJson);
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-
-                return OutcomeBuilder.CreateSuccess(msgSuccess, objReturn.Result).Get();
-
-            }
-            catch (Exception e)
-            {
-
-                return OutcomeBuilder.CreateException(e).Append(errFailure).Get();
-
-            }
+            RoundingStrategy = roundingStrategy;
+            LabeledTextJsonDeserializer = labeledTextJsonDeserializer;
+            NGramsTokenizer = nGramsTokenizer;
+            NGramsSimilarityCalculator = nGramsSimilarityCalculator;
+            AreAllZerosStrategy = areAllZerosStrategy;
+            AreDistinctStrategy = areDistinctStrategy;
+            GetHighestStrategy = getHighestStrategy;
 
         }
-        public Outcome GetLabeledTexts(string strLabeledTextJson)
-        {
+        public NGramsTextClassifier()
+            : this(
+                  RoundingStategies.SixDecimalDigits,
+                  new LabeledTextJsonDeserializer(),
+                  new NGramsTokenizer(),
+                  new JaccardIndexCalculator(),
+                  HighestAverageStrategies.AreAllZeros,
+                  HighestAverageStrategies.AreDistinct,
+                  HighestAverageStrategies.GetHighest) { }
 
-            string msgSuccess = "The labeled text(s) have been obtained from the provided string.";
-            string errFailure = "It hasn't been possible to obtain the labeled text(s) from the provided string.";
+        // Methods (public)
+        public Outcome GetLabeledTexts(string labeledTextJson)
+        {
 
             try
             {
 
-                Outcome objReturn = ParametersValidator.IsNullOrEmpty(strLabeledTextJson);
+                Outcome objReturn = ParametersValidator.IsNullOrEmpty(labeledTextJson);
                 if (objReturn.IsFailureOrException())
                     return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
 
-                objReturn = LabeledTextJsonDeserializer.Do(strLabeledTextJson);
+                objReturn = LabeledTextJsonDeserializer.Do(labeledTextJson);
                 if (objReturn.IsFailureOrException())
                     return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
 
@@ -617,8 +602,8 @@ namespace NW.NGrams
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 23.02.2018 
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/
