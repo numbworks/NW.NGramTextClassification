@@ -43,7 +43,7 @@ namespace NW.NGrams
         /// <summary>
         /// It returns the label with the highest average similarity index.
         /// </summary>
-        LabeledTextSimilarityAverage EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages);
+        string EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages);
 
         /// <summary>
         /// It returns the list in tabular format.

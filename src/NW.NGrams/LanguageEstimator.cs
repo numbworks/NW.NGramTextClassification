@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using RUBN.Shared;
 
 namespace NW.NGrams
 {
@@ -9,69 +8,53 @@ namespace NW.NGrams
 
         // Fields
         // Properties
-        public INGramsTextClassifier NGramsTextClassifier { get; set; } = new NGramsTextClassifier();
-        public ITokenizationStrategyManager TokenizationStrategies { get; set; } = new TokenizationStrategyManager();
+        private INGramsTextClassifier _NGramsTextClassifier;
+        private ITokenizationStrategyManager _TokenizationStrategies;
 
         // Constructors
-        public LanguageEstimator() { }
-
-        // Methods
-        public Outcome Do(string strText, List<LabeledTextNGrams> listLabeledTextsNGrams)
+        public LanguageEstimator(
+            INGramsTextClassifier nGramsTextClassifier,
+            ITokenizationStrategyManager tokenizationStrategies)
         {
 
-            /*
-             * Strategy:
-             * 
-             * 1) If EstimateLabel() == Success
-             *    We want to return Success and the label (string) returned as objReturn.Result.
-             *    We can omit EstimateLabel()'s messages.	  
-             *    
-             * 2) If EstimateLabel() == Failure
-             *    We want to return Success and a null label.
-             *    We don't want to omit EstimateLabel()'s messages, in order to log why language hasn't been estimated.
-             * 
-             */
+            if (nGramsTextClassifier == null)
+                throw new ArgumentNullException(nameof(nGramsTextClassifier));
+            if (tokenizationStrategies == null)
+                throw new ArgumentNullException(nameof(tokenizationStrategies));
 
-            string msgSuccessLabel = "The language for the provided text has been successfully estimated.";
-            string msgSuccessLists = "It hasn't been possible to estimate the language for the provided text, but similarity indexes and averages are provided.";
-            string errFailure = "It hasn't been possible to estimate the language nor to provide the similarity indexes and averages for the provided text.";
+            _NGramsTextClassifier = nGramsTextClassifier;
+            _TokenizationStrategies = tokenizationStrategies;
 
-            try
-            {
+        }
+        public LanguageEstimator()
+            : this(
+                new NGramsTextClassifier(),
+                new TokenizationStrategyManager()) { }
 
+        // Methods
+        public LanguageEstimationResult Do(string text, List<LabeledTextNGrams> labeledTextsNGrams)
+        {
 
-                Outcome objReturn = NGramsTextClassifier.ConvertToNGrams(strText, TokenizationStrategies.Get());
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-                List<string> listNGrams = objReturn.Result as List<string>;
+            if (string.IsNullOrWhiteSpace(text))
+                throw new ArgumentNullException(nameof(text));
+            if (labeledTextsNGrams == null)
+                throw new ArgumentNullException(nameof(labeledTextsNGrams));
+            if (labeledTextsNGrams.Count == 0)
+                throw new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(nameof(labeledTextsNGrams)));
 
-                objReturn = NGramsTextClassifier.GetSimilarityIndexes(listNGrams, listLabeledTextsNGrams);
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-                List<LabeledTextSimilarityIndex> listSimilarityIndexes 
-                    = objReturn.Result as List<LabeledTextSimilarityIndex>;
+            List<string> nGrams = _NGramsTextClassifier.ConvertToNGrams(text, _TokenizationStrategies.Get());
+            List<LabeledTextSimilarityIndex> similarityIndexes
+                = _NGramsTextClassifier.GetSimilarityIndexes(nGrams, labeledTextsNGrams);
+            List<LabeledTextSimilarityAverage> similarityAverages
+                = _NGramsTextClassifier.GetSimilarityAverages(similarityIndexes);
 
-                objReturn = NGramsTextClassifier.GetSimilarityAverages(listSimilarityIndexes);
-                if (objReturn.IsFailureOrException())
-                    return OutcomeBuilder.Clone(objReturn).Append(errFailure).Get();
-                List<LabeledTextSimilarityAverage> listSimilarityAverages
-                    = objReturn.Result as List<LabeledTextSimilarityAverage>;
+            string label = _NGramsTextClassifier.EstimateLabel(similarityAverages);
+            LanguageEstimationResult estimationResult 
+                = new LanguageEstimationResult(label, similarityIndexes, similarityAverages);
 
-                objReturn = NGramsTextClassifier.EstimateLabel(listSimilarityAverages);
-                if (objReturn.IsSuccess())
-                    return OutcomeBuilder.CreateSuccess(msgSuccessLabel,
-                        new LanguageEstimationResult((string)objReturn.Result, listSimilarityIndexes, listSimilarityAverages)).Get();
-                else
-                    return OutcomeBuilder.CreateSuccess(msgSuccessLists,
-                        new LanguageEstimationResult(null, listSimilarityIndexes, listSimilarityAverages)).Append(objReturn.Messages).Get();
+            // if something fail, null should replace label
 
-            }
-            catch (Exception e)
-            {
-
-                return OutcomeBuilder.CreateException(e).Append(errFailure).Get();
-
-            }
+            return estimationResult;
 
         }
 
@@ -79,8 +62,8 @@ namespace NW.NGrams
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 23.08.2018
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/

@@ -182,7 +182,7 @@ namespace NW.NGrams
             return similarityAverages;
 
         }
-        public LabeledTextSimilarityAverage EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages)
+        public string EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages)
         {
 
             /*
@@ -198,7 +198,7 @@ namespace NW.NGrams
             Validate(similarityAverages, nameof(similarityAverages));
             Validate(similarityAverages, _AreAllZerosStrategy, _AreDistinctStrategy);
 
-            return _GetHighestStrategy(similarityAverages);
+            return _GetHighestStrategy(similarityAverages).Label;
 
         }
         public string FormatAsTable(List<ILabeledTextSimilarityValue> similarityValues)
