@@ -1,72 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using RUBN.Shared;
+﻿using System.Collections.Generic;
 
 namespace NW.NGrams
 {
     public interface INGramsTextClassifier
     {
-        ILabeledTextJsonDeserializer LabeledTextJsonDeserializer { get; set; }
-        INGramsSimilarityCalculator NGramsSimilarityCalculator { get; set; }
-        INGramsTokenizer NGramsTokenizer { get; set; }
-        IParametersValidator ParametersValidator { get; set; }
 
         /// <summary>
         /// It expects the content of a labeled texts Json file, and it returns a List<LabeledTextJson>.
         /// </summary>
-        Outcome GetLabeledTexts(string strLabeledTextJson);
+        List<LabeledTextJson> GetLabeledTexts(string labeledTextJson);
 
         /// <summary>
         /// It converts the provided List<LabeledTextJson> to List<LabeledTextNGrams>, in which each text is converted into a list of NGrams.
         /// </summary>
-        Outcome ConvertToNGrams(List<LabeledTextJson> listLabeledTexts, ITokenizationStrategy objTokenizationStrategy);
+        List<LabeledTextNGrams> ConvertToNGrams(List<LabeledTextJson> labeledTexts, ITokenizationStrategy tokenizationStrategy);
 
         /// <summary>
         /// It converts the provided text to a list of NGrams.
         /// </summary>
-        Outcome ConvertToNGrams(string strText, ITokenizationStrategy objTokenizationStrategy);
+        List<string> ConvertToNGrams(string text, ITokenizationStrategy tokenizationStrategy);
 
         /// <summary>
         /// It converts the provided List<LabeledTextJson> to List<LabeledTextNGrams>, in which each text is converted into a list of NGrams.
         /// </summary>
-        Outcome ConvertToNGrams(List<LabeledTextJson> listLabeledTexts, List<ITokenizationStrategy> listTokenizationStrategies);
+        List<LabeledTextNGrams> ConvertToNGrams(List<LabeledTextJson> labeledTexts, List<ITokenizationStrategy> tokenizationStrategies);
 
         /// <summary>
         /// It converts the provided text to a list of NGrams.
         /// </summary>
-        Outcome ConvertToNGrams(string strText, List<ITokenizationStrategy> listTokenizationStrategies);
+        List<string> ConvertToNGrams(string text, List<ITokenizationStrategy> tokenizationStrategies);
 
         /// <summary>
         /// It returns a List<LabeledTextSimilarityIndex> containining the similarities between the provided NGrammed text and each of the labeled texts.
         /// </summary>
-        Outcome GetSimilarityIndexes(List<string> listTextNGrams, List<LabeledTextNGrams> listLabeledTextsNGrams);
+        List<LabeledTextSimilarityIndex> GetSimilarityIndexes(List<string> textNGrams, List<LabeledTextNGrams> labeledTextsNGrams);
 
         /// <summary>
         /// It returns a List<LabeledTextSimilarityAverage> containining the average similarity index for each unique label.
         /// </summary>
-        Outcome GetSimilarityAverages(List<LabeledTextSimilarityIndex> listSimilarityIndexes);
+        List<LabeledTextSimilarityAverage> GetSimilarityAverages(List<LabeledTextSimilarityIndex> similarityIndexes);
 
         /// <summary>
         /// It returns the label with the highest average similarity index.
         /// </summary>
-        Outcome EstimateLabel(List<LabeledTextSimilarityAverage> listSimilarityAverages);
+        LabeledTextSimilarityAverage EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages);
 
         /// <summary>
         /// It returns the list in tabular format.
         /// </summary>
-        Outcome FormatAsTable(List<ILabeledTextSimilarityValue> listSimilarityValues);
+        string FormatAsTable(List<ILabeledTextSimilarityValue> similarityValues);
 
         /// <summary>
         /// It returns the object in tabular format.
         /// </summary>
-        Outcome FormatAsTable(ILabeledTextSimilarityValue objSimilarityValue);
+        string FormatAsTable(ILabeledTextSimilarityValue similarityValue);
 
     }
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 23.02.2018 
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/

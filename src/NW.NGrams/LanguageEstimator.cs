@@ -16,7 +16,7 @@ namespace NW.NGrams
         public LanguageEstimator() { }
 
         // Methods
-        public Outcome Do(ITextDecisionStrategy objTextDecisionStrategy, List<LabeledTextNGrams> listLabeledTextsNGrams)
+        public Outcome Do(string strText, List<LabeledTextNGrams> listLabeledTextsNGrams)
         {
 
             /*
@@ -39,7 +39,6 @@ namespace NW.NGrams
             try
             {
 
-                string strText = objTextDecisionStrategy.GetText();
 
                 Outcome objReturn = NGramsTextClassifier.ConvertToNGrams(strText, TokenizationStrategies.Get());
                 if (objReturn.IsFailureOrException())
