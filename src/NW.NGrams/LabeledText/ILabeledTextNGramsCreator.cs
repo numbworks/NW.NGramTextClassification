@@ -1,12 +1,9 @@
-﻿using RUBN.Shared;
+﻿using System.Collections.Generic;
 
 namespace NW.NGrams
 {
     public interface ILabeledTextNGramsCreator
     {
-        string LabeledTextJson { get; }
-        INGramsTextClassifier NGramsTextClassifier { get; set; }
-        ITokenizationStrategyManager TokenizationStrategies { get; }
 
         /// <summary>
         /// It creates a A List<LabeledTextNGrams> out of Resources/LabeledTextsJson.txt.
@@ -14,13 +11,14 @@ namespace NW.NGrams
         /// For ex. {"en", "sv" } will include just the labeled texts with Label="sv" and Label="en".
         /// Default (null) will include all of them.
         /// </summary>
-        Outcome Do(string[] arrLabels = null);
+        List<LabeledTextNGrams> Do(string labeledTextJson, string[] labels = null);
+
     }
 }
 
 /*
- *
- *  Author: numbworks@gmail.com
- *  Last Update: 24.08.2018 
- * 
- */
+
+    Author: numbworks@gmail.com
+    Last Update: 29.12.2020
+
+*/
