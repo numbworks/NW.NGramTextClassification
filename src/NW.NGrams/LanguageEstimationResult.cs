@@ -7,20 +7,20 @@ namespace NW.NGrams
 
         // Fields
         // Properties
-        public string Language { get; }
+        public string Label { get; }
         public List<LabeledTextSimilarityIndex> SimilarityIndexes { get; }
         public List<LabeledTextSimilarityAverage> SimilarityAverages { get; }
 
         // Constructors	
         public LanguageEstimationResult(
-            string strLanguage,
-            List<LabeledTextSimilarityIndex> listSimilarityIndexes,
-            List<LabeledTextSimilarityAverage> listSimilarityAverages)
+            string label,
+            List<LabeledTextSimilarityIndex> similarityIndexes,
+            List<LabeledTextSimilarityAverage> similarityAverages)
         {
 
-            Language = strLanguage;
-            SimilarityIndexes = listSimilarityIndexes;
-            SimilarityAverages = listSimilarityAverages;
+            Label = label;
+            SimilarityIndexes = similarityIndexes;
+            SimilarityAverages = similarityAverages;
 
         }
 
@@ -32,6 +32,6 @@ namespace NW.NGrams
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 23.08.2018
+    Last Update: 29.12.2020
 
 */
