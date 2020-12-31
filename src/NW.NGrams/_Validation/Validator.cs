@@ -42,6 +42,16 @@ namespace NW.NGrams
         public static void ValidateList<U>(List<U> list, string variableName)
             => ValidateList<ArgumentNullException, U>(list, variableName);
 
+        public static void ValidateN<T>(ushort n) where T : Exception
+        {
+
+            if (n < 1)
+                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(n)));
+
+        }
+        public static void ValidateN(ushort n)
+            => ValidateN<ArgumentException>(n);
+
         // Methods (private)
         private static T CreateException<T>(string message) where T : Exception
             => (T)Activator.CreateInstance(typeof(T), message);

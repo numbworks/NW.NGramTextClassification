@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NW.NGrams
+﻿namespace NW.NGrams
 {
     public abstract class ANGram
     {
@@ -15,12 +13,9 @@ namespace NW.NGrams
         protected ANGram(ushort n, ITokenizationStrategy strategy, string value)
         {
 
-            if (n < 1)
-                throw new ArgumentException(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(n)));
-            if (strategy == null)
-                throw new ArgumentNullException(nameof(strategy));
-            if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException(nameof(value));
+            Validator.ValidateN(n);
+            Validator.ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateString(value, nameof(value));
 
             N = n;
             Strategy = strategy;
