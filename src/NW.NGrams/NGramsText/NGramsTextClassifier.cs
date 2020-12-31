@@ -11,7 +11,7 @@ namespace NW.NGrams
         private Func<double, double> _RoundingStrategy;
         private ILabeledTextJsonDeserializer _LabeledTextJsonDeserializer;
         private INGramsTokenizer _NGramsTokenizer;
-        private INGramsSimilarityCalculator _NGramsSimilarityCalculator;
+        private ISimilarityIndexCalculator _NGramsSimilarityCalculator;
         private Func<List<SimilarityIndexAverage>, bool> _AreAllZerosStrategy;
         private Func<List<SimilarityIndexAverage>, bool> _AreDistinctStrategy;
         private Func<List<SimilarityIndexAverage>, SimilarityIndexAverage> _GetHighestStrategy;
@@ -22,7 +22,7 @@ namespace NW.NGrams
             (Func<double, double> roundingStrategy,
             ILabeledTextJsonDeserializer labeledTextJsonDeserializer,
             INGramsTokenizer nGramsTokenizer,
-            INGramsSimilarityCalculator nGramsSimilarityCalculator,
+            ISimilarityIndexCalculator nGramsSimilarityCalculator,
             Func<List<SimilarityIndexAverage>, bool> areAllZerosStrategy,
             Func<List<SimilarityIndexAverage>, bool> areDistinctStrategy,
             Func<List<SimilarityIndexAverage>, SimilarityIndexAverage> getHighestStrategy)
@@ -42,7 +42,7 @@ namespace NW.NGrams
                   RoundingStategies.SixDecimalDigits,
                   new LabeledTextJsonDeserializer(),
                   new NGramsTokenizer(),
-                  new JaccardIndexCalculator(),
+                  new SimilarityIndexCalculatorJaccard(),
                   HighestAverageStrategies.AreAllZeros,
                   HighestAverageStrategies.AreDistinct,
                   HighestAverageStrategies.GetHighest) { }

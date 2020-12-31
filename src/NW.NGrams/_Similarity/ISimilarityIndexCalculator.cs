@@ -3,19 +3,16 @@ using System.Collections.Generic;
 
 namespace NW.NGrams
 {
-    public interface INGramsSimilarityCalculator
+    public interface ISimilarityIndexCalculator
     {
-
-        Func<double, double> RoundingStrategy { get; }
-
+        double Do(List<string> list1, List<string> list2, Func<double, double> RoundingStrategy);
         double Do(List<string> list1, List<string> list2);
-
     }
 }
 
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 29.12.2020
+    Last Update: 31.12.2020
 
 */
