@@ -75,7 +75,7 @@ namespace NW.NGrams
                     currentToken.Append(word);
 
                 // "This is a" => "this is a"
-                if (strategy.ConvertAllToLowercase)
+                if (strategy.ToLowercase)
                     tokens.Add(currentToken.ToString().ToLower());
 
                 tokens.Add(currentToken.ToString());

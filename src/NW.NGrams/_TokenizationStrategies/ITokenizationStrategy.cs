@@ -2,16 +2,17 @@
 {
     public interface ITokenizationStrategy
     {
-        bool ConvertAllToLowercase { get; }
-        string Delimiter { get; }
-        ushort N { get; }
+
         string Pattern { get; }
+        string Delimiter { get; }
+        bool ToLowercase { get; }
+
     }
 }
 
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 29.12.2020
+    Last Update: 30.12.2020
 
 */

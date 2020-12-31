@@ -8,12 +8,12 @@ namespace NW.NGrams
         /// <summary>
         /// It expects the content of a labeled texts Json file, and it returns a List<LabeledTextJson>.
         /// </summary>
-        List<LabeledTextJson> GetLabeledTexts(string labeledTextJson);
+        List<LabeledExtract> GetLabeledTexts(string labeledTextJson);
 
         /// <summary>
         /// It converts the provided List<LabeledTextJson> to List<LabeledTextNGrams>, in which each text is converted into a list of NGrams.
         /// </summary>
-        List<LabeledTextNGrams> ConvertToNGrams(List<LabeledTextJson> labeledTexts, ITokenizationStrategy tokenizationStrategy);
+        List<LabeledTextNGrams> ConvertToNGrams(List<LabeledExtract> labeledTexts, ITokenizationStrategy tokenizationStrategy);
 
         /// <summary>
         /// It converts the provided text to a list of NGrams.
@@ -23,7 +23,7 @@ namespace NW.NGrams
         /// <summary>
         /// It converts the provided List<LabeledTextJson> to List<LabeledTextNGrams>, in which each text is converted into a list of NGrams.
         /// </summary>
-        List<LabeledTextNGrams> ConvertToNGrams(List<LabeledTextJson> labeledTexts, List<ITokenizationStrategy> tokenizationStrategies);
+        List<LabeledTextNGrams> ConvertToNGrams(List<LabeledExtract> labeledTexts, List<ITokenizationStrategy> tokenizationStrategies);
 
         /// <summary>
         /// It converts the provided text to a list of NGrams.

@@ -8,7 +8,7 @@ namespace NW.NGrams
         /// <summary>
         /// It expects a JSON string that looks like: { "LabeledTextId": 1, "Label": "sv", "Text": "Vår kund erbjuder..." }.
         /// </summary>
-        List<LabeledTextJson> Do(string json);
+        List<LabeledExtract> Do(string json);
 
     }
 }

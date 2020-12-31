@@ -48,7 +48,7 @@ namespace NW.NGrams
                   HighestAverageStrategies.GetHighest) { }
 
         // Methods (public)
-        public List<LabeledTextJson> GetLabeledTexts(string labeledTextJson)
+        public List<LabeledExtract> GetLabeledTexts(string labeledTextJson)
         {
 
             Validate(labeledTextJson, nameof(labeledTextJson));
@@ -56,7 +56,7 @@ namespace NW.NGrams
             return _LabeledTextJsonDeserializer.Do(labeledTextJson);
 
         }
-        public List<LabeledTextNGrams> ConvertToNGrams(List<LabeledTextJson> labeledTexts, ITokenizationStrategy tokenizationStrategy)
+        public List<LabeledTextNGrams> ConvertToNGrams(List<LabeledExtract> labeledTexts, ITokenizationStrategy tokenizationStrategy)
         {
 
             Validate(labeledTexts, nameof(labeledTexts));
@@ -70,7 +70,7 @@ namespace NW.NGrams
 
                 labeledTextsNGrams.Add(
                     new LabeledTextNGrams(
-                        labeledTexts[i].LabeledTextId,
+                        labeledTexts[i].Id,
                         labeledTexts[i].Label,
                         currentTokens));
 
@@ -88,7 +88,7 @@ namespace NW.NGrams
             return _NGramsTokenizer.Do(tokenizationStrategy, text);
 
         }
-        public List<LabeledTextNGrams> ConvertToNGrams(List<LabeledTextJson> labeledTexts, List<ITokenizationStrategy> tokenizationStrategies)
+        public List<LabeledTextNGrams> ConvertToNGrams(List<LabeledExtract> labeledTexts, List<ITokenizationStrategy> tokenizationStrategies)
         {
 
             Validate(labeledTexts, nameof(labeledTexts));

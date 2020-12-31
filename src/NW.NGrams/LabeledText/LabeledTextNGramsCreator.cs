@@ -39,7 +39,7 @@ namespace NW.NGrams
             if (string.IsNullOrWhiteSpace(labeledTextJson))
                 throw new ArgumentNullException(nameof(labeledTextJson));
 
-            List <LabeledTextJson> labeledTexts = _NGramsTextClassifier.GetLabeledTexts(labeledTextJson);
+            List <LabeledExtract> labeledTexts = _NGramsTextClassifier.GetLabeledTexts(labeledTextJson);
             if (labels != null)
                 if (labels.Length > 0)
                     labeledTexts = labeledTexts.Where(obj => labels.Contains(obj.Label)).ToList();
