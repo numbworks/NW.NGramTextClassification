@@ -26,7 +26,7 @@ namespace NW.NGrams
             : this(new ArrayManager()) { }
 
         // Methods
-        public List<T> Do<T>(ITokenizationStrategy strategy, string text) where T : INGram
+        public List<T> DoFor<T>(ITokenizationStrategy strategy, string text) where T : INGram
         {
 
             if (strategy == null)
@@ -42,10 +42,10 @@ namespace NW.NGrams
             return GetTokens<T>(strategy, matches);
 
         }
-        public List<T> Do<T>(string text) where T : INGram
-            => Do<T>(new TokenizationStrategy(), text);
+        public List<T> DoFor<T>(string text) where T : INGram
+            => DoFor<T>(new TokenizationStrategy(), text);
 
-        public List<INGram> DoForMany
+        public List<INGram> DoForRuleset
             (INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text)
         {
 
@@ -59,19 +59,19 @@ namespace NW.NGrams
             List<INGram> nGrams = new List<INGram>();
 
             if (ruleSet.DoForMonograms)
-                nGrams.AddRange(Do<Monogram>(strategy, text));
+                nGrams.AddRange(DoFor<Monogram>(strategy, text));
             if (ruleSet.DoForBigrams)
-                nGrams.AddRange(Do<Bigram>(strategy, text));
+                nGrams.AddRange(DoFor<Bigram>(strategy, text));
             if (ruleSet.DoForTrigrams)
-                nGrams.AddRange(Do<Trigram>(strategy, text));
+                nGrams.AddRange(DoFor<Trigram>(strategy, text));
 
             return nGrams;
 
         }
-        public List<INGram> DoForMany(ITokenizationStrategy strategy, string text)
-                => DoForMany(new NGramsTokenizerRuleSet(), strategy, text);
-        public List<INGram> DoForMany(string text)
-                => DoForMany(new NGramsTokenizerRuleSet(), new TokenizationStrategy(), text);
+        public List<INGram> DoForRuleset(ITokenizationStrategy strategy, string text)
+            => DoForRuleset(new NGramsTokenizerRuleSet(), strategy, text);
+        public List<INGram> DoForRuleset(string text)
+            => DoForRuleset(new NGramsTokenizerRuleSet(), new TokenizationStrategy(), text);
 
         // Methods (private)
         private T CreateInstance<T>(params object[] args)

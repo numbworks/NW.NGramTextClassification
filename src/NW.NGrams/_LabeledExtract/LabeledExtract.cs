@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NW.NGrams
 {
@@ -7,15 +8,34 @@ namespace NW.NGrams
 
         // Fields
         // Properties
-        public ulong Id { get; set; }
-        public string Label { get; set; }
-        public string Text { get; set; }
-        public List<INGram> TextAsNGrams { get; set; }
+        public ulong Id { get; }
+        public string Label { get; }
+        public string Text { get; }
+        public List<INGram> TextAsNGrams { get; }
 
         // Constructors
-        public LabeledExtract() { }
+        public LabeledExtract
+            (ulong id, string label, string text, List<INGram> textAsNGrams)
+        {
+
+            if (string.IsNullOrWhiteSpace(label))
+                throw new ArgumentNullException(nameof(label));
+            if (string.IsNullOrWhiteSpace(text))
+                throw new ArgumentNullException(nameof(text));
+            if (textAsNGrams == null)
+                throw new ArgumentNullException(nameof(textAsNGrams));
+            if (textAsNGrams.Count == 0)
+                throw new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(nameof(textAsNGrams)));
+
+            Id = id;
+            Label = label;
+            Text = text;
+            TextAsNGrams = textAsNGrams;
+
+        }
 
         // Methods
+        // Methods (private)
 
     }
 }

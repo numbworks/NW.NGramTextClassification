@@ -4,11 +4,11 @@ namespace NW.NGrams
 {
     public interface INGramsTokenizer
     {
-        List<T> Do<T>(ITokenizationStrategy strategy, string text) where T : INGram;
-        List<T> Do<T>(string text) where T : INGram;
-        List<INGram> DoForMany(INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text);
-        List<INGram> DoForMany(ITokenizationStrategy strategy, string text);
-        List<INGram> DoForMany(string text);
+        List<T> DoFor<T>(ITokenizationStrategy strategy, string text) where T : INGram;
+        List<T> DoFor<T>(string text) where T : INGram;
+        List<INGram> DoForRuleset(INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text);
+        List<INGram> DoForRuleset(ITokenizationStrategy strategy, string text);
+        List<INGram> DoForRuleset(string text);
     }
 }
 
