@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace NW.NGrams
 {
-    public class NGramsTokenizer
+    public class NGramsTokenizer : INGramsTokenizer
     {
 
         // Fields
@@ -44,6 +44,34 @@ namespace NW.NGrams
         }
         public List<T> Do<T>(string text) where T : INGram
             => Do<T>(new TokenizationStrategy(), text);
+
+        public List<INGram> DoForMany
+            (INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text)
+        {
+
+            if (strategy == null)
+                throw new ArgumentNullException(nameof(strategy));
+            if (strategy == null)
+                throw new ArgumentNullException(nameof(strategy));
+            if (string.IsNullOrWhiteSpace(text))
+                throw new ArgumentNullException(nameof(text));
+
+            List<INGram> nGrams = new List<INGram>();
+
+            if (ruleSet.DoForMonograms)
+                nGrams.AddRange(Do<Monogram>(strategy, text));
+            if (ruleSet.DoForBigrams)
+                nGrams.AddRange(Do<Bigram>(strategy, text));
+            if (ruleSet.DoForTrigrams)
+                nGrams.AddRange(Do<Trigram>(strategy, text));
+
+            return nGrams;
+
+        }
+        public List<INGram> DoForMany(ITokenizationStrategy strategy, string text)
+                => DoForMany(new NGramsTokenizerRuleSet(), strategy, text);
+        public List<INGram> DoForMany(string text)
+                => DoForMany(new NGramsTokenizerRuleSet(), new TokenizationStrategy(), text);
 
         // Methods (private)
         private T CreateInstance<T>(params object[] args)
