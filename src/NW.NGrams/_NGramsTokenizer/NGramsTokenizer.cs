@@ -16,8 +16,7 @@ namespace NW.NGrams
         public NGramsTokenizer(IArrayManager arrayManager)
         {
 
-            if (arrayManager == null)
-                throw new ArgumentNullException(nameof(arrayManager));
+            Validator.ValidateObject(arrayManager, nameof(arrayManager));
 
             _ArrayManager = arrayManager;
 
@@ -29,10 +28,8 @@ namespace NW.NGrams
         public List<T> DoFor<T>(ITokenizationStrategy strategy, string text) where T : INGram
         {
 
-            if (strategy == null)
-                throw new ArgumentNullException(nameof(strategy));
-            if (string.IsNullOrWhiteSpace(text))
-                throw new ArgumentNullException(nameof(text));
+            Validator.ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
 
             // "This is a sample text." => "This", "is", ..., "text"
             MatchCollection matches = Regex.Matches(text, strategy.Pattern);
@@ -49,12 +46,9 @@ namespace NW.NGrams
             (INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text)
         {
 
-            if (strategy == null)
-                throw new ArgumentNullException(nameof(strategy));
-            if (strategy == null)
-                throw new ArgumentNullException(nameof(strategy));
-            if (string.IsNullOrWhiteSpace(text))
-                throw new ArgumentNullException(nameof(text));
+            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
 
             List<INGram> nGrams = new List<INGram>();
 
