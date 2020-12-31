@@ -32,9 +32,9 @@ namespace NW.NGrams
             (ulong id, string label, ITokenizationStrategy strategy, string text) where T : INGram
         {
 
-            Validator.ValidateString(label, nameof(label));
+            Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
             Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateString(text, nameof(text));
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
 
             List<INGram> nGrams = _tokenizer.DoFor<T>(strategy, text).Select(item => (INGram)item).ToList();
             LabeledExtract labeledExtract = new LabeledExtract(id, label, text, nGrams);
@@ -50,10 +50,10 @@ namespace NW.NGrams
             (ulong id, string label, INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text)
         {
 
-            Validator.ValidateString(label, nameof(label));
+            Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
             Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateString(text, nameof(text));
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
 
             List<INGram> nGrams = _tokenizer.DoForRuleset(ruleSet, strategy, text);
             LabeledExtract labeledExtract = new LabeledExtract(id, label, text, nGrams);

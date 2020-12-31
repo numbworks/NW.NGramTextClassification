@@ -20,15 +20,24 @@ namespace NW.NGrams
         public static void ValidateObject(object obj, string variableName)
             => ValidateObject<ArgumentNullException>(obj, variableName);
 
-        public static void ValidateString<T>(string str, string variableName) where T : Exception
+        public static void ValidateStringNullOrWhiteSpace<T>(string str, string variableName) where T : Exception
         {
 
             if (string.IsNullOrWhiteSpace(str))
                 throw CreateException<T>(variableName);
 
         }
-        public static void ValidateString(string str, string variableName)
-            => ValidateString<ArgumentNullException>(str, variableName);
+        public static void ValidateStringNullOrWhiteSpace(string str, string variableName)
+            => ValidateStringNullOrWhiteSpace<ArgumentNullException>(str, variableName);
+        public static void ValidateStringNullOrEmpty<T>(string str, string variableName) where T : Exception
+        {
+
+            if (string.IsNullOrEmpty(str))
+                throw CreateException<T>(variableName);
+
+        }
+        public static void ValidateStringNullOrEmpty(string str, string variableName)
+            => ValidateStringNullOrEmpty<ArgumentNullException>(str, variableName);
 
         public static void ValidateList<T, U>(List<U> list, string variableName) where T : Exception
         {

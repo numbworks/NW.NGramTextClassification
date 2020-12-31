@@ -15,7 +15,7 @@
 
             Validator.ValidateN(n);
             Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateString(value, nameof(value));
+            Validator.ValidateStringNullOrWhiteSpace(value, nameof(value));
 
             N = n;
             Strategy = strategy;

@@ -1,12 +1,13 @@
-﻿using System;
-
-namespace NW.NGrams
+﻿namespace NW.NGrams
 {
     public class TokenizationStrategy : ITokenizationStrategy
     {
 
         // Fields
         // Properties
+        public static string DefaultPattern { get; } = "[\\w0-9_]{1,}";
+        public static string DefaultDelimiter { get; } = " ";
+        public static bool DefaultToLowercase { get; } = true;
         public string Pattern { get; }
         public string Delimiter { get; }
         public bool ToLowercase { get; }
@@ -15,10 +16,8 @@ namespace NW.NGrams
         public TokenizationStrategy(string pattern, string delimiter, bool toLowercase)
         {
 
-            if (string.IsNullOrWhiteSpace(pattern))
-                throw new ArgumentNullException(nameof(pattern));
-            if (string.IsNullOrEmpty(delimiter))
-                throw new ArgumentNullException(nameof(delimiter)); // Whitespace is a valid delimiter
+            Validator.ValidateStringNullOrWhiteSpace(pattern, nameof(pattern));
+            Validator.ValidateStringNullOrEmpty(delimiter, nameof(delimiter)); // Whitespace is a valid delimiter
 
             Pattern = pattern;
             Delimiter = delimiter;
@@ -26,7 +25,7 @@ namespace NW.NGrams
 
         }
         public TokenizationStrategy()
-            : this("[\\w0-9_]{1,}", " ", true) { }
+            : this(DefaultPattern, DefaultDelimiter, DefaultToLowercase) { }
 
         // Methods (public)
         // Methods (private)

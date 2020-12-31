@@ -17,8 +17,8 @@ namespace NW.NGrams
             (ulong id, string label, string text, List<INGram> textAsNGrams)
         {
 
-            Validator.ValidateString(label, nameof(label));
-            Validator.ValidateString(text, nameof(text));
+            Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
             Validator.ValidateList(textAsNGrams, nameof(textAsNGrams));
 
             Id = id;
