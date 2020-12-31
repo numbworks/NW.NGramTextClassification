@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace NW.NGrams
 {
@@ -18,14 +17,9 @@ namespace NW.NGrams
             (ulong id, string label, string text, List<INGram> textAsNGrams)
         {
 
-            if (string.IsNullOrWhiteSpace(label))
-                throw new ArgumentNullException(nameof(label));
-            if (string.IsNullOrWhiteSpace(text))
-                throw new ArgumentNullException(nameof(text));
-            if (textAsNGrams == null)
-                throw new ArgumentNullException(nameof(textAsNGrams));
-            if (textAsNGrams.Count == 0)
-                throw new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(nameof(textAsNGrams)));
+            Validator.ValidateString(label, nameof(label));
+            Validator.ValidateString(text, nameof(text));
+            Validator.ValidateList(textAsNGrams, nameof(textAsNGrams));
 
             Id = id;
             Label = label;
