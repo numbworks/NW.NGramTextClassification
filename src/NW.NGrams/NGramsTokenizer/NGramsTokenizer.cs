@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace NW.NGrams
 {
-    public class NGramsTokenizer : INGramsTokenizer
+    public class NGramsTokenizer
     {
 
         // Fields
@@ -26,27 +26,31 @@ namespace NW.NGrams
             : this(new ArrayManager()) { }
 
         // Methods
-        public List<string> Do(ITokenizationStrategy strategy, string text)
+        public List<T> Do<T>(ITokenizationStrategy strategy, string text) where T : INGram
         {
 
             if (strategy == null)
                 throw new ArgumentNullException(nameof(strategy));
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentNullException(nameof(text));
-            if (strategy.N < 1)
-                throw new ArgumentException(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(strategy.N)));
 
             // "This is a sample text." => "This", "is", ..., "text"
             MatchCollection matches = Regex.Matches(text, strategy.Pattern);
             if (matches.Count == 0)
                 throw new Exception(MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
 
-            return GetTokens(strategy, matches);
+            return GetTokens<T>(strategy, matches);
 
         }
+        public List<T> Do<T>(string text) where T : INGram
+            => Do<T>(new TokenizationStrategy(), text);
 
         // Methods (private)
-        private List<string> GetTokens(ITokenizationStrategy strategy, MatchCollection matches)
+        private T CreateInstance<T>(params object[] args)
+            => (T)Activator.CreateInstance(typeof(T), args);
+        private ushort GetN<T>()
+            => ((INGram)CreateInstance<T>()).N;
+        private List<T> GetTokens<T>(ITokenizationStrategy strategy, MatchCollection matches)
         {
 
             // "This", "is", ..., "text" => ["This", "is", ..., "text"]
@@ -54,13 +58,15 @@ namespace NW.NGrams
             for (int i = 0; i < matches.Count; i++)
                 allWords[i] = matches[i].Value;
 
-            List<string> tokens = new List<string>();
+            ushort N = GetN<T>();
+
+            List<T> tokens = new List<T>();
             for (uint i = 0; i < allWords.Length; i++)
             {
 
                 // The last x NGrams are shorter in length...
-                ushort currentN = strategy.N;
-                if ((allWords.Length - i) < strategy.N)
+                ushort currentN = N;
+                if ((allWords.Length - i) < N)
                     currentN = (ushort)(allWords.Length - i);
 
                 // For N = 3: ["This", "is", "a"], ["is", "a", "sample"], ...
@@ -76,9 +82,12 @@ namespace NW.NGrams
 
                 // "This is a" => "this is a"
                 if (strategy.ToLowercase)
-                    tokens.Add(currentToken.ToString().ToLower());
+                    currentToken = new StringBuilder(currentToken.ToString().ToLower());
 
-                tokens.Add(currentToken.ToString());
+                // new Monogram(strategy, "this is a")
+                T nGram = CreateInstance<T>(strategy, currentToken.ToString());
+
+                tokens.Add(nGram);
 
             }
 

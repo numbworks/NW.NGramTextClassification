@@ -15,6 +15,8 @@ namespace NW.NGrams
         protected ANGram(ushort n, ITokenizationStrategy strategy, string value)
         {
 
+            if (n < 1)
+                throw new ArgumentException(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(n)));
             if (strategy == null)
                 throw new ArgumentNullException(nameof(strategy));
             if (string.IsNullOrWhiteSpace(value))

@@ -7,7 +7,7 @@ namespace NW.NGrams
 
         // Fields
         // Properties
-        public Type Type { get;  }
+        public T Value { get; }
 
         // Constructors
         public NGramType(T t)
@@ -16,7 +16,7 @@ namespace NW.NGrams
             if (t == null)
                 throw new ArgumentNullException(nameof(t));
 
-            Type = t.GetType();
+            Value = t;
 
         }
 
