@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace NW.NGrams
@@ -12,26 +11,30 @@ namespace NW.NGrams
         private uint _initialId;
 
         // Properties
+        public static uint DefaultInitialId { get; } = 1;
+
         // Constructors
         public LabeledExtractFactory
             (INGramsTokenizer tokenizer, uint initialId)
         {
 
-            ValidateObject(tokenizer, nameof(tokenizer));
+            Validator.ValidateObject(tokenizer, nameof(tokenizer));
 
             _tokenizer = tokenizer;
             _initialId = initialId;
 
         }
+        public LabeledExtractFactory()
+            : this(new NGramsTokenizer(), DefaultInitialId) { }
 
         // Methods (public)
         public LabeledExtract CreateFor<T>
             (ulong id, string label, ITokenizationStrategy strategy, string text) where T : INGram
         {
 
-            ValidateString(label, nameof(label));
-            ValidateObject(strategy, nameof(strategy));
-            ValidateString(text, nameof(text));
+            Validator.ValidateString(label, nameof(label));
+            Validator.ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateString(text, nameof(text));
 
             List<INGram> nGrams = _tokenizer.DoFor<T>(strategy, text).Select(item => (INGram)item).ToList();
             LabeledExtract labeledExtract = new LabeledExtract(id, label, text, nGrams);
@@ -47,10 +50,10 @@ namespace NW.NGrams
             (ulong id, string label, INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text)
         {
 
-            ValidateString(label, nameof(label));
-            ValidateObject(ruleSet, nameof(ruleSet));
-            ValidateObject(strategy, nameof(strategy));
-            ValidateString(text, nameof(text));
+            Validator.ValidateString(label, nameof(label));
+            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateString(text, nameof(text));
 
             List<INGram> nGrams = _tokenizer.DoForRuleset(ruleSet, strategy, text);
             LabeledExtract labeledExtract = new LabeledExtract(id, label, text, nGrams);
@@ -67,8 +70,8 @@ namespace NW.NGrams
             (List<(string label, string text)> tuples, ITokenizationStrategy strategy) where T : INGram
         {
 
-            ValidateList(tuples, nameof(tuples));
-            ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateList(tuples, nameof(tuples));
+            Validator.ValidateObject(strategy, nameof(strategy));
 
             List<LabeledExtract> labeledExtracts = new List<LabeledExtract>();
 
@@ -93,9 +96,9 @@ namespace NW.NGrams
             (List<(string label, string text)> tuples, INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy)
         {
 
-            ValidateList(tuples, nameof(tuples));
-            ValidateObject(ruleSet, nameof(ruleSet));
-            ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateList(tuples, nameof(tuples));
+            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(strategy, nameof(strategy));
 
             List<LabeledExtract> labeledExtracts = new List<LabeledExtract>();
 
@@ -119,40 +122,6 @@ namespace NW.NGrams
             => CreateForRuleset(tuples, new NGramsTokenizerRuleSet(), new TokenizationStrategy());
 
         // Methods (private)
-        private T CreateException<T>(string message) where T : Exception
-            => (T)Activator.CreateInstance(typeof(T), message);
-
-        private void ValidateObject<T>(object obj, string variableName) where T : Exception
-        {
-
-            if (obj == null)
-                throw CreateException<T>(variableName);
-
-        }
-        private void ValidateObject(object obj, string variableName)
-            => ValidateObject<ArgumentNullException>(obj, variableName);
-
-        private void ValidateString<T>(string str, string variableName) where T : Exception
-        {
-
-            if (string.IsNullOrWhiteSpace(str))
-                throw CreateException<T>(variableName);
-
-        }
-        private void ValidateString(string str, string variableName)
-            => ValidateString<ArgumentNullException>(str, variableName);
-
-        private void ValidateList<T, U>(List<U> list, string variableName) where T : Exception
-        {
-
-            if (list == null)
-                throw CreateException<T>(variableName);
-            if (list.Count == 0)
-                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
-
-        }
-        private void ValidateList<U>(List<U> list, string variableName)
-            => ValidateList<ArgumentNullException, U>(list, variableName);
 
     }
 }
