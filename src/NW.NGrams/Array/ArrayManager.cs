@@ -15,10 +15,8 @@ namespace NW.NGrams
         public string[] AddDelimiter(string[] arr, string delimiter)
         {
 
-            if (arr == null)
-                throw new ArgumentNullException(nameof(arr));
-            if (arr.Length == 0)
-                throw new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(nameof(arr)));
+            Validator.ValidateArray(arr, nameof(arr));
+            Validator.ValidateStringNullOrEmpty(delimiter, nameof(delimiter)); // Whitespace is a valid delimiter
 
             List<string> list = new List<string>();
             for (int i = 0; i < arr.Length; i++)
@@ -35,12 +33,8 @@ namespace NW.NGrams
         public string[] GetSubset(string[] arr, uint startIndex, uint length)
         {
 
-            if (arr == null)
-                throw new ArgumentNullException(nameof(arr));
-            if (arr.Length == 0)
-                throw new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(nameof(arr)));
-            if (length < 1)
-                throw new ArgumentException(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(length)));
+            Validator.ValidateArray(arr, nameof(arr));
+            Validator.ValidateLength<ArgumentException>(length);
 
             string[] subset = new string[length];
             Array.Copy(arr, startIndex, subset, 0, length);

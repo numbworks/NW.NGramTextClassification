@@ -61,6 +61,28 @@ namespace NW.NGrams
         public static void ValidateN(ushort n)
             => ValidateN<ArgumentException>(n);
 
+        public static void ValidateArray<T>(string[] arr, string variableName) where T : Exception
+        {
+
+            if (arr == null)
+                throw CreateException<T>(variableName);
+            if (arr.Length == 0)
+                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
+
+        }
+        public static void ValidateArray(string[] arr, string variableName)
+            => ValidateArray<ArgumentNullException>(arr, variableName);
+
+        public static void ValidateLength<T>(uint length) where T : Exception
+        {
+
+            if (length < 1)
+                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(length)));
+
+        }
+        public static void ValidateLength(uint length)
+            => ValidateLength<ArgumentException>(length);
+
         // Methods (private)
         private static T CreateException<T>(string message) where T : Exception
             => (T)Activator.CreateInstance(typeof(T), message);
