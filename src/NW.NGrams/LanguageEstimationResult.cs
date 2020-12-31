@@ -8,14 +8,14 @@ namespace NW.NGrams
         // Fields
         // Properties
         public string Label { get; }
-        public List<LabeledTextSimilarityIndex> SimilarityIndexes { get; }
-        public List<LabeledTextSimilarityAverage> SimilarityAverages { get; }
+        public List<SimilarityIndex> SimilarityIndexes { get; }
+        public List<SimilarityIndexAverage> SimilarityAverages { get; }
 
         // Constructors	
         public LanguageEstimationResult(
             string label,
-            List<LabeledTextSimilarityIndex> similarityIndexes,
-            List<LabeledTextSimilarityAverage> similarityAverages)
+            List<SimilarityIndex> similarityIndexes,
+            List<SimilarityIndexAverage> similarityAverages)
         {
 
             Label = label;

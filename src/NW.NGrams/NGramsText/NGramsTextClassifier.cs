@@ -12,9 +12,9 @@ namespace NW.NGrams
         private ILabeledTextJsonDeserializer _LabeledTextJsonDeserializer;
         private INGramsTokenizer _NGramsTokenizer;
         private INGramsSimilarityCalculator _NGramsSimilarityCalculator;
-        private Func<List<LabeledTextSimilarityAverage>, bool> _AreAllZerosStrategy;
-        private Func<List<LabeledTextSimilarityAverage>, bool> _AreDistinctStrategy;
-        private Func<List<LabeledTextSimilarityAverage>, LabeledTextSimilarityAverage> _GetHighestStrategy;
+        private Func<List<SimilarityIndexAverage>, bool> _AreAllZerosStrategy;
+        private Func<List<SimilarityIndexAverage>, bool> _AreDistinctStrategy;
+        private Func<List<SimilarityIndexAverage>, SimilarityIndexAverage> _GetHighestStrategy;
 
         // Properties
         // Constructors
@@ -23,9 +23,9 @@ namespace NW.NGrams
             ILabeledTextJsonDeserializer labeledTextJsonDeserializer,
             INGramsTokenizer nGramsTokenizer,
             INGramsSimilarityCalculator nGramsSimilarityCalculator,
-            Func<List<LabeledTextSimilarityAverage>, bool> areAllZerosStrategy,
-            Func<List<LabeledTextSimilarityAverage>, bool> areDistinctStrategy,
-            Func<List<LabeledTextSimilarityAverage>, LabeledTextSimilarityAverage> getHighestStrategy)
+            Func<List<SimilarityIndexAverage>, bool> areAllZerosStrategy,
+            Func<List<SimilarityIndexAverage>, bool> areDistinctStrategy,
+            Func<List<SimilarityIndexAverage>, SimilarityIndexAverage> getHighestStrategy)
         {
 
             _RoundingStrategy = roundingStrategy;
@@ -116,7 +116,7 @@ namespace NW.NGrams
             return nGrams;
 
         }
-        public List<LabeledTextSimilarityIndex> GetSimilarityIndexes(List<string> nGrams, List<LabeledTextNGrams> labeledTextsNGrams)
+        public List<SimilarityIndex> GetSimilarityIndexes(List<string> nGrams, List<LabeledTextNGrams> labeledTextsNGrams)
         {
 
             /*
@@ -140,13 +140,13 @@ namespace NW.NGrams
             Validate(nGrams, nameof(nGrams));
             Validate(labeledTextsNGrams, nameof(labeledTextsNGrams));
 
-            List<LabeledTextSimilarityIndex> similarityIndexes = new List<LabeledTextSimilarityIndex>();
+            List<SimilarityIndex> similarityIndexes = new List<SimilarityIndex>();
             for (int i = 0; i < labeledTextsNGrams.Count; i++)
             {
 
                 double similarityIndex = _NGramsSimilarityCalculator.Do(nGrams, labeledTextsNGrams[i].NGrams);
                 similarityIndexes.Add(
-                    new LabeledTextSimilarityIndex(
+                    new SimilarityIndex(
                         labeledTextsNGrams[i].LabeledTextId,
                         labeledTextsNGrams[i].Label,
                         _RoundingStrategy(similarityIndex)
@@ -157,14 +157,14 @@ namespace NW.NGrams
             return similarityIndexes;
 
         }
-        public List<LabeledTextSimilarityAverage> GetSimilarityAverages(List<LabeledTextSimilarityIndex> similarityIndexes)
+        public List<SimilarityIndexAverage> GetSimilarityAverages(List<SimilarityIndex> similarityIndexes)
         {
 
             Validate(similarityIndexes, nameof(similarityIndexes));
 
             List<string> uniqueLabels = ExtractUniqueLabels(similarityIndexes);
 
-            List<LabeledTextSimilarityAverage> similarityAverages = new List<LabeledTextSimilarityAverage>();
+            List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
@@ -173,7 +173,7 @@ namespace NW.NGrams
                 double currentAverage = CalculateAverage(currentIndexes);
 
                 similarityAverages.Add(
-                    new LabeledTextSimilarityAverage(
+                    new SimilarityIndexAverage(
                         currentLabel,
                         _RoundingStrategy(currentAverage)));
 
@@ -182,7 +182,7 @@ namespace NW.NGrams
             return similarityAverages;
 
         }
-        public string EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages)
+        public string EstimateLabel(List<SimilarityIndexAverage> similarityAverages)
         {
 
             /*
@@ -201,7 +201,7 @@ namespace NW.NGrams
             return _GetHighestStrategy(similarityAverages).Label;
 
         }
-        public string FormatAsTable(List<ILabeledTextSimilarityValue> similarityValues)
+        public string FormatAsTable(List<ISimilarityValue> similarityValues)
         {
 
             /*
@@ -237,7 +237,7 @@ namespace NW.NGrams
             return table;
 
         }
-        public string FormatAsTable(ILabeledTextSimilarityValue similarityValue)
+        public string FormatAsTable(ISimilarityValue similarityValue)
         {
 
             if (similarityValue == null)
@@ -251,7 +251,7 @@ namespace NW.NGrams
         }
 
         // Methods (private)
-        private List<string> ExtractUniqueLabels(List<LabeledTextSimilarityIndex> similarityIndexes)
+        private List<string> ExtractUniqueLabels(List<SimilarityIndex> similarityIndexes)
         {
 
             /*
@@ -272,7 +272,7 @@ namespace NW.NGrams
             return uniqueLabels;
 
         }
-        private List<double> ExtractSimilarityIndexes(string label, List<LabeledTextSimilarityIndex> similarityIndexes)
+        private List<double> ExtractSimilarityIndexes(string label, List<SimilarityIndex> similarityIndexes)
         {
 
             /*
@@ -288,7 +288,7 @@ namespace NW.NGrams
 
             return similarityIndexes
                     .Where(similarityIndex => similarityIndex.Label == label)
-                    .Select(similarityIndex => similarityIndex.SimilarityIndex)
+                    .Select(similarityIndex => similarityIndex.Value)
                     .ToList();
 
         }
@@ -341,9 +341,9 @@ namespace NW.NGrams
 
         }
         private void Validate(
-            List<LabeledTextSimilarityAverage> similarityAverages,
-            Func<List<LabeledTextSimilarityAverage>, bool> areAllZerosStrategy,
-            Func<List<LabeledTextSimilarityAverage>, bool> areDistinctStrategy
+            List<SimilarityIndexAverage> similarityAverages,
+            Func<List<SimilarityIndexAverage>, bool> areAllZerosStrategy,
+            Func<List<SimilarityIndexAverage>, bool> areDistinctStrategy
             )
         {
 

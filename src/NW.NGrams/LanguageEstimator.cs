@@ -43,9 +43,9 @@ namespace NW.NGrams
                 throw new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(nameof(labeledTextsNGrams)));
 
             List<string> nGrams = _NGramsTextClassifier.ConvertToNGrams(text, _TokenizationStrategies.Get());
-            List<LabeledTextSimilarityIndex> similarityIndexes
+            List<SimilarityIndex> similarityIndexes
                 = _NGramsTextClassifier.GetSimilarityIndexes(nGrams, labeledTextsNGrams);
-            List<LabeledTextSimilarityAverage> similarityAverages
+            List<SimilarityIndexAverage> similarityAverages
                 = _NGramsTextClassifier.GetSimilarityAverages(similarityIndexes);
 
             string label = _NGramsTextClassifier.EstimateLabel(similarityAverages);

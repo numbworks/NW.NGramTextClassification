@@ -8,7 +8,7 @@ namespace NW.NGrams
     {
 
         // Properties
-        public static Func<List<LabeledTextSimilarityAverage>, bool> AreAllZeros { get; } 
+        public static Func<List<SimilarityIndexAverage>, bool> AreAllZeros { get; } 
             = (list) 
                 => {
 
@@ -22,13 +22,13 @@ namespace NW.NGrams
                          * 
                          */
 
-                        if (list.Where(Item => Item.Average == 0).Count() == list.Count)
+                        if (list.Where(Item => Item.Value == 0).Count() == list.Count)
                             return true;
 
                         return false;
 
                     };
-        public static Func<List<LabeledTextSimilarityAverage>, bool> AreDistinct { get; } 
+        public static Func<List<SimilarityIndexAverage>, bool> AreDistinct { get; } 
             = (list) 
                 => {
 
@@ -43,13 +43,13 @@ namespace NW.NGrams
                          * 
                          */
 
-                        if (list.Select(Item => Item.Average).Distinct().Count() == list.Count)
+                        if (list.Select(Item => Item.Value).Distinct().Count() == list.Count)
                             return true;
 
                         return false;
 
                     };
-        public static Func<List<LabeledTextSimilarityAverage>, LabeledTextSimilarityAverage> GetHighest { get; } 
+        public static Func<List<SimilarityIndexAverage>, SimilarityIndexAverage> GetHighest { get; } 
             = (list) 
                 => {
 
@@ -63,7 +63,7 @@ namespace NW.NGrams
                          * 
                          */
 
-                        return list.OrderByDescending(Item => Item.Average).ToList().First();
+                        return list.OrderByDescending(Item => Item.Value).ToList().First();
 
                     };
 

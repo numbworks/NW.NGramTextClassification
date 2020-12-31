@@ -1,6 +1,6 @@
 ﻿namespace NW.NGrams
 {
-    public interface ILabeledTextSimilarityValue
+    public interface ISimilarityValue
     {
         string ToHeader();
 

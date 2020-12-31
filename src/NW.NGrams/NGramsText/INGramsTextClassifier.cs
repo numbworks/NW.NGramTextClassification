@@ -33,27 +33,27 @@ namespace NW.NGrams
         /// <summary>
         /// It returns a List<LabeledTextSimilarityIndex> containining the similarities between the provided NGrammed text and each of the labeled texts.
         /// </summary>
-        List<LabeledTextSimilarityIndex> GetSimilarityIndexes(List<string> textNGrams, List<LabeledTextNGrams> labeledTextsNGrams);
+        List<SimilarityIndex> GetSimilarityIndexes(List<string> textNGrams, List<LabeledTextNGrams> labeledTextsNGrams);
 
         /// <summary>
         /// It returns a List<LabeledTextSimilarityAverage> containining the average similarity index for each unique label.
         /// </summary>
-        List<LabeledTextSimilarityAverage> GetSimilarityAverages(List<LabeledTextSimilarityIndex> similarityIndexes);
+        List<SimilarityIndexAverage> GetSimilarityAverages(List<SimilarityIndex> similarityIndexes);
 
         /// <summary>
         /// It returns the label with the highest average similarity index.
         /// </summary>
-        string EstimateLabel(List<LabeledTextSimilarityAverage> similarityAverages);
+        string EstimateLabel(List<SimilarityIndexAverage> similarityAverages);
 
         /// <summary>
         /// It returns the list in tabular format.
         /// </summary>
-        string FormatAsTable(List<ILabeledTextSimilarityValue> similarityValues);
+        string FormatAsTable(List<ISimilarityValue> similarityValues);
 
         /// <summary>
         /// It returns the object in tabular format.
         /// </summary>
-        string FormatAsTable(ILabeledTextSimilarityValue similarityValue);
+        string FormatAsTable(ISimilarityValue similarityValue);
 
     }
 }
