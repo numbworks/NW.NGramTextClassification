@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NW.NGramTextClassification
 {
@@ -15,9 +16,24 @@ namespace NW.NGramTextClassification
         public static Func<ITokenizationStrategy, string> TheProvidedTokenizationStrategyPatternReturnsZeroMatches =
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
 
-        // NGramsTextClassifier
-        public static Func<string, bool, string> TheMethodDidntReturnExpectedOutcome =
-            (name, expected) => $"The '{name}' method didn't return the expected outcome ('{expected}').";
+        // TextClassifier
+        public static Func<string, bool, string> FollowingVerificationHasBeenSuccessful =
+            (name, expected) => $"The following verification has been successful: '{name}'.";
+        public static Func<string, bool, string> FollowingVerificationHasFailed =
+            (name, expected) => $"The following verification has failed: '{name}'.";
+
+        // Methods
+        public static string RollOutCollection(IEnumerable<object> coll)
+        {
+
+            List<string> list = new List<string>();
+
+            foreach (object obj in coll)
+                list.Add(obj.ToString());
+
+            return $"[{string.Join(", ", list)}]";
+
+        }
 
     }
 }
@@ -25,6 +41,6 @@ namespace NW.NGramTextClassification
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 29.12.2020
+    Last Update: 01.01.2021
 
 */

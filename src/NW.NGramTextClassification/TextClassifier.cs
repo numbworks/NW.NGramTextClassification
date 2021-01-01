@@ -88,20 +88,20 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            Validator.ValidateList(nGrams, nameof(nGrams));
-            Validator.ValidateList(labeledExtracts, nameof(labeledExtracts));
-
             List<SimilarityIndex> similarityIndexes = new List<SimilarityIndex>();
             for (int i = 0; i < labeledExtracts.Count; i++)
             {
 
-                double similarityIndex = _similarityIndexCalculator.Do(nGrams, labeledExtracts[i].TextAsNGrams);
-                similarityIndexes.Add(
-                    new SimilarityIndex(
-                        labeledExtracts[i].Id,
-                        labeledExtracts[i].Label,
-                        _roundingStrategy(similarityIndex)
-                    ));
+                Console.WriteLine($"Comparing privided text against: '{labeledExtracts[i].Id}', '{labeledExtracts[i].Label}'...");
+
+                double indexValue = _similarityIndexCalculator.Do(nGrams, labeledExtracts[i].TextAsNGrams);
+                double roundedValue = _roundingStrategy(indexValue);
+
+                Console.WriteLine($"Similarity Index: '{indexValue}'.");
+                Console.WriteLine($"Similarity Index (rounded): '{roundedValue}'.");
+
+                SimilarityIndex similarityIndex = new SimilarityIndex(labeledExtracts[i].Id, labeledExtracts[i].Label, roundedValue);
+                similarityIndexes.Add(similarityIndex);
 
             }
 
@@ -111,22 +111,26 @@ namespace NW.NGramTextClassification
         private List<SimilarityIndexAverage> GetSimilarityIndexAverages(List<SimilarityIndex> indexes)
         {
 
-            Validator.ValidateList(indexes, nameof(indexes));
-
             List<string> uniqueLabels = ExtractUniqueLabels(indexes);
+            Console.WriteLine($"The following labels have been found in the provided {nameof(LabeledExtract)}s: '{MessageCollection.RollOutCollection(uniqueLabels)}'.");
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
                 string currentLabel = uniqueLabels[i];
-                List<double> currentIndexes = ExtractSimilarityIndexes(currentLabel, indexes);
-                double currentAverage = CalculateAverage(currentIndexes);
+                Console.WriteLine($"Current label: '{currentLabel}'.");
 
-                similarityAverages.Add(
-                    new SimilarityIndexAverage(
-                        currentLabel,
-                        _roundingStrategy(currentAverage)));
+                List<double> indexValues = ExtractSimilarityIndexes(currentLabel, indexes);
+                double averageValue = CalculateAverage(indexValues);
+                double roundedValue = _roundingStrategy(averageValue);
+
+                Console.WriteLine($"Average Index: '{averageValue}'.");
+                Console.WriteLine($"Average Index (rounded): '{roundedValue}'.");
+
+                SimilarityIndexAverage indexAverage = new SimilarityIndexAverage(currentLabel, roundedValue);
+
+                similarityAverages.Add(indexAverage);
 
             }
 
@@ -146,8 +150,13 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            Validator.ValidateList(indexAverages, nameof(indexAverages));
-            Validator.ValidateSimilarityIndexAverages(indexAverages);
+            if (HasOnlyZeros(indexAverages))
+                return null;
+
+            if (HasEveryLabelSameAverage(indexAverages))
+                return null;
+
+            // What if the two highest values are the same?
 
             return GetHighest(indexAverages).Label;
 
@@ -205,6 +214,49 @@ namespace NW.NGramTextClassification
             return sum / averages.Count;
 
         }
+        private static bool HasOnlyZeros(List<SimilarityIndexAverage> indexAverages)
+        {
+
+            /*
+             *
+             * Label    Average
+             * sv       0
+             * en       0
+             * 
+             * 		=> { 0, 0 } 
+             * 		=> true
+             * 
+             */
+
+            if (indexAverages.Where(Item => Item.Value == 0).Count() == indexAverages.Count)
+                return true;
+
+            return false;
+
+        }
+        private static bool HasEveryLabelSameAverage(List<SimilarityIndexAverage> indexAverages)
+        {
+
+            /*
+             *
+             * Label    Average
+             * sv       0.1
+             * en       0.1
+             * dk       0.1
+             * 
+             * 		=> { 0.1, 0.1, 0.1 } 
+             * 		=> 1 
+             * 		=> 1 == 1
+             * 		=> true
+             * 
+             */
+
+            if (indexAverages.Select(Item => Item.Value).Distinct().Count() == 1)
+                return true;
+
+            return false;
+
+        }
         private SimilarityIndexAverage GetHighest(List<SimilarityIndexAverage> indexAverages)
         {
 
@@ -228,6 +280,6 @@ namespace NW.NGramTextClassification
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 31.12.2020
+    Last Update: 01.01.2021
 
 */
