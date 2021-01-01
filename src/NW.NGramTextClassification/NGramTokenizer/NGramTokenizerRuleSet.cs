@@ -1,6 +1,6 @@
 ﻿namespace NW.NGramTextClassification
 {
-    public class NGramsTokenizerRuleSet : INGramsTokenizerRuleSet
+    public class NGramTokenizerRuleSet : INGramsTokenizerRuleSet
     {
 
         // Fields
@@ -10,7 +10,7 @@
         public bool DoForTrigrams { get; }
 
         // Constructors
-        public NGramsTokenizerRuleSet
+        public NGramTokenizerRuleSet
             (bool doForMonograms, bool doForBigrams, bool doForTrigrams)
         {
 
@@ -19,7 +19,7 @@
             DoForTrigrams = doForTrigrams;
 
         }
-        public NGramsTokenizerRuleSet()
+        public NGramTokenizerRuleSet()
             : this(true, true, true) {}
 
         // Methods (public)

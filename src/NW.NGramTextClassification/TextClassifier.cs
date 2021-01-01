@@ -10,13 +10,13 @@ namespace NW.NGramTextClassification
         // Fields
         // Properties
         private Func<double, double> _roundingStrategy;
-        private INGramsTokenizer _nGramsTokenizer;
+        private INGramTokenizer _nGramsTokenizer;
         private ISimilarityIndexCalculator _similarityIndexCalculator;
 
         // Constructors
         public TextClassifier
             (Func<double, double> roundingStrategy,
-            INGramsTokenizer nGramsTokenizer,
+            INGramTokenizer nGramsTokenizer,
             ISimilarityIndexCalculator similarityIndexCalculator)
         {
 
@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification
         public TextClassifier()
             : this(
                   RoundingStategies.SixDecimalDigits,
-                  new NGramsTokenizer(),
+                  new NGramTokenizer(),
                   new SimilarityIndexCalculatorJaccard()) { }
 
         // Methods
@@ -63,7 +63,7 @@ namespace NW.NGramTextClassification
                 => Predict(text, new TokenizationStrategy(), ruleSet, labeledExtracts);
         public TextClassifierResult Predict
             (string text, List<LabeledExtract> labeledExtracts)
-                => Predict(text, new NGramsTokenizerRuleSet(), labeledExtracts);
+                => Predict(text, new NGramTokenizerRuleSet(), labeledExtracts);
 
         // Methods (private)
         private List<SimilarityIndex> GetSimilarityIndexes

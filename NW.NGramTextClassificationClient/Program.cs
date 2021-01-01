@@ -19,8 +19,9 @@ namespace NW.NGramTextClassificationClient
             };
 
             ITextClassifier textClassifier = new TextClassifier();
-            textClassifier.
+            TextClassifierResult result = textClassifier.Predict(text, labeledExtracts);
 
+            Console.WriteLine(result.Label);
 
 
             Console.ReadKey();

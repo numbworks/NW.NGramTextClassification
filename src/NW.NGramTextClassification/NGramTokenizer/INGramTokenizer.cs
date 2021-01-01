@@ -2,7 +2,7 @@
 
 namespace NW.NGramTextClassification
 {
-    public interface INGramsTokenizer
+    public interface INGramTokenizer
     {
         List<INGram> Do(string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet);
         List<INGram> Do(string text, ITokenizationStrategy strategy);

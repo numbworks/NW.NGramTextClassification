@@ -6,7 +6,7 @@ namespace NW.NGramTextClassification
     {
 
         // Fields
-        private INGramsTokenizer _tokenizer;
+        private INGramTokenizer _tokenizer;
         private uint _initialId;
 
         // Properties
@@ -14,7 +14,7 @@ namespace NW.NGramTextClassification
 
         // Constructors
         public LabeledExtractFactory
-            (INGramsTokenizer tokenizer, uint initialId)
+            (INGramTokenizer tokenizer, uint initialId)
         {
 
             Validator.ValidateObject(tokenizer, nameof(tokenizer));
@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification
 
         }
         public LabeledExtractFactory()
-            : this(new NGramsTokenizer(), DefaultInitialId) { }
+            : this(new NGramTokenizer(), DefaultInitialId) { }
 
         // Methods (public)
         public LabeledExtract Create
@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification
 
         }
         public LabeledExtract Create(ulong id, string label, string text, ITokenizationStrategy strategy)
-            => Create(id, label, text, strategy, new NGramsTokenizerRuleSet());
+            => Create(id, label, text, strategy, new NGramTokenizerRuleSet());
         public LabeledExtract Create(ulong id, string label, string text)
             => Create(id, label, text, new TokenizationStrategy());
 
@@ -72,7 +72,7 @@ namespace NW.NGramTextClassification
 
         }
         public List<LabeledExtract> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy)
-            => Create(tuples, strategy, new NGramsTokenizerRuleSet());
+            => Create(tuples, strategy, new NGramTokenizerRuleSet());
         public List<LabeledExtract> Create(List<(string label, string text)> tuples)
             => Create(tuples, new TokenizationStrategy());
 

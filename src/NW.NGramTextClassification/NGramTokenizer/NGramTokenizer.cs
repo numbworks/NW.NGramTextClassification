@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace NW.NGramTextClassification
 {
-    public class NGramsTokenizer : INGramsTokenizer
+    public class NGramTokenizer : INGramTokenizer
     {
 
         // Fields
@@ -13,7 +13,7 @@ namespace NW.NGramTextClassification
 
         // Properties
         // Constructors
-        public NGramsTokenizer(IArrayManager arrayManager)
+        public NGramTokenizer(IArrayManager arrayManager)
         {
 
             Validator.ValidateObject(arrayManager, nameof(arrayManager));
@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification
             _ArrayManager = arrayManager;
 
         }
-        public NGramsTokenizer()
+        public NGramTokenizer()
             : this(new ArrayManager()) { }
 
         // Methods
@@ -46,9 +46,9 @@ namespace NW.NGramTextClassification
 
         }
         public List<INGram> Do(string text, ITokenizationStrategy strategy)
-            => Do(text, strategy, new NGramsTokenizerRuleSet());
+            => Do(text, strategy, new NGramTokenizerRuleSet());
         public List<INGram> Do(string text)
-            => Do(text, new TokenizationStrategy(), new NGramsTokenizerRuleSet());
+            => Do(text, new TokenizationStrategy(), new NGramTokenizerRuleSet());
 
         // Methods (private)
         private T CreateInstance<T>(params object[] args)
