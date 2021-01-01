@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NW.NGrams
+﻿namespace NW.NGrams
 {
     public class SimilarityIndex
     {
@@ -15,8 +13,7 @@ namespace NW.NGrams
         public SimilarityIndex(ulong id, string label, double value)
         {
 
-            if (string.IsNullOrWhiteSpace(label))
-                throw new ArgumentNullException(nameof(label));
+            Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
 
             LabeledExtractId = id;
             Label = label;
@@ -33,6 +30,6 @@ namespace NW.NGrams
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
+    Last Update: 31.12.2020
 
 */

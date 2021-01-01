@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NW.NGrams
+﻿namespace NW.NGrams
 {
     public class SimilarityIndexAverage
     {
@@ -14,8 +12,7 @@ namespace NW.NGrams
         public SimilarityIndexAverage(string label, double value)
         {
 
-            if (string.IsNullOrWhiteSpace(label))
-                throw new ArgumentNullException(nameof(label));
+            Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
 
             Label = label;
             Value = value;
@@ -31,6 +28,6 @@ namespace NW.NGrams
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
+    Last Update: 31.12.2020
 
 */
