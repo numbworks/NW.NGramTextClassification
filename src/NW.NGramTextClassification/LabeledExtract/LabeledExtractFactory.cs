@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NW.NGrams
+namespace NW.NGramTextClassification
 {
     public class LabeledExtractFactory : ILabeledExtractFactory
     {

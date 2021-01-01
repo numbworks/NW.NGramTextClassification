@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NW.NGrams
+namespace NW.NGramTextClassification
 {
     public static class MessageCollection
     {

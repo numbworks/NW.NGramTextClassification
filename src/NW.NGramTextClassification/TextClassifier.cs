@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NW.NGrams
+namespace NW.NGramTextClassification
 {
     public class TextClassifier : ITextClassifier
     {
@@ -36,11 +36,8 @@ namespace NW.NGrams
                   new SimilarityIndexCalculatorJaccard()) { }
 
         // Methods
-        public TextClassifierResult Do
-            (string text, 
-            ITokenizationStrategy strategy, 
-            INGramsTokenizerRuleSet ruleSet, 
-            List<LabeledExtract> labeledExtracts)
+        public TextClassifierResult Predict
+            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -61,6 +58,12 @@ namespace NW.NGrams
             return result;
 
         }
+        public TextClassifierResult Predict
+            (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts)
+                => Predict(text, new TokenizationStrategy(), ruleSet, labeledExtracts);
+        public TextClassifierResult Predict
+            (string text, List<LabeledExtract> labeledExtracts)
+                => Predict(text, new NGramsTokenizerRuleSet(), labeledExtracts);
 
         // Methods (private)
         private List<SimilarityIndex> GetSimilarityIndexes

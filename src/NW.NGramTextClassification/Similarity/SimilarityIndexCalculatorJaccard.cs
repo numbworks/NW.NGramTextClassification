@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NW.NGrams
+namespace NW.NGramTextClassification
 {
     public class SimilarityIndexCalculatorJaccard : ISimilarityIndexCalculator
     {

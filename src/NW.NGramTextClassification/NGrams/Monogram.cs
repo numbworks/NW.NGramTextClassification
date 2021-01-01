@@ -1,4 +1,4 @@
-﻿namespace NW.NGrams
+﻿namespace NW.NGramTextClassification
 {
     public class Monogram : ANGram, INGram
     {

@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace NW.NGrams
+namespace NW.NGramTextClassification
 {
     public interface ITextClassifier
     {
-        TextClassifierResult Do(string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts);
+        TextClassifierResult Predict
+            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts);
+        TextClassifierResult Predict
+            (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts);
+        TextClassifierResult Predict
+            (string text, List<LabeledExtract> labeledExtracts);
     }
 }
 
