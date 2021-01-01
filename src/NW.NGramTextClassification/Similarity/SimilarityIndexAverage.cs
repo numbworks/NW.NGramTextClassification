@@ -20,6 +20,20 @@
         }
 
         // Methods
+        public override string ToString()
+        {
+
+            string content
+                = string.Join(
+                    ", ",
+                    $"{nameof(Label)}: '{Label}'",
+                    $"{nameof(Value)}: '{Value.ToString()}'"
+                    );
+
+            return $"[ {content} ]";
+
+        }
+
         // Methods (private)
 
     }
@@ -28,6 +42,6 @@
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 31.12.2020
+    Last Update: 01.01.2021
 
 */
