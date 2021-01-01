@@ -5,7 +5,7 @@
 
         // Fields
         // Properties
-        public ulong LabeledExtractId { get; }
+        public ulong Id { get; }
         public string Label { get; }
         public double Value { get; }
 
@@ -15,13 +15,28 @@
 
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
 
-            LabeledExtractId = id;
+            Id = id;
             Label = label;
             Value = value; 
 
         }
 
         // Methods
+        public override string ToString()
+        {
+
+            string content
+                = string.Join(
+                    ", ",
+                    $"{nameof(Id)}: '{Id}'",
+                    $"{nameof(Label)}: '{Label}'",
+                    $"{nameof(Value)}: '{Value.ToString()}'"
+                    );
+
+            return $"[ {content} ]";
+
+        }
+
         // Methods (private)
 
     }
