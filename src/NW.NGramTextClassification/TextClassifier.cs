@@ -80,16 +80,18 @@ namespace NW.NGramTextClassification
             for (int i = 0; i < labeledExtracts.Count; i++)
             {
 
-                Console.WriteLine($"Comparing privided text against: '{labeledExtracts[i].Id}', '{labeledExtracts[i].Label}'...");
+                _components.LoggingAction.Invoke(MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(labeledExtracts[i]));
 
                 double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, labeledExtracts[i].TextAsNGrams, _components.RoundingFunction);
                 double roundedValue = _components.RoundingFunction.Invoke(indexValue);
 
-                Console.WriteLine($"Similarity Index: '{indexValue}'.");
-                Console.WriteLine($"Similarity Index (rounded): '{roundedValue}'.");
+                _components.LoggingAction.Invoke(MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(indexValue));
+                _components.LoggingAction.Invoke(MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(roundedValue));
 
                 SimilarityIndex similarityIndex = new SimilarityIndex(labeledExtracts[i].Id, labeledExtracts[i].Label, roundedValue);
                 similarityIndexes.Add(similarityIndex);
+
+                _components.LoggingAction.Invoke(MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(similarityIndex));
 
             }
 

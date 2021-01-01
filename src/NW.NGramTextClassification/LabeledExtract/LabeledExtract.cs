@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NW.NGramTextClassification
 {
@@ -31,6 +32,8 @@ namespace NW.NGramTextClassification
         // Methods
         // Methods (private)
         public override string ToString()
+            => ToString(20);
+        public string ToString(uint truncateTextAfter)
         {
 
             string content
@@ -38,7 +41,7 @@ namespace NW.NGramTextClassification
                     ", ",
                     $"{nameof(Id)}: '{Id}'",
                     $"{nameof(Label)}: '{Label}'",
-                    $"{nameof(Text)}: '{Text}'",
+                    $"{nameof(Text)}: '{Text.Substring(0, (int)truncateTextAfter)}...'",
                     $"{nameof(TextAsNGrams)}: '{TextAsNGrams?.Count.ToString() ?? "null"}'"
                     );
 

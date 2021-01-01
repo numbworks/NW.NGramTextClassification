@@ -21,6 +21,14 @@ namespace NW.NGramTextClassification
             (name, expected) => $"The following verification has been successful: '{name}'.";
         public static Func<string, bool, string> FollowingVerificationHasFailed =
             (name, expected) => $"The following verification has failed: '{name}'.";
+        public static Func<LabeledExtract, string> ComparingProvidedTextAgainstFollowingLabeledExample =
+            (labeledExtract) => $"Comparing the provided text against the following {nameof(LabeledExtract)}: '{labeledExtract.ToString()}'...";
+        public static Func<double, string> TheCalculatedSimilarityIndexValueIs =
+            (indexValue) => $"The calculated Similarity Index value is '{indexValue}'.";
+        public static Func<double, string> TheRoundedSimilarityIndexValueIs =
+            (roundedValue) => $"The rounded Similarity Index value is '{roundedValue}'.";
+        public static Func<SimilarityIndex, string> TheFollowingSimilarityIndexObjectHasBeenAddedToTheList =
+            (similarityIndex) => $"The following {nameof(SimilarityIndex)} object has been added to the list: '{similarityIndex.ToString()}'.";
 
         // Methods
         public static string RollOutCollection(IEnumerable<object> coll)
