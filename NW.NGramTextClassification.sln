@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NW.NGrams", "src\NW.NGrams\NW.NGrams.csproj", "{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification", "src\NW.NGramTextClassification\NW.NGramTextClassification.csproj", "{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NW.NGrams.UnitTests", "tests\NW.NGrams.UnitTests\NW.NGrams.UnitTests.csproj", "{DED71858-151D-46C5-89FD-03AF41A44CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification.UnitTests", "tests\NW.NGramTextClassification.UnitTests\NW.NGramTextClassification.UnitTests.csproj", "{DED71858-151D-46C5-89FD-03AF41A44CFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
