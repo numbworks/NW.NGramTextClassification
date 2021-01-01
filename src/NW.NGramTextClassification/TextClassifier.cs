@@ -8,32 +8,20 @@ namespace NW.NGramTextClassification
     {
 
         // Fields
-        // Properties
-        private Func<double, double> _roundingStrategy;
-        private INGramTokenizer _nGramsTokenizer;
-        private ISimilarityIndexCalculator _similarityIndexCalculator;
+        private TextClassifierComponents _components;
 
+        // Properties
         // Constructors
-        public TextClassifier
-            (Func<double, double> roundingStrategy,
-            INGramTokenizer nGramsTokenizer,
-            ISimilarityIndexCalculator similarityIndexCalculator)
+        public TextClassifier(TextClassifierComponents components)
         {
 
-            Validator.ValidateObject(roundingStrategy, nameof(roundingStrategy));
-            Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
-            Validator.ValidateObject(similarityIndexCalculator, nameof(similarityIndexCalculator));
+            Validator.ValidateObject(components, nameof(components));
 
-            _roundingStrategy = roundingStrategy;
-            _nGramsTokenizer = nGramsTokenizer;
-            _similarityIndexCalculator = similarityIndexCalculator;
+            _components = components;
 
         }
         public TextClassifier()
-            : this(
-                  RoundingStategies.SixDecimalDigits,
-                  new NGramTokenizer(),
-                  new SimilarityIndexCalculatorJaccard()) { }
+            : this(new TextClassifierComponents()) { }
 
         // Methods
         public TextClassifierResult Predict
@@ -45,7 +33,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
             Validator.ValidateList(labeledExtracts, nameof(labeledExtracts));
 
-            List<INGram> nGrams = _nGramsTokenizer.Do(text, strategy, ruleSet);
+            List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExtracts);
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 
@@ -94,8 +82,8 @@ namespace NW.NGramTextClassification
 
                 Console.WriteLine($"Comparing privided text against: '{labeledExtracts[i].Id}', '{labeledExtracts[i].Label}'...");
 
-                double indexValue = _similarityIndexCalculator.Do(nGrams, labeledExtracts[i].TextAsNGrams);
-                double roundedValue = _roundingStrategy(indexValue);
+                double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, labeledExtracts[i].TextAsNGrams, _components.RoundingFunction);
+                double roundedValue = _components.RoundingFunction.Invoke(indexValue);
 
                 Console.WriteLine($"Similarity Index: '{indexValue}'.");
                 Console.WriteLine($"Similarity Index (rounded): '{roundedValue}'.");
@@ -123,7 +111,7 @@ namespace NW.NGramTextClassification
 
                 List<double> indexValues = ExtractSimilarityIndexes(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
-                double roundedValue = _roundingStrategy(averageValue);
+                double roundedValue = _components.RoundingFunction.Invoke(averageValue);
 
                 Console.WriteLine($"Average Index: '{averageValue}'.");
                 Console.WriteLine($"Average Index (rounded): '{roundedValue}'.");

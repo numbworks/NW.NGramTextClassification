@@ -5,8 +5,7 @@ namespace NW.NGramTextClassification
 {
     public interface ISimilarityIndexCalculator
     {
-        double Do(List<INGram> list1, List<INGram> list2, Func<double, double> RoundingStrategy);
-        double Do(List<INGram> list1, List<INGram> list2);
+        double Do(List<INGram> list1, List<INGram> list2, Func<double, double> roundingStrategy);
     }
 }
 

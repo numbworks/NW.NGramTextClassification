@@ -26,8 +26,6 @@ namespace NW.NGramTextClassification
                     roundingStrategy);
 
         }
-        public double Do(List<INGram> list1, List<INGram> list2)
-            => Do(list1, list2, RoundingStategies.SixDecimalDigits);
 
         // Methods (private)
         private double Do(List<string> list1, List<string> list2, Func<double, double> roundingStrategy)
