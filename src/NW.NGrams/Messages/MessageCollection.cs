@@ -16,8 +16,8 @@ namespace NW.NGrams
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
 
         // NGramsTextClassifier
-        public static Func<string, bool, string> TheFunctionDidntReturnExpectedOutcome =
-            (name, expected) => $"The '{name}' function didn't return the expected outcome ('{expected}').";
+        public static Func<string, bool, string> TheMethodDidntReturnExpectedOutcome =
+            (name, expected) => $"The '{name}' method didn't return the expected outcome ('{expected}').";
 
     }
 }

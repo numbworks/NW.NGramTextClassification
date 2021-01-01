@@ -2,7 +2,7 @@
 
 namespace NW.NGrams
 {
-    public class LanguageEstimationResult
+    public class TextClassifierResult
     {
 
         // Fields
@@ -12,7 +12,7 @@ namespace NW.NGrams
         public List<SimilarityIndexAverage> SimilarityAverages { get; }
 
         // Constructors	
-        public LanguageEstimationResult(
+        public TextClassifierResult(
             string label,
             List<SimilarityIndex> similarityIndexes,
             List<SimilarityIndexAverage> similarityAverages)
