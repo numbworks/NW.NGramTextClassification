@@ -30,6 +30,21 @@ namespace NW.NGramTextClassification
 
         // Methods
         // Methods (private)
+        public override string ToString()
+        {
+
+            string content
+                = string.Join(
+                    ", ",
+                    $"{nameof(Id)}: '{Id}'",
+                    $"{nameof(Label)}: '{Label}'",
+                    $"{nameof(Text)}: '{Text}'",
+                    $"{nameof(TextAsNGrams)}: '{TextAsNGrams?.Count.ToString() ?? "null"}'"
+                    );
+
+            return $"[ {content} ]";
+
+        }
 
     }
 }
