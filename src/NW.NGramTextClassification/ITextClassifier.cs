@@ -8,7 +8,7 @@ namespace NW.NGramTextClassification
             (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts);
         TextClassifierResult Predict
             (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts);
-        TextClassifierResult Predict
+        TextClassifierResult PredictLabel
             (string text, List<LabeledExtract> labeledExtracts);
     }
 }

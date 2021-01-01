@@ -54,7 +54,7 @@ namespace NW.NGramTextClassification
         private T CreateInstance<T>(params object[] args)
             => (T)Activator.CreateInstance(typeof(T), args);
         private ushort GetN<T>()
-            => ((INGram)CreateInstance<T>()).N;
+            => ((INGram)CreateInstance<T>(new TokenizationStrategy(), "whatever_value")).N;
         private List<T> GetTokens<T>(MatchCollection matches, ITokenizationStrategy strategy)
         {
 

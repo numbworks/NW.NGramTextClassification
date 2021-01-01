@@ -61,7 +61,7 @@ namespace NW.NGramTextClassification
         public TextClassifierResult Predict
             (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts)
                 => Predict(text, new TokenizationStrategy(), ruleSet, labeledExtracts);
-        public TextClassifierResult Predict
+        public TextClassifierResult PredictLabel
             (string text, List<LabeledExtract> labeledExtracts)
                 => Predict(text, new NGramTokenizerRuleSet(), labeledExtracts);
 
