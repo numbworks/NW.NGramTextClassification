@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NW.NGrams
 {
@@ -83,9 +83,64 @@ namespace NW.NGrams
         public static void ValidateLength(uint length)
             => ValidateLength<ArgumentException>(length);
 
+        public static void ValidateSimilarityIndexAverages(List<SimilarityIndexAverage> indexAverages)
+        {
+
+            if (HasOnlyZeros(indexAverages))
+                throw new Exception(MessageCollection.TheMethodDidntReturnExpectedOutcome.Invoke(nameof(HasOnlyZeros), true));
+
+            if (HasDuplicates(indexAverages))
+                throw new Exception(MessageCollection.TheMethodDidntReturnExpectedOutcome.Invoke(nameof(HasDuplicates), true));
+
+        }
+
         // Methods (private)
         private static T CreateException<T>(string message) where T : Exception
             => (T)Activator.CreateInstance(typeof(T), message);
+        private static bool HasOnlyZeros(List<SimilarityIndexAverage> indexAverages)
+        {
+
+            /*
+             *
+             * Label    Average
+             * sv       0
+             * en       0
+             * 
+             * 		=> { 0, 0 } 
+             * 		=> true
+             * 
+             */
+
+            if (indexAverages.Where(Item => Item.Value == 0).Count() == indexAverages.Count)
+                return true;
+
+            return false;
+
+        }
+        private static bool HasDuplicates(List<SimilarityIndexAverage> indexAverages)
+        {
+
+            /*
+             *
+             * Label    Average
+             * sv       0.1
+             * en       0.1
+             * dk       0.1
+             * 
+             * 		=> { 0.1, 0.1, 0.1 } 
+             * 		=> 1 
+             * 		=> 1 != 3 
+             * 		=> true
+             * 
+             */
+
+            if (indexAverages.Select(Item => Item.Value).Distinct().Count() == indexAverages.Count)
+                return false;
+
+            return true;
+
+        }
+
 
     }
 }
@@ -93,6 +148,6 @@ namespace NW.NGrams
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
+    Last Update: 31.12.2020
 
 */

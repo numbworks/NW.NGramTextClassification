@@ -25,54 +25,37 @@ namespace NW.NGrams
             : this(new ArrayManager()) { }
 
         // Methods
-        public List<T> DoFor<T>(ITokenizationStrategy strategy, string text) where T : INGram
+        public List<INGram> Do
+            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet)
         {
 
-            Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-
-            // "This is a sample text." => "This", "is", ..., "text"
-            MatchCollection matches = Regex.Matches(text, strategy.Pattern);
-            if (matches.Count == 0)
-                throw new Exception(MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
-
-            return GetTokens<T>(strategy, matches);
-
-        }
-        public List<T> DoFor<T>(string text) where T : INGram
-            => DoFor<T>(new TokenizationStrategy(), text);
-
-        public List<INGram> DoForRuleset
-            (INGramsTokenizerRuleSet ruleSet, ITokenizationStrategy strategy, string text)
-        {
-
+            Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
-            Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
 
             List<INGram> nGrams = new List<INGram>();
 
             if (ruleSet.DoForMonograms)
-                nGrams.AddRange(DoFor<Monogram>(strategy, text));
+                nGrams.AddRange(DoFor<Monogram>(text, strategy));
             if (ruleSet.DoForBigrams)
-                nGrams.AddRange(DoFor<Bigram>(strategy, text));
+                nGrams.AddRange(DoFor<Bigram>(text, strategy));
             if (ruleSet.DoForTrigrams)
-                nGrams.AddRange(DoFor<Trigram>(strategy, text));
+                nGrams.AddRange(DoFor<Trigram>(text, strategy));
 
             return nGrams;
 
         }
-        public List<INGram> DoForRuleset(ITokenizationStrategy strategy, string text)
-            => DoForRuleset(new NGramsTokenizerRuleSet(), strategy, text);
-        public List<INGram> DoForRuleset(string text)
-            => DoForRuleset(new NGramsTokenizerRuleSet(), new TokenizationStrategy(), text);
+        public List<INGram> Do(string text, ITokenizationStrategy strategy)
+            => Do(text, strategy, new NGramsTokenizerRuleSet());
+        public List<INGram> Do(string text)
+            => Do(text, new TokenizationStrategy(), new NGramsTokenizerRuleSet());
 
         // Methods (private)
         private T CreateInstance<T>(params object[] args)
             => (T)Activator.CreateInstance(typeof(T), args);
         private ushort GetN<T>()
             => ((INGram)CreateInstance<T>()).N;
-        private List<T> GetTokens<T>(ITokenizationStrategy strategy, MatchCollection matches)
+        private List<T> GetTokens<T>(MatchCollection matches, ITokenizationStrategy strategy)
         {
 
             // "This", "is", ..., "text" => ["This", "is", ..., "text"]
@@ -116,6 +99,17 @@ namespace NW.NGrams
             return tokens;
 
         }
+        private List<T> DoFor<T>(string text, ITokenizationStrategy strategy) where T : INGram
+        {
+
+            // "This is a sample text." => "This", "is", ..., "text"
+            MatchCollection matches = Regex.Matches(text, strategy.Pattern);
+            if (matches.Count == 0)
+                throw new Exception(MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
+
+            return GetTokens<T>(matches, strategy);
+
+        }
 
     }
 }
@@ -123,6 +117,6 @@ namespace NW.NGrams
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
+    Last Update: 31.12.2020
 
 */

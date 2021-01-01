@@ -55,7 +55,7 @@ namespace NW.NGrams
             Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
 
-            List<INGram> nGrams = _tokenizer.DoForRuleset(ruleSet, strategy, text);
+            List<INGram> nGrams = _tokenizer.Do(ruleSet, strategy, text);
             LabeledExtract labeledExtract = new LabeledExtract(id, label, text, nGrams);
 
             return labeledExtract;

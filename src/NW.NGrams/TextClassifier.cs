@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NW.NGrams
 {
-    public class TextClassifier
+    public class TextClassifier : ITextClassifier
     {
 
         // Fields
@@ -36,31 +36,35 @@ namespace NW.NGrams
                   new SimilarityIndexCalculatorJaccard()) { }
 
         // Methods
-        public TextClassifierResult DoFor<T>(ITokenizationStrategy strategy, string text, List<LabeledExtract> labeledExtracts) where T : INGram
+        public TextClassifierResult Do
+            (string text, 
+            ITokenizationStrategy strategy, 
+            INGramsTokenizerRuleSet ruleSet, 
+            List<LabeledExtract> labeledExtracts)
         {
 
-            Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
+            Validator.ValidateObject(strategy, nameof(strategy));
+            Validator.ValidateObject(ruleSet, nameof(ruleSet));
             Validator.ValidateList(labeledExtracts, nameof(labeledExtracts));
 
-            List<T> nGrams = _nGramsTokenizer.DoFor<T>(strategy, text);
+            List<INGram> nGrams = _nGramsTokenizer.Do(text, strategy, ruleSet);
+            List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExtracts);
+            List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 
-
-            List<SimilarityIndex> similarityIndexes = GetSimilarityIndexes(nGrams, labeledExtracts);
-            List<SimilarityIndexAverage> similarityAverages = GetSimilarityAverages(similarityIndexes);
-
-            string label = EstimateLabel(similarityAverages);
-            TextClassifierResult estimationResult 
-                = new TextClassifierResult(label, similarityIndexes, similarityAverages);
+            string label = EstimateLabel(indexAverages);
+            TextClassifierResult result 
+                = new TextClassifierResult(label, indexes, indexAverages);
 
             // if something fail, null should replace label
 
-            return estimationResult;
+            return result;
 
         }
 
         // Methods (private)
-        private List<SimilarityIndex> GetSimilarityIndexes(List<string> nGrams, List<LabeledExtract> labeledExtracts)
+        private List<SimilarityIndex> GetSimilarityIndexes
+            (List<INGram> nGrams, List<LabeledExtract> labeledExtracts)
         {
 
             /*
@@ -101,19 +105,19 @@ namespace NW.NGrams
             return similarityIndexes;
 
         }
-        private List<SimilarityIndexAverage> GetSimilarityAverages(List<SimilarityIndex> similarityIndexes)
+        private List<SimilarityIndexAverage> GetSimilarityIndexAverages(List<SimilarityIndex> indexes)
         {
 
-            Validator.ValidateList(similarityIndexes, nameof(similarityIndexes));
+            Validator.ValidateList(indexes, nameof(indexes));
 
-            List<string> uniqueLabels = ExtractUniqueLabels(similarityIndexes);
+            List<string> uniqueLabels = ExtractUniqueLabels(indexes);
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
                 string currentLabel = uniqueLabels[i];
-                List<double> currentIndexes = ExtractSimilarityIndexes(currentLabel, similarityIndexes);
+                List<double> currentIndexes = ExtractSimilarityIndexes(currentLabel, indexes);
                 double currentAverage = CalculateAverage(currentIndexes);
 
                 similarityAverages.Add(
@@ -126,7 +130,7 @@ namespace NW.NGrams
             return similarityAverages;
 
         }
-        private string EstimateLabel(List<SimilarityIndexAverage> similarityAverages)
+        private string EstimateLabel(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -139,13 +143,13 @@ namespace NW.NGrams
              * 
              */
 
-            Validator.ValidateList(similarityAverages, nameof(similarityAverages));
-            Validate(similarityAverages);
+            Validator.ValidateList(indexAverages, nameof(indexAverages));
+            Validator.ValidateSimilarityIndexAverages(indexAverages);
 
-            return GetHighest(similarityAverages).Label;
+            return GetHighest(indexAverages).Label;
 
         }
-        private List<string> ExtractUniqueLabels(List<SimilarityIndex> similarityIndexes)
+        private List<string> ExtractUniqueLabels(List<SimilarityIndex> indexes)
         {
 
             /*
@@ -160,13 +164,13 @@ namespace NW.NGrams
              * 
              */
 
-            List<string> labels = similarityIndexes.Select(similarityIndex => similarityIndex.Label).ToList();
+            List<string> labels = indexes.Select(similarityIndex => similarityIndex.Label).ToList();
             List<string> uniqueLabels = new HashSet<string>(labels).ToList();
 
             return uniqueLabels;
 
         }
-        private List<double> ExtractSimilarityIndexes(string label, List<SimilarityIndex> similarityIndexes)
+        private List<double> ExtractSimilarityIndexes(string label, List<SimilarityIndex> indexes)
         {
 
             /*
@@ -180,7 +184,7 @@ namespace NW.NGrams
              * 
              */
 
-            return similarityIndexes
+            return indexes
                     .Where(similarityIndex => similarityIndex.Label == label)
                     .Select(similarityIndex => similarityIndex.Value)
                     .ToList();
@@ -198,46 +202,7 @@ namespace NW.NGrams
             return sum / averages.Count;
 
         }
-        private bool AreAllZero(List<SimilarityIndexAverage> list)
-        {
-
-            /*
-             *
-             * Label    Average
-             * sv       0
-             * en       0
-             * 
-             * 		=> { 0, 0 } => true
-             * 
-             */
-
-            if (list.Where(Item => Item.Value == 0).Count() == list.Count)
-                return true;
-
-            return false;
-
-        }
-        private bool AreDistinct(List<SimilarityIndexAverage> list)
-        {
-
-            /*
-             *
-             * Label    Average
-             * sv       0.1
-             * en       0.1
-             * dk       0.1
-             * 
-             * 		=> { 0.1, 0.1, 0.1 } => 1 => 1 != 3 => false
-             * 
-             */
-
-            if (list.Select(Item => Item.Value).Distinct().Count() == list.Count)
-                return true;
-
-            return false;
-
-        }
-        private SimilarityIndexAverage GetHighest(List<SimilarityIndexAverage> list)
+        private SimilarityIndexAverage GetHighest(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -250,17 +215,7 @@ namespace NW.NGrams
              * 
              */
 
-            return list.OrderByDescending(Item => Item.Value).ToList().First();
-
-        }
-        private void Validate(List<SimilarityIndexAverage> similarityAverages)
-        {
-
-            if (AreAllZero(similarityAverages))
-                throw new Exception(MessageCollection.TheMethodDidntReturnExpectedOutcome.Invoke(nameof(AreAllZero), true));
-
-            if (!AreDistinct(similarityAverages))
-                throw new Exception(MessageCollection.TheMethodDidntReturnExpectedOutcome.Invoke(nameof(AreDistinct), false));
+            return indexAverages.OrderByDescending(Item => Item.Value).ToList().First();
 
         }
 

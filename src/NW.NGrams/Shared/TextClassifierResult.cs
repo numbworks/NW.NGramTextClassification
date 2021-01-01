@@ -9,18 +9,22 @@ namespace NW.NGrams
         // Properties
         public string Label { get; }
         public List<SimilarityIndex> SimilarityIndexes { get; }
-        public List<SimilarityIndexAverage> SimilarityAverages { get; }
+        public List<SimilarityIndexAverage> SimilarityIndexAverages { get; }
 
         // Constructors	
         public TextClassifierResult(
             string label,
-            List<SimilarityIndex> similarityIndexes,
-            List<SimilarityIndexAverage> similarityAverages)
+            List<SimilarityIndex> indexes,
+            List<SimilarityIndexAverage> indexAverages)
         {
 
+            // Label can also be null when estimation didn't return any value
+            Validator.ValidateList(indexes, nameof(indexes));
+            Validator.ValidateList(indexAverages, nameof(indexAverages));
+
             Label = label;
-            SimilarityIndexes = similarityIndexes;
-            SimilarityAverages = similarityAverages;
+            SimilarityIndexes = indexes;
+            SimilarityIndexAverages = indexAverages;
 
         }
 
@@ -32,6 +36,6 @@ namespace NW.NGrams
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 29.12.2020
+    Last Update: 31.12.2020
 
 */
