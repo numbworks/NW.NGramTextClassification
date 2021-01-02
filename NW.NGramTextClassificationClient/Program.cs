@@ -54,7 +54,7 @@ namespace NW.NGramTextClassificationClient
 
             };
 
-            string text = "Vår kund erbjuder trivsel";
+            string text = "Fattoria degli animali"; // "Vår kund erbjuder trivsel";
             List<LabeledExample> labeledExamples = new LabeledExampleFactory().Create(tuples);
 
             ITextClassifier textClassifier = new TextClassifier();

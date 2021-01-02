@@ -42,7 +42,7 @@ namespace NW.NGramTextClassification
                     $"{nameof(Id)}: '{Id}'",
                     $"{nameof(Label)}: '{Label}'",
                     $"{nameof(Text)}: '{Text.Substring(0, (int)truncateTextAfter)}...'",
-                    $"{nameof(TextAsNGrams)}: '{TextAsNGrams?.Count.ToString() ?? "null"}'"
+                    $"{nameof(TextAsNGrams)}: '{TextAsNGrams.Count.ToString()}'"  // can't be null due of ValidateList()
                     );
 
             return $"[ {content} ]";

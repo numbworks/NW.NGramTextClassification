@@ -29,6 +29,20 @@ namespace NW.NGramTextClassification
         }
 
         // Methods
+        public override string ToString()
+        {
+
+            string content
+                = string.Join(
+                    ", ",
+                    $"{nameof(Label)}: '{Label ?? "null"}'",
+                    $"{nameof(SimilarityIndexes)}: '{SimilarityIndexes.Count.ToString()}'", // can't be null due of ValidateList()
+                    $"{nameof(SimilarityIndexAverages)}: '{SimilarityIndexAverages.Count.ToString()}'" // can't be null due of ValidateList()
+                    );
+
+            return $"[ {content} ]";
+
+        }
 
     }
 }
