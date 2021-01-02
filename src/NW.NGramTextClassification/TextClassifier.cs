@@ -102,25 +102,26 @@ namespace NW.NGramTextClassification
         {
 
             List<string> uniqueLabels = ExtractUniqueLabels(indexes);
-            Console.WriteLine($"The following labels have been found in the provided {nameof(LabeledExtract)}s: '{MessageCollection.RollOutCollection(uniqueLabels)}'.");
+            _components.LoggingAction.Invoke(MessageCollection.TheFollowingUniqueLabelsHaveBeenFound.Invoke(uniqueLabels));
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
                 string currentLabel = uniqueLabels[i];
-                Console.WriteLine($"Current label: '{currentLabel}'.");
+                _components.LoggingAction.Invoke(MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(currentLabel));
 
                 List<double> indexValues = ExtractSimilarityIndexes(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
                 double roundedValue = _components.RoundingFunction.Invoke(averageValue);
 
-                Console.WriteLine($"Average Index: '{averageValue}'.");
-                Console.WriteLine($"Average Index (rounded): '{roundedValue}'.");
+                _components.LoggingAction.Invoke(MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(averageValue));
+                _components.LoggingAction.Invoke(MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(roundedValue));
 
                 SimilarityIndexAverage indexAverage = new SimilarityIndexAverage(currentLabel, roundedValue);
-
                 similarityAverages.Add(indexAverage);
+
+                _components.LoggingAction.Invoke(MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(indexAverage));
 
             }
 
@@ -141,10 +142,18 @@ namespace NW.NGramTextClassification
              */
 
             if (HasOnlyZeros(indexAverages))
+            {
+                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(HasOnlyZeros)));
                 return null;
+            }
+            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(HasOnlyZeros)));
 
             if (HasEveryLabelSameAverage(indexAverages))
+            {
+                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(HasEveryLabelSameAverage)));
                 return null;
+            }
+            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(HasEveryLabelSameAverage)));
 
             // What if the two highest values are the same?
 

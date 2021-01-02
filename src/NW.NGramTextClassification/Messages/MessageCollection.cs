@@ -17,18 +17,28 @@ namespace NW.NGramTextClassification
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
 
         // TextClassifier
-        public static Func<string, bool, string> FollowingVerificationHasBeenSuccessful =
-            (name, expected) => $"The following verification has been successful: '{name}'.";
-        public static Func<string, bool, string> FollowingVerificationHasFailed =
-            (name, expected) => $"The following verification has failed: '{name}'.";
         public static Func<LabeledExtract, string> ComparingProvidedTextAgainstFollowingLabeledExample =
             (labeledExtract) => $"Comparing the provided text against the following {nameof(LabeledExtract)}: '{labeledExtract.ToString()}'...";
         public static Func<double, string> TheCalculatedSimilarityIndexValueIs =
-            (indexValue) => $"The calculated Similarity Index value is '{indexValue}'.";
+            (indexValue) => $"The calculated '{nameof(SimilarityIndex)}' value is '{indexValue}'.";
         public static Func<double, string> TheRoundedSimilarityIndexValueIs =
-            (roundedValue) => $"The rounded Similarity Index value is '{roundedValue}'.";
+            (roundedValue) => $"The rounded '{nameof(SimilarityIndex)}' value is '{roundedValue}'.";
         public static Func<SimilarityIndex, string> TheFollowingSimilarityIndexObjectHasBeenAddedToTheList =
             (similarityIndex) => $"The following {nameof(SimilarityIndex)} object has been added to the list: '{similarityIndex.ToString()}'.";
+        public static Func<List<string>, string> TheFollowingUniqueLabelsHaveBeenFound =
+            (uniqueLabels) => $"The following unique labels have been found in the provided {nameof(SimilarityIndex)} list: '{RollOutCollection(uniqueLabels)}'.";
+        public static Func<string, string> CalculatingIndexAverageForTheFollowingLabel =
+            (label) => $"Calculating '{nameof(SimilarityIndexAverage)}' for the following label: '{label}'...";
+        public static Func<double, string> TheCalculatedSimilarityIndexAverageValueIs =
+            (averageValue) => $"The calculated '{nameof(SimilarityIndexAverage)}' value is '{averageValue}'.";
+        public static Func<double, string> TheRoundedSimilarityIndexAverageValueIs =
+            (roundedValue) => $"The rounded '{nameof(SimilarityIndexAverage)}' value is '{roundedValue}'.";
+        public static Func<SimilarityIndexAverage, string> TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList =
+            (indexAverage) => $"The following {nameof(SimilarityIndexAverage)} object has been added to the list: '{indexAverage.ToString()}'.";
+        public static Func<string, string> FollowingVerificationHasBeenSuccessful =
+            (name) => $"The following verification has been successful: '{name}'.";
+        public static Func<string, string> FollowingVerificationHasFailed =
+            (name) => $"The following verification has failed: '{name}'.";
 
         // Methods
         public static string RollOutCollection(IEnumerable<object> coll)
