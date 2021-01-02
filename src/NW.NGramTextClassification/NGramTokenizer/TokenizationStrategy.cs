@@ -28,6 +28,21 @@
             : this(DefaultPattern, DefaultDelimiter, DefaultToLowercase) { }
 
         // Methods (public)
+        public override string ToString()
+        {
+
+            string content
+                = string.Join(
+                    ", ",
+                    $"{nameof(Pattern)}: '{Pattern}'",
+                    $"{nameof(Delimiter)}: '{Delimiter}'",
+                    $"{nameof(ToLowercase)}: '{ToLowercase.ToString()}...'"
+                    );
+
+            return $"[ {content} ]";
+
+        }
+
         // Methods (private)
 
     }
