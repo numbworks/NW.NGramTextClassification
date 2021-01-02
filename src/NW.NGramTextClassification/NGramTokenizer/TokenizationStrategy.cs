@@ -36,7 +36,7 @@
                     ", ",
                     $"{nameof(Pattern)}: '{Pattern}'",
                     $"{nameof(Delimiter)}: '{Delimiter}'",
-                    $"{nameof(ToLowercase)}: '{ToLowercase.ToString()}...'"
+                    $"{nameof(ToLowercase)}: '{ToLowercase.ToString()}'"
                     );
 
             return $"[ {content} ]";

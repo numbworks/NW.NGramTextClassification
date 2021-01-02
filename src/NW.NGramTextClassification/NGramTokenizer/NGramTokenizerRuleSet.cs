@@ -23,6 +23,21 @@
             : this(true, true, true) {}
 
         // Methods (public)
+        public override string ToString()
+        {
+
+            string content
+                = string.Join(
+                    ", ",
+                    $"{nameof(DoForMonograms)}: '{DoForMonograms.ToString()}'",
+                    $"{nameof(DoForBigrams)}: '{DoForBigrams.ToString()}'",
+                    $"{nameof(DoForTrigrams)}: '{DoForTrigrams.ToString()}'"
+                    );
+
+            return $"[ {content} ]";
+
+        }
+
         // Methods (private)
 
     }
