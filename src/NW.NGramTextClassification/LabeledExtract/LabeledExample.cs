@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NW.NGramTextClassification
 {
-    public class LabeledExtract
+    public class LabeledExample
     {
 
         // Fields
@@ -14,7 +14,7 @@ namespace NW.NGramTextClassification
         public List<INGram> TextAsNGrams { get; }
 
         // Constructors
-        public LabeledExtract
+        public LabeledExample
             (ulong id, string label, string text, List<INGram> textAsNGrams)
         {
 

@@ -24,16 +24,16 @@ namespace NW.NGramTextClassification
 
         // Methods
         public TextClassifierResult Predict
-            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts)
+            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
             Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
-            Validator.ValidateList(labeledExtracts, nameof(labeledExtracts));
+            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
             List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
-            List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExtracts);
+            List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 
             string label = EstimateLabel(indexAverages);
@@ -46,15 +46,15 @@ namespace NW.NGramTextClassification
 
         }
         public TextClassifierResult Predict
-            (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExtract> labeledExtracts)
-                => Predict(text, new TokenizationStrategy(), ruleSet, labeledExtracts);
+            (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+                => Predict(text, new TokenizationStrategy(), ruleSet, labeledExamples);
         public TextClassifierResult PredictLabel
-            (string text, List<LabeledExtract> labeledExtracts)
-                => Predict(text, new NGramTokenizerRuleSet(), labeledExtracts);
+            (string text, List<LabeledExample> labeledExamples)
+                => Predict(text, new NGramTokenizerRuleSet(), labeledExamples);
 
         // Methods (private)
         private List<SimilarityIndex> GetSimilarityIndexes
-            (List<INGram> nGrams, List<LabeledExtract> labeledExtracts)
+            (List<INGram> nGrams, List<LabeledExample> labeledExamples)
         {
 
             /*
@@ -76,18 +76,18 @@ namespace NW.NGramTextClassification
              */
 
             List<SimilarityIndex> similarityIndexes = new List<SimilarityIndex>();
-            for (int i = 0; i < labeledExtracts.Count; i++)
+            for (int i = 0; i < labeledExamples.Count; i++)
             {
 
-                _components.LoggingAction.Invoke(MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(labeledExtracts[i]));
+                _components.LoggingAction.Invoke(MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(labeledExamples[i]));
 
-                double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, labeledExtracts[i].TextAsNGrams, _components.RoundingFunction);
+                double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, labeledExamples[i].TextAsNGrams, _components.RoundingFunction);
                 double roundedValue = _components.RoundingFunction.Invoke(indexValue);
 
                 _components.LoggingAction.Invoke(MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(indexValue));
                 _components.LoggingAction.Invoke(MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(roundedValue));
 
-                SimilarityIndex similarityIndex = new SimilarityIndex(labeledExtracts[i].Id, labeledExtracts[i].Label, roundedValue);
+                SimilarityIndex similarityIndex = new SimilarityIndex(labeledExamples[i].Id, labeledExamples[i].Label, roundedValue);
                 similarityIndexes.Add(similarityIndex);
 
                 _components.LoggingAction.Invoke(MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(similarityIndex));
@@ -100,7 +100,7 @@ namespace NW.NGramTextClassification
         private List<SimilarityIndexAverage> GetSimilarityIndexAverages(List<SimilarityIndex> indexes)
         {
 
-            List<string> uniqueLabels = ExtractUniqueLabels(indexes);
+            List<string> uniqueLabels = ExampleUniqueLabels(indexes);
             _components.LoggingAction.Invoke(MessageCollection.TheFollowingUniqueLabelsHaveBeenFound.Invoke(uniqueLabels));
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
@@ -110,7 +110,7 @@ namespace NW.NGramTextClassification
                 string currentLabel = uniqueLabels[i];
                 _components.LoggingAction.Invoke(MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(currentLabel));
 
-                List<double> indexValues = ExtractSimilarityIndexes(currentLabel, indexes);
+                List<double> indexValues = ExampleSimilarityIndexes(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
                 double roundedValue = _components.RoundingFunction.Invoke(averageValue);
 
@@ -174,7 +174,7 @@ namespace NW.NGramTextClassification
             return orderedByhighest[0].Label;
 
         }
-        private List<string> ExtractUniqueLabels(List<SimilarityIndex> indexes)
+        private List<string> ExampleUniqueLabels(List<SimilarityIndex> indexes)
         {
 
             /*
@@ -195,7 +195,7 @@ namespace NW.NGramTextClassification
             return uniqueLabels;
 
         }
-        private List<double> ExtractSimilarityIndexes(string label, List<SimilarityIndex> indexes)
+        private List<double> ExampleSimilarityIndexes(string label, List<SimilarityIndex> indexes)
         {
 
             /*

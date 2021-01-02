@@ -17,8 +17,8 @@ namespace NW.NGramTextClassification
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
 
         // TextClassifier
-        public static Func<LabeledExtract, string> ComparingProvidedTextAgainstFollowingLabeledExample =
-            (labeledExtract) => $"Comparing the provided text against the following {nameof(LabeledExtract)}: '{labeledExtract.ToString()}'...";
+        public static Func<LabeledExample, string> ComparingProvidedTextAgainstFollowingLabeledExample =
+            (labeledExample) => $"Comparing the provided text against the following {nameof(LabeledExample)}: '{labeledExample.ToString()}'...";
         public static Func<double, string> TheCalculatedSimilarityIndexValueIs =
             (indexValue) => $"The calculated '{nameof(SimilarityIndex)}' value is '{indexValue}'.";
         public static Func<double, string> TheRoundedSimilarityIndexValueIs =

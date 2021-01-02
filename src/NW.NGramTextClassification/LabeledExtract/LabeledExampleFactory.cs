@@ -2,7 +2,7 @@
 
 namespace NW.NGramTextClassification
 {
-    public class LabeledExtractFactory : ILabeledExtractFactory
+    public class LabeledExampleFactory : ILabeledExampleFactory
     {
 
         // Fields
@@ -13,7 +13,7 @@ namespace NW.NGramTextClassification
         public static uint DefaultInitialId { get; } = 1;
 
         // Constructors
-        public LabeledExtractFactory
+        public LabeledExampleFactory
             (INGramTokenizer tokenizer, uint initialId)
         {
 
@@ -23,11 +23,11 @@ namespace NW.NGramTextClassification
             _initialId = initialId;
 
         }
-        public LabeledExtractFactory()
+        public LabeledExampleFactory()
             : this(new NGramTokenizer(), DefaultInitialId) { }
 
         // Methods (public)
-        public LabeledExtract Create
+        public LabeledExample Create
             (ulong id, string label, string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet)
         {
 
@@ -37,17 +37,17 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
 
             List<INGram> nGrams = _tokenizer.Do(text, strategy, ruleSet);
-            LabeledExtract labeledExtract = new LabeledExtract(id, label, text, nGrams);
+            LabeledExample labeledExample = new LabeledExample(id, label, text, nGrams);
 
-            return labeledExtract;
+            return labeledExample;
 
         }
-        public LabeledExtract Create(ulong id, string label, string text, ITokenizationStrategy strategy)
+        public LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy)
             => Create(id, label, text, strategy, new NGramTokenizerRuleSet());
-        public LabeledExtract Create(ulong id, string label, string text)
+        public LabeledExample Create(ulong id, string label, string text)
             => Create(id, label, text, new TokenizationStrategy());
 
-        public List<LabeledExtract> Create
+        public List<LabeledExample> Create
             (List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet)
         {
 
@@ -55,25 +55,25 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
 
-            List<LabeledExtract> labeledExtracts = new List<LabeledExtract>();
+            List<LabeledExample> labeledExamples = new List<LabeledExample>();
 
             uint currentId = _initialId;
             foreach ((string label, string text) tuple in tuples)
             {
 
-                LabeledExtract labeledExtract = Create(currentId, tuple.label, tuple.text, strategy, ruleSet);
-                labeledExtracts.Add(labeledExtract);
+                LabeledExample labeledExample = Create(currentId, tuple.label, tuple.text, strategy, ruleSet);
+                labeledExamples.Add(labeledExample);
 
                 currentId++;
 
             }
 
-            return labeledExtracts;
+            return labeledExamples;
 
         }
-        public List<LabeledExtract> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy)
+        public List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy)
             => Create(tuples, strategy, new NGramTokenizerRuleSet());
-        public List<LabeledExtract> Create(List<(string label, string text)> tuples)
+        public List<LabeledExample> Create(List<(string label, string text)> tuples)
             => Create(tuples, new TokenizationStrategy());
 
         // Methods (private)

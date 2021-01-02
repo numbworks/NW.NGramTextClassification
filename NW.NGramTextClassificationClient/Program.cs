@@ -55,10 +55,10 @@ namespace NW.NGramTextClassificationClient
             };
 
             string text = "Vår kund erbjuder trivsel";
-            List<LabeledExtract> labeledExtracts = new LabeledExtractFactory().Create(tuples);
+            List<LabeledExample> labeledExamples = new LabeledExampleFactory().Create(tuples);
 
             ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.PredictLabel(text, labeledExtracts);
+            TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 
