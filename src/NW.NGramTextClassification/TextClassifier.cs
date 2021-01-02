@@ -32,7 +32,14 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
+            _components.LoggingAction.Invoke(MessageCollection.AttemptingToPredictLabel);
+            _components.LoggingAction.Invoke(MessageCollection.TheFollowingTokenizationStrategyWillBeUsed.Invoke(strategy));
+            _components.LoggingAction.Invoke(MessageCollection.TheFollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(ruleSet));
+            _components.LoggingAction.Invoke(MessageCollection.XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
+
+            List <INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
+            _components.LoggingAction.Invoke(MessageCollection.TheProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
+
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 

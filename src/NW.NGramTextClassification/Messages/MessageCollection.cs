@@ -17,6 +17,16 @@ namespace NW.NGramTextClassification
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
 
         // TextClassifier
+        public static string AttemptingToPredictLabel ="Attempting to predict the label of the provided text...";
+        public static Func<List<LabeledExample>, string> XLabeledExamplesHaveBeenProvided =
+            (labeledExamples) => $"'{labeledExamples.Count.ToString()}' {nameof(LabeledExample)} objects have been provided.";
+        public static Func<List<INGram>, string> TheProvidedTextHasBeenTokenizedIntoXNGrams =
+            (nGrams) => $"'The provided text has been tokenized into '{nGrams.Count.ToString()}' {nameof(INGram)} object.";
+        public static Func<ITokenizationStrategy, string> TheFollowingTokenizationStrategyWillBeUsed =
+            (strategy) => $"'The following '{nameof(ITokenizationStrategy)}' object will be used: '{strategy.ToString()}'.";
+        public static Func<INGramsTokenizerRuleSet, string> TheFollowingNGramsTokenizerRuleSetWillBeUsed =
+            (ruleset) => $"'The following '{nameof(INGramsTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
+
         public static Func<LabeledExample, string> ComparingProvidedTextAgainstFollowingLabeledExample =
             (labeledExample) => $"Comparing the provided text against the following {nameof(LabeledExample)}: '{labeledExample.ToString()}'...";
         public static Func<double, string> TheCalculatedSimilarityIndexValueIs =
