@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace NW.NGramTextClassification
@@ -136,28 +135,43 @@ namespace NW.NGramTextClassification
              * Label    Average
              * sv       0.19
              * en       0.45
+             * dk       0.27 
              * 
              *      => { Label: "en", Average: 0.45 } => "en"
              * 
              */
 
-            if (HasOnlyZeros(indexAverages))
+            if (!ContainsAtLeastOneIndexAverageThatIsNotZero(indexAverages))
             {
-                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(HasOnlyZeros)));
+                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(HasOnlyZeros)));
+            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
 
-            if (HasEveryLabelSameAverage(indexAverages))
+            if (!ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(indexAverages))
             {
-                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(HasEveryLabelSameAverage)));
+                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(HasEveryLabelSameAverage)));
+            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
 
-            // What if the two highest values are the same?
+            if (indexAverages.Count == 1)
+            {
+                _components.LoggingAction.Invoke(MessageCollection.TheSimilarityIndexAverageWithTheHighestValueIs.Invoke(indexAverages[0]));
+                return indexAverages[0].Label;
+            }
 
-            return GetHighest(indexAverages).Label;
+            List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
+            if (!ContainsTwoHighestIndexAveragesThatArentEqual(orderedByhighest[0].Value, orderedByhighest[1].Value))
+            {
+                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
+                return null;
+            }
+            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
+
+            _components.LoggingAction.Invoke(MessageCollection.TheSimilarityIndexAverageWithTheHighestValueIs.Invoke(orderedByhighest[0]));
+
+            return orderedByhighest[0].Label;
 
         }
         private List<string> ExtractUniqueLabels(List<SimilarityIndex> indexes)
@@ -213,7 +227,7 @@ namespace NW.NGramTextClassification
             return sum / averages.Count;
 
         }
-        private static bool HasOnlyZeros(List<SimilarityIndexAverage> indexAverages)
+        private static bool ContainsAtLeastOneIndexAverageThatIsNotZero(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -227,13 +241,13 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            if (indexAverages.Where(Item => Item.Value == 0).Count() == indexAverages.Count)
-                return true;
+            if (indexAverages.Where(Item => Item.Value == 0).Count() == indexAverages.Count) // all equal to zero
+                return false;
 
-            return false;
+            return true;
 
         }
-        private static bool HasEveryLabelSameAverage(List<SimilarityIndexAverage> indexAverages)
+        private static bool ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -246,32 +260,36 @@ namespace NW.NGramTextClassification
              * 		=> { 0.1, 0.1, 0.1 } 
              * 		=> 1 
              * 		=> 1 == 1
+             * 		=> false
+             * 
+             */
+
+            if (indexAverages.Select(Item => Item.Value).Distinct().Count() == 1) // all with the same value
+                return false;
+
+            return true;
+
+        }
+        private static bool ContainsTwoHighestIndexAveragesThatArentEqual(double first, double second)
+        {
+
+            /*
+             *
+             * Label    Average
+             * sv       0.98        < 1st
+             * en       0.98        < 2nd
+             * dk       0.32        < 3rd
+             * 
+             * 		=> 0.98 == 0.98
              * 		=> true
              * 
              */
 
-            if (indexAverages.Select(Item => Item.Value).Distinct().Count() == 1)
-                return true;
-
-            return false;
+            return (first != second);
 
         }
-        private SimilarityIndexAverage GetHighest(List<SimilarityIndexAverage> indexAverages)
-        {
-
-            /*
-             * 
-             * Label    Average
-             * sv       0.19
-             * en       0.45
-             * 
-             *      => { Label: "en", Average: 0.45 }
-             * 
-             */
-
-            return indexAverages.OrderByDescending(Item => Item.Value).ToList().First();
-
-        }
+        private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
+            => indexAverages.OrderByDescending(Item => Item.Value).ToList();
 
     }
 }

@@ -39,6 +39,8 @@ namespace NW.NGramTextClassification
             (name) => $"The following verification has been successful: '{name}'.";
         public static Func<string, string> FollowingVerificationHasFailed =
             (name) => $"The following verification has failed: '{name}'.";
+        public static Func<SimilarityIndexAverage, string> TheSimilarityIndexAverageWithTheHighestValueIs = 
+            (indexAverage) => $"The '{nameof(SimilarityIndexAverage)}' object with the highest value is: '{indexAverage}'.";
 
         // Methods
         public static string RollOutCollection(IEnumerable<object> coll)
