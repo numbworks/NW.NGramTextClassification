@@ -18,14 +18,16 @@ namespace NW.NGramTextClassification
 
         // TextClassifier
         public static string AttemptingToPredictLabel ="Attempting to predict the label of the provided text...";
+        public static Func<string, string> TheFollowingTextHasBeenProvided =
+            (text) => $"The following text has been provided: '{text}'.";
         public static Func<List<LabeledExample>, string> XLabeledExamplesHaveBeenProvided =
             (labeledExamples) => $"'{labeledExamples.Count.ToString()}' {nameof(LabeledExample)} objects have been provided.";
         public static Func<List<INGram>, string> TheProvidedTextHasBeenTokenizedIntoXNGrams =
-            (nGrams) => $"'The provided text has been tokenized into '{nGrams.Count.ToString()}' {nameof(INGram)} object.";
+            (nGrams) => $"The provided text has been tokenized into '{nGrams.Count.ToString()}' {nameof(INGram)} object.";
         public static Func<ITokenizationStrategy, string> TheFollowingTokenizationStrategyWillBeUsed =
-            (strategy) => $"'The following '{nameof(ITokenizationStrategy)}' object will be used: '{strategy.ToString()}'.";
+            (strategy) => $"The following '{nameof(ITokenizationStrategy)}' object will be used: '{strategy.ToString()}'.";
         public static Func<INGramsTokenizerRuleSet, string> TheFollowingNGramsTokenizerRuleSetWillBeUsed =
-            (ruleset) => $"'The following '{nameof(INGramsTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
+            (ruleset) => $"The following '{nameof(INGramsTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
         public static string TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples =
             $"The tokenized text has been successfully compared against the provided list of {nameof(LabeledExample)} objects.";
         public static Func<List<SimilarityIndex>, string> XSimilarityIndexObjectsHaveBeenComputed =

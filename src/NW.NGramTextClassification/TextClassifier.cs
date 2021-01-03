@@ -8,19 +8,26 @@ namespace NW.NGramTextClassification
 
         // Fields
         private TextClassifierComponents _components;
+        private TextClassifierSettings _settings;
 
         // Properties
         // Constructors
-        public TextClassifier(TextClassifierComponents components)
+        public TextClassifier
+            (TextClassifierComponents components,
+            TextClassifierSettings settings)
         {
 
             Validator.ValidateObject(components, nameof(components));
+            Validator.ValidateObject(settings, nameof(settings));
 
             _components = components;
+            _settings = settings;
 
         }
         public TextClassifier()
-            : this(new TextClassifierComponents()) { }
+            : this(
+                  new TextClassifierComponents(),
+                  new TextClassifierSettings()) { }
 
         // Methods
         public TextClassifierResult Predict
@@ -33,6 +40,8 @@ namespace NW.NGramTextClassification
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
             _components.LoggingAction.Invoke(MessageCollection.AttemptingToPredictLabel);
+            string truncatedText = _components.TextTruncatingFunction.Invoke(text, _settings.TruncateTextInLogMessagesAfter);
+            _components.LoggingAction.Invoke(MessageCollection.TheFollowingTextHasBeenProvided.Invoke(truncatedText));
             _components.LoggingAction.Invoke(MessageCollection.TheFollowingTokenizationStrategyWillBeUsed.Invoke(strategy));
             _components.LoggingAction.Invoke(MessageCollection.TheFollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(ruleSet));
             _components.LoggingAction.Invoke(MessageCollection.XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));

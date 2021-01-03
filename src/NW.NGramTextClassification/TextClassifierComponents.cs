@@ -9,6 +9,8 @@ namespace NW.NGramTextClassification
         // Properties (static)
         public static Func<double, double> DefaultRoundingFunction { get; }
             = x => Math.Round(x, 6, MidpointRounding.AwayFromZero);
+        public static Func<string, uint, string> DefaultTextTruncatingFunction { get; }
+            = (text, length) => text?.Substring(0, (int)length) + "..." ?? text; 
         public static Action<string> DefaultLoggingAction { get; }
             = (message) => Console.WriteLine(message);
 
@@ -16,6 +18,7 @@ namespace NW.NGramTextClassification
         public INGramTokenizer NGramsTokenizer { get; private set; }
         public ISimilarityIndexCalculator SimilarityIndexCalculator { get; private set; }
         public Func<double, double> RoundingFunction { get; private set; }
+        public Func<string, uint, string> TextTruncatingFunction { get; private set; }
         public Action<string> LoggingAction { get; private set; }
 
         // Constructors
@@ -23,17 +26,20 @@ namespace NW.NGramTextClassification
                 INGramTokenizer nGramsTokenizer,
                 ISimilarityIndexCalculator similarityIndexCalculator,
                 Func<double, double> roundingFunction,
+                Func<string, uint, string> textTruncatingFunction,
                 Action<string> loggingAction)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
             Validator.ValidateObject(similarityIndexCalculator, nameof(similarityIndexCalculator));
             Validator.ValidateObject(roundingFunction, nameof(roundingFunction));
+            Validator.ValidateObject(textTruncatingFunction, nameof(textTruncatingFunction));
             Validator.ValidateObject(loggingAction, nameof(loggingAction));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
             RoundingFunction = roundingFunction;
+            TextTruncatingFunction = textTruncatingFunction;
             LoggingAction = loggingAction;
 
         }
@@ -41,7 +47,8 @@ namespace NW.NGramTextClassification
             : this(
                   new NGramTokenizer(), 
                   new SimilarityIndexCalculatorJaccard(), 
-                  DefaultRoundingFunction, 
+                  DefaultRoundingFunction,
+                  DefaultTextTruncatingFunction,
                   DefaultLoggingAction) { }
 
         // Methods (public)
@@ -53,6 +60,6 @@ namespace NW.NGramTextClassification
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 01.01.2021
+    Last Update: 03.01.2021
 
 */
