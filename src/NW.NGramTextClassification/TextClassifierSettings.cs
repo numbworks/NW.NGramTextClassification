@@ -5,6 +5,8 @@
 
         // Fields
         // Properties
+        public static uint DefaultTruncateTextInLogMessagesAfter { get; } = 20;
+
         public uint TruncateTextInLogMessagesAfter { get; private set; }
 
         // Constructors
@@ -16,7 +18,7 @@
 
         }
         public TextClassifierSettings()
-            : this(20) { }
+            : this(DefaultTruncateTextInLogMessagesAfter) { }
 
         // Methods (public)
         // Methods (private)

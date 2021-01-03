@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification
         // Methods
         // Methods (private)
         public override string ToString()
-            => ToString(20);
+            => ToString(TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
         public string ToString(uint truncateTextAfter)
         {
 
