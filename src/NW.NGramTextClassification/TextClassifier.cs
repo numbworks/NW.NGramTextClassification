@@ -41,13 +41,21 @@ namespace NW.NGramTextClassification
             _components.LoggingAction.Invoke(MessageCollection.TheProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
+            _components.LoggingAction.Invoke(MessageCollection.TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples);
+            _components.LoggingAction.Invoke(MessageCollection.XSimilarityIndexObjectsHaveBeenComputed.Invoke(indexes));
+
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
+            _components.LoggingAction.Invoke(MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
-            string label = EstimateLabel(indexAverages);
-            TextClassifierResult result 
-                = new TextClassifierResult(label, indexes, indexAverages);
+            string label = PredictLabel(indexAverages);
+            _components.LoggingAction.Invoke(MessageCollection.ThePredictedLabelIs.Invoke(label));
 
-            // if something fail, null should replace label
+            if (label == null)
+                _components.LoggingAction.Invoke(MessageCollection.ThePredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+            else
+                _components.LoggingAction.Invoke(MessageCollection.ThePredictionHasBeenSuccessful);
+                
+            TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
             return result;
 
@@ -134,7 +142,7 @@ namespace NW.NGramTextClassification
             return similarityAverages;
 
         }
-        private string EstimateLabel(List<SimilarityIndexAverage> indexAverages)
+        private string PredictLabel(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*

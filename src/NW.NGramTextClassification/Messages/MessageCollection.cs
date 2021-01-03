@@ -26,6 +26,18 @@ namespace NW.NGramTextClassification
             (strategy) => $"'The following '{nameof(ITokenizationStrategy)}' object will be used: '{strategy.ToString()}'.";
         public static Func<INGramsTokenizerRuleSet, string> TheFollowingNGramsTokenizerRuleSetWillBeUsed =
             (ruleset) => $"'The following '{nameof(INGramsTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
+        public static string TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples =
+            $"The tokenized text has been successfully compared against the provided list of {nameof(LabeledExample)} objects.";
+        public static Func<List<SimilarityIndex>, string> XSimilarityIndexObjectsHaveBeenComputed =
+            (similarityIndexes) => $"'{similarityIndexes.Count.ToString()}' {nameof(SimilarityIndex)} objects have been computed.";
+        public static Func<List<SimilarityIndexAverage>, string> XSimilarityIndexAverageObjectsHaveBeenComputed =
+            (indexAverages) => $"'{indexAverages.Count.ToString()}' {nameof(SimilarityIndexAverage)} objects have been computed.";
+        public static Func<string, string> ThePredictedLabelIs =
+            (label) => $"The predicted label is: '{label}'.";
+        public static string ThePredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples =
+                $"The prediction has failed. Try increasing the amount of provided {nameof(LabeledExample)} objects.";
+        public static string ThePredictionHasBeenSuccessful =
+                $"The prediction has been successful.";
 
         public static Func<LabeledExample, string> ComparingProvidedTextAgainstFollowingLabeledExample =
             (labeledExample) => $"Comparing the provided text against the following {nameof(LabeledExample)}: '{labeledExample.ToString()}'...";
