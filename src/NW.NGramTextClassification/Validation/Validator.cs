@@ -9,6 +9,50 @@ namespace NW.NGramTextClassification
         // Fields
         // Properties
         // Methods (public)
+        public static void ValidateArray<T, U>(U[] arr, string variableName) where T : Exception
+        {
+
+            if (arr == null)
+                throw CreateException<T>(variableName);
+            if (arr.Length == 0)
+                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
+
+        }
+        public static void ValidateArray<U>(U[] arr, string variableName)
+            => ValidateArray<ArgumentNullException, U>(arr, variableName);
+
+        public static void ValidateLength<T>(uint length) where T : Exception
+        {
+
+            if (length < 1)
+                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(length)));
+
+        }
+        public static void ValidateLength(uint length)
+            => ValidateLength<ArgumentException>(length);
+
+        public static void ValidateList<T, U>(List<U> list, string variableName) where T : Exception
+        {
+
+            if (list == null)
+                throw CreateException<T>(variableName);
+            if (list.Count == 0)
+                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
+
+        }
+        public static void ValidateList<U>(List<U> list, string variableName)
+            => ValidateList<ArgumentNullException, U>(list, variableName);
+
+        public static void ValidateN<T>(ushort n) where T : Exception
+        {
+
+            if (n < 1)
+                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(n)));
+
+        }
+        public static void ValidateN(ushort n)
+            => ValidateN<ArgumentException>(n);
+
         public static void ValidateObject<T>(object obj, string variableName) where T : Exception
         {
 
@@ -37,50 +81,6 @@ namespace NW.NGramTextClassification
         }
         public static void ValidateStringNullOrEmpty(string str, string variableName)
             => ValidateStringNullOrEmpty<ArgumentNullException>(str, variableName);
-
-        public static void ValidateList<T, U>(List<U> list, string variableName) where T : Exception
-        {
-
-            if (list == null)
-                throw CreateException<T>(variableName);
-            if (list.Count == 0)
-                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
-
-        }
-        public static void ValidateList<U>(List<U> list, string variableName)
-            => ValidateList<ArgumentNullException, U>(list, variableName);
-
-        public static void ValidateN<T>(ushort n) where T : Exception
-        {
-
-            if (n < 1)
-                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(n)));
-
-        }
-        public static void ValidateN(ushort n)
-            => ValidateN<ArgumentException>(n);
-
-        public static void ValidateArray<T>(string[] arr, string variableName) where T : Exception
-        {
-
-            if (arr == null)
-                throw CreateException<T>(variableName);
-            if (arr.Length == 0)
-                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
-
-        }
-        public static void ValidateArray(string[] arr, string variableName)
-            => ValidateArray<ArgumentNullException>(arr, variableName);
-
-        public static void ValidateLength<T>(uint length) where T : Exception
-        {
-
-            if (length < 1)
-                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(length)));
-
-        }
-        public static void ValidateLength(uint length)
-            => ValidateLength<ArgumentException>(length);
 
         // Methods (private)
         private static T CreateException<T>(string message) where T : Exception
