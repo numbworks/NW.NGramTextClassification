@@ -21,7 +21,9 @@ namespace NW.NGramTextClassification.UnitTests
         internal static uint Length1 = 3;
         internal static string VariableName = "variable";
         internal static string VariableName_Length = "length";
+        internal static string VariableName_N = "n";
         internal static List<string> List1 = Array1.ToList();
+        internal static ushort N1 = (ushort)Length1;
 
     }
 }

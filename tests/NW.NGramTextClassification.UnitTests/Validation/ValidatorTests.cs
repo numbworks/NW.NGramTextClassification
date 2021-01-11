@@ -99,6 +99,18 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_02"),
 
         };
+        private static TestCaseData[] validateNExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateN(0)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.VariableName_N)
+                ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_01"),
+
+        };
 
         // SetUp
         // Tests
@@ -116,6 +128,10 @@ namespace NW.NGramTextClassification.UnitTests
                 => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
         [TestCaseSource(nameof(validateListExceptionTestCases))]
         public void ValidateList_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(validateNExceptionTestCases))]
+        public void ValidateN_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
@@ -197,6 +213,28 @@ namespace NW.NGramTextClassification.UnitTests
                 // Arrange
                 // Act
                 Validator.ValidateList(ObjectMother.List1, ObjectMother.VariableName);
+
+            }
+            catch (Exception ex)
+            {
+
+                // Assert
+                Assert.Fail(ex.Message);
+
+            }
+
+        }
+
+        [Test]
+        public void ValidateN_ShouldDoNothing_WhenProperArgument()
+        {
+
+            try
+            {
+
+                // Arrange
+                // Act
+                Validator.ValidateN(ObjectMother.N1);
 
             }
             catch (Exception ex)
