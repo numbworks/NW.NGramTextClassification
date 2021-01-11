@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
-using System.Linq;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -86,32 +84,21 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(validateObjectExceptionTestCases)}_02")
 
         };
-        private static TestCaseData[] allExceptionTestCases =
-                                            new List<TestCaseData>()
-                                                .Concat(validateArrayExceptionTestCases)
-                                                .Concat(validateLengthExceptionTestCases)
-                                                .Concat(validateObjectExceptionTestCases)
-                                                .ToArray();
 
         // SetUp
         // Tests
-        /*
-         * This one will work correctly in both NCrunch and Test Explorer 
-         * if using NUnit 3.13.0 and NUnit3 Adapter 3.17.0.
-         * 
-         */
-        [TestCaseSource(nameof(allExceptionTestCases))]
-        public void ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(validateArrayExceptionTestCases))]
+        public void ValidateArray_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-        {
-
-            // Arrange
-            // Act
-            // Assert
-            Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
-
-        }
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(validateLengthExceptionTestCases))]
+        public void ValidateLength_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(validateObjectExceptionTestCases))]
+        public void ValidateObject_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ValidateArray_ShouldDoNothing_WhenProperArgument()
@@ -184,6 +171,17 @@ namespace NW.NGramTextClassification.UnitTests
 
         // TearDown
         // Support methods
+        private void ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+        {
+
+            // Arrange
+            // Act
+            // Assert
+            Exception actual = Assert.Throws(expectedType, del);
+            Assert.AreEqual(expectedMessage, actual.Message);
+
+        }
 
     }
 }
