@@ -9,18 +9,6 @@ namespace NW.NGramTextClassification
         // Fields
         // Properties
         // Methods (public)
-        public static void ValidateArray<T, U>(U[] arr, string variableName) where T : Exception
-        {
-
-            if (arr == null)
-                throw CreateException<T>(variableName);
-            if (arr.Length == 0)
-                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
-
-        }
-        public static void ValidateArray<U>(U[] arr, string variableName)
-            => ValidateArray<ArgumentNullException, U>(arr, variableName);
-
         public static void ValidateLength<T>(uint length) where T : Exception
         {
 
@@ -31,17 +19,59 @@ namespace NW.NGramTextClassification
         public static void ValidateLength(uint length)
             => ValidateLength<ArgumentException>(length);
 
-        public static void ValidateList<T, U>(List<U> list, string variableName) where T : Exception
+        public static void ValidateObject<T>(object obj, string variableName) where T : Exception
         {
 
-            if (list == null)
+            if (obj == null)
                 throw CreateException<T>(variableName);
-            if (list.Count == 0)
+
+        }
+        public static void ValidateObject(object obj, string variableName)
+            => ValidateObject<ArgumentNullException>(obj, variableName);
+
+        public static void ValidateArrayNull<T, U>(U[] arr, string variableName) where T : Exception
+        {
+
+            if (arr == null)
+                throw CreateException<T>(variableName);
+
+        }
+        public static void ValidateArrayEmpty<T, U>(U[] arr, string variableName) where T : Exception
+        {
+
+            if (arr.Length == 0)
                 throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
 
         }
+        public static void ValidateArray<U>(U[] arr, string variableName)
+        {
+
+            ValidateArrayNull<ArgumentNullException, U>(arr, variableName);
+            ValidateArrayEmpty<ArgumentException, U>(arr, variableName);
+
+        }
+
+        public static void ValidateListNull<T, U>(List<U> list, string variableName) where T : Exception
+        {
+
+            if (list == null)
+                throw CreateException<ArgumentNullException>(variableName);
+
+        }
+        public static void ValidateListEmpty<T, U>(List<U> list, string variableName) where T : Exception
+        {
+
+            if (list.Count == 0)
+                throw CreateException<ArgumentException>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
+
+        }
         public static void ValidateList<U>(List<U> list, string variableName)
-            => ValidateList<ArgumentNullException, U>(list, variableName);
+        {
+
+            ValidateListNull<ArgumentNullException, U>(list, variableName);
+            ValidateListEmpty<ArgumentException, U>(list, variableName);
+
+        }
 
         public static void ValidateN<T>(ushort n) where T : Exception
         {
@@ -52,16 +82,6 @@ namespace NW.NGramTextClassification
         }
         public static void ValidateN(ushort n)
             => ValidateN<ArgumentException>(n);
-
-        public static void ValidateObject<T>(object obj, string variableName) where T : Exception
-        {
-
-            if (obj == null)
-                throw CreateException<T>(variableName);
-
-        }
-        public static void ValidateObject(object obj, string variableName)
-            => ValidateObject<ArgumentNullException>(obj, variableName);
 
         public static void ValidateStringNullOrWhiteSpace<T>(string str, string variableName) where T : Exception
         {

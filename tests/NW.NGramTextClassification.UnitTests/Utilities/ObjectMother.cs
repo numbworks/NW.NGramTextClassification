@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -20,6 +21,7 @@ namespace NW.NGramTextClassification.UnitTests
         internal static uint Length1 = 3;
         internal static string VariableName = "variable";
         internal static string VariableName_Length = "length";
+        internal static List<string> List1 = Array1.ToList();
 
     }
 }

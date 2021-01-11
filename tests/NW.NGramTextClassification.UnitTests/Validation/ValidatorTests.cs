@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -8,40 +9,6 @@ namespace NW.NGramTextClassification.UnitTests
     {
 
         // Fields
-        private static TestCaseData[] validateArrayExceptionTestCases =
-        {
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => Validator.ValidateArray<string>(
-                                null,
-                                ObjectMother.VariableName)
-                    ),
-                typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
-                ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_01"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => Validator.ValidateArray(
-                                Array.Empty<string>(),
-                                ObjectMother.VariableName)
-                    ),
-                typeof(ArgumentNullException),
-                new ArgumentNullException(MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.VariableName)).Message
-                ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_02"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => Validator.ValidateArray<ArgumentException, string>(
-                                null,
-                                ObjectMother.VariableName)
-                    ),
-                typeof(ArgumentException),
-                new ArgumentException(ObjectMother.VariableName).Message
-                ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_03"),
-
-        };
         private static TestCaseData[] validateLengthExceptionTestCases =
         {
 
@@ -84,13 +51,57 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(validateObjectExceptionTestCases)}_02")
 
         };
+        private static TestCaseData[] validateArrayExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateArray<string>(
+                                null,
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateArray(
+                                Array.Empty<string>(),
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.VariableName)
+                ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_02")
+
+        };
+        private static TestCaseData[] validateListExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateList(
+                                (List<string>)null, 
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateList(
+                                new List<string>() { },
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.VariableName)
+                ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_02"),
+
+        };
 
         // SetUp
         // Tests
-        [TestCaseSource(nameof(validateArrayExceptionTestCases))]
-        public void ValidateArray_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
         [TestCaseSource(nameof(validateLengthExceptionTestCases))]
         public void ValidateLength_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -99,29 +110,14 @@ namespace NW.NGramTextClassification.UnitTests
         public void ValidateObject_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
-        [Test]
-        public void ValidateArray_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateArray(ObjectMother.Array1, ObjectMother.VariableName);
-                Validator.ValidateArray<ArgumentException, string>(ObjectMother.Array1, ObjectMother.VariableName);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
-
-        }
+        [TestCaseSource(nameof(validateArrayExceptionTestCases))]
+        public void ValidateArray_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(validateListExceptionTestCases))]
+        public void ValidateList_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ValidateLength_ShouldDoNothing_WhenProperArgument()
@@ -166,6 +162,50 @@ namespace NW.NGramTextClassification.UnitTests
                 Assert.Fail(ex.Message);
 
             }           
+
+        }
+
+        [Test]
+        public void ValidateArray_ShouldDoNothing_WhenProperArgument()
+        {
+
+            try
+            {
+
+                // Arrange
+                // Act
+                Validator.ValidateArray(ObjectMother.Array1, ObjectMother.VariableName);
+
+            }
+            catch (Exception ex)
+            {
+
+                // Assert
+                Assert.Fail(ex.Message);
+
+            }
+
+        }
+
+        [Test]
+        public void ValidateList_ShouldDoNothing_WhenProperArgument()
+        {
+
+            try
+            {
+
+                // Arrange
+                // Act
+                Validator.ValidateList(ObjectMother.List1, ObjectMother.VariableName);
+
+            }
+            catch (Exception ex)
+            {
+
+                // Assert
+                Assert.Fail(ex.Message);
+
+            }
 
         }
 
