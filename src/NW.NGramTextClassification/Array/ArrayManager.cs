@@ -21,6 +21,7 @@ namespace NW.NGramTextClassification
             List<string> list = new List<string>();
             for (int i = 0; i < arr.Length; i++)
             {
+
                 list.Add(arr[i]);
                 if (i != (arr.Length - 1))
                     list.Add(delimiter);
@@ -34,7 +35,7 @@ namespace NW.NGramTextClassification
         {
 
             Validator.ValidateArray(arr, nameof(arr));
-            Validator.ValidateLength<ArgumentException>(length);
+            Validator.ValidateLength(length);
 
             string[] subset = new string[length];
             Array.Copy(arr, startIndex, subset, 0, length);
