@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -8,8 +6,13 @@ namespace NW.NGramTextClassification.UnitTests
     internal static class ObjectMother
     {
 
+        // ArrayManager
+        internal static string Delimiter1 = ";";
+        internal static string VariableName_AddDelimiter_Arr = "arr";
+        internal static string VariableName_AddDelimiter_Delimiter = "delimiter";
+
         // Validator
-        internal static string[] Array1 = new[] { "Dodge", "Datsun" };
+        internal static string[] Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
         internal static Car Object1 = new Car()
                 {
                     Brand = "Dodge",
