@@ -111,6 +111,76 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_01"),
 
         };
+        private static TestCaseData[] validateStringNullOrWhiteSpaceExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateStringNullOrWhiteSpace(
+                                null,
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrWhiteSpaceExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateStringNullOrWhiteSpace(
+                                string.Empty,
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrWhiteSpaceExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateStringNullOrWhiteSpace(
+                                ObjectMother.String_WhiteSpaces,
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrWhiteSpaceExceptionTestCases)}_03")
+
+        };
+        private static TestCaseData[] validateStringNullOrEmptyExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateStringNullOrEmpty(
+                                null,
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ValidateStringNullOrEmpty(
+                                string.Empty,
+                                ObjectMother.VariableName)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.VariableName).Message
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyExceptionTestCases)}_02")
+
+        };
+        private static TestCaseData[] validateStringNullOrEmptyTestCases =
+        {
+
+            new TestCaseData(
+                    ObjectMother.String1
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyTestCases)}_01"),
+
+            new TestCaseData(
+                    ObjectMother.String_WhiteSpaces
+                ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyTestCases)}_02")
+
+        };
 
         // SetUp
         // Tests
@@ -132,6 +202,14 @@ namespace NW.NGramTextClassification.UnitTests
                 => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
         [TestCaseSource(nameof(validateNExceptionTestCases))]
         public void ValidateN_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(validateStringNullOrWhiteSpaceExceptionTestCases))]
+        public void ValidateStringNullOrWhiteSpace_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(validateStringNullOrEmptyExceptionTestCases))]
+        public void ValidateStringNullOrEmpty_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ValidateMethod_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
@@ -235,6 +313,50 @@ namespace NW.NGramTextClassification.UnitTests
                 // Arrange
                 // Act
                 Validator.ValidateN(ObjectMother.N1);
+
+            }
+            catch (Exception ex)
+            {
+
+                // Assert
+                Assert.Fail(ex.Message);
+
+            }
+
+        }
+
+        [Test]
+        public void ValidateStringNullOrWhiteSpace_ShouldDoNothing_WhenProperArgument()
+        {
+
+            try
+            {
+
+                // Arrange
+                // Act
+                Validator.ValidateStringNullOrWhiteSpace(ObjectMother.String1, ObjectMother.VariableName);
+
+            }
+            catch (Exception ex)
+            {
+
+                // Assert
+                Assert.Fail(ex.Message);
+
+            }
+
+        }
+
+        [TestCaseSource(nameof(validateStringNullOrEmptyTestCases))]
+        public void ValidateStringNullOrEmpty_ShouldDoNothing_WhenProperArgument(string str)
+        {
+
+            try
+            {
+
+                // Arrange
+                // Act
+                Validator.ValidateStringNullOrEmpty(str, ObjectMother.VariableName);
 
             }
             catch (Exception ex)
