@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -20,7 +21,123 @@ namespace NW.NGramTextClassification.UnitTests
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Tokenizer).Message
-                ).SetArgDisplayNames($"{nameof(labeledExampleFactoryExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(labeledExampleFactoryExceptionTestCases)}_01")
+
+        };
+        private static TestCaseData[] createExceptionTestCases =
+        {
+
+            // ValidateStringNullOrWhiteSpace
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        null,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Label).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_01"),
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        string.Empty,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Label).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_02"),
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_LabelOnlyWhiteSpaces,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Label).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_03"),
+
+            // ValidateStringNullOrWhiteSpace
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        null,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Text).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_04"),
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        string.Empty,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Text).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_05"),
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        ObjectMother.LabeledExampleFactory_TextOnlyWhiteSpaces,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Text).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_06"),
+
+            // ValidateObject
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        null,
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Strategy).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_07"),
+
+            // ValidateObject
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        new TokenizationStrategy(),
+                                        null
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_RuleSet).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_08")
 
         };
 
@@ -28,6 +145,10 @@ namespace NW.NGramTextClassification.UnitTests
         // Tests
         [TestCaseSource(nameof(labeledExampleFactoryExceptionTestCases))]
         public void LabeledExampleFactory_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(createExceptionTestCases))]
+        public void Create_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 

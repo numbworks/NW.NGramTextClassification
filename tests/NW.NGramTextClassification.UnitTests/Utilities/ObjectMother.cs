@@ -90,8 +90,16 @@ namespace NW.NGramTextClassification.UnitTests
 
         // LabeledExampleFactory
         internal static string LabeledExampleFactory_VariableName_Tokenizer = "tokenizer";
+        internal static string LabeledExampleFactory_VariableName_Label = "label";
+        internal static string LabeledExampleFactory_VariableName_Text = "text";
+        internal static string LabeledExampleFactory_VariableName_Strategy = "strategy";
+        internal static string LabeledExampleFactory_VariableName_RuleSet = "ruleSet";
         internal static uint LabeledExampleFactory_InitialId1 = 0;
-
+        internal static ulong LabeledExampleFactory_Id1 = LabeledExample_Id1;
+        internal static string LabeledExampleFactory_Label1 = LabeledExample_Label1;
+        internal static string LabeledExampleFactory_LabelOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
+        internal static string LabeledExampleFactory_Text1 = LabeledExample_Text1;
+        internal static string LabeledExampleFactory_TextOnlyWhiteSpaces = LabeledExample_TextOnlyWhiteSpaces;
 
     }
 }
