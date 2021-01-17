@@ -159,7 +159,7 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
 
-    Author: rua@sitecore.net
+    Author: numbworks@gmail.com
     Last Update: 17.01.2021
 
 */

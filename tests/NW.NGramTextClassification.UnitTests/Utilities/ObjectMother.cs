@@ -88,6 +88,11 @@ namespace NW.NGramTextClassification.UnitTests
                         $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count.ToString()}' ]"
                     );
 
+        // LabeledExampleFactory
+        internal static string LabeledExampleFactory_VariableName_Tokenizer = "tokenizer";
+        internal static uint LabeledExampleFactory_InitialId1 = 0;
+
+
     }
 }
 
