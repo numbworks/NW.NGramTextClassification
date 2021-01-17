@@ -260,159 +260,65 @@ namespace NW.NGramTextClassification.UnitTests
 
         [Test]
         public void ValidateLength_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateLength(ObjectMother.Validator_Length1);
-                Validator.ValidateLength<ArgumentException>(ObjectMother.Validator_Length1);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
-
-        }
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateLength(ObjectMother.Validator_Length1),
+                        () => Validator.ValidateLength<ArgumentException>(ObjectMother.Validator_Length1)
+                    });
 
         [Test]
         public void ValidateObject_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateObject(ObjectMother.Validator_Object1, ObjectMother.Validator_VariableName_Variable);
-                Validator.ValidateObject<ArgumentException>(ObjectMother.Validator_Object1, ObjectMother.Validator_VariableName_Variable);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }           
-
-        }
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateObject(ObjectMother.Validator_Object1, ObjectMother.Validator_VariableName_Variable),
+                        () => Validator.ValidateObject<ArgumentException>(ObjectMother.Validator_Object1, ObjectMother.Validator_VariableName_Variable)
+                    });
 
         [Test]
         public void ValidateArray_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateArray(ObjectMother.Validator_Array1, ObjectMother.Validator_VariableName_Variable);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
-
-        }
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateArray(ObjectMother.Validator_Array1, ObjectMother.Validator_VariableName_Variable)
+                    });
 
         [Test]
         public void ValidateList_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateList(ObjectMother.List1, ObjectMother.Validator_VariableName_Variable);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
-
-        }
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateList(ObjectMother.List1, ObjectMother.Validator_VariableName_Variable)
+                    });
 
         [Test]
         public void ValidateN_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateN(ObjectMother.N1);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
-
-        }
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateN(ObjectMother.N1)
+                    });
 
         [Test]
         public void ValidateStringNullOrWhiteSpace_ShouldDoNothing_WhenProperArgument()
-        {
-
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateStringNullOrWhiteSpace(ObjectMother.Validator_String1, ObjectMother.Validator_VariableName_Variable);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
-
-        }
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateStringNullOrWhiteSpace(ObjectMother.Validator_String1, ObjectMother.Validator_VariableName_Variable)
+                    });
 
         [TestCaseSource(nameof(validateStringNullOrEmptyTestCases))]
         public void ValidateStringNullOrEmpty_ShouldDoNothing_WhenProperArgument(string str)
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ValidateStringNullOrEmpty(str, ObjectMother.Validator_VariableName_Variable)
+                    });
+
+        [Test]
+        public void ThrowIfFirstIsGreaterOrEqual_ShouldDoNothing_WhenProperArgument()
         {
 
-            try
-            {
-
-                // Arrange
-                // Act
-                Validator.ValidateStringNullOrEmpty(str, ObjectMother.Validator_VariableName_Variable);
-
-            }
-            catch (Exception ex)
-            {
-
-                // Assert
-                Assert.Fail(ex.Message);
-
-            }
+            // Arrange
+            // Act
+            // Assert
 
         }
+
 
         // TearDown
         // Support methods
@@ -425,6 +331,27 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Exception actual = Assert.Throws(expectedType, del);
             Assert.AreEqual(expectedMessage, actual.Message);
+
+        }
+        public void Method_ShouldDoNothing_WhenProperArgument(Action[] actions)
+        {
+
+            try
+            {
+
+                // Arrange
+                // Act
+                foreach (Action action in actions)
+                    action.Invoke();
+
+            }
+            catch (Exception ex)
+            {
+
+                // Assert
+                Assert.Fail(ex.Message);
+
+            }
 
         }
 
