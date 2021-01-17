@@ -8,6 +8,8 @@
         // Constructors
         public Trigram(ITokenizationStrategy strategy, string value)
             : base(3, strategy, value) { }
+        public Trigram(string value)
+            : base(3, new TokenizationStrategy(), value) { }
 
         // Methods (public)
         // Methods (private)

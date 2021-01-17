@@ -8,6 +8,8 @@
         // Constructors
         public Monogram(ITokenizationStrategy strategy, string value)
             : base(1, strategy, value) { }
+        public Monogram(string value)
+            : base(1, new TokenizationStrategy(), value) { }
 
         // Methods (public)
         // Methods (private)
