@@ -29,6 +29,13 @@ namespace NW.NGramTextClassification
         public static void ValidateObject(object obj, string variableName)
             => ValidateObject<ArgumentNullException>(obj, variableName);
 
+        public static void ValidateArray<U>(U[] arr, string variableName)
+        {
+
+            ValidateArrayNull<ArgumentNullException, U>(arr, variableName);
+            ValidateArrayEmpty<ArgumentException, U>(arr, variableName);
+
+        }
         public static void ValidateArrayNull<T, U>(U[] arr, string variableName) where T : Exception
         {
 
@@ -43,14 +50,14 @@ namespace NW.NGramTextClassification
                 throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
 
         }
-        public static void ValidateArray<U>(U[] arr, string variableName)
+
+        public static void ValidateList<U>(List<U> list, string variableName)
         {
 
-            ValidateArrayNull<ArgumentNullException, U>(arr, variableName);
-            ValidateArrayEmpty<ArgumentException, U>(arr, variableName);
+            ValidateListNull<ArgumentNullException, U>(list, variableName);
+            ValidateListEmpty<ArgumentException, U>(list, variableName);
 
         }
-
         public static void ValidateListNull<T, U>(List<U> list, string variableName) where T : Exception
         {
 
@@ -63,13 +70,6 @@ namespace NW.NGramTextClassification
 
             if (list.Count == 0)
                 throw CreateException<ArgumentException>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
-
-        }
-        public static void ValidateList<U>(List<U> list, string variableName)
-        {
-
-            ValidateListNull<ArgumentNullException, U>(list, variableName);
-            ValidateListEmpty<ArgumentException, U>(list, variableName);
 
         }
 
