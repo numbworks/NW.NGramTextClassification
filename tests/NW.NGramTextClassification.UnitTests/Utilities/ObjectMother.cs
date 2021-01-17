@@ -40,6 +40,26 @@ namespace NW.NGramTextClassification.UnitTests
             = new[] { "Dodge", ArrayManager_Delimiter1, "Datsun", ArrayManager_Delimiter1, "Jaguar", ArrayManager_Delimiter1, "DeLorean" };
         internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
 
+        // LabeledExample
+        internal static ulong LabeledExample_Id1 = 1;
+        internal static string LabeledExample_Label1 = "some_label";
+        internal static string LabeledExample_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
+        internal static string LabeledExample_Text1 = "some_text";
+        internal static string LabeledExample_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
+        internal static string LabeledExample_INGramValue1 = "We are looking for several skilled and driven developers to join our team.";
+        internal static INGram LabeledExample_Monogram1 = new Monogram(LabeledExample_INGramValue1);
+        internal static INGram LabeledExample_Bigram1 = new Bigram(LabeledExample_INGramValue1);
+        internal static INGram LabeledExample_Trigram1 = new Trigram(LabeledExample_INGramValue1);
+        internal static List<INGram> LabeledExample_TextAsNGrams1 
+            = new List<INGram>() {
+                LabeledExample_Monogram1,
+                LabeledExample_Bigram1,
+                LabeledExample_Trigram1
+            };
+        internal static string LabeledExample_VariableName_Label = "label";
+        internal static string LabeledExample_VariableName_Text = "text";
+        internal static string LabeledExample_VariableName_TextAsNGrams = "textAsNGrams";
+
     }
 }
 
