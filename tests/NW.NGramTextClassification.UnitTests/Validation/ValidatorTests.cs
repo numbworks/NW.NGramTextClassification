@@ -311,14 +311,17 @@ namespace NW.NGramTextClassification.UnitTests
 
         [Test]
         public void ThrowIfFirstIsGreaterOrEqual_ShouldDoNothing_WhenProperArgument()
-        {
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfFirstIsGreaterOrEqual(4, "n1", 5, "n2")
+                    });
 
-            // Arrange
-            // Act
-            // Assert
-
-        }
-
+        [Test]
+        public void ThrowIfFirstIsGreater_ShouldDoNothing_WhenProperArgument()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfFirstIsGreater(3, "n1", 4, "n2")
+                    });
 
         // TearDown
         // Support methods
