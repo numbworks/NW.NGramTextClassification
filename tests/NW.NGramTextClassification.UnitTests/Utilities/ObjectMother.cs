@@ -57,14 +57,17 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string LabeledExample_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
         internal static string LabeledExample_Text1 = "We are looking for several skilled and driven developers to join our team.";
         internal static string LabeledExample_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-        internal static INGram LabeledExample_Monogram1 = new Monogram(LabeledExample_Text1);
-        internal static INGram LabeledExample_Bigram1 = new Bigram(LabeledExample_Text1);
-        internal static INGram LabeledExample_Trigram1 = new Trigram(LabeledExample_Text1);
+        internal static string LabeledExample_Text1_MonogramValue1 = "We";
+        internal static string LabeledExample_Text1_BigramValue1 = "We are";
+        internal static string LabeledExample_Text1_TrigramValue1 = "We are looking";
+        internal static INGram LabeledExample_Text1_Monogram1 = new Monogram(LabeledExample_Text1_MonogramValue1);
+        internal static INGram LabeledExample_Text1_Bigram1 = new Bigram(LabeledExample_Text1_BigramValue1);
+        internal static INGram LabeledExample_Text1_Trigram1 = new Trigram(LabeledExample_Text1_TrigramValue1);
         internal static List<INGram> LabeledExample_TextAsNGrams1 
             = new List<INGram>() {
-                LabeledExample_Monogram1,
-                LabeledExample_Bigram1,
-                LabeledExample_Trigram1
+                LabeledExample_Text1_Monogram1,
+                LabeledExample_Text1_Bigram1,
+                LabeledExample_Text1_Trigram1
             };
         internal static LabeledExample LabeledExample1
             = new LabeledExample(
