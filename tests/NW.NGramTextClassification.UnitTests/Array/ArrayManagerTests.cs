@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -12,33 +11,49 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] addDelimiterExceptionTestCases =
         {
 
+            // ValidateArrayNull
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(null, ObjectMother.ArrayManager_Delimiter1)
+                        () => new ArrayManager()
+                                    .AddDelimiter(
+                                        null, 
+                                        ObjectMother.ArrayManager_Delimiter1)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Arr).Message
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_01"),
 
+            // ValidateArrayEmpty
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(Array.Empty<string>(), ObjectMother.ArrayManager_Delimiter1)
+                        () => new ArrayManager()
+                                    .AddDelimiter(
+                                        Array.Empty<string>(), 
+                                        ObjectMother.ArrayManager_Delimiter1)
                     ),
                 typeof(ArgumentException),
                 MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.ArrayManager_VariableName_Arr)
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_02"),
 
+            // ValidateStringNullOrEmpty
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(ObjectMother.Validator_Array1, null)
+                        () => new ArrayManager()
+                                    .AddDelimiter(
+                                        ObjectMother.Validator_Array1, 
+                                        null)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Delimiter).Message
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_03"),
 
+            // ValidateStringNullOrEmpty
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(ObjectMother.Validator_Array1, string.Empty)
+                        () => new ArrayManager()
+                                    .AddDelimiter(
+                                        ObjectMother.Validator_Array1, 
+                                        string.Empty)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Delimiter).Message
@@ -123,10 +138,17 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
+            string[] actual = new ArrayManager().GetSubset(
+                                                    ObjectMother.ArrayManager_Array1,
+                                                    ObjectMother.ArrayManager_StartIndex1,
+                                                    ObjectMother.ArrayManager_Length1);
+
             // Assert
+            Assert.AreEqual(
+                    ObjectMother.ArrayManager_Array1_Subset1,
+                    actual);
 
         }
-
 
         // TearDown
         // Support methods
