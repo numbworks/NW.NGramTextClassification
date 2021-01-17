@@ -6,29 +6,35 @@ namespace NW.NGramTextClassification.UnitTests
     internal static class ObjectMother
     {
 
-        // ArrayManager
-        internal static string Delimiter1 = ";";
-        internal static string VariableName_AddDelimiter_Arr = "arr";
-        internal static string VariableName_AddDelimiter_Delimiter = "delimiter";
-
         // Validator
-        internal static string[] Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
-        internal static Car Object1 = new Car()
-                {
-                    Brand = "Dodge",
-                    Model = "Charger",
-                    Year = 1966,
-                    Price = 13500,
-                    Currency = "USD"
-                };
-        internal static uint Length1 = 3;
-        internal static string VariableName = "variable";
-        internal static string VariableName_Length = "length";
-        internal static string VariableName_N = "n";
-        internal static List<string> List1 = Array1.ToList();
-        internal static ushort N1 = (ushort)Length1;
-        internal static string String1 = "Dodge";
-        internal static string String_WhiteSpaces = "   ";
+        internal static string[] Validator_Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
+        internal static Car Validator_Object1 = new Car()
+        {
+            Brand = "Dodge",
+            Model = "Charger",
+            Year = 1966,
+            Price = 13500,
+            Currency = "USD"
+        };
+        internal static uint Validator_Length1 = 3;
+        internal static string Validator_VariableName_Variable = "variable";
+        internal static string Validator_VariableName_Length = "length";
+        internal static string Validator_VariableName_N = "n";
+        internal static List<string> List1 = Validator_Array1.ToList();
+        internal static ushort N1 = (ushort)Validator_Length1;
+        internal static string Validator_String1 = "Dodge";
+        internal static string Validator_StringOnlyWhiteSpaces = "   ";
+
+        // ArrayManager
+        internal static string ArrayManager_Delimiter1 = ";";
+        internal static string ArrayManager_VariableName_Arr = "arr";
+        internal static string ArrayManager_VariableName_Delimiter = "delimiter";
+        internal static string ArrayManager_VariableName_StartIndex = "startIndex";
+        internal static string ArrayManager_VariableName_Length = Validator_VariableName_Length;
+        internal static uint ArrayManager_StartIndex1 = 0;
+        internal static uint ArrayManager_Length1 = 2;
+        internal static string[] ArrayManager_Array1 = Validator_Array1;
+        internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
 
     }
 }
@@ -36,6 +42,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 08.01.2021
+    Last Update: 17.01.2021
 
 */

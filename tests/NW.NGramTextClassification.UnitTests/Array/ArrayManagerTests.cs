@@ -14,41 +14,78 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(null, ObjectMother.Delimiter1)
+                        () => new ArrayManager().AddDelimiter(null, ObjectMother.ArrayManager_Delimiter1)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName_AddDelimiter_Arr).Message
+                new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Arr).Message
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(Array.Empty<string>(), ObjectMother.Delimiter1)
+                        () => new ArrayManager().AddDelimiter(Array.Empty<string>(), ObjectMother.ArrayManager_Delimiter1)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.VariableName_AddDelimiter_Arr)
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.ArrayManager_VariableName_Arr)
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(ObjectMother.Array1, null)
+                        () => new ArrayManager().AddDelimiter(ObjectMother.Validator_Array1, null)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName_AddDelimiter_Delimiter).Message
+                new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Delimiter).Message
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_03"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ArrayManager().AddDelimiter(ObjectMother.Array1, string.Empty)
+                        () => new ArrayManager().AddDelimiter(ObjectMother.Validator_Array1, string.Empty)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName_AddDelimiter_Delimiter).Message
+                new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Delimiter).Message
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_04"),
 
         };
         private static TestCaseData[] getSubsetExceptionTestCases =
         {
 
+            // ValidateArrayNull
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ArrayManager()
+                                    .GetSubset(
+                                        null, 
+                                        ObjectMother.ArrayManager_StartIndex1,
+                                        ObjectMother.ArrayManager_Length1)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.ArrayManager_VariableName_Arr).Message
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_01"),
 
+            // ValidateArrayEmpty
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ArrayManager()
+                                    .GetSubset(
+                                        Array.Empty<string>(),
+                                        ObjectMother.ArrayManager_StartIndex1,
+                                        ObjectMother.ArrayManager_Length1)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.ArrayManager_VariableName_Arr)
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_02"),
+
+            // ValidateLength
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ArrayManager()
+                                    .GetSubset(
+                                        ObjectMother.ArrayManager_Array1,
+                                        ObjectMother.ArrayManager_StartIndex1,
+                                        0)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.ArrayManager_VariableName_Length)
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_03")
 
         };
 

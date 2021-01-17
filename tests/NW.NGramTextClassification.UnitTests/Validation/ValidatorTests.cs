@@ -18,7 +18,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(ArgumentException),
                 new ArgumentException(
-                        MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.VariableName_Length)).Message
+                        MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_Length)).Message
                 ).SetArgDisplayNames($"{nameof(validateLengthExceptionTestCases)}_01"),
 
             new TestCaseData(
@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(Exception),
                 new Exception(
-                        MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.VariableName_Length)).Message
+                        MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_Length)).Message
                 ).SetArgDisplayNames($"{nameof(validateLengthExceptionTestCases)}_02")
 
         };
@@ -36,18 +36,18 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => Validator.ValidateObject(null, ObjectMother.VariableName)
+                        () => Validator.ValidateObject(null, ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateObjectExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => Validator.ValidateObject<ArgumentException>(null, ObjectMother.VariableName)
+                        () => Validator.ValidateObject<ArgumentException>(null, ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                new ArgumentException(ObjectMother.VariableName).Message
+                new ArgumentException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateObjectExceptionTestCases)}_02")
 
         };
@@ -58,20 +58,20 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => Validator.ValidateArray<string>(
                                 null,
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => Validator.ValidateArray(
                                 Array.Empty<string>(),
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.VariableName)
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.Validator_VariableName_Variable)
                 ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_02")
 
         };
@@ -82,20 +82,20 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => Validator.ValidateList(
                                 (List<string>)null, 
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => Validator.ValidateList(
                                 new List<string>() { },
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.VariableName)
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.Validator_VariableName_Variable)
                 ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_02"),
 
         };
@@ -107,7 +107,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => Validator.ValidateN(0)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.VariableName_N)
+                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
                 ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_01"),
 
         };
@@ -118,30 +118,30 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => Validator.ValidateStringNullOrWhiteSpace(
                                 null,
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrWhiteSpaceExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => Validator.ValidateStringNullOrWhiteSpace(
                                 string.Empty,
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrWhiteSpaceExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => Validator.ValidateStringNullOrWhiteSpace(
-                                ObjectMother.String_WhiteSpaces,
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_StringOnlyWhiteSpaces,
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrWhiteSpaceExceptionTestCases)}_03")
 
         };
@@ -152,20 +152,20 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => Validator.ValidateStringNullOrEmpty(
                                 null,
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => Validator.ValidateStringNullOrEmpty(
                                 string.Empty,
-                                ObjectMother.VariableName)
+                                ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.VariableName).Message
+                new ArgumentNullException(ObjectMother.Validator_VariableName_Variable).Message
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyExceptionTestCases)}_02")
 
         };
@@ -173,11 +173,11 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    ObjectMother.String1
+                    ObjectMother.Validator_String1
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.String_WhiteSpaces
+                    ObjectMother.Validator_StringOnlyWhiteSpaces
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyTestCases)}_02")
 
         };
@@ -222,8 +222,8 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Arrange
                 // Act
-                Validator.ValidateLength(ObjectMother.Length1);
-                Validator.ValidateLength<ArgumentException>(ObjectMother.Length1);
+                Validator.ValidateLength(ObjectMother.Validator_Length1);
+                Validator.ValidateLength<ArgumentException>(ObjectMother.Validator_Length1);
 
             }
             catch (Exception ex)
@@ -245,8 +245,8 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Arrange
                 // Act
-                Validator.ValidateObject(ObjectMother.Object1, ObjectMother.VariableName);
-                Validator.ValidateObject<ArgumentException>(ObjectMother.Object1, ObjectMother.VariableName);
+                Validator.ValidateObject(ObjectMother.Validator_Object1, ObjectMother.Validator_VariableName_Variable);
+                Validator.ValidateObject<ArgumentException>(ObjectMother.Validator_Object1, ObjectMother.Validator_VariableName_Variable);
 
             }
             catch (Exception ex)
@@ -268,7 +268,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Arrange
                 // Act
-                Validator.ValidateArray(ObjectMother.Array1, ObjectMother.VariableName);
+                Validator.ValidateArray(ObjectMother.Validator_Array1, ObjectMother.Validator_VariableName_Variable);
 
             }
             catch (Exception ex)
@@ -290,7 +290,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Arrange
                 // Act
-                Validator.ValidateList(ObjectMother.List1, ObjectMother.VariableName);
+                Validator.ValidateList(ObjectMother.List1, ObjectMother.Validator_VariableName_Variable);
 
             }
             catch (Exception ex)
@@ -334,7 +334,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Arrange
                 // Act
-                Validator.ValidateStringNullOrWhiteSpace(ObjectMother.String1, ObjectMother.VariableName);
+                Validator.ValidateStringNullOrWhiteSpace(ObjectMother.Validator_String1, ObjectMother.Validator_VariableName_Variable);
 
             }
             catch (Exception ex)
@@ -356,7 +356,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Arrange
                 // Act
-                Validator.ValidateStringNullOrEmpty(str, ObjectMother.VariableName);
+                Validator.ValidateStringNullOrEmpty(str, ObjectMother.Validator_VariableName_Variable);
 
             }
             catch (Exception ex)
