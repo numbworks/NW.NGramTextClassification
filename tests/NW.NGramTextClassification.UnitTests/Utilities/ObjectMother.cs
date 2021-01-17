@@ -26,39 +26,67 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string Validator_StringOnlyWhiteSpaces = "   ";
 
         // ArrayManager
-        internal static string ArrayManager_Delimiter1 = ";";
         internal static string ArrayManager_VariableName_Arr = "arr";
         internal static string ArrayManager_VariableName_Delimiter = "delimiter";
         internal static string ArrayManager_VariableName_StartIndex = "startIndex";
         internal static string ArrayManager_VariableName_Length = Validator_VariableName_Length;
         internal static string ArrayManager_VariableName_ArrLength = "arr.Length";
         internal static string ArrayManager_VariableName_StartIndexPlusLength = "startIndex + length";
+        internal static string ArrayManager_Delimiter1 = ";";
         internal static uint ArrayManager_StartIndex1 = 0;
         internal static uint ArrayManager_Length1 = 2;
         internal static string[] ArrayManager_Array1 = Validator_Array1;
         internal static string[] ArrayManager_Array1_WithDelimiter1 
-            = new[] { "Dodge", ArrayManager_Delimiter1, "Datsun", ArrayManager_Delimiter1, "Jaguar", ArrayManager_Delimiter1, "DeLorean" };
+            = new[] {
+                "Dodge",
+                ArrayManager_Delimiter1,
+                "Datsun",
+                ArrayManager_Delimiter1,
+                "Jaguar",
+                ArrayManager_Delimiter1,
+                "DeLorean"
+            };
         internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
 
         // LabeledExample
+        internal static string LabeledExample_VariableName_Label = "label";
+        internal static string LabeledExample_VariableName_Text = "text";
+        internal static string LabeledExample_VariableName_TextAsNGrams = "textAsNGrams";
         internal static ulong LabeledExample_Id1 = 1;
         internal static string LabeledExample_Label1 = "some_label";
         internal static string LabeledExample_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-        internal static string LabeledExample_Text1 = "some_text";
+        internal static string LabeledExample_Text1 = "We are looking for several skilled and driven developers to join our team.";
         internal static string LabeledExample_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-        internal static string LabeledExample_INGramValue1 = "We are looking for several skilled and driven developers to join our team.";
-        internal static INGram LabeledExample_Monogram1 = new Monogram(LabeledExample_INGramValue1);
-        internal static INGram LabeledExample_Bigram1 = new Bigram(LabeledExample_INGramValue1);
-        internal static INGram LabeledExample_Trigram1 = new Trigram(LabeledExample_INGramValue1);
+        internal static INGram LabeledExample_Monogram1 = new Monogram(LabeledExample_Text1);
+        internal static INGram LabeledExample_Bigram1 = new Bigram(LabeledExample_Text1);
+        internal static INGram LabeledExample_Trigram1 = new Trigram(LabeledExample_Text1);
         internal static List<INGram> LabeledExample_TextAsNGrams1 
             = new List<INGram>() {
                 LabeledExample_Monogram1,
                 LabeledExample_Bigram1,
                 LabeledExample_Trigram1
             };
-        internal static string LabeledExample_VariableName_Label = "label";
-        internal static string LabeledExample_VariableName_Text = "text";
-        internal static string LabeledExample_VariableName_TextAsNGrams = "textAsNGrams";
+        internal static LabeledExample LabeledExample1
+            = new LabeledExample(
+                    LabeledExample_Id1,
+                    LabeledExample_Label1,
+                    LabeledExample_Text1,
+                    LabeledExample_TextAsNGrams1
+                );
+        internal static string LabeledExample1_AsStringTruncatedAt7 
+            = string.Concat(
+                        $"[ Id: '{LabeledExample_Id1}', ",
+                        $"Label: '{LabeledExample_Label1}', ",
+                        $"Text: '{LabeledExample_Text1.Substring(0, 7)}...', ",
+                        $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count.ToString()}' ]"
+                    );
+        internal static string LabeledExample1_AsStringTruncatedAtDefault
+            = string.Concat(
+                        $"[ Id: '{LabeledExample_Id1}', ",
+                        $"Label: '{LabeledExample_Label1}', ",
+                        $"Text: '{LabeledExample_Text1.Substring(0, (int)TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter)}...', ",
+                        $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count.ToString()}' ]"
+                    );
 
     }
 }

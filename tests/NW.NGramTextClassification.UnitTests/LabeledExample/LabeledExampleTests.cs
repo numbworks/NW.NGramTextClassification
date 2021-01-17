@@ -100,12 +100,6 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         };
-        private static TestCaseData[] toStringTestCases =
-        {
-
-            new TestCaseData( "Something", false )
-
-        };
 
         // SetUp
         // Tests
@@ -113,6 +107,37 @@ namespace NW.NGramTextClassification.UnitTests
         public void LabeledExample_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [Test]
+        public void ToString_ShouldTruncateTextInACustomWay_WhenTruncateAfterTextIsProvided()
+        {
+
+            // Arrange
+            // Act
+            string actual = ObjectMother.LabeledExample1.ToString(7);
+
+            // Assert
+            Assert.AreEqual(
+                    ObjectMother.LabeledExample1_AsStringTruncatedAt7, 
+                    actual);
+
+        }
+
+        [Test]
+        public void ToString_ShouldTruncateTextInADefaultWay_WhenInvokedWithoutTruncateAfterText()
+        {
+
+            // Arrange
+            // Act
+            string actual 
+                = ObjectMother.LabeledExample1.ToString();
+
+            // Assert
+            Assert.AreEqual(
+                    ObjectMother.LabeledExample1_AsStringTruncatedAtDefault,
+                    actual);
+
+        }
 
         // TearDown
         // Support methods
