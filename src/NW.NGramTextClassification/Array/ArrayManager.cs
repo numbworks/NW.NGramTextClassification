@@ -37,7 +37,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateArray(arr, nameof(arr));
             Validator.ValidateLength(length);
             Validator.ThrowIfFirstIsGreaterOrEqual((int)startIndex, nameof(startIndex), arr.Length, "arr.Length");
-            Validator.ThrowIfFirstIsGreater((int)length, nameof(length), arr.Length, "arr.Length");
+            Validator.ThrowIfFirstIsGreaterOrEqual((int)length, nameof(length), arr.Length, "arr.Length");
             Validator.ThrowIfFirstIsGreater((int)(startIndex + length), "startIndex + length", arr.Length, "arr.Length");
 
             string[] subset = new string[length];

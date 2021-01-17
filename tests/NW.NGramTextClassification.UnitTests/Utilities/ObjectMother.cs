@@ -31,6 +31,8 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string ArrayManager_VariableName_Delimiter = "delimiter";
         internal static string ArrayManager_VariableName_StartIndex = "startIndex";
         internal static string ArrayManager_VariableName_Length = Validator_VariableName_Length;
+        internal static string ArrayManager_VariableName_ArrLength = "arr.Length";
+        internal static string ArrayManager_VariableName_StartIndexPlusLength = "startIndex + length";
         internal static uint ArrayManager_StartIndex1 = 0;
         internal static uint ArrayManager_Length1 = 2;
         internal static string[] ArrayManager_Array1 = Validator_Array1;

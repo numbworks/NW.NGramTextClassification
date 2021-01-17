@@ -100,7 +100,49 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(ArgumentException),
                 MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.ArrayManager_VariableName_Length)
-                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_03")
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_03"),
+
+            // ThrowIfFirstIsGreaterOrEqual
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ArrayManager()
+                                    .GetSubset(
+                                        ObjectMother.ArrayManager_Array1, // arr.Length = 4
+                                        4,
+                                        ObjectMother.ArrayManager_Length1)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue.Invoke
+                    (ObjectMother.ArrayManager_VariableName_StartIndex, ObjectMother.ArrayManager_VariableName_ArrLength)
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_04"),
+
+            // ThrowIfFirstIsGreaterOrEqual
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ArrayManager()
+                                    .GetSubset(
+                                        ObjectMother.ArrayManager_Array1, // arr.Length = 4
+                                        0,
+                                        4)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue.Invoke
+                    (ObjectMother.ArrayManager_VariableName_Length, ObjectMother.ArrayManager_VariableName_ArrLength)
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_05"),
+
+            // ThrowIfFirstIsGreater
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ArrayManager()
+                                    .GetSubset(
+                                        ObjectMother.ArrayManager_Array1, // arr.Length = 4
+                                        2,
+                                        3)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.FirstValueIsGreaterThanSecondValue.Invoke
+                    (ObjectMother.ArrayManager_VariableName_StartIndexPlusLength, ObjectMother.ArrayManager_VariableName_ArrLength)
+                ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_06")
 
         };
 
