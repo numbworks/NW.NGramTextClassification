@@ -102,6 +102,25 @@ namespace NW.NGramTextClassification
         public static void ValidateStringNullOrEmpty(string str, string variableName)
             => ValidateStringNullOrEmpty<ArgumentNullException>(str, variableName);
 
+        public static void ThrowIfFirstIsGreaterOrEqual<T>(int value1, string variableName1, int value2, string variableName2) where T : Exception
+        {
+
+            if (value1 >= value2)
+                throw CreateException<T>(MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue.Invoke(variableName1, variableName2));
+
+        }
+        public static void ThrowIfFirstIsGreaterOrEqual(int value1, string variableName1, int value2, string variableName2)
+            => ThrowIfFirstIsGreaterOrEqual<ArgumentException>(value1, variableName1, value2, variableName2);
+        public static void ThrowIfFirstIsGreater<T>(int value1, string variableName1, int value2, string variableName2) where T : Exception
+        {
+
+            if (value1 >= value2)
+                throw CreateException<T>(MessageCollection.FirstValueIsGreaterThanSecondValue.Invoke(variableName1, variableName2));
+
+        }
+        public static void ThrowIfFirstIsGreater(int value1, string variableName1, int value2, string variableName2)
+            => ThrowIfFirstIsGreater<ArgumentException>(value1, variableName1, value2, variableName2);
+
         // Methods (private)
         private static T CreateException<T>(string message) where T : Exception
             => (T)Activator.CreateInstance(typeof(T), message);

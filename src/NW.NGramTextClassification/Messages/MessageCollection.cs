@@ -6,10 +6,14 @@ namespace NW.NGramTextClassification
     public static class MessageCollection
     {
 
-        // ArrayManager
-        public static Func<string, string> VariableContainsZeroItems { get; }
+        // Validator
+        public static Func<string, string, string> FirstValueIsGreaterOrEqualThanSecondValue
+            = (variableName1, variableName2) => $"The '{variableName1}''s value is greater or equal than '{variableName2}''s value.";
+        public static Func<string, string, string> FirstValueIsGreaterThanSecondValue
+            = (variableName1, variableName2) => $"The '{variableName1}''s value is greater than '{variableName2}''s value.";
+        public static Func<string, string> VariableContainsZeroItems
             = (variableName) => $"'{variableName}' contains zero items.";
-        public static Func<string, string> VariableCantBeLessThanOne { get; }
+        public static Func<string, string> VariableCantBeLessThanOne
             = (variableName) => $"'{variableName}' can't be less than one.";
 
         // NGramsTokenizer

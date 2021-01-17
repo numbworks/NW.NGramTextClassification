@@ -133,7 +133,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetSubset_ShouldAReturnASubsetArray_WhenProperArguments()
+        public void GetSubset_ShouldReturnASubsetArray_WhenProperArguments()
         {
 
             // Arrange
