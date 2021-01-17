@@ -34,6 +34,8 @@ namespace NW.NGramTextClassification.UnitTests
         internal static uint ArrayManager_StartIndex1 = 0;
         internal static uint ArrayManager_Length1 = 2;
         internal static string[] ArrayManager_Array1 = Validator_Array1;
+        internal static string[] ArrayManager_Array1_WithDelimiter1 
+            = new[] { "Dodge", ArrayManager_Delimiter1, "Datsun", ArrayManager_Delimiter1, "Jaguar", ArrayManager_Delimiter1, "DeLorean" };
         internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
 
     }

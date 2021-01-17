@@ -100,6 +100,34 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [Test]
+        public void AddDelimiter_ShouldAddADelimiterItemBetweenTheOtherItems_WhenProperArguments()
+        {
+
+            // Arrange
+            // Act
+            string[] actual = new ArrayManager().AddDelimiter(
+                                                    ObjectMother.ArrayManager_Array1,
+                                                    ObjectMother.ArrayManager_Delimiter1);
+
+            // Assert
+            Assert.AreEqual(
+                    ObjectMother.ArrayManager_Array1_WithDelimiter1,
+                    actual);
+
+        }
+
+        [Test]
+        public void GetSubset_ShouldAReturnASubsetArray_WhenProperArguments()
+        {
+
+            // Arrange
+            // Act
+            // Assert
+
+        }
+
+
         // TearDown
         // Support methods
         private void Method_ShouldThrowACertainException_WhenUnproperArguments
