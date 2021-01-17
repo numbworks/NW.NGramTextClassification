@@ -137,7 +137,57 @@ namespace NW.NGramTextClassification.UnitTests
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_RuleSet).Message
-                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_08")
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_08"),
+
+            // ValidateList
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        null,
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Tuples).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_09"),
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        new List<(string label, string text)>(),
+                                        new TokenizationStrategy(),
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentException),
+                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.LabeledExampleFactory_VariableName_Tuples)
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_10"),
+
+            // ValidateObject
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Tuples,
+                                        null,
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Strategy).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_11"),
+
+            // ValidateObject
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .Create(
+                                        ObjectMother.LabeledExampleFactory_Tuples,
+                                        new TokenizationStrategy(),
+                                        null
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_RuleSet).Message
+                ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_12")
 
         };
 

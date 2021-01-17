@@ -94,12 +94,22 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string LabeledExampleFactory_VariableName_Text = "text";
         internal static string LabeledExampleFactory_VariableName_Strategy = "strategy";
         internal static string LabeledExampleFactory_VariableName_RuleSet = "ruleSet";
+        internal static string LabeledExampleFactory_VariableName_Tuples = "tuples";
         internal static uint LabeledExampleFactory_InitialId1 = 0;
         internal static ulong LabeledExampleFactory_Id1 = LabeledExample_Id1;
         internal static string LabeledExampleFactory_Label1 = LabeledExample_Label1;
         internal static string LabeledExampleFactory_LabelOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
         internal static string LabeledExampleFactory_Text1 = LabeledExample_Text1;
         internal static string LabeledExampleFactory_TextOnlyWhiteSpaces = LabeledExample_TextOnlyWhiteSpaces;
+        internal static string LabeledExampleFactory_Text2 = "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.";
+        internal static (string label, string text) LabeledExampleFactory_Tuple1 = ("en", LabeledExampleFactory_Text1);
+        internal static (string label, string text) LabeledExampleFactory_Tuple2 = ("sv", LabeledExampleFactory_Text2);
+        internal static List<(string label, string text)> LabeledExampleFactory_Tuples
+            = new List<(string label, string text)>()
+            {
+                LabeledExampleFactory_Tuple1,
+                LabeledExampleFactory_Tuple2
+            };
 
     }
 }
