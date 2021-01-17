@@ -36,6 +36,8 @@ namespace NW.NGramTextClassification
 
             Validator.ValidateArray(arr, nameof(arr));
             Validator.ValidateLength(length);
+            if (startIndex >= arr.Length)
+                throw new ArgumentException();
 
             string[] subset = new string[length];
             Array.Copy(arr, startIndex, subset, 0, length);
