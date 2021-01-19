@@ -114,7 +114,7 @@ namespace NW.NGramTextClassification
         public static void ThrowIfFirstIsGreater<T>(int value1, string variableName1, int value2, string variableName2) where T : Exception
         {
 
-            if (value1 >= value2)
+            if (value1 > value2)
                 throw CreateException<T>(MessageCollection.FirstValueIsGreaterThanSecondValue.Invoke(variableName1, variableName2));
 
         }

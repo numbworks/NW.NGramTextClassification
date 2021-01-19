@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -193,6 +194,58 @@ namespace NW.NGramTextClassification.UnitTests
                 new Trigram(LabeledExampleFactory_Text1_TrigramValue12)
 
             };
+        internal static LabeledExample LabeledExampleFactory_LabeledExample1
+            = new LabeledExample(
+                        LabeledExampleFactory_Id1,
+                        LabeledExampleFactory_Label1,
+                        LabeledExampleFactory_Text1,
+                        LabeledExampleFactory_Text1_NGrams1);
+
+        // Methods
+        internal static bool AreEqual(INGram obj1, INGram obj2)
+        {
+
+            return (obj1.N == obj2.N)
+                    && AreEqual(obj1.Strategy, obj2.Strategy)
+                    && string.Equals(obj1.Value, obj2.Value, StringComparison.InvariantCulture);
+
+        }
+        internal static bool AreEqual(ITokenizationStrategy obj1, ITokenizationStrategy obj2)
+        {
+
+            return string.Equals(obj1.Delimiter, obj2.Delimiter, StringComparison.InvariantCulture)
+                    && string.Equals(obj1.Pattern, obj2.Pattern, StringComparison.InvariantCulture)
+                    && (obj1.ToLowercase == obj2.ToLowercase);
+
+        }
+        internal static bool AreEqual(List<INGram> list1, List<INGram> list2)
+        {
+
+            if (list1 == null && list2 == null)
+                return true;
+
+            if (list1 == null || list2 == null)
+                return false;
+
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+                if (AreEqual(list1[i], list2[i]) == false)
+                    return false;
+
+            return true;
+
+        }
+        internal static bool AreEqual(LabeledExample obj1, LabeledExample obj2)
+        {
+
+            return (obj1.Id == obj2.Id)
+                    && string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && string.Equals(obj1.Text, obj2.Text, StringComparison.InvariantCulture)
+                    && AreEqual(obj1.TextAsNGrams, obj2.TextAsNGrams);
+
+        }
 
     }
 }
@@ -200,6 +253,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 17.01.2021
+    Last Update: 19.01.2021
 
 */

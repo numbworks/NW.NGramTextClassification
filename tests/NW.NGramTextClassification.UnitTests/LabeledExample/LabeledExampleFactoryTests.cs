@@ -202,6 +202,28 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [Test]
+        public void Create_ShouldReturnALabeledExample_WhenPropertArguments()
+        {
+
+            // Arrange
+            // Act
+            LabeledExample actual 
+                = new LabeledExampleFactory()
+                            .Create(
+                                ObjectMother.LabeledExampleFactory_Id1,
+                                ObjectMother.LabeledExampleFactory_Label1,
+                                ObjectMother.LabeledExampleFactory_Text1
+                            );
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(
+                        ObjectMother.LabeledExampleFactory_LabeledExample1, 
+                        actual));
+
+        }
+
         // TearDown
         // Support methods
         private void Method_ShouldThrowACertainException_WhenUnproperArguments
