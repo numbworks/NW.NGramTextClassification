@@ -150,10 +150,12 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string LabeledExampleFactory_Text1_TrigramValue8 = "driven developers to";
         internal static string LabeledExampleFactory_Text1_TrigramValue9 = "developers to join";
         internal static string LabeledExampleFactory_Text1_TrigramValue10 = "to join our";
-        internal static string LabeledExampleFactory_Text1_TrigramValue11 = "our team";
-        internal static string LabeledExampleFactory_Text1_TrigramValue12 = "team";
+        internal static string LabeledExampleFactory_Text1_TrigramValue11 = "join our team";
+        internal static string LabeledExampleFactory_Text1_TrigramValue12 = "our team";
+        internal static string LabeledExampleFactory_Text1_TrigramValue13 = "team";
         internal static List<INGram> LabeledExampleFactory_Text1_NGrams1
             = new List<INGram>() {
+
                 new Monogram(LabeledExampleFactory_Text1_MonogramValue1),
                 new Monogram(LabeledExampleFactory_Text1_MonogramValue2),
                 new Monogram(LabeledExampleFactory_Text1_MonogramValue3),
@@ -191,7 +193,8 @@ namespace NW.NGramTextClassification.UnitTests
                 new Trigram(LabeledExampleFactory_Text1_TrigramValue9),
                 new Trigram(LabeledExampleFactory_Text1_TrigramValue10),
                 new Trigram(LabeledExampleFactory_Text1_TrigramValue11),
-                new Trigram(LabeledExampleFactory_Text1_TrigramValue12)
+                new Trigram(LabeledExampleFactory_Text1_TrigramValue12),
+                new Trigram(LabeledExampleFactory_Text1_TrigramValue13)
 
             };
         internal static LabeledExample LabeledExampleFactory_LabeledExample1

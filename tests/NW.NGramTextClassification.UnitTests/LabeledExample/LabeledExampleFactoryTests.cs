@@ -219,7 +219,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsTrue(
                     ObjectMother.AreEqual(
-                        ObjectMother.LabeledExampleFactory_LabeledExample1, 
+                        ObjectMother.LabeledExampleFactory_LabeledExample1,
                         actual));
 
         }
