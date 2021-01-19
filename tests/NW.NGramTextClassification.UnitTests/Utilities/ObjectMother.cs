@@ -113,8 +113,6 @@ namespace NW.NGramTextClassification.UnitTests
                 LabeledExampleFactory_Tuple1,
                 LabeledExampleFactory_Tuple2
             };
-
-        // "We are looking for several skilled and driven developers to join our team."
         internal static string LabeledExampleFactory_Text1_MonogramValue1 = LabeledExample_Text1_MonogramValue1;
         internal static string LabeledExampleFactory_Text1_MonogramValue2 = "are";
         internal static string LabeledExampleFactory_Text1_MonogramValue3 = "looking";
@@ -204,8 +202,6 @@ namespace NW.NGramTextClassification.UnitTests
                         LabeledExampleFactory_Label1,
                         LabeledExampleFactory_Text1,
                         LabeledExampleFactory_Text1_NGrams);
-
-        // "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö."
         internal static string LabeledExampleFactory_Text2_MonogramValue1 = "vår";
         internal static string LabeledExampleFactory_Text2_MonogramValue2 = "kund";
         internal static string LabeledExampleFactory_Text2_MonogramValue3 = "erbjuder";
@@ -277,7 +273,6 @@ namespace NW.NGramTextClassification.UnitTests
                     LabeledExampleFactory_LabeledExample1,
                     LabeledExampleFactory_LabeledExample2
                 };
-
 
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
