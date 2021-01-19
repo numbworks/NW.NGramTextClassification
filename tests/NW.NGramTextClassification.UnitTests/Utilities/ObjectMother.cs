@@ -100,6 +100,7 @@ namespace NW.NGramTextClassification.UnitTests
         internal static ulong LabeledExampleFactory_Id1 = LabeledExample_Id1;
         internal static string LabeledExampleFactory_Label1 = LabeledExample_Label1;
         internal static string LabeledExampleFactory_LabelOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
+        internal static ulong LabeledExampleFactory_Id2 = 2;
         internal static string LabeledExampleFactory_Label2 = "sv";
         internal static string LabeledExampleFactory_Text1 = LabeledExample_Text1;
         internal static string LabeledExampleFactory_TextOnlyWhiteSpaces = LabeledExample_TextOnlyWhiteSpaces;
@@ -153,7 +154,7 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string LabeledExampleFactory_Text1_TrigramValue11 = "join our team";
         internal static string LabeledExampleFactory_Text1_TrigramValue12 = "our team";
         internal static string LabeledExampleFactory_Text1_TrigramValue13 = "team";
-        internal static List<INGram> LabeledExampleFactory_Text1_NGrams1
+        internal static List<INGram> LabeledExampleFactory_Text1_NGrams
             = new List<INGram>() {
 
                 new Monogram(LabeledExampleFactory_Text1_MonogramValue1),
@@ -202,7 +203,81 @@ namespace NW.NGramTextClassification.UnitTests
                         LabeledExampleFactory_Id1,
                         LabeledExampleFactory_Label1,
                         LabeledExampleFactory_Text1,
-                        LabeledExampleFactory_Text1_NGrams1);
+                        LabeledExampleFactory_Text1_NGrams);
+
+        // "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö."
+        internal static string LabeledExampleFactory_Text2_MonogramValue1 = "vår";
+        internal static string LabeledExampleFactory_Text2_MonogramValue2 = "kund";
+        internal static string LabeledExampleFactory_Text2_MonogramValue3 = "erbjuder";
+        internal static string LabeledExampleFactory_Text2_MonogramValue4 = "trivsel";
+        internal static string LabeledExampleFactory_Text2_MonogramValue5 = "arbetsglädje";
+        internal static string LabeledExampleFactory_Text2_MonogramValue6 = "och";
+        internal static string LabeledExampleFactory_Text2_MonogramValue7 = "en";
+        internal static string LabeledExampleFactory_Text2_MonogramValue8 = "trygg";
+        internal static string LabeledExampleFactory_Text2_MonogramValue9 = "arbetsmiljö";
+        internal static string LabeledExampleFactory_Text2_BigramValue1 = "vår kund";
+        internal static string LabeledExampleFactory_Text2_BigramValue2 = "kund erbjuder";
+        internal static string LabeledExampleFactory_Text2_BigramValue3 = "erbjuder trivsel";
+        internal static string LabeledExampleFactory_Text2_BigramValue4 = "trivsel arbetsglädje";
+        internal static string LabeledExampleFactory_Text2_BigramValue5 = "arbetsglädje och";
+        internal static string LabeledExampleFactory_Text2_BigramValue6 = "och en";
+        internal static string LabeledExampleFactory_Text2_BigramValue7 = "en trygg";
+        internal static string LabeledExampleFactory_Text2_BigramValue8 = "trygg arbetsmiljö";
+        internal static string LabeledExampleFactory_Text2_BigramValue9 = "arbetsmiljö";
+        internal static string LabeledExampleFactory_Text2_TrigramValue1 = "vår kund erbjuder";
+        internal static string LabeledExampleFactory_Text2_TrigramValue2 = "kund erbjuder trivsel";
+        internal static string LabeledExampleFactory_Text2_TrigramValue3 = "erbjuder trivsel arbetsglädje";
+        internal static string LabeledExampleFactory_Text2_TrigramValue4 = "trivsel arbetsglädje och";
+        internal static string LabeledExampleFactory_Text2_TrigramValue5 = "arbetsglädje och en";
+        internal static string LabeledExampleFactory_Text2_TrigramValue6 = "och en trygg";
+        internal static string LabeledExampleFactory_Text2_TrigramValue7 = "en trygg arbetsmiljö";
+        internal static string LabeledExampleFactory_Text2_TrigramValue8 = "trygg arbetsmiljö";
+        internal static string LabeledExampleFactory_Text2_TrigramValue9 = "arbetsmiljö";
+        internal static List<INGram> LabeledExampleFactory_Text2_NGrams
+            = new List<INGram>() {
+
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue1),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue2),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue3),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue4),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue5),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue6),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue7),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue8),
+                new Monogram(LabeledExampleFactory_Text2_MonogramValue9),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue1),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue2),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue3),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue4),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue5),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue6),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue7),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue8),
+                new Bigram(LabeledExampleFactory_Text2_BigramValue9),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue1),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue2),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue3),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue4),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue5),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue6),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue7),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue8),
+                new Trigram(LabeledExampleFactory_Text2_TrigramValue9)
+
+            };
+        internal static LabeledExample LabeledExampleFactory_LabeledExample2
+            = new LabeledExample(
+                        LabeledExampleFactory_Id2,
+                        LabeledExampleFactory_Label2,
+                        LabeledExampleFactory_Text2,
+                        LabeledExampleFactory_Text2_NGrams);
+        internal static List<LabeledExample> LabeledExampleFactory_LabeledExamples
+            = new List<LabeledExample>()
+                {
+                    LabeledExampleFactory_LabeledExample1,
+                    LabeledExampleFactory_LabeledExample2
+                };
+
 
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
@@ -247,6 +322,25 @@ namespace NW.NGramTextClassification.UnitTests
                     && string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
                     && string.Equals(obj1.Text, obj2.Text, StringComparison.InvariantCulture)
                     && AreEqual(obj1.TextAsNGrams, obj2.TextAsNGrams);
+
+        }
+        internal static bool AreEqual(List<LabeledExample> list1, List<LabeledExample> list2)
+        {
+
+            if (list1 == null && list2 == null)
+                return true;
+
+            if (list1 == null || list2 == null)
+                return false;
+
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+                if (AreEqual(list1[i], list2[i]) == false)
+                    return false;
+
+            return true;
 
         }
 

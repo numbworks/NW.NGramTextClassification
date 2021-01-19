@@ -203,7 +203,7 @@ namespace NW.NGramTextClassification.UnitTests
                 => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void Create_ShouldReturnALabeledExample_WhenPropertArguments()
+        public void Create_ShouldReturnALabeledExample_WhenProperArguments()
         {
 
             // Arrange
@@ -220,6 +220,23 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsTrue(
                     ObjectMother.AreEqual(
                         ObjectMother.LabeledExampleFactory_LabeledExample1,
+                        actual));
+
+        }
+
+        [Test]
+        public void Create_ShouldReturnACollectionOfLabeledExamples_WhenProperArguments()
+        {
+
+            // Arrange
+            // Act
+            List<LabeledExample> actual
+                    = new LabeledExampleFactory().Create(ObjectMother.LabeledExampleFactory_Tuples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(
+                        ObjectMother.LabeledExampleFactory_LabeledExamples,
                         actual));
 
         }
@@ -244,6 +261,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 17.01.2021
+    Last Update: 19.01.2021
 
 */
