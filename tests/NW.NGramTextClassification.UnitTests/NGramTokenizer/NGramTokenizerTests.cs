@@ -25,29 +25,17 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(nGramTokenizerExceptionTestCases))]
         public void ANGram_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         // TearDown
         // Support methods
-        private void Method_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-        {
-
-            // Arrange
-            // Act
-            // Assert
-            Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
-
-        }
 
     }
 }
 
 /*
 
-    Author: rua@sitecore.net
-    Last Update: xx.xx.2019
+    Author: numbworks@gmail.com
+    Last Update: 20.01.2021
 
 */

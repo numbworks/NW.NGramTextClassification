@@ -151,11 +151,11 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(addDelimiterExceptionTestCases))]
         public void AddDelimiter_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
         [TestCaseSource(nameof(getSubsetExceptionTestCases))]
         public void GetSubset_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void AddDelimiter_ShouldAddADelimiterItemBetweenTheOtherItems_WhenProperArguments()
@@ -194,17 +194,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         // TearDown
         // Support methods
-        private void Method_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-        {
-
-            // Arrange
-            // Act
-            // Assert
-            Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
-
-        }
 
     }
 }

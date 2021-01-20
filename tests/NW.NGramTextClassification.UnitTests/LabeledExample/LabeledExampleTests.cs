@@ -106,7 +106,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(labeledExampleExceptionTestCases))]
         public void LabeledExample_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ToString_ShouldTruncateTextInACustomWay_WhenTruncateAfterTextIsProvided()
@@ -141,18 +141,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         // TearDown
         // Support methods
-        private void Method_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-        {
 
-            // Arrange
-            // Act
-            // Assert
-            Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
-
-
-        }
     }
 
 }

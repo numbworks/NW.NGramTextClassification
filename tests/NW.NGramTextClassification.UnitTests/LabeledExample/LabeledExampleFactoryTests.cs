@@ -196,11 +196,11 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(labeledExampleFactoryExceptionTestCases))]
         public void LabeledExampleFactory_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
         [TestCaseSource(nameof(createExceptionTestCases))]
         public void Create_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void Create_ShouldReturnALabeledExample_WhenProperArguments()
@@ -243,17 +243,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         // TearDown
         // Support methods
-        private void Method_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-        {
-
-            // Arrange
-            // Act
-            // Assert
-            Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
-
-        }
 
     }
 }

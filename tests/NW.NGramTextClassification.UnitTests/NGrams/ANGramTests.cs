@@ -54,21 +54,10 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(aNGramExceptionTestCases))]
         public void ANGram_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         // TearDown
         // Support methods
-        private void Method_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-        {
-
-            // Arrange
-            // Act
-            // Assert
-            Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
-
-        }
 
     }
 }

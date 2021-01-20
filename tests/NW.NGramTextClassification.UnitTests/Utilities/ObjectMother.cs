@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -346,6 +347,17 @@ namespace NW.NGramTextClassification.UnitTests
                     return false;
 
             return true;
+
+        }
+        internal static void Method_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+        {
+
+            // Arrange
+            // Act
+            // Assert
+            Exception actual = Assert.Throws(expectedType, del);
+            Assert.AreEqual(expectedMessage, actual.Message);
 
         }
 
