@@ -47,6 +47,8 @@ namespace NW.NGramTextClassification
         }
         public List<INGram> Do(string text, ITokenizationStrategy strategy)
             => Do(text, strategy, new NGramTokenizerRuleSet());
+        public List<INGram> Do(string text, INGramsTokenizerRuleSet ruleSet)
+            => Do(text, new TokenizationStrategy(), ruleSet);
         public List<INGram> Do(string text)
             => Do(text, new TokenizationStrategy(), new NGramTokenizerRuleSet());
 

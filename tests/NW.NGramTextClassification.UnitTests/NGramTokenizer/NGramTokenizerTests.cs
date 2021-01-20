@@ -68,7 +68,7 @@ namespace NW.NGramTextClassification.UnitTests
                         )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.NGramTokenizer_VariableName_RuleSet).Message
-                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_05")
+                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_05"),
 
         };
 
@@ -100,6 +100,10 @@ namespace NW.NGramTextClassification.UnitTests
                                             new TokenizationStrategy());
             List<INGram> actual3 = new NGramTokenizer()
                                         .Do(
+                                            ObjectMother.NGramTokenizer_Text1,
+                                            new NGramTokenizerRuleSet());
+            List<INGram> actual4 = new NGramTokenizer()
+                                        .Do(
                                             ObjectMother.NGramTokenizer_Text1);
             
             // Assert
@@ -115,6 +119,10 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.AreEqual(
                         ObjectMother.NGramTokenizer_Text1_NGrams,
                         actual3));
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(
+                        ObjectMother.NGramTokenizer_Text1_NGrams,
+                        actual4));
 
         }
 

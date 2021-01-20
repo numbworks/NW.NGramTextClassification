@@ -6,6 +6,7 @@ namespace NW.NGramTextClassification
     {
         List<INGram> Do(string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet);
         List<INGram> Do(string text, ITokenizationStrategy strategy);
+        List<INGram> Do(string text, INGramsTokenizerRuleSet ruleSet);
         List<INGram> Do(string text);
     }
 }
