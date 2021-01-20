@@ -284,6 +284,12 @@ namespace NW.NGramTextClassification.UnitTests
 
         // NGramTokenizer
         internal static string NGramTokenizer_VariableName_ArrayManager = "arrayManager";
+        internal static string NGramTokenizer_VariableName_Text = LabeledExampleFactory_VariableName_Text;
+        internal static string NGramTokenizer_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
+        internal static string NGramTokenizer_VariableName_RuleSet = LabeledExampleFactory_VariableName_RuleSet;
+        internal static string NGramTokenizer_Text1 = LabeledExample_Text1;
+        internal static string NGramTokenizer_TextOnlyWhiteSpaces = LabeledExample_TextOnlyWhiteSpaces;
+        internal static List<INGram> NGramTokenizer_Text1_NGrams = LabeledExampleFactory_Text1_NGrams;
 
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
