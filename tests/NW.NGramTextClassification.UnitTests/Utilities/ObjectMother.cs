@@ -281,6 +281,9 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string ANGram_FakeGramValue1 = LabeledExampleFactory_Text1_MonogramValue1;
         internal static string ANGram_FakeGramValueOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
 
+        // NGramTokenizer
+        internal static string NGramTokenizer_VariableName_ArrayManager = "arrayManager";
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {
