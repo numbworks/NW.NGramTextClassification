@@ -274,6 +274,13 @@ namespace NW.NGramTextClassification.UnitTests
                     LabeledExampleFactory_LabeledExample2
                 };
 
+        // ANGram
+        internal static string ANGram_VariableName_N = "n";
+        internal static string ANGram_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
+        internal static string ANGram_VariableName_Value = "value";
+        internal static string ANGram_FakeGramValue1 = LabeledExampleFactory_Text1_MonogramValue1;
+        internal static string ANGram_FakeGramValueOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {
