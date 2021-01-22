@@ -301,6 +301,29 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TokenizationStrategy_ToString
             = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
 
+        // TextClassifierResult
+        internal static SimilarityIndex TextClassifierResult_SimilarityIndex1 = new SimilarityIndex(1, "en", 0.23);
+        internal static SimilarityIndex TextClassifierResult_SimilarityIndex2 = new SimilarityIndex(2, "en", 0.76);
+        internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
+            = new List<SimilarityIndex>()
+                {
+                    TextClassifierResult_SimilarityIndex1,
+                    TextClassifierResult_SimilarityIndex2
+                };
+        internal static SimilarityIndexAverage TextClassifierResult_SimilarityIndexAgerage1 = new SimilarityIndexAverage("en", 0.54);
+        internal static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
+            = new List<SimilarityIndexAverage>()
+                {
+                    TextClassifierResult_SimilarityIndexAgerage1
+                };
+        internal static string TextClassifierResult_Label1 = LabeledExample_Label1;
+        internal static string TextClassifierResult_ToString1
+            = $"[ Label: '{TextClassifierResult_Label1}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count.ToString()}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count.ToString()}' ]";
+        internal static string TextClassifierResult_ToString1WithNullLabel
+            = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count.ToString()}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count.ToString()}' ]";
+        internal static string TextClassifierResult_VariableName_Indexes = "indexes";
+        internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {
