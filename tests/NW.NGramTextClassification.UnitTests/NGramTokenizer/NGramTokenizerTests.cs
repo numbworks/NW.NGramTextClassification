@@ -70,6 +70,18 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException(ObjectMother.NGramTokenizer_VariableName_RuleSet).Message
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_05"),
 
+            // DoFor<T>
+            new TestCaseData(
+                new TestDelegate(
+                            () => new NGramTokenizer()
+                                        .Do(
+                                            ObjectMother.NGramTokenizer_TextNonAlphanumerical,
+                                            new NGramTokenizerRuleSet(true, false, false))
+                        ),
+                typeof(Exception),
+                MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(new TokenizationStrategy())
+                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06")
+
         };
 
         // SetUp
