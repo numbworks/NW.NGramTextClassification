@@ -241,6 +241,23 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void LabeledExampleFactory_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        {
+
+            // Arrange
+            // Act
+            LabeledExampleFactory actual
+                = new LabeledExampleFactory(
+                        new NGramTokenizer(),
+                        LabeledExampleFactory.DefaultInitialId
+                    );
+
+            // Assert
+            Assert.IsInstanceOf<LabeledExampleFactory>(actual);
+
+        }
+
         // TearDown
         // Support methods
 
