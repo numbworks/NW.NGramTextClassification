@@ -295,6 +295,12 @@ namespace NW.NGramTextClassification.UnitTests
         // NGramTokenizerRuleSet
         internal static string NGramTokenizerRuleSet_ToString = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True' ]";
 
+        // TokenizationStrategy
+        internal static string TokenizationStrategy_VariableName_Pattern = "pattern";
+        internal static string TokenizationStrategy_VariableName_Delimiter = "delimiter";
+        internal static string TokenizationStrategy_ToString
+            = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {
