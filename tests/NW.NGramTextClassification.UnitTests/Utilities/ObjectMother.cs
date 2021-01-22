@@ -292,6 +292,9 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string NGramTokenizer_TextNonAlphanumerical = ";;;-- £/£&$£";
         internal static List<INGram> NGramTokenizer_Text1_NGrams = LabeledExampleFactory_Text1_NGrams;
 
+        // NGramTokenizerRuleSet
+        internal static string NGramTokenizerRuleSet_ToString = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True' ]";
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {
