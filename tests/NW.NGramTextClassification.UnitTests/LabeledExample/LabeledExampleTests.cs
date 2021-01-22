@@ -139,6 +139,25 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void LabeledExample_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        {
+
+            // Arrange
+            // Act
+            LabeledExample actual
+                = new LabeledExample(
+                        ObjectMother.LabeledExample_Id1,
+                        ObjectMother.LabeledExample_Label1,
+                        ObjectMother.LabeledExample_Text1,
+                        ObjectMother.LabeledExample_TextAsNGrams1
+                    );
+
+            // Assert
+            Assert.IsInstanceOf<LabeledExample>(actual);
+
+        }
+
         // TearDown
         // Support methods
 
