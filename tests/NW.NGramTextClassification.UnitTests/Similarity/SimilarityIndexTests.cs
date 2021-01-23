@@ -62,19 +62,17 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            string actual = ObjectMother.SimilarityIndex1.ToString();
-
             // Assert
             Assert.IsTrue(
                 string.Equals(
                     ObjectMother.SimilarityIndex_ToString1,
-                    actual,
+                    ObjectMother.SimilarityIndex1.ToString(),
                     StringComparison.InvariantCulture));
 
         }
 
         [TestCaseSource(nameof(similarityIndexExceptionTestCases))]
-        public void TextClassifierResult_ShouldThrowACertainException_WhenUnproperArguments
+        public void SimilarityIndex_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 

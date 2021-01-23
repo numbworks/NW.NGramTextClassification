@@ -317,6 +317,16 @@ namespace NW.NGramTextClassification.UnitTests
             = $"[ Id: '{SimilarityIndex_Id1.ToString()}', Label: '{SimilarityIndex_Label1}', Value: '{SimilarityIndex_Value1.ToString()}' ]";
         internal static string SimilarityIndex_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
 
+        // SimilarityIndexAverage
+        internal static string SimilarityIndexAverage_Label1 = "en";
+        internal static double SimilarityIndexAverage_Value1 = 0.54;
+        internal static SimilarityIndexAverage SimilarityIndexAverage1 
+            = new SimilarityIndexAverage(SimilarityIndexAverage_Label1, SimilarityIndexAverage_Value1);
+        internal static string SimilarityIndexAverage_VariableName_Label = "label";
+        internal static string SimilarityIndexAverage_ToString1
+            = $"[ Label: '{SimilarityIndexAverage_Label1}', Value: '{SimilarityIndexAverage_Value1.ToString()}' ]";
+        internal static string SimilarityIndexAverage_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
+
         // TextClassifierResult
         internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
             = new List<SimilarityIndex>()
@@ -324,11 +334,10 @@ namespace NW.NGramTextClassification.UnitTests
                     SimilarityIndex1,
                     SimilarityIndex2
                 };
-        internal static SimilarityIndexAverage TextClassifierResult_SimilarityIndexAgerage1 = new SimilarityIndexAverage("en", 0.54);
         internal static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
             = new List<SimilarityIndexAverage>()
                 {
-                    TextClassifierResult_SimilarityIndexAgerage1
+                    SimilarityIndexAverage1
                 };
         internal static string TextClassifierResult_Label1 = LabeledExample_Label1;
         internal static string TextClassifierResult_ToString1
