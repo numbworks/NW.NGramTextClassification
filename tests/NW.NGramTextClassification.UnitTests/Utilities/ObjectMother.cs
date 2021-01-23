@@ -301,14 +301,28 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TokenizationStrategy_ToString
             = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
 
+        // SimilarityIndex
+        internal static string SimilarityIndex_VariableName_Label = "label";
+        internal static ulong SimilarityIndex_Id1 = 1;
+        internal static string SimilarityIndex_Label1 = "en";
+        internal static double SimilarityIndex_Value1 = 0.23;
+        internal static ulong SimilarityIndex_Id2 = 2;
+        internal static string SimilarityIndex_Label2 = "sv";
+        internal static double SimilarityIndex_Value2 = 0.76;
+        internal static SimilarityIndex SimilarityIndex1 
+            = new SimilarityIndex(SimilarityIndex_Id1, SimilarityIndex_Label1, SimilarityIndex_Value1);
+        internal static SimilarityIndex SimilarityIndex2
+            = new SimilarityIndex(SimilarityIndex_Id2, SimilarityIndex_Label2, SimilarityIndex_Value2);
+        internal static string SimilarityIndex_ToString1
+            = $"[ Id: '{SimilarityIndex_Id1.ToString()}', Label: '{SimilarityIndex_Label1}', Value: '{SimilarityIndex_Value1.ToString()}' ]";
+        internal static string SimilarityIndex_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
+
         // TextClassifierResult
-        internal static SimilarityIndex TextClassifierResult_SimilarityIndex1 = new SimilarityIndex(1, "en", 0.23);
-        internal static SimilarityIndex TextClassifierResult_SimilarityIndex2 = new SimilarityIndex(2, "en", 0.76);
         internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
             = new List<SimilarityIndex>()
                 {
-                    TextClassifierResult_SimilarityIndex1,
-                    TextClassifierResult_SimilarityIndex2
+                    SimilarityIndex1,
+                    SimilarityIndex2
                 };
         internal static SimilarityIndexAverage TextClassifierResult_SimilarityIndexAgerage1 = new SimilarityIndexAverage("en", 0.54);
         internal static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
