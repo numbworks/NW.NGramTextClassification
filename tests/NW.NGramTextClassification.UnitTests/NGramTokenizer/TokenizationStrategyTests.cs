@@ -81,6 +81,27 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void TokenizationStrategy_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        {
+
+            // Arrange
+            // Act
+            TokenizationStrategy actual1
+                = new TokenizationStrategy(
+                        TokenizationStrategy.DefaultPattern,
+                        TokenizationStrategy.DefaultDelimiter,
+                        TokenizationStrategy.DefaultToLowercase
+                    );
+            TokenizationStrategy actual2
+                = new TokenizationStrategy();
+
+            // Assert
+            Assert.IsInstanceOf<TokenizationStrategy>(actual1);
+            Assert.IsInstanceOf<TokenizationStrategy>(actual2);
+
+        }
+
         // TearDown
         // Support methods
 
