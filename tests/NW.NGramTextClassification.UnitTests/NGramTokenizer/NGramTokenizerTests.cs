@@ -138,6 +138,25 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void NGramTokenizer_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        {
+
+            // Arrange
+            // Act
+            NGramTokenizer actual1
+                = new NGramTokenizer(
+                        new ArrayManager()
+                    );
+            NGramTokenizer actual2
+                = new NGramTokenizer();
+
+            // Assert
+            Assert.IsInstanceOf<NGramTokenizer>(actual1);
+            Assert.IsInstanceOf<NGramTokenizer>(actual2);
+
+        }
+
         // TearDown
         // Support methods
 
