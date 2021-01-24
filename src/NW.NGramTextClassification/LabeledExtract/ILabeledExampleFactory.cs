@@ -6,10 +6,10 @@ namespace NW.NGramTextClassification
     {
         List<LabeledExample> Create(List<(string label, string text)> tuples);
         List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy);
-        List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet);
+        List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet);
         LabeledExample Create(ulong id, string label, string text);
         LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy);
-        LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet);
+        LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet);
     }
 }
 

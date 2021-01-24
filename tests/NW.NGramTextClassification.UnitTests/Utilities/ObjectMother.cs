@@ -362,6 +362,55 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifierResult_VariableName_Indexes = "indexes";
         internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
 
+        // SimilarityIndexCalculatorJaccard
+        internal static string SimilarityIndexCalculatorJaccard_VariableName_List1 = "list1";
+        internal static string SimilarityIndexCalculatorJaccard_VariableName_List2 = "list2";
+        internal static string SimilarityIndexCalculatorJaccard_VariableName_RoundingFunction = "roundingFunction";
+        internal static List<INGram> SimilarityIndexCalculatorJaccard_List1 = LabeledExampleFactory_Text1_NGrams;
+        internal static List<INGram> SimilarityIndexCalculatorJaccard_List2 = LabeledExampleFactory_Text2_NGrams;
+
+        // TextClassifier
+        internal static string TextClassifier_VariableName_Components = "components";
+        internal static string TextClassifier_VariableName_Settings = "settings";
+        internal static string TextClassifier_VariableName_Text = "text";
+        internal static string TextClassifier_VariableName_Strategy = "strategy";
+        internal static string TextClassifier_VariableName_RuleSet = "ruleSet";
+        internal static string TextClassifier_VariableName_LabeledExamples = "labeledExamples";
+        internal static string TextClassifier_Text1 = LabeledExample_Text1;
+        internal static string TextClassifier_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
+        internal static List<LabeledExample> TextClassifier_LabeledExamples = LabeledExampleFactory_LabeledExamples;
+        internal static string TextClassifier_Text1_Label = "en";
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 1);
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
+        internal static List<SimilarityIndex> TextClassifier_Text1_SimilarityIndexes
+            = new List<SimilarityIndex>()
+            {
+                TextClassifier_Text1_SimilarityIndex1,
+                TextClassifier_Text1_SimilarityIndex2
+            };
+        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage1
+            = new SimilarityIndexAverage("en", 1);
+        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage2
+            = new SimilarityIndexAverage("sv", 0);
+        internal static List<SimilarityIndexAverage> TextClassifier_Text1_SimilarityIndexAverages
+            = new List<SimilarityIndexAverage>()
+            {
+                TextClassifier_Text1_SimilarityIndexAverage1,
+                TextClassifier_Text1_SimilarityIndexAverage2
+            };
+        internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult1
+            = new TextClassifierResult(
+                        TextClassifier_Text1_Label,
+                        TextClassifier_Text1_SimilarityIndexes,
+                        TextClassifier_Text1_SimilarityIndexAverages);
+        internal static List<INGram> TextClassifier_Text1_NGrams = LabeledExampleFactory_Text1_NGrams;
+        internal static List<string> TextClassifier_Text1_UniqueLabels
+            = new List<string>()
+            {
+                TextClassifier_Text1_SimilarityIndex1.Label,
+                TextClassifier_Text1_SimilarityIndex2.Label,
+            };
+
         // Methods
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)
         {
@@ -408,6 +457,67 @@ namespace NW.NGramTextClassification.UnitTests
                     return false;
 
             return true;
+
+        }
+        internal static bool AreEqual(SimilarityIndex obj1, SimilarityIndex obj2)
+        {
+
+            return (obj1.Id== obj2.Id)
+                    && string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && (obj1.Value == obj2.Value);
+
+        }
+        internal static bool AreEqual(List<SimilarityIndex> list1, List<SimilarityIndex> list2)
+        {
+
+            if (list1 == null && list2 == null)
+                return true;
+
+            if (list1 == null || list2 == null)
+                return false;
+
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+                if (AreEqual(list1[i], list2[i]) == false)
+                    return false;
+
+            return true;
+
+        }
+        internal static bool AreEqual(SimilarityIndexAverage obj1, SimilarityIndexAverage obj2)
+        {
+
+            return string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && (obj1.Value == obj2.Value);
+
+        }
+        internal static bool AreEqual(List<SimilarityIndexAverage> list1, List<SimilarityIndexAverage> list2)
+        {
+
+            if (list1 == null && list2 == null)
+                return true;
+
+            if (list1 == null || list2 == null)
+                return false;
+
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+                if (AreEqual(list1[i], list2[i]) == false)
+                    return false;
+
+            return true;
+
+        }
+        internal static bool AreEqual(TextClassifierResult obj1, TextClassifierResult obj2)
+        {
+
+            return string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && AreEqual(obj1.SimilarityIndexAverages, obj2.SimilarityIndexAverages)
+                    && AreEqual(obj1.SimilarityIndexes, obj2.SimilarityIndexes);
 
         }
         internal static void Method_ShouldThrowACertainException_WhenUnproperArguments

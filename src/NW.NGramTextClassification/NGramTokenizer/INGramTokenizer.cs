@@ -4,9 +4,9 @@ namespace NW.NGramTextClassification
 {
     public interface INGramTokenizer
     {
-        List<INGram> Do(string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet);
+        List<INGram> Do(string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet);
         List<INGram> Do(string text, ITokenizationStrategy strategy);
-        List<INGram> Do(string text, INGramsTokenizerRuleSet ruleSet);
+        List<INGram> Do(string text, INGramTokenizerRuleSet ruleSet);
         List<INGram> Do(string text);
     }
 }

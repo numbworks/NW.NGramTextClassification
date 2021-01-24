@@ -30,8 +30,8 @@ namespace NW.NGramTextClassification
                   new TextClassifierSettings()) { }
 
         // Methods
-        public TextClassifierResult Predict
-            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierResult PredictLabel
+            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -69,12 +69,12 @@ namespace NW.NGramTextClassification
             return result;
 
         }
-        public TextClassifierResult Predict
-            (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
-                => Predict(text, new TokenizationStrategy(), ruleSet, labeledExamples);
+        public TextClassifierResult PredictLabel
+            (string text, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+                => PredictLabel(text, new TokenizationStrategy(), ruleSet, labeledExamples);
         public TextClassifierResult PredictLabel
             (string text, List<LabeledExample> labeledExamples)
-                => Predict(text, new NGramTokenizerRuleSet(), labeledExamples);
+                => PredictLabel(text, new NGramTokenizerRuleSet(), labeledExamples);
 
         // Methods (private)
         private List<SimilarityIndex> GetSimilarityIndexes

@@ -30,8 +30,8 @@ namespace NW.NGramTextClassification
             (nGrams) => $"The provided text has been tokenized into '{nGrams.Count.ToString()}' {nameof(INGram)} object.";
         public static Func<ITokenizationStrategy, string> TheFollowingTokenizationStrategyWillBeUsed =
             (strategy) => $"The following '{nameof(ITokenizationStrategy)}' object will be used: '{strategy.ToString()}'.";
-        public static Func<INGramsTokenizerRuleSet, string> TheFollowingNGramsTokenizerRuleSetWillBeUsed =
-            (ruleset) => $"The following '{nameof(INGramsTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
+        public static Func<INGramTokenizerRuleSet, string> TheFollowingNGramsTokenizerRuleSetWillBeUsed =
+            (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
         public static string TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples =
             $"The tokenized text has been successfully compared against the provided list of {nameof(LabeledExample)} objects.";
         public static Func<List<SimilarityIndex>, string> XSimilarityIndexObjectsHaveBeenComputed =

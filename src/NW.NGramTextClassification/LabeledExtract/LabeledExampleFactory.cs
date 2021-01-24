@@ -28,7 +28,7 @@ namespace NW.NGramTextClassification
 
         // Methods (public)
         public LabeledExample Create
-            (ulong id, string label, string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet)
+            (ulong id, string label, string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification
             => Create(id, label, text, new TokenizationStrategy());
 
         public List<LabeledExample> Create
-            (List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet)
+            (List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
         {
 
             Validator.ValidateList(tuples, nameof(tuples));

@@ -26,7 +26,7 @@ namespace NW.NGramTextClassification
 
         // Methods
         public List<INGram> Do
-            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet)
+            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -47,7 +47,7 @@ namespace NW.NGramTextClassification
         }
         public List<INGram> Do(string text, ITokenizationStrategy strategy)
             => Do(text, strategy, new NGramTokenizerRuleSet());
-        public List<INGram> Do(string text, INGramsTokenizerRuleSet ruleSet)
+        public List<INGram> Do(string text, INGramTokenizerRuleSet ruleSet)
             => Do(text, new TokenizationStrategy(), ruleSet);
         public List<INGram> Do(string text)
             => Do(text, new TokenizationStrategy(), new NGramTokenizerRuleSet());
