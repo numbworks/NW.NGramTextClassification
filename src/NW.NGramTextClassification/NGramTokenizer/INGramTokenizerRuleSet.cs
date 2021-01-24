@@ -1,6 +1,6 @@
 ﻿namespace NW.NGramTextClassification
 {
-    public interface INGramsTokenizerRuleSet
+    public interface INGramTokenizerRuleSet
     {
         bool DoForBigrams { get; }
         bool DoForMonograms { get; }

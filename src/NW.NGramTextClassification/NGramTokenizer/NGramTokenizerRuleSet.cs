@@ -1,6 +1,6 @@
 ﻿namespace NW.NGramTextClassification
 {
-    public class NGramTokenizerRuleSet : INGramsTokenizerRuleSet
+    public class NGramTokenizerRuleSet : INGramTokenizerRuleSet
     {
 
         // Fields

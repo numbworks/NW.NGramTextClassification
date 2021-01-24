@@ -388,6 +388,13 @@ namespace NW.NGramTextClassification.UnitTests
                         TextClassifier_Text1_Label,
                         TextClassifier_Text1_SimilarityIndexes,
                         TextClassifier_Text1_SimilarityIndexAverages);
+        internal static List<INGram> TextClassifier_Text1_NGrams = LabeledExampleFactory_Text1_NGrams;
+        internal static List<string> TextClassifier_Text1_UniqueLabels
+            = new List<string>()
+            {
+                TextClassifier_Text1_SimilarityIndex1.Label,
+                TextClassifier_Text1_SimilarityIndex2.Label,
+            };
 
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)

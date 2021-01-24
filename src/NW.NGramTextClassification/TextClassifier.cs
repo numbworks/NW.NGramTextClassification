@@ -31,7 +31,7 @@ namespace NW.NGramTextClassification
 
         // Methods
         public TextClassifierResult PredictLabel
-            (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -70,7 +70,7 @@ namespace NW.NGramTextClassification
 
         }
         public TextClassifierResult PredictLabel
-            (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+            (string text, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
                 => PredictLabel(text, new TokenizationStrategy(), ruleSet, labeledExamples);
         public TextClassifierResult PredictLabel
             (string text, List<LabeledExample> labeledExamples)
