@@ -279,8 +279,19 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string ANGram_VariableName_N = "n";
         internal static string ANGram_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
         internal static string ANGram_VariableName_Value = "value";
-        internal static string ANGram_FakeGramValue1 = LabeledExampleFactory_Text1_MonogramValue1;
-        internal static string ANGram_FakeGramValueOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
+        internal static ushort ANGram_FakeGram1_N = 1;
+        internal static string ANGram_FakeGram1_Value = LabeledExampleFactory_Text1_MonogramValue1;
+        internal static string ANGram_FakeGram_ValueOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
+        internal static ushort ANGram_FakeGram2_N = 1;
+        internal static string ANGram_FakeGram2_Value = LabeledExampleFactory_Text1_MonogramValue2;
+        internal static TokenizationStrategy ANGram_TokenizationStrategyDefault = new TokenizationStrategy();
+        internal static FakeGram ANGram_FakeGram1 
+            = new FakeGram(ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value);
+        internal static FakeGram ANGram_FakeGram2 
+            = new FakeGram(ANGram_FakeGram2_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram2_Value);
+        internal static TokenizationStrategy ANGram_TokenizationStrategyCustom = new TokenizationStrategy("[a-Z]", ";", false);
+        internal static int ANGram_FakeGram1_HashCode
+            = (ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value).GetHashCode();
 
         // NGramTokenizer
         internal static string NGramTokenizer_VariableName_ArrayManager = "arrayManager";

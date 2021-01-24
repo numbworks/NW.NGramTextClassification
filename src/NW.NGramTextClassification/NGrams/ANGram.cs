@@ -66,6 +66,6 @@ namespace NW.NGramTextClassification
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
+    Last Update: 24.01.2020
 
 */
