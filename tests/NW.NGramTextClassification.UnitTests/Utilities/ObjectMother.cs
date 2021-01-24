@@ -363,22 +363,6 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
 
         // Methods
-        internal static bool AreEqual(INGram obj1, INGram obj2)
-        {
-
-            return (obj1.N == obj2.N)
-                    && AreEqual(obj1.Strategy, obj2.Strategy)
-                    && string.Equals(obj1.Value, obj2.Value, StringComparison.InvariantCulture);
-
-        }
-        internal static bool AreEqual(ITokenizationStrategy obj1, ITokenizationStrategy obj2)
-        {
-
-            return string.Equals(obj1.Delimiter, obj2.Delimiter, StringComparison.InvariantCulture)
-                    && string.Equals(obj1.Pattern, obj2.Pattern, StringComparison.InvariantCulture)
-                    && (obj1.ToLowercase == obj2.ToLowercase);
-
-        }
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)
         {
 
@@ -392,7 +376,7 @@ namespace NW.NGramTextClassification.UnitTests
                 return false;
 
             for (int i = 0; i < list1.Count; i++)
-                if (AreEqual(list1[i], list2[i]) == false)
+                if (list1[i].Equals(list2[i]) == false)
                     return false;
 
             return true;
