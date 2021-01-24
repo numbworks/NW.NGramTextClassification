@@ -4,9 +4,9 @@ namespace NW.NGramTextClassification
 {
     public interface ITextClassifier
     {
-        TextClassifierResult Predict
+        TextClassifierResult PredictLabel
             (string text, ITokenizationStrategy strategy, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples);
-        TextClassifierResult Predict
+        TextClassifierResult PredictLabel
             (string text, INGramsTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples);
         TextClassifierResult PredictLabel
             (string text, List<LabeledExample> labeledExamples);

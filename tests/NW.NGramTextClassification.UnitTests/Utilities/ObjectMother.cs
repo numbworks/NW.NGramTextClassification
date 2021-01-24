@@ -362,6 +362,7 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifier_VariableName_RuleSet = "ruleSet";
         internal static string TextClassifier_VariableName_LabeledExamples = "labeledExamples";
         internal static string TextClassifier_Text1 = LabeledExample_Text1;
+        internal static string TextClassifier_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
         internal static List<LabeledExample> TextClassifier_LabeledExamples = LabeledExampleFactory_LabeledExamples;
         internal static string TextClassifier_Text1_Label = "en";
         internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 0.45);
