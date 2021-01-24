@@ -127,6 +127,19 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [Test]
+        public void TextClassifier_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        {
+
+            // Arrange
+            // Act
+            TextClassifier actual = new TextClassifier();
+
+            // Assert
+            Assert.IsInstanceOf<TextClassifier>(actual);
+
+        }
+
         // TearDown
         // Support methods
 
