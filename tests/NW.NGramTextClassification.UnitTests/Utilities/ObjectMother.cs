@@ -311,6 +311,10 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TokenizationStrategy_VariableName_Delimiter = "delimiter";
         internal static string TokenizationStrategy_ToString
             = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
+        internal static TokenizationStrategy TokenizationStrategy_Default = ANGram_TokenizationStrategyDefault;
+        internal static TokenizationStrategy TokenizationStrategy_Custom = ANGram_TokenizationStrategyCustom;
+        internal static int TokenizationStrategy_DefaultHashCode
+            = (TokenizationStrategy.DefaultPattern, TokenizationStrategy.DefaultDelimiter, TokenizationStrategy.DefaultToLowercase).GetHashCode();
 
         // SimilarityIndex
         internal static string SimilarityIndex_VariableName_Label = "label";

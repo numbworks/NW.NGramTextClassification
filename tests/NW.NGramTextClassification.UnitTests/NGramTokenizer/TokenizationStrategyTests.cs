@@ -56,6 +56,33 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(tokenizationStrategyExceptionTestCases)}_04"),
 
         };
+        private static TestCaseData[] equalityMethodsTestCases = {
+
+            new TestCaseData(
+                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.TokenizationStrategy_Default,
+                    true
+                ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_01"),
+
+            new TestCaseData(
+                    ObjectMother.TokenizationStrategy_Default,
+                    new TokenizationStrategy(),
+                    true
+                ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
+
+            new TestCaseData(
+                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.TokenizationStrategy_Custom,
+                    false
+                ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
+
+            new TestCaseData(
+                    ObjectMother.TokenizationStrategy_Default,
+                    null,
+                    false
+                ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_04")
+
+        };
 
         // SetUp
         // Tests
@@ -102,6 +129,63 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [TestCaseSource(nameof(equalityMethodsTestCases))]
+        public void EqualsAndEqualityOperators_ShouldReturnTheExpectedBoolean_WhenInvoked
+            (TokenizationStrategy a, TokenizationStrategy b, bool expected)
+        {
+
+            // Arrange
+            // Act
+            bool actual1 = a.Equals(b);
+            bool actual2 = a == b;
+            bool actual3 = a != b;
+
+            // Assert
+            Assert.AreEqual(expected, actual1);
+            Assert.AreEqual(expected, actual2);
+            Assert.AreNotEqual(expected, actual3);
+
+        }
+
+        [Test]
+        public void Equals_ShouldReturnReturnFalse_WhenComparedWithAnObjectOfDifferentType()
+        {
+
+            // Arrange
+            // Act
+            bool actual = ObjectMother.TokenizationStrategy_Default.Equals("some_string");
+
+            // Assert
+            Assert.IsFalse(actual);
+
+        }
+
+        [Test]
+        public void EqualityOperator_ShouldReturnFalse_WhenLeftMemberIsNull()
+        {
+
+            // Arrange
+            // Act
+            bool actual = null == ObjectMother.TokenizationStrategy_Default;
+
+            // Assert
+            Assert.IsFalse(actual);
+
+        }
+
+        [Test]
+        public void GetHashCode_ShouldReturnExpectedHashCode_WhenInvoked()
+        {
+
+            // Arrange
+            // Act
+            int actual = ObjectMother.TokenizationStrategy_Default.GetHashCode();
+
+            // Assert
+            Assert.AreEqual(ObjectMother.TokenizationStrategy_DefaultHashCode, actual);
+
+        }
+
         // TearDown
         // Support methods
 
@@ -111,6 +195,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 22.01.2021
+    Last Update: 24.01.2021
 
 */
