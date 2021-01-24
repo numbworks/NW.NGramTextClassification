@@ -347,6 +347,13 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifierResult_VariableName_Indexes = "indexes";
         internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
 
+        // SimilarityIndexCalculatorJaccard
+        internal static string SimilarityIndexCalculatorJaccard_VariableName_List1 = "list1";
+        internal static string SimilarityIndexCalculatorJaccard_VariableName_List2 = "list2";
+        internal static string SimilarityIndexCalculatorJaccard_VariableName_RoundingFunction = "roundingFunction";
+        internal static List<INGram> SimilarityIndexCalculatorJaccard_List1 = LabeledExampleFactory_Text1_NGrams;
+        internal static List<INGram> SimilarityIndexCalculatorJaccard_List2 = LabeledExampleFactory_Text2_NGrams;
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {

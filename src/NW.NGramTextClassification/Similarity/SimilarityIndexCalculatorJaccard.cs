@@ -13,17 +13,17 @@ namespace NW.NGramTextClassification
         public SimilarityIndexCalculatorJaccard() { }
 
         // Methods
-        public double Do(List<INGram> list1, List<INGram> list2, Func<double, double> roundingStrategy)
+        public double Do(List<INGram> list1, List<INGram> list2, Func<double, double> roundingFunction)
         {
 
             Validator.ValidateList(list1, nameof(list1));
             Validator.ValidateList(list2, nameof(list2));
-            Validator.ValidateObject(roundingStrategy, nameof(roundingStrategy));
+            Validator.ValidateObject(roundingFunction, nameof(roundingFunction));
 
             return Do(
                     list1.Select(item => item.Value).ToList(),
                     list2.Select(item => item.Value).ToList(),
-                    roundingStrategy);
+                    roundingFunction);
 
         }
 
