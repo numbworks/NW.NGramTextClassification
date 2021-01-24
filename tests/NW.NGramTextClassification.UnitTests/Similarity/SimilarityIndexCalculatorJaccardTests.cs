@@ -76,6 +76,28 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_05")
 
         };
+        private static TestCaseData[] doTestCases =
+        {
+
+            new TestCaseData(
+                    ObjectMother.SimilarityIndexCalculatorJaccard_List1,
+                    ObjectMother.SimilarityIndexCalculatorJaccard_List1,
+                    1.00
+                ),
+
+            new TestCaseData(
+                    ObjectMother.SimilarityIndexCalculatorJaccard_List1,
+                    ObjectMother.SimilarityIndexCalculatorJaccard_List2,
+                    0.00
+                ),
+
+            new TestCaseData(
+                    ObjectMother.SimilarityIndexCalculatorJaccard_List1.GetRange(0, 2),
+                    ObjectMother.SimilarityIndexCalculatorJaccard_List1.GetRange(0, 4),
+                    0.50
+                )
+
+        };
 
         // SetUp
         // Tests
@@ -83,6 +105,22 @@ namespace NW.NGramTextClassification.UnitTests
         public void Do_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(doTestCases))]
+        public void Do_ShouldReturnTheExpectedValue_WhenProperArguments
+            (List<INGram> list1, List<INGram> list2, double expected)
+        {
+
+            // Arrange
+            // Act
+            double actual 
+                = new SimilarityIndexCalculatorJaccard()
+                        .Do(list1, list2, TextClassifierComponents.DefaultRoundingFunction);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+
+        }
 
         // TearDown
         // Support methods
