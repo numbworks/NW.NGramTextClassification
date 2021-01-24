@@ -365,7 +365,7 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifier_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
         internal static List<LabeledExample> TextClassifier_LabeledExamples = LabeledExampleFactory_LabeledExamples;
         internal static string TextClassifier_Text1_Label = "en";
-        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 0.45);
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 1);
         internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
         internal static List<SimilarityIndex> TextClassifier_Text1_SimilarityIndexes
             = new List<SimilarityIndex>()
@@ -374,11 +374,14 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text1_SimilarityIndex2
             };
         internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage1
-            = new SimilarityIndexAverage("en", 0.30);
+            = new SimilarityIndexAverage("en", 1);
+        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage2
+            = new SimilarityIndexAverage("sv", 0);
         internal static List<SimilarityIndexAverage> TextClassifier_Text1_SimilarityIndexAverages
             = new List<SimilarityIndexAverage>()
             {
-                TextClassifier_Text1_SimilarityIndexAverage1
+                TextClassifier_Text1_SimilarityIndexAverage1,
+                TextClassifier_Text1_SimilarityIndexAverage2
             };
         internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult1
             = new TextClassifierResult(

@@ -140,6 +140,27 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void PredictLabel_ShouldReturnTheExpectedTextClassifierResult_WhenProperArgument()
+        {
+
+            // Arrange
+            // Act
+            TextClassifierResult actual 
+                = new TextClassifier()
+                        .PredictLabel(
+                            ObjectMother.TextClassifier_Text1,
+                            ObjectMother.TextClassifier_LabeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(
+                        ObjectMother.TextClassifier_Text1_TextClassifierResult1,
+                        actual
+                        ));
+
+        }
+
         // TearDown
         // Support methods
 
