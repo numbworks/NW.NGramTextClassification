@@ -1,4 +1,6 @@
-﻿namespace NW.NGramTextClassification
+﻿using System;
+
+namespace NW.NGramTextClassification
 {
     public class TokenizationStrategy : ITokenizationStrategy
     {
@@ -42,6 +44,39 @@
             return $"[ {content} ]";
 
         }
+        public override int GetHashCode()
+            => (Pattern, Delimiter, ToLowercase).GetHashCode();
+        public override bool Equals(object obj)
+        {
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (GetType() != obj.GetType())
+                return false;
+
+            return string.Equals(Delimiter, ((TokenizationStrategy)obj).Delimiter, StringComparison.InvariantCulture)
+                    && string.Equals(Pattern, ((TokenizationStrategy)obj).Pattern, StringComparison.InvariantCulture)
+                    && (ToLowercase == ((TokenizationStrategy)obj).ToLowercase);
+
+        }
+        public static bool operator ==(TokenizationStrategy a, TokenizationStrategy b)
+        {
+
+            if (ReferenceEquals(a, b))
+                return true;
+
+            if (ReferenceEquals(a, null))
+                return false;
+
+            return a.Equals(b) && b.Equals(a);
+
+        }
+        public static bool operator !=(TokenizationStrategy a, TokenizationStrategy b)
+            => !(a == b);
 
         // Methods (private)
 

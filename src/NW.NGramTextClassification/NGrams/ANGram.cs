@@ -1,4 +1,6 @@
-﻿namespace NW.NGramTextClassification
+﻿using System;
+
+namespace NW.NGramTextClassification
 {
     public abstract class ANGram
     {
@@ -24,6 +26,39 @@
         }
 
         // Methods
+        public override int GetHashCode()
+            => (N, Strategy, Value).GetHashCode();
+        public override bool Equals(object obj)
+        {
+
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (ReferenceEquals(null, obj))
+                return false;
+
+            if (GetType() != obj.GetType())
+                return false;
+
+            return (N == ((ANGram)obj).N)
+                    && Strategy.Equals(((ANGram)obj).Strategy)
+                    && string.Equals(Value, ((ANGram)obj).Value, StringComparison.InvariantCulture);
+
+        }
+        public static bool operator ==(ANGram a, ANGram b)
+        {
+
+            if (ReferenceEquals(a, b))
+                return true;
+
+            if (ReferenceEquals(a, null))
+                return false;
+
+            return a.Equals(b) && b.Equals(a);
+
+        }
+        public static bool operator !=(ANGram a, ANGram b)
+            => !(a == b);
 
     }
 }
