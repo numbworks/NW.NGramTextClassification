@@ -354,6 +354,37 @@ namespace NW.NGramTextClassification.UnitTests
         internal static List<INGram> SimilarityIndexCalculatorJaccard_List1 = LabeledExampleFactory_Text1_NGrams;
         internal static List<INGram> SimilarityIndexCalculatorJaccard_List2 = LabeledExampleFactory_Text2_NGrams;
 
+        // TextClassifier
+        internal static string TextClassifier_VariableName_Components = "components";
+        internal static string TextClassifier_VariableName_Settings = "settings";
+        internal static string TextClassifier_VariableName_Text = "text";
+        internal static string TextClassifier_VariableName_Strategy = "strategy";
+        internal static string TextClassifier_VariableName_RuleSet = "ruleSet";
+        internal static string TextClassifier_VariableName_LabeledExamples = "labeledExamples";
+        internal static string TextClassifier_Text1 = LabeledExample_Text1;
+        internal static List<LabeledExample> TextClassifier_LabeledExamples = LabeledExampleFactory_LabeledExamples;
+        internal static string TextClassifier_Text1_Label = "en";
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 0.45);
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
+        internal static List<SimilarityIndex> TextClassifier_Text1_SimilarityIndexes
+            = new List<SimilarityIndex>()
+            {
+                TextClassifier_Text1_SimilarityIndex1,
+                TextClassifier_Text1_SimilarityIndex2
+            };
+        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage1
+            = new SimilarityIndexAverage("en", 0.30);
+        internal static List<SimilarityIndexAverage> TextClassifier_Text1_SimilarityIndexAverages
+            = new List<SimilarityIndexAverage>()
+            {
+                TextClassifier_Text1_SimilarityIndexAverage1
+            };
+        internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult1
+            = new TextClassifierResult(
+                        TextClassifier_Text1_Label,
+                        TextClassifier_Text1_SimilarityIndexes,
+                        TextClassifier_Text1_SimilarityIndexAverages);
+
         // Methods
         internal static bool AreEqual(INGram obj1, INGram obj2)
         {
