@@ -450,6 +450,67 @@ namespace NW.NGramTextClassification.UnitTests
             return true;
 
         }
+        internal static bool AreEqual(SimilarityIndex obj1, SimilarityIndex obj2)
+        {
+
+            return (obj1.Id== obj2.Id)
+                    && string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && (obj1.Value == obj2.Value);
+
+        }
+        internal static bool AreEqual(List<SimilarityIndex> list1, List<SimilarityIndex> list2)
+        {
+
+            if (list1 == null && list2 == null)
+                return true;
+
+            if (list1 == null || list2 == null)
+                return false;
+
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+                if (AreEqual(list1[i], list2[i]) == false)
+                    return false;
+
+            return true;
+
+        }
+        internal static bool AreEqual(SimilarityIndexAverage obj1, SimilarityIndexAverage obj2)
+        {
+
+            return string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && (obj1.Value == obj2.Value);
+
+        }
+        internal static bool AreEqual(List<SimilarityIndexAverage> list1, List<SimilarityIndexAverage> list2)
+        {
+
+            if (list1 == null && list2 == null)
+                return true;
+
+            if (list1 == null || list2 == null)
+                return false;
+
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+                if (AreEqual(list1[i], list2[i]) == false)
+                    return false;
+
+            return true;
+
+        }
+        internal static bool AreEqual(TextClassifierResult obj1, TextClassifierResult obj2)
+        {
+
+            return string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+                    && AreEqual(obj1.SimilarityIndexAverages, obj2.SimilarityIndexAverages)
+                    && AreEqual(obj1.SimilarityIndexes, obj2.SimilarityIndexes);
+
+        }
         internal static void Method_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
         {
