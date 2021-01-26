@@ -489,6 +489,13 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text3_SimilarityIndex2.Label,
             };
 
+        // TextClassifierComponents
+        internal static string TextClassifierComponents_VariableName_NGramsTokenizer = "nGramsTokenizer";
+        internal static string TextClassifierComponents_VariableName_SimilarityIndexCalculator = "similarityIndexCalculator";
+        internal static string TextClassifierComponents_VariableName_RoundingFunction = "roundingFunction";
+        internal static string TextClassifierComponents_VariableName_TextTruncatingFunction = "textTruncatingFunction";
+        internal static string TextClassifierComponents_VariableName_LoggingAction = "loggingAction";
+
 
 
         // Methods
