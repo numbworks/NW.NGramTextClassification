@@ -496,8 +496,6 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifierComponents_VariableName_TextTruncatingFunction = "textTruncatingFunction";
         internal static string TextClassifierComponents_VariableName_LoggingAction = "loggingAction";
 
-
-
         // Methods
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)
         {

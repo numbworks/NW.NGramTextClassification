@@ -18,6 +18,17 @@ namespace NW.NGramTextClassificationClient
         static void RunExample1()
         {
 
+            ITextClassifier textClassifier = new TextClassifier();
+            string text = "Vår kund erbjuder trivsel";
+            List<LabeledExample> labeledExamples = CreateLabeledExamples();
+            TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
+
+            Console.WriteLine(result.Label);
+
+        }
+        private static List<LabeledExample> CreateLabeledExamples()
+        {
+
             List<(string label, string text)> tuples = new List<(string label, string text)>()
             {
 
@@ -54,13 +65,7 @@ namespace NW.NGramTextClassificationClient
 
             };
 
-            string text = "Fattoria degli animali"; // "Vår kund erbjuder trivsel";
-            List<LabeledExample> labeledExamples = new LabeledExampleFactory().Create(tuples);
-
-            ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
-
-            Console.WriteLine(result.Label);
+            return new LabeledExampleFactory().Create(tuples);
 
         }
 
