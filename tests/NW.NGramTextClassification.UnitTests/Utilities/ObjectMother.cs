@@ -398,7 +398,7 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text1_SimilarityIndexAverage1,
                 TextClassifier_Text1_SimilarityIndexAverage2
             };
-        internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult1
+        internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult
             = new TextClassifierResult(
                         TextClassifier_Text1_Label,
                         TextClassifier_Text1_SimilarityIndexes,
@@ -410,6 +410,86 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text1_SimilarityIndex1.Label,
                 TextClassifier_Text1_SimilarityIndex2.Label,
             };
+        internal static string TextClassifier_Text3 = "Kas siis selle maa keel Laulutuules ei või Taevani tõustes üles Igavikku omale otsida";
+        internal static string TextClassifier_Text3_Label = null;
+        internal static List<INGram> TextClassifier_Text3_NGrams
+            = new List<INGram>() {
+
+                new Monogram("kas"),
+                new Monogram("siis"),
+                new Monogram("selle"),
+                new Monogram("maa"),
+                new Monogram("keel"),
+                new Monogram("laulutuules"),
+                new Monogram("ei"),
+                new Monogram("või"),
+                new Monogram("taevani"),
+                new Monogram("tõustes"),
+                new Monogram("üles"),
+                new Monogram("igavikku"),
+                new Monogram("omale"),
+                new Monogram("otsida"),
+                new Bigram("kas siis"),
+                new Bigram("siis selle"),
+                new Bigram("selle maa"),
+                new Bigram("maa keel"),
+                new Bigram("keel laulutuules"),
+                new Bigram("laulutuules ei"),
+                new Bigram("ei või"),
+                new Bigram("või taevani"),
+                new Bigram("taevani tõustes"),
+                new Bigram("tõustes üles"),
+                new Bigram("üles igavikku"),
+                new Bigram("igavikku omale"),
+                new Bigram("omale otsida"),
+                new Bigram("otsida"),
+                new Trigram("kas siis selle"),
+                new Trigram("siis selle maa"),
+                new Trigram("selle maa keel"),
+                new Trigram("maa keel laulutuules"),
+                new Trigram("keel laulutuules ei"),
+                new Trigram("laulutuules ei või"),
+                new Trigram("ei või taevani"),
+                new Trigram("või taevani tõustes"),
+                new Trigram("taevani tõustes üles"),
+                new Trigram("tõustes üles igavikku"),
+                new Trigram("üles igavikku omale"),
+                new Trigram("igavikku omale otsida"),
+                new Trigram("omale otsida"),
+                new Trigram("otsida")
+
+            };
+        internal static SimilarityIndex TextClassifier_Text3_SimilarityIndex1 = new SimilarityIndex(1, "en", 0);
+        internal static SimilarityIndex TextClassifier_Text3_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
+        internal static List<SimilarityIndex> TextClassifier_Text3_SimilarityIndexes
+            = new List<SimilarityIndex>()
+            {
+                TextClassifier_Text3_SimilarityIndex1,
+                TextClassifier_Text3_SimilarityIndex2
+            };
+        internal static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage1
+            = new SimilarityIndexAverage("en", 0);
+        internal static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage2
+            = new SimilarityIndexAverage("sv", 0);
+        internal static List<SimilarityIndexAverage> TextClassifier_Text3_SimilarityIndexAverages
+            = new List<SimilarityIndexAverage>()
+            {
+                TextClassifier_Text3_SimilarityIndexAverage1,
+                TextClassifier_Text3_SimilarityIndexAverage2
+            };
+        internal static TextClassifierResult TextClassifier_Text3_TextClassifierResult
+            = new TextClassifierResult(
+                        TextClassifier_Text3_Label,
+                        TextClassifier_Text3_SimilarityIndexes,
+                        TextClassifier_Text3_SimilarityIndexAverages);
+        internal static List<string> TextClassifier_Text3_UniqueLabels
+            = new List<string>()
+            {
+                TextClassifier_Text3_SimilarityIndex1.Label,
+                TextClassifier_Text3_SimilarityIndex2.Label,
+            };
+
+
 
         // Methods
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)

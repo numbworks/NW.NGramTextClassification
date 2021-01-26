@@ -216,7 +216,87 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsTrue(
                     ObjectMother.AreEqual(
-                        ObjectMother.TextClassifier_Text1_TextClassifierResult1,
+                        ObjectMother.TextClassifier_Text1_TextClassifierResult,
+                        actual
+                        ));
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void PredictLabel_ShouldReturnANullLabelAndLogTheExpectedMessages_WhenContainsAllIndexAverageValuesEqualToZero()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction
+                = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          new NGramTokenizer(),
+                          new SimilarityIndexCalculatorJaccard(),
+                          TextClassifierComponents.DefaultRoundingFunction,
+                          TextClassifierComponents.DefaultTextTruncatingFunction,
+                          fakeLoggingAction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            string truncatedText
+                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
+                        ObjectMother.TextClassifier_Text3,
+                        TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                MessageCollection.AttemptingToPredictLabel,
+                MessageCollection.TheFollowingTextHasBeenProvided.Invoke(truncatedText),
+                MessageCollection.TheFollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
+                MessageCollection.TheFollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
+                MessageCollection.XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
+                MessageCollection.TheProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text3_NGrams),
+
+                MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
+                MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
+                MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
+                MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0]),
+
+                MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
+                MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
+                MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
+                MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1]),
+
+                MessageCollection.TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
+                MessageCollection.XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes),
+
+                MessageCollection.TheFollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels),
+
+                MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels[0]),
+                MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0].Value),
+                MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0].Value),
+                MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0]),
+
+                MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels[1]),
+                MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1].Value),
+                MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1].Value),
+                MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1]),
+
+                MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages),
+
+                MessageCollection.FollowingVerificationHasFailed.Invoke("ContainsAtLeastOneIndexAverageThatIsNotZero"),
+
+                MessageCollection.ThePredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text3_Label),
+                MessageCollection.ThePredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples
+
+            };
+
+            // Act
+            TextClassifierResult actual
+                = textClassifier.PredictLabel(
+                                    ObjectMother.TextClassifier_Text3,
+                                    ObjectMother.TextClassifier_LabeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(
+                        ObjectMother.TextClassifier_Text3_TextClassifierResult,
                         actual
                         ));
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
@@ -225,7 +305,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         // TearDown
         // Support methods
-
 
     }
 }
