@@ -83,19 +83,19 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.SimilarityIndexCalculatorJaccard_List1,
                     ObjectMother.SimilarityIndexCalculatorJaccard_List1,
                     1.00
-                ),
+                ).SetArgDisplayNames($"{nameof(doTestCases)}_01"),
 
             new TestCaseData(
                     ObjectMother.SimilarityIndexCalculatorJaccard_List1,
                     ObjectMother.SimilarityIndexCalculatorJaccard_List2,
                     0.00
-                ),
+                ).SetArgDisplayNames($"{nameof(doTestCases)}_02"),
 
             new TestCaseData(
                     ObjectMother.SimilarityIndexCalculatorJaccard_List1.GetRange(0, 2),
                     ObjectMother.SimilarityIndexCalculatorJaccard_List1.GetRange(0, 4),
                     0.50
-                )
+                ).SetArgDisplayNames($"{nameof(doTestCases)}_03")
 
         };
 
