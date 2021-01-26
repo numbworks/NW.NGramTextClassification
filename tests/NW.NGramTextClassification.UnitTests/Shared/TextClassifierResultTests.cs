@@ -19,7 +19,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                         ),
                     ObjectMother.TextClassifierResult_ToString1
-                ),
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_01"),
+
             new TestCaseData(
                     new TextClassifierResult(
                         null,
@@ -27,7 +28,7 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                         ),
                     ObjectMother.TextClassifierResult_ToString1WithNullLabel
-                )
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02")
 
         };
         private static TestCaseData[] textClassifierResultExceptionTestCases =
