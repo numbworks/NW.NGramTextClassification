@@ -15,18 +15,19 @@ namespace NW.NGramTextClassificationClient
 
         }
 
-        static void RunExample1()
+        // Private methods
+        private static void RunExample1()
         {
 
             ITextClassifier textClassifier = new TextClassifier();
             string text = "Vår kund erbjuder trivsel";
-            List<LabeledExample> labeledExamples = CreateLabeledExamples();
+            List<LabeledExample> labeledExamples = CreateLabeledExamples1();
             TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 
         }
-        private static List<LabeledExample> CreateLabeledExamples()
+        private static List<LabeledExample> CreateLabeledExamples1()
         {
 
             List<(string label, string text)> tuples = new List<(string label, string text)>()
