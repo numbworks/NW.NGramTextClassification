@@ -33,7 +33,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            NGramTokenizerRuleSet actual1 = new NGramTokenizerRuleSet(true, false, true);
+            NGramTokenizerRuleSet actual1 = new NGramTokenizerRuleSet(true, false, true, false, false);
             NGramTokenizerRuleSet actual2 = new NGramTokenizerRuleSet();
 
             // Assert

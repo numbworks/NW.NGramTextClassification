@@ -304,7 +304,8 @@ namespace NW.NGramTextClassification.UnitTests
         internal static List<INGram> NGramTokenizer_Text1_NGrams = LabeledExampleFactory_Text1_NGrams;
 
         // NGramTokenizerRuleSet
-        internal static string NGramTokenizerRuleSet_ToString = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True' ]";
+        internal static string NGramTokenizerRuleSet_ToString 
+            = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
 
         // TokenizationStrategy
         internal static string TokenizationStrategy_VariableName_Pattern = "pattern";

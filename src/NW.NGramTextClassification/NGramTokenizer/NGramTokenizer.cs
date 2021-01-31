@@ -41,6 +41,10 @@ namespace NW.NGramTextClassification
                 nGrams.AddRange(DoFor<Bigram>(text, strategy));
             if (ruleSet.DoForTrigrams)
                 nGrams.AddRange(DoFor<Trigram>(text, strategy));
+            if (ruleSet.DoForFourgrams)
+                nGrams.AddRange(DoFor<Fourgram>(text, strategy));
+            if (ruleSet.DoForFivegrams)
+                nGrams.AddRange(DoFor<Fivegram>(text, strategy));
 
             return nGrams;
 

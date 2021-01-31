@@ -5,12 +5,14 @@
         bool DoForBigrams { get; }
         bool DoForMonograms { get; }
         bool DoForTrigrams { get; }
+        bool DoForFourgrams { get; }
+        bool DoForFivegrams { get; }
     }
 }
 
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
+    Last Update: 30.01.2021
 
 */

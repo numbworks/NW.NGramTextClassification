@@ -76,7 +76,7 @@ namespace NW.NGramTextClassification.UnitTests
                             () => new NGramTokenizer()
                                         .Do(
                                             ObjectMother.NGramTokenizer_TextNonAlphanumerical,
-                                            new NGramTokenizerRuleSet(true, false, false))
+                                            new NGramTokenizerRuleSet(true, false, false, false, false))
                         ),
                 typeof(Exception),
                 MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(new TokenizationStrategy())
