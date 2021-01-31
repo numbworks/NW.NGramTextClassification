@@ -10,6 +10,7 @@ namespace NW.NGramTextClassificationClient
         {
 
             RunExample1();
+            RunExample2();
 
             Console.ReadKey();
 
@@ -20,14 +21,25 @@ namespace NW.NGramTextClassificationClient
         {
 
             ITextClassifier textClassifier = new TextClassifier();
-            string text = "Vår kund erbjuder trivsel";
-            List<LabeledExample> labeledExamples = CreateLabeledExamples1();
+            string text = "We are looking for several skilled and driven developers to join our team.";
+            List<LabeledExample> labeledExamples = CreateLabeledExamples();
             TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 
         }
-        private static List<LabeledExample> CreateLabeledExamples1()
+        private static void RunExample2()
+        {
+
+            ITextClassifier textClassifier = new TextClassifier();
+            string text = "Vår kund erbjuder trivsel";
+            List<LabeledExample> labeledExamples = CreateLabeledExamples();
+            TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
+
+            Console.WriteLine(result.Label);
+
+        }
+        private static List<LabeledExample> CreateLabeledExamples()
         {
 
             List<(string label, string text)> tuples = new List<(string label, string text)>()
