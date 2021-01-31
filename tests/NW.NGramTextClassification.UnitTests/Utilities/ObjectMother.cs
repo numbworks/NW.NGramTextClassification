@@ -89,6 +89,8 @@ namespace NW.NGramTextClassification.UnitTests
                         $"Text: '{LabeledExample_Text1.Substring(0, (int)TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter)}...', ",
                         $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count.ToString()}' ]"
                     );
+        internal static string LabeledExample_Text1_FourgramValue1 = "we are looking for";
+        internal static string LabeledExample_Text1_FivegramValue1 = "we are looking for several";
 
         // LabeledExampleFactory
         internal static string LabeledExampleFactory_VariableName_Tokenizer = "tokenizer";
