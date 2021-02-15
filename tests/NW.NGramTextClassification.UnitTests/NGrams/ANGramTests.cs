@@ -20,7 +20,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.ANGram_FakeGram1_Value
                             )),
                 typeof(ArgumentException),
-                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.ANGram_VariableName_N)
+                MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.ANGram_VariableName_N)
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_01"),
 
             // ValidateObject

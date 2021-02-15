@@ -160,7 +160,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         new NGramTokenizerRuleSet()
                             )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.LabeledExampleFactory_VariableName_Tuples)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.LabeledExampleFactory_VariableName_Tuples)
                 ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_10"),
 
             // ValidateObject

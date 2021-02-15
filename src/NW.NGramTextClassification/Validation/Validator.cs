@@ -13,7 +13,7 @@ namespace NW.NGramTextClassification
         {
 
             if (length < 1)
-                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(length)));
+                throw CreateException<T>(MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(nameof(length)));
 
         }
         public static void ValidateLength(uint length)
@@ -47,7 +47,7 @@ namespace NW.NGramTextClassification
         {
 
             if (arr.Length == 0)
-                throw CreateException<T>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
+                throw CreateException<T>(MessageCollection.Validator_VariableContainsZeroItems.Invoke(variableName));
 
         }
 
@@ -69,7 +69,7 @@ namespace NW.NGramTextClassification
         {
 
             if (list.Count == 0)
-                throw CreateException<ArgumentException>(MessageCollection.VariableContainsZeroItems.Invoke(variableName));
+                throw CreateException<ArgumentException>(MessageCollection.Validator_VariableContainsZeroItems.Invoke(variableName));
 
         }
 
@@ -77,7 +77,7 @@ namespace NW.NGramTextClassification
         {
 
             if (n < 1)
-                throw CreateException<T>(MessageCollection.VariableCantBeLessThanOne.Invoke(nameof(n)));
+                throw CreateException<T>(MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(nameof(n)));
 
         }
         public static void ValidateN(ushort n)
@@ -106,7 +106,7 @@ namespace NW.NGramTextClassification
         {
 
             if (value1 >= value2)
-                throw CreateException<T>(MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue.Invoke(variableName1, variableName2));
+                throw CreateException<T>(MessageCollection.Validator_FirstValueIsGreaterOrEqualThanSecondValue.Invoke(variableName1, variableName2));
 
         }
         public static void ThrowIfFirstIsGreaterOrEqual(int value1, string variableName1, int value2, string variableName2)
@@ -115,7 +115,7 @@ namespace NW.NGramTextClassification
         {
 
             if (value1 > value2)
-                throw CreateException<T>(MessageCollection.FirstValueIsGreaterThanSecondValue.Invoke(variableName1, variableName2));
+                throw CreateException<T>(MessageCollection.Validator_FirstValueIsGreaterThanSecondValue.Invoke(variableName1, variableName2));
 
         }
         public static void ThrowIfFirstIsGreater(int value1, string variableName1, int value2, string variableName2)

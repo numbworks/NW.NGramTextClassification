@@ -19,7 +19,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(Exception),
                 new Exception(
-                        MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_Length)).Message
+                        MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_Length)).Message
                 ).SetArgDisplayNames($"{nameof(validateLengthExceptionTestCases)}_01"),
 
             // ValidateLength
@@ -29,7 +29,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(ArgumentException),
                 new ArgumentException(
-                        MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_Length)).Message
+                        MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_Length)).Message
                 ).SetArgDisplayNames($"{nameof(validateLengthExceptionTestCases)}_02")
 
         };
@@ -77,7 +77,7 @@ namespace NW.NGramTextClassification.UnitTests
                                 ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.Validator_VariableName_Variable)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.Validator_VariableName_Variable)
                 ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_02")
 
         };
@@ -103,7 +103,7 @@ namespace NW.NGramTextClassification.UnitTests
                                 ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.Validator_VariableName_Variable)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.Validator_VariableName_Variable)
                 ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_02"),
 
         };
@@ -116,7 +116,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => Validator.ValidateN<Exception>(0)
                     ),
                 typeof(Exception),
-                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
+                MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
                 ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_01"),
 
             // ValidateN
@@ -125,7 +125,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => Validator.ValidateN(0)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
+                MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
                 ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_02")
 
         };

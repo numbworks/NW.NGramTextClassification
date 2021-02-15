@@ -39,30 +39,30 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            _components.LoggingAction.Invoke(MessageCollection.AttemptingToPredictLabel);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AttemptingToPredictLabel);
             string truncatedText = _components.TextTruncatingFunction.Invoke(text, _settings.TruncateTextInLogMessagesAfter);
-            _components.LoggingAction.Invoke(MessageCollection.TheFollowingTextHasBeenProvided.Invoke(truncatedText));
-            _components.LoggingAction.Invoke(MessageCollection.TheFollowingTokenizationStrategyWillBeUsed.Invoke(strategy));
-            _components.LoggingAction.Invoke(MessageCollection.TheFollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(ruleSet));
-            _components.LoggingAction.Invoke(MessageCollection.XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingTokenizationStrategyWillBeUsed.Invoke(strategy));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(ruleSet));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
 
             List <INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
-            _components.LoggingAction.Invoke(MessageCollection.TheProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
-            _components.LoggingAction.Invoke(MessageCollection.TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples);
-            _components.LoggingAction.Invoke(MessageCollection.XSimilarityIndexObjectsHaveBeenComputed.Invoke(indexes));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(indexes));
 
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
-            _components.LoggingAction.Invoke(MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
             string label = PredictLabel(indexAverages);
-            _components.LoggingAction.Invoke(MessageCollection.ThePredictedLabelIs.Invoke(label));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs.Invoke(label));
 
             if (label == null)
-                _components.LoggingAction.Invoke(MessageCollection.ThePredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
             else
-                _components.LoggingAction.Invoke(MessageCollection.ThePredictionHasBeenSuccessful);
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
                 
             TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
@@ -103,18 +103,18 @@ namespace NW.NGramTextClassification
             for (int i = 0; i < labeledExamples.Count; i++)
             {
 
-                _components.LoggingAction.Invoke(MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(labeledExamples[i]));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(labeledExamples[i]));
 
                 double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, labeledExamples[i].TextAsNGrams, _components.RoundingFunction);
                 double roundedValue = _components.RoundingFunction.Invoke(indexValue);
 
-                _components.LoggingAction.Invoke(MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(indexValue));
-                _components.LoggingAction.Invoke(MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(roundedValue));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(indexValue));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(roundedValue));
 
                 SimilarityIndex similarityIndex = new SimilarityIndex(labeledExamples[i].Id, labeledExamples[i].Label, roundedValue);
                 similarityIndexes.Add(similarityIndex);
 
-                _components.LoggingAction.Invoke(MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(similarityIndex));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(similarityIndex));
 
             }
 
@@ -125,26 +125,26 @@ namespace NW.NGramTextClassification
         {
 
             List<string> uniqueLabels = ExampleUniqueLabels(indexes);
-            _components.LoggingAction.Invoke(MessageCollection.TheFollowingUniqueLabelsHaveBeenFound.Invoke(uniqueLabels));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingUniqueLabelsHaveBeenFound.Invoke(uniqueLabels));
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
                 string currentLabel = uniqueLabels[i];
-                _components.LoggingAction.Invoke(MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(currentLabel));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_CalculatingIndexAverageForTheFollowingLabel.Invoke(currentLabel));
 
                 List<double> indexValues = ExampleSimilarityIndexes(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
                 double roundedValue = _components.RoundingFunction.Invoke(averageValue);
 
-                _components.LoggingAction.Invoke(MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(averageValue));
-                _components.LoggingAction.Invoke(MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(roundedValue));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_CalculatedSimilarityIndexAverageValueIs.Invoke(averageValue));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_RoundedSimilarityIndexAverageValueIs.Invoke(roundedValue));
 
                 SimilarityIndexAverage indexAverage = new SimilarityIndexAverage(currentLabel, roundedValue);
                 similarityAverages.Add(indexAverage);
 
-                _components.LoggingAction.Invoke(MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(indexAverage));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(indexAverage));
 
             }
 
@@ -167,33 +167,33 @@ namespace NW.NGramTextClassification
 
             if (!ContainsAtLeastOneIndexAverageThatIsNotZero(indexAverages))
             {
-                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
 
             if (!ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(indexAverages))
             {
-                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
 
             if (indexAverages.Count == 1)
             {
-                _components.LoggingAction.Invoke(MessageCollection.TheSimilarityIndexAverageWithTheHighestValueIs.Invoke(indexAverages[0]));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(indexAverages[0]));
                 return indexAverages[0].Label;
             }
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
             if (!ContainsTwoHighestIndexAveragesThatArentEqual(orderedByhighest[0].Value, orderedByhighest[1].Value))
             {
-                _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasFailed.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
 
-            _components.LoggingAction.Invoke(MessageCollection.TheSimilarityIndexAverageWithTheHighestValueIs.Invoke(orderedByhighest[0]));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(orderedByhighest[0]));
 
             return orderedByhighest[0].Label;
 

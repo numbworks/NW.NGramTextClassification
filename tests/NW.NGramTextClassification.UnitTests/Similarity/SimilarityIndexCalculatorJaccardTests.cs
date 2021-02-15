@@ -34,7 +34,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List1)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List1)
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_02"),
 
             // ValidateList
@@ -59,7 +59,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List2)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List2)
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_04"),
 
             // ValidateObject

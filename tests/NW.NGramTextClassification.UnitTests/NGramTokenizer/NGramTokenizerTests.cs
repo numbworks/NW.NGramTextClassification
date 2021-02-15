@@ -79,7 +79,7 @@ namespace NW.NGramTextClassification.UnitTests
                                             new NGramTokenizerRuleSet(true, false, false, false, false))
                         ),
                 typeof(Exception),
-                MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(new TokenizationStrategy())
+                MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(new TokenizationStrategy())
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06")
 
         };

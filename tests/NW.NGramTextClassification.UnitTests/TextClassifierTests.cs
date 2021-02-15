@@ -110,7 +110,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         new List<LabeledExample>()
                                 )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.TextClassifier_VariableName_LabeledExamples)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.TextClassifier_VariableName_LabeledExamples)
                 ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_06")
 
         };
@@ -163,47 +163,47 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                MessageCollection.AttemptingToPredictLabel,
-                MessageCollection.TheFollowingTextHasBeenProvided.Invoke(truncatedText),
-                MessageCollection.TheFollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
-                MessageCollection.TheFollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
-                MessageCollection.XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
-                MessageCollection.TheProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text1_NGrams),
+                MessageCollection.TextClassifier_AttemptingToPredictLabel,
+                MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
+                MessageCollection.TextClassifier_FollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
+                MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
+                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text1_NGrams),
 
-                MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
-                MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
-                MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
-                MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0]),
 
-                MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
-                MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
-                MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
-                MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1]),
 
-                MessageCollection.TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
-                MessageCollection.XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes),
+                MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
+                MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes),
 
-                MessageCollection.TheFollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels),
+                MessageCollection.TextClassifier_FollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels),
 
-                MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels[0]),
-                MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[0].Value),
-                MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[0].Value),
-                MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[0]),
+                MessageCollection.TextClassifier_CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels[0]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[0].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[0].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[0]),
 
-                MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels[1]),
-                MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[1].Value),
-                MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[1].Value),
-                MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[1]),
+                MessageCollection.TextClassifier_CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels[1]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[1].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[1].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages[1]),
 
-                MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages),
+                MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(ObjectMother.TextClassifier_Text1_SimilarityIndexAverages),
 
-                MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke("ContainsAtLeastOneIndexAverageThatIsNotZero"),
-                MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke("ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers"),
-                MessageCollection.FollowingVerificationHasBeenSuccessful.Invoke("ContainsTwoHighestIndexAveragesThatArentEqual"),
-                MessageCollection.TheSimilarityIndexAverageWithTheHighestValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverage1),
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke("ContainsAtLeastOneIndexAverageThatIsNotZero"),
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke("ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers"),
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke("ContainsTwoHighestIndexAveragesThatArentEqual"),
+                MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverage1),
 
-                MessageCollection.ThePredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text1_Label),
-                MessageCollection.ThePredictionHasBeenSuccessful
+                MessageCollection.TextClassifier_PredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text1_Label),
+                MessageCollection.TextClassifier_PredictionHasBeenSuccessful
 
             };
 
@@ -246,44 +246,44 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                MessageCollection.AttemptingToPredictLabel,
-                MessageCollection.TheFollowingTextHasBeenProvided.Invoke(truncatedText),
-                MessageCollection.TheFollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
-                MessageCollection.TheFollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
-                MessageCollection.XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
-                MessageCollection.TheProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text3_NGrams),
+                MessageCollection.TextClassifier_AttemptingToPredictLabel,
+                MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
+                MessageCollection.TextClassifier_FollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
+                MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
+                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text3_NGrams),
 
-                MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
-                MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
-                MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
-                MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0]),
 
-                MessageCollection.ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
-                MessageCollection.TheCalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
-                MessageCollection.TheRoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
-                MessageCollection.TheFollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1]),
 
-                MessageCollection.TheTokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
-                MessageCollection.XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes),
+                MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
+                MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes),
 
-                MessageCollection.TheFollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels),
+                MessageCollection.TextClassifier_FollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels),
 
-                MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels[0]),
-                MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0].Value),
-                MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0].Value),
-                MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0]),
+                MessageCollection.TextClassifier_CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels[0]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[0]),
 
-                MessageCollection.CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels[1]),
-                MessageCollection.TheCalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1].Value),
-                MessageCollection.TheRoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1].Value),
-                MessageCollection.TheFollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1]),
+                MessageCollection.TextClassifier_CalculatingIndexAverageForTheFollowingLabel.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels[1]),
+                MessageCollection.TextClassifier_CalculatedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1].Value),
+                MessageCollection.TextClassifier_RoundedSimilarityIndexAverageValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1].Value),
+                MessageCollection.TextClassifier_FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages[1]),
 
-                MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages),
+                MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(ObjectMother.TextClassifier_Text3_SimilarityIndexAverages),
 
-                MessageCollection.FollowingVerificationHasFailed.Invoke("ContainsAtLeastOneIndexAverageThatIsNotZero"),
+                MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke("ContainsAtLeastOneIndexAverageThatIsNotZero"),
 
-                MessageCollection.ThePredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text3_Label),
-                MessageCollection.ThePredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples
+                MessageCollection.TextClassifier_PredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text3_Label),
+                MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples
 
             };
 

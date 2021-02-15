@@ -95,7 +95,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 new List<INGram>()
                                             )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.LabeledExample_VariableName_TextAsNGrams)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.LabeledExample_VariableName_TextAsNGrams)
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_08"),
 
 

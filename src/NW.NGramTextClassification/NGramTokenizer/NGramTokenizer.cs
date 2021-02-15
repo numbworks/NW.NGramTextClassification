@@ -111,7 +111,7 @@ namespace NW.NGramTextClassification
             // "This is a sample text." => "This", "is", ..., "text"
             MatchCollection matches = Regex.Matches(text, strategy.Pattern);
             if (matches.Count == 0)
-                throw new Exception(MessageCollection.TheProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
+                throw new Exception(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
 
             return GetTokens<T>(matches, strategy);
 

@@ -53,7 +53,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                             )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.TextClassifierResult_VariableName_Indexes)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.TextClassifierResult_VariableName_Indexes)
                 ).SetArgDisplayNames($"{nameof(textClassifierResultExceptionTestCases)}_02"),
 
             // ValidateList
@@ -75,7 +75,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     new List<SimilarityIndexAverage>()
                             )),
                 typeof(ArgumentException),
-                MessageCollection.VariableContainsZeroItems.Invoke(ObjectMother.TextClassifierResult_VariableName_IndexAverages)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.TextClassifierResult_VariableName_IndexAverages)
                 ).SetArgDisplayNames($"{nameof(textClassifierResultExceptionTestCases)}_04")
 
         };
