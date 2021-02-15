@@ -9,14 +9,27 @@ namespace NW.NGramTextClassificationClient
         static void Main(string[] args)
         {
 
-            RunExample1();
-            RunExample2();
+            Run(() => RunExample1(), nameof(RunExample1));
+            Run(() => RunExample2(), nameof(RunExample2));
 
             Console.ReadKey();
 
         }
 
         // Private methods
+        private static void Run(Action action, string actionName)
+        {
+
+            Console.WriteLine(new string('=', 60));
+            Console.WriteLine(actionName);
+            Console.WriteLine(new string('=', 60));
+            Console.WriteLine(Environment.NewLine);
+
+            action.Invoke();
+
+            Console.WriteLine(Environment.NewLine);
+
+        }
         private static void RunExample1()
         {
 
