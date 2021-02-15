@@ -1,0 +1,45 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install dotnet SDK 2.1.x
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.1.x
+
+    - name: Install dotnet SDK 3.1.x
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+
+    - name: Display installed SDKs
+      run:  dotnet --info
+      
+    - name: Restore dependencies
+      run: dotnet restore -s https://api.nuget.org/v3/index.json --verbosity n
+      
+    - name: Build
+      working-directory: ./
+      run: dotnet build --no-restore
+      
+    - name: Run unit tests
+      working-directory: ./
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Pack
+      working-directory: ./src/NW.NGramTextClassification/
+      run: dotnet pack --configuration Release NW.NGramTextClassification.csproj
+
+    - name: Push to NuGet.org
+      working-directory: ./src/NW.NGramTextClassification/bin/Release/
+      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
