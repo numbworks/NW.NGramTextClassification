@@ -82,21 +82,13 @@ namespace NW.NGramTextClassification
         {
 
             /*
-             * 
-             * 1) It takes a text - for ex. "Vår kund erbjuder...";
-             * 2) it takes a List<string> of NGrammed labeled texts - for ex.:
-             *
-             *      1, "sv", { "Är du genuint", "du genuint intresserad", "genuint intresserad av", ... }
-             *      ...
-             * 
-             * 3) it returns something like: 
-             * 
-             *      LabeledTextId Label Similarity
-             *      1               sv    0.89
-             *      2               en    0.13
-             *      3               en    0.45   
-             *      ...
-             * 
+                Returns something like: 
+                    
+                    Id Label Value
+                    1  sv    0.01995
+                    2  en    0.014888
+                    3  en    0.002268
+                    ...
              */
 
             List<SimilarityIndex> similarityIndexes = new List<SimilarityIndex>();

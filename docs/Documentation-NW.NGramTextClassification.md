@@ -7,6 +7,7 @@ Contact: numbworks@gmail.com
 |---|---|---|
 | 2020-12-27 | numbworks | Created. |
 | 2021-01-30 | numbworks | Added examples, re-organized the document. |
+| 2021-02-15 | numbworks | Completed "Example 1: Main Scenario". |
 
 ## Introduction
 
@@ -14,13 +15,13 @@ Contact: numbworks@gmail.com
 
 `Text Classification` is a `machine learning` technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library to learn from it. 
 
-The `accuracy` of the classification process is augmented by the technique used to split the text strings before the `similarity calculation`, which is based on collections of `N-Grams` instead of collections of single words. In this context, a `n-gram` is a contiguous sequence of `n words`, where `n` can be equal to 1 (`monogram`), 2 (`bigram`), 3 (`trigram`) and so on.
+The `accuracy` of the classification process can be augmented by finetuning the technique used to split the text strings before performing the `similarity calculation` process, which is based on collections of `N-Grams` instead of collections of single words. In this context, a `n-gram` is a contiguous sequence of `n words`, where `n` can be equal to 1 (`monogram`), 2 (`bigram`), 3 (`trigram`) and so on.
 
 A `Text Classification` library can be super-useful for the resolution of many problems, such as `spam detection` or `language detection` in an automated environment.
 
 ## Example 1: Main Scenario 
 
-Let's imagine we do have `several strings of text` we need to `detect the language for`, but `we don't want to pay` for using the `Google Translate API` or similar other product. 
+Let's imagine we do have `several strings of text` we need to `detect the language` for, but `we don't want to pay` for using the `Google Translate API` or we are working in an environment that lacks of internet access. 
 
 We do know that these strings of text can be among three different languages (English, Swedish and Danish), but nothing more than that.
 
@@ -46,7 +47,7 @@ As you can see, the entry point of the library is the `TextClassifier` class and
 
 The `text` variable contains the string of text that we need to categorize, while the `labeledExamples` variable contains the collection of strings that already have a label associated to them and that we will use to train the library.
 
-Here how `labeledExamples` gets populated (strings are truncated):
+Here how `labeledExamples` is getting populated (strings are truncated for a readibility purpose):
 
 ```csharp
 /*...*/
@@ -75,21 +76,64 @@ private static List<LabeledExample> CreateLabeledExamples()
 /*...*/
 ```
 
-More `LabeledExamples` you do provide for each label and more accurate will be the prediction. Closer to the uncategorized text the `LabeledExamples` are and higher will be the accuracy - for ex. `LabeledExamples` about anthropology in multiple languages fed into the library for predicting the language of an uncategorized text about anthropology.  
+A collection of `(label, text)` tuples can get easily converted to a collection of `LabeledExamples` by using the provided `LabeledExampleFactory`.
 
-
-...
-
-```csharp
-
-```
+Once you have both `text` and `labeledExamples` variables properly set, you can initialize a `TextClassifier` object and call its `PredictLabel` method, which at its core looks like the following (logging statements have been removed for readibility purpose):
 
 ```csharp
+/*...*/
 
+public TextClassifierResult PredictLabel
+    (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+{
+
+    /*...*/
+
+    List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
+    List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
+    List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
+
+    string label = PredictLabel(indexAverages);     
+    TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
+
+    return result;
+
+}
+
+/*...*/
 ```
 
+The content of the `text` variable gets tokenized into a collection of `INGrams`, and each of them is compared to the provided collection of `LabeledExamples`.
 
-## What's a Labeled Example?
+The outcome is a collection of `SimilarityIndexes`, which looks like:
+
+| Id | Label | Value |
+|---|---|---|
+|1|en|0,01995|
+|2|en|0,014888|
+|...|...|...|
+|11|sv|0,002268|
+|12|sv|0|
+|...|...|...|
+|21|dk|0,005025|
+|22|dk|0|
+|...|...|...|
+
+All these values need to be averaged, so that we have one average value for each label:
+
+| Label | Value |
+|---|---|
+|en|0,016777|
+|sv|0,000942|
+|dk|0,003026|
+
+The `PredictLabel` method will run this collection of `SimilarityIndexAverage` objects thru a bunch of strategies, and eventually return the label with the highest average value (highest similarity). 
+
+That label is the most likely categorization possible, which in this case will be `en`.
+
+If it's not possible to predict the label, a `null` will be returned.
+
+## Labeled Examples?
 
 A `LabeledExample` is defined as following:
 
@@ -115,7 +159,7 @@ public class LabeledExample
 }
 ```
 
-`LabeledExample` objects can be created very easily by using the `LabeledExampleFactory` helper class, which basically automate the creation of the collection of `NGrams` for the `text` you provide:
+`LabeledExample` objects can be created very easily by using the provided `LabeledExampleFactory` helper class, which automates the creation of the collection of `NGrams` for the `text` you provide:
 
 ```csharp
 /*...*/
@@ -193,7 +237,16 @@ List<INGram> textAsNGrams = new List<INGram>() {
 
 By default, the library use three types of `INGram` (`Monogram`, `Bigram` and `Trigram`), but nothing prevents you by using just one of these or enable the disabled ones (`Fourgram` and `Fivegram`) or to fork the library and extend it even further.
 
-Using `Monogram`, `Bigram` and `Trigram` together does usually provide a quite good accuracy in the most common scenarios.
+Using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios.
+
+## Better predictions?
+
+The accuracy of the prediction can be improved:
+
+1. by increasing the number of `LabeledExamples` for each label
+2. by using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text
+
+An example of the second bullet point could be the attempt of predicting the language of a piece of text about anthropology using a collection of multilingual `LabeledExamples` about the same topic.
 
 ## Markdown Toolset
 
