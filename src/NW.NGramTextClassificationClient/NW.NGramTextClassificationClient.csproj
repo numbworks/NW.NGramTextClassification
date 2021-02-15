@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
+    <ProjectReference Include="..\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
   </ItemGroup>
 
 </Project>
