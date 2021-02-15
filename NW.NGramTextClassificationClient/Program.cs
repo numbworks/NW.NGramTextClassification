@@ -86,3 +86,10 @@ namespace NW.NGramTextClassificationClient
 
     }
 }
+
+/*
+
+    Author: numbworks@gmail.com
+    Last Update: 15.02.2021
+
+*/
