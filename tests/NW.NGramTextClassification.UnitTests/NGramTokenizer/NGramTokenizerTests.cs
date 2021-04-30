@@ -81,10 +81,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                 typeof(Exception),
                 MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke("DoForBigrams", "some string")
-                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06")
+                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06"),
 
-            /*
-            // DoFor<T>
             new TestCaseData(
                 new TestDelegate(
                             () => new NGramTokenizer()
@@ -93,9 +91,8 @@ namespace NW.NGramTextClassification.UnitTests
                                             new NGramTokenizerRuleSet(true, false, false, false, false))
                         ),
                 typeof(Exception),
-                MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(new TokenizationStrategy())
+                MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke("DoForMonograms", ObjectMother.NGramTokenizer_TextNonAlphanumerical)
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_07"),
-                */
 
         };
 
@@ -181,6 +178,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 20.01.2021
+    Last Update: 30.04.2021
 
 */
