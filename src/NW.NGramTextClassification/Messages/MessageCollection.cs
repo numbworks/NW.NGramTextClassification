@@ -19,6 +19,8 @@ namespace NW.NGramTextClassification
         // NGramsTokenizer
         public static Func<ITokenizationStrategy, string> NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches =
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
+        public static Func<string, string, string> NGramTokenizer_TheRuleCantBeAppliedTo =
+            (ruleName, text) => $"The '{ruleName}' rule can't be applied to the provided string: '{text}'.";
 
         // TextClassifier
         public static string TextClassifier_AttemptingToPredictLabel ="Attempting to predict the label of the provided text...";

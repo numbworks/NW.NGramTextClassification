@@ -33,20 +33,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateObject(ruleSet, nameof(ruleSet));
 
-            List<INGram> nGrams = new List<INGram>();
-
-            if (ruleSet.DoForMonograms)
-                nGrams.AddRange(DoFor<Monogram>(text, strategy));
-            if (ruleSet.DoForBigrams)
-                nGrams.AddRange(DoFor<Bigram>(text, strategy));
-            if (ruleSet.DoForTrigrams)
-                nGrams.AddRange(DoFor<Trigram>(text, strategy));
-            if (ruleSet.DoForFourgrams)
-                nGrams.AddRange(DoFor<Fourgram>(text, strategy));
-            if (ruleSet.DoForFivegrams)
-                nGrams.AddRange(DoFor<Fivegram>(text, strategy));
-
-            return nGrams;
+            return TokenizeText(text, strategy, ruleSet);
 
         }
         public List<INGram> Do(string text, ITokenizationStrategy strategy)
@@ -116,6 +103,57 @@ namespace NW.NGramTextClassification
             return GetTokens<T>(matches, strategy);
 
         }
+        private List<INGram> TokenizeText
+            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
+        {
+
+            List<INGram> nGrams = new List<INGram>();
+            string ruleName = null;
+
+            try
+            {
+
+                if (ruleSet.DoForMonograms)
+                {
+                    ruleName = nameof(ruleSet.DoForMonograms);
+                    nGrams.AddRange(DoFor<Monogram>(text, strategy));
+                }
+
+                if (ruleSet.DoForBigrams)
+                {
+                    ruleName = nameof(ruleSet.DoForBigrams);
+                    nGrams.AddRange(DoFor<Bigram>(text, strategy));
+                }
+
+                if (ruleSet.DoForTrigrams)
+                {
+                    ruleName = nameof(ruleSet.DoForTrigrams);
+                    nGrams.AddRange(DoFor<Trigram>(text, strategy));
+                }
+
+                if (ruleSet.DoForFourgrams)
+                {
+                    ruleName = nameof(ruleSet.DoForFourgrams);
+                    nGrams.AddRange(DoFor<Fourgram>(text, strategy));
+                }
+
+                if (ruleSet.DoForFivegrams)
+                {
+                    ruleName = nameof(ruleSet.DoForFivegrams);
+                    nGrams.AddRange(DoFor<Fivegram>(text, strategy));
+                }
+
+                return nGrams;
+
+            }
+            catch
+            {
+
+                throw new Exception(MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke(ruleName, text));
+
+            }
+
+        }
 
     }
 }
@@ -123,6 +161,6 @@ namespace NW.NGramTextClassification
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 31.12.2020
+    Last Update: 30.04.2021
 
 */
