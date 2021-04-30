@@ -70,6 +70,20 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException(ObjectMother.NGramTokenizer_VariableName_RuleSet).Message
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_05"),
 
+            // TokenizeText<T>
+            new TestCaseData(
+                new TestDelegate(
+                            () => new NGramTokenizer()
+                                        .Do(
+                                            "some string",
+                                            new NGramTokenizerRuleSet(true, true, true, false, false)
+                                            )
+                        ),
+                typeof(Exception),
+                MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke("DoForBigrams", "some string")
+                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06")
+
+            /*
             // DoFor<T>
             new TestCaseData(
                 new TestDelegate(
@@ -80,7 +94,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                 typeof(Exception),
                 MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(new TokenizationStrategy())
-                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06")
+                ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_07"),
+                */
 
         };
 
