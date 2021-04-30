@@ -10,7 +10,18 @@ namespace NW.NGramTextClassification
         public static Func<double, double> DefaultRoundingFunction { get; }
             = x => Math.Round(x, 6, MidpointRounding.AwayFromZero);
         public static Func<string, uint, string> DefaultTextTruncatingFunction { get; }
-            = (text, length) => text?.Substring(0, (int)length) + "..." ?? text; 
+            = (text, length) =>
+            {
+
+                if (string.IsNullOrWhiteSpace(text))
+                    return text;
+
+                if (text.Length >= length)
+                    return text.Substring(0, (int)length) + "...";
+
+                return text;
+
+            };
         public static Action<string> DefaultLoggingAction { get; }
             = (message) => Console.WriteLine(message);
 
@@ -60,6 +71,6 @@ namespace NW.NGramTextClassification
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 03.01.2021
+    Last Update: 30.04.2021
 
 */

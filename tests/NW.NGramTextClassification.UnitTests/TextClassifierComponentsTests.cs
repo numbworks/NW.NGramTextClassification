@@ -103,6 +103,25 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [TestCase(null, (uint)20, null)]
+        [TestCase("", (uint)20, "")]
+        [TestCase("some string", (uint)20, "some string")]
+        [TestCase("some string some string", (uint)20, "some string some str...")]
+        [TestCase("a", (uint)20, "a")]
+        public void DefaultTextTruncatingFunction_ShouldTruncateTextAsExpected_WhenInvoked
+            (string text, uint length, string expected)
+        {
+
+            // Arrange
+            // Act
+            string actual = TextClassifierComponents.DefaultTextTruncatingFunction(text, length);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+
+
         // TearDown
         // Support methods
 
@@ -112,6 +131,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 26.01.2021
+    Last Update: 30.04.2021
 
 */
