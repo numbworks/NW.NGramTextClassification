@@ -18,6 +18,8 @@
     <PackageIconUrl>https://raw.githubusercontent.com/numbworks/numbworks/master/numbworks_logo_128x128px.png</PackageIconUrl>
 
     <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
+
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
