@@ -1,2 +1,8 @@
+v1.1.0
+- TextClassifierComponents: fixed Issue #1 (thanks @projectstann!) related to DefaultTextTruncatingFunction.
+- NGramTokenizer: added "TheRuleCantBeAppliedTo" exception message.
+- NGramTokenizer: fixed "System.ArgumentException: The 'length''s value is greater or equal than 'arr.Length''s value.".
+- NGramTokenizer, DoFor<T>: added extra Validation.
+
 v1.0.0
 - Initial release.
