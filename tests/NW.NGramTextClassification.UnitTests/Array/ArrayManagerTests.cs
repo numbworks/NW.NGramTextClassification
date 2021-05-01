@@ -116,17 +116,17 @@ namespace NW.NGramTextClassification.UnitTests
                     (ObjectMother.ArrayManager_VariableName_StartIndex, ObjectMother.ArrayManager_VariableName_ArrLength)
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_04"),
 
-            // ThrowIfFirstIsGreaterOrEqual
+            // ThrowIfFirstIsGreater
             new TestCaseData(
                 new TestDelegate(
                         () => new ArrayManager()
                                     .GetSubset(
                                         ObjectMother.ArrayManager_Array1, // arr.Length = 4
                                         0,
-                                        4)
+                                        5)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_FirstValueIsGreaterOrEqualThanSecondValue.Invoke
+                MessageCollection.Validator_FirstValueIsGreaterThanSecondValue.Invoke
                     (ObjectMother.ArrayManager_VariableName_Length, ObjectMother.ArrayManager_VariableName_ArrLength)
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_05"),
 
