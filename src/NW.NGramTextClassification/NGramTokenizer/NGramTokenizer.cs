@@ -103,14 +103,16 @@ namespace NW.NGramTextClassification
             if (matches.Count == 0)
                 throw new Exception(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
 
-            return GetTokens<T>(matches, strategy);
+            ushort N = GetN<T>();
+            Validator.ThrowIfFirstIsGreater(N, nameof(N), matches.Count, "matches.Count");
+
+            return GetTokens<T>(N, matches, strategy);
 
         }
-        private List<T> GetTokens<T>(MatchCollection matches, ITokenizationStrategy strategy)
+        private List<T> GetTokens<T>(ushort N, MatchCollection matches, ITokenizationStrategy strategy)
         {
 
             string[] allWords = ConvertToArray(matches);
-            ushort N = GetN<T>();
 
             List<T> tokens = new List<T>();
             for (uint i = 0; i < allWords.Length; i++)

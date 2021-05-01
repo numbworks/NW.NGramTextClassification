@@ -80,7 +80,7 @@ namespace NW.NGramTextClassification.UnitTests
                                             )
                         ),
                 typeof(Exception),
-                MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke("DoForBigrams", "some string")
+                MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke("DoForTrigrams", "some string")
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_06"),
 
             new TestCaseData(
