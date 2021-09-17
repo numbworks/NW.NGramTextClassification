@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NW.NGramTextClassification.LabeledExamples;
+using NW.NGramTextClassification.Messages;
 
 namespace NW.NGramTextClassification
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Messages
 {
     ///<summary>Collects all the messages used for logging and exceptions.</summary>
     public static class MessageCollection

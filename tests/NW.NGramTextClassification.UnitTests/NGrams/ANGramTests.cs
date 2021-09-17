@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NW.NGramTextClassification.Messages;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -159,8 +160,6 @@ namespace NW.NGramTextClassification.UnitTests
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 24.01.2021
-
+    Last Update: 17.09.2021
 */

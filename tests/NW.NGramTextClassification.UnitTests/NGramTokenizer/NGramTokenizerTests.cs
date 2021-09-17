@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using NW.NGramTextClassification.Arrays;
+using NW.NGramTextClassification.Messages;
+using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
 {

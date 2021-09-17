@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using NW.NGramTextClassification.Arrays;
+using NW.NGramTextClassification.Messages;
 
 namespace NW.NGramTextClassification
 {
+    /// <inheritdoc cref="INGramTokenizer"/>
     public class NGramTokenizer : INGramTokenizer
     {
 
-        // Fields
+        #region Fields
+
         private IArrayManager _ArrayManager;
 
-        // Properties
-        // Constructors
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="NGramTokenizer"/> instance.</summary>
+        /// <exception cref="ArgumentNullException"/> 
         public NGramTokenizer(IArrayManager arrayManager)
         {
 
@@ -22,12 +32,16 @@ namespace NW.NGramTextClassification
             _ArrayManager = arrayManager;
 
         }
+
+        /// <summary>Initializes a <see cref="NGramTokenizer"/> instance using default parameters.</summary>
         public NGramTokenizer()
             : this(new ArrayManager()) { }
 
-        // Methods
-        public List<INGram> Do
-            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
+        #endregion
+
+        #region Methods_public
+
+        public List<INGram> Do(string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -44,7 +58,10 @@ namespace NW.NGramTextClassification
         public List<INGram> Do(string text)
             => Do(text, new TokenizationStrategy(), new NGramTokenizerRuleSet());
 
-        // Methods (private)
+        #endregion
+
+        #region Methods_private
+
         private List<INGram> TokenizeText
             (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
         {
@@ -96,6 +113,7 @@ namespace NW.NGramTextClassification
             }
 
         }
+
         private List<T> DoFor<T>(string text, ITokenizationStrategy strategy) where T : INGram
         {
 
@@ -163,6 +181,8 @@ namespace NW.NGramTextClassification
             => ((INGram)CreateInstance<T>(new TokenizationStrategy(), "whatever_value")).N;
         private T CreateInstance<T>(params object[] args)
             => (T)Activator.CreateInstance(typeof(T), args);
+
+        #endregion
 
     }
 }
