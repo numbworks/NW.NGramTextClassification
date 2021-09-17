@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
+using NW.NGramTextClassification.LabeledExamples;
 
 namespace NW.NGramTextClassificationClient
 {
@@ -101,8 +102,6 @@ namespace NW.NGramTextClassificationClient
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 15.02.2021
-
+    Last Update: 17.09.2021
 */

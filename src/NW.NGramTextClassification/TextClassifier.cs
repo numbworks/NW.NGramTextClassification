@@ -1,20 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NW.NGramTextClassification.LabeledExamples;
 
 namespace NW.NGramTextClassification
 {
+    /// <inheritdoc cref="ITextClassifier"/>
     public class TextClassifier : ITextClassifier
     {
 
-        // Fields
+        #region Fields
+
         private TextClassifierComponents _components;
         private TextClassifierSettings _settings;
 
-        // Properties
-        // Constructors
-        public TextClassifier
-            (TextClassifierComponents components,
-            TextClassifierSettings settings)
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="TextClassifier"/> instance.</summary>
+        public TextClassifier(TextClassifierComponents components, TextClassifierSettings settings)
         {
 
             Validator.ValidateObject(components, nameof(components));
@@ -24,12 +31,15 @@ namespace NW.NGramTextClassification
             _settings = settings;
 
         }
-        public TextClassifier()
-            : this(
-                  new TextClassifierComponents(),
-                  new TextClassifierSettings()) { }
 
-        // Methods
+        /// <summary>Initializes a <see cref="TextClassifier"/> instance using default parameters.</summary>
+        public TextClassifier()
+            : this(new TextClassifierComponents(), new TextClassifierSettings()) { }
+
+        #endregion
+
+        #region Methods_public
+
         public TextClassifierResult PredictLabel
             (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
         {
@@ -46,7 +56,7 @@ namespace NW.NGramTextClassification
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(ruleSet));
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
 
-            List <INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
+            List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
@@ -63,22 +73,22 @@ namespace NW.NGramTextClassification
                 _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
             else
                 _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
-                
+
             TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
             return result;
 
         }
-        public TextClassifierResult PredictLabel
-            (string text, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierResult PredictLabel(string text, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
                 => PredictLabel(text, new TokenizationStrategy(), ruleSet, labeledExamples);
-        public TextClassifierResult PredictLabel
-            (string text, List<LabeledExample> labeledExamples)
+        public TextClassifierResult PredictLabel(string text, List<LabeledExample> labeledExamples)
                 => PredictLabel(text, new NGramTokenizerRuleSet(), labeledExamples);
 
-        // Methods (private)
-        private List<SimilarityIndex> GetSimilarityIndexes
-            (List<INGram> nGrams, List<LabeledExample> labeledExamples)
+        #endregion
+
+        #region Methods_private
+
+        private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<LabeledExample> labeledExamples)
         {
 
             /*
@@ -307,12 +317,12 @@ namespace NW.NGramTextClassification
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
             => indexAverages.OrderByDescending(Item => Item.Value).ToList();
 
+        #endregion
+
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 01.01.2021
-
+    Last Update: 17.09.2021
 */

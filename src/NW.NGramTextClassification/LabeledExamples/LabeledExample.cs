@@ -1,20 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.LabeledExamples
 {
+    /// <summary>A labeled example.</summary>
     public class LabeledExample
     {
 
-        // Fields
-        // Properties
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public ulong Id { get; }
         public string Label { get; }
         public string Text { get; }
         public List<INGram> TextAsNGrams { get; }
 
-        // Constructors
-        public LabeledExample
-            (ulong id, string label, string text, List<INGram> textAsNGrams)
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a <see cref="LabeledExample"/> instance.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>  
+        public LabeledExample(ulong id, string label, string text, List<INGram> textAsNGrams)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
@@ -28,11 +40,11 @@ namespace NW.NGramTextClassification
 
         }
 
-        // Methods
-        // Methods (private)
+        #endregion
+
+        #region Methods_public
+
         public override string ToString()
-            => ToString(TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
-        public string ToString(uint truncateTextAfter)
         {
 
             string content
@@ -40,20 +52,21 @@ namespace NW.NGramTextClassification
                     ", ",
                     $"{nameof(Id)}: '{Id}'",
                     $"{nameof(Label)}: '{Label}'",
-                    $"{nameof(Text)}: '{Text.Substring(0, (int)truncateTextAfter)}...'",
-                    $"{nameof(TextAsNGrams)}: '{TextAsNGrams.Count.ToString()}'"  // can't be null due of ValidateList()
+                    $"{nameof(Text)}: '{Text}'",
+                    $"{nameof(TextAsNGrams)}: '{TextAsNGrams.Count}'"  // can't be null due of ValidateList()
                     );
 
             return $"[ {content} ]";
 
         }
 
+        #endregion
+
+
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
-
+    Last Update: 17.09.2021
 */

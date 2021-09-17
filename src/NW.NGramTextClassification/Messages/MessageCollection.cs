@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using NW.NGramTextClassification.LabeledExamples;
 
 namespace NW.NGramTextClassification
 {
+    ///<summary>Collects all the messages used for logging and exceptions.</summary>
     public static class MessageCollection
     {
 
-        // Validator
+        #region Validator
+
         public static Func<string, string, string> Validator_FirstValueIsGreaterOrEqualThanSecondValue
             = (variableName1, variableName2) => $"The '{variableName1}''s value is greater or equal than '{variableName2}''s value.";
         public static Func<string, string, string> Validator_FirstValueIsGreaterThanSecondValue
@@ -16,14 +19,20 @@ namespace NW.NGramTextClassification
         public static Func<string, string> Validator_VariableCantBeLessThanOne
             = (variableName) => $"'{variableName}' can't be less than one.";
 
-        // NGramsTokenizer
+        #endregion
+
+        #region NGramsTokenizer
+
         public static Func<ITokenizationStrategy, string> NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches =
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
         public static Func<string, string, string> NGramTokenizer_TheRuleCantBeAppliedTo =
             (ruleName, text) => $"The '{ruleName}' rule can't be applied to the provided string: '{text}'.";
 
-        // TextClassifier
-        public static string TextClassifier_AttemptingToPredictLabel ="Attempting to predict the label of the provided text...";
+        #endregion
+
+        #region TextClassifier
+
+        public static string TextClassifier_AttemptingToPredictLabel = "Attempting to predict the label of the provided text...";
         public static Func<string, string> TextClassifier_FollowingTextHasBeenProvided =
             (text) => $"The following text has been provided: '{text}'.";
         public static Func<List<LabeledExample>, string> TextClassifier_XLabeledExamplesHaveBeenProvided =
@@ -68,10 +77,13 @@ namespace NW.NGramTextClassification
             (name) => $"The following verification has been successful: '{name}'.";
         public static Func<string, string> TextClassifier_FollowingVerificationHasFailed =
             (name) => $"The following verification has failed: '{name}'.";
-        public static Func<SimilarityIndexAverage, string> TextClassifier_SimilarityIndexAverageWithTheHighestValueIs = 
+        public static Func<SimilarityIndexAverage, string> TextClassifier_SimilarityIndexAverageWithTheHighestValueIs =
             (indexAverage) => $"The '{nameof(SimilarityIndexAverage)}' object with the highest value is: '{indexAverage}'.";
 
-        // Methods
+        #endregion
+
+        #region Fields
+
         public static string RollOutCollection(IEnumerable<object> coll)
         {
 
@@ -84,12 +96,14 @@ namespace NW.NGramTextClassification
 
         }
 
+        #endregion
+
     }
 }
 
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 01.01.2021
+    Last Update: 17.09.2021
 
 */

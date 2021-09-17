@@ -1,20 +1,28 @@
 ﻿using System.Collections.Generic;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.LabeledExamples
 {
+    /// <inheritdoc cref="ILabeledExampleFactory"/>
     public class LabeledExampleFactory : ILabeledExampleFactory
     {
 
-        // Fields
+        #region Fields
+
         private INGramTokenizer _tokenizer;
         private uint _initialId;
 
-        // Properties
+        #endregion
+
+        #region Properties
+
         public static uint DefaultInitialId { get; } = 1;
 
-        // Constructors
-        public LabeledExampleFactory
-            (INGramTokenizer tokenizer, uint initialId)
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="LabeledExampleFactory"/> instance.</summary>
+        public LabeledExampleFactory(INGramTokenizer tokenizer, uint initialId)
         {
 
             Validator.ValidateObject(tokenizer, nameof(tokenizer));
@@ -23,10 +31,15 @@ namespace NW.NGramTextClassification
             _initialId = initialId;
 
         }
+
+        /// <summary>Initializes a <see cref="LabeledExampleFactory"/> instance using default parameters.</summary>
         public LabeledExampleFactory()
             : this(new NGramTokenizer(), DefaultInitialId) { }
 
-        // Methods (public)
+        #endregion
+
+        #region Methods_public
+
         public LabeledExample Create
             (ulong id, string label, string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
         {
@@ -76,14 +89,12 @@ namespace NW.NGramTextClassification
         public List<LabeledExample> Create(List<(string label, string text)> tuples)
             => Create(tuples, new TokenizationStrategy());
 
-        // Methods (private)
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 31.12.2020
-
+    Last Update: 17.09.2021
 */

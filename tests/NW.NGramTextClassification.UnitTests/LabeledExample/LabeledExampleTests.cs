@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using NW.NGramTextClassification.LabeledExamples;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -109,22 +110,7 @@ namespace NW.NGramTextClassification.UnitTests
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void ToString_ShouldTruncateTextInACustomWay_WhenTruncateAfterTextIsProvided()
-        {
-
-            // Arrange
-            // Act
-            string actual = ObjectMother.LabeledExample1.ToString(7);
-
-            // Assert
-            Assert.AreEqual(
-                    ObjectMother.LabeledExample1_AsStringTruncatedAt7, 
-                    actual);
-
-        }
-
-        [Test]
-        public void ToString_ShouldTruncateTextInADefaultWay_WhenInvokedWithoutTruncateAfterText()
+        public void ToString_ShouldReturnExpectedString_WhenInvoked()
         {
 
             // Arrange
@@ -134,7 +120,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.LabeledExample1_AsStringTruncatedAtDefault,
+                    ObjectMother.LabeledExample1_AsString,
                     actual);
 
         }
@@ -166,8 +152,6 @@ namespace NW.NGramTextClassification.UnitTests
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 17.01.2021
-
+    Last Update: 17.09.2021
 */

@@ -7,12 +7,21 @@ namespace NW.NGramTextClassification.Arrays
     public class ArrayManager : IArrayManager
     {
 
-        // Fields
-        // Properties
-        // Constructors
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="ArrayManager"/> instance.</summary>
         public ArrayManager() { }
 
-        // Methods
+        #endregion
+
+        #region Methods_public
+
         public string[] AddDelimiter(string[] arr, string delimiter)
         {
 
@@ -47,6 +56,8 @@ namespace NW.NGramTextClassification.Arrays
             return subset;
 
         }
+
+        #endregion
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using NW.NGramTextClassification.LabeledExamples;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -75,19 +76,12 @@ namespace NW.NGramTextClassification.UnitTests
                     LabeledExample_Text1,
                     LabeledExample_TextAsNGrams1
                 );
-        internal static string LabeledExample1_AsStringTruncatedAt7 
+        internal static string LabeledExample1_AsString
             = string.Concat(
                         $"[ Id: '{LabeledExample_Id1}', ",
                         $"Label: '{LabeledExample_Label1}', ",
-                        $"Text: '{LabeledExample_Text1.Substring(0, 7)}...', ",
-                        $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count.ToString()}' ]"
-                    );
-        internal static string LabeledExample1_AsStringTruncatedAtDefault
-            = string.Concat(
-                        $"[ Id: '{LabeledExample_Id1}', ",
-                        $"Label: '{LabeledExample_Label1}', ",
-                        $"Text: '{LabeledExample_Text1.Substring(0, (int)TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter)}...', ",
-                        $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count.ToString()}' ]"
+                        $"Text: '{LabeledExample_Text1}', ",
+                        $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count}' ]"
                     );
         internal static string LabeledExample_Text1_FourgramValue1 = "we are looking for";
         internal static string LabeledExample_Text1_FivegramValue1 = "we are looking for several";
@@ -624,8 +618,6 @@ namespace NW.NGramTextClassification.UnitTests
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 19.01.2021
-
+    Last Update: 17.09.2021
 */
