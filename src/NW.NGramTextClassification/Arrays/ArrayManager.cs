@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Arrays
 {
+    /// <inheritdoc cref="IArrayManager"/>
     public class ArrayManager : IArrayManager
     {
 
@@ -51,8 +52,6 @@ namespace NW.NGramTextClassification
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 29.12.2020
-
+    Last Update: 17.09.2021
 */

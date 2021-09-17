@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using NW.NGramTextClassification.Arrays;
 
 namespace NW.NGramTextClassification
 {
@@ -167,8 +168,6 @@ namespace NW.NGramTextClassification
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 30.04.2021
-
+    Last Update: 17.09.2021
 */
