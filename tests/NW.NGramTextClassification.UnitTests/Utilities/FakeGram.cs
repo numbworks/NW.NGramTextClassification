@@ -1,4 +1,6 @@
-﻿namespace NW.NGramTextClassification.UnitTests
+﻿using NW.NGramTextClassification.NGrams;
+
+namespace NW.NGramTextClassification.UnitTests
 {
     public class FakeGram : ANGram, INGram
     {

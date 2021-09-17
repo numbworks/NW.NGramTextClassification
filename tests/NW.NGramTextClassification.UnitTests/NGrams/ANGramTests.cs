@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using NW.NGramTextClassification.Messages;
+using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.UnitTests
 {

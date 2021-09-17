@@ -1,5 +1,6 @@
-﻿namespace NW.NGramTextClassification
+﻿namespace NW.NGramTextClassification.NGrams
 {
+    /// <summary>A contiguous sequence of N items from a given sample of text.</summary>
     public interface INGram
     {
 
@@ -11,8 +12,6 @@
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
-
+    Last Update: 17.09.2021
 */

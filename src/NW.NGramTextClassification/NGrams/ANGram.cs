@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.NGrams
 {
+    /// <summary>A contiguous sequence of N items from a given sample of text.</summary>
     public abstract class ANGram
     {
 

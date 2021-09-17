@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.LabeledExamples
 {

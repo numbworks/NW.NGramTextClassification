@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.Arrays;
 using NW.NGramTextClassification.Messages;
+using NW.NGramTextClassification.NGrams;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests

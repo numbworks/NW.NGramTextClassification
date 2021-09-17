@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification
 {
@@ -49,8 +50,6 @@ namespace NW.NGramTextClassification
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 31.12.2020
-
+    Last Update: 17.09.2021
 */
