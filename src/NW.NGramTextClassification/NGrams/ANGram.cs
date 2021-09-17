@@ -5,17 +5,23 @@ namespace NW.NGramTextClassification
     public abstract class ANGram
     {
 
-        // Fields
-        // Properties
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public ushort N { get; }
         public ITokenizationStrategy Strategy { get; }
         public string Value { get; set; }
 
-        // Constructor(s)
+        #endregion
+
+        #region Constructors
+
         protected ANGram(ushort n, ITokenizationStrategy strategy, string value)
         {
 
-            Validator.ValidateN(n);
+            Validator.ThrowIfLessThanOne(n, nameof(n));
             Validator.ValidateObject(strategy, nameof(strategy));
             Validator.ValidateStringNullOrWhiteSpace(value, nameof(value));
 
@@ -25,7 +31,10 @@ namespace NW.NGramTextClassification
 
         }
 
-        // Methods
+        #endregion
+
+        #region Methods_public
+
         public override int GetHashCode()
             => (N, Strategy, Value).GetHashCode();
         public override bool Equals(object obj)
@@ -60,12 +69,12 @@ namespace NW.NGramTextClassification
         public static bool operator !=(ANGram a, ANGram b)
             => !(a == b);
 
+        #endregion
+
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 24.01.2020
-
+    Last Update: 17.09.2021
 */

@@ -164,15 +164,22 @@ namespace NW.NGramTextClassification
 
         #endregion
 
-        public static void ValidateN<T>(ushort n) where T : Exception
+        #region ThrowIfLess
+
+        /// <summary>Throws an exception of type <see cref="TException"/> when <paramref name="value"/> is less than one.</summary>
+        public static void ThrowIfLessThanOne<TException>(uint value, string variableName) where TException : Exception
         {
 
-            if (n < 1)
-                throw CreateException<T>(MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(nameof(n)));
+            if (value < 1)
+                throw CreateException<TException>(MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(variableName));
 
         }
-        public static void ValidateN(ushort n)
-            => ValidateN<ArgumentException>(n);
+
+        /// <summary>Throws an exception of type <see cref="ArgumentException"/> when <paramref name="length"/> is less than one.</summary>
+        public static void ThrowIfLessThanOne(uint value, string variableName)
+            => ThrowIfLessThanOne<ArgumentException>(value, variableName);
+
+        #endregion
 
         #region Methods_private
 

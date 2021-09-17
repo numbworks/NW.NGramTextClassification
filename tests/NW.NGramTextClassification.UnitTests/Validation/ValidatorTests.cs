@@ -108,26 +108,26 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_02"),
 
         };
-        private static TestCaseData[] validateNExceptionTestCases =
+        private static TestCaseData[] throwIfLessThanOneExceptionTestCases =
         {
 
-            // ValidateN<T>
+            // ThrowIfLessThanOne<T>
             new TestCaseData(
                 new TestDelegate(
-                        () => Validator.ValidateN<Exception>(0)
+                        () => Validator.ThrowIfLessThanOne<Exception>(0, ObjectMother.Validator_VariableName_N)
                     ),
                 typeof(Exception),
                 MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
-                ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_01"),
 
-            // ValidateN
+            // ThrowIfLessThanOne
             new TestCaseData(
                 new TestDelegate(
-                        () => Validator.ValidateN(0)
+                        () => Validator.ThrowIfLessThanOne(0, ObjectMother.Validator_VariableName_N)
                     ),
                 typeof(ArgumentException),
                 MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.Validator_VariableName_N)
-                ).SetArgDisplayNames($"{nameof(validateNExceptionTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_02")
 
         };
         private static TestCaseData[] validateStringNullOrWhiteSpaceExceptionTestCases =
@@ -246,8 +246,8 @@ namespace NW.NGramTextClassification.UnitTests
         public void ValidateList_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-        [TestCaseSource(nameof(validateNExceptionTestCases))]
-        public void ValidateN_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(throwIfLessThanOneExceptionTestCases))]
+        public void ThrowIfLessThanOne_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
         [TestCaseSource(nameof(validateStringNullOrWhiteSpaceExceptionTestCases))]
@@ -290,10 +290,10 @@ namespace NW.NGramTextClassification.UnitTests
                     });
 
         [Test]
-        public void ValidateN_ShouldDoNothing_WhenProperArgument()
+        public void ThrowIfLessThanOne_ShouldDoNothing_WhenProperArgument()
             => Method_ShouldDoNothing_WhenProperArgument(
                     new Action[] {
-                        () => Validator.ValidateN(ObjectMother.N1)
+                        () => Validator.ThrowIfLessThanOne(ObjectMother.N1, ObjectMother.Validator_VariableName_N)
                     });
 
         [Test]
