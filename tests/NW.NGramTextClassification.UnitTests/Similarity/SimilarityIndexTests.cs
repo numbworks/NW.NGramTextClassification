@@ -8,7 +8,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class SimilarityIndexTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] similarityIndexExceptionTestCases =
         {
 
@@ -37,8 +38,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [Test]
         public void SimilarityIndex_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
@@ -77,15 +83,15 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 22.01.2021
-
+    Last Update: 18.09.2021
 */
