@@ -6,21 +6,26 @@ namespace NW.NGramTextClassification.UnitTests
     public class FakeGram : ANGram, INGram
     {
 
-        // Fields
-        // Properties
-        // Constructors
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+
         public FakeGram(ushort n, ITokenizationStrategy strategy, string value)
             : base(n, strategy, value) { }
 
-        // Methods (public)
-        // Methods (private)
+        #endregion
+
+        #region Methods_public
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 20.01.2021
-
+    Last Update: 18.09.2021
 */
