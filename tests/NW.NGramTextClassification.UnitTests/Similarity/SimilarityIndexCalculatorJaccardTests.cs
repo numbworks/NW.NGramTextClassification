@@ -11,7 +11,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class SimilarityIndexCalculatorJaccardTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] doExceptionTestCases =
         {
 
@@ -102,8 +103,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(doExceptionTestCases))]
         public void Do_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -116,7 +122,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            double actual 
+            double actual
                 = new SimilarityIndexCalculatorJaccard()
                         .Do(list1, list2, TextClassifierComponents.DefaultRoundingFunction);
 
@@ -125,8 +131,10 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
