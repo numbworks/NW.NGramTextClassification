@@ -8,13 +8,14 @@ namespace NW.NGramTextClassification.UnitTests
     public class TokenizationStrategyTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] tokenizationStrategyExceptionTestCases =
         {
 
             // ValidateStringNullOrWhiteSpace
             new TestCaseData(
-                new TestDelegate( 
+                new TestDelegate(
                         () => new TokenizationStrategy(
                                     null,
                                     TokenizationStrategy.DefaultDelimiter,
@@ -85,8 +86,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(tokenizationStrategyExceptionTestCases))]
         public void TokenizationStrategy_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -187,15 +193,16 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 24.01.2021
-
+    Last Update: 18.09.2021
 */
