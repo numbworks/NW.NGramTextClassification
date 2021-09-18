@@ -8,25 +8,13 @@ namespace NW.NGramTextClassification.UnitTests
     public class NGramTokenizerRuleSetTests
     {
 
-        // Fields
-        // SetUp
-        // Tests
-        [Test]
-        public void ToString_ShouldReturnTheExpectedString_WhenInvoked()
-        {
+        #region Fields
+        #endregion
 
-            // Arrange
-            // Act
-            string actual = new NGramTokenizerRuleSet().ToString();
+        #region SetUp
+        #endregion
 
-            // Assert
-            Assert.IsTrue(
-                string.Equals(
-                    ObjectMother.NGramTokenizerRuleSet_ToString, 
-                    actual, 
-                    StringComparison.InvariantCulture));
-
-        }
+        #region Tests
 
         [Test]
         public void NGramTokenizerRuleSet_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -43,15 +31,15 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 22.01.2021
-
+    Last Update: 18.09.2021
 */
