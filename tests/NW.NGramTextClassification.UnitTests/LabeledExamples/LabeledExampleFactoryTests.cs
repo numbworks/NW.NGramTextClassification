@@ -11,15 +11,16 @@ namespace NW.NGramTextClassification.UnitTests
     public class LabeledExampleFactoryTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] labeledExampleFactoryExceptionTestCases =
         {
 
             // ValidateObject
             new TestCaseData(
-                new TestDelegate( 
+                new TestDelegate(
                         () => new LabeledExampleFactory(
-                                            null, 
+                                            null,
                                             ObjectMother.LabeledExampleFactory_InitialId1
                             )),
                 typeof(ArgumentNullException),
@@ -194,12 +195,18 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(labeledExampleFactoryExceptionTestCases))]
         public void LabeledExampleFactory_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(createExceptionTestCases))]
         public void Create_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -211,7 +218,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            LabeledExample actual 
+            LabeledExample actual
                 = new LabeledExampleFactory()
                             .Create(
                                 ObjectMother.LabeledExampleFactory_Id1,
@@ -261,8 +268,10 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
