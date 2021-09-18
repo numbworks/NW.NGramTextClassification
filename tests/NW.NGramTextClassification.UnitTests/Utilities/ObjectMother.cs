@@ -5,13 +5,15 @@ using NUnit.Framework;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Similarity;
 
 namespace NW.NGramTextClassification.UnitTests
 {
     internal static class ObjectMother
     {
 
-        // Validator
+        #region Validator
+
         internal static string[] Validator_Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
         internal static Car Validator_Object1 = new Car()
         {
@@ -30,7 +32,10 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string Validator_String1 = "Dodge";
         internal static string Validator_StringOnlyWhiteSpaces = "   ";
 
-        // ArrayManager
+        #endregion
+
+        #region ArrayManager
+
         internal static string ArrayManager_VariableName_Arr = "arr";
         internal static string ArrayManager_VariableName_Delimiter = "delimiter";
         internal static string ArrayManager_VariableName_StartIndex = "startIndex";
@@ -53,7 +58,10 @@ namespace NW.NGramTextClassification.UnitTests
             };
         internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
 
-        // LabeledExample
+        #endregion
+
+        #region LabeledExample
+
         internal static string LabeledExample_VariableName_Label = "label";
         internal static string LabeledExample_VariableName_Text = "text";
         internal static string LabeledExample_VariableName_TextAsNGrams = "textAsNGrams";
@@ -88,7 +96,10 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string LabeledExample_Text1_FourgramValue1 = "we are looking for";
         internal static string LabeledExample_Text1_FivegramValue1 = "we are looking for several";
 
-        // LabeledExampleFactory
+        #endregion
+
+        #region LabeledExampleFactory
+
         internal static string LabeledExampleFactory_VariableName_Tokenizer = "tokenizer";
         internal static string LabeledExampleFactory_VariableName_Label = "label";
         internal static string LabeledExampleFactory_VariableName_Text = "text";
@@ -273,7 +284,10 @@ namespace NW.NGramTextClassification.UnitTests
                     LabeledExampleFactory_LabeledExample2
                 };
 
-        // ANGram
+        #endregion 
+
+        #region ANGram
+
         internal static string ANGram_VariableName_N = "n";
         internal static string ANGram_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
         internal static string ANGram_VariableName_Value = "value";
@@ -291,7 +305,10 @@ namespace NW.NGramTextClassification.UnitTests
         internal static int ANGram_FakeGram1_HashCode
             = (ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value).GetHashCode();
 
-        // NGramTokenizer
+        #endregion
+
+        #region NGramTokenizer
+
         internal static string NGramTokenizer_VariableName_ArrayManager = "arrayManager";
         internal static string NGramTokenizer_VariableName_Text = LabeledExampleFactory_VariableName_Text;
         internal static string NGramTokenizer_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
@@ -301,11 +318,17 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string NGramTokenizer_TextNonAlphanumerical = ";;;-- £/£&$£";
         internal static List<INGram> NGramTokenizer_Text1_NGrams = LabeledExampleFactory_Text1_NGrams;
 
-        // NGramTokenizerRuleSet
+        #endregion
+
+        #region NGramTokenizerRuleSet
+        
         internal static string NGramTokenizerRuleSet_ToString 
             = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
 
-        // TokenizationStrategy
+        #endregion
+
+        #region TokenizationStrategy
+
         internal static string TokenizationStrategy_VariableName_Pattern = "pattern";
         internal static string TokenizationStrategy_VariableName_Delimiter = "delimiter";
         internal static string TokenizationStrategy_ToString
@@ -315,7 +338,10 @@ namespace NW.NGramTextClassification.UnitTests
         internal static int TokenizationStrategy_DefaultHashCode
             = (TokenizationStrategy.DefaultPattern, TokenizationStrategy.DefaultDelimiter, TokenizationStrategy.DefaultToLowercase).GetHashCode();
 
-        // SimilarityIndex
+        #endregion
+
+        #region SimilarityIndex
+
         internal static string SimilarityIndex_VariableName_Label = "label";
         internal static ulong SimilarityIndex_Id1 = 1;
         internal static string SimilarityIndex_Label1 = "en";
@@ -331,7 +357,10 @@ namespace NW.NGramTextClassification.UnitTests
             = $"[ Id: '{SimilarityIndex_Id1.ToString()}', Label: '{SimilarityIndex_Label1}', Value: '{SimilarityIndex_Value1.ToString()}' ]";
         internal static string SimilarityIndex_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
 
-        // SimilarityIndexAverage
+        #endregion
+
+        #region SimilarityIndexAverage
+
         internal static string SimilarityIndexAverage_Label1 = "en";
         internal static double SimilarityIndexAverage_Value1 = 0.54;
         internal static SimilarityIndexAverage SimilarityIndexAverage1 
@@ -341,7 +370,10 @@ namespace NW.NGramTextClassification.UnitTests
             = $"[ Label: '{SimilarityIndexAverage_Label1}', Value: '{SimilarityIndexAverage_Value1.ToString()}' ]";
         internal static string SimilarityIndexAverage_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
 
-        // TextClassifierResult
+        #endregion
+
+        #region TextClassifierResult
+
         internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
             = new List<SimilarityIndex>()
                 {
@@ -361,14 +393,20 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string TextClassifierResult_VariableName_Indexes = "indexes";
         internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
 
-        // SimilarityIndexCalculatorJaccard
+        #endregion
+
+        #region SimilarityIndexCalculatorJaccard
+
         internal static string SimilarityIndexCalculatorJaccard_VariableName_List1 = "list1";
         internal static string SimilarityIndexCalculatorJaccard_VariableName_List2 = "list2";
         internal static string SimilarityIndexCalculatorJaccard_VariableName_RoundingFunction = "roundingFunction";
         internal static List<INGram> SimilarityIndexCalculatorJaccard_List1 = LabeledExampleFactory_Text1_NGrams;
         internal static List<INGram> SimilarityIndexCalculatorJaccard_List2 = LabeledExampleFactory_Text2_NGrams;
 
-        // TextClassifier
+        #endregion
+
+        #region TextClassifier
+
         internal static string TextClassifier_VariableName_Components = "components";
         internal static string TextClassifier_VariableName_Settings = "settings";
         internal static string TextClassifier_VariableName_Text = "text";
@@ -488,14 +526,20 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text3_SimilarityIndex2.Label,
             };
 
-        // TextClassifierComponents
+        #endregion
+
+        #region TextClassifierComponents
+        
         internal static string TextClassifierComponents_VariableName_NGramsTokenizer = "nGramsTokenizer";
         internal static string TextClassifierComponents_VariableName_SimilarityIndexCalculator = "similarityIndexCalculator";
         internal static string TextClassifierComponents_VariableName_RoundingFunction = "roundingFunction";
         internal static string TextClassifierComponents_VariableName_TextTruncatingFunction = "textTruncatingFunction";
         internal static string TextClassifierComponents_VariableName_LoggingAction = "loggingAction";
 
-        // Methods
+        #endregion
+
+        #region Methods
+
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)
         {
 
@@ -616,10 +660,12 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        #endregion
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2021
 */

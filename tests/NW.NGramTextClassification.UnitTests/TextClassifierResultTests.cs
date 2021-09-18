@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification.Messages;
+using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests

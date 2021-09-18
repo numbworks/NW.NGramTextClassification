@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Similarity;
 
 namespace NW.NGramTextClassification.Messages
 {

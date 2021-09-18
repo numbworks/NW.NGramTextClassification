@@ -1,4 +1,5 @@
 ﻿using System;
+using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Similarity
 {
     /// <summary>The average of multiple <see cref="SimilarityIndex"/>.</summary>
     public class SimilarityIndexAverage

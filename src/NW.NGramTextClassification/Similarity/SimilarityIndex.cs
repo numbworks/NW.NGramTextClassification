@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Similarity
 {
     /// <summary>The result of a similarity calculation.</summary>
     public class SimilarityIndex

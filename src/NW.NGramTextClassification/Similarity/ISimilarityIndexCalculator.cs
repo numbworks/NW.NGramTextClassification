@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Similarity
 {
     /// <summary>A component able to calculate a <see cref="SimilarityIndex"/>.</summary>
     public interface ISimilarityIndexCalculator
