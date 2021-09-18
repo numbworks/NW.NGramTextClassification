@@ -10,7 +10,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class TextClassifierResultTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] toStringTestCases =
         {
 
@@ -82,8 +83,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(toStringTestCases))]
         public void ToString_ShouldReturnTheExpectedString_WhenInvoked
             (TextClassifierResult textClassifierResult, string expected)
@@ -125,13 +131,15 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2021
 */
