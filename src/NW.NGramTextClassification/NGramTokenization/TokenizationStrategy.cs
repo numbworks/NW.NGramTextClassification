@@ -1,20 +1,30 @@
 ﻿using System;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.NGramTokenization
 {
+    /// <inheritdoc cref="ITokenizationStrategy"/>
     public class TokenizationStrategy : ITokenizationStrategy
     {
 
-        // Fields
-        // Properties
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public static string DefaultPattern { get; } = "[\\w0-9_]{1,}";
         public static string DefaultDelimiter { get; } = " ";
         public static bool DefaultToLowercase { get; } = true;
+
         public string Pattern { get; }
         public string Delimiter { get; }
         public bool ToLowercase { get; }
 
-        // Constructors
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="TokenizationStrategy"/> instance.</summary>
+        /// <exception cref="ArgumentNullException"/>
         public TokenizationStrategy(string pattern, string delimiter, bool toLowercase)
         {
 
@@ -26,10 +36,15 @@ namespace NW.NGramTextClassification
             ToLowercase = toLowercase;
 
         }
+
+        /// <summary>Initializes a <see cref="TokenizationStrategy"/> instance using default parameters.</summary>
         public TokenizationStrategy()
             : this(DefaultPattern, DefaultDelimiter, DefaultToLowercase) { }
 
-        // Methods (public)
+        #endregion
+
+        #region Methods_public
+
         public override string ToString()
         {
 
@@ -78,14 +93,12 @@ namespace NW.NGramTextClassification
         public static bool operator !=(TokenizationStrategy a, TokenizationStrategy b)
             => !(a == b);
 
-        // Methods (private)
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 30.12.2020
-
+    Last Update: 17.09.2021
 */

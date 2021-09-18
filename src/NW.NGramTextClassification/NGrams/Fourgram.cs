@@ -1,4 +1,6 @@
-﻿namespace NW.NGramTextClassification.NGrams
+﻿using NW.NGramTextClassification.NGramTokenization;
+
+namespace NW.NGramTextClassification.NGrams
 {
     /// <inheritdoc cref="ANGram"/>
     public class Fourgram : ANGram, INGram

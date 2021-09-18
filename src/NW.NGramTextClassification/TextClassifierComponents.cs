@@ -1,12 +1,18 @@
 ﻿using System;
 
+using NW.NGramTextClassification.NGramTokenization;
+
 namespace NW.NGramTextClassification
 {
+    /// <summary>Collects all the dependencies required by <see cref="TextClassifier"/>.</summary>
     public class TextClassifierComponents
     {
 
-        // Fields
-        // Properties (static)
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public static Func<double, double> DefaultRoundingFunction { get; }
             = x => Math.Round(x, 6, MidpointRounding.AwayFromZero);
         public static Func<string, uint, string> DefaultTextTruncatingFunction { get; }
@@ -25,20 +31,23 @@ namespace NW.NGramTextClassification
         public static Action<string> DefaultLoggingAction { get; }
             = (message) => Console.WriteLine(message);
 
-        // Properties
         public INGramTokenizer NGramsTokenizer { get; private set; }
         public ISimilarityIndexCalculator SimilarityIndexCalculator { get; private set; }
         public Func<double, double> RoundingFunction { get; private set; }
         public Func<string, uint, string> TextTruncatingFunction { get; private set; }
         public Action<string> LoggingAction { get; private set; }
 
-        // Constructors
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="TextClassifierComponents"/> instance.</summary>
         public TextClassifierComponents(
-                INGramTokenizer nGramsTokenizer,
-                ISimilarityIndexCalculator similarityIndexCalculator,
-                Func<double, double> roundingFunction,
-                Func<string, uint, string> textTruncatingFunction,
-                Action<string> loggingAction)
+                    INGramTokenizer nGramsTokenizer,
+                    ISimilarityIndexCalculator similarityIndexCalculator,
+                    Func<double, double> roundingFunction,
+                    Func<string, uint, string> textTruncatingFunction,
+                    Action<string> loggingAction)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -54,23 +63,26 @@ namespace NW.NGramTextClassification
             LoggingAction = loggingAction;
 
         }
+
+        /// <summary>Initializes a <see cref="TextClassifierComponents"/> instance using default parameters.</summary>
         public TextClassifierComponents()
             : this(
-                  new NGramTokenizer(), 
-                  new SimilarityIndexCalculatorJaccard(), 
+                  new NGramTokenizer(),
+                  new SimilarityIndexCalculatorJaccard(),
                   DefaultRoundingFunction,
                   DefaultTextTruncatingFunction,
-                  DefaultLoggingAction) { }
+                  DefaultLoggingAction)
+        { }
 
-        // Methods (public)
-        // Methods (private)
+        #endregion
+
+        #region Methods_public
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 30.04.2021
-
+    Last Update: 17.09.2021
 */

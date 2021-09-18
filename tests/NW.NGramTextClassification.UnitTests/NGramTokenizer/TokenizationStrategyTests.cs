@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NW.NGramTextClassification.NGramTokenization;
 
 namespace NW.NGramTextClassification.UnitTests
 {

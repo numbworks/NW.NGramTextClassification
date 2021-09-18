@@ -1,4 +1,6 @@
-﻿namespace NW.NGramTextClassification.NGrams
+﻿using NW.NGramTextClassification.NGramTokenization;
+
+namespace NW.NGramTextClassification.NGrams
 {
     /// <summary>A contiguous sequence of N items from a given sample of text.</summary>
     public interface INGram

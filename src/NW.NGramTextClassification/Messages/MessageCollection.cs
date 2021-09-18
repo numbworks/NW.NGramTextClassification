@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
+using NW.NGramTextClassification.NGramTokenization;
 
 namespace NW.NGramTextClassification.Messages
 {

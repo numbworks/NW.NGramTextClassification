@@ -6,7 +6,7 @@ using NW.NGramTextClassification.Arrays;
 using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.NGramTokenization
 {
     /// <inheritdoc cref="INGramTokenizer"/>
     public class NGramTokenizer : INGramTokenizer

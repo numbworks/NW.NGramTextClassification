@@ -4,6 +4,7 @@ using System.Linq;
 using NUnit.Framework;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
+using NW.NGramTextClassification.NGramTokenization;
 
 namespace NW.NGramTextClassification.UnitTests
 {

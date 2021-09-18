@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.NGramTokenization
 {
-
     /// <summary>Collects methods that break a text into tokens of type <see cref="INGram"/>.</summary>
     public interface INGramTokenizer
     {
