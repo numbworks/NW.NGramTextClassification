@@ -10,7 +10,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class ANGramTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] aNGramExceptionTestCases =
         {
 
@@ -91,8 +92,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(aNGramExceptionTestCases))]
         public void ANGram_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -153,10 +159,12 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.AreEqual(ObjectMother.ANGram_FakeGram1_HashCode, actual);
 
-        }       
+        }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
