@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.Arrays
 {

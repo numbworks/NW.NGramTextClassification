@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.LabeledExamples
 {

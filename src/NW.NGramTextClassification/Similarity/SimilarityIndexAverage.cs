@@ -1,4 +1,5 @@
 ﻿using System;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.Similarity
 {

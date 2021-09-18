@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.Messages;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Validation
 {
     /// <summary>Collects all the validation methods.</summary>
     public static class Validator

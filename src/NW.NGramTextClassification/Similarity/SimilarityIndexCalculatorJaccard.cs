@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NW.NGramTextClassification.NGrams;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.Similarity
 {

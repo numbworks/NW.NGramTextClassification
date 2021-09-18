@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using NW.NGramTextClassification.Arrays;
 using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.NGramTokenization
 {

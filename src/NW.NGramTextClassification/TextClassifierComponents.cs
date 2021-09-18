@@ -1,7 +1,7 @@
 ﻿using System;
 using NW.NGramTextClassification.Similarity;
-
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification
 {

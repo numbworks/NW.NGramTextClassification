@@ -5,6 +5,7 @@ using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification
 {
