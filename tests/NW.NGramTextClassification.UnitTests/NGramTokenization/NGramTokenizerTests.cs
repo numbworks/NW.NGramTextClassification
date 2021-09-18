@@ -12,7 +12,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class NGramTokenizerTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] nGramTokenizerExceptionTestCases =
         {
 
@@ -29,8 +30,8 @@ namespace NW.NGramTextClassification.UnitTests
 
             // ValidateStringNullOrWhiteSpace
             new TestCaseData(
-                new TestDelegate( 
-                            () => new NGramTokenizer().Do(null) 
+                new TestDelegate(
+                            () => new NGramTokenizer().Do(null)
                         ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException(ObjectMother.NGramTokenizer_VariableName_Text).Message
@@ -55,8 +56,8 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                             () => new NGramTokenizer()
                                         .Do(
-                                            ObjectMother.NGramTokenizer_Text1, 
-                                            null, 
+                                            ObjectMother.NGramTokenizer_Text1,
+                                            null,
                                             new NGramTokenizerRuleSet()
                         )),
                 typeof(ArgumentNullException),
@@ -100,12 +101,18 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(nGramTokenizerExceptionTestCases))]
         public void NGramTokenizer_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(doExceptionTestCases))]
         public void Do_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -119,12 +126,12 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             List<INGram> actual1 = new NGramTokenizer()
                                         .Do(
-                                            ObjectMother.NGramTokenizer_Text1, 
-                                            new TokenizationStrategy(), 
+                                            ObjectMother.NGramTokenizer_Text1,
+                                            new TokenizationStrategy(),
                                             new NGramTokenizerRuleSet());
             List<INGram> actual2 = new NGramTokenizer()
                                         .Do(
-                                            ObjectMother.NGramTokenizer_Text1, 
+                                            ObjectMother.NGramTokenizer_Text1,
                                             new TokenizationStrategy());
             List<INGram> actual3 = new NGramTokenizer()
                                         .Do(
@@ -133,7 +140,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<INGram> actual4 = new NGramTokenizer()
                                         .Do(
                                             ObjectMother.NGramTokenizer_Text1);
-            
+
             // Assert
             Assert.IsTrue(
                     ObjectMother.AreEqual(
@@ -173,13 +180,15 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2021
 */
