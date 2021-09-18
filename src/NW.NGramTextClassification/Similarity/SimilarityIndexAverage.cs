@@ -1,14 +1,25 @@
-﻿namespace NW.NGramTextClassification
+﻿using System;
+
+namespace NW.NGramTextClassification
 {
+    /// <summary>The average of multiple <see cref="SimilarityIndex"/>.</summary>
     public class SimilarityIndexAverage
     {
 
-        // Fields
-        // Properties
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public string Label { get; }
         public double Value { get; }
 
-        // Constructors
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="SimilarityIndexAverage"/> instance.</summary>
+        /// <exception cref="ArgumentNullException"/>
         public SimilarityIndexAverage(string label, double value)
         {
 
@@ -19,7 +30,10 @@
 
         }
 
-        // Methods
+        #endregion
+
+        #region Methods_public
+
         public override string ToString()
         {
 
@@ -27,21 +41,19 @@
                 = string.Join(
                     ", ",
                     $"{nameof(Label)}: '{Label}'",
-                    $"{nameof(Value)}: '{Value.ToString()}'"
+                    $"{nameof(Value)}: '{Value}'"
                     );
 
             return $"[ {content} ]";
 
         }
 
-        // Methods (private)
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 01.01.2021
-
+    Last Update: 18.09.2021
 */

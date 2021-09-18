@@ -1,15 +1,26 @@
-﻿namespace NW.NGramTextClassification
+﻿using System;
+
+namespace NW.NGramTextClassification
 {
+    /// <summary>The result of a similarity calculation.</summary>
     public class SimilarityIndex
     {
 
-        // Fields
-        // Properties
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public ulong Id { get; }
         public string Label { get; }
         public double Value { get; }
 
-        // Constructors
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="SimilarityIndex"/> instance.</summary>
+        /// <exception cref="ArgumentNullException"/>
         public SimilarityIndex(ulong id, string label, double value)
         {
 
@@ -17,11 +28,14 @@
 
             Id = id;
             Label = label;
-            Value = value; 
+            Value = value;
 
         }
 
-        // Methods
+        #endregion
+
+        #region Methods_public
+
         public override string ToString()
         {
 
@@ -30,21 +44,19 @@
                     ", ",
                     $"{nameof(Id)}: '{Id}'",
                     $"{nameof(Label)}: '{Label}'",
-                    $"{nameof(Value)}: '{Value.ToString()}'"
+                    $"{nameof(Value)}: '{Value}'"
                     );
 
             return $"[ {content} ]";
 
         }
 
-        // Methods (private)
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 31.12.2020
-
+    Last Update: 18.09.2021
 */

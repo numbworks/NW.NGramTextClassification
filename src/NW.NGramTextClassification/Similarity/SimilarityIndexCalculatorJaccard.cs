@@ -5,15 +5,25 @@ using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification
 {
+    /// <inheritdoc cref="ISimilarityIndexCalculator"/>
     public class SimilarityIndexCalculatorJaccard : ISimilarityIndexCalculator
     {
 
-        // Fields
-        // Properties
-        // Constructors
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="SimilarityIndexCalculatorJaccard"/> instance.</summary>
         public SimilarityIndexCalculatorJaccard() { }
 
-        // Methods
+        #endregion
+
+        #region Methods_public
+
         public double Do(List<INGram> list1, List<INGram> list2, Func<double, double> roundingFunction)
         {
 
@@ -28,7 +38,10 @@ namespace NW.NGramTextClassification
 
         }
 
-        // Methods (private)
+        #endregion
+
+        #region Methods_private
+
         private double Do(List<string> list1, List<string> list2, Func<double, double> roundingStrategy)
         {
 
@@ -46,10 +59,12 @@ namespace NW.NGramTextClassification
 
         }
 
+        #endregion
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2021
 */
