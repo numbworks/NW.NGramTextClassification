@@ -3,26 +3,32 @@
     internal class Car
     {
 
-        // Fields
-        // Properties
+        #region Fields
+        #endregion
+
+        #region Properties
+
         public string Brand { get; set; }
         public string Model { get; set; }
         public uint Year { get; set; }
         public uint Price { get; set; }
         public string Currency { get; set; }
 
-        // Constructors
+        #endregion
+
+        #region Constructors
+
         public Car() { }
 
-        // Methods (public)
-        // Methods (private)
+        #endregion
+
+        #region Methods_public
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 08.01.2021
-
+    Last Update: 18.09.2021
 */
