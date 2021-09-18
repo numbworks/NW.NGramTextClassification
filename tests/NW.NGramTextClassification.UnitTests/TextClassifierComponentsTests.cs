@@ -9,7 +9,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class TextClassifierComponentsTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] textClassifierComponentsExceptionTestCases =
         {
 
@@ -85,8 +86,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(textClassifierComponentsExceptionTestCases))]
         public void TextClassifierComponents_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -123,16 +129,15 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        #endregion
 
-        // TearDown
-        // Support methods
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
-
     Author: numbworks@gmail.com
-    Last Update: 30.04.2021
-
+    Last Update: 18.09.2021
 */
