@@ -8,7 +8,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class SimilarityIndexAverageTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] similarityIndexAverageExceptionTestCases =
         {
 
@@ -35,8 +36,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [Test]
         public void SimilarityIndexAverage_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
@@ -74,8 +80,10 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
