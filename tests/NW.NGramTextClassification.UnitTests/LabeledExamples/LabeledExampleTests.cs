@@ -11,7 +11,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class LabeledExampleTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] labeledExampleExceptionTestCases =
         {
 
@@ -104,8 +105,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(labeledExampleExceptionTestCases))]
         public void LabeledExample_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -117,7 +123,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            string actual 
+            string actual
                 = ObjectMother.LabeledExample1.ToString();
 
             // Assert
@@ -146,8 +152,10 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 
