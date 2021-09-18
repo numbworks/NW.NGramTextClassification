@@ -10,7 +10,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class ValidatorTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] validateLengthExceptionTestCases =
         {
 
@@ -90,7 +91,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => Validator.ValidateList(
-                                (List<string>)null, 
+                                (List<string>)null,
                                 ObjectMother.Validator_VariableName_Variable)
                     ),
                 typeof(ArgumentNullException),
@@ -229,8 +230,14 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(validateLengthExceptionTestCases))]
         public void ValidateLength_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -325,8 +332,10 @@ namespace NW.NGramTextClassification.UnitTests
                         () => Validator.ThrowIfFirstIsGreater(3, "n1", 4, "n2")
                     });
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+
         public void Method_ShouldDoNothing_WhenProperArgument(Action[] actions)
         {
 
@@ -348,6 +357,8 @@ namespace NW.NGramTextClassification.UnitTests
             }
 
         }
+
+        #endregion
 
     }
 }
