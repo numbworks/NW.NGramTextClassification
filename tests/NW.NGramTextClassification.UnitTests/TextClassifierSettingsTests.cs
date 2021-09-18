@@ -6,9 +6,14 @@ namespace NW.NGramTextClassification.UnitTests
     public class TextClassifierSettingsTests
     {
 
-        // Fields
-        // SetUp
-        // Tests
+        #region Fields
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [Test]
         public void TextClassifierSettings_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
@@ -24,8 +29,10 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
