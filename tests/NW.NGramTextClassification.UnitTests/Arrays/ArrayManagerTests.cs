@@ -9,7 +9,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class ArrayManagerTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] addDelimiterExceptionTestCases =
         {
 
@@ -18,7 +19,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .AddDelimiter(
-                                        null, 
+                                        null,
                                         ObjectMother.ArrayManager_Delimiter1)
                     ),
                 typeof(ArgumentNullException),
@@ -30,7 +31,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .AddDelimiter(
-                                        Array.Empty<string>(), 
+                                        Array.Empty<string>(),
                                         ObjectMother.ArrayManager_Delimiter1)
                     ),
                 typeof(ArgumentException),
@@ -42,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .AddDelimiter(
-                                        ObjectMother.Validator_Array1, 
+                                        ObjectMother.Validator_Array1,
                                         null)
                     ),
                 typeof(ArgumentNullException),
@@ -54,7 +55,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .AddDelimiter(
-                                        ObjectMother.Validator_Array1, 
+                                        ObjectMother.Validator_Array1,
                                         string.Empty)
                     ),
                 typeof(ArgumentNullException),
@@ -70,7 +71,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .GetSubset(
-                                        null, 
+                                        null,
                                         ObjectMother.ArrayManager_StartIndex1,
                                         ObjectMother.ArrayManager_Length1)
                     ),
@@ -148,12 +149,18 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(addDelimiterExceptionTestCases))]
         public void AddDelimiter_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(getSubsetExceptionTestCases))]
         public void GetSubset_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -194,8 +201,10 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
