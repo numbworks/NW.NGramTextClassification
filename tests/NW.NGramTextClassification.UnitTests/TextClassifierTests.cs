@@ -12,7 +12,8 @@ namespace NW.NGramTextClassification.UnitTests
     public class TextClassifierTests
     {
 
-        // Fields
+        #region Fields
+
         private static TestCaseData[] textClassifierExceptionTestCases =
         {
 
@@ -119,8 +120,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        // SetUp
-        // Tests
+        #endregion
+
+        #region SetUp
+        #endregion
+
+        #region Tests
+
         [TestCaseSource(nameof(textClassifierExceptionTestCases))]
         public void TextClassifier_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
@@ -152,7 +158,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction
                 = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components 
+            TextClassifierComponents components
                 = new TextClassifierComponents(
                           new NGramTokenizer(),
                           new SimilarityIndexCalculatorJaccard(),
@@ -160,9 +166,9 @@ namespace NW.NGramTextClassification.UnitTests
                           TextClassifierComponents.DefaultTextTruncatingFunction,
                           fakeLoggingAction);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
-            string truncatedText 
+            string truncatedText
                 = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
-                        ObjectMother.TextClassifier_Text1, 
+                        ObjectMother.TextClassifier_Text1,
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
             List<string> expectedLogMessages = new List<string>()
             {
@@ -212,7 +218,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            TextClassifierResult actual 
+            TextClassifierResult actual
                 = textClassifier.PredictLabel(
                                     ObjectMother.TextClassifier_Text1,
                                     ObjectMother.TextClassifier_LabeledExamples);
@@ -307,13 +313,15 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        // TearDown
-        // Support methods
+        #endregion
+
+        #region TearDown
+        #endregion
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2021
 */
