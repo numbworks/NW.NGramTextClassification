@@ -136,6 +136,21 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenInvoked()
+        {
+
+
+            // Arrange
+            // Act
+            LabeledExample actual = new LabeledExampleFactory.TryCreateForRuleSet();
+
+
+            // Assert
+
+        }
+
+
         #endregion
 
         #region TearDown

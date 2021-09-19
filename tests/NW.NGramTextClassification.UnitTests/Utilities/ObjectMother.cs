@@ -12,6 +12,115 @@ namespace NW.NGramTextClassification.UnitTests
     internal static class ObjectMother
     {
 
+        #region Shared
+
+        internal static string Shared_Text1_Text = "We are looking for several skilled and driven developers to join our team.";
+        internal static string Shared_Text1_Label = "en";
+        internal static ITokenizationStrategy Shared_Text1_TokenizationStrategy = new TokenizationStrategy();
+        internal static List<Monogram> Shared_Text1_TextAsMonograms = new List<Monogram>()
+        {
+
+            new Monogram(Shared_Text1_TokenizationStrategy, "we"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "are"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "looking"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "for"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "several"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "skilled"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "and"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "driven"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "developers"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "to"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "join"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "our"),
+            new Monogram(Shared_Text1_TokenizationStrategy, "team")
+
+        };
+        internal static List<Bigram> Shared_Text1_TextAsBigrams = new List<Bigram>()
+        {
+
+            new Bigram(Shared_Text1_TokenizationStrategy, "we are"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "are looking"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "looking for"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "for several"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "several skilled"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "skilled and"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "and driven"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "driven developers"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "developers to"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "to join"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "join our"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "our team"),
+            new Bigram(Shared_Text1_TokenizationStrategy, "team")
+
+        };
+        internal static List<Trigram> Shared_Text1_TextAsTrigrams = new List<Trigram>()
+        {
+
+            new Trigram(Shared_Text1_TokenizationStrategy, "we are looking"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "are looking for"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "looking for several"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "for several skilled"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "several skilled and"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "skilled and driven"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "and driven developers"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "driven developers to"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "developers to join"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "to join our"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "join our team"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "our team"),
+            new Trigram(Shared_Text1_TokenizationStrategy, "team")
+
+        };
+
+        internal static List<INGram> Shared_Text1_TextAsNGrams = new List<INGram>() 
+        {
+
+            Shared_Text1_TextAsMonograms[0],
+            Shared_Text1_TextAsMonograms[1],
+            Shared_Text1_TextAsMonograms[2],
+            Shared_Text1_TextAsMonograms[3],
+            Shared_Text1_TextAsMonograms[4],
+            Shared_Text1_TextAsMonograms[5],
+            Shared_Text1_TextAsMonograms[6],
+            Shared_Text1_TextAsMonograms[7],
+            Shared_Text1_TextAsMonograms[8],
+            Shared_Text1_TextAsMonograms[9],
+            Shared_Text1_TextAsMonograms[10],
+            Shared_Text1_TextAsMonograms[11],
+            Shared_Text1_TextAsMonograms[12],
+
+            Shared_Text1_TextAsBigrams[0],
+            Shared_Text1_TextAsBigrams[1],
+            Shared_Text1_TextAsBigrams[2],
+            Shared_Text1_TextAsBigrams[3],
+            Shared_Text1_TextAsBigrams[4],
+            Shared_Text1_TextAsBigrams[5],
+            Shared_Text1_TextAsBigrams[6],
+            Shared_Text1_TextAsBigrams[7],
+            Shared_Text1_TextAsBigrams[8],
+            Shared_Text1_TextAsBigrams[9],
+            Shared_Text1_TextAsBigrams[10],
+            Shared_Text1_TextAsBigrams[11],
+            Shared_Text1_TextAsBigrams[12],
+
+            Shared_Text1_TextAsTrigrams[0],
+            Shared_Text1_TextAsTrigrams[1],
+            Shared_Text1_TextAsTrigrams[2],
+            Shared_Text1_TextAsTrigrams[3],
+            Shared_Text1_TextAsTrigrams[4],
+            Shared_Text1_TextAsTrigrams[5],
+            Shared_Text1_TextAsTrigrams[6],
+            Shared_Text1_TextAsTrigrams[7],
+            Shared_Text1_TextAsTrigrams[8],
+            Shared_Text1_TextAsTrigrams[9],
+            Shared_Text1_TextAsTrigrams[10],
+            Shared_Text1_TextAsTrigrams[11],
+            Shared_Text1_TextAsTrigrams[12]
+
+        };
+
+        #endregion
+
         #region Validator
 
         internal static string[] Validator_Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
