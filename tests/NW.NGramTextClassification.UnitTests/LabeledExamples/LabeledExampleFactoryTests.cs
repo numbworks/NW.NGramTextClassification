@@ -24,11 +24,80 @@ namespace NW.NGramTextClassification.UnitTests
                                             ObjectMother.LabeledExampleFactory_InitialId1
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.LabeledExampleFactory_VariableName_Tokenizer).Message
+                new ArgumentNullException("tokenizer").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleFactoryExceptionTestCases)}_01")
 
         };
+        private static TestCaseData[] tryCreateForRuleSetForTextExceptionTestCases =
+        {
 
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .TryCreateForRuleSet(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        null,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("label").Message
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTextExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .TryCreateForRuleSet(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        null,
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("text").Message
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTextExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .TryCreateForRuleSet(
+                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        null
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("tokenizerRuleSet").Message
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTextExceptionTestCases)}_03")
+
+
+        };
+        private static TestCaseData[] tryCreateForRuleSetForTuplesExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .TryCreateForRuleSet(
+                                        ObjectMother.LabeledExampleFactory_Tuples,
+                                        null
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("tokenizerRuleSet").Message
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTuplesExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleFactory()
+                                    .TryCreateForRuleSet(
+                                        null,
+                                        new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("tuples").Message
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTuplesExceptionTestCases)}_02"),
+
+        };
 
         #endregion
 
@@ -39,6 +108,16 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(labeledExampleFactoryExceptionTestCases))]
         public void LabeledExampleFactory_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(tryCreateForRuleSetForTextExceptionTestCases))]
+        public void TryCreateForRuleSetForText_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(tryCreateForRuleSetForTuplesExceptionTestCases))]
+        public void TryCreateForRuleSetForTuples_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
@@ -67,5 +146,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

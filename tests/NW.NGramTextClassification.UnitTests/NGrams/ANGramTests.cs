@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.ANGram_FakeGram1_Value
                             )),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableCantBeLessThanOne.Invoke(ObjectMother.ANGram_VariableName_N)
+                MessageCollection.Validator_VariableCantBeLessThanOne.Invoke("n")
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_01"),
 
             // ValidateObject
@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.ANGram_FakeGram1_Value
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.ANGram_VariableName_Strategy).Message
+                new ArgumentNullException("stategy").Message
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_02"),
 
             // Validator.ValidateStringNullOrWhiteSpace
@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.ANGram_FakeGram_ValueOnlyWhiteSpaces
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.ANGram_VariableName_Value).Message
+                new ArgumentNullException("value").Message
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_03")
 
         };

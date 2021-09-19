@@ -100,12 +100,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region LabeledExampleFactory
 
-        internal static string LabeledExampleFactory_VariableName_Tokenizer = "tokenizer";
-        internal static string LabeledExampleFactory_VariableName_Label = "label";
-        internal static string LabeledExampleFactory_VariableName_Text = "text";
-        internal static string LabeledExampleFactory_VariableName_Strategy = "strategy";
-        internal static string LabeledExampleFactory_VariableName_RuleSet = "ruleSet";
-        internal static string LabeledExampleFactory_VariableName_Tuples = "tuples";
         internal static uint LabeledExampleFactory_InitialId1 = 0;
         internal static ulong LabeledExampleFactory_Id1 = LabeledExample_Id1;
         internal static string LabeledExampleFactory_Label1 = LabeledExample_Label1;
@@ -288,9 +282,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region ANGram
 
-        internal static string ANGram_VariableName_N = "n";
-        internal static string ANGram_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
-        internal static string ANGram_VariableName_Value = "value";
         internal static ushort ANGram_FakeGram1_N = 1;
         internal static string ANGram_FakeGram1_Value = LabeledExampleFactory_Text1_MonogramValue1;
         internal static string ANGram_FakeGram_ValueOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
@@ -309,9 +300,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region NGramTokenizer
 
-        internal static string NGramTokenizer_VariableName_Text = LabeledExampleFactory_VariableName_Text;
-        internal static string NGramTokenizer_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
-        internal static string NGramTokenizer_VariableName_RuleSet = LabeledExampleFactory_VariableName_RuleSet;
         internal static string NGramTokenizer_Text1 = LabeledExample_Text1;
         internal static string NGramTokenizer_TextOnlyWhiteSpaces = LabeledExample_TextOnlyWhiteSpaces;
         internal static string NGramTokenizer_TextNonAlphanumerical = ";;;-- £/£&$£";
