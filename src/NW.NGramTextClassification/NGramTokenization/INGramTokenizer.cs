@@ -38,6 +38,13 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         /// <summary>
         /// Breaks <paramref name="text"/> into a collection of tokens according to <paramref name="tokenizerRuleset"/>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        List<INGram> DoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset);
+
+        /// <summary>
+        /// Attempts to breaks <paramref name="text"/> into a collection of tokens according to <paramref name="tokenizerRuleset"/>.
         /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail, null will be returned.</para>
         /// </summary>

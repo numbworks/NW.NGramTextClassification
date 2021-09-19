@@ -15,16 +15,34 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
-        LabeledExample TryCreateForRuleset(ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet);
+        LabeledExample TryCreateForRuleSet(ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet);
 
         /// <summary>
-        /// Initializes a collection of <see cref="LabeledExample"/> object out of the provided parameters.
+        /// Initializes a <see cref="LabeledExample"/> out of the provided parameters and <see cref="LabeledExampleFactory.DefaultTokenizerRuleSet"/>.
         /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail, null will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
-        List<LabeledExample> TryCreateForRuleset(List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet);
+        LabeledExample TryCreateForRuleSet(ulong id, string label, string text);
+
+        /// <summary>
+        /// Initializes a collection of <see cref="LabeledExample"/> objects out of the provided parameters.
+        /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, null will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        List<LabeledExample> TryCreateForRuleSet(List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet);
+
+        /// <summary>
+        /// Initializes a collection of <see cref="LabeledExample"/> objects out of the provided parameters and <see cref="LabeledExampleFactory.DefaultTokenizerRuleSet"/>.
+        /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, null will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        List<LabeledExample> TryCreateForRuleSet(List<(string label, string text)> tuples);
 
     }
 }

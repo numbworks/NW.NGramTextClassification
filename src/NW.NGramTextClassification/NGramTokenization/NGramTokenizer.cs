@@ -60,6 +60,53 @@ namespace NW.NGramTextClassification.NGramTokenization
         public List<Fivegram> DoForFivegram(string text)
             => DoFor<Fivegram>(text);
 
+        public List<INGram> DoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset)
+        {
+
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
+            Validator.ValidateObject(tokenizerRuleset, nameof(tokenizerRuleset));
+
+            List<INGram> ngrams = new List<INGram>();
+
+            if (tokenizerRuleset.DoForMonogram)
+            {
+
+                List<Monogram> current = DoFor<Monogram>(text);
+                ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForBigram)
+            {
+
+                List<Bigram> current = DoFor<Bigram>(text);
+                ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForTrigram)
+            {
+
+                List<Trigram> current = DoFor<Trigram>(text);
+                ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForFourgram)
+            {
+
+                List<Fourgram> current = DoFor<Fourgram>(text);
+                ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForFivegram)
+            {
+
+                List<Fivegram> current = DoFor<Fivegram>(text);
+                ngrams.AddRange(current);
+
+            }
+
+            return ngrams;
+
+        }
         public List<INGram> TryDoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset)
         {
 

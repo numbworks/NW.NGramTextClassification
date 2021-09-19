@@ -94,7 +94,7 @@ namespace NW.NGramTextClassificationClient
 
             };
 
-            return new LabeledExampleFactory().Create(tuples);
+            return new LabeledExampleFactory().TryCreateForRuleSet(tuples);
 
         }
 

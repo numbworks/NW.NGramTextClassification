@@ -406,12 +406,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region TextClassifier
 
-        internal static string TextClassifier_VariableName_Components = "components";
-        internal static string TextClassifier_VariableName_Settings = "settings";
-        internal static string TextClassifier_VariableName_Text = "text";
-        internal static string TextClassifier_VariableName_Strategy = "strategy";
-        internal static string TextClassifier_VariableName_RuleSet = "ruleSet";
-        internal static string TextClassifier_VariableName_LabeledExamples = "labeledExamples";
         internal static string TextClassifier_Text1 = LabeledExample_Text1;
         internal static string TextClassifier_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
         internal static List<LabeledExample> TextClassifier_LabeledExamples = LabeledExampleFactory_LabeledExamples;

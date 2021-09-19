@@ -39,17 +39,15 @@ namespace NW.NGramTextClassification.Messages
         public static Func<List<LabeledExample>, string> TextClassifier_XLabeledExamplesHaveBeenProvided =
             (labeledExamples) => $"'{labeledExamples.Count.ToString()}' {nameof(LabeledExample)} objects have been provided.";
         public static Func<List<INGram>, string> TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams =
-            (nGrams) => $"The provided text has been tokenized into '{nGrams.Count.ToString()}' {nameof(INGram)} object.";
-        public static Func<ITokenizationStrategy, string> TextClassifier_FollowingTokenizationStrategyWillBeUsed =
-            (strategy) => $"The following '{nameof(ITokenizationStrategy)}' object will be used: '{strategy.ToString()}'.";
+            (nGrams) => $"The provided text has been tokenized into '{nGrams.Count}' {nameof(INGram)} object.";
         public static Func<INGramTokenizerRuleSet, string> TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed =
-            (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset.ToString()}'.";
+            (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset}'.";
         public static string TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples =
             $"The tokenized text has been successfully compared against the provided list of {nameof(LabeledExample)} objects.";
         public static Func<List<SimilarityIndex>, string> TextClassifier_XSimilarityIndexObjectsHaveBeenComputed =
-            (similarityIndexes) => $"'{similarityIndexes.Count.ToString()}' {nameof(SimilarityIndex)} objects have been computed.";
+            (similarityIndexes) => $"'{similarityIndexes.Count}' {nameof(SimilarityIndex)} objects have been computed.";
         public static Func<List<SimilarityIndexAverage>, string> TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed =
-            (indexAverages) => $"'{indexAverages.Count.ToString()}' {nameof(SimilarityIndexAverage)} objects have been computed.";
+            (indexAverages) => $"'{indexAverages.Count}' {nameof(SimilarityIndexAverage)} objects have been computed.";
         public static Func<string, string> TextClassifier_PredictedLabelIs =
             (label) => $"The predicted label is: '{label}'.";
         public static string TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples =
@@ -57,13 +55,13 @@ namespace NW.NGramTextClassification.Messages
         public static string TextClassifier_PredictionHasBeenSuccessful =
                 $"The prediction has been successful.";
         public static Func<LabeledExample, string> TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample =
-            (labeledExample) => $"Comparing the provided text against the following {nameof(LabeledExample)}: '{labeledExample.ToString()}'...";
+            (labeledExample) => $"Comparing the provided text against the following {nameof(LabeledExample)}: '{labeledExample}'...";
         public static Func<double, string> TextClassifier_CalculatedSimilarityIndexValueIs =
             (indexValue) => $"The calculated '{nameof(SimilarityIndex)}' value is '{indexValue}'.";
         public static Func<double, string> TextClassifier_RoundedSimilarityIndexValueIs =
             (roundedValue) => $"The rounded '{nameof(SimilarityIndex)}' value is '{roundedValue}'.";
         public static Func<SimilarityIndex, string> TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList =
-            (similarityIndex) => $"The following {nameof(SimilarityIndex)} object has been added to the list: '{similarityIndex.ToString()}'.";
+            (similarityIndex) => $"The following {nameof(SimilarityIndex)} object has been added to the list: '{similarityIndex}'.";
         public static Func<List<string>, string> TextClassifier_FollowingUniqueLabelsHaveBeenFound =
             (uniqueLabels) => $"The following unique labels have been found in the provided {nameof(SimilarityIndex)} list: '{RollOutCollection(uniqueLabels)}'.";
         public static Func<string, string> TextClassifier_CalculatingIndexAverageForTheFollowingLabel =
@@ -73,7 +71,7 @@ namespace NW.NGramTextClassification.Messages
         public static Func<double, string> TextClassifier_RoundedSimilarityIndexAverageValueIs =
             (roundedValue) => $"The rounded '{nameof(SimilarityIndexAverage)}' value is '{roundedValue}'.";
         public static Func<SimilarityIndexAverage, string> TextClassifier_FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList =
-            (indexAverage) => $"The following {nameof(SimilarityIndexAverage)} object has been added to the list: '{indexAverage.ToString()}'.";
+            (indexAverage) => $"The following {nameof(SimilarityIndexAverage)} object has been added to the list: '{indexAverage}'.";
         public static Func<string, string> TextClassifier_FollowingVerificationHasBeenSuccessful =
             (name) => $"The following verification has been successful: '{name}'.";
         public static Func<string, string> TextClassifier_FollowingVerificationHasFailed =

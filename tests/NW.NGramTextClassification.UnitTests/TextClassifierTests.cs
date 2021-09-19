@@ -25,7 +25,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         new TextClassifierSettings()
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_Components).Message
+                new ArgumentNullException("components").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierExceptionTestCases)}_01"),
 
             // ValidateObject
@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_Settings).Message
+                new ArgumentNullException("settings").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierExceptionTestCases)}_02")
 
         };
@@ -52,21 +52,22 @@ namespace NW.NGramTextClassification.UnitTests
                                         ObjectMother.TextClassifier_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_Text).Message
+                new ArgumentNullException("text").Message
                 ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_01"),
 
+            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
                                     .PredictLabel(
-                                        ObjectMother.TextClassifier_TextOnlyWhiteSpaces,
+                                        ObjectMother.TextClassifier_Text1,
+                                        null,
                                         ObjectMother.TextClassifier_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_Text).Message
+                new ArgumentNullException("strategy").Message
                 ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_02"),
 
-
             // ValidateObject
             new TestCaseData(
                 new TestDelegate(
@@ -74,26 +75,11 @@ namespace NW.NGramTextClassification.UnitTests
                                     .PredictLabel(
                                         ObjectMother.TextClassifier_Text1,
                                         null,
-                                        new NGramTokenizerRuleSet(),
                                         ObjectMother.TextClassifier_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_Strategy).Message
+                new ArgumentNullException("ruleSet").Message
                 ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_03"),
-
-            // ValidateObject
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifier()
-                                    .PredictLabel(
-                                        ObjectMother.TextClassifier_Text1,
-                                        new TokenizationStrategy(),
-                                        null,
-                                        ObjectMother.TextClassifier_LabeledExamples
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_RuleSet).Message
-                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_04"),
 
             // ValidateList
             new TestCaseData(
@@ -104,8 +90,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifier_VariableName_LabeledExamples).Message
-                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_05"),
+                new ArgumentNullException("labeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_04"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -115,8 +101,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         new List<LabeledExample>()
                                 )),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.TextClassifier_VariableName_LabeledExamples)
-                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_06")
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke("labeledExamples")
+                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_05")
 
         };
 
@@ -175,7 +161,6 @@ namespace NW.NGramTextClassification.UnitTests
 
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
-                MessageCollection.TextClassifier_FollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
                 MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text1_NGrams),
@@ -258,7 +243,6 @@ namespace NW.NGramTextClassification.UnitTests
 
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
-                MessageCollection.TextClassifier_FollowingTokenizationStrategyWillBeUsed.Invoke(new TokenizationStrategy()),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
                 MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text3_NGrams),
@@ -323,5 +307,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 19.09.2021
 */

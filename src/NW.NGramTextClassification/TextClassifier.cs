@@ -45,23 +45,20 @@ namespace NW.NGramTextClassification
 
         #region Methods_public
 
-        public TextClassifierResult PredictLabel
-            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierResult PredictLabel(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AttemptingToPredictLabel);
             string truncatedText = _components.TextTruncatingFunction.Invoke(text, _settings.TruncateTextInLogMessagesAfter);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText));
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingTokenizationStrategyWillBeUsed.Invoke(strategy));
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(ruleSet));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(tokenizerRuleSet));
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
 
-            List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
+            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleset(text, tokenizerRuleSet);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
@@ -84,8 +81,6 @@ namespace NW.NGramTextClassification
             return result;
 
         }
-        public TextClassifierResult PredictLabel(string text, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
-                => PredictLabel(text, new TokenizationStrategy(), ruleSet, labeledExamples);
         public TextClassifierResult PredictLabel(string text, List<LabeledExample> labeledExamples)
                 => PredictLabel(text, new NGramTokenizerRuleSet(), labeledExamples);
 
@@ -329,5 +324,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

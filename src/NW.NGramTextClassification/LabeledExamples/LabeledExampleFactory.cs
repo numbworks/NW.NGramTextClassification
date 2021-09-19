@@ -19,6 +19,7 @@ namespace NW.NGramTextClassification.LabeledExamples
         #region Properties
 
         public static uint DefaultInitialId { get; } = 1;
+        public static INGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Methods_public
 
-        public LabeledExample TryCreateForRuleset(ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet)
+        public LabeledExample TryCreateForRuleSet(ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
@@ -57,7 +58,10 @@ namespace NW.NGramTextClassification.LabeledExamples
             return null;
 
         }
-        public List<LabeledExample> TryCreateForRuleset(List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet)
+        public LabeledExample TryCreateForRuleSet(ulong id, string label, string text)
+            => TryCreateForRuleSet(id, label, text, DefaultTokenizerRuleSet);
+
+        public List<LabeledExample> TryCreateForRuleSet(List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateList(tuples, nameof(tuples));
@@ -69,7 +73,7 @@ namespace NW.NGramTextClassification.LabeledExamples
             foreach ((string label, string text) tuple in tuples)
             {
 
-                LabeledExample labeledExample = TryCreateForRuleset(currentId, tuple.label, tuple.text, tokenizerRuleSet);
+                LabeledExample labeledExample = TryCreateForRuleSet(currentId, tuple.label, tuple.text, tokenizerRuleSet);
                 if (labeledExample != null)
                 {
 
@@ -86,6 +90,8 @@ namespace NW.NGramTextClassification.LabeledExamples
             return labeledExamples;
 
         }
+        public List<LabeledExample> TryCreateForRuleSet(List<(string label, string text)> tuples)
+            => TryCreateForRuleSet(tuples, DefaultTokenizerRuleSet);
 
         #endregion
 
