@@ -184,27 +184,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region Validator
 
-        internal static string[] Validator_Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
-        internal static Car Validator_Object1 = new Car()
-        {
-            Brand = "Dodge",
-            Model = "Charger",
-            Year = 1966,
-            Price = 13500,
-            Currency = "USD"
-        };
-        internal static uint Validator_Length1 = 3;
-        internal static string Validator_VariableName_Variable = "variable";
-        internal static string Validator_VariableName_Length = "length";
-        internal static string Validator_VariableName_N = "n";
-        internal static List<string> List1 = Validator_Array1.ToList();
-        internal static ushort N1 = (ushort)Validator_Length1;
-        internal static string Validator_String1 = "Dodge";
-        internal static string Validator_StringOnlyWhiteSpaces = "   ";
-
-        #endregion
 
         #region ArrayManager
 
@@ -531,39 +511,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region TextClassifierResult
-
-        internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
-            = new List<SimilarityIndex>()
-                {
-                    SimilarityIndex1,
-                    SimilarityIndex2
-                };
-        internal static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
-            = new List<SimilarityIndexAverage>()
-                {
-                    SimilarityIndexAverage1
-                };
-        internal static string TextClassifierResult_Label1 = LabeledExample_Label1;
-        internal static string TextClassifierResult_ToString1
-            = $"[ Label: '{TextClassifierResult_Label1}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count.ToString()}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count.ToString()}' ]";
-        internal static string TextClassifierResult_ToString1WithNullLabel
-            = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count.ToString()}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count.ToString()}' ]";
-        internal static string TextClassifierResult_VariableName_Indexes = "indexes";
-        internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
-
-        #endregion
-
-        #region SimilarityIndexCalculatorJaccard
-
-        internal static string SimilarityIndexCalculatorJaccard_VariableName_List1 = "list1";
-        internal static string SimilarityIndexCalculatorJaccard_VariableName_List2 = "list2";
-        internal static string SimilarityIndexCalculatorJaccard_VariableName_RoundingFunction = "roundingFunction";
-        internal static List<INGram> SimilarityIndexCalculatorJaccard_List1 = LabeledExampleFactory_Text1_NGrams;
-        internal static List<INGram> SimilarityIndexCalculatorJaccard_List2 = LabeledExampleFactory_Text2_NGrams;
-
-        #endregion
-
         #region TextClassifier
 
         internal static string TextClassifier_Text1 = LabeledExample_Text1;
@@ -678,6 +625,54 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text3_SimilarityIndex1.Label,
                 TextClassifier_Text3_SimilarityIndex2.Label,
             };
+
+        #endregion
+
+
+        /* --------------------------------------------------- */
+
+        #region TextClassifierResult
+
+        internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
+            = new List<SimilarityIndex>()
+                {
+                    SimilarityIndex1,
+                    SimilarityIndex2
+                };
+        internal static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
+            = new List<SimilarityIndexAverage>()
+                {
+                    SimilarityIndexAverage1
+                };
+        internal static string TextClassifierResult_Label1 = LabeledExample_Label1;
+        internal static string TextClassifierResult_ToString1
+            = $"[ Label: '{TextClassifierResult_Label1}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
+        internal static string TextClassifierResult_ToString1WithNullLabel
+            = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
+        internal static string TextClassifierResult_VariableName_Indexes = "indexes";
+        internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
+
+        #endregion
+
+        #region Validator
+
+        internal static string[] Validator_Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
+        internal static Car Validator_Object1 = new Car()
+        {
+            Brand = "Dodge",
+            Model = "Charger",
+            Year = 1966,
+            Price = 13500,
+            Currency = "USD"
+        };
+        internal static uint Validator_Length1 = 3;
+        internal static string Validator_VariableName_Variable = "variable";
+        internal static string Validator_VariableName_Length = "length";
+        internal static string Validator_VariableName_N = "n";
+        internal static List<string> List1 = Validator_Array1.ToList();
+        internal static ushort N1 = (ushort)Validator_Length1;
+        internal static string Validator_String1 = "Dodge";
+        internal static string Validator_StringOnlyWhiteSpaces = "   ";
 
         #endregion
 

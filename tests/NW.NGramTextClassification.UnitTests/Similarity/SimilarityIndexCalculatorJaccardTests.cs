@@ -22,11 +22,11 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
                                         null,
-                                        ObjectMother.SimilarityIndexCalculatorJaccard_List2,
+                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List1).Message
+                new ArgumentNullException("list1").Message
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_01"),
 
             new TestCaseData(
@@ -34,11 +34,11 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
                                         new List<INGram>(),
-                                        ObjectMother.SimilarityIndexCalculatorJaccard_List2,
+                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List1)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke("list1")
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_02"),
 
             // ValidateList
@@ -46,24 +46,24 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        ObjectMother.SimilarityIndexCalculatorJaccard_List1,
+                                        ObjectMother.LabeledExampleFactory_Text1_NGrams,
                                         null,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List2).Message
+                new ArgumentNullException("list2").Message
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_03"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        ObjectMother.SimilarityIndexCalculatorJaccard_List2,
+                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
                                         new List<INGram>(),
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_List2)
+                MessageCollection.Validator_VariableContainsZeroItems.Invoke("list2")
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_04"),
 
             // ValidateObject
@@ -71,12 +71,12 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        ObjectMother.SimilarityIndexCalculatorJaccard_List1,
-                                        ObjectMother.SimilarityIndexCalculatorJaccard_List2,
+                                        ObjectMother.LabeledExampleFactory_Text1_NGrams,
+                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
                                         null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndexCalculatorJaccard_VariableName_RoundingFunction).Message
+                new ArgumentNullException("roundingFunction").Message
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_05")
 
         };
@@ -84,20 +84,20 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    ObjectMother.SimilarityIndexCalculatorJaccard_List1,
-                    ObjectMother.SimilarityIndexCalculatorJaccard_List1,
+                    ObjectMother.LabeledExampleFactory_Text1_NGrams,
+                    ObjectMother.LabeledExampleFactory_Text1_NGrams,
                     1.00
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.SimilarityIndexCalculatorJaccard_List1,
-                    ObjectMother.SimilarityIndexCalculatorJaccard_List2,
+                    ObjectMother.LabeledExampleFactory_Text1_NGrams,
+                    ObjectMother.LabeledExampleFactory_Text2_NGrams,
                     0.00
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.SimilarityIndexCalculatorJaccard_List1.GetRange(0, 2),
-                    ObjectMother.SimilarityIndexCalculatorJaccard_List1.GetRange(0, 4),
+                    ObjectMother.LabeledExampleFactory_Text1_NGrams.GetRange(0, 2),
+                    ObjectMother.LabeledExampleFactory_Text1_NGrams.GetRange(0, 4),
                     0.50
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_03")
 
@@ -141,5 +141,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */
