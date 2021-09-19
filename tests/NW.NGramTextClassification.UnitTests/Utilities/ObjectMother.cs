@@ -71,7 +71,42 @@ namespace NW.NGramTextClassification.UnitTests
             new Trigram(Shared_Text1_TokenizationStrategy, "team")
 
         };
+        internal static List<Fourgram> Shared_Text1_TextAsFourgrams = new List<Fourgram>()
+        {
 
+            new Fourgram(Shared_Text1_TokenizationStrategy, "we are looking for"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "are looking for several"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "looking for several skilled"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "for several skilled and"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "several skilled and driven"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "skilled and driven developers"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "and driven developers to"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "driven developers to join"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "developers to join our"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "to join our team"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "join our team"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "our team"),
+            new Fourgram(Shared_Text1_TokenizationStrategy, "team")
+
+        };
+        internal static List<Fivegram> Shared_Text1_TextAsFivegrams = new List<Fivegram>()
+        {
+
+            new Fivegram(Shared_Text1_TokenizationStrategy, "we are looking for several"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "are looking for several skilled"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "looking for several skilled and"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "for several skilled and driven"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "several skilled and driven developers"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "skilled and driven developers to"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "and driven developers to join"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "driven developers to join our"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "developers to join our team"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "to join our team"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "join our team"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "our team"),
+            new Fivegram(Shared_Text1_TokenizationStrategy, "team")
+
+        };
         internal static List<INGram> Shared_Text1_TextAsNGrams = new List<INGram>() 
         {
 
@@ -115,7 +150,35 @@ namespace NW.NGramTextClassification.UnitTests
             Shared_Text1_TextAsTrigrams[9],
             Shared_Text1_TextAsTrigrams[10],
             Shared_Text1_TextAsTrigrams[11],
-            Shared_Text1_TextAsTrigrams[12]
+            Shared_Text1_TextAsTrigrams[12],
+
+            Shared_Text1_TextAsFourgrams[0],
+            Shared_Text1_TextAsFourgrams[1],
+            Shared_Text1_TextAsFourgrams[2],
+            Shared_Text1_TextAsFourgrams[3],
+            Shared_Text1_TextAsFourgrams[4],
+            Shared_Text1_TextAsFourgrams[5],
+            Shared_Text1_TextAsFourgrams[6],
+            Shared_Text1_TextAsFourgrams[7],
+            Shared_Text1_TextAsFourgrams[8],
+            Shared_Text1_TextAsFourgrams[9],
+            Shared_Text1_TextAsFourgrams[10],
+            Shared_Text1_TextAsFourgrams[11],
+            Shared_Text1_TextAsFourgrams[12],
+
+            Shared_Text1_TextAsFivegrams[0],
+            Shared_Text1_TextAsFivegrams[1],
+            Shared_Text1_TextAsFivegrams[2],
+            Shared_Text1_TextAsFivegrams[3],
+            Shared_Text1_TextAsFivegrams[4],
+            Shared_Text1_TextAsFivegrams[5],
+            Shared_Text1_TextAsFivegrams[6],
+            Shared_Text1_TextAsFivegrams[7],
+            Shared_Text1_TextAsFivegrams[8],
+            Shared_Text1_TextAsFivegrams[9],
+            Shared_Text1_TextAsFivegrams[10],
+            Shared_Text1_TextAsFivegrams[11],
+            Shared_Text1_TextAsFivegrams[12]
 
         };
 
