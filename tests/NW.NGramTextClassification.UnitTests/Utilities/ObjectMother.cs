@@ -309,7 +309,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region NGramTokenizer
 
-        internal static string NGramTokenizer_VariableName_ArrayManager = "arrayManager";
         internal static string NGramTokenizer_VariableName_Text = LabeledExampleFactory_VariableName_Text;
         internal static string NGramTokenizer_VariableName_Strategy = LabeledExampleFactory_VariableName_Strategy;
         internal static string NGramTokenizer_VariableName_RuleSet = LabeledExampleFactory_VariableName_RuleSet;
