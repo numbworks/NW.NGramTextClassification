@@ -13,7 +13,6 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] similarityIndexExceptionTestCases =
         {
 
-            // ValidateStringNullOrWhiteSpace
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndex(
@@ -22,18 +21,18 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.SimilarityIndex_Value1
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndex_VariableName_Label).Message
+                new ArgumentNullException("label").Message
                 ).SetArgDisplayNames($"{nameof(similarityIndexExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndex(
                                     ObjectMother.SimilarityIndex_Id1,
-                                    ObjectMother.SimilarityIndex_LabelOnlyWhiteSpaces,
+                                    ObjectMother.Validator_StringOnlyWhiteSpaces,
                                     ObjectMother.SimilarityIndex_Value1
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndex_VariableName_Label).Message
+                new ArgumentNullException("label").Message
                 ).SetArgDisplayNames($"{nameof(similarityIndexExceptionTestCases)}_02")
 
         };

@@ -460,27 +460,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-
-
-        #region SimilarityIndex
-
-        internal static string SimilarityIndex_VariableName_Label = "label";
-        internal static ulong SimilarityIndex_Id1 = 1;
-        internal static string SimilarityIndex_Label1 = "en";
-        internal static double SimilarityIndex_Value1 = 0.23;
-        internal static ulong SimilarityIndex_Id2 = 2;
-        internal static string SimilarityIndex_Label2 = "sv";
-        internal static double SimilarityIndex_Value2 = 0.76;
-        internal static SimilarityIndex SimilarityIndex1 
-            = new SimilarityIndex(SimilarityIndex_Id1, SimilarityIndex_Label1, SimilarityIndex_Value1);
-        internal static SimilarityIndex SimilarityIndex2
-            = new SimilarityIndex(SimilarityIndex_Id2, SimilarityIndex_Label2, SimilarityIndex_Value2);
-        internal static string SimilarityIndex_ToString1
-            = $"[ Id: '{SimilarityIndex_Id1.ToString()}', Label: '{SimilarityIndex_Label1}', Value: '{SimilarityIndex_Value1.ToString()}' ]";
-        internal static string SimilarityIndex_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-
-        #endregion
-
         #region TextClassifier
 
         internal static string TextClassifier_Text1 = LabeledExample_Text1;
@@ -605,6 +584,23 @@ namespace NW.NGramTextClassification.UnitTests
 
         internal static string NGramTokenizerRuleSet_ToString
             = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
+
+        #endregion
+
+        #region SimilarityIndex
+
+        internal static ulong SimilarityIndex_Id1 = 1;
+        internal static string SimilarityIndex_Label1 = "en";
+        internal static double SimilarityIndex_Value1 = 0.23;
+        internal static ulong SimilarityIndex_Id2 = 2;
+        internal static string SimilarityIndex_Label2 = "sv";
+        internal static double SimilarityIndex_Value2 = 0.76;
+        internal static SimilarityIndex SimilarityIndex1
+            = new SimilarityIndex(SimilarityIndex_Id1, SimilarityIndex_Label1, SimilarityIndex_Value1);
+        internal static SimilarityIndex SimilarityIndex2
+            = new SimilarityIndex(SimilarityIndex_Id2, SimilarityIndex_Label2, SimilarityIndex_Value2);
+        internal static string SimilarityIndex_ToString1
+            = $"[ Id: '{SimilarityIndex_Id1}', Label: '{SimilarityIndex_Label1}', Value: '{SimilarityIndex_Value1}' ]";
 
         #endregion
 
