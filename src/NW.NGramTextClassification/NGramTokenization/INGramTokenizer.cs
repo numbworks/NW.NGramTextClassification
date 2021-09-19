@@ -13,22 +13,27 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Monogram.N"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
         List<Monogram> DoForMonogram(string text);
 
         /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Bigram.N"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
         List<Bigram> DoForBigram(string text);
 
         /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Trigram.N"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
         List<Trigram> DoForTrigram(string text);
 
         /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Fourgram.N"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
         List<Fourgram> DoForFourgram(string text);
 
         /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Fivegram.N"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
         List<Fivegram> DoForFivegram(string text);
 
         /// <summary>

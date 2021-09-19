@@ -153,10 +153,10 @@ namespace NW.NGramTextClassification.NGramTokenization
 
             MatchCollection matches = GetMatches(text);
             if (matches.Count == 0)
-                throw new ArgumentNullException(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(_tokenizationStrategy));
+                throw new ArgumentException(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(_tokenizationStrategy));
 
             ushort N = GetN<T>();
-            Validator.ThrowIfFirstIsGreater<ArgumentNullException>(N, nameof(N), matches.Count, nameof(matches.Count));
+            Validator.ThrowIfFirstIsGreater<ArgumentException>(N, nameof(N), matches.Count, nameof(matches.Count));
 
         }
         private List<T> DoFor<T>(string text) where T : INGram

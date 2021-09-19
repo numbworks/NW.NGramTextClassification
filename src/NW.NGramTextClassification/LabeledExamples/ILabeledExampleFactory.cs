@@ -10,47 +10,26 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         /// <summary>
         /// Initializes a <see cref="LabeledExample"/> out of the provided parameters.
+        /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, null will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        LabeledExample Create(ulong id, string label, string text);
+        /// <exception cref="ArgumentException"/>
+        LabeledExample TryCreateForRuleset(ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet);
 
         /// <summary>
-        /// Initializes a <see cref="LabeledExample"/> out of the provided parameters.
+        /// Initializes a collection of <see cref="LabeledExample"/> object out of the provided parameters.
+        /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, null will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy);
-
-        /// <summary>
-        /// Initializes a <see cref="LabeledExample"/> out of the provided parameters.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet);
-
-        /// <summary>
-        /// Initializes a <see cref="LabeledExample"/> out of the provided parameters.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/> 
-        List<LabeledExample> Create(List<(string label, string text)> tuples);
-
-        /// <summary>
-        /// Initializes a <see cref="LabeledExample"/> out of the provided parameters.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/> 
-        List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy);
-
-        /// <summary>
-        /// Initializes a <see cref="LabeledExample"/> out of the provided parameters.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>         
-        List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet);
+        /// <exception cref="ArgumentException"/>
+        List<LabeledExample> TryCreateForRuleset(List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet);
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

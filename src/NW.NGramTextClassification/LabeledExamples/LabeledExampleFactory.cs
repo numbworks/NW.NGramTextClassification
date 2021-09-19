@@ -43,33 +43,25 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Methods_public
 
-        public LabeledExample Create
-            (ulong id, string label, string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
+        public LabeledExample TryCreateForRuleset(ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
 
-            List<INGram> nGrams = _tokenizer.Do(text, strategy, ruleSet);
-            LabeledExample labeledExample = new LabeledExample(id, label, text, nGrams);
+            List<INGram> ngrams = _tokenizer.TryDoForRuleset(text, tokenizerRuleSet);
+            if (ngrams != null)
+                return new LabeledExample(id, label, text, ngrams);
 
-            return labeledExample;
+            return null;
 
         }
-        public LabeledExample Create(ulong id, string label, string text, ITokenizationStrategy strategy)
-            => Create(id, label, text, strategy, new NGramTokenizerRuleSet());
-        public LabeledExample Create(ulong id, string label, string text)
-            => Create(id, label, text, new TokenizationStrategy());
-
-        public List<LabeledExample> Create
-            (List<(string label, string text)> tuples, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
+        public List<LabeledExample> TryCreateForRuleset(List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateList(tuples, nameof(tuples));
-            Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
 
             List<LabeledExample> labeledExamples = new List<LabeledExample>();
 
@@ -77,20 +69,23 @@ namespace NW.NGramTextClassification.LabeledExamples
             foreach ((string label, string text) tuple in tuples)
             {
 
-                LabeledExample labeledExample = Create(currentId, tuple.label, tuple.text, strategy, ruleSet);
-                labeledExamples.Add(labeledExample);
+                LabeledExample labeledExample = TryCreateForRuleset(currentId, tuple.label, tuple.text, tokenizerRuleSet);
+                if (labeledExample != null)
+                {
 
-                currentId++;
+                    labeledExamples.Add(labeledExample);
+                    currentId++;
+
+                }
 
             }
+
+            if (labeledExamples.Count == 0)
+                return null;
 
             return labeledExamples;
 
         }
-        public List<LabeledExample> Create(List<(string label, string text)> tuples, ITokenizationStrategy strategy)
-            => Create(tuples, strategy, new NGramTokenizerRuleSet());
-        public List<LabeledExample> Create(List<(string label, string text)> tuples)
-            => Create(tuples, new TokenizationStrategy());
 
         #endregion
 
@@ -103,5 +98,5 @@ namespace NW.NGramTextClassification.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */
