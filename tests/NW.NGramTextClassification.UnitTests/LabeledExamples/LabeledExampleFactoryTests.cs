@@ -143,7 +143,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            LabeledExample actual = new LabeledExampleFactory.TryCreateForRuleSet();
+            // LabeledExample actual = new LabeledExampleFactory.TryCreateForRuleSet();
 
 
             // Assert

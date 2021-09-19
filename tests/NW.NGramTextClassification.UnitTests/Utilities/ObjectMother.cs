@@ -681,16 +681,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region TextClassifierComponents
-        
-        internal static string TextClassifierComponents_VariableName_NGramsTokenizer = "nGramsTokenizer";
-        internal static string TextClassifierComponents_VariableName_SimilarityIndexCalculator = "similarityIndexCalculator";
-        internal static string TextClassifierComponents_VariableName_RoundingFunction = "roundingFunction";
-        internal static string TextClassifierComponents_VariableName_TextTruncatingFunction = "textTruncatingFunction";
-        internal static string TextClassifierComponents_VariableName_LoggingAction = "loggingAction";
-
-        #endregion
-
         #region Methods
 
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)

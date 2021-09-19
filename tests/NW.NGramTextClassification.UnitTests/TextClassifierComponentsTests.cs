@@ -25,7 +25,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         TextClassifierComponents.DefaultLoggingAction
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierComponents_VariableName_NGramsTokenizer).Message
+                new ArgumentNullException("nGramsTokenizer").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_01"),
 
             // ValidateObject
@@ -39,7 +39,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         TextClassifierComponents.DefaultLoggingAction
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierComponents_VariableName_SimilarityIndexCalculator).Message
+                new ArgumentNullException("similarityIndexCalculator").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_02"),
 
             // ValidateObject
@@ -53,7 +53,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         TextClassifierComponents.DefaultLoggingAction
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierComponents_VariableName_RoundingFunction).Message
+                new ArgumentNullException("roundingFunction").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_03"),
 
             // ValidateObject
@@ -67,7 +67,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         TextClassifierComponents.DefaultLoggingAction
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierComponents_VariableName_TextTruncatingFunction).Message
+                new ArgumentNullException("textTruncatingFunction").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_04"),
 
             // ValidateObject
@@ -81,7 +81,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierComponents_VariableName_LoggingAction).Message
+                new ArgumentNullException("loggingAction").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_05")
 
         };
@@ -139,5 +139,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 19.09.2021
 */
