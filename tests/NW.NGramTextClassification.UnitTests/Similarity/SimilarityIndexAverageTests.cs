@@ -13,7 +13,6 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] similarityIndexAverageExceptionTestCases =
         {
 
-            // ValidateStringNullOrWhiteSpace
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndexAverage(
@@ -21,17 +20,17 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.SimilarityIndexAverage_Value1
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndexAverage_VariableName_Label).Message
+                new ArgumentNullException("label").Message
                 ).SetArgDisplayNames($"{nameof(similarityIndexAverageExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndexAverage(
-                                    ObjectMother.SimilarityIndexAverage_LabelOnlyWhiteSpaces,
+                                    ObjectMother.Validator_StringOnlyWhiteSpaces,
                                     ObjectMother.SimilarityIndexAverage_Value1
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.SimilarityIndexAverage_VariableName_Label).Message
+                new ArgumentNullException("label").Message
                 ).SetArgDisplayNames($"{nameof(similarityIndexAverageExceptionTestCases)}_02")
 
         };
@@ -91,6 +90,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 22.01.2021
+    Last Update: 19.09.2021
 
 */

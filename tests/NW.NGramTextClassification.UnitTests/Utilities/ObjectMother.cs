@@ -481,19 +481,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region SimilarityIndexAverage
-
-        internal static string SimilarityIndexAverage_Label1 = "en";
-        internal static double SimilarityIndexAverage_Value1 = 0.54;
-        internal static SimilarityIndexAverage SimilarityIndexAverage1 
-            = new SimilarityIndexAverage(SimilarityIndexAverage_Label1, SimilarityIndexAverage_Value1);
-        internal static string SimilarityIndexAverage_VariableName_Label = "label";
-        internal static string SimilarityIndexAverage_ToString1
-            = $"[ Label: '{SimilarityIndexAverage_Label1}', Value: '{SimilarityIndexAverage_Value1.ToString()}' ]";
-        internal static string SimilarityIndexAverage_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-
-        #endregion
-
         #region TextClassifier
 
         internal static string TextClassifier_Text1 = LabeledExample_Text1;
@@ -618,6 +605,17 @@ namespace NW.NGramTextClassification.UnitTests
 
         internal static string NGramTokenizerRuleSet_ToString
             = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
+
+        #endregion
+
+        #region SimilarityIndexAverage
+
+        internal static string SimilarityIndexAverage_Label1 = "en";
+        internal static double SimilarityIndexAverage_Value1 = 0.54;
+        internal static SimilarityIndexAverage SimilarityIndexAverage1
+            = new SimilarityIndexAverage(SimilarityIndexAverage_Label1, SimilarityIndexAverage_Value1);
+        internal static string SimilarityIndexAverage_ToString1
+            = $"[ Label: '{SimilarityIndexAverage_Label1}', Value: '{SimilarityIndexAverage_Value1}' ]";
 
         #endregion
 
