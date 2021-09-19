@@ -188,31 +188,7 @@ namespace NW.NGramTextClassification.UnitTests
 
 
 
-        #region ArrayManager
 
-        internal static string ArrayManager_VariableName_Arr = "arr";
-        internal static string ArrayManager_VariableName_Delimiter = "delimiter";
-        internal static string ArrayManager_VariableName_StartIndex = "startIndex";
-        internal static string ArrayManager_VariableName_Length = Validator_VariableName_Length;
-        internal static string ArrayManager_VariableName_ArrLength = "arr.Length";
-        internal static string ArrayManager_VariableName_StartIndexPlusLength = "startIndex + length";
-        internal static string ArrayManager_Delimiter1 = ";";
-        internal static uint ArrayManager_StartIndex1 = 0;
-        internal static uint ArrayManager_Length1 = 2;
-        internal static string[] ArrayManager_Array1 = Validator_Array1;
-        internal static string[] ArrayManager_Array1_WithDelimiter1 
-            = new[] {
-                "Dodge",
-                ArrayManager_Delimiter1,
-                "Datsun",
-                ArrayManager_Delimiter1,
-                "Jaguar",
-                ArrayManager_Delimiter1,
-                "DeLorean"
-            };
-        internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
-
-        #endregion
 
         #region LabeledExample
 
@@ -579,6 +555,25 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         /* --------------------------------------------------- */
+
+        #region ArrayManager
+
+        internal static string ArrayManager_Delimiter1 = ";";
+        internal static uint ArrayManager_StartIndex1 = 0;
+        internal static uint ArrayManager_Length1 = 2;
+        internal static string[] ArrayManager_Array1_WithDelimiter1
+            = new[] {
+                "Dodge",
+                ArrayManager_Delimiter1,
+                "Datsun",
+                ArrayManager_Delimiter1,
+                "Jaguar",
+                ArrayManager_Delimiter1,
+                "DeLorean"
+            };
+        internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
+
+        #endregion
 
         #region NGramTokenizerRuleSet
 
