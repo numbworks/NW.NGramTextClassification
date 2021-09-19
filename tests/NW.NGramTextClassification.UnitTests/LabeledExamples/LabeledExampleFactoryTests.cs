@@ -48,14 +48,12 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            LabeledExampleFactory actual
-                = new LabeledExampleFactory(
-                        new NGramTokenizer(),
-                        LabeledExampleFactory.DefaultInitialId
-                    );
+            LabeledExampleFactory actual = new LabeledExampleFactory();
 
             // Assert
             Assert.IsInstanceOf<LabeledExampleFactory>(actual);
+            Assert.AreEqual(1, LabeledExampleFactory.DefaultInitialId);
+            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleFactory.DefaultTokenizerRuleSet);
 
         }
 
