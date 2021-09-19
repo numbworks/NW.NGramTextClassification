@@ -22,7 +22,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     TokenizationStrategy.DefaultToLowercase
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TokenizationStrategy_VariableName_Pattern).Message
+                new ArgumentNullException("pattern").Message
                 ).SetArgDisplayNames($"{nameof(tokenizationStrategyExceptionTestCases)}_01"),
             new TestCaseData(
                 new TestDelegate(
@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     TokenizationStrategy.DefaultToLowercase
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TokenizationStrategy_VariableName_Pattern).Message
+                new ArgumentNullException("pattern").Message
                 ).SetArgDisplayNames($"{nameof(tokenizationStrategyExceptionTestCases)}_02"),
 
             // ValidateStringNullOrEmpty
@@ -44,7 +44,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     TokenizationStrategy.DefaultToLowercase
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TokenizationStrategy_VariableName_Delimiter).Message
+                new ArgumentNullException("delimiter").Message
                 ).SetArgDisplayNames($"{nameof(tokenizationStrategyExceptionTestCases)}_03"),
             new TestCaseData(
                 new TestDelegate(
@@ -54,32 +54,32 @@ namespace NW.NGramTextClassification.UnitTests
                                     TokenizationStrategy.DefaultToLowercase
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TokenizationStrategy_VariableName_Delimiter).Message
+                new ArgumentNullException("delimiter").Message
                 ).SetArgDisplayNames($"{nameof(tokenizationStrategyExceptionTestCases)}_04"),
 
         };
         private static TestCaseData[] equalityMethodsTestCases = {
 
             new TestCaseData(
-                    ObjectMother.TokenizationStrategy_Default,
-                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.Shared_TokenizationStrategyDefault,
+                    ObjectMother.Shared_TokenizationStrategyDefault,
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.Shared_TokenizationStrategyDefault,
                     new TokenizationStrategy(),
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.TokenizationStrategy_Default,
-                    ObjectMother.TokenizationStrategy_Custom,
+                    ObjectMother.Shared_TokenizationStrategyDefault,
+                    ObjectMother.Shared_TokenizationStrategyCustom,
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
 
             new TestCaseData(
-                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.Shared_TokenizationStrategyDefault,
                     null,
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_04")
@@ -160,7 +160,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            bool actual = ObjectMother.TokenizationStrategy_Default.Equals("some_string");
+            bool actual = ObjectMother.Shared_TokenizationStrategyDefault.Equals("some_string");
 
             // Assert
             Assert.IsFalse(actual);
@@ -173,7 +173,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            bool actual = null == ObjectMother.TokenizationStrategy_Default;
+            bool actual = null == ObjectMother.Shared_TokenizationStrategyDefault;
 
             // Assert
             Assert.IsFalse(actual);
@@ -186,7 +186,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            int actual = ObjectMother.TokenizationStrategy_Default.GetHashCode();
+            int actual = ObjectMother.Shared_TokenizationStrategyDefault.GetHashCode();
 
             // Assert
             Assert.AreEqual(ObjectMother.TokenizationStrategy_DefaultHashCode, actual);
@@ -204,5 +204,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 19.09.2021
 */

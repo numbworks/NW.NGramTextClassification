@@ -14,97 +14,99 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region Shared
 
+        internal static ITokenizationStrategy Shared_TokenizationStrategyDefault = new TokenizationStrategy();
+        internal static TokenizationStrategy Shared_TokenizationStrategyCustom = new TokenizationStrategy("[a-Z]", ";", false);
+
         internal static string Shared_Text1_Text = "We are looking for several skilled and driven developers to join our team.";
         internal static string Shared_Text1_Label = "en";
-        internal static ITokenizationStrategy Shared_Text1_TokenizationStrategy = new TokenizationStrategy();
         internal static List<Monogram> Shared_Text1_TextAsMonograms = new List<Monogram>()
         {
 
-            new Monogram(Shared_Text1_TokenizationStrategy, "we"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "are"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "looking"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "for"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "several"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "skilled"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "and"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "driven"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "developers"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "to"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "join"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "our"),
-            new Monogram(Shared_Text1_TokenizationStrategy, "team")
+            new Monogram(Shared_TokenizationStrategyDefault, "we"),
+            new Monogram(Shared_TokenizationStrategyDefault, "are"),
+            new Monogram(Shared_TokenizationStrategyDefault, "looking"),
+            new Monogram(Shared_TokenizationStrategyDefault, "for"),
+            new Monogram(Shared_TokenizationStrategyDefault, "several"),
+            new Monogram(Shared_TokenizationStrategyDefault, "skilled"),
+            new Monogram(Shared_TokenizationStrategyDefault, "and"),
+            new Monogram(Shared_TokenizationStrategyDefault, "driven"),
+            new Monogram(Shared_TokenizationStrategyDefault, "developers"),
+            new Monogram(Shared_TokenizationStrategyDefault, "to"),
+            new Monogram(Shared_TokenizationStrategyDefault, "join"),
+            new Monogram(Shared_TokenizationStrategyDefault, "our"),
+            new Monogram(Shared_TokenizationStrategyDefault, "team")
 
         };
         internal static List<Bigram> Shared_Text1_TextAsBigrams = new List<Bigram>()
         {
 
-            new Bigram(Shared_Text1_TokenizationStrategy, "we are"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "are looking"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "looking for"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "for several"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "several skilled"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "skilled and"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "and driven"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "driven developers"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "developers to"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "to join"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "join our"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "our team"),
-            new Bigram(Shared_Text1_TokenizationStrategy, "team")
+            new Bigram(Shared_TokenizationStrategyDefault, "we are"),
+            new Bigram(Shared_TokenizationStrategyDefault, "are looking"),
+            new Bigram(Shared_TokenizationStrategyDefault, "looking for"),
+            new Bigram(Shared_TokenizationStrategyDefault, "for several"),
+            new Bigram(Shared_TokenizationStrategyDefault, "several skilled"),
+            new Bigram(Shared_TokenizationStrategyDefault, "skilled and"),
+            new Bigram(Shared_TokenizationStrategyDefault, "and driven"),
+            new Bigram(Shared_TokenizationStrategyDefault, "driven developers"),
+            new Bigram(Shared_TokenizationStrategyDefault, "developers to"),
+            new Bigram(Shared_TokenizationStrategyDefault, "to join"),
+            new Bigram(Shared_TokenizationStrategyDefault, "join our"),
+            new Bigram(Shared_TokenizationStrategyDefault, "our team"),
+            new Bigram(Shared_TokenizationStrategyDefault, "team")
 
         };
         internal static List<Trigram> Shared_Text1_TextAsTrigrams = new List<Trigram>()
         {
 
-            new Trigram(Shared_Text1_TokenizationStrategy, "we are looking"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "are looking for"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "looking for several"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "for several skilled"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "several skilled and"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "skilled and driven"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "and driven developers"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "driven developers to"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "developers to join"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "to join our"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "join our team"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "our team"),
-            new Trigram(Shared_Text1_TokenizationStrategy, "team")
+            new Trigram(Shared_TokenizationStrategyDefault, "we are looking"),
+            new Trigram(Shared_TokenizationStrategyDefault, "are looking for"),
+            new Trigram(Shared_TokenizationStrategyDefault, "looking for several"),
+            new Trigram(Shared_TokenizationStrategyDefault, "for several skilled"),
+            new Trigram(Shared_TokenizationStrategyDefault, "several skilled and"),
+            new Trigram(Shared_TokenizationStrategyDefault, "skilled and driven"),
+            new Trigram(Shared_TokenizationStrategyDefault, "and driven developers"),
+            new Trigram(Shared_TokenizationStrategyDefault, "driven developers to"),
+            new Trigram(Shared_TokenizationStrategyDefault, "developers to join"),
+            new Trigram(Shared_TokenizationStrategyDefault, "to join our"),
+            new Trigram(Shared_TokenizationStrategyDefault, "join our team"),
+            new Trigram(Shared_TokenizationStrategyDefault, "our team"),
+            new Trigram(Shared_TokenizationStrategyDefault, "team")
 
         };
         internal static List<Fourgram> Shared_Text1_TextAsFourgrams = new List<Fourgram>()
         {
 
-            new Fourgram(Shared_Text1_TokenizationStrategy, "we are looking for"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "are looking for several"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "looking for several skilled"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "for several skilled and"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "several skilled and driven"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "skilled and driven developers"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "and driven developers to"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "driven developers to join"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "developers to join our"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "to join our team"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "join our team"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "our team"),
-            new Fourgram(Shared_Text1_TokenizationStrategy, "team")
+            new Fourgram(Shared_TokenizationStrategyDefault, "we are looking for"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "are looking for several"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "looking for several skilled"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "for several skilled and"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "several skilled and driven"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "skilled and driven developers"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "and driven developers to"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "driven developers to join"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "developers to join our"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "to join our team"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "join our team"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "our team"),
+            new Fourgram(Shared_TokenizationStrategyDefault, "team")
 
         };
         internal static List<Fivegram> Shared_Text1_TextAsFivegrams = new List<Fivegram>()
         {
 
-            new Fivegram(Shared_Text1_TokenizationStrategy, "we are looking for several"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "are looking for several skilled"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "looking for several skilled and"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "for several skilled and driven"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "several skilled and driven developers"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "skilled and driven developers to"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "and driven developers to join"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "driven developers to join our"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "developers to join our team"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "to join our team"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "join our team"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "our team"),
-            new Fivegram(Shared_Text1_TokenizationStrategy, "team")
+            new Fivegram(Shared_TokenizationStrategyDefault, "we are looking for several"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "are looking for several skilled"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "looking for several skilled and"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "for several skilled and driven"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "several skilled and driven developers"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "skilled and driven developers to"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "and driven developers to join"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "driven developers to join our"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "developers to join our team"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "to join our team"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "join our team"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "our team"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "team")
 
         };
         internal static List<INGram> Shared_Text1_TextAsNGrams = new List<INGram>() 
@@ -444,7 +446,6 @@ namespace NW.NGramTextClassification.UnitTests
             = new FakeGram(ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value);
         internal static FakeGram ANGram_FakeGram2 
             = new FakeGram(ANGram_FakeGram2_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram2_Value);
-        internal static TokenizationStrategy ANGram_TokenizationStrategyCustom = new TokenizationStrategy("[a-Z]", ";", false);
         internal static int ANGram_FakeGram1_HashCode
             = (ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value).GetHashCode();
 
@@ -459,25 +460,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region NGramTokenizerRuleSet
-        
-        internal static string NGramTokenizerRuleSet_ToString 
-            = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
 
-        #endregion
-
-        #region TokenizationStrategy
-
-        internal static string TokenizationStrategy_VariableName_Pattern = "pattern";
-        internal static string TokenizationStrategy_VariableName_Delimiter = "delimiter";
-        internal static string TokenizationStrategy_ToString
-            = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
-        internal static TokenizationStrategy TokenizationStrategy_Default = ANGram_TokenizationStrategyDefault;
-        internal static TokenizationStrategy TokenizationStrategy_Custom = ANGram_TokenizationStrategyCustom;
-        internal static int TokenizationStrategy_DefaultHashCode
-            = (TokenizationStrategy.DefaultPattern, TokenizationStrategy.DefaultDelimiter, TokenizationStrategy.DefaultToLowercase).GetHashCode();
-
-        #endregion
 
         #region SimilarityIndex
 
@@ -631,6 +614,13 @@ namespace NW.NGramTextClassification.UnitTests
 
         /* --------------------------------------------------- */
 
+        #region NGramTokenizerRuleSet
+
+        internal static string NGramTokenizerRuleSet_ToString
+            = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
+
+        #endregion
+
         #region TextClassifierResult
 
         internal static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
@@ -651,6 +641,15 @@ namespace NW.NGramTextClassification.UnitTests
             = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
         internal static string TextClassifierResult_VariableName_Indexes = "indexes";
         internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
+
+        #endregion
+
+        #region TokenizationStrategy
+
+        internal static string TokenizationStrategy_ToString
+            = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
+        internal static int TokenizationStrategy_DefaultHashCode
+            = (TokenizationStrategy.DefaultPattern, TokenizationStrategy.DefaultDelimiter, TokenizationStrategy.DefaultToLowercase).GetHashCode();
 
         #endregion
 
@@ -805,5 +804,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 19.09.2021
 */

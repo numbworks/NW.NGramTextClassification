@@ -73,7 +73,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.ANGram_FakeGram1,
                     new FakeGram(
                         ObjectMother.ANGram_FakeGram1_N,
-                        ObjectMother.ANGram_TokenizationStrategyCustom,
+                        ObjectMother.Shared_TokenizationStrategyCustom,
                         ObjectMother.ANGram_FakeGram1_Value),
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
