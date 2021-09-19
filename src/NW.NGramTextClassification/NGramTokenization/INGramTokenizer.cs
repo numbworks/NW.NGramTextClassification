@@ -8,34 +8,41 @@ namespace NW.NGramTextClassification.NGramTokenization
     public interface INGramTokenizer
     {
 
-        /// <summary>
-        /// Breaks <paramref name="text"/> into a collection of tokens according to <paramref name="strategy"/> and <paramref name="ruleSet"/>.
-        /// </summary>
+        /// <summary>Returns N for the provided <see cref="INGram"/>.</summary>
+        ushort GetN<T>() where T : INGram;
+
+        /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Monogram.N"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
-        List<INGram> Do(string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet);
+        List<Monogram> DoForMonogram(string text);
+
+        /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Bigram.N"/>.</summary>
+        /// <exception cref="ArgumentNullException"/>
+        List<Bigram> DoForBigram(string text);
+
+        /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Trigram.N"/>.</summary>
+        /// <exception cref="ArgumentNullException"/>
+        List<Trigram> DoForTrigram(string text);
+
+        /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Fourgram.N"/>.</summary>
+        /// <exception cref="ArgumentNullException"/>
+        List<Fourgram> DoForFourgram(string text);
+
+        /// <summary>Breaks <paramref name="text"/> into a collection of tokens according to <see cref="Fivegram.N"/>.</summary>
+        /// <exception cref="ArgumentNullException"/>
+        List<Fivegram> DoForFivegram(string text);
 
         /// <summary>
-        /// Breaks <paramref name="text"/> into a collection of tokens according to <paramref name="strategy"/> and a default <paramref name="ruleSet"/>.
+        /// Breaks <paramref name="text"/> into a collection of tokens according to <paramref name="tokenizerRuleset"/>.
+        /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, null will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        List<INGram> Do(string text, ITokenizationStrategy strategy);
+        List<INGram> TryDoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset);
 
-        /// <summary>
-        /// Breaks <paramref name="text"/> into a collection of tokens according to <paramref name="ruleSet"/> and a default <paramref name="strategy"/>.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        List<INGram> Do(string text, INGramTokenizerRuleSet ruleSet);
-
-        /// <summary>
-        /// Breaks <paramref name="text"/> into a collection of tokens using default <paramref name="ruleSet"/> and <paramref name="strategy"/>.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        List<INGram> Do(string text);
-    
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

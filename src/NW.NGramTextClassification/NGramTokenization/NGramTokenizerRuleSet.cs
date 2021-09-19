@@ -9,17 +9,17 @@
 
         #region Properties
 
-        public static bool DefaultDoForMonograms { get; } = true;
-        public static bool DefaultDoForBigrams { get; } = true;
-        public static bool DefaultDoForTrigrams { get; } = true;
-        public static bool DefaultDoForFourgrams { get; } = true;
-        public static bool DefaultDoForFivegrams { get; } = true;
+        public static bool DefaultDoForMonogram { get; } = true;
+        public static bool DefaultDoForBigram { get; } = true;
+        public static bool DefaultDoForTrigram { get; } = true;
+        public static bool DefaultDoForFourgram { get; } = true;
+        public static bool DefaultDoForFivegram { get; } = true;
 
-        public bool DoForMonograms { get; }
-        public bool DoForBigrams { get; }
-        public bool DoForTrigrams { get; }
-        public bool DoForFourgrams { get; }
-        public bool DoForFivegrams { get; }
+        public bool DoForMonogram { get; }
+        public bool DoForBigram { get; }
+        public bool DoForTrigram { get; }
+        public bool DoForFourgram { get; }
+        public bool DoForFivegram { get; }
 
         #endregion
 
@@ -27,29 +27,29 @@
 
         /// <summary>Initializes a <see cref="NGramTokenizerRuleSet"/> instance.</summary>
         public NGramTokenizerRuleSet
-            (bool doForMonograms,
-             bool doForBigrams,
-             bool doForTrigrams,
-             bool doForFourgrams,
-             bool doForFivegrams)
+            (bool doForMonogram,
+             bool doForBigram,
+             bool doForTrigram,
+             bool doForFourgram,
+             bool doForFivegram)
         {
 
-            DoForMonograms = doForMonograms;
-            DoForBigrams = doForBigrams;
-            DoForTrigrams = doForTrigrams;
-            DoForFourgrams = doForFourgrams;
-            DoForFivegrams = doForFivegrams;
+            DoForMonogram = doForMonogram;
+            DoForBigram = doForBigram;
+            DoForTrigram = doForTrigram;
+            DoForFourgram = doForFourgram;
+            DoForFivegram = doForFivegram;
 
         }
 
         /// <summary>Initializes a <see cref="NGramTokenizerRuleSet"/> instance using default parameters.</summary>
         public NGramTokenizerRuleSet()
             : this(
-                  DefaultDoForMonograms, 
-                  DefaultDoForBigrams,
-                  DefaultDoForTrigrams,
-                  DefaultDoForFourgrams,
-                  DefaultDoForFivegrams
+                  DefaultDoForMonogram, 
+                  DefaultDoForBigram,
+                  DefaultDoForTrigram,
+                  DefaultDoForFourgram,
+                  DefaultDoForFivegram
                   ) { }
 
         #endregion
@@ -62,11 +62,11 @@
             string content
                 = string.Join(
                     ", ",
-                    $"{nameof(DoForMonograms)}: '{DoForMonograms}'",
-                    $"{nameof(DoForBigrams)}: '{DoForBigrams}'",
-                    $"{nameof(DoForTrigrams)}: '{DoForTrigrams}'",
-                    $"{nameof(DoForFourgrams)}: '{DoForFourgrams}'",
-                    $"{nameof(DoForFivegrams)}: '{DoForFivegrams}'"
+                    $"{nameof(DoForMonogram)}: '{DoForMonogram}'",
+                    $"{nameof(DoForBigram)}: '{DoForBigram}'",
+                    $"{nameof(DoForTrigram)}: '{DoForTrigram}'",
+                    $"{nameof(DoForFourgram)}: '{DoForFourgram}'",
+                    $"{nameof(DoForFivegram)}: '{DoForFivegram}'"
                     );
 
             return $"[ {content} ]";
@@ -80,5 +80,5 @@
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

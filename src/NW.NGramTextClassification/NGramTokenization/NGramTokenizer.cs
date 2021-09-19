@@ -15,7 +15,8 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         #region Fields
 
-        private IArrayManager _ArrayManager;
+        private IArrayManager _arrayManager;
+        private ITokenizationStrategy _tokenizationStrategy;
 
         #endregion
 
@@ -26,147 +27,113 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         /// <summary>Initializes a <see cref="NGramTokenizer"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/> 
-        public NGramTokenizer(IArrayManager arrayManager)
+        public NGramTokenizer(IArrayManager arrayManager, ITokenizationStrategy tokenizationStrategy)
         {
 
             Validator.ValidateObject(arrayManager, nameof(arrayManager));
+            Validator.ValidateObject(tokenizationStrategy, nameof(tokenizationStrategy));
 
-            _ArrayManager = arrayManager;
+            _arrayManager = arrayManager;
+            _tokenizationStrategy = tokenizationStrategy;
 
         }
 
         /// <summary>Initializes a <see cref="NGramTokenizer"/> instance using default parameters.</summary>
         public NGramTokenizer()
-            : this(new ArrayManager()) { }
+            : this(new ArrayManager(), new TokenizationStrategy()) { }
 
         #endregion
 
         #region Methods_public
 
-        public List<INGram> Do(string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
+        public ushort GetN<T>() where T : INGram
+            => ((INGram)CreateInstance<T>(new TokenizationStrategy(), "whatever_value")).N;
+
+        public List<Monogram> DoForMonogram(string text)
+            => DoFor<Monogram>(text);
+        public List<Bigram> DoForBigram(string text)
+            => DoFor<Bigram>(text);
+        public List<Trigram> DoForTrigram(string text)
+            => DoFor<Trigram>(text);
+        public List<Fourgram> DoForFourgram(string text)
+            => DoFor<Fourgram>(text);
+        public List<Fivegram> DoForFivegram(string text)
+            => DoFor<Fivegram>(text);
+
+        public List<INGram> TryDoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(strategy, nameof(strategy));
-            Validator.ValidateObject(ruleSet, nameof(ruleSet));
+            Validator.ValidateObject(tokenizerRuleset, nameof(tokenizerRuleset));
 
-            return TokenizeText(text, strategy, ruleSet);
+            List<INGram> ngrams = new List<INGram>();
+
+            if (tokenizerRuleset.DoForMonogram)
+            {
+
+                List<Monogram> current;
+                bool status = TryDoFor(text, out current);
+                if (status)
+                    ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForBigram)
+            {
+
+                List<Bigram> current;
+                bool status = TryDoFor(text, out current);
+                if (status)
+                    ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForTrigram)
+            {
+
+                List<Trigram> current;
+                bool status = TryDoFor(text, out current);
+                if (status)
+                    ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForFourgram)
+            {
+
+                List<Fourgram> current;
+                bool status = TryDoFor(text, out current);
+                if (status)
+                    ngrams.AddRange(current);
+
+            }
+            if (tokenizerRuleset.DoForFivegram)
+            {
+
+                List<Fivegram> current;
+                bool status = TryDoFor(text, out current);
+                if (status)
+                    ngrams.AddRange(current);
+
+            }
+
+            if (ngrams.Count == 0)
+                return null;
+
+            return ngrams;
 
         }
-        public List<INGram> Do(string text, ITokenizationStrategy strategy)
-            => Do(text, strategy, new NGramTokenizerRuleSet());
-        public List<INGram> Do(string text, INGramTokenizerRuleSet ruleSet)
-            => Do(text, new TokenizationStrategy(), ruleSet);
-        public List<INGram> Do(string text)
-            => Do(text, new TokenizationStrategy(), new NGramTokenizerRuleSet());
 
         #endregion
 
         #region Methods_private
 
-        private List<INGram> TokenizeText
-            (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet)
-        {
-
-            List<INGram> nGrams = new List<INGram>();
-            string ruleName = null;
-
-            try
-            {
-
-                if (ruleSet.DoForMonograms)
-                {
-                    ruleName = nameof(ruleSet.DoForMonograms);
-                    nGrams.AddRange(DoFor<Monogram>(text, strategy));
-                }
-
-                if (ruleSet.DoForBigrams)
-                {
-                    ruleName = nameof(ruleSet.DoForBigrams);
-                    nGrams.AddRange(DoFor<Bigram>(text, strategy));
-                }
-
-                if (ruleSet.DoForTrigrams)
-                {
-                    ruleName = nameof(ruleSet.DoForTrigrams);
-                    nGrams.AddRange(DoFor<Trigram>(text, strategy));
-                }
-
-                if (ruleSet.DoForFourgrams)
-                {
-                    ruleName = nameof(ruleSet.DoForFourgrams);
-                    nGrams.AddRange(DoFor<Fourgram>(text, strategy));
-                }
-
-                if (ruleSet.DoForFivegrams)
-                {
-                    ruleName = nameof(ruleSet.DoForFivegrams);
-                    nGrams.AddRange(DoFor<Fivegram>(text, strategy));
-                }
-
-                return nGrams;
-
-            }
-            catch
-            {
-
-                throw new Exception(MessageCollection.NGramTokenizer_TheRuleCantBeAppliedTo.Invoke(ruleName, text));
-
-            }
-
-        }
-
-        private List<T> DoFor<T>(string text, ITokenizationStrategy strategy) where T : INGram
+        private T CreateInstance<T>(params object[] args)
+            => (T)Activator.CreateInstance(typeof(T), args);
+        private MatchCollection GetMatches(string text)
         {
 
             // "This is a sample text." => "This", "is", ..., "text"
-            MatchCollection matches = Regex.Matches(text, strategy.Pattern);
-            if (matches.Count == 0)
-                throw new Exception(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(strategy));
+            MatchCollection matches = Regex.Matches(text, _tokenizationStrategy.Pattern);
 
-            ushort N = GetN<T>();
-            Validator.ThrowIfFirstIsGreater(N, nameof(N), matches.Count, "matches.Count");
-
-            return GetTokens<T>(N, matches, strategy);
-
-        }
-        private List<T> GetTokens<T>(ushort N, MatchCollection matches, ITokenizationStrategy strategy)
-        {
-
-            string[] allWords = ConvertToArray(matches);
-
-            List<T> tokens = new List<T>();
-            for (uint i = 0; i < allWords.Length; i++)
-            {
-
-                // The last x NGrams are shorter in length...
-                ushort currentN = N;
-                if ((allWords.Length - i) < N)
-                    currentN = (ushort)(allWords.Length - i);
-
-                // For N = 3: ["This", "is", "a"], ["is", "a", "sample"], ...
-                string[] currentSubset = _ArrayManager.GetSubset(allWords, i, currentN);
-
-                // [ "This", "is", "a" ] => [ "This", " ", "is", " ", "a" ]
-                currentSubset = _ArrayManager.AddDelimiter(currentSubset, strategy.Delimiter);
-
-                // [ "This", " ", "is", " ", "a" ] => "This is a"
-                StringBuilder currentToken = new StringBuilder();
-                foreach (string word in currentSubset)
-                    currentToken.Append(word);
-
-                // "This is a" => "this is a"
-                if (strategy.ToLowercase)
-                    currentToken = new StringBuilder(currentToken.ToString().ToLower());
-
-                // new Monogram(strategy, "this is a")
-                T nGram = CreateInstance<T>(strategy, currentToken.ToString());
-
-                tokens.Add(nGram);
-
-            }
-
-            return tokens;
+            return matches;
 
         }
         private string[] ConvertToArray(MatchCollection matches)
@@ -179,10 +146,85 @@ namespace NW.NGramTextClassification.NGramTokenization
             return allWords;
 
         }
-        private ushort GetN<T>()
-            => ((INGram)CreateInstance<T>(new TokenizationStrategy(), "whatever_value")).N;
-        private T CreateInstance<T>(params object[] args)
-            => (T)Activator.CreateInstance(typeof(T), args);
+        private void Validate<T>(string text) where T : INGram
+        {
+
+            Validator.ValidateStringNullOrWhiteSpace<ArgumentNullException>(text, nameof(text));
+
+            MatchCollection matches = GetMatches(text);
+            if (matches.Count == 0)
+                throw new ArgumentNullException(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(_tokenizationStrategy));
+
+            ushort N = GetN<T>();
+            Validator.ThrowIfFirstIsGreater<ArgumentNullException>(N, nameof(N), matches.Count, nameof(matches.Count));
+
+        }
+        private List<T> DoFor<T>(string text) where T : INGram
+        {
+
+            /*
+             
+                1. For N = 3: ["This", "is", "a"], ["is", "a", "sample"], ...
+                2. [ "This", "is", "a" ] => [ "This", " ", "is", " ", "a" ]
+                3. [ "This", " ", "is", " ", "a" ] => "This is a"
+                4. "This is a" => "this is a"
+                5. new Trigram(strategy, "this is a")
+
+            */
+
+            Validate<T>(text);
+
+            ushort N = GetN<T>();
+            MatchCollection matches = GetMatches(text);
+            string[] allWords = ConvertToArray(matches);
+
+            List<T> tokens = new List<T>();
+            for (uint i = 0; i < allWords.Length; i++)
+            {
+
+                ushort currentN = N;
+                if ((allWords.Length - i) < N)
+                    currentN = (ushort)(allWords.Length - i); // The last x NGrams are shorter in length
+
+                string[] currentSubset = _arrayManager.GetSubset(allWords, i, currentN);
+                currentSubset = _arrayManager.AddDelimiter(currentSubset, _tokenizationStrategy.Delimiter);
+
+                StringBuilder currentToken = new StringBuilder();
+                foreach (string word in currentSubset)
+                    currentToken.Append(word);
+
+                if (_tokenizationStrategy.ToLowercase)
+                    currentToken = new StringBuilder(currentToken.ToString().ToLower());
+
+                T nGram = CreateInstance<T>(_tokenizationStrategy, currentToken.ToString());
+
+                tokens.Add(nGram);
+
+            }
+
+            return tokens;
+
+        }
+        private bool TryDoFor<T>(string text, out List<T> ngrams) where T : INGram
+        {
+
+            try
+            {
+
+                ngrams = DoFor<T>(text);
+                return true;
+
+            }
+            catch
+            {
+
+
+                ngrams = null;
+                return false;
+
+            }
+
+        }
 
         #endregion
 
@@ -191,5 +233,5 @@ namespace NW.NGramTextClassification.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

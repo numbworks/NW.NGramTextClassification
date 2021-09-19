@@ -28,8 +28,6 @@ namespace NW.NGramTextClassification.Messages
 
         public static Func<ITokenizationStrategy, string> NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches =
             (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
-        public static Func<string, string, string> NGramTokenizer_TheRuleCantBeAppliedTo =
-            (ruleName, text) => $"The '{ruleName}' rule can't be applied to the provided string: '{text}'.";
 
         #endregion
 
@@ -106,5 +104,5 @@ namespace NW.NGramTextClassification.Messages
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 19.09.2021
 */

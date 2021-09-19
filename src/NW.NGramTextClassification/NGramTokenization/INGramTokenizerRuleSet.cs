@@ -3,11 +3,11 @@
     /// <summary>A collection of rules for <see cref="INGramTokenizer"/>.</summary>
     public interface INGramTokenizerRuleSet
     {
-        bool DoForBigrams { get; }
-        bool DoForMonograms { get; }
-        bool DoForTrigrams { get; }
-        bool DoForFourgrams { get; }
-        bool DoForFivegrams { get; }
+        bool DoForBigram { get; }
+        bool DoForMonogram { get; }
+        bool DoForTrigram { get; }
+        bool DoForFourgram { get; }
+        bool DoForFivegram { get; }
     }
 }
 

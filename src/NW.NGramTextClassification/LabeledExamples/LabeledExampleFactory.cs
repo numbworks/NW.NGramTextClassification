@@ -94,6 +94,10 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #endregion
 
+        #region Methods_private
+
+        #endregion
+
     }
 }
 
