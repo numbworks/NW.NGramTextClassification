@@ -410,23 +410,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion 
 
-        #region ANGram
-
-        internal static ushort ANGram_FakeGram1_N = 1;
-        internal static string ANGram_FakeGram1_Value = LabeledExampleFactory_Text1_MonogramValue1;
-        internal static string ANGram_FakeGram_ValueOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
-        internal static ushort ANGram_FakeGram2_N = 1;
-        internal static string ANGram_FakeGram2_Value = LabeledExampleFactory_Text1_MonogramValue2;
-        internal static TokenizationStrategy ANGram_TokenizationStrategyDefault = new TokenizationStrategy();
-        internal static FakeGram ANGram_FakeGram1 
-            = new FakeGram(ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value);
-        internal static FakeGram ANGram_FakeGram2 
-            = new FakeGram(ANGram_FakeGram2_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram2_Value);
-        internal static int ANGram_FakeGram1_HashCode
-            = (ANGram_FakeGram1_N, ANGram_TokenizationStrategyDefault, ANGram_FakeGram1_Value).GetHashCode();
-
-        #endregion
-
         #region NGramTokenizer
 
         internal static string NGramTokenizer_Text1 = LabeledExample_Text1;
@@ -555,6 +538,19 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         /* --------------------------------------------------- */
+
+        #region ANGram
+
+        internal static ushort ANGram_FakeGram1_N = 1;
+        internal static ushort ANGram_FakeGram2_N = 1;
+        internal static FakeGram ANGram_FakeGram1
+            = new FakeGram(ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, Shared_Text1_TextAsMonograms[0].Value);
+        internal static FakeGram ANGram_FakeGram2
+            = new FakeGram(ANGram_FakeGram2_N, Shared_TokenizationStrategyDefault, Shared_Text1_TextAsMonograms[1].Value);
+        internal static int ANGram_FakeGram1_HashCode
+            = (ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, Shared_Text1_TextAsMonograms[0].Value).GetHashCode();
+
+        #endregion
 
         #region ArrayManager
 

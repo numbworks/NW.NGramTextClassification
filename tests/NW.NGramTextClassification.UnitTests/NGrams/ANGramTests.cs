@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new FakeGram(
                                     0,
                                     new TokenizationStrategy(),
-                                    ObjectMother.ANGram_FakeGram1_Value
+                                    ObjectMother.Shared_Text1_TextAsMonograms[0].Value
                             )),
                 typeof(ArgumentException),
                 MessageCollection.Validator_VariableCantBeLessThanOne.Invoke("n")
@@ -33,7 +33,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new FakeGram(
                                     1,
                                     null,
-                                    ObjectMother.ANGram_FakeGram1_Value
+                                    ObjectMother.Shared_Text1_TextAsMonograms[0].Value
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("stategy").Message
@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new FakeGram(
                                     1,
                                     new TokenizationStrategy(),
-                                    ObjectMother.ANGram_FakeGram_ValueOnlyWhiteSpaces
+                                    ObjectMother.Validator_StringOnlyWhiteSpaces
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("value").Message
@@ -65,7 +65,7 @@ namespace NW.NGramTextClassification.UnitTests
                     new FakeGram(
                         ObjectMother.ANGram_FakeGram1_N,
                         new TokenizationStrategy(), // Tests if TokenizationStrategy.Equals() works as expected.
-                        ObjectMother.ANGram_FakeGram1_Value),
+                        ObjectMother.Shared_Text1_TextAsMonograms[0].Value),
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
 
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification.UnitTests
                     new FakeGram(
                         ObjectMother.ANGram_FakeGram1_N,
                         ObjectMother.Shared_TokenizationStrategyCustom,
-                        ObjectMother.ANGram_FakeGram1_Value),
+                        ObjectMother.Shared_Text1_TextAsMonograms[0].Value),
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
 
