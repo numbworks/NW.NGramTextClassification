@@ -17,6 +17,7 @@ namespace NW.NGramTextClassification.UnitTests
         internal static ITokenizationStrategy Shared_TokenizationStrategyDefault = new TokenizationStrategy();
         internal static TokenizationStrategy Shared_TokenizationStrategyCustom = new TokenizationStrategy("[a-Z]", ";", false);
 
+        internal static ulong Shared_Text1_LabeledExampleId = 1;
         internal static string Shared_Text1_Text = "We are looking for several skilled and driven developers to join our team.";
         internal static string Shared_Text1_Label = "en";
         internal static List<Monogram> Shared_Text1_TextAsMonograms = new List<Monogram>()
@@ -190,48 +191,12 @@ namespace NW.NGramTextClassification.UnitTests
 
 
 
-        #region LabeledExample
 
-        internal static string LabeledExample_VariableName_Label = "label";
-        internal static string LabeledExample_VariableName_Text = "text";
-        internal static string LabeledExample_VariableName_TextAsNGrams = "textAsNGrams";
-        internal static ulong LabeledExample_Id1 = 1;
-        internal static string LabeledExample_Label1 = "en";
-        internal static string LabeledExample_LabelOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-        internal static string LabeledExample_Text1 = "We are looking for several skilled and driven developers to join our team.";
-        internal static string LabeledExample_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-        internal static string LabeledExample_Text1_MonogramValue1 = "we";
-        internal static string LabeledExample_Text1_BigramValue1 = "we are";
-        internal static string LabeledExample_Text1_TrigramValue1 = "we are looking";
-        internal static List<INGram> LabeledExample_TextAsNGrams1 
-            = new List<INGram>() {
-                new Monogram(LabeledExample_Text1_MonogramValue1),
-                new Bigram(LabeledExample_Text1_BigramValue1),
-                new Trigram(LabeledExample_Text1_TrigramValue1)
-            };
-        internal static LabeledExample LabeledExample1
-            = new LabeledExample(
-                    LabeledExample_Id1,
-                    LabeledExample_Label1,
-                    LabeledExample_Text1,
-                    LabeledExample_TextAsNGrams1
-                );
-        internal static string LabeledExample1_AsString
-            = string.Concat(
-                        $"[ Id: '{LabeledExample_Id1}', ",
-                        $"Label: '{LabeledExample_Label1}', ",
-                        $"Text: '{LabeledExample_Text1}', ",
-                        $"TextAsNGrams: '{LabeledExample_TextAsNGrams1.Count}' ]"
-                    );
-        internal static string LabeledExample_Text1_FourgramValue1 = "we are looking for";
-        internal static string LabeledExample_Text1_FivegramValue1 = "we are looking for several";
-
-        #endregion
 
         #region LabeledExampleFactory
 
         internal static uint LabeledExampleFactory_InitialId1 = 0;
-        internal static ulong LabeledExampleFactory_Id1 = LabeledExample_Id1;
+        internal static ulong LabeledExampleFactory_Id1 = Shared_Text1_LabeledExampleId;
         internal static string LabeledExampleFactory_Label1 = LabeledExample_Label1;
         internal static string LabeledExampleFactory_LabelOnlyWhiteSpaces = LabeledExample_LabelOnlyWhiteSpaces;
         internal static ulong LabeledExampleFactory_Id2 = 2;
@@ -568,6 +533,25 @@ namespace NW.NGramTextClassification.UnitTests
                 "DeLorean"
             };
         internal static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
+
+        #endregion
+
+        #region LabeledExample
+
+        internal static LabeledExample LabeledExample1
+            = new LabeledExample(
+                    Shared_Text1_LabeledExampleId,
+                    Shared_Text1_Label,
+                    Shared_Text1_Text,
+                    Shared_Text1_TextAsNGrams
+                );
+        internal static string LabeledExample1_AsString
+            = string.Concat(
+                        $"[ Id: '{Shared_Text1_LabeledExampleId}', ",
+                        $"Label: '{Shared_Text1_Label}', ",
+                        $"Text: '{Shared_Text1_Text}', ",
+                        $"TextAsNGrams: '{Shared_Text1_TextAsNGrams.Count}' ]"
+                    );
 
         #endregion
 
