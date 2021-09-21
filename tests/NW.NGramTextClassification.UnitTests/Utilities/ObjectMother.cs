@@ -313,6 +313,184 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
+        internal static string Shared_Text3_Text = "Kas siis selle maa keel Laulutuules ei või Taevani tõustes üles Igavikku omale otsida";
+        internal static string Shared_Text3_Label = null;
+        internal static List<Monogram> Shared_Text3_TextAsMonograms
+            = new List<Monogram>() {
+
+                new Monogram(Shared_TokenizationStrategyDefault, "kas"),
+                new Monogram(Shared_TokenizationStrategyDefault, "siis"),
+                new Monogram(Shared_TokenizationStrategyDefault, "selle"),
+                new Monogram(Shared_TokenizationStrategyDefault, "maa"),
+                new Monogram(Shared_TokenizationStrategyDefault, "keel"),
+                new Monogram(Shared_TokenizationStrategyDefault, "laulutuules"),
+                new Monogram(Shared_TokenizationStrategyDefault, "ei"),
+                new Monogram(Shared_TokenizationStrategyDefault, "või"),
+                new Monogram(Shared_TokenizationStrategyDefault, "taevani"),
+                new Monogram(Shared_TokenizationStrategyDefault, "tõustes"),
+                new Monogram(Shared_TokenizationStrategyDefault, "üles"),
+                new Monogram(Shared_TokenizationStrategyDefault, "igavikku"),
+                new Monogram(Shared_TokenizationStrategyDefault, "omale"),
+                new Monogram(Shared_TokenizationStrategyDefault, "otsida")
+
+            };
+        internal static List<Bigram> Shared_Text3_TextAsBigrams
+            = new List<Bigram>() {
+
+                new Bigram(Shared_TokenizationStrategyDefault, "kas siis"),
+                new Bigram(Shared_TokenizationStrategyDefault, "siis selle"),
+                new Bigram(Shared_TokenizationStrategyDefault, "selle maa"),
+                new Bigram(Shared_TokenizationStrategyDefault, "maa keel"),
+                new Bigram(Shared_TokenizationStrategyDefault, "keel laulutuules"),
+                new Bigram(Shared_TokenizationStrategyDefault, "laulutuules ei"),
+                new Bigram(Shared_TokenizationStrategyDefault, "ei või"),
+                new Bigram(Shared_TokenizationStrategyDefault, "või taevani"),
+                new Bigram(Shared_TokenizationStrategyDefault, "taevani tõustes"),
+                new Bigram(Shared_TokenizationStrategyDefault, "tõustes üles"),
+                new Bigram(Shared_TokenizationStrategyDefault, "üles igavikku"),
+                new Bigram(Shared_TokenizationStrategyDefault, "igavikku omale"),
+                new Bigram(Shared_TokenizationStrategyDefault, "omale otsida"),
+                new Bigram(Shared_TokenizationStrategyDefault, "otsida")
+
+            };
+        internal static List<Trigram> Shared_Text3_TextAsTrigrams
+            = new List<Trigram>() {
+
+                new Trigram(Shared_TokenizationStrategyDefault, "kas siis selle"),
+                new Trigram(Shared_TokenizationStrategyDefault, "siis selle maa"),
+                new Trigram(Shared_TokenizationStrategyDefault, "selle maa keel"),
+                new Trigram(Shared_TokenizationStrategyDefault, "maa keel laulutuules"),
+                new Trigram(Shared_TokenizationStrategyDefault, "keel laulutuules ei"),
+                new Trigram(Shared_TokenizationStrategyDefault, "laulutuules ei või"),
+                new Trigram(Shared_TokenizationStrategyDefault, "ei või taevani"),
+                new Trigram(Shared_TokenizationStrategyDefault, "või taevani tõustes"),
+                new Trigram(Shared_TokenizationStrategyDefault, "taevani tõustes üles"),
+                new Trigram(Shared_TokenizationStrategyDefault, "tõustes üles igavikku"),
+                new Trigram(Shared_TokenizationStrategyDefault, "üles igavikku omale"),
+                new Trigram(Shared_TokenizationStrategyDefault, "igavikku omale otsida"),
+                new Trigram(Shared_TokenizationStrategyDefault, "omale otsida"),
+                new Trigram(Shared_TokenizationStrategyDefault, "otsida")
+
+            };
+        internal static List<Fourgram> Shared_Text3_TextAsFourgrams
+            = new List<Fourgram>() {
+
+                new Fourgram(Shared_TokenizationStrategyDefault, "kas siis selle maa"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "siis selle maa keel"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "selle maa keel laulutuules"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maa keel laulutuules ei"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maakeel laulutuules ei või"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maalaulutuules ei või taevani"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maaei või taevani tõustes"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maavõi taevani tõustes üles"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maataevani tõustes üles igavikku"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maatõustes üles igavikku omale"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maaüles igavikku omale otsida"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maaigavikku omale otsida"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maaomale otsida"),
+                new Fourgram(Shared_TokenizationStrategyDefault, "maaotsida")
+
+            };
+        internal static List<Fivegram> Shared_Text3_TextAsFivegrams
+            = new List<Fivegram>()
+            {
+
+                new Fivegram(Shared_TokenizationStrategyDefault, "kas siis selle maa keel"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "siis selle maa keel laulutuules"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "selle maa keel laulutuules ei"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "maa keel laulutuules ei või"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "keel laulutuules ei või taevani"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "laulutuules ei või taevani tõustes"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "ei või taevani tõustes üles"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "või taevani tõustes üles igavikku"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "taevani tõustes üles igavikku omale"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "tõustes üles igavikku omale otsida"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "üles igavikku omale otsida"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "igavikku omale otsida"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "omale otsida"),
+                new Fivegram(Shared_TokenizationStrategyDefault, "otsida")
+
+            };
+        internal static List<INGram> Shared_Text3_TextAsNGrams = new List<INGram>()
+        {
+
+            Shared_Text3_TextAsMonograms[0],
+            Shared_Text3_TextAsMonograms[1],
+            Shared_Text3_TextAsMonograms[2],
+            Shared_Text3_TextAsMonograms[3],
+            Shared_Text3_TextAsMonograms[4],
+            Shared_Text3_TextAsMonograms[5],
+            Shared_Text3_TextAsMonograms[6],
+            Shared_Text3_TextAsMonograms[7],
+            Shared_Text3_TextAsMonograms[8],
+            Shared_Text3_TextAsMonograms[9],
+            Shared_Text3_TextAsMonograms[10],
+            Shared_Text3_TextAsMonograms[11],
+            Shared_Text3_TextAsMonograms[12],
+            Shared_Text3_TextAsMonograms[13],
+
+            Shared_Text3_TextAsBigrams[0],
+            Shared_Text3_TextAsBigrams[1],
+            Shared_Text3_TextAsBigrams[2],
+            Shared_Text3_TextAsBigrams[3],
+            Shared_Text3_TextAsBigrams[4],
+            Shared_Text3_TextAsBigrams[5],
+            Shared_Text3_TextAsBigrams[6],
+            Shared_Text3_TextAsBigrams[7],
+            Shared_Text3_TextAsBigrams[8],
+            Shared_Text3_TextAsBigrams[9],
+            Shared_Text3_TextAsBigrams[10],
+            Shared_Text3_TextAsBigrams[11],
+            Shared_Text3_TextAsBigrams[12],
+            Shared_Text3_TextAsBigrams[13],
+
+            Shared_Text3_TextAsTrigrams[0],
+            Shared_Text3_TextAsTrigrams[1],
+            Shared_Text3_TextAsTrigrams[2],
+            Shared_Text3_TextAsTrigrams[3],
+            Shared_Text3_TextAsTrigrams[4],
+            Shared_Text3_TextAsTrigrams[5],
+            Shared_Text3_TextAsTrigrams[6],
+            Shared_Text3_TextAsTrigrams[7],
+            Shared_Text3_TextAsTrigrams[8],
+            Shared_Text3_TextAsTrigrams[9],
+            Shared_Text3_TextAsTrigrams[10],
+            Shared_Text3_TextAsTrigrams[11],
+            Shared_Text3_TextAsTrigrams[12],
+            Shared_Text3_TextAsTrigrams[13],
+
+            Shared_Text3_TextAsFourgrams[0],
+            Shared_Text3_TextAsFourgrams[1],
+            Shared_Text3_TextAsFourgrams[2],
+            Shared_Text3_TextAsFourgrams[3],
+            Shared_Text3_TextAsFourgrams[4],
+            Shared_Text3_TextAsFourgrams[5],
+            Shared_Text3_TextAsFourgrams[6],
+            Shared_Text3_TextAsFourgrams[7],
+            Shared_Text3_TextAsFourgrams[8],
+            Shared_Text3_TextAsFourgrams[9],
+            Shared_Text3_TextAsFourgrams[10],
+            Shared_Text3_TextAsFourgrams[11],
+            Shared_Text3_TextAsFourgrams[12],
+            Shared_Text3_TextAsFourgrams[13],
+
+            Shared_Text3_TextAsFivegrams[0],
+            Shared_Text3_TextAsFivegrams[1],
+            Shared_Text3_TextAsFivegrams[2],
+            Shared_Text3_TextAsFivegrams[3],
+            Shared_Text3_TextAsFivegrams[4],
+            Shared_Text3_TextAsFivegrams[5],
+            Shared_Text3_TextAsFivegrams[6],
+            Shared_Text3_TextAsFivegrams[7],
+            Shared_Text3_TextAsFivegrams[8],
+            Shared_Text3_TextAsFivegrams[9],
+            Shared_Text3_TextAsFivegrams[10],
+            Shared_Text3_TextAsFivegrams[11],
+            Shared_Text3_TextAsFivegrams[12],
+            Shared_Text3_TextAsFivegrams[13]
+
+        };
+
         internal static LabeledExample Shared_Text1_LabeledExample
             = new LabeledExample(
                         Shared_Text1_LabeledExampleId,
@@ -361,124 +539,6 @@ namespace NW.NGramTextClassification.UnitTests
         internal static string NGramTokenizer_TextNonAlphanumerical = ";;;-- £/£&$£";
 
         #endregion
-
-        #region TextClassifier
-
-        internal static string TextClassifier_Text1 = Shared_Text1_Text;
-        internal static string TextClassifier_TextOnlyWhiteSpaces = Validator_StringOnlyWhiteSpaces;
-        internal static List<LabeledExample> TextClassifier_LabeledExamples = Shared_LabeledExamples;
-        internal static string TextClassifier_Text1_Label = "en";
-        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 1);
-        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
-        internal static List<SimilarityIndex> TextClassifier_Text1_SimilarityIndexes
-            = new List<SimilarityIndex>()
-            {
-                TextClassifier_Text1_SimilarityIndex1,
-                TextClassifier_Text1_SimilarityIndex2
-            };
-        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage1
-            = new SimilarityIndexAverage("en", 1);
-        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage2
-            = new SimilarityIndexAverage("sv", 0);
-        internal static List<SimilarityIndexAverage> TextClassifier_Text1_SimilarityIndexAverages
-            = new List<SimilarityIndexAverage>()
-            {
-                TextClassifier_Text1_SimilarityIndexAverage1,
-                TextClassifier_Text1_SimilarityIndexAverage2
-            };
-        internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult
-            = new TextClassifierResult(
-                        TextClassifier_Text1_Label,
-                        TextClassifier_Text1_SimilarityIndexes,
-                        TextClassifier_Text1_SimilarityIndexAverages);
-        internal static List<INGram> TextClassifier_Text1_NGrams = Shared_Text1_TextAsNGrams;
-        internal static List<string> TextClassifier_Text1_UniqueLabels
-            = new List<string>()
-            {
-                TextClassifier_Text1_SimilarityIndex1.Label,
-                TextClassifier_Text1_SimilarityIndex2.Label,
-            };
-        internal static string TextClassifier_Text3 = "Kas siis selle maa keel Laulutuules ei või Taevani tõustes üles Igavikku omale otsida";
-        internal static string TextClassifier_Text3_Label = null;
-        internal static List<INGram> TextClassifier_Text3_NGrams
-            = new List<INGram>() {
-
-                new Monogram("kas"),
-                new Monogram("siis"),
-                new Monogram("selle"),
-                new Monogram("maa"),
-                new Monogram("keel"),
-                new Monogram("laulutuules"),
-                new Monogram("ei"),
-                new Monogram("või"),
-                new Monogram("taevani"),
-                new Monogram("tõustes"),
-                new Monogram("üles"),
-                new Monogram("igavikku"),
-                new Monogram("omale"),
-                new Monogram("otsida"),
-                new Bigram("kas siis"),
-                new Bigram("siis selle"),
-                new Bigram("selle maa"),
-                new Bigram("maa keel"),
-                new Bigram("keel laulutuules"),
-                new Bigram("laulutuules ei"),
-                new Bigram("ei või"),
-                new Bigram("või taevani"),
-                new Bigram("taevani tõustes"),
-                new Bigram("tõustes üles"),
-                new Bigram("üles igavikku"),
-                new Bigram("igavikku omale"),
-                new Bigram("omale otsida"),
-                new Bigram("otsida"),
-                new Trigram("kas siis selle"),
-                new Trigram("siis selle maa"),
-                new Trigram("selle maa keel"),
-                new Trigram("maa keel laulutuules"),
-                new Trigram("keel laulutuules ei"),
-                new Trigram("laulutuules ei või"),
-                new Trigram("ei või taevani"),
-                new Trigram("või taevani tõustes"),
-                new Trigram("taevani tõustes üles"),
-                new Trigram("tõustes üles igavikku"),
-                new Trigram("üles igavikku omale"),
-                new Trigram("igavikku omale otsida"),
-                new Trigram("omale otsida"),
-                new Trigram("otsida")
-
-            };
-        internal static SimilarityIndex TextClassifier_Text3_SimilarityIndex1 = new SimilarityIndex(1, "en", 0);
-        internal static SimilarityIndex TextClassifier_Text3_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
-        internal static List<SimilarityIndex> TextClassifier_Text3_SimilarityIndexes
-            = new List<SimilarityIndex>()
-            {
-                TextClassifier_Text3_SimilarityIndex1,
-                TextClassifier_Text3_SimilarityIndex2
-            };
-        internal static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage1
-            = new SimilarityIndexAverage("en", 0);
-        internal static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage2
-            = new SimilarityIndexAverage("sv", 0);
-        internal static List<SimilarityIndexAverage> TextClassifier_Text3_SimilarityIndexAverages
-            = new List<SimilarityIndexAverage>()
-            {
-                TextClassifier_Text3_SimilarityIndexAverage1,
-                TextClassifier_Text3_SimilarityIndexAverage2
-            };
-        internal static TextClassifierResult TextClassifier_Text3_TextClassifierResult
-            = new TextClassifierResult(
-                        TextClassifier_Text3_Label,
-                        TextClassifier_Text3_SimilarityIndexes,
-                        TextClassifier_Text3_SimilarityIndexAverages);
-        internal static List<string> TextClassifier_Text3_UniqueLabels
-            = new List<string>()
-            {
-                TextClassifier_Text3_SimilarityIndex1.Label,
-                TextClassifier_Text3_SimilarityIndex2.Label,
-            };
-
-        #endregion
-
 
         /* --------------------------------------------------- */
 
@@ -565,6 +625,71 @@ namespace NW.NGramTextClassification.UnitTests
             = new SimilarityIndexAverage(SimilarityIndexAverage_Label1, SimilarityIndexAverage_Value1);
         internal static string SimilarityIndexAverage_ToString1
             = $"[ Label: '{SimilarityIndexAverage_Label1}', Value: '{SimilarityIndexAverage_Value1}' ]";
+
+        #endregion
+
+        #region TextClassifier
+
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(1, "en", 1);
+        internal static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
+        internal static List<SimilarityIndex> TextClassifier_Text1_SimilarityIndexes
+            = new List<SimilarityIndex>()
+            {
+                TextClassifier_Text1_SimilarityIndex1,
+                TextClassifier_Text1_SimilarityIndex2
+            };
+        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage1
+            = new SimilarityIndexAverage("en", 1);
+        internal static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage2
+            = new SimilarityIndexAverage("sv", 0);
+        internal static List<SimilarityIndexAverage> TextClassifier_Text1_SimilarityIndexAverages
+            = new List<SimilarityIndexAverage>()
+            {
+                TextClassifier_Text1_SimilarityIndexAverage1,
+                TextClassifier_Text1_SimilarityIndexAverage2
+            };
+        internal static TextClassifierResult TextClassifier_Text1_TextClassifierResult
+            = new TextClassifierResult(
+                        Shared_Text1_Label,
+                        TextClassifier_Text1_SimilarityIndexes,
+                        TextClassifier_Text1_SimilarityIndexAverages);
+        internal static List<INGram> TextClassifier_Text1_NGrams = Shared_Text1_TextAsNGrams;
+        internal static List<string> TextClassifier_Text1_UniqueLabels
+            = new List<string>()
+            {
+                TextClassifier_Text1_SimilarityIndex1.Label,
+                TextClassifier_Text1_SimilarityIndex2.Label,
+            };
+
+        internal static SimilarityIndex TextClassifier_Text3_SimilarityIndex1 = new SimilarityIndex(1, "en", 0);
+        internal static SimilarityIndex TextClassifier_Text3_SimilarityIndex2 = new SimilarityIndex(2, "sv", 0);
+        internal static List<SimilarityIndex> TextClassifier_Text3_SimilarityIndexes
+            = new List<SimilarityIndex>()
+            {
+                TextClassifier_Text3_SimilarityIndex1,
+                TextClassifier_Text3_SimilarityIndex2
+            };
+        internal static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage1
+            = new SimilarityIndexAverage("en", 0);
+        internal static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage2
+            = new SimilarityIndexAverage("sv", 0);
+        internal static List<SimilarityIndexAverage> TextClassifier_Text3_SimilarityIndexAverages
+            = new List<SimilarityIndexAverage>()
+            {
+                TextClassifier_Text3_SimilarityIndexAverage1,
+                TextClassifier_Text3_SimilarityIndexAverage2
+            };
+        internal static TextClassifierResult TextClassifier_Text3_TextClassifierResult
+            = new TextClassifierResult(
+                        Shared_Text3_Label,
+                        TextClassifier_Text3_SimilarityIndexes,
+                        TextClassifier_Text3_SimilarityIndexAverages);
+        internal static List<string> TextClassifier_Text3_UniqueLabels
+            = new List<string>()
+            {
+                TextClassifier_Text3_SimilarityIndex1.Label,
+                TextClassifier_Text3_SimilarityIndex2.Label,
+            };
 
         #endregion
 

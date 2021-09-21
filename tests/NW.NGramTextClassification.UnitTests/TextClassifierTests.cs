@@ -49,7 +49,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new TextClassifier()
                                     .PredictLabel(
                                         null,
-                                        ObjectMother.TextClassifier_LabeledExamples
+                                        ObjectMother.Shared_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -60,9 +60,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .PredictLabel(
-                                        ObjectMother.TextClassifier_Text1,
+                                        ObjectMother.Shared_Text1_Text,
                                         null,
-                                        ObjectMother.TextClassifier_LabeledExamples
+                                        ObjectMother.Shared_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("strategy").Message
@@ -73,9 +73,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .PredictLabel(
-                                        ObjectMother.TextClassifier_Text1,
+                                        ObjectMother.Shared_Text1_Text,
                                         null,
-                                        ObjectMother.TextClassifier_LabeledExamples
+                                        ObjectMother.Shared_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("ruleSet").Message
@@ -86,7 +86,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .PredictLabel(
-                                        ObjectMother.TextClassifier_Text1,
+                                        ObjectMother.Shared_Text1_Text,
                                         null
                                 )),
                 typeof(ArgumentNullException),
@@ -97,7 +97,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .PredictLabel(
-                                        ObjectMother.TextClassifier_Text1,
+                                        ObjectMother.Shared_Text1_Text,
                                         new List<LabeledExample>()
                                 )),
                 typeof(ArgumentException),
@@ -154,7 +154,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
             string truncatedText
                 = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
-                        ObjectMother.TextClassifier_Text1,
+                        ObjectMother.Shared_Text1_Text,
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
             List<string> expectedLogMessages = new List<string>()
             {
@@ -162,15 +162,15 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
-                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text1_NGrams),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0]),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[1]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1]),
@@ -197,7 +197,7 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke("ContainsTwoHighestIndexAveragesThatArentEqual"),
                 MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexAverage1),
 
-                MessageCollection.TextClassifier_PredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text1_Label),
+                MessageCollection.TextClassifier_PredictedLabelIs.Invoke(ObjectMother.Shared_Text1_Label),
                 MessageCollection.TextClassifier_PredictionHasBeenSuccessful
 
             };
@@ -205,8 +205,8 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             TextClassifierResult actual
                 = textClassifier.PredictLabel(
-                                    ObjectMother.TextClassifier_Text1,
-                                    ObjectMother.TextClassifier_LabeledExamples);
+                                    ObjectMother.Shared_Text1_Text,
+                                    ObjectMother.Shared_LabeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -236,7 +236,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
             string truncatedText
                 = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
-                        ObjectMother.TextClassifier_Text3,
+                        ObjectMother.Shared_Text3_Text,
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
             List<string> expectedLogMessages = new List<string>()
             {
@@ -244,15 +244,15 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
-                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.TextClassifier_LabeledExamples),
-                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text3_NGrams),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples),
+                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.Shared_Text3_TextAsNGrams),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0]),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.TextClassifier_LabeledExamples[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[1]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1]),
@@ -276,7 +276,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke("ContainsAtLeastOneIndexAverageThatIsNotZero"),
 
-                MessageCollection.TextClassifier_PredictedLabelIs.Invoke(ObjectMother.TextClassifier_Text3_Label),
+                MessageCollection.TextClassifier_PredictedLabelIs.Invoke(ObjectMother.Shared_Text3_Label),
                 MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples
 
             };
@@ -284,8 +284,8 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             TextClassifierResult actual
                 = textClassifier.PredictLabel(
-                                    ObjectMother.TextClassifier_Text3,
-                                    ObjectMother.TextClassifier_LabeledExamples);
+                                    ObjectMother.Shared_Text3_Text,
+                                    ObjectMother.Shared_LabeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -307,5 +307,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 21.09.2021
 */
