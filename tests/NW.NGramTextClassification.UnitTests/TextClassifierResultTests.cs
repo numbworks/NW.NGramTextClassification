@@ -17,7 +17,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     new TextClassifierResult(
-                        ObjectMother.TextClassifierResult_Label1,
+                        ObjectMother.Shared_Text1_Label,
                         ObjectMother.TextClassifierResult_SimilarityIndexes1,
                         ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                         ),
@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierResult(
-                                    ObjectMother.TextClassifierResult_Label1,
+                                    ObjectMother.Shared_Text1_Label,
                                     null,
                                     ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                             )),
@@ -51,7 +51,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierResult(
-                                    ObjectMother.TextClassifierResult_Label1,
+                                    ObjectMother.Shared_Text1_Label,
                                     new List<SimilarityIndex>(),
                                     ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                             )),
@@ -63,7 +63,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierResult(
-                                    ObjectMother.TextClassifierResult_Label1,
+                                    ObjectMother.Shared_Text1_Label,
                                     ObjectMother.TextClassifierResult_SimilarityIndexes1,
                                     null
                             )),
@@ -73,7 +73,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierResult(
-                                    ObjectMother.TextClassifierResult_Label1,
+                                    ObjectMother.Shared_Text1_Label,
                                     ObjectMother.TextClassifierResult_SimilarityIndexes1,
                                     new List<SimilarityIndexAverage>()
                             )),
@@ -121,7 +121,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             TextClassifierResult actual
                 = new TextClassifierResult(
-                        ObjectMother.TextClassifierResult_Label1,
+                        ObjectMother.Shared_Text1_Label,
                         ObjectMother.TextClassifierResult_SimilarityIndexes1,
                         ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                     );

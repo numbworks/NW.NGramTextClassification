@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.Shared_Text1_TextAsMonograms[0].Value
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("stategy").Message
+                new ArgumentNullException("strategy").Message
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_02"),
 
             // Validator.ValidateStringNullOrWhiteSpace

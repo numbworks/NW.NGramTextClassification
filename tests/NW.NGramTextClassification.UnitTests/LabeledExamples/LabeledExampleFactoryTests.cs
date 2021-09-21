@@ -35,9 +35,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new LabeledExampleFactory()
                                     .TryCreateForRuleSet(
-                                        ObjectMother.LabeledExampleFactory_Id1,
+                                        ObjectMother.Shared_Text1_LabeledExampleId,
                                         null,
-                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        ObjectMother.Shared_Text1_Text,
                                         new NGramTokenizerRuleSet()
                             )),
                 typeof(ArgumentNullException),
@@ -48,8 +48,8 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new LabeledExampleFactory()
                                     .TryCreateForRuleSet(
-                                        ObjectMother.LabeledExampleFactory_Id1,
-                                        ObjectMother.LabeledExampleFactory_Label1,
+                                        ObjectMother.Shared_Text1_LabeledExampleId,
+                                        ObjectMother.Shared_Text1_Label,
                                         null,
                                         new NGramTokenizerRuleSet()
                             )),
@@ -61,9 +61,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new LabeledExampleFactory()
                                     .TryCreateForRuleSet(
-                                        ObjectMother.LabeledExampleFactory_Id1,
-                                        ObjectMother.LabeledExampleFactory_Label1,
-                                        ObjectMother.LabeledExampleFactory_Text1,
+                                        ObjectMother.Shared_Text1_LabeledExampleId,
+                                        ObjectMother.Shared_Text1_Label,
+                                        ObjectMother.Shared_Text1_Text,
                                         null
                             )),
                 typeof(ArgumentNullException),

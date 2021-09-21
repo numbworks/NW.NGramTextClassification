@@ -22,7 +22,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
                                         null,
-                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
+                                        ObjectMother.Shared_Text2_TextAsNGrams,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
@@ -34,7 +34,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
                                         new List<INGram>(),
-                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
+                                        ObjectMother.Shared_Text2_TextAsNGrams,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
@@ -46,7 +46,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        ObjectMother.LabeledExampleFactory_Text1_NGrams,
+                                        ObjectMother.Shared_Text1_TextAsNGrams,
                                         null,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
@@ -58,7 +58,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
+                                        ObjectMother.Shared_Text1_TextAsNGrams,
                                         new List<INGram>(),
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
@@ -71,8 +71,8 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        ObjectMother.LabeledExampleFactory_Text1_NGrams,
-                                        ObjectMother.LabeledExampleFactory_Text2_NGrams,
+                                        ObjectMother.Shared_Text1_TextAsNGrams,
+                                        ObjectMother.Shared_Text2_TextAsNGrams,
                                         null
                                 )),
                 typeof(ArgumentNullException),
@@ -84,20 +84,20 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    ObjectMother.LabeledExampleFactory_Text1_NGrams,
-                    ObjectMother.LabeledExampleFactory_Text1_NGrams,
+                    ObjectMother.Shared_Text1_TextAsNGrams,
+                    ObjectMother.Shared_Text1_TextAsNGrams,
                     1.00
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.LabeledExampleFactory_Text1_NGrams,
-                    ObjectMother.LabeledExampleFactory_Text2_NGrams,
+                    ObjectMother.Shared_Text1_TextAsNGrams,
+                    ObjectMother.Shared_Text2_TextAsNGrams,
                     0.00
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.LabeledExampleFactory_Text1_NGrams.GetRange(0, 2),
-                    ObjectMother.LabeledExampleFactory_Text1_NGrams.GetRange(0, 4),
+                    ObjectMother.Shared_Text1_TextAsNGrams.GetRange(0, 2),
+                    ObjectMother.Shared_Text1_TextAsNGrams.GetRange(0, 4),
                     0.50
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_03")
 
@@ -141,5 +141,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 21.09.2021
 */

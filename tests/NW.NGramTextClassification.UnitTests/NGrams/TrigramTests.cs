@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests
             Trigram actual1
                 = new Trigram(
                         new TokenizationStrategy(),
-                        ObjectMother.LabeledExample_Text1_TrigramValue1
+                        ObjectMother.Shared_Text1_TextAsTrigrams[0].Value
                     );
             Trigram actual2
                 = new Trigram(
-                        ObjectMother.LabeledExample_Text1_TrigramValue1
+                        ObjectMother.Shared_Text1_TextAsTrigrams[0].Value
                     );
 
             // Assert
@@ -48,5 +48,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 21.09.2021
 */
