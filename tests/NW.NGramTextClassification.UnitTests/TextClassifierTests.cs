@@ -65,21 +65,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         ObjectMother.Shared_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("strategy").Message
+                new ArgumentNullException("tokenizerRuleSet").Message
                 ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_02"),
-
-            // ValidateObject
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifier()
-                                    .PredictLabel(
-                                        ObjectMother.Shared_Text1_Text,
-                                        null,
-                                        ObjectMother.Shared_LabeledExamples
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("ruleSet").Message
-                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_03"),
 
             // ValidateList
             new TestCaseData(
@@ -91,7 +78,7 @@ namespace NW.NGramTextClassification.UnitTests
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExamples").Message
-                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_04"),
+                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_03"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -102,7 +89,7 @@ namespace NW.NGramTextClassification.UnitTests
                                 )),
                 typeof(ArgumentException),
                 MessageCollection.Validator_VariableContainsZeroItems.Invoke("labeledExamples")
-                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_05")
+                ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_04")
 
         };
 
