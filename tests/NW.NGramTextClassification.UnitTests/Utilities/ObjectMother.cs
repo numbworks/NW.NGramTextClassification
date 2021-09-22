@@ -491,6 +491,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
+        internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_OnlyFive
+            = new NGramTokenizerRuleSet(false, false, false, false, true);
         internal static string Shared_Text1_TextOnlyFirstWord = "We";
 
         internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_Mono 
@@ -606,9 +608,13 @@ namespace NW.NGramTextClassification.UnitTests
                         ( Shared_Text2_Label, Shared_Text2_Text )
 
                     };
+        internal static List<(string label, string text)> Shared_Tuples_TextOnlyFirstWord
+            = new List<(string label, string text)>()
+                    {
 
+                        ( Shared_Text1_Label, Shared_Text1_TextOnlyFirstWord )
 
-
+                    };
 
         #endregion
 

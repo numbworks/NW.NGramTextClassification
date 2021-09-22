@@ -217,7 +217,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void TryCreateForRuleSet_ShouldReturnNull_WhenUnproperParameters()
+        public void TryCreateForRuleSet_ShouldReturnNullInsteadOfALabeledExample_WhenUnproperParameters()
         {
 
             // Arrange
@@ -230,7 +230,7 @@ namespace NW.NGramTextClassification.UnitTests
                         id: ObjectMother.Shared_Text1_LabeledExampleId, 
                         label: ObjectMother.Shared_Text1_Label, 
                         text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
-                        tokenizerRuleSet: new NGramTokenizerRuleSet(false, false, false, false, false)
+                        tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
                         );
 
             // Assert
@@ -256,6 +256,25 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void TryCreateForRuleSet_ShouldReturnNullInsteadOfACollectionOfLabeledExamples_WhenUnproperParameters()
+        {
+
+            // Arrange
+            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+
+            // Act
+            List<LabeledExample> actual 
+                = labeledExampleFactory
+                    .TryCreateForRuleSet(
+                        tuples: ObjectMother.Shared_Tuples_TextOnlyFirstWord, 
+                        tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
+                        );
+
+            // Assert
+            Assert.IsNull(actual);
+
+        }
 
         #endregion
 
