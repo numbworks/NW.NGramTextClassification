@@ -512,6 +512,9 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text2_LabeledExample
                 };
 
+        internal static string Shared_Text1_TextOnlyFirstWord = "We";
+
+
         #endregion
 
 
@@ -868,6 +871,29 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        internal static List<INGram> CreateNGrams
+            (List<Monogram> monograms, List<Bigram> bigrams = null, List<Trigram> trigrams = null, List<Fourgram> fourgrams = null, List<Fivegram> fivegrams = null)
+        {
+
+            List<INGram> ngrams = new List<INGram>();
+            ngrams.AddRange(monograms);
+
+            if (bigrams != null)
+                ngrams.AddRange(bigrams);
+
+            if (trigrams != null)
+                ngrams.AddRange(trigrams);
+
+            if (fourgrams != null)
+                ngrams.AddRange(fourgrams);
+
+            if (fivegrams != null)
+                ngrams.AddRange(fivegrams);
+
+            return ngrams;
+
+        }
+
         #endregion
 
     }
@@ -875,5 +901,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 22.09.2021
 */

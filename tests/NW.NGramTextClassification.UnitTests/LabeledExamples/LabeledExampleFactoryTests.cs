@@ -4,6 +4,7 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
+using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -98,6 +99,95 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTuplesExceptionTestCases)}_02"),
 
         };
+        private static TestCaseData[] tryCreateForRuleSetTestCases =
+        {
+
+            new TestCaseData(
+                    ObjectMother.Shared_Text1_LabeledExampleId,
+                    ObjectMother.Shared_Text1_Label,
+                    ObjectMother.Shared_Text1_Text,
+                    new NGramTokenizerRuleSet(true, false, false, false, false),
+                    new LabeledExample(
+                            ObjectMother.Shared_Text1_LabeledExampleId,
+                            ObjectMother.Shared_Text1_Label,
+                            ObjectMother.Shared_Text1_Text,
+                            ObjectMother.CreateNGrams(
+                                ObjectMother.Shared_Text1_TextAsMonograms
+                                )
+                        )
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_01"),
+
+            new TestCaseData(
+                    ObjectMother.Shared_Text1_LabeledExampleId,
+                    ObjectMother.Shared_Text1_Label,
+                    ObjectMother.Shared_Text1_Text,
+                    new NGramTokenizerRuleSet(true, true, false, false, false),
+                    new LabeledExample(
+                            ObjectMother.Shared_Text1_LabeledExampleId,
+                            ObjectMother.Shared_Text1_Label,
+                            ObjectMother.Shared_Text1_Text,
+                            ObjectMother.CreateNGrams(
+                                ObjectMother.Shared_Text1_TextAsMonograms,
+                                ObjectMother.Shared_Text1_TextAsBigrams
+                                )
+                        )
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_02"),
+
+            new TestCaseData(
+                    ObjectMother.Shared_Text1_LabeledExampleId,
+                    ObjectMother.Shared_Text1_Label,
+                    ObjectMother.Shared_Text1_Text,
+                    new NGramTokenizerRuleSet(true, true, true, false, false),
+                    new LabeledExample(
+                            ObjectMother.Shared_Text1_LabeledExampleId,
+                            ObjectMother.Shared_Text1_Label,
+                            ObjectMother.Shared_Text1_Text,
+                            ObjectMother.CreateNGrams(
+                                ObjectMother.Shared_Text1_TextAsMonograms,
+                                ObjectMother.Shared_Text1_TextAsBigrams,
+                                ObjectMother.Shared_Text1_TextAsTrigrams
+                                )
+                        )
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_03"),
+
+            new TestCaseData(
+                    ObjectMother.Shared_Text1_LabeledExampleId,
+                    ObjectMother.Shared_Text1_Label,
+                    ObjectMother.Shared_Text1_Text,
+                    new NGramTokenizerRuleSet(true, true, true, true, false),
+                    new LabeledExample(
+                            ObjectMother.Shared_Text1_LabeledExampleId,
+                            ObjectMother.Shared_Text1_Label,
+                            ObjectMother.Shared_Text1_Text,
+                            ObjectMother.CreateNGrams(
+                                ObjectMother.Shared_Text1_TextAsMonograms,
+                                ObjectMother.Shared_Text1_TextAsBigrams,
+                                ObjectMother.Shared_Text1_TextAsTrigrams,
+                                ObjectMother.Shared_Text1_TextAsFourgrams
+                                )
+                        )
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_04"),
+
+            new TestCaseData(
+                    ObjectMother.Shared_Text1_LabeledExampleId,
+                    ObjectMother.Shared_Text1_Label,
+                    ObjectMother.Shared_Text1_Text,
+                    new NGramTokenizerRuleSet(true, true, true, true, true),
+                    new LabeledExample(
+                            ObjectMother.Shared_Text1_LabeledExampleId,
+                            ObjectMother.Shared_Text1_Label,
+                            ObjectMother.Shared_Text1_Text,
+                            ObjectMother.CreateNGrams(
+                                ObjectMother.Shared_Text1_TextAsMonograms,
+                                ObjectMother.Shared_Text1_TextAsBigrams,
+                                ObjectMother.Shared_Text1_TextAsTrigrams,
+                                ObjectMother.Shared_Text1_TextAsFourgrams,
+                                ObjectMother.Shared_Text1_TextAsFivegrams
+                                )
+                        )
+                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_05")
+
+        };
 
         #endregion
 
@@ -136,20 +226,46 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [Test]
-        public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenInvoked()
+        [TestCaseSource(nameof(tryCreateForRuleSetTestCases))]
+        public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenProperParameters
+            (ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet, LabeledExample expected)
         {
 
 
             // Arrange
-            // Act
-            // LabeledExample actual = new LabeledExampleFactory.TryCreateForRuleSet();
+            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
 
+            // Act
+            LabeledExample actual = labeledExampleFactory.TryCreateForRuleSet(id, label, text, tokenizerRuleSet);
 
             // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
 
         }
 
+        [Test]
+        public void TryCreateForRuleSet_ShouldReturnNull_WhenUnproperParameters()
+        {
+
+            // Arrange
+            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+
+            // Act
+            LabeledExample actual 
+                = labeledExampleFactory
+                    .TryCreateForRuleSet(
+                        id: ObjectMother.Shared_Text1_LabeledExampleId, 
+                        label: ObjectMother.Shared_Text1_Label, 
+                        text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(false, false, false, false, false)
+                        );
+
+            // Assert
+            Assert.IsNull(actual);
+
+        }
 
         #endregion
 
@@ -161,5 +277,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 22.09.2021
 */
