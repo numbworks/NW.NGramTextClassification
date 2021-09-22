@@ -491,28 +491,123 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
-        internal static LabeledExample Shared_Text1_LabeledExample
+        internal static string Shared_Text1_TextOnlyFirstWord = "We";
+
+        internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_Mono 
+            = new NGramTokenizerRuleSet(true, false, false, false, false);
+        internal static LabeledExample Shared_Text1_LabeledExample_Mono
+            = new LabeledExample(
+                    Shared_Text1_LabeledExampleId,
+                    Shared_Text1_Label,
+                    Shared_Text1_Text,
+                    CreateNGrams(
+                        Shared_Text1_TextAsMonograms
+                        ));
+        internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBi
+            = new NGramTokenizerRuleSet(true, true, false, false, false);
+        internal static LabeledExample Shared_Text1_LabeledExample_MonoBi
+            = new LabeledExample(
+                    Shared_Text1_LabeledExampleId,
+                    Shared_Text1_Label,
+                    Shared_Text1_Text,
+                    CreateNGrams(
+                        Shared_Text1_TextAsMonograms,
+                        Shared_Text1_TextAsBigrams
+                        ));
+        internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTri
+            = new NGramTokenizerRuleSet(true, true, true, false, false);
+        internal static LabeledExample Shared_Text1_LabeledExample_MonoBiTri
+            = new LabeledExample(
+                    Shared_Text1_LabeledExampleId,
+                    Shared_Text1_Label,
+                    Shared_Text1_Text,
+                    CreateNGrams(
+                        Shared_Text1_TextAsMonograms,
+                        Shared_Text1_TextAsBigrams,
+                        Shared_Text1_TextAsTrigrams
+                        ));
+        internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFour
+            = new NGramTokenizerRuleSet(true, true, true, true, false);
+        internal static LabeledExample Shared_Text1_LabeledExample_MonoBiTriFour
+            = new LabeledExample(
+                    Shared_Text1_LabeledExampleId,
+                    Shared_Text1_Label,
+                    Shared_Text1_Text,
+                    CreateNGrams(
+                        Shared_Text1_TextAsMonograms,
+                        Shared_Text1_TextAsBigrams,
+                        Shared_Text1_TextAsTrigrams,
+                        Shared_Text1_TextAsFourgrams
+                        ));
+        internal static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFourFive
+            = new NGramTokenizerRuleSet(true, true, true, true, true);
+        internal static LabeledExample Shared_Text1_LabeledExample_MonoBiTriFourFive
             = new LabeledExample(
                         Shared_Text1_LabeledExampleId,
                         Shared_Text1_Label,
                         Shared_Text1_Text,
-                        Shared_Text1_TextAsNGrams);
+                        CreateNGrams(
+                            Shared_Text1_TextAsMonograms,
+                            Shared_Text1_TextAsBigrams,
+                            Shared_Text1_TextAsTrigrams,
+                            Shared_Text1_TextAsFourgrams,
+                            Shared_Text1_TextAsFivegrams
+                            ));
 
-        internal static LabeledExample Shared_Text2_LabeledExample
+        internal static LabeledExample Shared_Text2_LabeledExample_Mono
+            = new LabeledExample(
+                    Shared_Text2_LabeledExampleId,
+                    Shared_Text2_Label,
+                    Shared_Text2_Text,
+                    CreateNGrams(
+                        Shared_Text2_TextAsMonograms
+                        ));
+        internal static LabeledExample Shared_Text2_LabeledExample_MonoBiTriFourFive
             = new LabeledExample(
                         Shared_Text2_LabeledExampleId,
                         Shared_Text2_Label,
                         Shared_Text2_Text,
                         Shared_Text2_TextAsNGrams);
 
-        internal static List<LabeledExample> Shared_LabeledExamples
+        internal static List<LabeledExample> Shared_LabeledExamples_Text1_Mono
+            = new List<LabeledExample>()
+                    {
+
+                        Shared_Text1_LabeledExample_Mono
+
+                    };
+        internal static List<LabeledExample> Shared_LabeledExamples_Text1Text2_Mono
+            = new List<LabeledExample>()
+                    {
+
+                        Shared_Text1_LabeledExample_Mono,
+                        Shared_Text2_LabeledExample_Mono
+
+                    };
+        internal static List<LabeledExample> Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
             = new List<LabeledExample>()
                 {
-                    Shared_Text1_LabeledExample,
-                    Shared_Text2_LabeledExample
+                    Shared_Text1_LabeledExample_MonoBiTriFourFive,
+                    Shared_Text2_LabeledExample_MonoBiTriFourFive
                 };
 
-        internal static string Shared_Text1_TextOnlyFirstWord = "We";
+        internal static List<(string label, string text)> Shared_Tuples_Text1
+            = new List<(string label, string text)>()
+                    {
+
+                        ( Shared_Text1_Label, Shared_Text1_Text )
+
+                    };
+        internal static List<(string label, string text)> Shared_Tuples_Text1Text2
+            = new List<(string label, string text)>()
+                    {
+
+                        ( Shared_Text1_Label, Shared_Text1_Text ),
+                        ( Shared_Text2_Label, Shared_Text2_Text )
+
+                    };
+
+
 
 
         #endregion

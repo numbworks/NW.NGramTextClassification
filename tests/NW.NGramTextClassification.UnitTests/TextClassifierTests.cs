@@ -49,7 +49,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new TextClassifier()
                                     .PredictLabel(
                                         null,
-                                        ObjectMother.Shared_LabeledExamples
+                                        ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -62,7 +62,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     .PredictLabel(
                                         ObjectMother.Shared_Text1_Text,
                                         null,
-                                        ObjectMother.Shared_LabeledExamples
+                                        ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizerRuleSet").Message
@@ -149,15 +149,15 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
-                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text1_NGrams),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0]),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[1]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1]),
@@ -193,7 +193,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierResult actual
                 = textClassifier.PredictLabel(
                                     ObjectMother.Shared_Text1_Text,
-                                    ObjectMother.Shared_LabeledExamples);
+                                    ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive);
 
             // Assert
             Assert.IsTrue(
@@ -231,15 +231,15 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
-                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.Shared_Text3_TextAsNGrams),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0]),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[1]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1]),
@@ -272,7 +272,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierResult actual
                 = textClassifier.PredictLabel(
                                     ObjectMother.Shared_Text3_Text,
-                                    ObjectMother.Shared_LabeledExamples);
+                                    ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive);
 
             // Assert
             Assert.IsTrue(
