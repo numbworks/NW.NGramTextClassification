@@ -45,7 +45,18 @@ namespace NW.NGramTextClassification.UnitTests
                         )),
                     typeof(ArgumentException),
                     MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical)
-                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_01")
+                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                    new TestDelegate(
+                            () => new NGramTokenizer()
+                                        .DoForRuleSet(
+                                            text: null,
+                                            tokenizerRuleSet: new NGramTokenizerRuleSet()
+                        )),
+                    typeof(ArgumentNullException),
+                    new ArgumentNullException("text").Message
+                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_02")
 
         };
         private static TestCaseData[] tryDoForRuleSetTestCases = CreateDoForRuleSetTestCases(nameof(tryDoForRuleSetTestCases));
