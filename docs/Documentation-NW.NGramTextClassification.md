@@ -8,10 +8,11 @@ Contact: numbworks@gmail.com
 | 2020-12-27 | numbworks | Created. |
 | 2021-01-30 | numbworks | Added examples, re-organized the document. |
 | 2021-02-15 | numbworks | Completed "Example 1: Main Scenario". |
+| 2021-09-24 | numbworks | Version numbers removed, updated examples for v2.0.0. |
 
 ## Introduction
 
-`NW.NGramTextClassification` is a `.NET Standard 2.0` library written in `C#` to perform `Text Classification` on the string of text you provide. 
+`NW.NGramTextClassification` is a `.NET Standard` library written in `C#` to perform `Text Classification` on the string of text you provide. 
 
 `Text Classification` is a `machine learning` technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library to learn from it. 
 
@@ -31,6 +32,7 @@ To perform the task above you need only few lines of code:
 using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
+using NW.NGramTextClassification.LabeledExamples;
 
 /*...*/
 
@@ -69,7 +71,7 @@ private static List<LabeledExample> CreateLabeledExamples()
 
     };
 
-    return new LabeledExampleFactory().Create(tuples);
+    return new LabeledExampleFactory().TryCreateForRuleSet(tuples);
 
 }
 
@@ -84,16 +86,22 @@ Once you have both `text` and `labeledExamples` variables properly set, you can 
 /*...*/
 
 public TextClassifierResult PredictLabel
-    (string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet, List<LabeledExample> labeledExamples)
+    (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
 {
 
     /*...*/
 
-    List<INGram> nGrams = _components.NGramsTokenizer.Do(text, strategy, ruleSet);
+    List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSet(text, tokenizerRuleSet);
     List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
     List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 
-    string label = PredictLabel(indexAverages);     
+    string label = PredictLabel(indexAverages);
+
+    if (label == null)
+        _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+    else
+        _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
+
     TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
     return result;
@@ -143,14 +151,15 @@ A `LabeledExample` is defined as following:
 public class LabeledExample
 {
 
-    // Fields
-    // Properties
+    /*...*/
+
     public ulong Id { get; }
     public string Label { get; }
     public string Text { get; }
     public List<INGram> TextAsNGrams { get; }
 
-    // Constructors
+    /*...*/
+
     public LabeledExample
         (ulong id, string label, string text, List<INGram> textAsNGrams) { /*...*/ }
 
@@ -169,24 +178,38 @@ public class LabeledExampleFactory : ILabeledExampleFactory
 
     /*...*/
 
-    // Constructors
     public LabeledExampleFactory
         (INGramTokenizer tokenizer, uint initialId) { /*...*/ }
     public LabeledExampleFactory()
         : this(new NGramTokenizer(), DefaultInitialId) { }
 
-    // Methods (public)
-    public LabeledExample Create
-        (ulong id, string label, string text, ITokenizationStrategy strategy, INGramTokenizerRuleSet ruleSet) { /*...*/ }
+    /*...*/
+
+    public LabeledExample TryCreateForRuleSet
+        (ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet) { /*...*/ }
             
     /*...*/
 
 }
 ```
 
-It requires you to provide an `INGramTokenizer`, an `ITokenizationStrategy` and an `INGramTokenizerRuleSet` that will influence how the `List<INGram>` property of the `LabeledExample` object will be populated.
+It requires you to provide an `INGramTokenizer` and an `INGramTokenizerRuleSet` that will influence how the `List<INGram>` property of the `LabeledExample` object will be populated.
 
-If your `text` is "*We are looking for several skilled and driven developers to join our team.*" and you tokenize it by using `LabeledExampleFactory`'s default settings and dependencies, the resulting `List<INGram>` will look like:
+If your `text` is "*We are looking for several skilled and driven developers to join our team.*" and you tokenize it by using the following `NGramTokenizerRuleSet`:
+
+```csharp
+INGramTokenizerRuleSet nGramTokenizerRuleSet 
+    = new NGramTokenizerRuleSet(
+            doForMonogram: true, 
+            doForBigram: true, 
+            doForTrigram: true, 
+            doForFourgram: false, 
+            doForFivegram: false
+        );
+
+```
+
+ the resulting `List<INGram>` will look like:
 
 ```csharp
 List<INGram> textAsNGrams = new List<INGram>() {
@@ -232,12 +255,9 @@ List<INGram> textAsNGrams = new List<INGram>() {
     new Trigram("team")
 
 };
-
 ```
 
-By default, the library use three types of `INGram` (`Monogram`, `Bigram` and `Trigram`), but nothing prevents you by using just one of these or enable the disabled ones (`Fourgram` and `Fivegram`) or to fork the library and extend it even further.
-
-Using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios.
+Using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available.
 
 ## Better predictions?
 
