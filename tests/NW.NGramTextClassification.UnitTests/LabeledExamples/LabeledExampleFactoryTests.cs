@@ -238,6 +238,29 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenDefaultConstructor()
+        {
+
+            // Arrange
+            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+
+            // Act
+            LabeledExample actual
+                = labeledExampleFactory
+                    .TryCreateForRuleSet(
+                        id: ObjectMother.Shared_Text1_LabeledExampleId,
+                        label: ObjectMother.Shared_Text1_Label,
+                        text: ObjectMother.Shared_Text1_Text
+                        );
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_LabeledExample_MonoBiTriFourFive, actual)
+                );
+
+        }
+
         [TestCaseSource(nameof(tryCreateForRuleSetCollectionTestCases))]
         public void TryCreateForRuleSet_ShouldReturnExpectedCollectionOfLabeledExamples_WhenProperParameters
             (List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> expected)
@@ -273,6 +296,24 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsNull(actual);
+
+        }
+
+        [Test]
+        public void TryCreateForRuleSet_ShouldReturnExpectedCollectionOfLabeledExamples_WhenDefaultConstructor()
+        {
+
+            // Arrange
+            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+
+            // Act
+            List<LabeledExample> actual
+                = labeledExampleFactory.TryCreateForRuleSet(tuples: ObjectMother.Shared_Tuples_Text1);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExamples_Text1_MonoBiTriFourFive, actual)
+                );
 
         }
 
