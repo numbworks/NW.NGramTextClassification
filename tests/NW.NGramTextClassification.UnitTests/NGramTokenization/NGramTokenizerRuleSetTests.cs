@@ -1,6 +1,7 @@
 ﻿using System;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
+using NW.NGramTextClassification.Messages;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -9,12 +10,28 @@ namespace NW.NGramTextClassification.UnitTests
     {
 
         #region Fields
+
+        private static TestCaseData[] nGramTokenizerRuleSetExceptionTestCases =
+        {
+
+            new TestCaseData(
+                    new TestDelegate( () => new NGramTokenizerRuleSet(false, false, false, false, false) ),
+                    typeof(ArgumentException),
+                    MessageCollection.NGramTokenizerRuleSet_AtLeastOneArgumentMustBeTrue
+                ).SetArgDisplayNames($"{nameof(nGramTokenizerRuleSetExceptionTestCases)}_01")
+        };
+
         #endregion
 
         #region SetUp
         #endregion
 
         #region Tests
+
+        [TestCaseSource(nameof(nGramTokenizerRuleSetExceptionTestCases))]
+        public void NGramTokenizerRuleSet_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void NGramTokenizerRuleSet_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -41,5 +58,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 24.09.2021
 */

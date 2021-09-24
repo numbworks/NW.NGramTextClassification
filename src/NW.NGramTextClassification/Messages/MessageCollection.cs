@@ -31,6 +31,12 @@ namespace NW.NGramTextClassification.Messages
 
         #endregion
 
+        #region NGramTokenizerRuleSet
+
+        public static string NGramTokenizerRuleSet_AtLeastOneArgumentMustBeTrue = "At least one argument must be true.";
+
+        #endregion
+
         #region TextClassifier
 
         public static string TextClassifier_AttemptingToPredictLabel = "Attempting to predict the label of the provided text...";
@@ -102,5 +108,5 @@ namespace NW.NGramTextClassification.Messages
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 24.09.2021
 */

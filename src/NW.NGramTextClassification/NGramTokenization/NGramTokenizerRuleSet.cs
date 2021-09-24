@@ -1,4 +1,7 @@
-﻿namespace NW.NGramTextClassification.NGramTokenization
+﻿using NW.NGramTextClassification.Messages;
+using System;
+
+namespace NW.NGramTextClassification.NGramTokenization
 {
     /// <inheritdoc cref="INGramTokenizerRuleSet"/>
     public class NGramTokenizerRuleSet : INGramTokenizerRuleSet
@@ -26,13 +29,11 @@
         #region Constructors
 
         /// <summary>Initializes a <see cref="NGramTokenizerRuleSet"/> instance.</summary>
-        public NGramTokenizerRuleSet
-            (bool doForMonogram,
-             bool doForBigram,
-             bool doForTrigram,
-             bool doForFourgram,
-             bool doForFivegram)
+        /// <exception cref="ArgumentException"></exception>
+        public NGramTokenizerRuleSet(bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
         {
+
+            Validate(doForMonogram, doForBigram, doForTrigram, doForFourgram, doForFivegram);
 
             DoForMonogram = doForMonogram;
             DoForBigram = doForBigram;
@@ -75,10 +76,26 @@
 
         #endregion
 
+        #region Methods_private
+
+        private void Validate(bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
+        {
+
+            if (doForMonogram == false 
+                    && doForBigram == false
+                    && doForTrigram == false
+                    && doForFourgram == false
+                    && doForFivegram == false)
+                throw new ArgumentException(MessageCollection.NGramTokenizerRuleSet_AtLeastOneArgumentMustBeTrue);
+
+        }
+
+        #endregion
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 24.09.2021
 */
