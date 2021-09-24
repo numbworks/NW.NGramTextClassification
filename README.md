@@ -9,12 +9,13 @@ Contact: numbworks@gmail.com
 |---|---|---|
 | 2020-12-27 | numbworks | Created. |
 | 2021-02-15 | numbworks | Updated paragraphs with the correct content. |
+| 2021-09-24 | numbworks | Version numbers removed. |
 
 ## In Short
 
 From the documentation:
 
-> `NW.NGramTextClassification` is a `.NET Standard 2.0` library written in `C#` to perform `Text Classification` on the string of text you provide.
+> `NW.NGramTextClassification` is a `.NET Standard` library written in `C#` to perform `Text Classification` on the string of text you provide.
 
 > `Text Classification` is a `machine learning` technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library to learn from it. 
 
@@ -33,7 +34,7 @@ PS C:\> cd .\NW.NGramTextClassification\
 PS C:\NW.NGramTextClassification> git clone https://github.com/numbworks/NW.NGramTextClassification.git
 ```
 
-3. Open `NW.NGramTextClassification.sln` with `Visual Studio 2017` or other IDE;
+3. Open `NW.NGramTextClassification.sln` with `Visual Studio` or other IDE;
 4. Done!
 
 ## Download the binary packages
