@@ -30,60 +30,8 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(nGramTokenizerExceptionTestCases)}_02"),
 
         };
-        private static TestCaseData[] tryDoForRuleSetTestCases =
-        {
-
-            new TestCaseData(
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
-                    ObjectMother.CreateNGrams(
-                        ObjectMother.Shared_Text1_TextAsMonograms
-                        )
-                ).SetArgDisplayNames($"{nameof(tryDoForRuleSetTestCases)}_01"),
-
-            new TestCaseData(
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBi,
-                    ObjectMother.CreateNGrams(
-                        ObjectMother.Shared_Text1_TextAsMonograms,
-                        ObjectMother.Shared_Text1_TextAsBigrams
-                        )
-                ).SetArgDisplayNames($"{nameof(tryDoForRuleSetTestCases)}_02"),
-
-            new TestCaseData(
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTri,
-                    ObjectMother.CreateNGrams(
-                        ObjectMother.Shared_Text1_TextAsMonograms,
-                        ObjectMother.Shared_Text1_TextAsBigrams,
-                        ObjectMother.Shared_Text1_TextAsTrigrams
-                        )
-                ).SetArgDisplayNames($"{nameof(tryDoForRuleSetTestCases)}_03"),
-
-            new TestCaseData(
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFour,
-                    ObjectMother.CreateNGrams(
-                        ObjectMother.Shared_Text1_TextAsMonograms,
-                        ObjectMother.Shared_Text1_TextAsBigrams,
-                        ObjectMother.Shared_Text1_TextAsTrigrams,
-                        ObjectMother.Shared_Text1_TextAsFourgrams
-                        )
-                ).SetArgDisplayNames($"{nameof(tryDoForRuleSetTestCases)}_04"),
-
-            new TestCaseData(
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFourFive,
-                    ObjectMother.CreateNGrams(
-                        ObjectMother.Shared_Text1_TextAsMonograms,
-                        ObjectMother.Shared_Text1_TextAsBigrams,
-                        ObjectMother.Shared_Text1_TextAsTrigrams,
-                        ObjectMother.Shared_Text1_TextAsFourgrams,
-                        ObjectMother.Shared_Text1_TextAsFivegrams
-                        )
-                ).SetArgDisplayNames($"{nameof(tryDoForRuleSetTestCases)}_05")
-
-        };
+        private static TestCaseData[] tryDoForRuleSetTestCases = CreateDoForRuleSetTestCases(nameof(tryDoForRuleSetTestCases));
+        private static TestCaseData[] doForRuleSetTestCases = CreateDoForRuleSetTestCases(nameof(doForRuleSetTestCases));
 
         #endregion
 
@@ -113,7 +61,26 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [TestCaseSource(nameof(tryDoForRuleSetTestCases))]
-        public void TryDoRuleSet_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
+        public void TryDoForRuleSet_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<INGram> expected)
+        {
+
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<INGram> actual = nGramTokenizer.TryDoForRuleSet(text, tokenizerRuleSet);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
+        [TestCaseSource(nameof(doForRuleSetTestCases))]
+        public void DoForRuleSet_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<INGram> expected)
         {
 
@@ -144,8 +111,55 @@ namespace NW.NGramTextClassification.UnitTests
             List<TestCaseData> testCases = new List<TestCaseData>()
             {
 
+                new TestCaseData(
+                        ObjectMother.Shared_Text1_Text,
+                        ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
+                        ObjectMother.CreateNGrams(
+                            ObjectMother.Shared_Text1_TextAsMonograms
+                            )
+                    ).SetArgDisplayNames($"{baseName}_01"),
 
+                new TestCaseData(
+                        ObjectMother.Shared_Text1_Text,
+                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBi,
+                        ObjectMother.CreateNGrams(
+                            ObjectMother.Shared_Text1_TextAsMonograms,
+                            ObjectMother.Shared_Text1_TextAsBigrams
+                            )
+                    ).SetArgDisplayNames($"{nameof(baseName)}_02"),
 
+                new TestCaseData(
+                        ObjectMother.Shared_Text1_Text,
+                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTri,
+                        ObjectMother.CreateNGrams(
+                            ObjectMother.Shared_Text1_TextAsMonograms,
+                            ObjectMother.Shared_Text1_TextAsBigrams,
+                            ObjectMother.Shared_Text1_TextAsTrigrams
+                            )
+                    ).SetArgDisplayNames($"{nameof(baseName)}_03"),
+
+                new TestCaseData(
+                        ObjectMother.Shared_Text1_Text,
+                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFour,
+                        ObjectMother.CreateNGrams(
+                            ObjectMother.Shared_Text1_TextAsMonograms,
+                            ObjectMother.Shared_Text1_TextAsBigrams,
+                            ObjectMother.Shared_Text1_TextAsTrigrams,
+                            ObjectMother.Shared_Text1_TextAsFourgrams
+                            )
+                    ).SetArgDisplayNames($"{nameof(baseName)}_04"),
+
+                new TestCaseData(
+                        ObjectMother.Shared_Text1_Text,
+                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFourFive,
+                        ObjectMother.CreateNGrams(
+                            ObjectMother.Shared_Text1_TextAsMonograms,
+                            ObjectMother.Shared_Text1_TextAsBigrams,
+                            ObjectMother.Shared_Text1_TextAsTrigrams,
+                            ObjectMother.Shared_Text1_TextAsFourgrams,
+                            ObjectMother.Shared_Text1_TextAsFivegrams
+                            )
+                    ).SetArgDisplayNames($"{nameof(baseName)}_05")
 
             };
 
