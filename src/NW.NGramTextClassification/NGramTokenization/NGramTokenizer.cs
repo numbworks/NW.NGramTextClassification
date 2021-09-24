@@ -60,7 +60,7 @@ namespace NW.NGramTextClassification.NGramTokenization
         public List<Fivegram> DoForFivegram(string text)
             => DoFor<Fivegram>(text);
 
-        public List<INGram> DoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset)
+        public List<INGram> DoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleset)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -107,7 +107,7 @@ namespace NW.NGramTextClassification.NGramTokenization
             return ngrams;
 
         }
-        public List<INGram> TryDoForRuleset(string text, INGramTokenizerRuleSet tokenizerRuleset)
+        public List<INGram> TryDoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleset)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));

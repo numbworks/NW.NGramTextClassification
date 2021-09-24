@@ -631,19 +631,7 @@ namespace NW.NGramTextClassification.UnitTests
 
 
 
-        #region LabeledExampleFactory
 
-        internal static uint LabeledExampleFactory_InitialId1 = 0;
-        internal static (string label, string text) LabeledExampleFactory_Tuple1 = (Shared_Text1_Label, Shared_Text1_Text);
-        internal static (string label, string text) LabeledExampleFactory_Tuple2 = (Shared_Text2_Label, Shared_Text2_Text);
-        internal static List<(string label, string text)> LabeledExampleFactory_Tuples
-            = new List<(string label, string text)>()
-            {
-                LabeledExampleFactory_Tuple1,
-                LabeledExampleFactory_Tuple2
-            };
-
-        #endregion 
 
         #region NGramTokenizer
 
@@ -703,6 +691,20 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
         #endregion
+
+        #region LabeledExampleFactory
+
+        internal static uint LabeledExampleFactory_InitialId1 = 0;
+        internal static (string label, string text) LabeledExampleFactory_Tuple1 = (Shared_Text1_Label, Shared_Text1_Text);
+        internal static (string label, string text) LabeledExampleFactory_Tuple2 = (Shared_Text2_Label, Shared_Text2_Text);
+        internal static List<(string label, string text)> LabeledExampleFactory_Tuples
+            = new List<(string label, string text)>()
+            {
+                LabeledExampleFactory_Tuple1,
+                LabeledExampleFactory_Tuple2
+            };
+
+        #endregion 
 
         #region NGramTokenizerRuleSet
 
@@ -1009,5 +1011,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.09.2021
+    Last Update: 24.09.2021
 */

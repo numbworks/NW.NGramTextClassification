@@ -58,7 +58,7 @@ namespace NW.NGramTextClassification
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(tokenizerRuleSet));
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
 
-            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleset(text, tokenizerRuleSet);
+            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSet(text, tokenizerRuleSet);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);

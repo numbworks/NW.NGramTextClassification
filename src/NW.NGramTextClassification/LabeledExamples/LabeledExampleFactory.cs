@@ -51,7 +51,7 @@ namespace NW.NGramTextClassification.LabeledExamples
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
 
-            List<INGram> ngrams = _tokenizer.TryDoForRuleset(text, tokenizerRuleSet);
+            List<INGram> ngrams = _tokenizer.TryDoForRuleSet(text, tokenizerRuleSet);
             if (ngrams != null)
                 return new LabeledExample(id, label, text, ngrams);
 
