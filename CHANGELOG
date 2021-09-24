@@ -1,3 +1,10 @@
+v2.0.0 - BREAKING CHANGES
+- Added support for sub-namespaces.
+- Added XML documentation for all the methods and constructors (summaries).
+- Re-organized part of the unit tests (shared items in ObjectMother).
+- NGramTokenizer: nearly a complete re-design.
+- LabeledExampleFactory: nearly a complete re-design.
+
 v1.1.0
 - TextClassifierComponents: fixed Issue #1 (thanks @projectstann!) related to DefaultTextTruncatingFunction.
 - NGramTokenizer: added "TheRuleCantBeAppliedTo" exception message.
