@@ -625,22 +625,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-
-
-
-
-
-
-
-
-        #region NGramTokenizer
-
-        internal static string NGramTokenizer_TextNonAlphanumerical = ";;;-- £/£&$£";
-
-        #endregion
-
-        /* --------------------------------------------------- */
-
         #region ANGram
 
         internal static ushort ANGram_FakeGram1_N = 1;
@@ -705,6 +689,18 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
         #endregion 
+
+        #region NGramTokenizer
+
+        internal static string NGramTokenizer_Text_NonAlphanumerical = ";;;-- £/£&$£";
+        internal static TokenizationStrategy NGramTokenizer_TokenizationStrategy_NonAlphanumerical
+            = new TokenizationStrategy(
+                    pattern: NGramTokenizer_Text_NonAlphanumerical,
+                    delimiter: TokenizationStrategy.DefaultDelimiter,
+                    toLowercase: TokenizationStrategy.DefaultToLowercase
+                );
+
+        #endregion
 
         #region NGramTokenizerRuleSet
 
