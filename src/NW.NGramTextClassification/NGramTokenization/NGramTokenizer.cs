@@ -60,43 +60,43 @@ namespace NW.NGramTextClassification.NGramTokenization
         public List<Fivegram> DoForFivegram(string text)
             => DoFor<Fivegram>(text);
 
-        public List<INGram> DoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleset)
+        public List<INGram> DoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(tokenizerRuleset, nameof(tokenizerRuleset));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
 
             List<INGram> ngrams = new List<INGram>();
 
-            if (tokenizerRuleset.DoForMonogram)
+            if (tokenizerRuleSet.DoForMonogram)
             {
 
                 List<Monogram> current = DoFor<Monogram>(text);
                 ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForBigram)
+            if (tokenizerRuleSet.DoForBigram)
             {
 
                 List<Bigram> current = DoFor<Bigram>(text);
                 ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForTrigram)
+            if (tokenizerRuleSet.DoForTrigram)
             {
 
                 List<Trigram> current = DoFor<Trigram>(text);
                 ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForFourgram)
+            if (tokenizerRuleSet.DoForFourgram)
             {
 
                 List<Fourgram> current = DoFor<Fourgram>(text);
                 ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForFivegram)
+            if (tokenizerRuleSet.DoForFivegram)
             {
 
                 List<Fivegram> current = DoFor<Fivegram>(text);
@@ -107,15 +107,15 @@ namespace NW.NGramTextClassification.NGramTokenization
             return ngrams;
 
         }
-        public List<INGram> TryDoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleset)
+        public List<INGram> TryDoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(tokenizerRuleset, nameof(tokenizerRuleset));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
 
             List<INGram> ngrams = new List<INGram>();
 
-            if (tokenizerRuleset.DoForMonogram)
+            if (tokenizerRuleSet.DoForMonogram)
             {
 
                 List<Monogram> current;
@@ -124,7 +124,7 @@ namespace NW.NGramTextClassification.NGramTokenization
                     ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForBigram)
+            if (tokenizerRuleSet.DoForBigram)
             {
 
                 List<Bigram> current;
@@ -133,7 +133,7 @@ namespace NW.NGramTextClassification.NGramTokenization
                     ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForTrigram)
+            if (tokenizerRuleSet.DoForTrigram)
             {
 
                 List<Trigram> current;
@@ -142,7 +142,7 @@ namespace NW.NGramTextClassification.NGramTokenization
                     ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForFourgram)
+            if (tokenizerRuleSet.DoForFourgram)
             {
 
                 List<Fourgram> current;
@@ -151,7 +151,7 @@ namespace NW.NGramTextClassification.NGramTokenization
                     ngrams.AddRange(current);
 
             }
-            if (tokenizerRuleset.DoForFivegram)
+            if (tokenizerRuleSet.DoForFivegram)
             {
 
                 List<Fivegram> current;

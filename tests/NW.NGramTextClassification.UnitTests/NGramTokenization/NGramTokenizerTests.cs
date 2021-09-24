@@ -84,17 +84,41 @@ namespace NW.NGramTextClassification.UnitTests
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<INGram> expected)
         {
 
-
             // Arrange
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<INGram> actual = nGramTokenizer.TryDoForRuleSet(text, tokenizerRuleSet);
+            List<INGram> actual 
+                = nGramTokenizer
+                    .TryDoForRuleSet(
+                        text: text, 
+                        tokenizerRuleSet: tokenizerRuleSet
+                        );
 
             // Assert
             Assert.IsTrue(
                     ObjectMother.AreEqual(expected, actual)
                 );
+
+        }
+
+        [Test]
+        public void TryDoForRuleSet_ShouldReturnNullInsteadOfALabeledExample_WhenUnproperParameters()
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<INGram> actual 
+                = nGramTokenizer
+                    .TryDoForRuleSet(
+                        text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
+                        tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
+                        );
+
+            // Assert
+            Assert.IsNull(actual);
 
         }
 
