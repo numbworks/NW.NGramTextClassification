@@ -857,6 +857,16 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region Methods
 
+        internal static bool AreEqual(List<Monogram> list1, List<Monogram> list2)
+            => AreEqual(new List<INGram>(list1), new List<INGram>(list2));
+        internal static bool AreEqual(List<Bigram> list1, List<Bigram> list2)
+            => AreEqual(new List<INGram>(list1), new List<INGram>(list2));
+        internal static bool AreEqual(List<Trigram> list1, List<Trigram> list2)
+            => AreEqual(new List<INGram>(list1), new List<INGram>(list2));
+        internal static bool AreEqual(List<Fourgram> list1, List<Fourgram> list2)
+            => AreEqual(new List<INGram>(list1), new List<INGram>(list2));
+        internal static bool AreEqual(List<Fivegram> list1, List<Fivegram> list2)
+            => AreEqual(new List<INGram>(list1), new List<INGram>(list2));
         internal static bool AreEqual(List<INGram> list1, List<INGram> list2)
         {
 

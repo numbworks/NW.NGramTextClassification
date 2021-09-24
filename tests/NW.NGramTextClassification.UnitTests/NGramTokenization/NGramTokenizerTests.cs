@@ -156,6 +156,91 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void DoForMonogram_ShouldReturnExpectedCollectionOfMonograms_WhenProperParameters()
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<Monogram> actual = nGramTokenizer.DoForMonogram(ObjectMother.Shared_Text1_Text);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsMonograms, actual)
+                );
+
+        }
+
+        [Test]
+        public void DoForBigram_ShouldReturnExpectedCollectionOfBigrams_WhenProperParameters()
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<Bigram> actual = nGramTokenizer.DoForBigram(ObjectMother.Shared_Text1_Text);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsBigrams, actual)
+                );
+
+        }
+
+        [Test]
+        public void DoForTrigram_ShouldReturnExpectedCollectionOfTrigrams_WhenProperParameters()
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<Trigram> actual = nGramTokenizer.DoForTrigram(ObjectMother.Shared_Text1_Text);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsTrigrams, actual)
+                );
+
+        }
+
+        [Test]
+        public void DoForFourgram_ShouldReturnExpectedCollectionOfFourgrams_WhenProperParameters()
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<Fourgram> actual = nGramTokenizer.DoForFourgram(ObjectMother.Shared_Text1_Text);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsFourgrams, actual)
+                );
+
+        }
+
+        [Test]
+        public void DoForFivegram_ShouldReturnExpectedCollectionOfFivegrams_WhenProperParameters()
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<Fivegram> actual = nGramTokenizer.DoForFivegram(ObjectMother.Shared_Text1_Text);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsFivegrams, actual)
+                );
+
+        }
+
         #endregion
 
         #region TearDown
