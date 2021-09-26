@@ -12,7 +12,7 @@
     <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.1.0</Version>
+		<Version>2.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
