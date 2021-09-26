@@ -11,22 +11,42 @@ namespace NW.NGramTextClassification
 
         /// <summary>
         /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/>.
+        /// <para>If one rule in <paramref name="tokenizerRuleSet"/> fails, an exception will be thrown and no <see cref="TextClassifierResult"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>          
         TextClassifierResult PredictLabel(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples);
 
         /// <summary>
-        /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/>.
+        /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
+        /// <para>If one rule in the default <see cref="INGramTokenizerRuleSet"/> fails, an exception will be thrown and no <see cref="TextClassifierResult"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>        
         TextClassifierResult PredictLabel(string text, List<LabeledExample> labeledExamples);
+
+        /// <summary>
+        /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/>.
+        /// <para>If one rule in <paramref name="tokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, an empty <see cref="TextClassifierResult"/> (with a null label) will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>      
+        TextClassifierResult TryPredictLabel(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples);
+
+        /// <summary>
+        /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
+        /// <para>If one rule in the default <see cref="INGramTokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// <para>If all rules will fail, an empty <see cref="TextClassifierResult"/> (with a null label) will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>       
+        TextClassifierResult TryPredictLabel(string text, List<LabeledExample> labeledExamples);
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 26.09.2021
 */

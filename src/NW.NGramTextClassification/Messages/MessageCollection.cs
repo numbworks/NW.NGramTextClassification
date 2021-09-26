@@ -84,6 +84,8 @@ namespace NW.NGramTextClassification.Messages
             (name) => $"The following verification has failed: '{name}'.";
         public static Func<SimilarityIndexAverage, string> TextClassifier_SimilarityIndexAverageWithTheHighestValueIs =
             (indexAverage) => $"The '{nameof(SimilarityIndexAverage)}' object with the highest value is: '{indexAverage}'.";
+        public static Func<string, string> TextClassifier_AllRulesInProvidedRulesetFailed
+            = (text) => $"All the rules in the provided ruleset failed for the provided text ('{text}'), therefore a 'null' label will be returned.";
 
         #endregion
 
@@ -108,5 +110,5 @@ namespace NW.NGramTextClassification.Messages
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2021
+    Last Update: 26.09.2021
 */
