@@ -1,3 +1,7 @@
+v2.1.0
+- Added support for XML documentation file.
+- TextClassifier: added TryPredictLabel().
+
 v2.0.0 - BREAKING CHANGES
 - Added support for sub-namespaces.
 - Added XML documentation for all the methods and constructors (summaries).
