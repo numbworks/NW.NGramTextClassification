@@ -21,6 +21,10 @@ namespace NW.NGramTextClassification.NGramTokenization
         #endregion
 
         #region Properties
+
+        public static IArrayManager DefaultArrayManager { get; } = new ArrayManager();
+        public static ITokenizationStrategy DefaultTokenizationStrategy { get; } = new TokenizationStrategy();
+
         #endregion
 
         #region Constructors
@@ -40,14 +44,14 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         /// <summary>Initializes a <see cref="NGramTokenizer"/> instance using default parameters.</summary>
         public NGramTokenizer()
-            : this(new ArrayManager(), new TokenizationStrategy()) { }
+            : this(DefaultArrayManager, DefaultTokenizationStrategy) { }
 
         #endregion
 
         #region Methods_public
 
         public ushort GetN<T>() where T : INGram
-            => ((INGram)CreateInstance<T>(new TokenizationStrategy(), "whatever_value")).N;
+            => ((INGram)CreateInstance<T>(DefaultTokenizationStrategy, "whatever_value")).N;
 
         public List<Monogram> DoForMonogram(string text)
             => DoFor<Monogram>(text);
@@ -280,5 +284,5 @@ namespace NW.NGramTextClassification.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2021
+    Last Update: 27.09.2021
 */
