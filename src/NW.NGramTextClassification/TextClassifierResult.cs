@@ -23,13 +23,10 @@ namespace NW.NGramTextClassification
 
         /// <summary>
         /// Initializes a <see cref="TextClassifierResult"/> instance.
-        /// <para>When the text classification didn't return any value, <paramref name="label"/> can also be null. Therefore null is an accepted value.</para>
+        /// <para>When the text classification doesn't return any value, parameters can be null.</para>
         /// </summary>
         public TextClassifierResult(string label, List<SimilarityIndex> indexes, List<SimilarityIndexAverage> indexAverages)
         {
-
-            Validator.ValidateList(indexes, nameof(indexes));
-            Validator.ValidateList(indexAverages, nameof(indexAverages));
 
             Label = label;
             SimilarityIndexes = indexes;
@@ -48,8 +45,8 @@ namespace NW.NGramTextClassification
                 = string.Join(
                     ", ",
                     $"{nameof(Label)}: '{Label ?? "null"}'",
-                    $"{nameof(SimilarityIndexes)}: '{SimilarityIndexes.Count}'", // can't be null due of ValidateList()
-                    $"{nameof(SimilarityIndexAverages)}: '{SimilarityIndexAverages.Count}'" // can't be null due of ValidateList()
+                    $"{nameof(SimilarityIndexes)}: '{SimilarityIndexes?.Count.ToString() ?? "null"}'",
+                    $"{nameof(SimilarityIndexAverages)}: '{SimilarityIndexAverages?.Count.ToString() ?? "null"}'"
                     );
 
             return $"[ {content} ]";
@@ -63,5 +60,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 27.09.2021
 */
