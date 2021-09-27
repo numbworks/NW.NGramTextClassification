@@ -800,6 +800,57 @@ namespace NW.NGramTextClassification.UnitTests
                 TextClassifier_Text3_SimilarityIndex2.Label,
             };
 
+        public static TextClassifierResult TextClassifier_TextClassifierResult_LabeledExamples00
+            = new TextClassifierResult(
+                    label: ObjectMother.CreateLabeledExamples()[0].Label,
+                    indexes: new List<SimilarityIndex>()
+                                {
+
+                                    new SimilarityIndex(id: 1, label: "en", value: 0.216718),
+                                    new SimilarityIndex(id: 2, label: "en", value: 0.001258),
+                                    new SimilarityIndex(id: 3, label: "en", value: 0),
+                                    new SimilarityIndex(id: 4, label: "en", value: 0.001166),
+                                    new SimilarityIndex(id: 5, label: "en", value: 0),
+                                    new SimilarityIndex(id: 6, label: "en", value: 0),
+                                    new SimilarityIndex(id: 7, label: "en", value: 0.001263),
+                                    new SimilarityIndex(id: 8, label: "en", value: 0),
+                                    new SimilarityIndex(id: 9, label: "en", value: 0),
+                                    new SimilarityIndex(id: 10, label: "en", value: 0.001199),
+
+                                    new SimilarityIndex(id: 11, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 12, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 13, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 14, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 15, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 16, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 17, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 18, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 19, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 20, label: "sv", value: 0),
+
+                                    new SimilarityIndex(id: 21, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 22, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 23, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 24, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 25, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 26, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 27, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 28, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 29, label: "dk", value: 0),
+                                    new SimilarityIndex(id: 30, label: "dk", value: 0.0013)
+
+                                },
+                    indexAverages: new List<SimilarityIndexAverage>()
+                                    {
+
+                                        new SimilarityIndexAverage(label: "en", value: 0.02216),
+                                        new SimilarityIndexAverage(label: "sv", value: 0),
+                                        new SimilarityIndexAverage(label: "dk", value: 0.00013)
+
+                                    }
+                );
+
+
         #endregion
 
         #region TextClassifierResult

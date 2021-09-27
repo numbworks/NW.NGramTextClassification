@@ -97,14 +97,50 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     "/",
-                    new NGramTokenizerRuleSet(),
+                    new NGramTokenizerRuleSet(
+                            doForMonogram: true,
+                            doForBigram: true,
+                            doForTrigram: true,
+                            doForFourgram: true,
+                            doForFivegram: true
+                        ),
                     ObjectMother.CreateLabeledExamples(),
                     new TextClassifierResult(
                             label: null,
                             indexes: new List<SimilarityIndex>(),
                             indexAverages: new List<SimilarityIndexAverage>()
                         )
-                ).SetArgDisplayNames($"{nameof(tryPredictLabelTestCases)}_01")
+                ).SetArgDisplayNames($"{nameof(tryPredictLabelTestCases)}_01"),
+
+            new TestCaseData(
+                    "hi",
+                    new NGramTokenizerRuleSet(
+                            doForMonogram: false,
+                            doForBigram: false,
+                            doForTrigram: false,
+                            doForFourgram: false,
+                            doForFivegram: true     
+                        ),
+                    ObjectMother.CreateLabeledExamples(),
+                    new TextClassifierResult(
+                            label: null,
+                            indexes: new List<SimilarityIndex>(),
+                            indexAverages: new List<SimilarityIndexAverage>()
+                        )
+                ).SetArgDisplayNames($"{nameof(tryPredictLabelTestCases)}_02"),
+
+            new TestCaseData(
+                    ObjectMother.CreateLabeledExamples()[0].Text,
+                    new NGramTokenizerRuleSet(
+                            doForMonogram: false,
+                            doForBigram: false,
+                            doForTrigram: false,
+                            doForFourgram: false,
+                            doForFivegram: true
+                        ),
+                    ObjectMother.CreateLabeledExamples(),
+                    ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
+                ).SetArgDisplayNames($"{nameof(tryPredictLabelTestCases)}_03")
 
         };
 
@@ -320,7 +356,7 @@ namespace NW.NGramTextClassification.UnitTests
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
 
             // Act
-            TextClassifierResult actual = textClassifier.TryPredictLabel(text, labeledExamples);
+            TextClassifierResult actual = textClassifier.TryPredictLabel(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
