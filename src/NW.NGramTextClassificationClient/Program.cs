@@ -52,7 +52,7 @@ namespace NW.NGramTextClassificationClient
             List<LabeledExample> labeledExamples = ObjectMother.CreateLabeledExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
+            TextClassifierResult result = textClassifier.TryPredictLabel(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 
