@@ -43,9 +43,9 @@ namespace NW.NGramTextClassification.Messages
         public static Func<string, string> TextClassifier_FollowingTextHasBeenProvided =
             (text) => $"The following text has been provided: '{text}'.";
         public static Func<List<LabeledExample>, string> TextClassifier_XLabeledExamplesHaveBeenProvided =
-            (labeledExamples) => $"'{labeledExamples.Count.ToString()}' {nameof(LabeledExample)} objects have been provided.";
+            (labeledExamples) => $"'{labeledExamples.Count}' {nameof(LabeledExample)} objects have been provided.";
         public static Func<List<INGram>, string> TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams =
-            (nGrams) => $"The provided text has been tokenized into '{nGrams.Count}' {nameof(INGram)} object.";
+            (nGrams) => $"The provided text has been tokenized into '{nGrams?.Count ?? 0}' {nameof(INGram)} object.";
         public static Func<INGramTokenizerRuleSet, string> TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed =
             (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset}'.";
         public static string TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples =
@@ -110,5 +110,5 @@ namespace NW.NGramTextClassification.Messages
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.09.2021
+    Last Update: 27.09.2021
 */
