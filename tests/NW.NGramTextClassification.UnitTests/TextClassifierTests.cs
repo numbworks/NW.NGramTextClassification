@@ -92,6 +92,21 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(predictLabelExceptionTestCases)}_04")
 
         };
+        private static TestCaseData[] tryPredictLabelTestCases =
+        {
+
+            new TestCaseData(
+                    "/",
+                    new NGramTokenizerRuleSet(),
+                    ObjectMother.CreateLabeledExamples(),
+                    new TextClassifierResult(
+                            label: null,
+                            indexes: new List<SimilarityIndex>(),
+                            indexAverages: new List<SimilarityIndexAverage>()
+                        )
+                ).SetArgDisplayNames($"{nameof(tryPredictLabelTestCases)}_01")
+
+        };
 
         #endregion
 
@@ -284,6 +299,36 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [TestCaseSource(nameof(tryPredictLabelTestCases))]
+        public void TryPredictLabel_ShouldReturnTheExpectedTextClassifierResult_WhenProperArgument
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        {
+
+            // Arrange
+            Action<string> fakeLoggingAction = (message) => { };
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          new NGramTokenizer(),
+                          new SimilarityIndexCalculatorJaccard(),
+                          TextClassifierComponents.DefaultRoundingFunction,
+                          TextClassifierComponents.DefaultTextTruncatingFunction,
+                          fakeLoggingAction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            string truncatedText
+                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
+                        text,
+                        TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
+
+            // Act
+            TextClassifierResult actual = textClassifier.TryPredictLabel(text, labeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected,actual)
+                );
+
+        }
+
         #endregion
 
         #region TearDown
@@ -294,5 +339,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 21.09.2021
+    Last Update: 27.09.2021
 */

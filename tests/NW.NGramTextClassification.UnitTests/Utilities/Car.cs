@@ -1,6 +1,6 @@
 ﻿namespace NW.NGramTextClassification.UnitTests
 {
-    internal class Car
+    public class Car
     {
 
         #region Fields
@@ -30,5 +30,5 @@
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 27.09.2021
 */
