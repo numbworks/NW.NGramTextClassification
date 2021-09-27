@@ -23,6 +23,8 @@ namespace NW.NGramTextClassification
 
         #region Properties
 
+        public static TextClassifierComponents DefaultTextClassifierComponents { get; } = new TextClassifierComponents();
+        public static TextClassifierSettings DefaultTextClassifierSettings { get; } = new TextClassifierSettings();
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
 
         #endregion
@@ -43,7 +45,7 @@ namespace NW.NGramTextClassification
 
         /// <summary>Initializes a <see cref="TextClassifier"/> instance using default parameters.</summary>
         public TextClassifier()
-            : this(new TextClassifierComponents(), new TextClassifierSettings()) { }
+            : this(DefaultTextClassifierComponents, DefaultTextClassifierSettings) { }
 
         #endregion
 
