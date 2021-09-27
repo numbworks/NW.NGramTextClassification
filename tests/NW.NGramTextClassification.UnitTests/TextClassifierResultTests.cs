@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using NW.NGramTextClassification.Messages;
-using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -31,55 +28,16 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.TextClassifierResult_SimilarityIndexAverages1
                         ),
                     ObjectMother.TextClassifierResult_ToString1WithNullLabel
-                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
 
-        };
-        private static TestCaseData[] textClassifierResultExceptionTestCases =
-        {
-
-            // ValidateList
             new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifierResult(
-                                    ObjectMother.Shared_Text1_Label,
-                                    null,
-                                    ObjectMother.TextClassifierResult_SimilarityIndexAverages1
-                            )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierResult_VariableName_Indexes).Message
-                ).SetArgDisplayNames($"{nameof(textClassifierResultExceptionTestCases)}_01"),
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifierResult(
-                                    ObjectMother.Shared_Text1_Label,
-                                    new List<SimilarityIndex>(),
-                                    ObjectMother.TextClassifierResult_SimilarityIndexAverages1
-                            )),
-                typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.TextClassifierResult_VariableName_Indexes)
-                ).SetArgDisplayNames($"{nameof(textClassifierResultExceptionTestCases)}_02"),
-
-            // ValidateList
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifierResult(
-                                    ObjectMother.Shared_Text1_Label,
-                                    ObjectMother.TextClassifierResult_SimilarityIndexes1,
-                                    null
-                            )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException(ObjectMother.TextClassifierResult_VariableName_IndexAverages).Message
-                ).SetArgDisplayNames($"{nameof(textClassifierResultExceptionTestCases)}_03"),
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifierResult(
-                                    ObjectMother.Shared_Text1_Label,
-                                    ObjectMother.TextClassifierResult_SimilarityIndexes1,
-                                    new List<SimilarityIndexAverage>()
-                            )),
-                typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems.Invoke(ObjectMother.TextClassifierResult_VariableName_IndexAverages)
-                ).SetArgDisplayNames($"{nameof(textClassifierResultExceptionTestCases)}_04")
+                    new TextClassifierResult(
+                        null,
+                        null,
+                        null
+                        ),
+                    ObjectMother.TextClassifierResult_AllNulls
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_03")
 
         };
 
@@ -107,11 +65,6 @@ namespace NW.NGramTextClassification.UnitTests
                     StringComparison.InvariantCulture));
 
         }
-
-        [TestCaseSource(nameof(textClassifierResultExceptionTestCases))]
-        public void TextClassifierResult_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void TextClassifierResult_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -141,5 +94,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 27.09.2021
 */

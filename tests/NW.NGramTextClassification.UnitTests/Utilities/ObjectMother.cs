@@ -819,6 +819,8 @@ namespace NW.NGramTextClassification.UnitTests
             = $"[ Label: '{Shared_Text1_Label}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
         internal static string TextClassifierResult_ToString1WithNullLabel
             = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
+        internal static string TextClassifierResult_AllNulls
+            = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
         internal static string TextClassifierResult_VariableName_Indexes = "indexes";
         internal static string TextClassifierResult_VariableName_IndexAverages = "indexAverages";
 
@@ -1017,5 +1019,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2021
+    Last Update: 27.09.2021
 */
