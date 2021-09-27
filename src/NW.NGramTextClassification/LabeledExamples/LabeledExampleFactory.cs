@@ -18,6 +18,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Properties
 
+        public static INGramTokenizer DefaultNGramTokenizer { get; } = new NGramTokenizer();
         public static uint DefaultInitialId { get; } = 1;
         public static INGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
 
@@ -38,7 +39,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         /// <summary>Initializes a <see cref="LabeledExampleFactory"/> instance using default parameters.</summary>
         public LabeledExampleFactory()
-            : this(new NGramTokenizer(), DefaultInitialId) { }
+            : this(DefaultNGramTokenizer, DefaultInitialId) { }
 
         #endregion
 
@@ -104,5 +105,5 @@ namespace NW.NGramTextClassification.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 27.09.2021
 */
