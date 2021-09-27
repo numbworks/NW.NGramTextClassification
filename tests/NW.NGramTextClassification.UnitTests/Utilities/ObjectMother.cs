@@ -806,50 +806,49 @@ namespace NW.NGramTextClassification.UnitTests
                     indexes: new List<SimilarityIndex>()
                                 {
 
-                                    new SimilarityIndex(id: 1, label: "en", value: 0.216718),
-                                    new SimilarityIndex(id: 2, label: "en", value: 0.001258),
-                                    new SimilarityIndex(id: 3, label: "en", value: 0),
-                                    new SimilarityIndex(id: 4, label: "en", value: 0.001166),
-                                    new SimilarityIndex(id: 5, label: "en", value: 0),
-                                    new SimilarityIndex(id: 6, label: "en", value: 0),
-                                    new SimilarityIndex(id: 7, label: "en", value: 0.001263),
-                                    new SimilarityIndex(id: 8, label: "en", value: 0),
-                                    new SimilarityIndex(id: 9, label: "en", value: 0),
-                                    new SimilarityIndex(id: 10, label: "en", value: 0.001199),
+                                    new SimilarityIndex(id: 1, label: "en", value: 1),
+                                    new SimilarityIndex(id: 2, label: "en", value: 0.031696),
+                                    new SimilarityIndex(id: 3, label: "en", value: 0.017512),
+                                    new SimilarityIndex(id: 4, label: "en", value: 0.022472),
+                                    new SimilarityIndex(id: 5, label: "en", value: 0.017927),
+                                    new SimilarityIndex(id: 6, label: "en", value: 0.018717),
+                                    new SimilarityIndex(id: 7, label: "en", value: 0.014844),
+                                    new SimilarityIndex(id: 8, label: "en", value: 0.017185),
+                                    new SimilarityIndex(id: 9, label: "en", value: 0.024096),
+                                    new SimilarityIndex(id: 10, label: "en", value: 0.020548),
 
-                                    new SimilarityIndex(id: 11, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 11, label: "sv", value: 0.000741),
                                     new SimilarityIndex(id: 12, label: "sv", value: 0),
                                     new SimilarityIndex(id: 13, label: "sv", value: 0),
-                                    new SimilarityIndex(id: 14, label: "sv", value: 0),
-                                    new SimilarityIndex(id: 15, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 14, label: "sv", value: 0.000802),
+                                    new SimilarityIndex(id: 15, label: "sv", value: 0.000745),
                                     new SimilarityIndex(id: 16, label: "sv", value: 0),
-                                    new SimilarityIndex(id: 17, label: "sv", value: 0),
-                                    new SimilarityIndex(id: 18, label: "sv", value: 0),
-                                    new SimilarityIndex(id: 19, label: "sv", value: 0),
-                                    new SimilarityIndex(id: 20, label: "sv", value: 0),
+                                    new SimilarityIndex(id: 17, label: "sv", value: 0.000861),
+                                    new SimilarityIndex(id: 18, label: "sv", value: 0.00074),
+                                    new SimilarityIndex(id: 19, label: "sv", value: 0.000733),
+                                    new SimilarityIndex(id: 20, label: "sv", value: 0.000905),
 
-                                    new SimilarityIndex(id: 21, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 22, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 23, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 24, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 25, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 26, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 27, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 28, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 29, label: "dk", value: 0),
-                                    new SimilarityIndex(id: 30, label: "dk", value: 0.0013)
+                                    new SimilarityIndex(id: 21, label: "dk", value: 0.002333),
+                                    new SimilarityIndex(id: 22, label: "dk", value: 0.000895),
+                                    new SimilarityIndex(id: 23, label: "dk", value: 0.000843),
+                                    new SimilarityIndex(id: 24, label: "dk", value: 0.004918),
+                                    new SimilarityIndex(id: 25, label: "dk", value: 0.001668),
+                                    new SimilarityIndex(id: 26, label: "dk", value: 0.003027),
+                                    new SimilarityIndex(id: 27, label: "dk", value: 0.002618),
+                                    new SimilarityIndex(id: 28, label: "dk", value: 0.00367),
+                                    new SimilarityIndex(id: 29, label: "dk", value: 0.002575),
+                                    new SimilarityIndex(id: 30, label: "dk", value: 0.003934)
 
                                 },
                     indexAverages: new List<SimilarityIndexAverage>()
                                     {
 
-                                        new SimilarityIndexAverage(label: "en", value: 0.02216),
-                                        new SimilarityIndexAverage(label: "sv", value: 0),
-                                        new SimilarityIndexAverage(label: "dk", value: 0.00013)
+                                        new SimilarityIndexAverage(label: "en", value: 0.1185),
+                                        new SimilarityIndexAverage(label: "sv", value: 0.000553),
+                                        new SimilarityIndexAverage(label: "dk", value: 0.002648)
 
                                     }
                 );
-
 
         #endregion
 

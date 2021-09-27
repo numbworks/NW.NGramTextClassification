@@ -132,10 +132,10 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                     ObjectMother.CreateLabeledExamples()[0].Text,
                     new NGramTokenizerRuleSet(
-                            doForMonogram: false,
-                            doForBigram: false,
-                            doForTrigram: false,
-                            doForFourgram: false,
+                            doForMonogram: true,
+                            doForBigram: true,
+                            doForTrigram: true,
+                            doForFourgram: true,
                             doForFivegram: true
                         ),
                     ObjectMother.CreateLabeledExamples(),
