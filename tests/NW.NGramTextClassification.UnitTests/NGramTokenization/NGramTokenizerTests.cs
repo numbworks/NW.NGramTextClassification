@@ -104,7 +104,7 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<INGram> actual = nGramTokenizer.TryDoForRuleSet(text, tokenizerRuleSet);
+            List<INGram> actual = nGramTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
 
             // Assert
             Assert.IsTrue(
@@ -124,7 +124,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             List<INGram> actual 
                 = nGramTokenizer
-                    .TryDoForRuleSet(
+                    .DoForRuleSetOrDefault(
                         text: text, 
                         tokenizerRuleSet: tokenizerRuleSet
                         );
@@ -146,7 +146,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             List<INGram> actual 
                 = nGramTokenizer
-                    .TryDoForRuleSet(
+                    .DoForRuleSetOrDefault(
                         text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
                         tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
                         );

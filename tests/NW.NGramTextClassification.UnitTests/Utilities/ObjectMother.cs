@@ -497,8 +497,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_Mono 
             = new NGramTokenizerRuleSet(true, false, false, false, false);
-        public static LabeledExample Shared_Text1_LabeledExample_Mono
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text1_LabeledExample_Mono
+            = new TokenizedExample(
                     Shared_Text1_LabeledExampleId,
                     Shared_Text1_Label,
                     Shared_Text1_Text,
@@ -507,8 +507,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBi
             = new NGramTokenizerRuleSet(true, true, false, false, false);
-        public static LabeledExample Shared_Text1_LabeledExample_MonoBi
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text1_LabeledExample_MonoBi
+            = new TokenizedExample(
                     Shared_Text1_LabeledExampleId,
                     Shared_Text1_Label,
                     Shared_Text1_Text,
@@ -518,8 +518,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTri
             = new NGramTokenizerRuleSet(true, true, true, false, false);
-        public static LabeledExample Shared_Text1_LabeledExample_MonoBiTri
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text1_LabeledExample_MonoBiTri
+            = new TokenizedExample(
                     Shared_Text1_LabeledExampleId,
                     Shared_Text1_Label,
                     Shared_Text1_Text,
@@ -530,8 +530,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFour
             = new NGramTokenizerRuleSet(true, true, true, true, false);
-        public static LabeledExample Shared_Text1_LabeledExample_MonoBiTriFour
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text1_LabeledExample_MonoBiTriFour
+            = new TokenizedExample(
                     Shared_Text1_LabeledExampleId,
                     Shared_Text1_Label,
                     Shared_Text1_Text,
@@ -543,8 +543,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFourFive
             = new NGramTokenizerRuleSet(true, true, true, true, true);
-        public static LabeledExample Shared_Text1_LabeledExample_MonoBiTriFourFive
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text1_LabeledExample_MonoBiTriFourFive
+            = new TokenizedExample(
                         Shared_Text1_LabeledExampleId,
                         Shared_Text1_Label,
                         Shared_Text1_Text,
@@ -556,45 +556,45 @@ namespace NW.NGramTextClassification.UnitTests
                             Shared_Text1_TextAsFivegrams
                             ));
 
-        public static LabeledExample Shared_Text2_LabeledExample_Mono
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text2_LabeledExample_Mono
+            = new TokenizedExample(
                     Shared_Text2_LabeledExampleId,
                     Shared_Text2_Label,
                     Shared_Text2_Text,
                     CreateNGrams(
                         Shared_Text2_TextAsMonograms
                         ));
-        public static LabeledExample Shared_Text2_LabeledExample_MonoBiTriFourFive
-            = new LabeledExample(
+        public static TokenizedExample Shared_Text2_LabeledExample_MonoBiTriFourFive
+            = new TokenizedExample(
                         Shared_Text2_LabeledExampleId,
                         Shared_Text2_Label,
                         Shared_Text2_Text,
                         Shared_Text2_TextAsNGrams);
 
-        public static List<LabeledExample> Shared_LabeledExamples_Text1_Mono
-            = new List<LabeledExample>()
+        public static List<TokenizedExample> Shared_LabeledExamples_Text1_Mono
+            = new List<TokenizedExample>()
                     {
 
                         Shared_Text1_LabeledExample_Mono
 
                     };
-        public static List<LabeledExample> Shared_LabeledExamples_Text1_MonoBiTriFourFive
-            = new List<LabeledExample>()
+        public static List<TokenizedExample> Shared_LabeledExamples_Text1_MonoBiTriFourFive
+            = new List<TokenizedExample>()
                     {
 
                         Shared_Text1_LabeledExample_MonoBiTriFourFive
 
                     };
-        public static List<LabeledExample> Shared_LabeledExamples_Text1Text2_Mono
-            = new List<LabeledExample>()
+        public static List<TokenizedExample> Shared_LabeledExamples_Text1Text2_Mono
+            = new List<TokenizedExample>()
                     {
 
                         Shared_Text1_LabeledExample_Mono,
                         Shared_Text2_LabeledExample_Mono
 
                     };
-        public static List<LabeledExample> Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
-            = new List<LabeledExample>()
+        public static List<TokenizedExample> Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
+            = new List<TokenizedExample>()
                 {
                     Shared_Text1_LabeledExample_MonoBiTriFourFive,
                     Shared_Text2_LabeledExample_MonoBiTriFourFive
@@ -659,8 +659,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region LabeledExample
 
-        public static LabeledExample LabeledExample1
-            = new LabeledExample(
+        public static TokenizedExample LabeledExample1
+            = new TokenizedExample(
                     Shared_Text1_LabeledExampleId,
                     Shared_Text1_Label,
                     Shared_Text1_Text,
@@ -938,16 +938,16 @@ namespace NW.NGramTextClassification.UnitTests
             return true;
 
         }
-        public static bool AreEqual(LabeledExample obj1, LabeledExample obj2)
+        public static bool AreEqual(TokenizedExample obj1, TokenizedExample obj2)
         {
 
             return (obj1.Id == obj2.Id)
                     && string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
                     && string.Equals(obj1.Text, obj2.Text, StringComparison.InvariantCulture)
-                    && AreEqual(obj1.TextAsNGrams, obj2.TextAsNGrams);
+                    && AreEqual(obj1.NGrams, obj2.NGrams);
 
         }
-        public static bool AreEqual(List<LabeledExample> list1, List<LabeledExample> list2)
+        public static bool AreEqual(List<TokenizedExample> list1, List<TokenizedExample> list2)
         {
 
             if (list1 == null && list2 == null)
@@ -1062,7 +1062,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
         
-        public static List<LabeledExample> CreateLabeledExamples()
+        public static List<TokenizedExample> CreateLabeledExamples()
         {
 
             List<(string label, string text)> tuples = new List<(string label, string text)>()
@@ -1101,7 +1101,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             };
 
-            return new LabeledExampleFactory().TryCreateForRuleSet(tuples);
+            return new LabeledExampleManager().CreateOrDefault(tuples);
 
         }
 

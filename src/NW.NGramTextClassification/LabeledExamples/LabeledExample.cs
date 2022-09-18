@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.LabeledExamples
@@ -14,10 +12,8 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Properties
 
-        public ulong Id { get; }
         public string Label { get; }
         public string Text { get; }
-        public List<INGram> TextAsNGrams { get; }
 
         #endregion
 
@@ -27,18 +23,14 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// Initializes a <see cref="LabeledExample"/> instance.
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>  
-        public LabeledExample(ulong id, string label, string text, List<INGram> textAsNGrams)
+        public LabeledExample(string label, string text)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateList(textAsNGrams, nameof(textAsNGrams));
 
-            Id = id;
             Label = label;
             Text = text;
-            TextAsNGrams = textAsNGrams;
 
         }
 
@@ -52,10 +44,8 @@ namespace NW.NGramTextClassification.LabeledExamples
             string content
                 = string.Join(
                     ", ",
-                    $"{nameof(Id)}: '{Id}'",
                     $"{nameof(Label)}: '{Label}'",
-                    $"{nameof(Text)}: '{Text}'",
-                    $"{nameof(TextAsNGrams)}: '{TextAsNGrams.Count}'"  // can't be null due of ValidateList()
+                    $"{nameof(Text)}: '{Text}'"
                     );
 
             return $"[ {content} ]";
@@ -64,11 +54,10 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #endregion
 
-
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2022
 */

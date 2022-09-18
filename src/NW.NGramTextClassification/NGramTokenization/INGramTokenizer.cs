@@ -49,7 +49,7 @@ namespace NW.NGramTextClassification.NGramTokenization
         /// <para>If all rules will fail, null will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        List<INGram> TryDoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleset);
+        List<INGram> DoForRuleSetOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleset);
 
     }
 }

@@ -111,7 +111,7 @@ namespace NW.NGramTextClassification.NGramTokenization
             return ngrams;
 
         }
-        public List<INGram> TryDoForRuleSet(string text, INGramTokenizerRuleSet tokenizerRuleSet)
+        public List<INGram> DoForRuleSetOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
@@ -284,5 +284,5 @@ namespace NW.NGramTextClassification.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2021
+    Last Update: 18.09.2022
 */

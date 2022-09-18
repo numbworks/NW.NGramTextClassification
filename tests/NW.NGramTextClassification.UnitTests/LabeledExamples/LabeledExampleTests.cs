@@ -18,7 +18,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // ValidateStringNullOrWhiteSpace
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 null,
                                                 ObjectMother.Shared_Text1_Text,
@@ -28,7 +28,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException("label").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_01"),
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 string.Empty,
                                                 ObjectMother.Shared_Text1_Text,
@@ -38,7 +38,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException("label").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_02"),
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Validator_StringOnlyWhiteSpaces,
                                                 ObjectMother.Shared_Text1_Text,
@@ -50,7 +50,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // ValidateStringNullOrWhiteSpace
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 null,
@@ -60,7 +60,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException("text").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_04"),
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 string.Empty,
@@ -70,7 +70,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException("text").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_05"),
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 ObjectMother.Validator_StringOnlyWhiteSpaces,
@@ -82,7 +82,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // ValidateList
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 ObjectMother.Shared_Text1_Text,
@@ -92,7 +92,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new ArgumentNullException("textAsNGrams").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_07"),
             new TestCaseData(
-                new TestDelegate( () => new LabeledExample(
+                new TestDelegate( () => new TokenizedExample(
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 ObjectMother.Shared_Text1_Text,
@@ -138,8 +138,8 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            LabeledExample actual
-                = new LabeledExample(
+            TokenizedExample actual
+                = new TokenizedExample(
                         ObjectMother.Shared_Text1_LabeledExampleId,
                         ObjectMother.Shared_Text1_Label,
                         ObjectMother.Shared_Text1_Text,
@@ -147,7 +147,7 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.IsInstanceOf<LabeledExample>(actual);
+            Assert.IsInstanceOf<TokenizedExample>(actual);
 
         }
 

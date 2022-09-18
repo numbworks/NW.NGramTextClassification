@@ -9,7 +9,7 @@ using NW.NGramTextClassification.NGrams;
 namespace NW.NGramTextClassification.UnitTests
 {
     [TestFixture]
-    public class LabeledExampleFactoryTests
+    public class LabeledExampleManagerTests
     {
 
         #region Fields
@@ -20,7 +20,7 @@ namespace NW.NGramTextClassification.UnitTests
             // ValidateObject
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleFactory(
+                        () => new LabeledExampleManager(
                                             null,
                                             ObjectMother.LabeledExampleFactory_InitialId1
                             )),
@@ -34,7 +34,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleFactory()
+                        () => new LabeledExampleManager()
                                     .TryCreateForRuleSet(
                                         ObjectMother.Shared_Text1_LabeledExampleId,
                                         null,
@@ -47,7 +47,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleFactory()
+                        () => new LabeledExampleManager()
                                     .TryCreateForRuleSet(
                                         ObjectMother.Shared_Text1_LabeledExampleId,
                                         ObjectMother.Shared_Text1_Label,
@@ -60,7 +60,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleFactory()
+                        () => new LabeledExampleManager()
                                     .TryCreateForRuleSet(
                                         ObjectMother.Shared_Text1_LabeledExampleId,
                                         ObjectMother.Shared_Text1_Label,
@@ -78,8 +78,8 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleFactory()
-                                    .TryCreateForRuleSet(
+                        () => new LabeledExampleManager()
+                                    .CreateOrDefault(
                                         ObjectMother.LabeledExampleFactory_Tuples,
                                         null
                             )),
@@ -89,9 +89,9 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleFactory()
-                                    .TryCreateForRuleSet(
-                                        null,
+                        () => new LabeledExampleManager()
+                                    .CreateOrDefault(
+                                        (List<(string label, string text)>)null,
                                         new NGramTokenizerRuleSet()
                             )),
                 typeof(ArgumentNullException),
@@ -188,26 +188,26 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            LabeledExampleFactory actual = new LabeledExampleFactory();
+            LabeledExampleManager actual = new LabeledExampleManager();
 
             // Assert
-            Assert.IsInstanceOf<LabeledExampleFactory>(actual);
-            Assert.AreEqual(1, LabeledExampleFactory.DefaultInitialId);
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleFactory.DefaultTokenizerRuleSet);
+            Assert.IsInstanceOf<LabeledExampleManager>(actual);
+            Assert.AreEqual(1, LabeledExampleManager.DefaultInitialId);
+            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleManager.DefaultTokenizerRuleSet);
 
         }
 
         [TestCaseSource(nameof(tryCreateForRuleSetTestCases))]
         public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenProperParameters
-            (ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet, LabeledExample expected)
+            (ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet, TokenizedExample expected)
         {
 
 
             // Arrange
-            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
 
             // Act
-            LabeledExample actual = labeledExampleFactory.TryCreateForRuleSet(id, label, text, tokenizerRuleSet);
+            TokenizedExample actual = labeledExampleFactory.TryCreateForRuleSet(id, label, text, tokenizerRuleSet);
 
             // Assert
             Assert.IsTrue(
@@ -221,13 +221,13 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             // Arrange
-            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
 
             // Act
-            LabeledExample actual 
+            TokenizedExample actual 
                 = labeledExampleFactory
                     .TryCreateForRuleSet(
-                        id: ObjectMother.Shared_Text1_LabeledExampleId, 
+                        labeledExample: ObjectMother.Shared_Text1_LabeledExampleId, 
                         label: ObjectMother.Shared_Text1_Label, 
                         text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
                         tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
@@ -243,10 +243,10 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             // Arrange
-            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
 
             // Act
-            LabeledExample actual
+            TokenizedExample actual
                 = labeledExampleFactory
                     .TryCreateForRuleSet(
                         id: ObjectMother.Shared_Text1_LabeledExampleId,
@@ -263,14 +263,14 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(tryCreateForRuleSetCollectionTestCases))]
         public void TryCreateForRuleSet_ShouldReturnExpectedCollectionOfLabeledExamples_WhenProperParameters
-            (List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> expected)
+            (List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet, List<TokenizedExample> expected)
         {
 
             // Arrange
-            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
 
             // Act
-            List<LabeledExample> actual = labeledExampleFactory.TryCreateForRuleSet(tuples, tokenizerRuleSet);
+            List<TokenizedExample> actual = labeledExampleFactory.CreateOrDefault(tuples, tokenizerRuleSet);
 
             // Assert
             Assert.IsTrue(
@@ -284,12 +284,12 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             // Arrange
-            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
 
             // Act
-            List<LabeledExample> actual 
+            List<TokenizedExample> actual 
                 = labeledExampleFactory
-                    .TryCreateForRuleSet(
+                    .CreateOrDefault(
                         tuples: ObjectMother.Shared_Tuples_TextOnlyFirstWord, 
                         tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
                         );
@@ -304,11 +304,11 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             // Arrange
-            LabeledExampleFactory labeledExampleFactory = new LabeledExampleFactory();
+            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
 
             // Act
-            List<LabeledExample> actual
-                = labeledExampleFactory.TryCreateForRuleSet(tuples: ObjectMother.Shared_Tuples_Text1);
+            List<TokenizedExample> actual
+                = labeledExampleFactory.CreateOrDefault(tuples: ObjectMother.Shared_Tuples_Text1);
 
             // Assert
             Assert.IsTrue(
