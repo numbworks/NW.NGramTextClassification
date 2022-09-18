@@ -26,8 +26,10 @@ namespace NW.NGramTextClassification
         public static TextClassifierComponents DefaultTextClassifierComponents { get; } = new TextClassifierComponents();
         public static TextClassifierSettings DefaultTextClassifierSettings { get; } = new TextClassifierSettings();
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
-
-        #endregion
+        public static TextClassifierResult DefaultTextClassifierResult { get; }
+            = new TextClassifierResult(null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
+        
+            #endregion
 
         #region Constructors
 
@@ -62,8 +64,7 @@ namespace NW.NGramTextClassification
             {
 
                 _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AllRulesInProvidedRulesetFailed.Invoke(text));
-
-                return CreateEmptyTextClassifierResult();
+                return DefaultTextClassifierResult;
 
             }
 
@@ -73,8 +74,7 @@ namespace NW.NGramTextClassification
             {
 
                 // log
-
-                return CreateEmptyTextClassifierResult();
+                return DefaultTextClassifierResult;
 
             }
 
@@ -126,7 +126,7 @@ namespace NW.NGramTextClassification
 
             return result;
 
-        }
+        }        
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
@@ -293,7 +293,7 @@ namespace NW.NGramTextClassification
             return sum / averages.Count;
 
         }
-        private static bool ContainsAtLeastOneIndexAverageThatIsNotZero(List<SimilarityIndexAverage> indexAverages)
+        private bool ContainsAtLeastOneIndexAverageThatIsNotZero(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -313,7 +313,7 @@ namespace NW.NGramTextClassification
             return true;
 
         }
-        private static bool ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(List<SimilarityIndexAverage> indexAverages)
+        private bool ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -336,7 +336,7 @@ namespace NW.NGramTextClassification
             return true;
 
         }
-        private static bool ContainsTwoHighestIndexAveragesThatArentEqual(double first, double second)
+        private bool ContainsTwoHighestIndexAveragesThatArentEqual(double first, double second)
         {
 
             /*
@@ -356,9 +356,6 @@ namespace NW.NGramTextClassification
         }
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
             => indexAverages.OrderByDescending(Item => Item.Value).ToList();
-
-        private static TextClassifierResult CreateEmptyTextClassifierResult()
-            => new TextClassifierResult(null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
 
         #endregion
 

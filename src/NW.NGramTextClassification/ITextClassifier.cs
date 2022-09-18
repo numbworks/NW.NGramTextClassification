@@ -12,7 +12,7 @@ namespace NW.NGramTextClassification
         /// <summary>
         /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/>.
         /// <para>If one rule in <paramref name="tokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, an empty <see cref="TextClassifierResult"/> (with a null label) will be returned.</para>
+        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification
         /// <summary>
         /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
         /// <para>If one rule in the default <see cref="INGramTokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, an empty <see cref="TextClassifierResult"/> (with a null label) will be returned.</para>
+        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>       
