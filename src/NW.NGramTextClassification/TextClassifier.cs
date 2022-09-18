@@ -65,12 +65,12 @@ namespace NW.NGramTextClassification
         public TextClassifierResult PredictLabel(string text, List<LabeledExample> labeledExamples)
                 => PredictLabel(text, DefaultNGramTokenizerRuleSet, labeledExamples);
 
-        public TextClassifierResult TryPredictLabel(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierResult PredictLabelOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
             ValidateAndBeginPrediction(text, tokenizerRuleSet, labeledExamples);
 
-            List<INGram> nGrams = _components.NGramsTokenizer.TryDoForRuleSet(text, tokenizerRuleSet);
+            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
 
             if (nGrams == null)
@@ -85,12 +85,52 @@ namespace NW.NGramTextClassification
             return CalculateTextClassifierResult(labeledExamples, nGrams);
 
         }
-        public TextClassifierResult TryPredictLabel(string text, List<LabeledExample> labeledExamples)
-                => TryPredictLabel(text, DefaultNGramTokenizerRuleSet, labeledExamples);
+        public TextClassifierResult PredictLabelOrDefault(string text, List<LabeledExample> labeledExamples)
+                => PredictLabelOrDefault(text, DefaultNGramTokenizerRuleSet, labeledExamples);
 
         #endregion
 
         #region Methods_private
+
+        private void ValidateAndBeginPrediction(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        {
+
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
+            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
+
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AttemptingToPredictLabel);
+
+            string truncatedText = _components.TextTruncatingFunction.Invoke(text, _settings.TruncateTextInLogMessagesAfter);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText));
+
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(tokenizerRuleSet));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
+
+        }
+        private TextClassifierResult CalculateTextClassifierResult(List<LabeledExample> labeledExamples, List<INGram> nGrams)
+        {
+
+            List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(indexes));
+
+            List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
+
+            string label = PredictLabel(indexAverages);
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs.Invoke(label));
+
+            if (label == null)
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+            else
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
+
+            TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
+
+            return result;
+
+        }
 
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<LabeledExample> labeledExamples)
         {
@@ -321,43 +361,6 @@ namespace NW.NGramTextClassification
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
             => indexAverages.OrderByDescending(Item => Item.Value).ToList();
 
-        private void ValidateAndBeginPrediction(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
-        {
-
-            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
-            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
-
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AttemptingToPredictLabel);
-            string truncatedText = _components.TextTruncatingFunction.Invoke(text, _settings.TruncateTextInLogMessagesAfter);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText));
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(tokenizerRuleSet));
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(labeledExamples));
-
-        }
-        private TextClassifierResult CalculateTextClassifierResult(List<LabeledExample> labeledExamples, List<INGram> nGrams)
-        {
-
-            List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(indexes));
-
-            List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
-
-            string label = PredictLabel(indexAverages);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs.Invoke(label));
-
-            if (label == null)
-                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
-            else
-                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
-
-            TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
-
-            return result;
-
-        }
         private static TextClassifierResult CreateEmptyTextClassifierResult()
             => new TextClassifierResult(null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
 
@@ -368,5 +371,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.09.2021
+    Last Update: 18.09.2022
 */

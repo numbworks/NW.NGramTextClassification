@@ -356,7 +356,7 @@ namespace NW.NGramTextClassification.UnitTests
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
 
             // Act
-            TextClassifierResult actual = textClassifier.TryPredictLabel(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
