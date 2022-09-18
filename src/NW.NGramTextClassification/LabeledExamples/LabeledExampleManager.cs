@@ -76,7 +76,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
             }
 
-            if (labeledExamples.Count == 0)
+            if (tokenizedExamples.Count != labeledExamples.Count)
                 return null;
 
             return tokenizedExamples;
