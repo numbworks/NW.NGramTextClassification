@@ -1,4 +1,5 @@
 ﻿using System;
+using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
@@ -14,75 +15,89 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] textClassifierComponentsExceptionTestCases =
         {
 
-            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierComponents(
-                                        null,
-                                        new SimilarityIndexCalculatorJaccard(),
-                                        TextClassifierComponents.DefaultRoundingFunction,
-                                        TextClassifierComponents.DefaultTextTruncatingFunction,
-                                        TextClassifierComponents.DefaultLoggingAction
+                                        nGramsTokenizer: null,
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nGramsTokenizer").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_01"),
 
-            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierComponents(
-                                        new NGramTokenizer(),
-                                        null,
-                                        TextClassifierComponents.DefaultRoundingFunction,
-                                        TextClassifierComponents.DefaultTextTruncatingFunction,
-                                        TextClassifierComponents.DefaultLoggingAction
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: null,
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("similarityIndexCalculator").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_02"),
 
-            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierComponents(
-                                        new NGramTokenizer(),
-                                        new SimilarityIndexCalculatorJaccard(),
-                                        null,
-                                        TextClassifierComponents.DefaultTextTruncatingFunction,
-                                        TextClassifierComponents.DefaultLoggingAction
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: null,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("roundingFunction").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_03"),
 
-            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierComponents(
-                                        new NGramTokenizer(),
-                                        new SimilarityIndexCalculatorJaccard(),
-                                        TextClassifierComponents.DefaultRoundingFunction,
-                                        null,
-                                        TextClassifierComponents.DefaultLoggingAction
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: null,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textTruncatingFunction").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_04"),
 
-            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierComponents(
-                                        new NGramTokenizer(),
-                                        new SimilarityIndexCalculatorJaccard(),
-                                        TextClassifierComponents.DefaultRoundingFunction,
-                                        TextClassifierComponents.DefaultTextTruncatingFunction,
-                                        null
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: null,
+                                        labeledExampleManager: new LabeledExampleManager()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingAction").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_05")
+                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_05"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifierComponents(
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("labeledExampleManager").Message
+                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_06")
 
         };
 
@@ -139,5 +154,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 18.09.2022
 */

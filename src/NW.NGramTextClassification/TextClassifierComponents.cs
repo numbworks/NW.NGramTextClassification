@@ -1,6 +1,7 @@
 ﻿using System;
-using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification
@@ -32,11 +33,12 @@ namespace NW.NGramTextClassification
         public static Action<string> DefaultLoggingAction { get; }
             = (message) => Console.WriteLine(message);
 
-        public INGramTokenizer NGramsTokenizer { get; private set; }
-        public ISimilarityIndexCalculator SimilarityIndexCalculator { get; private set; }
-        public Func<double, double> RoundingFunction { get; private set; }
-        public Func<string, uint, string> TextTruncatingFunction { get; private set; }
-        public Action<string> LoggingAction { get; private set; }
+        public INGramTokenizer NGramsTokenizer { get; }
+        public ISimilarityIndexCalculator SimilarityIndexCalculator { get; }
+        public Func<double, double> RoundingFunction { get; }
+        public Func<string, uint, string> TextTruncatingFunction { get; }
+        public Action<string> LoggingAction { get; }
+        public ILabeledExampleManager LabeledExampleManager { get; }
 
         #endregion
 
@@ -48,7 +50,8 @@ namespace NW.NGramTextClassification
                     ISimilarityIndexCalculator similarityIndexCalculator,
                     Func<double, double> roundingFunction,
                     Func<string, uint, string> textTruncatingFunction,
-                    Action<string> loggingAction)
+                    Action<string> loggingAction,
+                    ILabeledExampleManager labeledExampleManager)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -56,12 +59,14 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(roundingFunction, nameof(roundingFunction));
             Validator.ValidateObject(textTruncatingFunction, nameof(textTruncatingFunction));
             Validator.ValidateObject(loggingAction, nameof(loggingAction));
+            Validator.ValidateObject(labeledExampleManager, nameof(labeledExampleManager));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
             RoundingFunction = roundingFunction;
             TextTruncatingFunction = textTruncatingFunction;
             LoggingAction = loggingAction;
+            LabeledExampleManager = labeledExampleManager;
 
         }
 
@@ -72,7 +77,8 @@ namespace NW.NGramTextClassification
                   new SimilarityIndexCalculatorJaccard(),
                   DefaultRoundingFunction,
                   DefaultTextTruncatingFunction,
-                  DefaultLoggingAction)
+                  DefaultLoggingAction,
+                  new LabeledExampleManager())
         { }
 
         #endregion
@@ -85,5 +91,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 17.09.2021
+    Last Update: 18.09.2022
 */

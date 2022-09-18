@@ -19,7 +19,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Properties
 
-        public static NGramTokenization.INGramTokenizer DefaultNGramTokenizer { get; } = new NGramTokenizer();
+        public static INGramTokenizer DefaultNGramTokenizer { get; } = new NGramTokenizer();
         public static INGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
 
         #endregion
@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.LabeledExamples
         #region Constructors
 
         /// <summary>Initializes a <see cref="LabeledExampleManager"/> instance.</summary>
-        public LabeledExampleManager(NGramTokenization.INGramTokenizer tokenizer)
+        public LabeledExampleManager(INGramTokenizer tokenizer)
         {
 
             Validator.ValidateObject(tokenizer, nameof(tokenizer));
