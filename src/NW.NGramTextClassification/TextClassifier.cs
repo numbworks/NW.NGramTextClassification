@@ -51,20 +51,6 @@ namespace NW.NGramTextClassification
 
         #region Methods_public
 
-        public TextClassifierResult PredictLabel(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
-        {
-
-            ValidateAndBeginPrediction(text, tokenizerRuleSet, labeledExamples);
-
-            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSet(text, tokenizerRuleSet);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
-
-            return CalculateTextClassifierResult(labeledExamples, nGrams);
-
-        }
-        public TextClassifierResult PredictLabel(string text, List<LabeledExample> labeledExamples)
-                => PredictLabel(text, DefaultNGramTokenizerRuleSet, labeledExamples);
-
         public TextClassifierResult PredictLabelOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
@@ -72,11 +58,21 @@ namespace NW.NGramTextClassification
 
             List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(nGrams));
-
             if (nGrams == null)
             {
 
                 _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AllRulesInProvidedRulesetFailed.Invoke(text));
+
+                return CreateEmptyTextClassifierResult();
+
+            }
+
+            List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples);
+            // log
+            if (tokenizedExamples == null)
+            {
+
+                // log
 
                 return CreateEmptyTextClassifierResult();
 
