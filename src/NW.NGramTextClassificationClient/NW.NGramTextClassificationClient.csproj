@@ -5,14 +5,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>numbworks</Authors>
     <Description>Collection of examples for NW.NGramTextClassification.</Description>
-    <Copyright>numbworks 2021</Copyright>
+    <Copyright>numbworks 2022</Copyright>
     <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/numbworks/numbworks/master/numbworks_logo_128x128px.png</PackageIconUrl>
     <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>2.2.0</Version>
+		<Version>3.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
