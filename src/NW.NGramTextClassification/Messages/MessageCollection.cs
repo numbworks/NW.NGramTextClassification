@@ -48,8 +48,8 @@ namespace NW.NGramTextClassification.Messages
             (nGrams) => $"The provided text has been tokenized into '{nGrams?.Count ?? 0}' {nameof(INGram)} object.";
         public static Func<INGramTokenizerRuleSet, string> TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed =
             (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset}'.";
-        public static string TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples =
-            $"The tokenized text has been successfully compared against the provided list of {nameof(LabeledExample)} objects.";
+        public static string TextClassifier_TokenizedTextComparedAgainstProvidedTokenizedExamples =
+            $"The tokenized text has been successfully compared against the provided list of {nameof(TokenizedExample)} objects.";
         public static Func<List<SimilarityIndex>, string> TextClassifier_XSimilarityIndexObjectsHaveBeenComputed =
             (similarityIndexes) => $"'{similarityIndexes.Count}' {nameof(SimilarityIndex)} objects have been computed.";
         public static Func<List<SimilarityIndexAverage>, string> TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed =
@@ -60,8 +60,8 @@ namespace NW.NGramTextClassification.Messages
                 $"The prediction has failed. Try increasing the amount of provided {nameof(LabeledExample)} objects.";
         public static string TextClassifier_PredictionHasBeenSuccessful =
                 $"The prediction has been successful.";
-        public static Func<LabeledExample, string> TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample =
-            (labeledExample) => $"Comparing the provided text against the following {nameof(LabeledExample)}: '{labeledExample}'...";
+        public static Func<TokenizedExample, string> TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample =
+            (tokenizedExample) => $"Comparing the provided text against the following {nameof(TokenizedExample)}: '{tokenizedExample}'...";
         public static Func<double, string> TextClassifier_CalculatedSimilarityIndexValueIs =
             (indexValue) => $"The calculated '{nameof(SimilarityIndex)}' value is '{indexValue}'.";
         public static Func<double, string> TextClassifier_RoundedSimilarityIndexValueIs =

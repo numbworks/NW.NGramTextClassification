@@ -203,17 +203,17 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.TextClassifier_Text1_NGrams),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[0]),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[1]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes[1]),
 
-                MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
+                MessageCollection.TextClassifier_TokenizedTextComparedAgainstProvidedTokenizedExamples,
                 MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text1_SimilarityIndexes),
 
                 MessageCollection.TextClassifier_FollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text1_UniqueLabels),
@@ -285,17 +285,17 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.Shared_Text3_TextAsNGrams),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0]),
 
-                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingLabeledExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[1]),
+                MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[1]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_RoundedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1].Value),
                 MessageCollection.TextClassifier_FollowingSimilarityIndexObjectHasBeenAddedToTheList.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[1]),
 
-                MessageCollection.TextClassifier_TokenizedTextHasBeenComparedAgainstTheProvidedLabeledExamples,
+                MessageCollection.TextClassifier_TokenizedTextComparedAgainstProvidedTokenizedExamples,
                 MessageCollection.TextClassifier_XSimilarityIndexObjectsHaveBeenComputed.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes),
 
                 MessageCollection.TextClassifier_FollowingUniqueLabelsHaveBeenFound.Invoke(ObjectMother.TextClassifier_Text3_UniqueLabels),

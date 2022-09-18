@@ -12,7 +12,7 @@ namespace NW.NGramTextClassification.Similarity
 
         #region Properties
 
-        public ulong Id { get; }
+        public string Text { get; }
         public string Label { get; }
         public double Value { get; }
 
@@ -22,12 +22,13 @@ namespace NW.NGramTextClassification.Similarity
 
         /// <summary>Initializes a <see cref="SimilarityIndex"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
-        public SimilarityIndex(ulong id, string label, double value)
+        public SimilarityIndex(string text, string label, double value)
         {
 
+            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
             Validator.ValidateStringNullOrWhiteSpace(label, nameof(label));
 
-            Id = id;
+            Text = text;
             Label = label;
             Value = value;
 
@@ -43,7 +44,7 @@ namespace NW.NGramTextClassification.Similarity
             string content
                 = string.Join(
                     ", ",
-                    $"{nameof(Id)}: '{Id}'",
+                    $"{nameof(Text)}: '{Text}'",
                     $"{nameof(Label)}: '{Label}'",
                     $"{nameof(Value)}: '{Value}'"
                     );
@@ -59,5 +60,5 @@ namespace NW.NGramTextClassification.Similarity
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 18.09.2022
 */
