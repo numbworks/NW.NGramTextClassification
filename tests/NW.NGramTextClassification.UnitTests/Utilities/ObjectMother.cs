@@ -580,55 +580,17 @@ namespace NW.NGramTextClassification.UnitTests
                                     fivegrams: Shared_LabeledExample01_Fivegrams
                             ));
 
-        public static LabeledExample Shared_LabeledExample01_OnlyFirstWord
+        public static LabeledExample Shared_LabeledExample04_Untokenizable
             = new LabeledExample(label: "en", text: "We");
+        public static List<LabeledExample> Shared_LabeledExamples_Untokenizable = new List<LabeledExample>()
+        {
 
+            Shared_LabeledExample01,
+            Shared_LabeledExample02,
+            Shared_LabeledExample03,
+            Shared_LabeledExample04_Untokenizable
 
-
-
-        public static TokenizedExample Shared_Text2_LabeledExample_Mono
-            = new TokenizedExample(
-                    Shared_Text2_LabeledExampleId,
-                    Shared_Text2_Label,
-                    Shared_Text2_Text,
-                    CreateNGrams(
-                        Shared_LabeledExample02_Monograms
-                        ));
-        public static TokenizedExample Shared_Text2_LabeledExample_MonoBiTriFourFive
-            = new TokenizedExample(
-                        Shared_Text2_LabeledExampleId,
-                        Shared_Text2_Label,
-                        Shared_Text2_Text,
-                        Shared_LabeledExample02_NGrams);
-
-        public static List<TokenizedExample> Shared_LabeledExamples_Text1_Mono
-            = new List<TokenizedExample>()
-                    {
-
-                        Shared_TokenizedExample01_Mono
-
-                    };
-        public static List<TokenizedExample> Shared_LabeledExamples_Text1_MonoBiTriFourFive
-            = new List<TokenizedExample>()
-                    {
-
-                        Shared_TokenizedExample01_MonoBiTriFourFive
-
-                    };
-        public static List<TokenizedExample> Shared_LabeledExamples_Text1Text2_Mono
-            = new List<TokenizedExample>()
-                    {
-
-                        Shared_TokenizedExample01_Mono,
-                        Shared_Text2_LabeledExample_Mono
-
-                    };
-        public static List<TokenizedExample> Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
-            = new List<TokenizedExample>()
-                {
-                    Shared_TokenizedExample01_MonoBiTriFourFive,
-                    Shared_Text2_LabeledExample_MonoBiTriFourFive
-                };
+        };
 
         #endregion
 

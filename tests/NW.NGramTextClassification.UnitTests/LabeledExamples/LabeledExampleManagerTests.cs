@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
-using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -111,22 +109,11 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05"),
 
             // Second method signature
-
-        };
-        private static TestCaseData[] tryCreateForRuleSetCollectionTestCases =
-        {
-
             new TestCaseData(
-                    ObjectMother.Shared_Tuples_Text1,
-                    ObjectMother.Shared_RuleSet_Mono,
-                    ObjectMother.Shared_LabeledExamples_Text1_Mono
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetCollectionTestCases)}_01"),
-
-            new TestCaseData(
-                    ObjectMother.Shared_Tuples_Text1Text2,
-                    ObjectMother.Shared_RuleSet_Mono,
-                    ObjectMother.Shared_LabeledExamples_Text1Text2_Mono
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetCollectionTestCases)}_02"),
+                    ObjectMother.Shared_LabeledExamples,
+                    LabeledExampleManager.DefaultTokenizerRuleSet,
+                    ObjectMother.Shared_TokenizedExamples
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_06"),
 
         };
 
@@ -192,71 +179,7 @@ namespace NW.NGramTextClassification.UnitTests
             TokenizedExample actual 
                 = labeledExampleManager
                     .CreateOrDefault(
-                        labeledExample: ObjectMother.Shared_LabeledExample01_OnlyFirstWord,
-                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
-                        );
-
-            // Assert
-            Assert.IsNull(actual);
-
-        }
-
-
-
-
-        [Test]
-        public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenDefaultConstructor()
-        {
-
-            // Arrange
-            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
-
-            // Act
-            TokenizedExample actual
-                = labeledExampleFactory
-                    .TryCreateForRuleSet(
-                        id: ObjectMother.Shared_Text1_LabeledExampleId,
-                        label: ObjectMother.Shared_Text1_Label,
-                        text: ObjectMother.Shared_Text1_Text
-                        );
-
-            // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExample01_MonoBiTriFourFive, actual)
-                );
-
-        }
-
-        [TestCaseSource(nameof(tryCreateForRuleSetCollectionTestCases))]
-        public void TryCreateForRuleSet_ShouldReturnExpectedCollectionOfLabeledExamples_WhenProperParameters
-            (List<(string label, string text)> tuples, INGramTokenizerRuleSet tokenizerRuleSet, List<TokenizedExample> expected)
-        {
-
-            // Arrange
-            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
-
-            // Act
-            List<TokenizedExample> actual = labeledExampleFactory.CreateOrDefault(tuples, tokenizerRuleSet);
-
-            // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
-                );
-
-        }
-
-        [Test]
-        public void TryCreateForRuleSet_ShouldReturnNullInsteadOfACollectionOfLabeledExamples_WhenUnproperParameters()
-        {
-
-            // Arrange
-            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
-
-            // Act
-            List<TokenizedExample> actual 
-                = labeledExampleFactory
-                    .CreateOrDefault(
-                        tuples: ObjectMother.Shared_Tuples_TextOnlyFirstWord, 
+                        labeledExample: ObjectMother.Shared_LabeledExample04_Untokenizable,
                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
@@ -266,19 +189,55 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void TryCreateForRuleSet_ShouldReturnExpectedCollectionOfLabeledExamples_WhenDefaultConstructor()
+        public void CreateOrDefault_ShouldReturnDefault_WhenUnproperLabeledExamples()
         {
 
             // Arrange
-            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
             // Act
             List<TokenizedExample> actual
-                = labeledExampleFactory.CreateOrDefault(tuples: ObjectMother.Shared_Tuples_Text1);
+                = labeledExampleManager
+                    .CreateOrDefault(
+                        labeledExamples: ObjectMother.Shared_LabeledExamples_Untokenizable,
+                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
+                        );
+
+            // Assert
+            Assert.IsNull(actual);
+
+        }
+
+        [Test]
+        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenDefaultConstructor()
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample: ObjectMother.Shared_LabeledExample01);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExamples_Text1_MonoBiTriFourFive, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExample01, actual)
+                );
+
+        }
+
+        [Test]
+        public void CreateOrDefault_ShouldReturnExpectedTokenizedExamples_WhenDefaultConstructor()
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            List<TokenizedExample> actual = labeledExampleManager.CreateOrDefault(labeledExamples: ObjectMother.Shared_LabeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExamples, actual)
                 );
 
         }
