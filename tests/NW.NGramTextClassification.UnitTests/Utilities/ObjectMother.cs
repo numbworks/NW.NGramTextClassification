@@ -745,42 +745,42 @@ namespace NW.NGramTextClassification.UnitTests
 
         public static TextClassifierResult TextClassifier_TextClassifierResult_LabeledExamples00
             = new TextClassifierResult(
-                    label: CreateTokenizedExamples()[0].LabeledExample.Label,
+                    label: CreateThirtyTokenizedExamples()[0].LabeledExample.Label,
                     indexes: new List<SimilarityIndex>()
                                 {
 
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[0].LabeledExample.Text, label: "en", value: 1),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[1].LabeledExample.Text, label: "en", value: 0.031696),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[2].LabeledExample.Text, label: "en", value: 0.017512),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[3].LabeledExample.Text, label: "en", value: 0.022472),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[4].LabeledExample.Text, label: "en", value: 0.017927),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[5].LabeledExample.Text, label: "en", value: 0.018717),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[6].LabeledExample.Text, label: "en", value: 0.014844),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[7].LabeledExample.Text, label: "en", value: 0.017185),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[8].LabeledExample.Text, label: "en", value: 0.024096),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[9].LabeledExample.Text, label: "en", value: 0.020548),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[0].LabeledExample.Text, label: "en", value: 1),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[1].LabeledExample.Text, label: "en", value: 0.031696),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[2].LabeledExample.Text, label: "en", value: 0.017512),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[3].LabeledExample.Text, label: "en", value: 0.022472),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[4].LabeledExample.Text, label: "en", value: 0.017927),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[5].LabeledExample.Text, label: "en", value: 0.018717),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[6].LabeledExample.Text, label: "en", value: 0.014844),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[7].LabeledExample.Text, label: "en", value: 0.017185),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[8].LabeledExample.Text, label: "en", value: 0.024096),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[9].LabeledExample.Text, label: "en", value: 0.020548),
 
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[10].LabeledExample.Text, label: "sv", value: 0.000741),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[11].LabeledExample.Text, label: "sv", value: 0),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[12].LabeledExample.Text, label: "sv", value: 0),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[13].LabeledExample.Text, label: "sv", value: 0.000802),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[14].LabeledExample.Text, label: "sv", value: 0.000745),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[15].LabeledExample.Text, label: "sv", value: 0),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[16].LabeledExample.Text, label: "sv", value: 0.000861),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[17].LabeledExample.Text, label: "sv", value: 0.00074),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[18].LabeledExample.Text, label: "sv", value: 0.000733),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[19].LabeledExample.Text, label: "sv", value: 0.000905),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[10].LabeledExample.Text, label: "sv", value: 0.000741),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[11].LabeledExample.Text, label: "sv", value: 0),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[12].LabeledExample.Text, label: "sv", value: 0),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[13].LabeledExample.Text, label: "sv", value: 0.000802),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[14].LabeledExample.Text, label: "sv", value: 0.000745),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[15].LabeledExample.Text, label: "sv", value: 0),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[16].LabeledExample.Text, label: "sv", value: 0.000861),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[17].LabeledExample.Text, label: "sv", value: 0.00074),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[18].LabeledExample.Text, label: "sv", value: 0.000733),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[19].LabeledExample.Text, label: "sv", value: 0.000905),
 
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[20].LabeledExample.Text, label: "dk", value: 0.002333),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[21].LabeledExample.Text, label: "dk", value: 0.000895),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[22].LabeledExample.Text, label: "dk", value: 0.000843),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[23].LabeledExample.Text, label: "dk", value: 0.004918),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[24].LabeledExample.Text, label: "dk", value: 0.001668),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[25].LabeledExample.Text, label: "dk", value: 0.003027),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[26].LabeledExample.Text, label: "dk", value: 0.002618),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[27].LabeledExample.Text, label: "dk", value: 0.00367),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[28].LabeledExample.Text, label: "dk", value: 0.002575),
-                                    new SimilarityIndex(text: CreateTokenizedExamples()[29].LabeledExample.Text, label: "dk", value: 0.003934)
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[20].LabeledExample.Text, label: "dk", value: 0.002333),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[21].LabeledExample.Text, label: "dk", value: 0.000895),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[22].LabeledExample.Text, label: "dk", value: 0.000843),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[23].LabeledExample.Text, label: "dk", value: 0.004918),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[24].LabeledExample.Text, label: "dk", value: 0.001668),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[25].LabeledExample.Text, label: "dk", value: 0.003027),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[26].LabeledExample.Text, label: "dk", value: 0.002618),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[27].LabeledExample.Text, label: "dk", value: 0.00367),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[28].LabeledExample.Text, label: "dk", value: 0.002575),
+                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[29].LabeledExample.Text, label: "dk", value: 0.003934)
 
                                 },
                     indexAverages: new List<SimilarityIndexAverage>()
@@ -962,11 +962,12 @@ namespace NW.NGramTextClassification.UnitTests
 
             return ngrams;
 
-        }       
-        public static List<TokenizedExample> CreateTokenizedExamples()
+        }
+
+        public static List<LabeledExample> CreateThirtyLabeledExamples()
         {
 
-            List<LabeledExample> labeledExample = new List<LabeledExample>()
+            List<LabeledExample> labeledExamples = new List<LabeledExample>()
             {
 
                 new LabeledExample("en", "VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most popular gifts, makes it possible for the gift recipient to choose their own gift at GoGift.com. With more than 7000 business to business customers worldwide GoGift is also a preferred supplier of corporate gifts.ArbetsuppgifterYou will play a very important role developing and maintaining our core platform as well as numerous APIs, applications and websites. You will be a key player in our dev team with highly skilled and experienced software developers (public and external), UX/UI designers, dev ops specialists and online content manager."),
@@ -979,7 +980,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new LabeledExample("en", "About Axis Communications Axis offers intelligent security solutions that enable a smarter, safer world. As the market leader in network video, Axis is driving the industry by continually launching innovative network products based on an open platform - delivering high value to customers through a global partner network. Axis has long-term relationships with partners and provides them with knowledge and ground-breaking network products in existing and new markets.Axis has more than 2,700 dedicated employees in more than 50 countries around the world, supported by a global network of over 80,000 partners. For more information about Axis, please visit our website.Reference number: 2182OUR TEAMWe are a team within Axis Research &amp; Development organization, overall   responsible for Axis Common Firmware PLatform and upgrading products with new firmware."),
                 new LabeledExample("en", "WHAT WILL YOU DO? You will be a part of a team working with our common firmware at a system level. The team’s main responsibilities are to keep track of the firmware platform system resources and handle system wide activities such as open source upgrades.WHO ARE WE LOOKING FOR?We believe you are a curious person with a holistic and open source mindset. It is important that you have a genuine interest in software and tools at a system level.Suitable background for the position:Master’s/Bachelor’s degree in engineering, system science or similarExperience of general software developmentExperience of Linux environmentExperience of Embedded systemExperience of programing languages such as C and PythonExperience of Agile methods such as Scrum &amp; KanbanKnowledge of Docker, Jenkins, git, Elasticsearch and Kibana is an advantage.WHAT CAN WE DO FOR YOU?"),
                 new LabeledExample("en", "Working with the Platform Management team will give you possibility to influence Axis firmware at a system level. You will have the opportunity to get broad knowledge of Axis’ products &amp; solutions, working closely with different parts of the company. Axis is an organization that values creativity and promotes teamwork and openness. This is a great opportunity to use and develop your skills as part of an exciting, successful organization that is already the world leader in network video. In exchange for your dedication Axis can offer you an innovative and global environment where you can develop both as a professional and as an individual.READY TO ACT?Axis is a company realizing the benefits of a diverse workforce. We know that diversity in groups creates a better working environment and promotes creativity, something that is fundamental for our success. Would you like to grow with us? Find out more from our recruiting manager."),
-                
+
                 new LabeledExample("sv", "Conic Restaurants AB äger och driver idag SUBWAY restauranger i Göteborg, Uddevalla, Skövde, Halmstad, Helsingborg, Malmö, Lund, Kristianstad och Kalmar. Subway är en av världens största restaurangkedjor med över 45 000 restauranger i över 100 länder och ett självklart val för alla som vill ha ett nyttigare och fräschare snabbmatsalternativ.Conic äger också varumärket “Togogo” och driver Togogos första restaurang på Centralstationen i Göteborg. Vi är ett expansivt företag och vår målsättning är att under de kommande åren öppna eller förvärva fler restauranger och att utveckla vår verksamhet. Vår expansion bygger på att vi lyckas attrahera de allra bästa inom vår bransch.Vi vill vara en modern arbetsgivare där medarbetare trivs på jobbet och får en bra balans mellan arbete och fritid. Vi behåller duktiga medarbetare genom att erbjuda intressanta utvecklingsmöjligheter.Vi behöver nu förstärka vårt team och söker dig som är glad, flexibel och som får både kunder och kollegor att trivas."),
                 new LabeledExample("sv", "Du ska vara noggrann, van vid att ta eget ansvar och gilla att arbeta i ett högt tempo. Dina arbetsuppgifter kommer att bestå av försäljning och beredning av våra produkter samt att hålla rent och snyggt i restaurangen. Vi jobbar ständigt med att hålla hög produktkvalitet, god hygien och genuin kundservice. Nyckeln till detta tror vi är teamkänsla och söker därför dig som gillar att vara en del av en grupp.Erfarenhet från restaurang, café, livsmedel, kassa eller liknande är meriterande men inte ett krav. Som nyanställd hos oss på Subway kommer du under vår introduktion att utbildas i alla olika delar och moment du förväntas behärska. Vi lägger därför stor vikt vid vilja och iniativförmåga. Vi söker dig som inspirerar dina kollegor, är ambitiös och vill visa vad du går för.Hos oss avgör alltid dina ambitioner hur långt du vill utvecklas. För rätt person finns det stora chanser till att inom vår organisation utvecklas och få mer ansvar."),
                 new LabeledExample("sv", "Vi söker nu dig som vill arbeta deltid och då våra restauranger har öppet både dag, kväll och helg söker vi dig som kan arbeta alla tider på dygnet. Vi tillämpar alltid en provanställning på sex månader och följer kollektivavtal. Tjänsten är på deltid 6 timmar per vecka.Vi kommer tillsätta tjänsterna så snart som möjligt och kommer löpande hålla intervjuer, så vänta inte med din ansökan!"),
@@ -990,7 +991,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new LabeledExample("sv", "Söker du ett spännande jobb inom gaming-världen? Vill du jobba centralt på ett coolt företag som är lite crazy och nytänkande? Fortsätt då läsa, vi har jobbet för dig!Dina arbetsuppgifterSom frontend-utvecklare hos vår kund kommer du framför allt att jobba med kodning. Du jobbar projektbaserat och i team för det aktuella projektet. Hos vår kund får du möjlighet att arbeta både med befintliga spel samt nyutveckling och lansering av spel.  Här får du möjlighet att jobba med erfarna och mycket komptetenta programmerare i ett företag som växer, det finns med andra ord stora möjligheter för att utvecklas! De språk du kommer att arbeta i är JavaScript, CSS, HTML5, Redux och React. Om företagetVår kund arbetar med spelutveckling av casinospel och gamblingspel. Genom att kombinera funktioner inom sina spel, kan du vinna pengar. Spelen riktar sig till de personer som vill tjäna pengar på att spela spel på mobilen. Bolaget grundades 2014 och växer snabbt."),
                 new LabeledExample("sv", "I dagsläget är de ca 30 personer i Malmö där produktionen sköts, både förbättring av buggar och nyskapande. Resten av företaget finns på Malta. Företaget är väldigt måna om sin personal och dess välmående. Varje år skickas man på seminarier, kurser, kick-offer och de har återkommande AW:s. Frukost och energidryck serveras dagligen. Här jobba personer som är drivna, vill ha kul tillsammans och göra ett så  bra jobb sm möjligt.Din profilFör att trivas hos vår kund ska du vara en lagspelare. Du ska tycka om att ha ett utbyte av kunskap med dina kollegor, och det är inte fel om du gillar att stanna en stund och umgås efter jobb under lättsamma former.Skallkrav: 3 års erfarenhet inom kodning, behöver inte ha utbildning men kunskap! Språken; JavaScript, CSS, Redux, React och HTML5EngelskaMeriterande: 'Erfarenhet av iGamingJobbat i team tidigareOm ossFramtiden AB är ett rekryterings- och bemanningsföretag och vår specialitet är Unga Talanger."),
                 new LabeledExample("sv", "Det innebär att vi hjälper våra kunder att hitta de bästa medarbetarna som fortfarande är i början av sin karriär. Just nu har vi hundratals lediga jobb. Framtiden AB arbetar med både bemanning och rekrytering och vår idé är att minska avståndet mellan utbildningen och arbetslivet. Vi gör vad vi heter – hjälper våra kunder till en bättre framtid genom den personal som vi förmedlar. För denna tjänst kommer du vara anställd av oss på Framtiden AB och arbeta som konsult hos ett av våra kundföretag.VillkorStart: omgående Arbetstider: Kontorstid med flexVi behandlar ansökningar löpande, skicka in din redan idag!"),
-                
+
                 new LabeledExample("dk", "Har du lyst til et nært samarbejde med kolleger i en klinik, der sætter patienten i centrum? Hos Vitanova får du rig mulighed for at udvikle dig, når du i en ledende funktion arbejder ud fra to af vores kerneværdier: støtte og nærvær. Som lægesekretær hos Vitanova bliver du en vigtig del af sekretariatet, når du er med til at opdatere og forny vores processer i samarbejde med den øvrige ledelse, ligesom du også har ansvar for at oplære personale, fortæller personalechef og jordemoder Rie Koldorf Jørgensen. Vi arbejder tværfagligt sammen med fokus på individuel behandling af vores patienter. Derfor vil du møde både glade patienter, men også nogle der trænger til trøstende ord. Som frontmedarbejder har du daglig patientkontakt både på mail og telefon, ligesom du også tager del i praktiske opgaver for vores behandlerteam, når de trænger til en hjælpende hånd."),
                 new LabeledExample("dk", "Lægesekretær/SOSU-assistent 20-25 timer ugentligt til almen lægepraksis, Amager Speciallæger i Almen Medicin Boiesen, Binderup, Møller og Svendsen 4-lægepraksis med ca. 6500 patienter søger stabil, fleksibel og serviceminded sekretær. Du skal være indstillet på en travl og udfordrende hverdag og være vant til at have flere bolde i luften ad gangen. Dit job vil bestå i patientkontakt telefonisk og ved personlig henvendelse samt forefaldende sekretariatsopgaver. Du vil komme til at samarbejde tæt med 1 sekretær, 2 sygeplejersker og 4 læger. Erfaring fra almen praksis er en klar fordel. Vi kan tilbyde søde patienter, velordnede arbejdsforhold og gode samarbejdsrelationer."),
                 new LabeledExample("dk", "MENY søger flere MADarbejdere – er du vores nye delikatesseassistent? MENY Nærum er byens og hele Danmarks førende fødevaremarked, og vi søger en passioneret og engageret delikatesseassistent. Så ka' du flække en hummer og skære hovedet af en grøn asparges? Er du kreativ, elsker du at arbejde med mad og synes MENYs delikatessekoncept er spændende? Ja, så er jobbet måske lige dig. Meny Du skal blandt andet: Være en del af den daglige produktion og sikre en fantastisk kundebetjening Sikre at vores stærke koncepter og faste rutiner overholdes Være med til at udvikle nye retter og måltidsløsninger Du får et spændende og varieret job i en dynamisk virksomhed, hvor du kan være med til at præge din egen arbejdssituation og udvikling."),
@@ -1004,7 +1005,17 @@ namespace NW.NGramTextClassification.UnitTests
 
             };
 
-            return new LabeledExampleManager().CreateOrDefault(labeledExample);
+
+            return labeledExamples;
+
+        }
+        public static List<TokenizedExample> CreateThirtyTokenizedExamples()
+        {
+
+            List<LabeledExample> labeledExamples = CreateThirtyLabeledExamples();
+            List<TokenizedExample> tokenizedExamples = new LabeledExampleManager().CreateOrDefault(labeledExamples);
+
+            return tokenizedExamples;
 
         }
 
