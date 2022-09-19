@@ -21,6 +21,8 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         public static INGramTokenizer DefaultNGramTokenizer { get; } = new NGramTokenizer();
         public static INGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
+        public static TokenizedExample DefaultTokenizedExample { get; } = null;
+        public static List<TokenizedExample> DefaultTokenizedExamples { get; } = null;
 
         #endregion
 
@@ -54,7 +56,7 @@ namespace NW.NGramTextClassification.LabeledExamples
             if (ngrams != null)
                 return new TokenizedExample(labeledExample, ngrams);
 
-            return null;
+            return DefaultTokenizedExample;
 
         }
         public TokenizedExample CreateOrDefault(LabeledExample labeledExample)
@@ -77,7 +79,7 @@ namespace NW.NGramTextClassification.LabeledExamples
             }
 
             if (tokenizedExamples.Count != labeledExamples.Count)
-                return null;
+                return DefaultTokenizedExamples;
 
             return tokenizedExamples;
 
@@ -96,5 +98,5 @@ namespace NW.NGramTextClassification.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 19.09.2022
 */

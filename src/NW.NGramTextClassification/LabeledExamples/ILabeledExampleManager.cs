@@ -11,7 +11,7 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <summary>
         /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters.
         /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, null will be returned.</para>
+        /// <para>If all rules will fail, <see cref="LabeledExampleManager.DefaultTokenizedExample"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
@@ -20,7 +20,7 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <summary>
         /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters and <see cref="LabeledExampleManager.DefaultTokenizerRuleSet"/>.
         /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, null will be returned.</para>
+        /// <para>If all rules will fail, <see cref="LabeledExampleManager.DefaultTokenizedExample"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
@@ -28,7 +28,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         /// <summary>
         /// Initializes a collection of <see cref="TokenizedExample"/> objects out of the provided parameters.
-        /// <para>If at least one <see cref="TokenizedExample"/> object fails to be created, null will be returned.</para>
+        /// <para>If at least one <see cref="TokenizedExample"/> object fails to be created, <see cref="LabeledExampleManager.DefaultTokenizedExamples"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         /// <summary>
         /// Initializes a collection of <see cref="TokenizedExample"/> objects out of the provided parameters and <see cref="LabeledExampleManager.DefaultTokenizerRuleSet"/>.
-        /// <para>If at least one <see cref="TokenizedExample"/> object fails to be created, null will be returned.</para>
+        /// <para>If at least one <see cref="TokenizedExample"/> object fails to be created, <see cref="LabeledExampleManager.DefaultTokenizedExamples"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
@@ -47,5 +47,5 @@ namespace NW.NGramTextClassification.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 19.09.2022
 */
