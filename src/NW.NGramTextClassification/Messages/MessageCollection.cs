@@ -46,6 +46,12 @@ namespace NW.NGramTextClassification.Messages
             (labeledExamples) => $"'{labeledExamples.Count}' {nameof(LabeledExample)} objects have been provided.";
         public static Func<List<INGram>, string> TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams =
             (nGrams) => $"The provided text has been tokenized into '{nGrams?.Count ?? 0}' {nameof(INGram)} object.";
+
+        public static string TextClassifier_ProvidedLabeledExamplesThruTokenizationProcess 
+            = $"The provided {nameof(LabeledExample)} objects have been thru the tokenization process.";
+        public static string TextClassifier_AtLeastOneLabeledExampleFailedTokenized
+            = $"At least one {nameof(LabeledExample)} object failed to be tokenized.";
+
         public static Func<INGramTokenizerRuleSet, string> TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed =
             (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset}'.";
         public static string TextClassifier_TokenizedTextComparedAgainstProvidedTokenizedExamples =

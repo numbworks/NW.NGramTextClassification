@@ -69,11 +69,11 @@ namespace NW.NGramTextClassification
             }
 
             List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples);
-            // log
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedLabeledExamplesThruTokenizationProcess);
             if (tokenizedExamples == null)
             {
 
-                // log
+                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_AtLeastOneLabeledExampleFailedTokenized);
                 return DefaultTextClassifierResult;
 
             }
