@@ -76,50 +76,38 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(createOrDefaultExceptionTestCases)}_04")
 
         };
-        
-
-        private static TestCaseData[] tryCreateForRuleSetTestCases =
+        private static TestCaseData[] createOrDefaultTestCases =
         {
 
             new TestCaseData(
-                    ObjectMother.Shared_Text1_LabeledExampleId,
-                    ObjectMother.Shared_Text1_Label,
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
-                    ObjectMother.Shared_Text1_LabeledExample_Mono
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_01"),
+                    ObjectMother.Shared_LabeledExample01,
+                    ObjectMother.Shared_RuleSet_Mono,
+                    ObjectMother.Shared_TokenizedExample01_Mono
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.Shared_Text1_LabeledExampleId,
-                    ObjectMother.Shared_Text1_Label,
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBi,
-                    ObjectMother.Shared_Text1_LabeledExample_MonoBi
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_02"),
+                    ObjectMother.Shared_LabeledExample01,
+                    ObjectMother.Shared_RuleSet_MonoBi,
+                    ObjectMother.Shared_TokenizedExample01_MonoBi
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.Shared_Text1_LabeledExampleId,
-                    ObjectMother.Shared_Text1_Label,
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTri,
-                    ObjectMother.Shared_Text1_LabeledExample_MonoBiTri
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_03"),
+                    ObjectMother.Shared_LabeledExample01,
+                    ObjectMother.Shared_RuleSet_MonoBiTri,
+                    ObjectMother.Shared_TokenizedExample01_MonoBiTri
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_03"),
 
             new TestCaseData(
-                    ObjectMother.Shared_Text1_LabeledExampleId,
-                    ObjectMother.Shared_Text1_Label,
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFour,
-                    ObjectMother.Shared_Text1_LabeledExample_MonoBiTriFour
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_04"),
+                    ObjectMother.Shared_LabeledExample01,
+                    ObjectMother.Shared_RuleSet_MonoBiTriFour,
+                    ObjectMother.Shared_TokenizedExample01_MonoBiTriFour
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_04"),
 
             new TestCaseData(
-                    ObjectMother.Shared_Text1_LabeledExampleId,
-                    ObjectMother.Shared_Text1_Label,
-                    ObjectMother.Shared_Text1_Text,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFourFive,
-                    ObjectMother.Shared_Text1_LabeledExample_MonoBiTriFourFive
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetTestCases)}_05")
+                    ObjectMother.Shared_LabeledExample01,
+                    ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
+                    ObjectMother.Shared_TokenizedExample01_MonoBiTriFourFive
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
 
         };
         private static TestCaseData[] tryCreateForRuleSetCollectionTestCases =
@@ -127,13 +115,13 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     ObjectMother.Shared_Tuples_Text1,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
+                    ObjectMother.Shared_RuleSet_Mono,
                     ObjectMother.Shared_LabeledExamples_Text1_Mono
                 ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetCollectionTestCases)}_01"),
 
             new TestCaseData(
                     ObjectMother.Shared_Tuples_Text1Text2,
-                    ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
+                    ObjectMother.Shared_RuleSet_Mono,
                     ObjectMother.Shared_LabeledExamples_Text1Text2_Mono
                 ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetCollectionTestCases)}_02"),
 
@@ -156,6 +144,26 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [TestCaseSource(nameof(createOrDefaultTestCases))]
+        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenProperParameters
+            (LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet, TokenizedExample expected)
+        {
+
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample, tokenizerRuleSet);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
+
         [Test]
         public void LabeledExampleManager_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
@@ -168,25 +176,6 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsInstanceOf<LabeledExampleManager>(actual);
             Assert.IsInstanceOf<NGramTokenizer>(LabeledExampleManager.DefaultNGramTokenizer);
             Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleManager.DefaultTokenizerRuleSet);
-
-        }
-
-        [TestCaseSource(nameof(tryCreateForRuleSetTestCases))]
-        public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenProperParameters
-            (ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet, TokenizedExample expected)
-        {
-
-
-            // Arrange
-            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
-
-            // Act
-            TokenizedExample actual = labeledExampleFactory.TryCreateForRuleSet(id, label, text, tokenizerRuleSet);
-
-            // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
-                );
 
         }
 
@@ -204,7 +193,7 @@ namespace NW.NGramTextClassification.UnitTests
                         labeledExample: ObjectMother.Shared_Text1_LabeledExampleId, 
                         label: ObjectMother.Shared_Text1_Label, 
                         text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
-                        tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
+                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
             // Assert
@@ -230,7 +219,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_LabeledExample_MonoBiTriFourFive, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExample01_MonoBiTriFourFive, actual)
                 );
 
         }
@@ -265,7 +254,7 @@ namespace NW.NGramTextClassification.UnitTests
                 = labeledExampleFactory
                     .CreateOrDefault(
                         tuples: ObjectMother.Shared_Tuples_TextOnlyFirstWord, 
-                        tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
+                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
             // Assert

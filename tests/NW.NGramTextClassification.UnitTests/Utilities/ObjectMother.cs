@@ -506,6 +506,8 @@ namespace NW.NGramTextClassification.UnitTests
             Shared_LabeledExample03_Fivegrams[13]
 
         };
+        public static TokenizedExample Shared_TokenizedExample03
+            = new TokenizedExample(labeledExample: Shared_LabeledExample03, nGrams: Shared_LabeledExample03_NGrams);
 
         public static List<LabeledExample> Shared_LabeledExamples = new List<LabeledExample>()
         {
@@ -515,72 +517,77 @@ namespace NW.NGramTextClassification.UnitTests
             Shared_LabeledExample03
 
         };
+        public static List<TokenizedExample> Shared_TokenizedExamples = new List<TokenizedExample>()
+        {
 
+            Shared_TokenizedExample01,
+            Shared_TokenizedExample02,
+            Shared_TokenizedExample03
 
-        public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_OnlyFive
-            = new NGramTokenizerRuleSet(false, false, false, false, true);
-        public static string Shared_Text1_TextOnlyFirstWord = "We";
+        };
 
-        public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_Mono 
+        public static INGramTokenizerRuleSet Shared_RuleSet_Mono
             = new NGramTokenizerRuleSet(true, false, false, false, false);
-        public static TokenizedExample Shared_Text1_LabeledExample_Mono
-            = new TokenizedExample(
-                    Shared_Text1_LabeledExampleId,
-                    Shared_Text1_Label,
-                    Shared_Text1_Text,
-                    CreateNGrams(
-                        Shared_LabeledExample01_Monograms
-                        ));
-        public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBi
+        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBi
             = new NGramTokenizerRuleSet(true, true, false, false, false);
-        public static TokenizedExample Shared_Text1_LabeledExample_MonoBi
-            = new TokenizedExample(
-                    Shared_Text1_LabeledExampleId,
-                    Shared_Text1_Label,
-                    Shared_Text1_Text,
-                    CreateNGrams(
-                        Shared_LabeledExample01_Monograms,
-                        Shared_LabeledExample01_Bigrams
-                        ));
-        public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTri
+        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBiTri
             = new NGramTokenizerRuleSet(true, true, true, false, false);
-        public static TokenizedExample Shared_Text1_LabeledExample_MonoBiTri
-            = new TokenizedExample(
-                    Shared_Text1_LabeledExampleId,
-                    Shared_Text1_Label,
-                    Shared_Text1_Text,
-                    CreateNGrams(
-                        Shared_LabeledExample01_Monograms,
-                        Shared_LabeledExample01_Bigrams,
-                        Shared_LabeledExample01_Trigrams
-                        ));
-        public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFour
+        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBiTriFour
             = new NGramTokenizerRuleSet(true, true, true, true, false);
-        public static TokenizedExample Shared_Text1_LabeledExample_MonoBiTriFour
-            = new TokenizedExample(
-                    Shared_Text1_LabeledExampleId,
-                    Shared_Text1_Label,
-                    Shared_Text1_Text,
-                    CreateNGrams(
-                        Shared_LabeledExample01_Monograms,
-                        Shared_LabeledExample01_Bigrams,
-                        Shared_LabeledExample01_Trigrams,
-                        Shared_LabeledExample01_Fourgrams
-                        ));
-        public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFourFive
+        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBiTriFourFive
             = new NGramTokenizerRuleSet(true, true, true, true, true);
-        public static TokenizedExample Shared_Text1_LabeledExample_MonoBiTriFourFive
+        public static INGramTokenizerRuleSet Shared_RuleSet_Five
+            = new NGramTokenizerRuleSet(false, false, false, false, true);
+
+        public static TokenizedExample Shared_TokenizedExample01_Mono
             = new TokenizedExample(
-                        Shared_Text1_LabeledExampleId,
-                        Shared_Text1_Label,
-                        Shared_Text1_Text,
-                        CreateNGrams(
-                            Shared_LabeledExample01_Monograms,
-                            Shared_LabeledExample01_Bigrams,
-                            Shared_LabeledExample01_Trigrams,
-                            Shared_LabeledExample01_Fourgrams,
-                            Shared_LabeledExample01_Fivegrams
+                    labeledExample: Shared_LabeledExample01,
+                    nGrams: CreateNGrams(
+                                monograms: Shared_LabeledExample01_Monograms
+                        ));
+        public static TokenizedExample Shared_TokenizedExample01_MonoBi
+            = new TokenizedExample(
+                    labeledExample: Shared_LabeledExample01,
+                    nGrams: CreateNGrams(
+                                monograms: Shared_LabeledExample01_Monograms,
+                                bigrams: Shared_LabeledExample01_Bigrams
+                        ));
+        public static TokenizedExample Shared_TokenizedExample01_MonoBiTri
+            = new TokenizedExample(
+                    labeledExample: Shared_LabeledExample01,
+                    nGrams: CreateNGrams(
+                                monograms: Shared_LabeledExample01_Monograms,
+                                bigrams: Shared_LabeledExample01_Bigrams,
+                                trigrams: Shared_LabeledExample01_Trigrams
+                        ));
+        public static TokenizedExample Shared_TokenizedExample01_MonoBiTriFour
+            = new TokenizedExample(
+                    labeledExample: Shared_LabeledExample01,
+                    nGrams: CreateNGrams(
+                                monograms: Shared_LabeledExample01_Monograms,
+                                bigrams: Shared_LabeledExample01_Bigrams,
+                                trigrams: Shared_LabeledExample01_Trigrams,
+                                fourgrams: Shared_LabeledExample01_Fourgrams
+                        ));
+        public static TokenizedExample Shared_TokenizedExample01_MonoBiTriFourFive
+            = new TokenizedExample(
+                        labeledExample: Shared_LabeledExample01,
+                        nGrams: CreateNGrams(
+                                    monograms: Shared_LabeledExample01_Monograms,
+                                    bigrams: Shared_LabeledExample01_Bigrams,
+                                    trigrams: Shared_LabeledExample01_Trigrams,
+                                    fourgrams: Shared_LabeledExample01_Fourgrams,
+                                    fivegrams: Shared_LabeledExample01_Fivegrams
                             ));
+
+
+
+
+
+
+
+
+        public static string Shared_Text1_TextOnlyFirstWord = "We";
 
         public static TokenizedExample Shared_Text2_LabeledExample_Mono
             = new TokenizedExample(
@@ -601,28 +608,28 @@ namespace NW.NGramTextClassification.UnitTests
             = new List<TokenizedExample>()
                     {
 
-                        Shared_Text1_LabeledExample_Mono
+                        Shared_TokenizedExample01_Mono
 
                     };
         public static List<TokenizedExample> Shared_LabeledExamples_Text1_MonoBiTriFourFive
             = new List<TokenizedExample>()
                     {
 
-                        Shared_Text1_LabeledExample_MonoBiTriFourFive
+                        Shared_TokenizedExample01_MonoBiTriFourFive
 
                     };
         public static List<TokenizedExample> Shared_LabeledExamples_Text1Text2_Mono
             = new List<TokenizedExample>()
                     {
 
-                        Shared_Text1_LabeledExample_Mono,
+                        Shared_TokenizedExample01_Mono,
                         Shared_Text2_LabeledExample_Mono
 
                     };
         public static List<TokenizedExample> Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive
             = new List<TokenizedExample>()
                 {
-                    Shared_Text1_LabeledExample_MonoBiTriFourFive,
+                    Shared_TokenizedExample01_MonoBiTriFourFive,
                     Shared_Text2_LabeledExample_MonoBiTriFourFive
                 };
 

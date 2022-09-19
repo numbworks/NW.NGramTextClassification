@@ -148,7 +148,7 @@ namespace NW.NGramTextClassification.UnitTests
                 = nGramTokenizer
                     .DoForRuleSetOrDefault(
                         text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
-                        tokenizerRuleSet: ObjectMother.Shared_NGramTokenizerRuleSet_OnlyFive
+                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
             // Assert
@@ -256,7 +256,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         ObjectMother.Shared_Text1_Text,
-                        ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
+                        ObjectMother.Shared_RuleSet_Mono,
                         ObjectMother.CreateNGrams(
                             ObjectMother.Shared_LabeledExample01_Monograms
                             )
@@ -264,7 +264,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         ObjectMother.Shared_Text1_Text,
-                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBi,
+                        ObjectMother.Shared_RuleSet_MonoBi,
                         ObjectMother.CreateNGrams(
                             ObjectMother.Shared_LabeledExample01_Monograms,
                             ObjectMother.Shared_LabeledExample01_Bigrams
@@ -273,7 +273,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         ObjectMother.Shared_Text1_Text,
-                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTri,
+                        ObjectMother.Shared_RuleSet_MonoBiTri,
                         ObjectMother.CreateNGrams(
                             ObjectMother.Shared_LabeledExample01_Monograms,
                             ObjectMother.Shared_LabeledExample01_Bigrams,
@@ -283,7 +283,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         ObjectMother.Shared_Text1_Text,
-                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFour,
+                        ObjectMother.Shared_RuleSet_MonoBiTriFour,
                         ObjectMother.CreateNGrams(
                             ObjectMother.Shared_LabeledExample01_Monograms,
                             ObjectMother.Shared_LabeledExample01_Bigrams,
@@ -294,7 +294,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         ObjectMother.Shared_Text1_Text,
-                        ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFourFive,
+                        ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                         ObjectMother.CreateNGrams(
                             ObjectMother.Shared_LabeledExample01_Monograms,
                             ObjectMother.Shared_LabeledExample01_Bigrams,
