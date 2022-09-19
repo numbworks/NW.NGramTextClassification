@@ -159,12 +159,28 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
+            LabeledExampleManager actual = new LabeledExampleManager(new NGramTokenizer());
+
+            // Assert
+            Assert.IsInstanceOf<LabeledExampleManager>(actual);
+
+            Assert.IsInstanceOf<NGramTokenizer>(LabeledExampleManager.DefaultNGramTokenizer);
+            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleManager.DefaultTokenizerRuleSet);
+            Assert.IsNull(LabeledExampleManager.DefaultTokenizedExample);
+            Assert.IsNull(LabeledExampleManager.DefaultTokenizedExamples);
+
+        }
+
+        [Test]
+        public void LabeledExampleManager_ShouldCreateAnInstanceOfThisType_WhenProperArgumentAndDefaultConstructor()
+        {
+
+            // Arrange
+            // Act
             LabeledExampleManager actual = new LabeledExampleManager();
 
             // Assert
             Assert.IsInstanceOf<LabeledExampleManager>(actual);
-            Assert.IsInstanceOf<NGramTokenizer>(LabeledExampleManager.DefaultNGramTokenizer);
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleManager.DefaultTokenizerRuleSet);
 
         }
 
