@@ -37,7 +37,7 @@ namespace NW.NGramTextClassificationClient
         {
 
             string text = "We are looking for several skilled and driven developers to join our team.";
-            List<TokenizedExample> labeledExamples = ObjectMother.CreateLabeledExamples();
+            List<TokenizedExample> labeledExamples = ObjectMother.CreateTokenizedExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
             TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
@@ -49,7 +49,7 @@ namespace NW.NGramTextClassificationClient
         {
 
             string text = "Vår kund erbjuder trivsel";
-            List<TokenizedExample> labeledExamples = ObjectMother.CreateLabeledExamples();
+            List<TokenizedExample> labeledExamples = ObjectMother.CreateTokenizedExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
             TextClassifierResult result = textClassifier.PredictLabelOrDefault(text, labeledExamples);
@@ -61,7 +61,7 @@ namespace NW.NGramTextClassificationClient
         {
 
             string text = "/";
-            List<TokenizedExample> labeledExamples = ObjectMother.CreateLabeledExamples();
+            List<TokenizedExample> labeledExamples = ObjectMother.CreateTokenizedExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
             TextClassifierResult result = textClassifier.PredictLabelOrDefault(text, labeledExamples);
