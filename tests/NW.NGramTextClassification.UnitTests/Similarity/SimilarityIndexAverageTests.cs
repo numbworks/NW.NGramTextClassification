@@ -17,7 +17,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexAverage(
                                     null,
-                                    ObjectMother.SimilarityIndexAverage_Value1
+                                    ObjectMother.SimilarityIndexAverage01_Value
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new SimilarityIndexAverage(
                                     ObjectMother.Validator_StringOnlyWhiteSpaces,
-                                    ObjectMother.SimilarityIndexAverage_Value1
+                                    ObjectMother.SimilarityIndexAverage01_Value
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -50,8 +50,8 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             SimilarityIndexAverage actual
                 = new SimilarityIndexAverage(
-                        ObjectMother.SimilarityIndexAverage_Label1,
-                        ObjectMother.SimilarityIndexAverage_Value1
+                        ObjectMother.SimilarityIndexAverage01_Label,
+                        ObjectMother.SimilarityIndexAverage01_Value
                     );
 
             // Assert
@@ -68,8 +68,8 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsTrue(
                 string.Equals(
-                    ObjectMother.SimilarityIndexAverage_ToString1,
-                    ObjectMother.SimilarityIndexAverage1.ToString(),
+                    ObjectMother.SimilarityIndexAverage01_AsString,
+                    ObjectMother.SimilarityIndexAverage01.ToString(),
                     StringComparison.InvariantCulture));
 
         }

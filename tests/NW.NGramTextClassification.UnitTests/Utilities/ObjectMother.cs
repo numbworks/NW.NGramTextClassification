@@ -671,12 +671,12 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region SimilarityIndexAverage
 
-        public static string SimilarityIndexAverage_Label1 = "en";
-        public static double SimilarityIndexAverage_Value1 = 0.54;
-        public static SimilarityIndexAverage SimilarityIndexAverage1
-            = new SimilarityIndexAverage(SimilarityIndexAverage_Label1, SimilarityIndexAverage_Value1);
-        public static string SimilarityIndexAverage_ToString1
-            = $"[ Label: '{SimilarityIndexAverage_Label1}', Value: '{SimilarityIndexAverage_Value1}' ]";
+        public static string SimilarityIndexAverage01_Label = "en";
+        public static double SimilarityIndexAverage01_Value = 0.54;
+        public static SimilarityIndexAverage SimilarityIndexAverage01
+            = new SimilarityIndexAverage(SimilarityIndexAverage01_Label, SimilarityIndexAverage01_Value);
+        public static string SimilarityIndexAverage01_AsString
+            = $"[ Label: '{SimilarityIndexAverage01_Label}', Value: '{SimilarityIndexAverage01_Value}' ]";
 
         #endregion
 
@@ -797,21 +797,21 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region TextClassifierResult
 
-        public static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
+        public static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes
             = new List<SimilarityIndex>()
                 {
                     SimilarityIndex01,
                     SimilarityIndex02
                 };
-        public static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
+        public static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages
             = new List<SimilarityIndexAverage>()
                 {
-                    SimilarityIndexAverage1
+                    SimilarityIndexAverage01
                 };
         public static string TextClassifierResult_ToString1
-            = $"[ Label: '{Shared_LabeledExample01.Text}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
+            = $"[ Label: '{Shared_LabeledExample01.Text}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_ToString1WithNullLabel
-            = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes1.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages1.Count}' ]";
+            = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AllNulls
             = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
         public static string TextClassifierResult_VariableName_Indexes = "indexes";

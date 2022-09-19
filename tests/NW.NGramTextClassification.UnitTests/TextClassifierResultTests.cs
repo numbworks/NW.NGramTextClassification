@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -14,27 +15,27 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     new TextClassifierResult(
-                        ObjectMother.Shared_Text1_Label,
-                        ObjectMother.TextClassifierResult_SimilarityIndexes1,
-                        ObjectMother.TextClassifierResult_SimilarityIndexAverages1
+                        label: ObjectMother.Shared_LabeledExample01.Label,
+                        indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
+                        indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
                         ),
                     ObjectMother.TextClassifierResult_ToString1
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_01"),
 
             new TestCaseData(
                     new TextClassifierResult(
-                        null,
-                        ObjectMother.TextClassifierResult_SimilarityIndexes1,
-                        ObjectMother.TextClassifierResult_SimilarityIndexAverages1
+                        label: null,
+                        indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
+                        ObjectMother.TextClassifierResult_SimilarityIndexAverages
                         ),
                     ObjectMother.TextClassifierResult_ToString1WithNullLabel
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
 
             new TestCaseData(
                     new TextClassifierResult(
-                        null,
-                        null,
-                        null
+                        label: null,
+                        indexes: null,
+                        indexAverages: null
                         ),
                     ObjectMother.TextClassifierResult_AllNulls
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_03")
@@ -74,9 +75,9 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             TextClassifierResult actual
                 = new TextClassifierResult(
-                        ObjectMother.Shared_Text1_Label,
-                        ObjectMother.TextClassifierResult_SimilarityIndexes1,
-                        ObjectMother.TextClassifierResult_SimilarityIndexAverages1
+                        label: ObjectMother.Shared_LabeledExample01.Label,
+                        indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
+                        indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
                     );
 
             // Assert
@@ -94,5 +95,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2021
+    Last Update: 19.09.2022
 */
