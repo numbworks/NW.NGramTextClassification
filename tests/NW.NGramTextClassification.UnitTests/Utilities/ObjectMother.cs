@@ -580,14 +580,11 @@ namespace NW.NGramTextClassification.UnitTests
                                     fivegrams: Shared_LabeledExample01_Fivegrams
                             ));
 
+        public static LabeledExample Shared_LabeledExample01_OnlyFirstWord
+            = new LabeledExample(label: "en", text: "We");
 
 
 
-
-
-
-
-        public static string Shared_Text1_TextOnlyFirstWord = "We";
 
         public static TokenizedExample Shared_Text2_LabeledExample_Mono
             = new TokenizedExample(

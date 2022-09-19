@@ -79,6 +79,7 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] createOrDefaultTestCases =
         {
 
+            // First method signature
             new TestCaseData(
                     ObjectMother.Shared_LabeledExample01,
                     ObjectMother.Shared_RuleSet_Mono,
@@ -107,7 +108,9 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.Shared_LabeledExample01,
                     ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                     ObjectMother.Shared_TokenizedExample01_MonoBiTriFourFive
-                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05"),
+
+            // Second method signature
 
         };
         private static TestCaseData[] tryCreateForRuleSetCollectionTestCases =
@@ -163,7 +166,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-
         [Test]
         public void LabeledExampleManager_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
@@ -180,19 +182,17 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void TryCreateForRuleSet_ShouldReturnNullInsteadOfALabeledExample_WhenUnproperParameters()
+        public void CreateOrDefault_ShouldReturnDefault_WhenUnproperLabeledExample()
         {
 
             // Arrange
-            LabeledExampleManager labeledExampleFactory = new LabeledExampleManager();
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
             // Act
             TokenizedExample actual 
-                = labeledExampleFactory
-                    .TryCreateForRuleSet(
-                        labeledExample: ObjectMother.Shared_Text1_LabeledExampleId, 
-                        label: ObjectMother.Shared_Text1_Label, 
-                        text: ObjectMother.Shared_Text1_TextOnlyFirstWord, 
+                = labeledExampleManager
+                    .CreateOrDefault(
+                        labeledExample: ObjectMother.Shared_LabeledExample01_OnlyFirstWord,
                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
@@ -200,6 +200,9 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsNull(actual);
 
         }
+
+
+
 
         [Test]
         public void TryCreateForRuleSet_ShouldReturnExpectedLabeledExample_WhenDefaultConstructor()
