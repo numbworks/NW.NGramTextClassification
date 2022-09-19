@@ -22,7 +22,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 null,
                                                 ObjectMother.Shared_Text1_Text,
-                                                ObjectMother.Shared_Text1_TextAsNGrams
+                                                ObjectMother.Shared_LabeledExample01_NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 string.Empty,
                                                 ObjectMother.Shared_Text1_Text,
-                                                ObjectMother.Shared_Text1_TextAsNGrams
+                                                ObjectMother.Shared_LabeledExample01_NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -42,7 +42,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Validator_StringOnlyWhiteSpaces,
                                                 ObjectMother.Shared_Text1_Text,
-                                                ObjectMother.Shared_Text1_TextAsNGrams
+                                                ObjectMother.Shared_LabeledExample01_NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -54,7 +54,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 null,
-                                                ObjectMother.Shared_Text1_TextAsNGrams
+                                                ObjectMother.Shared_LabeledExample01_NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -64,7 +64,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 string.Empty,
-                                                ObjectMother.Shared_Text1_TextAsNGrams
+                                                ObjectMother.Shared_LabeledExample01_NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 ObjectMother.Shared_Text1_LabeledExampleId,
                                                 ObjectMother.Shared_Text1_Label,
                                                 ObjectMother.Validator_StringOnlyWhiteSpaces,
-                                                ObjectMother.Shared_Text1_TextAsNGrams
+                                                ObjectMother.Shared_LabeledExample01_NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -127,7 +127,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.LabeledExample1_AsString,
+                    ObjectMother.Shared_LabeledExample01_AsString,
                     actual);
 
         }
@@ -143,7 +143,7 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.Shared_Text1_LabeledExampleId,
                         ObjectMother.Shared_Text1_Label,
                         ObjectMother.Shared_Text1_Text,
-                        ObjectMother.Shared_Text1_TextAsNGrams
+                        ObjectMother.Shared_LabeledExample01_NGrams
                     );
 
             // Assert

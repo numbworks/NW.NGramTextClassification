@@ -17,10 +17,9 @@ namespace NW.NGramTextClassification.UnitTests
         public static ITokenizationStrategy Shared_TokenizationStrategyDefault = new TokenizationStrategy();
         public static TokenizationStrategy Shared_TokenizationStrategyCustom = new TokenizationStrategy("[a-Z]", ";", false);
 
-        public static ulong Shared_Text1_LabeledExampleId = 1;
-        public static string Shared_Text1_Text = "We are looking for several skilled and driven developers to join our team.";
-        public static string Shared_Text1_Label = "en";
-        public static List<Monogram> Shared_Text1_TextAsMonograms = new List<Monogram>()
+        public static LabeledExample Shared_LabeledExample01 
+            = new LabeledExample(label: "en", text: "We are looking for several skilled and driven developers to join our team.");
+        public static List<Monogram> Shared_LabeledExample01_Monograms = new List<Monogram>()
         {
 
             new Monogram(Shared_TokenizationStrategyDefault, "we"),
@@ -38,7 +37,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Monogram(Shared_TokenizationStrategyDefault, "team")
 
         };
-        public static List<Bigram> Shared_Text1_TextAsBigrams = new List<Bigram>()
+        public static List<Bigram> Shared_LabeledExample01_Bigrams = new List<Bigram>()
         {
 
             new Bigram(Shared_TokenizationStrategyDefault, "we are"),
@@ -56,7 +55,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Bigram(Shared_TokenizationStrategyDefault, "team")
 
         };
-        public static List<Trigram> Shared_Text1_TextAsTrigrams = new List<Trigram>()
+        public static List<Trigram> Shared_LabeledExample01_Trigrams = new List<Trigram>()
         {
 
             new Trigram(Shared_TokenizationStrategyDefault, "we are looking"),
@@ -74,7 +73,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Trigram(Shared_TokenizationStrategyDefault, "team")
 
         };
-        public static List<Fourgram> Shared_Text1_TextAsFourgrams = new List<Fourgram>()
+        public static List<Fourgram> Shared_LabeledExample01_Fourgrams = new List<Fourgram>()
         {
 
             new Fourgram(Shared_TokenizationStrategyDefault, "we are looking for"),
@@ -92,7 +91,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Fourgram(Shared_TokenizationStrategyDefault, "team")
 
         };
-        public static List<Fivegram> Shared_Text1_TextAsFivegrams = new List<Fivegram>()
+        public static List<Fivegram> Shared_LabeledExample01_Fivegrams = new List<Fivegram>()
         {
 
             new Fivegram(Shared_TokenizationStrategyDefault, "we are looking for several"),
@@ -110,85 +109,101 @@ namespace NW.NGramTextClassification.UnitTests
             new Fivegram(Shared_TokenizationStrategyDefault, "team")
 
         };
-        public static List<INGram> Shared_Text1_TextAsNGrams = new List<INGram>() 
+        public static List<INGram> Shared_LabeledExample01_NGrams = new List<INGram>() 
         {
 
-            Shared_Text1_TextAsMonograms[0],
-            Shared_Text1_TextAsMonograms[1],
-            Shared_Text1_TextAsMonograms[2],
-            Shared_Text1_TextAsMonograms[3],
-            Shared_Text1_TextAsMonograms[4],
-            Shared_Text1_TextAsMonograms[5],
-            Shared_Text1_TextAsMonograms[6],
-            Shared_Text1_TextAsMonograms[7],
-            Shared_Text1_TextAsMonograms[8],
-            Shared_Text1_TextAsMonograms[9],
-            Shared_Text1_TextAsMonograms[10],
-            Shared_Text1_TextAsMonograms[11],
-            Shared_Text1_TextAsMonograms[12],
+            Shared_LabeledExample01_Monograms[0],
+            Shared_LabeledExample01_Monograms[1],
+            Shared_LabeledExample01_Monograms[2],
+            Shared_LabeledExample01_Monograms[3],
+            Shared_LabeledExample01_Monograms[4],
+            Shared_LabeledExample01_Monograms[5],
+            Shared_LabeledExample01_Monograms[6],
+            Shared_LabeledExample01_Monograms[7],
+            Shared_LabeledExample01_Monograms[8],
+            Shared_LabeledExample01_Monograms[9],
+            Shared_LabeledExample01_Monograms[10],
+            Shared_LabeledExample01_Monograms[11],
+            Shared_LabeledExample01_Monograms[12],
 
-            Shared_Text1_TextAsBigrams[0],
-            Shared_Text1_TextAsBigrams[1],
-            Shared_Text1_TextAsBigrams[2],
-            Shared_Text1_TextAsBigrams[3],
-            Shared_Text1_TextAsBigrams[4],
-            Shared_Text1_TextAsBigrams[5],
-            Shared_Text1_TextAsBigrams[6],
-            Shared_Text1_TextAsBigrams[7],
-            Shared_Text1_TextAsBigrams[8],
-            Shared_Text1_TextAsBigrams[9],
-            Shared_Text1_TextAsBigrams[10],
-            Shared_Text1_TextAsBigrams[11],
-            Shared_Text1_TextAsBigrams[12],
+            Shared_LabeledExample01_Bigrams[0],
+            Shared_LabeledExample01_Bigrams[1],
+            Shared_LabeledExample01_Bigrams[2],
+            Shared_LabeledExample01_Bigrams[3],
+            Shared_LabeledExample01_Bigrams[4],
+            Shared_LabeledExample01_Bigrams[5],
+            Shared_LabeledExample01_Bigrams[6],
+            Shared_LabeledExample01_Bigrams[7],
+            Shared_LabeledExample01_Bigrams[8],
+            Shared_LabeledExample01_Bigrams[9],
+            Shared_LabeledExample01_Bigrams[10],
+            Shared_LabeledExample01_Bigrams[11],
+            Shared_LabeledExample01_Bigrams[12],
 
-            Shared_Text1_TextAsTrigrams[0],
-            Shared_Text1_TextAsTrigrams[1],
-            Shared_Text1_TextAsTrigrams[2],
-            Shared_Text1_TextAsTrigrams[3],
-            Shared_Text1_TextAsTrigrams[4],
-            Shared_Text1_TextAsTrigrams[5],
-            Shared_Text1_TextAsTrigrams[6],
-            Shared_Text1_TextAsTrigrams[7],
-            Shared_Text1_TextAsTrigrams[8],
-            Shared_Text1_TextAsTrigrams[9],
-            Shared_Text1_TextAsTrigrams[10],
-            Shared_Text1_TextAsTrigrams[11],
-            Shared_Text1_TextAsTrigrams[12],
+            Shared_LabeledExample01_Trigrams[0],
+            Shared_LabeledExample01_Trigrams[1],
+            Shared_LabeledExample01_Trigrams[2],
+            Shared_LabeledExample01_Trigrams[3],
+            Shared_LabeledExample01_Trigrams[4],
+            Shared_LabeledExample01_Trigrams[5],
+            Shared_LabeledExample01_Trigrams[6],
+            Shared_LabeledExample01_Trigrams[7],
+            Shared_LabeledExample01_Trigrams[8],
+            Shared_LabeledExample01_Trigrams[9],
+            Shared_LabeledExample01_Trigrams[10],
+            Shared_LabeledExample01_Trigrams[11],
+            Shared_LabeledExample01_Trigrams[12],
 
-            Shared_Text1_TextAsFourgrams[0],
-            Shared_Text1_TextAsFourgrams[1],
-            Shared_Text1_TextAsFourgrams[2],
-            Shared_Text1_TextAsFourgrams[3],
-            Shared_Text1_TextAsFourgrams[4],
-            Shared_Text1_TextAsFourgrams[5],
-            Shared_Text1_TextAsFourgrams[6],
-            Shared_Text1_TextAsFourgrams[7],
-            Shared_Text1_TextAsFourgrams[8],
-            Shared_Text1_TextAsFourgrams[9],
-            Shared_Text1_TextAsFourgrams[10],
-            Shared_Text1_TextAsFourgrams[11],
-            Shared_Text1_TextAsFourgrams[12],
+            Shared_LabeledExample01_Fourgrams[0],
+            Shared_LabeledExample01_Fourgrams[1],
+            Shared_LabeledExample01_Fourgrams[2],
+            Shared_LabeledExample01_Fourgrams[3],
+            Shared_LabeledExample01_Fourgrams[4],
+            Shared_LabeledExample01_Fourgrams[5],
+            Shared_LabeledExample01_Fourgrams[6],
+            Shared_LabeledExample01_Fourgrams[7],
+            Shared_LabeledExample01_Fourgrams[8],
+            Shared_LabeledExample01_Fourgrams[9],
+            Shared_LabeledExample01_Fourgrams[10],
+            Shared_LabeledExample01_Fourgrams[11],
+            Shared_LabeledExample01_Fourgrams[12],
 
-            Shared_Text1_TextAsFivegrams[0],
-            Shared_Text1_TextAsFivegrams[1],
-            Shared_Text1_TextAsFivegrams[2],
-            Shared_Text1_TextAsFivegrams[3],
-            Shared_Text1_TextAsFivegrams[4],
-            Shared_Text1_TextAsFivegrams[5],
-            Shared_Text1_TextAsFivegrams[6],
-            Shared_Text1_TextAsFivegrams[7],
-            Shared_Text1_TextAsFivegrams[8],
-            Shared_Text1_TextAsFivegrams[9],
-            Shared_Text1_TextAsFivegrams[10],
-            Shared_Text1_TextAsFivegrams[11],
-            Shared_Text1_TextAsFivegrams[12]
+            Shared_LabeledExample01_Fivegrams[0],
+            Shared_LabeledExample01_Fivegrams[1],
+            Shared_LabeledExample01_Fivegrams[2],
+            Shared_LabeledExample01_Fivegrams[3],
+            Shared_LabeledExample01_Fivegrams[4],
+            Shared_LabeledExample01_Fivegrams[5],
+            Shared_LabeledExample01_Fivegrams[6],
+            Shared_LabeledExample01_Fivegrams[7],
+            Shared_LabeledExample01_Fivegrams[8],
+            Shared_LabeledExample01_Fivegrams[9],
+            Shared_LabeledExample01_Fivegrams[10],
+            Shared_LabeledExample01_Fivegrams[11],
+            Shared_LabeledExample01_Fivegrams[12]
 
         };
+        public static TokenizedExample Shared_TokenizedExample01
+            = new TokenizedExample(labeledExample: Shared_LabeledExample01, nGrams: Shared_LabeledExample01_NGrams);
+        public static string Shared_LabeledExample01_AsString
+            = string.Concat(
+                        "[ ",
+                        $"Label: '{Shared_LabeledExample01.Label}', ",
+                        $"Text: '{Shared_LabeledExample01.Text}' ",
+                        " ]"
+                    );
+        public static string Shared_TokenizedExample01_AsString
+            = string.Concat(
+                        "[ ",
+                        $"Label: '{Shared_TokenizedExample01.LabeledExample.Label}', ",
+                        $"Text: '{Shared_TokenizedExample01.LabeledExample.Text}', ",
+                        $"NGrams: '{Shared_TokenizedExample01.NGrams.Count}'",
+                        " ]"
+                    );
 
-        public static ulong Shared_Text2_LabeledExampleId = 2;
-        public static string Shared_Text2_Text = "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.";
-        public static string Shared_Text2_Label = "sv";
-        public static List<Monogram> Shared_Text2_TextAsMonograms = new List<Monogram>()
+        public static LabeledExample Shared_LabeledExample02
+            = new LabeledExample(label: "sv", text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.");
+        public static List<Monogram> Shared_LabeledExample02_Monograms = new List<Monogram>()
         {
 
             new Monogram(Shared_TokenizationStrategyDefault, "vår"),
@@ -202,7 +217,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Monogram(Shared_TokenizationStrategyDefault, "arbetsmiljö")
 
         };
-        public static List<Bigram> Shared_Text2_TextAsBigrams = new List<Bigram>()
+        public static List<Bigram> Shared_LabeledExample02_Bigrams = new List<Bigram>()
         {
 
             new Bigram(Shared_TokenizationStrategyDefault, "vår kund"),
@@ -216,7 +231,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Bigram(Shared_TokenizationStrategyDefault, "arbetsmiljö")
 
         };
-        public static List<Trigram> Shared_Text2_TextAsTrigrams = new List<Trigram>()
+        public static List<Trigram> Shared_LabeledExample02_Trigrams = new List<Trigram>()
         {
 
             new Trigram(Shared_TokenizationStrategyDefault, "vår kund erbjuder"),
@@ -230,7 +245,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Trigram(Shared_TokenizationStrategyDefault, "arbetsmiljö")
 
         };
-        public static List<Fourgram> Shared_Text2_TextAsFourgrams = new List<Fourgram>()
+        public static List<Fourgram> Shared_LabeledExample02_Fourgrams = new List<Fourgram>()
         {
 
             new Fourgram(Shared_TokenizationStrategyDefault, "vår kund erbjuder trivsel"),
@@ -244,7 +259,7 @@ namespace NW.NGramTextClassification.UnitTests
             new Fourgram(Shared_TokenizationStrategyDefault, "arbetsmiljö")
 
         };
-        public static List<Fivegram> Shared_Text2_TextAsFivegrams = new List<Fivegram>()
+        public static List<Fivegram> Shared_LabeledExample02_Fivegrams = new List<Fivegram>()
         {
 
             new Fivegram(Shared_TokenizationStrategyDefault, "vår kund erbjuder trivsel arbetsglädje"),
@@ -258,65 +273,67 @@ namespace NW.NGramTextClassification.UnitTests
             new Fivegram(Shared_TokenizationStrategyDefault, "arbetsmiljö")
 
         };
-        public static List<INGram> Shared_Text2_TextAsNGrams = new List<INGram>()
+        public static List<INGram> Shared_LabeledExample02_NGrams = new List<INGram>()
         {
 
-            Shared_Text2_TextAsMonograms[0],
-            Shared_Text2_TextAsMonograms[1],
-            Shared_Text2_TextAsMonograms[2],
-            Shared_Text2_TextAsMonograms[3],
-            Shared_Text2_TextAsMonograms[4],
-            Shared_Text2_TextAsMonograms[5],
-            Shared_Text2_TextAsMonograms[6],
-            Shared_Text2_TextAsMonograms[7],
-            Shared_Text2_TextAsMonograms[8],
+            Shared_LabeledExample02_Monograms[0],
+            Shared_LabeledExample02_Monograms[1],
+            Shared_LabeledExample02_Monograms[2],
+            Shared_LabeledExample02_Monograms[3],
+            Shared_LabeledExample02_Monograms[4],
+            Shared_LabeledExample02_Monograms[5],
+            Shared_LabeledExample02_Monograms[6],
+            Shared_LabeledExample02_Monograms[7],
+            Shared_LabeledExample02_Monograms[8],
 
-            Shared_Text2_TextAsBigrams[0],
-            Shared_Text2_TextAsBigrams[1],
-            Shared_Text2_TextAsBigrams[2],
-            Shared_Text2_TextAsBigrams[3],
-            Shared_Text2_TextAsBigrams[4],
-            Shared_Text2_TextAsBigrams[5],
-            Shared_Text2_TextAsBigrams[6],
-            Shared_Text2_TextAsBigrams[7],
-            Shared_Text2_TextAsBigrams[8],
+            Shared_LabeledExample02_Bigrams[0],
+            Shared_LabeledExample02_Bigrams[1],
+            Shared_LabeledExample02_Bigrams[2],
+            Shared_LabeledExample02_Bigrams[3],
+            Shared_LabeledExample02_Bigrams[4],
+            Shared_LabeledExample02_Bigrams[5],
+            Shared_LabeledExample02_Bigrams[6],
+            Shared_LabeledExample02_Bigrams[7],
+            Shared_LabeledExample02_Bigrams[8],
 
-            Shared_Text2_TextAsTrigrams[0],
-            Shared_Text2_TextAsTrigrams[1],
-            Shared_Text2_TextAsTrigrams[2],
-            Shared_Text2_TextAsTrigrams[3],
-            Shared_Text2_TextAsTrigrams[4],
-            Shared_Text2_TextAsTrigrams[5],
-            Shared_Text2_TextAsTrigrams[6],
-            Shared_Text2_TextAsTrigrams[7],
-            Shared_Text2_TextAsTrigrams[8],
+            Shared_LabeledExample02_Trigrams[0],
+            Shared_LabeledExample02_Trigrams[1],
+            Shared_LabeledExample02_Trigrams[2],
+            Shared_LabeledExample02_Trigrams[3],
+            Shared_LabeledExample02_Trigrams[4],
+            Shared_LabeledExample02_Trigrams[5],
+            Shared_LabeledExample02_Trigrams[6],
+            Shared_LabeledExample02_Trigrams[7],
+            Shared_LabeledExample02_Trigrams[8],
 
-            Shared_Text2_TextAsFourgrams[0],
-            Shared_Text2_TextAsFourgrams[1],
-            Shared_Text2_TextAsFourgrams[2],
-            Shared_Text2_TextAsFourgrams[3],
-            Shared_Text2_TextAsFourgrams[4],
-            Shared_Text2_TextAsFourgrams[5],
-            Shared_Text2_TextAsFourgrams[6],
-            Shared_Text2_TextAsFourgrams[7],
-            Shared_Text2_TextAsFourgrams[8],
+            Shared_LabeledExample02_Fourgrams[0],
+            Shared_LabeledExample02_Fourgrams[1],
+            Shared_LabeledExample02_Fourgrams[2],
+            Shared_LabeledExample02_Fourgrams[3],
+            Shared_LabeledExample02_Fourgrams[4],
+            Shared_LabeledExample02_Fourgrams[5],
+            Shared_LabeledExample02_Fourgrams[6],
+            Shared_LabeledExample02_Fourgrams[7],
+            Shared_LabeledExample02_Fourgrams[8],
 
-            Shared_Text2_TextAsFivegrams[0],
-            Shared_Text2_TextAsFivegrams[1],
-            Shared_Text2_TextAsFivegrams[2],
-            Shared_Text2_TextAsFivegrams[3],
-            Shared_Text2_TextAsFivegrams[4],
-            Shared_Text2_TextAsFivegrams[5],
-            Shared_Text2_TextAsFivegrams[6],
-            Shared_Text2_TextAsFivegrams[7],
-            Shared_Text2_TextAsFivegrams[8]
+            Shared_LabeledExample02_Fivegrams[0],
+            Shared_LabeledExample02_Fivegrams[1],
+            Shared_LabeledExample02_Fivegrams[2],
+            Shared_LabeledExample02_Fivegrams[3],
+            Shared_LabeledExample02_Fivegrams[4],
+            Shared_LabeledExample02_Fivegrams[5],
+            Shared_LabeledExample02_Fivegrams[6],
+            Shared_LabeledExample02_Fivegrams[7],
+            Shared_LabeledExample02_Fivegrams[8]
 
         };
+        public static TokenizedExample Shared_TokenizedExample02
+            = new TokenizedExample(labeledExample: Shared_LabeledExample02, nGrams: Shared_LabeledExample02_NGrams);
 
-        public static string Shared_Text3_Text = "Kas siis selle maa keel Laulutuules ei või Taevani tõustes üles Igavikku omale otsida";
-        public static string Shared_Text3_Label = null;
-        public static List<Monogram> Shared_Text3_TextAsMonograms
-            = new List<Monogram>() {
+        public static LabeledExample Shared_LabeledExample03
+            = new LabeledExample(label: null, text: "Kas siis selle maa keel Laulutuules ei või Taevani tõustes üles Igavikku omale otsida");
+        public static List<Monogram> Shared_LabeledExample03_Monograms = new List<Monogram>() 
+        {
 
                 new Monogram(Shared_TokenizationStrategyDefault, "kas"),
                 new Monogram(Shared_TokenizationStrategyDefault, "siis"),
@@ -333,9 +350,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new Monogram(Shared_TokenizationStrategyDefault, "omale"),
                 new Monogram(Shared_TokenizationStrategyDefault, "otsida")
 
-            };
-        public static List<Bigram> Shared_Text3_TextAsBigrams
-            = new List<Bigram>() {
+        };
+        public static List<Bigram> Shared_LabeledExample03_Bigrams = new List<Bigram>() 
+        {
 
                 new Bigram(Shared_TokenizationStrategyDefault, "kas siis"),
                 new Bigram(Shared_TokenizationStrategyDefault, "siis selle"),
@@ -352,9 +369,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new Bigram(Shared_TokenizationStrategyDefault, "omale otsida"),
                 new Bigram(Shared_TokenizationStrategyDefault, "otsida")
 
-            };
-        public static List<Trigram> Shared_Text3_TextAsTrigrams
-            = new List<Trigram>() {
+        };
+        public static List<Trigram> Shared_LabeledExample03_Trigrams = new List<Trigram>() 
+        {
 
                 new Trigram(Shared_TokenizationStrategyDefault, "kas siis selle"),
                 new Trigram(Shared_TokenizationStrategyDefault, "siis selle maa"),
@@ -371,9 +388,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new Trigram(Shared_TokenizationStrategyDefault, "omale otsida"),
                 new Trigram(Shared_TokenizationStrategyDefault, "otsida")
 
-            };
-        public static List<Fourgram> Shared_Text3_TextAsFourgrams
-            = new List<Fourgram>() {
+        };
+        public static List<Fourgram> Shared_LabeledExample03_Fourgrams = new List<Fourgram>() 
+        {
 
                 new Fourgram(Shared_TokenizationStrategyDefault, "kas siis selle maa"),
                 new Fourgram(Shared_TokenizationStrategyDefault, "siis selle maa keel"),
@@ -390,106 +407,108 @@ namespace NW.NGramTextClassification.UnitTests
                 new Fourgram(Shared_TokenizationStrategyDefault, "maaomale otsida"),
                 new Fourgram(Shared_TokenizationStrategyDefault, "maaotsida")
 
-            };
-        public static List<Fivegram> Shared_Text3_TextAsFivegrams
-            = new List<Fivegram>()
-            {
-
-                new Fivegram(Shared_TokenizationStrategyDefault, "kas siis selle maa keel"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "siis selle maa keel laulutuules"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "selle maa keel laulutuules ei"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "maa keel laulutuules ei või"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "keel laulutuules ei või taevani"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "laulutuules ei või taevani tõustes"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "ei või taevani tõustes üles"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "või taevani tõustes üles igavikku"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "taevani tõustes üles igavikku omale"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "tõustes üles igavikku omale otsida"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "üles igavikku omale otsida"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "igavikku omale otsida"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "omale otsida"),
-                new Fivegram(Shared_TokenizationStrategyDefault, "otsida")
-
-            };
-        public static List<INGram> Shared_Text3_TextAsNGrams = new List<INGram>()
+        };
+        public static List<Fivegram> Shared_LabeledExample03_Fivegrams = new List<Fivegram>()
         {
 
-            Shared_Text3_TextAsMonograms[0],
-            Shared_Text3_TextAsMonograms[1],
-            Shared_Text3_TextAsMonograms[2],
-            Shared_Text3_TextAsMonograms[3],
-            Shared_Text3_TextAsMonograms[4],
-            Shared_Text3_TextAsMonograms[5],
-            Shared_Text3_TextAsMonograms[6],
-            Shared_Text3_TextAsMonograms[7],
-            Shared_Text3_TextAsMonograms[8],
-            Shared_Text3_TextAsMonograms[9],
-            Shared_Text3_TextAsMonograms[10],
-            Shared_Text3_TextAsMonograms[11],
-            Shared_Text3_TextAsMonograms[12],
-            Shared_Text3_TextAsMonograms[13],
-
-            Shared_Text3_TextAsBigrams[0],
-            Shared_Text3_TextAsBigrams[1],
-            Shared_Text3_TextAsBigrams[2],
-            Shared_Text3_TextAsBigrams[3],
-            Shared_Text3_TextAsBigrams[4],
-            Shared_Text3_TextAsBigrams[5],
-            Shared_Text3_TextAsBigrams[6],
-            Shared_Text3_TextAsBigrams[7],
-            Shared_Text3_TextAsBigrams[8],
-            Shared_Text3_TextAsBigrams[9],
-            Shared_Text3_TextAsBigrams[10],
-            Shared_Text3_TextAsBigrams[11],
-            Shared_Text3_TextAsBigrams[12],
-            Shared_Text3_TextAsBigrams[13],
-
-            Shared_Text3_TextAsTrigrams[0],
-            Shared_Text3_TextAsTrigrams[1],
-            Shared_Text3_TextAsTrigrams[2],
-            Shared_Text3_TextAsTrigrams[3],
-            Shared_Text3_TextAsTrigrams[4],
-            Shared_Text3_TextAsTrigrams[5],
-            Shared_Text3_TextAsTrigrams[6],
-            Shared_Text3_TextAsTrigrams[7],
-            Shared_Text3_TextAsTrigrams[8],
-            Shared_Text3_TextAsTrigrams[9],
-            Shared_Text3_TextAsTrigrams[10],
-            Shared_Text3_TextAsTrigrams[11],
-            Shared_Text3_TextAsTrigrams[12],
-            Shared_Text3_TextAsTrigrams[13],
-
-            Shared_Text3_TextAsFourgrams[0],
-            Shared_Text3_TextAsFourgrams[1],
-            Shared_Text3_TextAsFourgrams[2],
-            Shared_Text3_TextAsFourgrams[3],
-            Shared_Text3_TextAsFourgrams[4],
-            Shared_Text3_TextAsFourgrams[5],
-            Shared_Text3_TextAsFourgrams[6],
-            Shared_Text3_TextAsFourgrams[7],
-            Shared_Text3_TextAsFourgrams[8],
-            Shared_Text3_TextAsFourgrams[9],
-            Shared_Text3_TextAsFourgrams[10],
-            Shared_Text3_TextAsFourgrams[11],
-            Shared_Text3_TextAsFourgrams[12],
-            Shared_Text3_TextAsFourgrams[13],
-
-            Shared_Text3_TextAsFivegrams[0],
-            Shared_Text3_TextAsFivegrams[1],
-            Shared_Text3_TextAsFivegrams[2],
-            Shared_Text3_TextAsFivegrams[3],
-            Shared_Text3_TextAsFivegrams[4],
-            Shared_Text3_TextAsFivegrams[5],
-            Shared_Text3_TextAsFivegrams[6],
-            Shared_Text3_TextAsFivegrams[7],
-            Shared_Text3_TextAsFivegrams[8],
-            Shared_Text3_TextAsFivegrams[9],
-            Shared_Text3_TextAsFivegrams[10],
-            Shared_Text3_TextAsFivegrams[11],
-            Shared_Text3_TextAsFivegrams[12],
-            Shared_Text3_TextAsFivegrams[13]
+            new Fivegram(Shared_TokenizationStrategyDefault, "kas siis selle maa keel"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "siis selle maa keel laulutuules"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "selle maa keel laulutuules ei"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "maa keel laulutuules ei või"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "keel laulutuules ei või taevani"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "laulutuules ei või taevani tõustes"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "ei või taevani tõustes üles"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "või taevani tõustes üles igavikku"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "taevani tõustes üles igavikku omale"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "tõustes üles igavikku omale otsida"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "üles igavikku omale otsida"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "igavikku omale otsida"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "omale otsida"),
+            new Fivegram(Shared_TokenizationStrategyDefault, "otsida")
 
         };
+        public static List<INGram> Shared_LabeledExample03_NGrams = new List<INGram>()
+        {
+
+            Shared_LabeledExample03_Monograms[0],
+            Shared_LabeledExample03_Monograms[1],
+            Shared_LabeledExample03_Monograms[2],
+            Shared_LabeledExample03_Monograms[3],
+            Shared_LabeledExample03_Monograms[4],
+            Shared_LabeledExample03_Monograms[5],
+            Shared_LabeledExample03_Monograms[6],
+            Shared_LabeledExample03_Monograms[7],
+            Shared_LabeledExample03_Monograms[8],
+            Shared_LabeledExample03_Monograms[9],
+            Shared_LabeledExample03_Monograms[10],
+            Shared_LabeledExample03_Monograms[11],
+            Shared_LabeledExample03_Monograms[12],
+            Shared_LabeledExample03_Monograms[13],
+
+            Shared_LabeledExample03_Bigrams[0],
+            Shared_LabeledExample03_Bigrams[1],
+            Shared_LabeledExample03_Bigrams[2],
+            Shared_LabeledExample03_Bigrams[3],
+            Shared_LabeledExample03_Bigrams[4],
+            Shared_LabeledExample03_Bigrams[5],
+            Shared_LabeledExample03_Bigrams[6],
+            Shared_LabeledExample03_Bigrams[7],
+            Shared_LabeledExample03_Bigrams[8],
+            Shared_LabeledExample03_Bigrams[9],
+            Shared_LabeledExample03_Bigrams[10],
+            Shared_LabeledExample03_Bigrams[11],
+            Shared_LabeledExample03_Bigrams[12],
+            Shared_LabeledExample03_Bigrams[13],
+
+            Shared_LabeledExample03_Trigrams[0],
+            Shared_LabeledExample03_Trigrams[1],
+            Shared_LabeledExample03_Trigrams[2],
+            Shared_LabeledExample03_Trigrams[3],
+            Shared_LabeledExample03_Trigrams[4],
+            Shared_LabeledExample03_Trigrams[5],
+            Shared_LabeledExample03_Trigrams[6],
+            Shared_LabeledExample03_Trigrams[7],
+            Shared_LabeledExample03_Trigrams[8],
+            Shared_LabeledExample03_Trigrams[9],
+            Shared_LabeledExample03_Trigrams[10],
+            Shared_LabeledExample03_Trigrams[11],
+            Shared_LabeledExample03_Trigrams[12],
+            Shared_LabeledExample03_Trigrams[13],
+
+            Shared_LabeledExample03_Fourgrams[0],
+            Shared_LabeledExample03_Fourgrams[1],
+            Shared_LabeledExample03_Fourgrams[2],
+            Shared_LabeledExample03_Fourgrams[3],
+            Shared_LabeledExample03_Fourgrams[4],
+            Shared_LabeledExample03_Fourgrams[5],
+            Shared_LabeledExample03_Fourgrams[6],
+            Shared_LabeledExample03_Fourgrams[7],
+            Shared_LabeledExample03_Fourgrams[8],
+            Shared_LabeledExample03_Fourgrams[9],
+            Shared_LabeledExample03_Fourgrams[10],
+            Shared_LabeledExample03_Fourgrams[11],
+            Shared_LabeledExample03_Fourgrams[12],
+            Shared_LabeledExample03_Fourgrams[13],
+
+            Shared_LabeledExample03_Fivegrams[0],
+            Shared_LabeledExample03_Fivegrams[1],
+            Shared_LabeledExample03_Fivegrams[2],
+            Shared_LabeledExample03_Fivegrams[3],
+            Shared_LabeledExample03_Fivegrams[4],
+            Shared_LabeledExample03_Fivegrams[5],
+            Shared_LabeledExample03_Fivegrams[6],
+            Shared_LabeledExample03_Fivegrams[7],
+            Shared_LabeledExample03_Fivegrams[8],
+            Shared_LabeledExample03_Fivegrams[9],
+            Shared_LabeledExample03_Fivegrams[10],
+            Shared_LabeledExample03_Fivegrams[11],
+            Shared_LabeledExample03_Fivegrams[12],
+            Shared_LabeledExample03_Fivegrams[13]
+
+        };
+
+
+
 
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_OnlyFive
             = new NGramTokenizerRuleSet(false, false, false, false, true);
@@ -503,7 +522,7 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text1_Label,
                     Shared_Text1_Text,
                     CreateNGrams(
-                        Shared_Text1_TextAsMonograms
+                        Shared_LabeledExample01_Monograms
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBi
             = new NGramTokenizerRuleSet(true, true, false, false, false);
@@ -513,8 +532,8 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text1_Label,
                     Shared_Text1_Text,
                     CreateNGrams(
-                        Shared_Text1_TextAsMonograms,
-                        Shared_Text1_TextAsBigrams
+                        Shared_LabeledExample01_Monograms,
+                        Shared_LabeledExample01_Bigrams
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTri
             = new NGramTokenizerRuleSet(true, true, true, false, false);
@@ -524,9 +543,9 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text1_Label,
                     Shared_Text1_Text,
                     CreateNGrams(
-                        Shared_Text1_TextAsMonograms,
-                        Shared_Text1_TextAsBigrams,
-                        Shared_Text1_TextAsTrigrams
+                        Shared_LabeledExample01_Monograms,
+                        Shared_LabeledExample01_Bigrams,
+                        Shared_LabeledExample01_Trigrams
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFour
             = new NGramTokenizerRuleSet(true, true, true, true, false);
@@ -536,10 +555,10 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text1_Label,
                     Shared_Text1_Text,
                     CreateNGrams(
-                        Shared_Text1_TextAsMonograms,
-                        Shared_Text1_TextAsBigrams,
-                        Shared_Text1_TextAsTrigrams,
-                        Shared_Text1_TextAsFourgrams
+                        Shared_LabeledExample01_Monograms,
+                        Shared_LabeledExample01_Bigrams,
+                        Shared_LabeledExample01_Trigrams,
+                        Shared_LabeledExample01_Fourgrams
                         ));
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_MonoBiTriFourFive
             = new NGramTokenizerRuleSet(true, true, true, true, true);
@@ -549,11 +568,11 @@ namespace NW.NGramTextClassification.UnitTests
                         Shared_Text1_Label,
                         Shared_Text1_Text,
                         CreateNGrams(
-                            Shared_Text1_TextAsMonograms,
-                            Shared_Text1_TextAsBigrams,
-                            Shared_Text1_TextAsTrigrams,
-                            Shared_Text1_TextAsFourgrams,
-                            Shared_Text1_TextAsFivegrams
+                            Shared_LabeledExample01_Monograms,
+                            Shared_LabeledExample01_Bigrams,
+                            Shared_LabeledExample01_Trigrams,
+                            Shared_LabeledExample01_Fourgrams,
+                            Shared_LabeledExample01_Fivegrams
                             ));
 
         public static TokenizedExample Shared_Text2_LabeledExample_Mono
@@ -562,14 +581,14 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text2_Label,
                     Shared_Text2_Text,
                     CreateNGrams(
-                        Shared_Text2_TextAsMonograms
+                        Shared_LabeledExample02_Monograms
                         ));
         public static TokenizedExample Shared_Text2_LabeledExample_MonoBiTriFourFive
             = new TokenizedExample(
                         Shared_Text2_LabeledExampleId,
                         Shared_Text2_Label,
                         Shared_Text2_Text,
-                        Shared_Text2_TextAsNGrams);
+                        Shared_LabeledExample02_NGrams);
 
         public static List<TokenizedExample> Shared_LabeledExamples_Text1_Mono
             = new List<TokenizedExample>()
@@ -600,29 +619,6 @@ namespace NW.NGramTextClassification.UnitTests
                     Shared_Text2_LabeledExample_MonoBiTriFourFive
                 };
 
-        public static List<(string label, string text)> Shared_Tuples_Text1
-            = new List<(string label, string text)>()
-                    {
-
-                        ( Shared_Text1_Label, Shared_Text1_Text )
-
-                    };
-        public static List<(string label, string text)> Shared_Tuples_Text1Text2
-            = new List<(string label, string text)>()
-                    {
-
-                        ( Shared_Text1_Label, Shared_Text1_Text ),
-                        ( Shared_Text2_Label, Shared_Text2_Text )
-
-                    };
-        public static List<(string label, string text)> Shared_Tuples_TextOnlyFirstWord
-            = new List<(string label, string text)>()
-                    {
-
-                        ( Shared_Text1_Label, Shared_Text1_TextOnlyFirstWord )
-
-                    };
-
         #endregion
 
         #region ANGram
@@ -630,11 +626,11 @@ namespace NW.NGramTextClassification.UnitTests
         public static ushort ANGram_FakeGram1_N = 1;
         public static ushort ANGram_FakeGram2_N = 1;
         public static FakeGram ANGram_FakeGram1
-            = new FakeGram(ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, Shared_Text1_TextAsMonograms[0].Value);
+            = new FakeGram(ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, Shared_LabeledExample01_Monograms[0].Value);
         public static FakeGram ANGram_FakeGram2
-            = new FakeGram(ANGram_FakeGram2_N, Shared_TokenizationStrategyDefault, Shared_Text1_TextAsMonograms[1].Value);
+            = new FakeGram(ANGram_FakeGram2_N, Shared_TokenizationStrategyDefault, Shared_LabeledExample01_Monograms[1].Value);
         public static int ANGram_FakeGram1_HashCode
-            = (ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, Shared_Text1_TextAsMonograms[0].Value).GetHashCode();
+            = (ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, Shared_LabeledExample01_Monograms[0].Value).GetHashCode();
 
         #endregion
 
@@ -656,39 +652,6 @@ namespace NW.NGramTextClassification.UnitTests
         public static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
 
         #endregion
-
-        #region LabeledExample
-
-        public static TokenizedExample LabeledExample1
-            = new TokenizedExample(
-                    Shared_Text1_LabeledExampleId,
-                    Shared_Text1_Label,
-                    Shared_Text1_Text,
-                    Shared_Text1_TextAsNGrams
-                );
-        public static string LabeledExample1_AsString
-            = string.Concat(
-                        $"[ Id: '{Shared_Text1_LabeledExampleId}', ",
-                        $"Label: '{Shared_Text1_Label}', ",
-                        $"Text: '{Shared_Text1_Text}', ",
-                        $"TextAsNGrams: '{Shared_Text1_TextAsNGrams.Count}' ]"
-                    );
-
-        #endregion
-
-        #region LabeledExampleFactory
-
-        public static uint LabeledExampleFactory_InitialId1 = 0;
-        public static (string label, string text) LabeledExampleFactory_Tuple1 = (Shared_Text1_Label, Shared_Text1_Text);
-        public static (string label, string text) LabeledExampleFactory_Tuple2 = (Shared_Text2_Label, Shared_Text2_Text);
-        public static List<(string label, string text)> LabeledExampleFactory_Tuples
-            = new List<(string label, string text)>()
-            {
-                LabeledExampleFactory_Tuple1,
-                LabeledExampleFactory_Tuple2
-            };
-
-        #endregion 
 
         #region NGramTokenizer
 
@@ -762,7 +725,7 @@ namespace NW.NGramTextClassification.UnitTests
                         Shared_Text1_Label,
                         TextClassifier_Text1_SimilarityIndexes,
                         TextClassifier_Text1_SimilarityIndexAverages);
-        public static List<INGram> TextClassifier_Text1_NGrams = Shared_Text1_TextAsNGrams;
+        public static List<INGram> TextClassifier_Text1_NGrams = Shared_LabeledExample01_NGrams;
         public static List<string> TextClassifier_Text1_UniqueLabels
             = new List<string>()
             {

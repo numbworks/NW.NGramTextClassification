@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests
             Fourgram actual1
                 = new Fourgram(
                         new TokenizationStrategy(),
-                        ObjectMother.Shared_Text1_TextAsFourgrams[0].Value
+                        ObjectMother.Shared_LabeledExample01_Fourgrams[0].Value
                     );
             Fourgram actual2
                 = new Fourgram(
-                        ObjectMother.Shared_Text1_TextAsFourgrams[0].Value
+                        ObjectMother.Shared_LabeledExample01_Fourgrams[0].Value
                     );
 
             // Assert

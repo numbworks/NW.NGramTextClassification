@@ -168,7 +168,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsMonograms, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExample01_Monograms, actual)
                 );
 
         }
@@ -185,7 +185,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsBigrams, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExample01_Bigrams, actual)
                 );
 
         }
@@ -202,7 +202,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsTrigrams, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExample01_Trigrams, actual)
                 );
 
         }
@@ -219,7 +219,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsFourgrams, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExample01_Fourgrams, actual)
                 );
 
         }
@@ -236,7 +236,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_Text1_TextAsFivegrams, actual)
+                    ObjectMother.AreEqual(ObjectMother.Shared_LabeledExample01_Fivegrams, actual)
                 );
 
         }
@@ -258,7 +258,7 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.Shared_Text1_Text,
                         ObjectMother.Shared_NGramTokenizerRuleSet_Mono,
                         ObjectMother.CreateNGrams(
-                            ObjectMother.Shared_Text1_TextAsMonograms
+                            ObjectMother.Shared_LabeledExample01_Monograms
                             )
                     ).SetArgDisplayNames($"{baseName}_01"),
 
@@ -266,8 +266,8 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.Shared_Text1_Text,
                         ObjectMother.Shared_NGramTokenizerRuleSet_MonoBi,
                         ObjectMother.CreateNGrams(
-                            ObjectMother.Shared_Text1_TextAsMonograms,
-                            ObjectMother.Shared_Text1_TextAsBigrams
+                            ObjectMother.Shared_LabeledExample01_Monograms,
+                            ObjectMother.Shared_LabeledExample01_Bigrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_02"),
 
@@ -275,9 +275,9 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.Shared_Text1_Text,
                         ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTri,
                         ObjectMother.CreateNGrams(
-                            ObjectMother.Shared_Text1_TextAsMonograms,
-                            ObjectMother.Shared_Text1_TextAsBigrams,
-                            ObjectMother.Shared_Text1_TextAsTrigrams
+                            ObjectMother.Shared_LabeledExample01_Monograms,
+                            ObjectMother.Shared_LabeledExample01_Bigrams,
+                            ObjectMother.Shared_LabeledExample01_Trigrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_03"),
 
@@ -285,10 +285,10 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.Shared_Text1_Text,
                         ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFour,
                         ObjectMother.CreateNGrams(
-                            ObjectMother.Shared_Text1_TextAsMonograms,
-                            ObjectMother.Shared_Text1_TextAsBigrams,
-                            ObjectMother.Shared_Text1_TextAsTrigrams,
-                            ObjectMother.Shared_Text1_TextAsFourgrams
+                            ObjectMother.Shared_LabeledExample01_Monograms,
+                            ObjectMother.Shared_LabeledExample01_Bigrams,
+                            ObjectMother.Shared_LabeledExample01_Trigrams,
+                            ObjectMother.Shared_LabeledExample01_Fourgrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_04"),
 
@@ -296,11 +296,11 @@ namespace NW.NGramTextClassification.UnitTests
                         ObjectMother.Shared_Text1_Text,
                         ObjectMother.Shared_NGramTokenizerRuleSet_MonoBiTriFourFive,
                         ObjectMother.CreateNGrams(
-                            ObjectMother.Shared_Text1_TextAsMonograms,
-                            ObjectMother.Shared_Text1_TextAsBigrams,
-                            ObjectMother.Shared_Text1_TextAsTrigrams,
-                            ObjectMother.Shared_Text1_TextAsFourgrams,
-                            ObjectMother.Shared_Text1_TextAsFivegrams
+                            ObjectMother.Shared_LabeledExample01_Monograms,
+                            ObjectMother.Shared_LabeledExample01_Bigrams,
+                            ObjectMother.Shared_LabeledExample01_Trigrams,
+                            ObjectMother.Shared_LabeledExample01_Fourgrams,
+                            ObjectMother.Shared_LabeledExample01_Fivegrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_05")
 

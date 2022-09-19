@@ -283,7 +283,7 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_FollowingTextHasBeenProvided.Invoke(truncatedText),
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed.Invoke(new NGramTokenizerRuleSet()),
                 MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive),
-                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.Shared_Text3_TextAsNGrams),
+                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams.Invoke(ObjectMother.Shared_LabeledExample03_NGrams),
 
                 MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample.Invoke(ObjectMother.Shared_LabeledExamples_Text1Text2_MonoBiTriFourFive[0]),
                 MessageCollection.TextClassifier_CalculatedSimilarityIndexValueIs.Invoke(ObjectMother.TextClassifier_Text3_SimilarityIndexes[0].Value),
