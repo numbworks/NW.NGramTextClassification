@@ -16,20 +16,20 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndex(
-                                    ObjectMother.SimilarityIndex_Id1,
-                                    null,
-                                    ObjectMother.SimilarityIndex_Value1
+                                    text: null,
+                                    label: ObjectMother.SimilarityIndex01_Label,
+                                    value: ObjectMother.SimilarityIndex01_Value
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("label").Message
+                new ArgumentNullException("text").Message
                 ).SetArgDisplayNames($"{nameof(similarityIndexExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndex(
-                                    ObjectMother.SimilarityIndex_Id1,
-                                    ObjectMother.Validator_StringOnlyWhiteSpaces,
-                                    ObjectMother.SimilarityIndex_Value1
+                                    text: ObjectMother.SimilarityIndex01_Text,
+                                    label: null,
+                                    value: ObjectMother.SimilarityIndex01_Value
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -52,9 +52,9 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             SimilarityIndex actual
                 = new SimilarityIndex(
-                        ObjectMother.SimilarityIndex_Id1,
-                        ObjectMother.SimilarityIndex_Label1,
-                        ObjectMother.SimilarityIndex_Value1
+                        ObjectMother.SimilarityIndex01_Text,
+                        ObjectMother.SimilarityIndex01_Label,
+                        ObjectMother.SimilarityIndex01_Value
                     );
 
             // Assert
@@ -71,8 +71,8 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsTrue(
                 string.Equals(
-                    ObjectMother.SimilarityIndex_ToString1,
-                    ObjectMother.SimilarityIndex1.ToString(),
+                    ObjectMother.SimilarityIndex01_AsString,
+                    ObjectMother.SimilarityIndex01.ToString(),
                     StringComparison.InvariantCulture));
 
         }
@@ -92,5 +92,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 19.09.2021
 */

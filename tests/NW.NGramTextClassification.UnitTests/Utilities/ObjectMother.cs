@@ -647,18 +647,25 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region SimilarityIndex
 
-        public static ulong SimilarityIndex_Id1 = 1;
-        public static string SimilarityIndex_Label1 = "en";
-        public static double SimilarityIndex_Value1 = 0.23;
-        public static ulong SimilarityIndex_Id2 = 2;
-        public static string SimilarityIndex_Label2 = "sv";
-        public static double SimilarityIndex_Value2 = 0.76;
-        public static SimilarityIndex SimilarityIndex1
-            = new SimilarityIndex(Shared_LabeledExample01.Text, SimilarityIndex_Label1, SimilarityIndex_Value1);
-        public static SimilarityIndex SimilarityIndex2
-            = new SimilarityIndex(Shared_LabeledExample02.Text, SimilarityIndex_Label2, SimilarityIndex_Value2);
-        public static string SimilarityIndex_ToString1
-            = $"[ Id: '{SimilarityIndex_Id1}', Label: '{SimilarityIndex_Label1}', Value: '{SimilarityIndex_Value1}' ]";
+        public static string SimilarityIndex01_Text = Shared_LabeledExample01.Text;
+        public static string SimilarityIndex01_Label = "en";
+        public static double SimilarityIndex01_Value = 0.23;
+        public static SimilarityIndex SimilarityIndex01
+            = new SimilarityIndex(
+                    text: SimilarityIndex01_Text, 
+                    label: SimilarityIndex01_Label, 
+                    value: SimilarityIndex01_Value);
+        public static string SimilarityIndex01_AsString
+            = $"[ Id: '{SimilarityIndex01_Text}', Label: '{SimilarityIndex01_Label}', Value: '{SimilarityIndex01_Value}' ]";
+
+        public static string SimilarityIndex02_Text = Shared_LabeledExample02.Text;
+        public static string SimilarityIndex02_Label = "sv";
+        public static double SimilarityIndex02_Value = 0.76;
+        public static SimilarityIndex SimilarityIndex02
+            = new SimilarityIndex(
+                    text: SimilarityIndex02_Text,
+                    label: SimilarityIndex02_Label,
+                    value: SimilarityIndex02_Value);
 
         #endregion
 
@@ -793,8 +800,8 @@ namespace NW.NGramTextClassification.UnitTests
         public static List<SimilarityIndex> TextClassifierResult_SimilarityIndexes1
             = new List<SimilarityIndex>()
                 {
-                    SimilarityIndex1,
-                    SimilarityIndex2
+                    SimilarityIndex01,
+                    SimilarityIndex02
                 };
         public static List<SimilarityIndexAverage> TextClassifierResult_SimilarityIndexAverages1
             = new List<SimilarityIndexAverage>()
