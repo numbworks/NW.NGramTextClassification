@@ -179,7 +179,7 @@ namespace NW.NGramTextClassification.UnitTests
             TokenizedExample actual 
                 = labeledExampleManager
                     .CreateOrDefault(
-                        labeledExample: ObjectMother.Shared_LabeledExample04_Untokenizable,
+                        labeledExample: ObjectMother.Shared_LabeledExample03_Untokenizable,
                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 

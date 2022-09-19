@@ -330,199 +330,18 @@ namespace NW.NGramTextClassification.UnitTests
         public static TokenizedExample Shared_TokenizedExample02
             = new TokenizedExample(labeledExample: Shared_LabeledExample02, nGrams: Shared_LabeledExample02_NGrams);
 
-        public static LabeledExample Shared_LabeledExample03
-            = new LabeledExample(label: null, text: "Kas siis selle maa keel Laulutuules ei või Taevani tõustes üles Igavikku omale otsida");
-        public static List<Monogram> Shared_LabeledExample03_Monograms = new List<Monogram>() 
-        {
-
-                new Monogram(Shared_TokenizationStrategyDefault, "kas"),
-                new Monogram(Shared_TokenizationStrategyDefault, "siis"),
-                new Monogram(Shared_TokenizationStrategyDefault, "selle"),
-                new Monogram(Shared_TokenizationStrategyDefault, "maa"),
-                new Monogram(Shared_TokenizationStrategyDefault, "keel"),
-                new Monogram(Shared_TokenizationStrategyDefault, "laulutuules"),
-                new Monogram(Shared_TokenizationStrategyDefault, "ei"),
-                new Monogram(Shared_TokenizationStrategyDefault, "või"),
-                new Monogram(Shared_TokenizationStrategyDefault, "taevani"),
-                new Monogram(Shared_TokenizationStrategyDefault, "tõustes"),
-                new Monogram(Shared_TokenizationStrategyDefault, "üles"),
-                new Monogram(Shared_TokenizationStrategyDefault, "igavikku"),
-                new Monogram(Shared_TokenizationStrategyDefault, "omale"),
-                new Monogram(Shared_TokenizationStrategyDefault, "otsida")
-
-        };
-        public static List<Bigram> Shared_LabeledExample03_Bigrams = new List<Bigram>() 
-        {
-
-                new Bigram(Shared_TokenizationStrategyDefault, "kas siis"),
-                new Bigram(Shared_TokenizationStrategyDefault, "siis selle"),
-                new Bigram(Shared_TokenizationStrategyDefault, "selle maa"),
-                new Bigram(Shared_TokenizationStrategyDefault, "maa keel"),
-                new Bigram(Shared_TokenizationStrategyDefault, "keel laulutuules"),
-                new Bigram(Shared_TokenizationStrategyDefault, "laulutuules ei"),
-                new Bigram(Shared_TokenizationStrategyDefault, "ei või"),
-                new Bigram(Shared_TokenizationStrategyDefault, "või taevani"),
-                new Bigram(Shared_TokenizationStrategyDefault, "taevani tõustes"),
-                new Bigram(Shared_TokenizationStrategyDefault, "tõustes üles"),
-                new Bigram(Shared_TokenizationStrategyDefault, "üles igavikku"),
-                new Bigram(Shared_TokenizationStrategyDefault, "igavikku omale"),
-                new Bigram(Shared_TokenizationStrategyDefault, "omale otsida"),
-                new Bigram(Shared_TokenizationStrategyDefault, "otsida")
-
-        };
-        public static List<Trigram> Shared_LabeledExample03_Trigrams = new List<Trigram>() 
-        {
-
-                new Trigram(Shared_TokenizationStrategyDefault, "kas siis selle"),
-                new Trigram(Shared_TokenizationStrategyDefault, "siis selle maa"),
-                new Trigram(Shared_TokenizationStrategyDefault, "selle maa keel"),
-                new Trigram(Shared_TokenizationStrategyDefault, "maa keel laulutuules"),
-                new Trigram(Shared_TokenizationStrategyDefault, "keel laulutuules ei"),
-                new Trigram(Shared_TokenizationStrategyDefault, "laulutuules ei või"),
-                new Trigram(Shared_TokenizationStrategyDefault, "ei või taevani"),
-                new Trigram(Shared_TokenizationStrategyDefault, "või taevani tõustes"),
-                new Trigram(Shared_TokenizationStrategyDefault, "taevani tõustes üles"),
-                new Trigram(Shared_TokenizationStrategyDefault, "tõustes üles igavikku"),
-                new Trigram(Shared_TokenizationStrategyDefault, "üles igavikku omale"),
-                new Trigram(Shared_TokenizationStrategyDefault, "igavikku omale otsida"),
-                new Trigram(Shared_TokenizationStrategyDefault, "omale otsida"),
-                new Trigram(Shared_TokenizationStrategyDefault, "otsida")
-
-        };
-        public static List<Fourgram> Shared_LabeledExample03_Fourgrams = new List<Fourgram>() 
-        {
-
-                new Fourgram(Shared_TokenizationStrategyDefault, "kas siis selle maa"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "siis selle maa keel"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "selle maa keel laulutuules"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maa keel laulutuules ei"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maakeel laulutuules ei või"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maalaulutuules ei või taevani"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maaei või taevani tõustes"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maavõi taevani tõustes üles"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maataevani tõustes üles igavikku"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maatõustes üles igavikku omale"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maaüles igavikku omale otsida"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maaigavikku omale otsida"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maaomale otsida"),
-                new Fourgram(Shared_TokenizationStrategyDefault, "maaotsida")
-
-        };
-        public static List<Fivegram> Shared_LabeledExample03_Fivegrams = new List<Fivegram>()
-        {
-
-            new Fivegram(Shared_TokenizationStrategyDefault, "kas siis selle maa keel"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "siis selle maa keel laulutuules"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "selle maa keel laulutuules ei"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "maa keel laulutuules ei või"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "keel laulutuules ei või taevani"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "laulutuules ei või taevani tõustes"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "ei või taevani tõustes üles"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "või taevani tõustes üles igavikku"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "taevani tõustes üles igavikku omale"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "tõustes üles igavikku omale otsida"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "üles igavikku omale otsida"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "igavikku omale otsida"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "omale otsida"),
-            new Fivegram(Shared_TokenizationStrategyDefault, "otsida")
-
-        };
-        public static List<INGram> Shared_LabeledExample03_NGrams = new List<INGram>()
-        {
-
-            Shared_LabeledExample03_Monograms[0],
-            Shared_LabeledExample03_Monograms[1],
-            Shared_LabeledExample03_Monograms[2],
-            Shared_LabeledExample03_Monograms[3],
-            Shared_LabeledExample03_Monograms[4],
-            Shared_LabeledExample03_Monograms[5],
-            Shared_LabeledExample03_Monograms[6],
-            Shared_LabeledExample03_Monograms[7],
-            Shared_LabeledExample03_Monograms[8],
-            Shared_LabeledExample03_Monograms[9],
-            Shared_LabeledExample03_Monograms[10],
-            Shared_LabeledExample03_Monograms[11],
-            Shared_LabeledExample03_Monograms[12],
-            Shared_LabeledExample03_Monograms[13],
-
-            Shared_LabeledExample03_Bigrams[0],
-            Shared_LabeledExample03_Bigrams[1],
-            Shared_LabeledExample03_Bigrams[2],
-            Shared_LabeledExample03_Bigrams[3],
-            Shared_LabeledExample03_Bigrams[4],
-            Shared_LabeledExample03_Bigrams[5],
-            Shared_LabeledExample03_Bigrams[6],
-            Shared_LabeledExample03_Bigrams[7],
-            Shared_LabeledExample03_Bigrams[8],
-            Shared_LabeledExample03_Bigrams[9],
-            Shared_LabeledExample03_Bigrams[10],
-            Shared_LabeledExample03_Bigrams[11],
-            Shared_LabeledExample03_Bigrams[12],
-            Shared_LabeledExample03_Bigrams[13],
-
-            Shared_LabeledExample03_Trigrams[0],
-            Shared_LabeledExample03_Trigrams[1],
-            Shared_LabeledExample03_Trigrams[2],
-            Shared_LabeledExample03_Trigrams[3],
-            Shared_LabeledExample03_Trigrams[4],
-            Shared_LabeledExample03_Trigrams[5],
-            Shared_LabeledExample03_Trigrams[6],
-            Shared_LabeledExample03_Trigrams[7],
-            Shared_LabeledExample03_Trigrams[8],
-            Shared_LabeledExample03_Trigrams[9],
-            Shared_LabeledExample03_Trigrams[10],
-            Shared_LabeledExample03_Trigrams[11],
-            Shared_LabeledExample03_Trigrams[12],
-            Shared_LabeledExample03_Trigrams[13],
-
-            Shared_LabeledExample03_Fourgrams[0],
-            Shared_LabeledExample03_Fourgrams[1],
-            Shared_LabeledExample03_Fourgrams[2],
-            Shared_LabeledExample03_Fourgrams[3],
-            Shared_LabeledExample03_Fourgrams[4],
-            Shared_LabeledExample03_Fourgrams[5],
-            Shared_LabeledExample03_Fourgrams[6],
-            Shared_LabeledExample03_Fourgrams[7],
-            Shared_LabeledExample03_Fourgrams[8],
-            Shared_LabeledExample03_Fourgrams[9],
-            Shared_LabeledExample03_Fourgrams[10],
-            Shared_LabeledExample03_Fourgrams[11],
-            Shared_LabeledExample03_Fourgrams[12],
-            Shared_LabeledExample03_Fourgrams[13],
-
-            Shared_LabeledExample03_Fivegrams[0],
-            Shared_LabeledExample03_Fivegrams[1],
-            Shared_LabeledExample03_Fivegrams[2],
-            Shared_LabeledExample03_Fivegrams[3],
-            Shared_LabeledExample03_Fivegrams[4],
-            Shared_LabeledExample03_Fivegrams[5],
-            Shared_LabeledExample03_Fivegrams[6],
-            Shared_LabeledExample03_Fivegrams[7],
-            Shared_LabeledExample03_Fivegrams[8],
-            Shared_LabeledExample03_Fivegrams[9],
-            Shared_LabeledExample03_Fivegrams[10],
-            Shared_LabeledExample03_Fivegrams[11],
-            Shared_LabeledExample03_Fivegrams[12],
-            Shared_LabeledExample03_Fivegrams[13]
-
-        };
-        public static TokenizedExample Shared_TokenizedExample03
-            = new TokenizedExample(labeledExample: Shared_LabeledExample03, nGrams: Shared_LabeledExample03_NGrams);
-
         public static List<LabeledExample> Shared_LabeledExamples = new List<LabeledExample>()
         {
 
             Shared_LabeledExample01,
-            Shared_LabeledExample02,
-            Shared_LabeledExample03
+            Shared_LabeledExample02
 
         };
         public static List<TokenizedExample> Shared_TokenizedExamples = new List<TokenizedExample>()
         {
 
             Shared_TokenizedExample01,
-            Shared_TokenizedExample02,
-            Shared_TokenizedExample03
+            Shared_TokenizedExample02
 
         };
 
@@ -580,15 +399,14 @@ namespace NW.NGramTextClassification.UnitTests
                                     fivegrams: Shared_LabeledExample01_Fivegrams
                             ));
 
-        public static LabeledExample Shared_LabeledExample04_Untokenizable
+        public static LabeledExample Shared_LabeledExample03_Untokenizable
             = new LabeledExample(label: "en", text: "We");
         public static List<LabeledExample> Shared_LabeledExamples_Untokenizable = new List<LabeledExample>()
         {
 
             Shared_LabeledExample01,
             Shared_LabeledExample02,
-            Shared_LabeledExample03,
-            Shared_LabeledExample04_Untokenizable
+            Shared_LabeledExample03_Untokenizable
 
         };
 
@@ -711,36 +529,6 @@ namespace NW.NGramTextClassification.UnitTests
             {
                 TextClassifier_Text1_SimilarityIndex1.Label,
                 TextClassifier_Text1_SimilarityIndex2.Label,
-            };
-
-        public static SimilarityIndex TextClassifier_Text3_SimilarityIndex1 = new SimilarityIndex(Shared_LabeledExample01.Text, "en", 0);
-        public static SimilarityIndex TextClassifier_Text3_SimilarityIndex2 = new SimilarityIndex(Shared_LabeledExample02.Text, "sv", 0);
-        public static List<SimilarityIndex> TextClassifier_Text3_SimilarityIndexes
-            = new List<SimilarityIndex>()
-            {
-                TextClassifier_Text3_SimilarityIndex1,
-                TextClassifier_Text3_SimilarityIndex2
-            };
-        public static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage1
-            = new SimilarityIndexAverage("en", 0);
-        public static SimilarityIndexAverage TextClassifier_Text3_SimilarityIndexAverage2
-            = new SimilarityIndexAverage("sv", 0);
-        public static List<SimilarityIndexAverage> TextClassifier_Text3_SimilarityIndexAverages
-            = new List<SimilarityIndexAverage>()
-            {
-                TextClassifier_Text3_SimilarityIndexAverage1,
-                TextClassifier_Text3_SimilarityIndexAverage2
-            };
-        public static TextClassifierResult TextClassifier_Text3_TextClassifierResult
-            = new TextClassifierResult(
-                        Shared_LabeledExample03.Text,
-                        TextClassifier_Text3_SimilarityIndexes,
-                        TextClassifier_Text3_SimilarityIndexAverages);
-        public static List<string> TextClassifier_Text3_UniqueLabels
-            = new List<string>()
-            {
-                TextClassifier_Text3_SimilarityIndex1.Label,
-                TextClassifier_Text3_SimilarityIndex2.Label,
             };
 
         public static TextClassifierResult TextClassifier_TextClassifierResult_LabeledExamples00

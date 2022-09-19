@@ -40,7 +40,7 @@ namespace NW.NGramTextClassification.UnitTests
                                             tokenizationStrategy: ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical
                                         )
                                     .DoForRuleSet(
-                                        text: ObjectMother.Shared_LabeledExample04_Untokenizable.Text,
+                                        text: ObjectMother.Shared_LabeledExample03_Untokenizable.Text,
                                         tokenizerRuleSet: new NGramTokenizerRuleSet()
                         )),
                     typeof(ArgumentException),
@@ -147,7 +147,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<INGram> actual 
                 = nGramTokenizer
                     .DoForRuleSetOrDefault(
-                        text: ObjectMother.Shared_LabeledExample04_Untokenizable.Text, 
+                        text: ObjectMother.Shared_LabeledExample03_Untokenizable.Text, 
                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
