@@ -14,19 +14,16 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region Fields
 
-        private static TestCaseData[] labeledExampleFactoryExceptionTestCases =
+        private static TestCaseData[] labeledExampleManagerExceptionTestCases =
         {
 
-            // ValidateObject
             new TestCaseData(
                 new TestDelegate(
-                        () => new LabeledExampleManager(
-                                            null,
-                                            ObjectMother.LabeledExampleFactory_InitialId1
-                            )),
+                        () => new LabeledExampleManager(null)
+                    ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizer").Message
-                ).SetArgDisplayNames($"{nameof(labeledExampleFactoryExceptionTestCases)}_01")
+                ).SetArgDisplayNames($"{nameof(labeledExampleManagerExceptionTestCases)}_01")
 
         };
         private static TestCaseData[] tryCreateForRuleSetForTextExceptionTestCases =
@@ -167,7 +164,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region Tests
 
-        [TestCaseSource(nameof(labeledExampleFactoryExceptionTestCases))]
+        [TestCaseSource(nameof(labeledExampleManagerExceptionTestCases))]
         public void LabeledExampleFactory_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
@@ -327,5 +324,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.09.2021
+    Last Update: 19.09.2022
 */
