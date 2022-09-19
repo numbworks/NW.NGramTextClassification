@@ -26,76 +26,58 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(labeledExampleManagerExceptionTestCases)}_01")
 
         };
-        private static TestCaseData[] tryCreateForRuleSetForTextExceptionTestCases =
+        private static TestCaseData[] createOrDefaultExceptionTestCases =
         {
 
+            // First method signature
             new TestCaseData(
                 new TestDelegate(
                         () => new LabeledExampleManager()
-                                    .TryCreateForRuleSet(
-                                        ObjectMother.Shared_Text1_LabeledExampleId,
-                                        null,
-                                        ObjectMother.Shared_Text1_Text,
-                                        new NGramTokenizerRuleSet()
+                                    .CreateOrDefault(
+                                        labeledExample: null,
+                                        tokenizerRuleSet: new NGramTokenizerRuleSet()
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("label").Message
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTextExceptionTestCases)}_01"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new LabeledExampleManager()
-                                    .TryCreateForRuleSet(
-                                        ObjectMother.Shared_Text1_LabeledExampleId,
-                                        ObjectMother.Shared_Text1_Label,
-                                        null,
-                                        new NGramTokenizerRuleSet()
-                            )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("text").Message
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTextExceptionTestCases)}_02"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new LabeledExampleManager()
-                                    .TryCreateForRuleSet(
-                                        ObjectMother.Shared_Text1_LabeledExampleId,
-                                        ObjectMother.Shared_Text1_Label,
-                                        ObjectMother.Shared_Text1_Text,
-                                        null
-                            )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("tokenizerRuleSet").Message
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTextExceptionTestCases)}_03")
-
-
-        };
-        private static TestCaseData[] tryCreateForRuleSetForTuplesExceptionTestCases =
-        {
+                new ArgumentNullException("labeledExample").Message
+                ).SetArgDisplayNames($"{nameof(createOrDefaultExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new LabeledExampleManager()
                                     .CreateOrDefault(
-                                        ObjectMother.LabeledExampleFactory_Tuples,
-                                        null
+                                        labeledExample: ObjectMother.Shared_LabeledExample01,
+                                        tokenizerRuleSet: null
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizerRuleSet").Message
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTuplesExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(createOrDefaultExceptionTestCases)}_02"),
+
+            // Second method signature
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleManager()
+                                    .CreateOrDefault(
+                                        labeledExamples: null,
+                                        tokenizerRuleSet: new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("labeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(createOrDefaultExceptionTestCases)}_03"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new LabeledExampleManager()
                                     .CreateOrDefault(
-                                        (List<(string label, string text)>)null,
-                                        new NGramTokenizerRuleSet()
+                                        labeledExamples: ObjectMother.Shared_LabeledExamples,
+                                        tokenizerRuleSet: null
                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("tuples").Message
-                ).SetArgDisplayNames($"{nameof(tryCreateForRuleSetForTuplesExceptionTestCases)}_02"),
+                new ArgumentNullException("tokenizerRuleSet").Message
+                ).SetArgDisplayNames($"{nameof(createOrDefaultExceptionTestCases)}_04")
 
         };
+        
+
         private static TestCaseData[] tryCreateForRuleSetTestCases =
         {
 
@@ -165,22 +147,17 @@ namespace NW.NGramTextClassification.UnitTests
         #region Tests
 
         [TestCaseSource(nameof(labeledExampleManagerExceptionTestCases))]
-        public void LabeledExampleFactory_ShouldThrowACertainException_WhenUnproperArguments
+        public void LabeledExampleManager_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
-        [TestCaseSource(nameof(tryCreateForRuleSetForTextExceptionTestCases))]
-        public void TryCreateForRuleSetForText_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
-        [TestCaseSource(nameof(tryCreateForRuleSetForTuplesExceptionTestCases))]
-        public void TryCreateForRuleSetForTuples_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(createOrDefaultExceptionTestCases))]
+        public void CreateOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void LabeledExampleFactory_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        public void LabeledExampleManager_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
 
             // Arrange
@@ -189,7 +166,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsInstanceOf<LabeledExampleManager>(actual);
-            Assert.AreEqual(1, LabeledExampleManager.DefaultInitialId);
+            Assert.IsInstanceOf<NGramTokenizer>(LabeledExampleManager.DefaultNGramTokenizer);
             Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleManager.DefaultTokenizerRuleSet);
 
         }

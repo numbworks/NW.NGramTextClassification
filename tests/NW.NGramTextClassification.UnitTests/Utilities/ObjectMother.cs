@@ -507,7 +507,14 @@ namespace NW.NGramTextClassification.UnitTests
 
         };
 
+        public static List<LabeledExample> Shared_LabeledExamples = new List<LabeledExample>()
+        {
 
+            Shared_LabeledExample01,
+            Shared_LabeledExample02,
+            Shared_LabeledExample03
+
+        };
 
 
         public static INGramTokenizerRuleSet Shared_NGramTokenizerRuleSet_OnlyFive
