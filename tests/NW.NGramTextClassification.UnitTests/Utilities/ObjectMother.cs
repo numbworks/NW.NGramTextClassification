@@ -190,15 +190,15 @@ namespace NW.NGramTextClassification.UnitTests
                         "[ ",
                         $"Label: '{Shared_LabeledExample01.Label}', ",
                         $"Text: '{Shared_LabeledExample01.Text}' ",
-                        " ]"
+                        "]"
                     );
         public static string Shared_TokenizedExample01_AsString
             = string.Concat(
                         "[ ",
                         $"Label: '{Shared_TokenizedExample01.LabeledExample.Label}', ",
                         $"Text: '{Shared_TokenizedExample01.LabeledExample.Text}', ",
-                        $"NGrams: '{Shared_TokenizedExample01.NGrams.Count}'",
-                        " ]"
+                        $"NGrams: '{Shared_TokenizedExample01.NGrams.Count}' ",
+                        "]"
                     );
 
         public static LabeledExample Shared_LabeledExample02

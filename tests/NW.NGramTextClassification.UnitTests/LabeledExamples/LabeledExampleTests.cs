@@ -28,7 +28,7 @@ namespace NW.NGramTextClassification.UnitTests
                                                 text: null
                                             )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("label").Message
+                new ArgumentNullException("text").Message
                 ).SetArgDisplayNames($"{nameof(labeledExampleExceptionTestCases)}_02")
 
         };
