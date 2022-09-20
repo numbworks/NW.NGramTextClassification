@@ -74,11 +74,6 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
-        [TestCaseSource(nameof(validateExceptionTestCases))]
-        public void Validate_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
         [Test]
         public void NGramTokenizer_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
@@ -94,6 +89,11 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [TestCaseSource(nameof(validateExceptionTestCases))]
+        public void Validate_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(doForRuleSetOrDefaultTestCases))]
         public void DoForRuleSetOrDefault_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<INGram> expected)
@@ -105,29 +105,6 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             List<INGram> actual = nGramTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
-
-            // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
-                );
-
-        }
-
-        [TestCaseSource(nameof(doForRuleSetTestCases))]
-        public void DoForRuleSet_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<INGram> expected)
-        {
-
-            // Arrange
-            NGramTokenizer nGramTokenizer = new NGramTokenizer();
-
-            // Act
-            List<INGram> actual 
-                = nGramTokenizer
-                    .DoForRuleSetOrDefault(
-                        text: text, 
-                        tokenizerRuleSet: tokenizerRuleSet
-                        );
 
             // Assert
             Assert.IsTrue(
@@ -241,6 +218,29 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [TestCaseSource(nameof(doForRuleSetTestCases))]
+        public void DoForRuleSet_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<INGram> expected)
+        {
+
+            // Arrange
+            NGramTokenizer nGramTokenizer = new NGramTokenizer();
+
+            // Act
+            List<INGram> actual 
+                = nGramTokenizer
+                    .DoForRuleSet(
+                        text: text,
+                        tokenizerRuleSet: tokenizerRuleSet
+                        );
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
         #endregion
 
         #region TearDown
@@ -317,5 +317,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2022
+    Last Update: 20.09.2022
 */
