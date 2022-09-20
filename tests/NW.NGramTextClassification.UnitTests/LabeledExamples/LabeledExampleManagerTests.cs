@@ -106,14 +106,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.Shared_LabeledExample01,
                     ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                     ObjectMother.Shared_TokenizedExample01_MonoBiTriFourFive
-                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05"),
-
-            // Second method signature
-            new TestCaseData(
-                    ObjectMother.Shared_LabeledExamples,
-                    LabeledExampleManager.DefaultTokenizerRuleSet,
-                    ObjectMother.Shared_TokenizedExamples
-                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_06"),
+                ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
 
         };
 
@@ -149,6 +142,24 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsTrue(
                     ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
+        [Test]
+        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenListLabeledExamplesAndProperParameters()
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            List<TokenizedExample> actual 
+                = labeledExampleManager.CreateOrDefault(ObjectMother.Shared_LabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExamples, actual)
                 );
 
         }
