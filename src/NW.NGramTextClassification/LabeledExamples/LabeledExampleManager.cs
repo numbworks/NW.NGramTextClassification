@@ -73,7 +73,7 @@ namespace NW.NGramTextClassification.LabeledExamples
             {
 
                 TokenizedExample tokenizedExample = CreateOrDefault(labeledExample, tokenizerRuleSet);
-                if (labeledExample != null)
+                if (tokenizedExample != null)
                     tokenizedExamples.Add(tokenizedExample);
 
             }
