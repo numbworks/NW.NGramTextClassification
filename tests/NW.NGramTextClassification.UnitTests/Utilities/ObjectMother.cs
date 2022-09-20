@@ -467,7 +467,7 @@ namespace NW.NGramTextClassification.UnitTests
                     label: SimilarityIndex01_Label, 
                     value: SimilarityIndex01_Value);
         public static string SimilarityIndex01_AsString
-            = $"[ Id: '{SimilarityIndex01_Text}', Label: '{SimilarityIndex01_Label}', Value: '{SimilarityIndex01_Value}' ]";
+            = $"[ Text: '{SimilarityIndex01_Text}', Label: '{SimilarityIndex01_Label}', Value: '{SimilarityIndex01_Value}' ]";
 
         public static string SimilarityIndex02_Text = Shared_LabeledExample02.Text;
         public static string SimilarityIndex02_Label = "sv";
