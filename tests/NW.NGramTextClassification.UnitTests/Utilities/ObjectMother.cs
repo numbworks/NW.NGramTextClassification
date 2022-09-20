@@ -589,9 +589,9 @@ namespace NW.NGramTextClassification.UnitTests
                 {
                     SimilarityIndexAverage01
                 };
-        public static string TextClassifierResult_ToString1
-            = $"[ Label: '{Shared_LabeledExample01.Text}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages.Count}' ]";
-        public static string TextClassifierResult_ToString1WithNullLabel
+        public static string TextClassifierResult_AsString
+            = $"[ Label: '{Shared_LabeledExample01.Label}', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages.Count}' ]";
+        public static string TextClassifierResult_AsStringWithNullLabel
             = $"[ Label: 'null', SimilarityIndexes: '{TextClassifierResult_SimilarityIndexes.Count}', SimilarityIndexAverages: '{TextClassifierResult_SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AllNulls
             = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
