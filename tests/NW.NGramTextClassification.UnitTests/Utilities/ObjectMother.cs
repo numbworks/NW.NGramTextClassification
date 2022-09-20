@@ -456,13 +456,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region NGramTokenizerRuleSet
-
-        public static string NGramTokenizerRuleSet_ToString
-            = "[ DoForMonograms: 'True', DoForBigrams: 'True', DoForTrigrams: 'True', DoForFourgrams: 'False', DoForFivegrams: 'False' ]";
-
-        #endregion
-
         #region SimilarityIndex
 
         public static string SimilarityIndex01_Text = Shared_LabeledExample01.Text;
