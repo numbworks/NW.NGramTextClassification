@@ -5,6 +5,7 @@ using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
+using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -78,10 +79,10 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultExceptionTestCases)}_03")
 
         };
-        private static TestCaseData[] predictLabelOrDefaultTestCases =
+        private static TestCaseData[] predictLabelOrDefaultWhenAllRulesFailedTestCases =
         {
 
-            new TestCaseData(
+           new TestCaseData(
                     "/",
                     new NGramTokenizerRuleSet(
                             doForMonogram: true,
@@ -96,7 +97,7 @@ namespace NW.NGramTextClassification.UnitTests
                             indexes: new List<SimilarityIndex>(),
                             indexAverages: new List<SimilarityIndexAverage>()
                         )
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
             new TestCaseData(
                     "hi",
@@ -105,7 +106,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForBigram: false,
                             doForTrigram: false,
                             doForFourgram: false,
-                            doForFivegram: true     
+                            doForFivegram: true
                         ),
                     ObjectMother.CreateThirtyLabeledExamples(),
                     new TextClassifierResult(
@@ -113,7 +114,13 @@ namespace NW.NGramTextClassification.UnitTests
                             indexes: new List<SimilarityIndex>(),
                             indexAverages: new List<SimilarityIndexAverage>()
                         )
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases)}_02"),
+
+
+        };
+
+        private static TestCaseData[] predictLabelOrDefaultTestCases =
+        {
 
             new TestCaseData(
                     ObjectMother.CreateThirtyLabeledExamples()[0].Text,
@@ -124,9 +131,9 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFourgram: true,
                             doForFivegram: true
                         ),
-                    ObjectMother.CreateThirtyLabeledExamples(),
+                    ObjectMother.CreateThirtyLabeledExamples().GetRange(0, 1),
                     ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultTestCases)}_03")
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultTestCases)}_01")
 
         };
 
@@ -165,13 +172,14 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(predictLabelOrDefaultTestCases))]
-        public void PredictLabelOrDefault_ShouldReturnTheExpectedTextClassifierResult_WhenProperArgument
+        [TestCaseSource(nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases))]
+        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenAllRulesFailed
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
         {
 
             // Arrange
-            Action<string> fakeLoggingAction = (message) => { };
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
             TextClassifierComponents components
                 = new TextClassifierComponents(
                           nGramsTokenizer: new NGramTokenizer(),
@@ -181,18 +189,79 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
-            string truncatedText
-                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
-                        text,
-                        TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
+
+            List<string> expectedLogMessages  = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
 
             // Act
             TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expected,actual)
+                    ObjectMother.AreEqual(expected, actual)
                 );
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [TestCaseSource(nameof(predictLabelOrDefaultTestCases))]
+        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenProperArgument
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            List<string> expectedLogMessages = CreateWhen(text, tokenizerRuleSet, labeledExamples, components);
+
+            // Act
+            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+
+            System.IO.File.WriteAllText(
+                @"C:\Users\Rubèn\Desktop\actualLogMessages.json",
+                System.Text.Json.JsonSerializer.Serialize(
+                    actualLogMessages,
+                    new System.Text.Json.JsonSerializerOptions()
+                    {
+                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                        WriteIndented = true
+                    }
+                ));
+
+            System.IO.File.WriteAllText(
+                @"C:\Users\Rubèn\Desktop\expectedLogMessages.json",
+                System.Text.Json.JsonSerializer.Serialize(
+                    expectedLogMessages,
+                    new System.Text.Json.JsonSerializerOptions()
+                    {
+                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                        WriteIndented = true
+                    }
+                ));
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void PredictLabelOrDefault_ShouldReturnDefaultTextClassifierResult_WhenUnproperLabeledExamples()
+        {
+
+            // Arrange
+            // Act
+            // Assert
 
         }
 
@@ -201,10 +270,85 @@ namespace NW.NGramTextClassification.UnitTests
         #region TearDown
         #endregion
 
+        #region SupportMethods
+        private static List<string> CreateWhenAllRulesFailed
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierComponents components)
+        {
+
+            string expectedText
+                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
+                        text,
+                        TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
+
+            List<INGram> expectedNGrams = components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_AttemptingToPredictLabel,
+                MessageCollection.TextClassifier_FollowingTextHasBeenProvided(expectedText),
+                MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided(labeledExamples),
+                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
+                MessageCollection.TextClassifier_AllRulesInProvidedRulesetFailed(text)
+
+            };
+
+            return expectedLogMessages;
+
+        }
+        private static List<string> CreateWhen
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierComponents components)
+        {
+
+            string expectedText
+                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
+                        text,
+                        TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
+
+            List<INGram> expectedNGrams = components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
+            
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_AttemptingToPredictLabel,
+                MessageCollection.TextClassifier_FollowingTextHasBeenProvided(expectedText),
+                MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
+                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided(labeledExamples),
+                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
+                MessageCollection.TextClassifier_ProvidedLabeledExamplesThruTokenizationProcess,
+                // MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample(expectedTokenizedExamples[0]),
+
+                "The calculated 'SimilarityIndex' value is '1'.",
+                "The rounded 'SimilarityIndex' value is '1'.",
+                "The following SimilarityIndex object has been added to the list: '[ Text: 'VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most popular gifts, makes it possible for the gift recipient to choose their own gift at GoGift.com. With more than 7000 business to business customers worldwide GoGift is also a preferred supplier of corporate gifts.ArbetsuppgifterYou will play a very important role developing and maintaining our core platform as well as numerous APIs, applications and websites. You will be a key player in our dev team with highly skilled and experienced software developers (public and external), UX/UI designers, dev ops specialists and online content manager.', Label: 'en', Value: '1' ]'.",
+                "The tokenized text has been successfully compared against the provided list of TokenizedExample objects.",
+                "'1' SimilarityIndex objects have been computed.",
+                "The following unique labels have been found in the provided SimilarityIndex list: '[en]'.",
+                "Calculating 'SimilarityIndexAverage' for the following label: 'en'...",
+
+                "The calculated 'SimilarityIndexAverage' value is '1'.",
+                "The rounded 'SimilarityIndexAverage' value is '1'.",
+                "The following SimilarityIndexAverage object has been added to the list: '[ Label: 'en', Value: '1' ]'.",
+                "'1' SimilarityIndexAverage objects have been computed.",
+                "The following verification has been successful: 'ContainsAtLeastOneIndexAverageThatIsNotZero'.",
+                "The following verification has failed: 'ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers'.",
+
+                "The predicted label is: ''.",
+                "The prediction has failed. Try increasing the amount of provided LabeledExample objects.",
+
+            };
+
+            return expectedLogMessages;
+
+        }
+
+        #endregion
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 20.09.2022
+    Last Update: 24.09.2022
 */
