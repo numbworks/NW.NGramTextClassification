@@ -512,6 +512,57 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void GetLabel_ShouldReturnExpectedLabel_ThreeDifferentSimilarityIndexAverageValues()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
+            {
+
+                new SimilarityIndexAverage(label: "sv", value: 0.98),
+                new SimilarityIndexAverage(label: "en", value: 0.75),
+                new SimilarityIndexAverage(label: "dk", value: 0.32)
+
+            };
+
+            string expected = "sv";
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful("ContainsTwoDifferentHighestIndexAverages"),
+                MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
+
+            };
+
+            // Act
+            string actual
+                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                        obj: textClassifier,
+                        methodName: "GetLabel",
+                        args: new object[] { indexAverages }
+                    );
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
         #endregion
 
         #region TearDown
