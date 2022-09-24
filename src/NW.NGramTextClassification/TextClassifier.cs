@@ -114,7 +114,7 @@ namespace NW.NGramTextClassification
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
-            string label = PredictLabel(indexAverages);
+            string label = GetLabel(indexAverages);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs(label));
 
             if (label == null)
@@ -127,6 +127,7 @@ namespace NW.NGramTextClassification
             return result;
 
         }        
+        
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
@@ -162,11 +163,10 @@ namespace NW.NGramTextClassification
             return similarityIndexes;
 
         }
-
         private List<SimilarityIndexAverage> GetSimilarityIndexAverages(List<SimilarityIndex> indexes)
         {
 
-            List<string> uniqueLabels = ExampleUniqueLabels(indexes);
+            List<string> uniqueLabels = GetUniqueLabels(indexes);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingUniqueLabelsHaveBeenFound.Invoke(uniqueLabels));
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
@@ -176,7 +176,7 @@ namespace NW.NGramTextClassification
                 string currentLabel = uniqueLabels[i];
                 _components.LoggingAction.Invoke(MessageCollection.TextClassifier_CalculatingIndexAverageForTheFollowingLabel.Invoke(currentLabel));
 
-                List<double> indexValues = ExampleSimilarityIndexes(currentLabel, indexes);
+                List<double> indexValues = GetSimilarityIndexValues(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
                 double roundedValue = _components.RoundingFunction.Invoke(averageValue);
 
@@ -193,7 +193,61 @@ namespace NW.NGramTextClassification
             return similarityAverages;
 
         }
-        private string PredictLabel(List<SimilarityIndexAverage> indexAverages)
+        private List<string> GetUniqueLabels(List<SimilarityIndex> indexes)
+        {
+
+            /*
+             * 
+             * Label    Average
+             * sv       0.19
+             * en       0.45
+             * en       0.11
+             * en       0.98
+             * 
+             *      => { "sv", "en" }
+             * 
+             */
+
+            List<string> labels = indexes.Select(similarityIndex => similarityIndex.Label).ToList();
+            List<string> uniqueLabels = new HashSet<string>(labels).ToList();
+
+            return uniqueLabels;
+
+        }
+        private List<double> GetSimilarityIndexValues(string label, List<SimilarityIndex> indexes)
+        {
+
+            /*
+             * 
+             * Label    SimilarityIndex
+             * sv       0.19
+             * en       0.45
+             * en       0.12
+             * 
+             *      => en: { 0.45, 0.12 }
+             * 
+             */
+
+            return indexes
+                    .Where(similarityIndex => similarityIndex.Label == label)
+                    .Select(similarityIndex => similarityIndex.Value)
+                    .ToList();
+
+        }
+        private double CalculateAverage(List<double> averages)
+        {
+
+            /* { 0.19, 0.45 } => 0.32 */
+
+            double sum = 0.0;
+            foreach (double dbl in averages)
+                sum += dbl;
+
+            return sum / averages.Count;
+
+        }
+
+        private string GetLabel(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -238,59 +292,6 @@ namespace NW.NGramTextClassification
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(orderedByhighest[0]));
 
             return orderedByhighest[0].Label;
-
-        }
-        private List<string> ExampleUniqueLabels(List<SimilarityIndex> indexes)
-        {
-
-            /*
-             * 
-             * Label    Average
-             * sv       0.19
-             * en       0.45
-             * en       0.11
-             * en       0.98
-             * 
-             *      => { "sv", "en" }
-             * 
-             */
-
-            List<string> labels = indexes.Select(similarityIndex => similarityIndex.Label).ToList();
-            List<string> uniqueLabels = new HashSet<string>(labels).ToList();
-
-            return uniqueLabels;
-
-        }
-        private List<double> ExampleSimilarityIndexes(string label, List<SimilarityIndex> indexes)
-        {
-
-            /*
-             * 
-             * Label    SimilarityIndex
-             * sv       0.19
-             * en       0.45
-             * en       0.12
-             * 
-             *      => en: { 0.45, 0.12 }
-             * 
-             */
-
-            return indexes
-                    .Where(similarityIndex => similarityIndex.Label == label)
-                    .Select(similarityIndex => similarityIndex.Value)
-                    .ToList();
-
-        }
-        private double CalculateAverage(List<double> averages)
-        {
-
-            /* { 0.19, 0.45 } => 0.32 */
-
-            double sum = 0.0;
-            foreach (double dbl in averages)
-                sum += dbl;
-
-            return sum / averages.Count;
 
         }
         private bool ContainsAtLeastOneIndexAverageThatIsNotZero(List<SimilarityIndexAverage> indexAverages)
@@ -364,5 +365,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 24.09.2022
 */

@@ -366,6 +366,16 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void GetLabel_ShouldReturnNull_WhenUntokenizableExamples()
+        {
+
+            // Arrange
+            // Act
+            // Assert
+
+        }
+
         #endregion
 
         #region TearDown

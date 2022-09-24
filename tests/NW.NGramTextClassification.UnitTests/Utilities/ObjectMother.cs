@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
@@ -648,6 +649,14 @@ namespace NW.NGramTextClassification.UnitTests
         public static bool AreEqual(List<INGram> list1, List<INGram> list2)
             => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
 
+        public static TReturn CallPrivateMethod<TClass, TReturn>(TClass obj, string methodName, object[] args)
+        {
+
+            Type type = typeof(TClass);
+
+            return (TReturn)type.GetTypeInfo().GetDeclaredMethod(methodName).Invoke(obj, args);
+
+        }
         public static void Method_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
         {
