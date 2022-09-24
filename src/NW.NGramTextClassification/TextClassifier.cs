@@ -115,7 +115,7 @@ namespace NW.NGramTextClassification
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
             string label = PredictLabel(indexAverages);
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs.Invoke(label));
+            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs(label));
 
             if (label == null)
                 _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);

@@ -6,6 +6,7 @@ using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
 using NW.NGramTextClassification.NGrams;
+using System.Linq;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -118,8 +119,7 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         };
-
-        private static TestCaseData[] predictLabelOrDefaultTestCases =
+        private static TestCaseData[] predictLabelOrDefaultWhenPredictionHasFailedTestCases =
         {
 
             new TestCaseData(
@@ -132,8 +132,8 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     ObjectMother.CreateThirtyLabeledExamples().GetRange(0, 1),
-                    ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultTestCases)}_01")
+                    (string)null
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenPredictionHasFailedTestCases)}_01")
 
         };
 
@@ -190,7 +190,7 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
-            List<string> expectedLogMessages  = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
+            List<string> expectedLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
 
             // Act
             TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
@@ -203,9 +203,9 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(predictLabelOrDefaultTestCases))]
-        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenProperArgument
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        [TestCaseSource(nameof(predictLabelOrDefaultWhenPredictionHasFailedTestCases))]
+        public void PredictLabelOrDefault_ShouldReturnExpectedLabel_WhenPredictionHasFailed
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
         {
 
             // Arrange
@@ -220,38 +220,30 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
-            List<string> expectedLogMessages = CreateWhen(text, tokenizerRuleSet, labeledExamples, components);
+
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            // We skip all the messages in the middle, otherwise the test would be too complex.
+            List<string> finalLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_PredictedLabelIs(expectedLabel),
+                MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples
+
+            };
 
             // Act
             TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
 
-            System.IO.File.WriteAllText(
-                @"C:\Users\Rubèn\Desktop\actualLogMessages.json",
-                System.Text.Json.JsonSerializer.Serialize(
-                    actualLogMessages,
-                    new System.Text.Json.JsonSerializerOptions()
-                    {
-                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                        WriteIndented = true
-                    }
-                ));
-
-            System.IO.File.WriteAllText(
-                @"C:\Users\Rubèn\Desktop\expectedLogMessages.json",
-                System.Text.Json.JsonSerializer.Serialize(
-                    expectedLogMessages,
-                    new System.Text.Json.JsonSerializerOptions()
-                    {
-                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                        WriteIndented = true
-                    }
-                ));
-
             // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+            Assert.AreEqual(expectedLabel, actual.Label);
+            Assert.AreEqual(
+                    initialLogMessages, 
+                    actualLogMessages.GetRange(0, 5)
                 );
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.AreEqual(
+                    finalLogMessages, 
+                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+                );
 
         }
 
@@ -271,6 +263,7 @@ namespace NW.NGramTextClassification.UnitTests
         #endregion
 
         #region SupportMethods
+
         private static List<string> CreateWhenAllRulesFailed
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierComponents components)
         {
@@ -282,7 +275,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             List<INGram> expectedNGrams = components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
 
-            List<string> expectedLogMessages = new List<string>()
+            List<string> expectedMessages = new List<string>()
             {
 
                 MessageCollection.TextClassifier_AttemptingToPredictLabel,
@@ -290,56 +283,12 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
                 MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided(labeledExamples),
                 MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
+
                 MessageCollection.TextClassifier_AllRulesInProvidedRulesetFailed(text)
 
             };
 
-            return expectedLogMessages;
-
-        }
-        private static List<string> CreateWhen
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierComponents components)
-        {
-
-            string expectedText
-                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
-                        text,
-                        TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
-
-            List<INGram> expectedNGrams = components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
-            
-            List<string> expectedLogMessages = new List<string>()
-            {
-
-                MessageCollection.TextClassifier_AttemptingToPredictLabel,
-                MessageCollection.TextClassifier_FollowingTextHasBeenProvided(expectedText),
-                MessageCollection.TextClassifier_FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
-                MessageCollection.TextClassifier_XLabeledExamplesHaveBeenProvided(labeledExamples),
-                MessageCollection.TextClassifier_ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
-                MessageCollection.TextClassifier_ProvidedLabeledExamplesThruTokenizationProcess,
-                // MessageCollection.TextClassifier_ComparingProvidedTextAgainstFollowingTokenizedExample(expectedTokenizedExamples[0]),
-
-                "The calculated 'SimilarityIndex' value is '1'.",
-                "The rounded 'SimilarityIndex' value is '1'.",
-                "The following SimilarityIndex object has been added to the list: '[ Text: 'VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most popular gifts, makes it possible for the gift recipient to choose their own gift at GoGift.com. With more than 7000 business to business customers worldwide GoGift is also a preferred supplier of corporate gifts.ArbetsuppgifterYou will play a very important role developing and maintaining our core platform as well as numerous APIs, applications and websites. You will be a key player in our dev team with highly skilled and experienced software developers (public and external), UX/UI designers, dev ops specialists and online content manager.', Label: 'en', Value: '1' ]'.",
-                "The tokenized text has been successfully compared against the provided list of TokenizedExample objects.",
-                "'1' SimilarityIndex objects have been computed.",
-                "The following unique labels have been found in the provided SimilarityIndex list: '[en]'.",
-                "Calculating 'SimilarityIndexAverage' for the following label: 'en'...",
-
-                "The calculated 'SimilarityIndexAverage' value is '1'.",
-                "The rounded 'SimilarityIndexAverage' value is '1'.",
-                "The following SimilarityIndexAverage object has been added to the list: '[ Label: 'en', Value: '1' ]'.",
-                "'1' SimilarityIndexAverage objects have been computed.",
-                "The following verification has been successful: 'ContainsAtLeastOneIndexAverageThatIsNotZero'.",
-                "The following verification has failed: 'ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers'.",
-
-                "The predicted label is: ''.",
-                "The prediction has failed. Try increasing the amount of provided LabeledExample objects.",
-
-            };
-
-            return expectedLogMessages;
+            return expectedMessages;
 
         }
 
