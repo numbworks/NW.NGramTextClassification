@@ -527,51 +527,8 @@ namespace NW.NGramTextClassification.UnitTests
         public static TextClassifierResult TextClassifier_TextClassifierResult_LabeledExamples00
             = new TextClassifierResult(
                     label: CreateThirtyTokenizedExamples()[0].LabeledExample.Label,
-                    indexes: new List<SimilarityIndex>()
-                                {
-
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[0].LabeledExample.Text, label: "en", value: 1),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[1].LabeledExample.Text, label: "en", value: 0.031696),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[2].LabeledExample.Text, label: "en", value: 0.017512),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[3].LabeledExample.Text, label: "en", value: 0.022472),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[4].LabeledExample.Text, label: "en", value: 0.017927),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[5].LabeledExample.Text, label: "en", value: 0.018717),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[6].LabeledExample.Text, label: "en", value: 0.014844),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[7].LabeledExample.Text, label: "en", value: 0.017185),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[8].LabeledExample.Text, label: "en", value: 0.024096),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[9].LabeledExample.Text, label: "en", value: 0.020548),
-
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[10].LabeledExample.Text, label: "sv", value: 0.000741),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[11].LabeledExample.Text, label: "sv", value: 0),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[12].LabeledExample.Text, label: "sv", value: 0),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[13].LabeledExample.Text, label: "sv", value: 0.000802),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[14].LabeledExample.Text, label: "sv", value: 0.000745),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[15].LabeledExample.Text, label: "sv", value: 0),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[16].LabeledExample.Text, label: "sv", value: 0.000861),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[17].LabeledExample.Text, label: "sv", value: 0.00074),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[18].LabeledExample.Text, label: "sv", value: 0.000733),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[19].LabeledExample.Text, label: "sv", value: 0.000905),
-
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[20].LabeledExample.Text, label: "dk", value: 0.002333),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[21].LabeledExample.Text, label: "dk", value: 0.000895),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[22].LabeledExample.Text, label: "dk", value: 0.000843),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[23].LabeledExample.Text, label: "dk", value: 0.004918),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[24].LabeledExample.Text, label: "dk", value: 0.001668),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[25].LabeledExample.Text, label: "dk", value: 0.003027),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[26].LabeledExample.Text, label: "dk", value: 0.002618),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[27].LabeledExample.Text, label: "dk", value: 0.00367),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[28].LabeledExample.Text, label: "dk", value: 0.002575),
-                                    new SimilarityIndex(text: CreateThirtyTokenizedExamples()[29].LabeledExample.Text, label: "dk", value: 0.003934)
-
-                                },
-                    indexAverages: new List<SimilarityIndexAverage>()
-                                    {
-
-                                        new SimilarityIndexAverage(label: "en", value: 0.1185),
-                                        new SimilarityIndexAverage(label: "sv", value: 0.000553),
-                                        new SimilarityIndexAverage(label: "dk", value: 0.002648)
-
-                                    }
+                    indexes: CreateThirtySimilarityIndexes(),
+                    indexAverages: CreateSimilarityIndexAveragesForThirty()
                 );
 
         #endregion
@@ -799,6 +756,65 @@ namespace NW.NGramTextClassification.UnitTests
             return tokenizedExamples;
 
         }
+        public static List<SimilarityIndex> CreateThirtySimilarityIndexes()
+        {
+
+            List<SimilarityIndex> similarityIndexes = new List<SimilarityIndex>()
+            {
+
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[0].LabeledExample.Text, label: "en", value: 1),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[1].LabeledExample.Text, label: "en", value: 0.031696),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[2].LabeledExample.Text, label: "en", value: 0.017512),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[3].LabeledExample.Text, label: "en", value: 0.022472),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[4].LabeledExample.Text, label: "en", value: 0.017927),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[5].LabeledExample.Text, label: "en", value: 0.018717),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[6].LabeledExample.Text, label: "en", value: 0.014844),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[7].LabeledExample.Text, label: "en", value: 0.017185),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[8].LabeledExample.Text, label: "en", value: 0.024096),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[9].LabeledExample.Text, label: "en", value: 0.020548),
+
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[10].LabeledExample.Text, label: "sv", value: 0.000741),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[11].LabeledExample.Text, label: "sv", value: 0),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[12].LabeledExample.Text, label: "sv", value: 0),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[13].LabeledExample.Text, label: "sv", value: 0.000802),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[14].LabeledExample.Text, label: "sv", value: 0.000745),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[15].LabeledExample.Text, label: "sv", value: 0),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[16].LabeledExample.Text, label: "sv", value: 0.000861),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[17].LabeledExample.Text, label: "sv", value: 0.00074),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[18].LabeledExample.Text, label: "sv", value: 0.000733),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[19].LabeledExample.Text, label: "sv", value: 0.000905),
+
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[20].LabeledExample.Text, label: "dk", value: 0.002333),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[21].LabeledExample.Text, label: "dk", value: 0.000895),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[22].LabeledExample.Text, label: "dk", value: 0.000843),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[23].LabeledExample.Text, label: "dk", value: 0.004918),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[24].LabeledExample.Text, label: "dk", value: 0.001668),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[25].LabeledExample.Text, label: "dk", value: 0.003027),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[26].LabeledExample.Text, label: "dk", value: 0.002618),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[27].LabeledExample.Text, label: "dk", value: 0.00367),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[28].LabeledExample.Text, label: "dk", value: 0.002575),
+                new SimilarityIndex(text: CreateThirtyTokenizedExamples()[29].LabeledExample.Text, label: "dk", value: 0.003934)
+
+            };
+
+            return similarityIndexes;
+
+        }
+        public static List<SimilarityIndexAverage> CreateSimilarityIndexAveragesForThirty()
+        {
+
+            List<SimilarityIndexAverage> similarityIndexAverages = new List<SimilarityIndexAverage>()
+            {
+
+                new SimilarityIndexAverage(label: "en", value: 0.1185),
+                new SimilarityIndexAverage(label: "sv", value: 0.000553),
+                new SimilarityIndexAverage(label: "dk", value: 0.002648)
+
+            };
+
+            return similarityIndexAverages;
+
+        }
 
         #endregion
 
@@ -807,5 +823,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2022
+    Last Update: 24.09.2022
 */
