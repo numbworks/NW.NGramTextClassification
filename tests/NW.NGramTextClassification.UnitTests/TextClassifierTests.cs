@@ -277,7 +277,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-
         [TestCaseSource(nameof(predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction))]
         public void PredictLabelOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulPrediction
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
