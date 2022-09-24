@@ -261,40 +261,40 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            if (!ContainsAtLeastOneIndexAverageThatIsNotZero(indexAverages))
+            if (!ContainsAtLeastOneNonZeroIndexAverage(indexAverages))
             {
-                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
+                _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasFailed(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsNotZero)));
+            _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
 
-            if (!ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(indexAverages))
+            if (!ContainsAtLeastOneDifferentIndexAverage(indexAverages))
             {
-                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
+                _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasFailed(nameof(ContainsAtLeastOneDifferentIndexAverage)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers)));
+            _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneDifferentIndexAverage)));
 
             if (indexAverages.Count == 1)
             {
-                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(indexAverages[0]));
+                _components.LoggingAction(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
                 return indexAverages[0].Label;
             }
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
-            if (!ContainsTwoHighestIndexAveragesThatArentEqual(orderedByhighest[0].Value, orderedByhighest[1].Value))
+            if (!ContainsTwoDifferentHighestIndexAverages(orderedByhighest[0].Value, orderedByhighest[1].Value))
             {
-                _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasFailed.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
+                _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasFailed(nameof(ContainsTwoDifferentHighestIndexAverages)));
                 return null;
             }
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful.Invoke(nameof(ContainsTwoHighestIndexAveragesThatArentEqual)));
+            _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful(nameof(ContainsTwoDifferentHighestIndexAverages)));
 
-            _components.LoggingAction.Invoke(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs.Invoke(orderedByhighest[0]));
+            _components.LoggingAction(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs(orderedByhighest[0]));
 
             return orderedByhighest[0].Label;
 
         }
-        private bool ContainsAtLeastOneIndexAverageThatIsNotZero(List<SimilarityIndexAverage> indexAverages)
+        private bool ContainsAtLeastOneNonZeroIndexAverage(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -314,7 +314,7 @@ namespace NW.NGramTextClassification
             return true;
 
         }
-        private bool ContainsAtLeastOneIndexAverageThatIsntEqualToTheOthers(List<SimilarityIndexAverage> indexAverages)
+        private bool ContainsAtLeastOneDifferentIndexAverage(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -337,7 +337,7 @@ namespace NW.NGramTextClassification
             return true;
 
         }
-        private bool ContainsTwoHighestIndexAveragesThatArentEqual(double first, double second)
+        private bool ContainsTwoDifferentHighestIndexAverages(double first, double second)
         {
 
             /*
