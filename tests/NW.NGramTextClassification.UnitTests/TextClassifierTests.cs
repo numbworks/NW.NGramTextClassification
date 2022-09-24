@@ -119,7 +119,18 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         };
-        private static TestCaseData[] predictLabelOrDefaultWhenPredictionHasFailedTestCases =
+        private static TestCaseData[] predictLabelOrDefaultWhenUntokenizableExamples =
+       {
+
+            new TestCaseData(
+                    ObjectMother.CreateThirtyLabeledExamples()[0].Text,
+                    ObjectMother.Shared_RuleSet_Five,
+                    ObjectMother.Shared_LabeledExamples_Untokenizable,
+                    TextClassifier.DefaultTextClassifierResult
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenUntokenizableExamples)}_01")
+
+        };
+        private static TestCaseData[] predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction =
         {
 
             new TestCaseData(
@@ -132,11 +143,11 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     ObjectMother.CreateThirtyLabeledExamples().GetRange(0, 1),
-                    (string)null
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenPredictionHasFailedTestCases)}_01")
+                    ObjectMother.CreateThirtyLabeledExamples()[0].Label
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction)}_01")
 
         };
-        private static TestCaseData[] predictLabelOrDefaultWhenPredictionHasBeenSuccessful =
+        private static TestCaseData[] predictLabelOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction =
         {
 
             new TestCaseData(
@@ -150,18 +161,7 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                     ObjectMother.CreateThirtyLabeledExamples(),
                     ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenPredictionHasBeenSuccessful)}_01")
-
-        };
-        private static TestCaseData[] predictLabelOrDefaultWhenUntokenizableExamples =
-        {
-
-            new TestCaseData(
-                    ObjectMother.CreateThirtyLabeledExamples()[0].Text,
-                    ObjectMother.Shared_RuleSet_Five,
-                    ObjectMother.Shared_LabeledExamples_Untokenizable,
-                    TextClassifier.DefaultTextClassifierResult
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenUntokenizableExamples)}_01")
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
 
@@ -200,6 +200,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+
         [TestCaseSource(nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases))]
         public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenAllRulesFailed
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
@@ -228,96 +229,6 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
-
-        }
-
-        [TestCaseSource(nameof(predictLabelOrDefaultWhenPredictionHasFailedTestCases))]
-        public void PredictLabelOrDefault_ShouldReturnExpectedLabel_WhenPredictionHasFailed
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
-        {
-
-            // Arrange
-            List<string> actualLogMessages = new List<string>();
-            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
-                          nGramsTokenizer: new NGramTokenizer(),
-                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
-                          loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
-
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
-            // We skip all the messages in the middle, otherwise the test would be too complex.
-            List<string> finalLogMessages = new List<string>()
-            {
-
-                MessageCollection.TextClassifier_PredictedLabelIs(expectedLabel),
-                MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples
-
-            };
-
-            // Act
-            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
-
-            // Assert
-            Assert.AreEqual(expectedLabel, actual.Label);
-            Assert.AreEqual(
-                    initialLogMessages, 
-                    actualLogMessages.GetRange(0, 5)
-                );
-            Assert.AreEqual(
-                    finalLogMessages, 
-                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
-                );
-
-        }
-
-        [TestCaseSource(nameof(predictLabelOrDefaultWhenPredictionHasBeenSuccessful))]
-        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenPredictionHasBeenSuccessful
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
-        {
-
-            // Arrange
-            List<string> actualLogMessages = new List<string>();
-            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
-                          nGramsTokenizer: new NGramTokenizer(),
-                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
-                          loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
-
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
-            // We skip all the messages in the middle, otherwise the test would be too complex.
-            List<string> finalLogMessages = new List<string>()
-            {
-
-                MessageCollection.TextClassifier_PredictedLabelIs(expected.Label),
-                MessageCollection.TextClassifier_PredictionHasBeenSuccessful
-
-            };
-
-            // Act
-            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
-
-            // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
-                );
-            Assert.AreEqual(
-                    initialLogMessages,
-                    actualLogMessages.GetRange(0, 5)
-                );
-            Assert.AreEqual(
-                    finalLogMessages,
-                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
-                );
 
         }
 
@@ -365,6 +276,98 @@ namespace NW.NGramTextClassification.UnitTests
                 );
 
         }
+
+
+        [TestCaseSource(nameof(predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction))]
+        public void PredictLabelOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulPrediction
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            // We skip all the messages in the middle, otherwise the test would be too complex.
+            List<string> finalLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_PredictedLabelIs(expectedLabel),
+                MessageCollection.TextClassifier_PredictionHasBeenSuccessful
+
+            };
+
+            // Act
+            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+
+            // Assert
+            Assert.AreEqual(expectedLabel, actual.Label);
+            Assert.AreEqual(
+                    initialLogMessages, 
+                    actualLogMessages.GetRange(0, 5)
+                );
+            Assert.AreEqual(
+                    finalLogMessages, 
+                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+                );
+
+        }
+
+        [TestCaseSource(nameof(predictLabelOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction))]
+        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenThirtyLabeledExamplesAndSuccessfulPrediction
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            // We skip all the messages in the middle, otherwise the test would be too complex.
+            List<string> finalLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_PredictedLabelIs(expected.Label),
+                MessageCollection.TextClassifier_PredictionHasBeenSuccessful
+
+            };
+
+            // Act
+            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+            Assert.AreEqual(
+                    initialLogMessages,
+                    actualLogMessages.GetRange(0, 5)
+                );
+            Assert.AreEqual(
+                    finalLogMessages,
+                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+                );
+
+        }
+
 
         [Test]
         public void GetLabel_ShouldReturnNull_WhenContainsAtLeastOneNonZeroIndexAverageReturnsFalse()
@@ -495,6 +498,53 @@ namespace NW.NGramTextClassification.UnitTests
                 MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
                 MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
                 MessageCollection.TextClassifier_FollowingVerificationHasFailed("ContainsTwoDifferentHighestIndexAverages")
+
+            };
+
+            // Act
+            string actual
+                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                        obj: textClassifier,
+                        methodName: "GetLabel",
+                        args: new object[] { indexAverages }
+                    );
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void GetLabel_ShouldReturnExpectedLabel_OneSimilarityIndexAverageValue()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
+            {
+
+                new SimilarityIndexAverage(label: "sv", value: 0.98)
+
+            };
+
+            string expected = "sv";
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
 

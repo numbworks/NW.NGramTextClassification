@@ -268,18 +268,18 @@ namespace NW.NGramTextClassification
             }
             _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
 
+            if (indexAverages.Count == 1)
+            {
+                _components.LoggingAction(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
+                return indexAverages[0].Label;
+            }
+
             if (!ContainsAtLeastOneDifferentIndexAverage(indexAverages))
             {
                 _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasFailed(nameof(ContainsAtLeastOneDifferentIndexAverage)));
                 return null;
             }
             _components.LoggingAction(MessageCollection.TextClassifier_FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneDifferentIndexAverage)));
-
-            if (indexAverages.Count == 1)
-            {
-                _components.LoggingAction(MessageCollection.TextClassifier_SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
-                return indexAverages[0].Label;
-            }
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
             if (!ContainsTwoDifferentHighestIndexAverages(orderedByhighest[0].Value, orderedByhighest[1].Value))
