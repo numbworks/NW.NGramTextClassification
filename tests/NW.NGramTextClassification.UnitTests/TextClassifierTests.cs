@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.Messages;
+using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
-using NW.NGramTextClassification.NGrams;
-using System.Linq;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -136,6 +136,23 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenPredictionHasFailedTestCases)}_01")
 
         };
+        private static TestCaseData[] predictLabelOrDefaultWhenPredictionHasBeenSuccessful =
+        {
+
+            new TestCaseData(
+                    ObjectMother.CreateThirtyLabeledExamples()[0].Text,
+                    new NGramTokenizerRuleSet(
+                            doForMonogram: true,
+                            doForBigram: true,
+                            doForTrigram: true,
+                            doForFourgram: true,
+                            doForFivegram: true
+                        ),
+                    ObjectMother.CreateThirtyLabeledExamples(),
+                    ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
+                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenPredictionHasBeenSuccessful)}_01")
+
+        };
 
         #endregion
 
@@ -246,6 +263,57 @@ namespace NW.NGramTextClassification.UnitTests
                 );
 
         }
+
+        [TestCaseSource(nameof(predictLabelOrDefaultWhenPredictionHasBeenSuccessful))]
+        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenPredictionHasBeenSuccessful
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            // We skip all the messages in the middle, otherwise the test would be too complex.
+            List<string> finalLogMessages = new List<string>()
+            {
+
+                MessageCollection.TextClassifier_PredictedLabelIs(expected.Label),
+                MessageCollection.TextClassifier_PredictionHasBeenSuccessful
+
+            };
+
+            // Act
+            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+            Assert.AreEqual(
+                    initialLogMessages,
+                    actualLogMessages.GetRange(0, 5)
+                );
+            Assert.AreEqual(
+                    finalLogMessages,
+                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+                );
+
+        }
+
+
+
+
+
 
         [Test]
         public void PredictLabelOrDefault_ShouldReturnDefaultTextClassifierResult_WhenUnproperLabeledExamples()
