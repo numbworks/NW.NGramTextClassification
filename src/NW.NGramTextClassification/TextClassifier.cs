@@ -68,7 +68,7 @@ namespace NW.NGramTextClassification
 
             }
 
-            List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples);
+            List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples, tokenizerRuleSet);
             _components.LoggingAction.Invoke(MessageCollection.TextClassifier_ProvidedLabeledExamplesThruTokenizationProcess);
             if (tokenizedExamples == null)
             {
