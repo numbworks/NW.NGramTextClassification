@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using NW.NGramTextClassification.NGrams;
-using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -13,44 +10,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region Properties
 
-        public static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(LabeledExamples.ObjectMother.LabeledExample01.Text, "en", 1);
-        public static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(LabeledExamples.ObjectMother.LabeledExample02.Text, "sv", 0);
-        public static List<SimilarityIndex> TextClassifier_Text1_SimilarityIndexes
-            = new List<SimilarityIndex>()
-            {
-                TextClassifier_Text1_SimilarityIndex1,
-                TextClassifier_Text1_SimilarityIndex2
-            };
-        public static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage1
-            = new SimilarityIndexAverage("en", 1);
-        public static SimilarityIndexAverage TextClassifier_Text1_SimilarityIndexAverage2
-            = new SimilarityIndexAverage("sv", 0);
-        public static List<SimilarityIndexAverage> TextClassifier_Text1_SimilarityIndexAverages
-            = new List<SimilarityIndexAverage>()
-            {
-                TextClassifier_Text1_SimilarityIndexAverage1,
-                TextClassifier_Text1_SimilarityIndexAverage2
-            };
-        public static TextClassifierResult TextClassifier_Text1_TextClassifierResult
-            = new TextClassifierResult(
-                        LabeledExamples.ObjectMother.LabeledExample01.Label,
-                        TextClassifier_Text1_SimilarityIndexes,
-                        TextClassifier_Text1_SimilarityIndexAverages);
-        public static List<INGram> TextClassifier_Text1_NGrams = LabeledExamples.ObjectMother.LabeledExample01_NGrams;
-        public static List<string> TextClassifier_Text1_UniqueLabels
-            = new List<string>()
-            {
-                TextClassifier_Text1_SimilarityIndex1.Label,
-                TextClassifier_Text1_SimilarityIndex2.Label,
-            };
-
-        public static TextClassifierResult TextClassifier_TextClassifierResult_LabeledExamples00
-            = new TextClassifierResult(
-                    label: LabeledExamples.ObjectMother.CreateThirtyTokenizedExamples()[0].LabeledExample.Label,
-                    indexes: Similarity.ObjectMother.CreateThirtySimilarityIndexes(),
-                    indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForThirty()
-                );
-
         public static string TextClassifierResult01_AsString
             = $"[ Label: '{LabeledExamples.ObjectMother.LabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";       
         public static string TextClassifierResult_AsStringWithNullLabel
@@ -58,10 +17,17 @@ namespace NW.NGramTextClassification.UnitTests
         public static string TextClassifierResult_AllNulls
             = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
 
+        public static TextClassifierResult TextClassifierResult02_LabeledExamples00
+            = new TextClassifierResult(
+                    label: LabeledExamples.ObjectMother.CreateThirtyTokenizedExamples()[0].LabeledExample.Label,
+                    indexes: Similarity.ObjectMother.CreateThirtySimilarityIndexes(),
+                    indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForThirty()
+                );
+
         #endregion
 
         #region Methods
-      
+
         public static bool AreEqual(TextClassifierResult obj1, TextClassifierResult obj2)
         {
 

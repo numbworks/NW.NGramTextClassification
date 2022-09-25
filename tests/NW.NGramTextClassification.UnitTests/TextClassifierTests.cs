@@ -160,7 +160,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyLabeledExamples(),
-                    ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
+                    ObjectMother.TextClassifierResult02_LabeledExamples00
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
