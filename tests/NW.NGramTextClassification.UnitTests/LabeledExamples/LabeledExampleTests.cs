@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new TestCaseData(
                 new TestDelegate( () => new LabeledExample(
                                                 label: null,
-                                                text: ObjectMother.Shared_LabeledExample01.Text
+                                                text: ObjectMother.LabeledExample01.Text
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             new TestCaseData(
                 new TestDelegate( () => new LabeledExample(
-                                                label: ObjectMother.Shared_LabeledExample01.Label,
+                                                label: ObjectMother.LabeledExample01.Label,
                                                 text: null
                                             )),
                 typeof(ArgumentNullException),
@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         [TestCaseSource(nameof(labeledExampleExceptionTestCases))]
         public void LabeledExample_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ToString_ShouldReturnExpectedString_WhenInvoked()
@@ -52,11 +52,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Arrange
             // Act
             string actual
-                = ObjectMother.Shared_LabeledExample01.ToString();
+                = ObjectMother.LabeledExample01.ToString();
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.Shared_LabeledExample01_AsString,
+                    ObjectMother.LabeledExample01_AsString,
                     actual);
 
         }
@@ -69,8 +69,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Act
             LabeledExample actual
                 = new LabeledExample(
-                        label: ObjectMother.Shared_LabeledExample01.Label,
-                        text: ObjectMother.Shared_LabeledExample01.Text
+                        label: ObjectMother.LabeledExample01.Label,
+                        text: ObjectMother.LabeledExample01.Text
                     );
 
             // Assert

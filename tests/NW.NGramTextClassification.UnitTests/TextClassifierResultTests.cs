@@ -15,7 +15,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     new TextClassifierResult(
-                        label: ObjectMother.LabeledExample01.Label,
+                        label: LabeledExamples.ObjectMother.LabeledExample01.Label,
                         indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
                         indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
                         ),
@@ -75,7 +75,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             TextClassifierResult actual
                 = new TextClassifierResult(
-                        label: ObjectMother.LabeledExample01.Label,
+                        label: LabeledExamples.ObjectMother.LabeledExample01.Label,
                         indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
                         indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
                     );
@@ -95,5 +95,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 20.09.2022
+    Last Update: 25.09.2022
 */

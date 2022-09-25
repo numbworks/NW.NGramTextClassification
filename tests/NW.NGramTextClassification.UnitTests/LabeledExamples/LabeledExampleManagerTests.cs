@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 new TestDelegate(
                         () => new LabeledExampleManager()
                                     .CreateOrDefault(
-                                        labeledExample: ObjectMother.Shared_LabeledExample01,
+                                        labeledExample: ObjectMother.LabeledExample01,
                                         tokenizerRuleSet: null
                             )),
                 typeof(ArgumentNullException),
@@ -66,7 +66,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 new TestDelegate(
                         () => new LabeledExampleManager()
                                     .CreateOrDefault(
-                                        labeledExamples: ObjectMother.Shared_LabeledExamples,
+                                        labeledExamples: ObjectMother.LabeledExamples,
                                         tokenizerRuleSet: null
                             )),
                 typeof(ArgumentNullException),
@@ -79,33 +79,33 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             // First method signature
             new TestCaseData(
-                    ObjectMother.Shared_LabeledExample01,
-                    ObjectMother.Shared_RuleSet_Mono,
-                    ObjectMother.Shared_TokenizedExample01_Mono
+                    ObjectMother.LabeledExample01,
+                    UnitTests.ObjectMother.Shared_RuleSet_Mono,
+                    ObjectMother.TokenizedExample01_Mono
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.Shared_LabeledExample01,
-                    ObjectMother.Shared_RuleSet_MonoBi,
-                    ObjectMother.Shared_TokenizedExample01_MonoBi
+                    ObjectMother.LabeledExample01,
+                    UnitTests.ObjectMother.Shared_RuleSet_MonoBi,
+                    ObjectMother.TokenizedExample01_MonoBi
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.Shared_LabeledExample01,
-                    ObjectMother.Shared_RuleSet_MonoBiTri,
-                    ObjectMother.Shared_TokenizedExample01_MonoBiTri
+                    ObjectMother.LabeledExample01,
+                    UnitTests.ObjectMother.Shared_RuleSet_MonoBiTri,
+                    ObjectMother.TokenizedExample01_MonoBiTri
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_03"),
 
             new TestCaseData(
-                    ObjectMother.Shared_LabeledExample01,
-                    ObjectMother.Shared_RuleSet_MonoBiTriFour,
-                    ObjectMother.Shared_TokenizedExample01_MonoBiTriFour
+                    ObjectMother.LabeledExample01,
+                    UnitTests.ObjectMother.Shared_RuleSet_MonoBiTriFour,
+                    ObjectMother.TokenizedExample01_MonoBiTriFour
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_04"),
 
             new TestCaseData(
-                    ObjectMother.Shared_LabeledExample01,
-                    ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
-                    ObjectMother.Shared_TokenizedExample01_MonoBiTriFourFive
+                    ObjectMother.LabeledExample01,
+                    UnitTests.ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
+                    ObjectMother.TokenizedExample01_MonoBiTriFourFive
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
 
         };
@@ -120,12 +120,12 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         [TestCaseSource(nameof(labeledExampleManagerExceptionTestCases))]
         public void LabeledExampleManager_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(createOrDefaultExceptionTestCases))]
         public void CreateOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(createOrDefaultTestCases))]
         public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenProperParameters
@@ -155,11 +155,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             // Act
             List<TokenizedExample> actual 
-                = labeledExampleManager.CreateOrDefault(ObjectMother.Shared_LabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
+                = labeledExampleManager.CreateOrDefault(ObjectMother.LabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExamples, actual)
+                    ObjectMother.AreEqual(ObjectMother.TokenizedExamples, actual)
                 );
 
         }
@@ -206,8 +206,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             TokenizedExample actual 
                 = labeledExampleManager
                     .CreateOrDefault(
-                        labeledExample: ObjectMother.Shared_LabeledExample03_Untokenizable,
-                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
+                        labeledExample: ObjectMother.LabeledExample03_Untokenizable,
+                        tokenizerRuleSet: UnitTests.ObjectMother.Shared_RuleSet_Five
                         );
 
             // Assert
@@ -226,8 +226,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             List<TokenizedExample> actual
                 = labeledExampleManager
                     .CreateOrDefault(
-                        labeledExamples: ObjectMother.Shared_LabeledExamples_Untokenizable,
-                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
+                        labeledExamples: ObjectMother.LabeledExamples_Untokenizable,
+                        tokenizerRuleSet: UnitTests.ObjectMother.Shared_RuleSet_Five
                         );
 
             // Assert
@@ -243,11 +243,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
             // Act
-            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample: ObjectMother.Shared_LabeledExample01);
+            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample: ObjectMother.LabeledExample01);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExample01, actual)
+                    ObjectMother.AreEqual(ObjectMother.TokenizedExample01, actual)
                 );
 
         }
@@ -260,11 +260,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
             // Act
-            List<TokenizedExample> actual = labeledExampleManager.CreateOrDefault(labeledExamples: ObjectMother.Shared_LabeledExamples);
+            List<TokenizedExample> actual = labeledExampleManager.CreateOrDefault(labeledExamples: ObjectMother.LabeledExamples);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.Shared_TokenizedExamples, actual)
+                    ObjectMother.AreEqual(ObjectMother.TokenizedExamples, actual)
                 );
 
         }

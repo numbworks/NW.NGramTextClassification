@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification;
 using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.UnitTests;
+using NW.NGramTextClassification.UnitTests.LabeledExamples;
 
 namespace NW.NGramTextClassificationClient
 {
@@ -75,5 +75,5 @@ namespace NW.NGramTextClassificationClient
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2022
+    Last Update: 25.09.2022
 */

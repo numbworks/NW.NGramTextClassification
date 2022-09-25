@@ -49,7 +49,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     .ClassifyOrDefault(
                                         text: null,
                                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
-                                        labeledExamples: ObjectMother.LabeledExamples
+                                        labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -59,9 +59,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: ObjectMother.LabeledExample01.Text,
+                                        text: LabeledExamples.ObjectMother.LabeledExample01.Text,
                                         tokenizerRuleSet: null,
-                                        labeledExamples: ObjectMother.LabeledExamples
+                                        labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizerRuleSet").Message
@@ -71,7 +71,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: ObjectMother.LabeledExample01.Text,
+                                        text: LabeledExamples.ObjectMother.LabeledExample01.Text,
                                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),
@@ -92,7 +92,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFourgram: true,
                             doForFivegram: true
                         ),
-                    ObjectMother.CreateThirtyLabeledExamples(),
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples(),
                     new TextClassifierResult(
                             label: null,
                             indexes: new List<SimilarityIndex>(),
@@ -109,7 +109,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFourgram: false,
                             doForFivegram: true
                         ),
-                    ObjectMother.CreateThirtyLabeledExamples(),
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples(),
                     new TextClassifierResult(
                             label: null,
                             indexes: new List<SimilarityIndex>(),
@@ -123,9 +123,9 @@ namespace NW.NGramTextClassification.UnitTests
        {
 
             new TestCaseData(
-                    ObjectMother.CreateThirtyLabeledExamples()[0].Text,
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples()[0].Text,
                     ObjectMother.Shared_RuleSet_Five,
-                    ObjectMother.LabeledExamples_Untokenizable,
+                    LabeledExamples.ObjectMother.LabeledExamples_Untokenizable,
                     TextClassifier.DefaultTextClassifierResult
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
@@ -134,7 +134,7 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    ObjectMother.CreateThirtyLabeledExamples()[0].Text,
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples()[0].Text,
                     new NGramTokenizerRuleSet(
                             doForMonogram: true,
                             doForBigram: true,
@@ -142,8 +142,8 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFourgram: true,
                             doForFivegram: true
                         ),
-                    ObjectMother.CreateThirtyLabeledExamples().GetRange(0, 1),
-                    ObjectMother.CreateThirtyLabeledExamples()[0].Label
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples().GetRange(0, 1),
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples()[0].Label
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction)}_01")
 
         };
@@ -151,7 +151,7 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    ObjectMother.CreateThirtyLabeledExamples()[0].Text,
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples()[0].Text,
                     new NGramTokenizerRuleSet(
                             doForMonogram: true,
                             doForBigram: true,
@@ -159,7 +159,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFourgram: true,
                             doForFivegram: true
                         ),
-                    ObjectMother.CreateThirtyLabeledExamples(),
+                    LabeledExamples.ObjectMother.CreateThirtyLabeledExamples(),
                     ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
@@ -654,5 +654,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2022
+    Last Update: 25.09.2022
 */

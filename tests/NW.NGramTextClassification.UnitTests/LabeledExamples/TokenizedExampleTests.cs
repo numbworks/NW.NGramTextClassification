@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new TestCaseData(
                 new TestDelegate( () => new TokenizedExample(
                                                 labeledExample: null,
-                                                nGrams: ObjectMother.Shared_TokenizedExample01.NGrams
+                                                nGrams: ObjectMother.TokenizedExample01.NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExample").Message
@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             new TestCaseData(
                 new TestDelegate( () => new TokenizedExample(
-                                                labeledExample: ObjectMother.Shared_LabeledExample01,
+                                                labeledExample: ObjectMother.LabeledExample01,
                                                 nGrams: null
                                             )),
                 typeof(ArgumentNullException),
@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         [TestCaseSource(nameof(tokenizedExampleExceptionTestCases))]
         public void TokenizedExample_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ToString_ShouldReturnExpectedString_WhenInvoked()
@@ -52,11 +52,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Arrange
             // Act
             string actual
-                = ObjectMother.Shared_TokenizedExample01.ToString();
+                = ObjectMother.TokenizedExample01.ToString();
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.Shared_TokenizedExample01_AsString,
+                    ObjectMother.TokenizedExample01_AsString,
                     actual);
 
         }
@@ -69,8 +69,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Act
             TokenizedExample actual
                 = new TokenizedExample(
-                        labeledExample: ObjectMother.Shared_TokenizedExample01.LabeledExample,
-                        nGrams: ObjectMother.Shared_TokenizedExample01.NGrams
+                        labeledExample: ObjectMother.TokenizedExample01.LabeledExample,
+                        nGrams: ObjectMother.TokenizedExample01.NGrams
                     );
 
             // Assert

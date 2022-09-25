@@ -40,7 +40,7 @@ namespace NW.NGramTextClassification.UnitTests
                                             tokenizationStrategy: ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical
                                         )
                                     .DoForRuleSet(
-                                        text: ObjectMother.LabeledExample03_Untokenizable.Text,
+                                        text: LabeledExamples.ObjectMother.LabeledExample03_Untokenizable.Text,
                                         tokenizerRuleSet: new NGramTokenizerRuleSet()
                         )),
                     typeof(ArgumentException),
@@ -124,7 +124,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<INGram> actual 
                 = nGramTokenizer
                     .DoForRuleSetOrDefault(
-                        text: ObjectMother.LabeledExample03_Untokenizable.Text, 
+                        text: LabeledExamples.ObjectMother.LabeledExample03_Untokenizable.Text, 
                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
                         );
 
@@ -141,11 +141,11 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<Monogram> actual = nGramTokenizer.DoForMonogram(ObjectMother.LabeledExample01.Text);
+            List<Monogram> actual = nGramTokenizer.DoForMonogram(LabeledExamples.ObjectMother.LabeledExample01.Text);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.LabeledExample01_Monograms, actual)
+                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Monograms, actual)
                 );
 
         }
@@ -158,11 +158,11 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<Bigram> actual = nGramTokenizer.DoForBigram(ObjectMother.LabeledExample01.Text);
+            List<Bigram> actual = nGramTokenizer.DoForBigram(LabeledExamples.ObjectMother.LabeledExample01.Text);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.LabeledExample01_Bigrams, actual)
+                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Bigrams, actual)
                 );
 
         }
@@ -175,11 +175,11 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<Trigram> actual = nGramTokenizer.DoForTrigram(ObjectMother.LabeledExample01.Text);
+            List<Trigram> actual = nGramTokenizer.DoForTrigram(LabeledExamples.ObjectMother.LabeledExample01.Text);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.LabeledExample01_Trigrams, actual)
+                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Trigrams, actual)
                 );
 
         }
@@ -192,11 +192,11 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<Fourgram> actual = nGramTokenizer.DoForFourgram(ObjectMother.LabeledExample01.Text);
+            List<Fourgram> actual = nGramTokenizer.DoForFourgram(LabeledExamples.ObjectMother.LabeledExample01.Text);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.LabeledExample01_Fourgrams, actual)
+                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Fourgrams, actual)
                 );
 
         }
@@ -209,11 +209,11 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizer nGramTokenizer = new NGramTokenizer();
 
             // Act
-            List<Fivegram> actual = nGramTokenizer.DoForFivegram(ObjectMother.LabeledExample01.Text);
+            List<Fivegram> actual = nGramTokenizer.DoForFivegram(LabeledExamples.ObjectMother.LabeledExample01.Text);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.LabeledExample01_Fivegrams, actual)
+                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Fivegrams, actual)
                 );
 
         }
@@ -255,52 +255,52 @@ namespace NW.NGramTextClassification.UnitTests
             {
 
                 new TestCaseData(
-                        ObjectMother.LabeledExample01.Text,
+                        LabeledExamples.ObjectMother.LabeledExample01.Text,
                         ObjectMother.Shared_RuleSet_Mono,
-                        ObjectMother.CreateNGrams(
-                            ObjectMother.LabeledExample01_Monograms
+                        LabeledExamples.ObjectMother.CreateNGrams(
+                            LabeledExamples.ObjectMother.LabeledExample01_Monograms
                             )
                     ).SetArgDisplayNames($"{baseName}_01"),
 
                 new TestCaseData(
-                        ObjectMother.LabeledExample01.Text,
+                        LabeledExamples.ObjectMother.LabeledExample01.Text,
                         ObjectMother.Shared_RuleSet_MonoBi,
-                        ObjectMother.CreateNGrams(
-                            ObjectMother.LabeledExample01_Monograms,
-                            ObjectMother.LabeledExample01_Bigrams
+                        LabeledExamples.ObjectMother.CreateNGrams(
+                            LabeledExamples.ObjectMother.LabeledExample01_Monograms,
+                            LabeledExamples.ObjectMother.LabeledExample01_Bigrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_02"),
 
                 new TestCaseData(
-                        ObjectMother.LabeledExample01.Text,
+                        LabeledExamples.ObjectMother.LabeledExample01.Text,
                         ObjectMother.Shared_RuleSet_MonoBiTri,
-                        ObjectMother.CreateNGrams(
-                            ObjectMother.LabeledExample01_Monograms,
-                            ObjectMother.LabeledExample01_Bigrams,
-                            ObjectMother.LabeledExample01_Trigrams
+                        LabeledExamples.ObjectMother.CreateNGrams(
+                            LabeledExamples.ObjectMother.LabeledExample01_Monograms,
+                            LabeledExamples.ObjectMother.LabeledExample01_Bigrams,
+                            LabeledExamples.ObjectMother.LabeledExample01_Trigrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_03"),
 
                 new TestCaseData(
-                        ObjectMother.LabeledExample01.Text,
+                        LabeledExamples.ObjectMother.LabeledExample01.Text,
                         ObjectMother.Shared_RuleSet_MonoBiTriFour,
-                        ObjectMother.CreateNGrams(
-                            ObjectMother.LabeledExample01_Monograms,
-                            ObjectMother.LabeledExample01_Bigrams,
-                            ObjectMother.LabeledExample01_Trigrams,
-                            ObjectMother.LabeledExample01_Fourgrams
+                        LabeledExamples.ObjectMother.CreateNGrams(
+                            LabeledExamples.ObjectMother.LabeledExample01_Monograms,
+                            LabeledExamples.ObjectMother.LabeledExample01_Bigrams,
+                            LabeledExamples.ObjectMother.LabeledExample01_Trigrams,
+                            LabeledExamples.ObjectMother.LabeledExample01_Fourgrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_04"),
 
                 new TestCaseData(
-                        ObjectMother.LabeledExample01.Text,
+                        LabeledExamples.ObjectMother.LabeledExample01.Text,
                         ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
-                        ObjectMother.CreateNGrams(
-                            ObjectMother.LabeledExample01_Monograms,
-                            ObjectMother.LabeledExample01_Bigrams,
-                            ObjectMother.LabeledExample01_Trigrams,
-                            ObjectMother.LabeledExample01_Fourgrams,
-                            ObjectMother.LabeledExample01_Fivegrams
+                        LabeledExamples.ObjectMother.CreateNGrams(
+                            LabeledExamples.ObjectMother.LabeledExample01_Monograms,
+                            LabeledExamples.ObjectMother.LabeledExample01_Bigrams,
+                            LabeledExamples.ObjectMother.LabeledExample01_Trigrams,
+                            LabeledExamples.ObjectMother.LabeledExample01_Fourgrams,
+                            LabeledExamples.ObjectMother.LabeledExample01_Fivegrams
                             )
                     ).SetArgDisplayNames($"{nameof(baseName)}_05")
 
@@ -317,5 +317,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 20.09.2022
+    Last Update: 25.09.2022
 */
