@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierResult PredictLabelOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples);
+        TextClassifierResult ClassifyOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples);
 
         /// <summary>
         /// Attempts to assign a label to <paramref name="text"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
@@ -25,12 +25,12 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>       
-        TextClassifierResult PredictLabelOrDefault(string text, List<LabeledExample> labeledExamples);
+        TextClassifierResult ClassifyOrDefault(string text, List<LabeledExample> labeledExamples);
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 24.09.2022
 */

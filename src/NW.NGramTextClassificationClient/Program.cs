@@ -40,7 +40,7 @@ namespace NW.NGramTextClassificationClient
             List<LabeledExample> labeledExamples = ObjectMother.CreateThirtyLabeledExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.PredictLabelOrDefault(text, labeledExamples);
+            TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 
@@ -52,7 +52,7 @@ namespace NW.NGramTextClassificationClient
             List<LabeledExample> labeledExamples = ObjectMother.CreateThirtyLabeledExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.PredictLabelOrDefault(text, labeledExamples);
+            TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 
@@ -64,7 +64,7 @@ namespace NW.NGramTextClassificationClient
             List<LabeledExample> labeledExamples = ObjectMother.CreateThirtyLabeledExamples();
 
             ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.PredictLabelOrDefault(text, labeledExamples);
+            TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
 
             Console.WriteLine(result.Label);
 

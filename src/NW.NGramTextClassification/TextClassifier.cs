@@ -53,7 +53,7 @@ namespace NW.NGramTextClassification
 
         #region Methods_public
 
-        public TextClassifierResult PredictLabelOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierResult ClassifyOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
             ValidateAndBeginPrediction(text, tokenizerRuleSet, labeledExamples);
@@ -81,8 +81,8 @@ namespace NW.NGramTextClassification
             return CreateResult(nGrams, tokenizedExamples);
 
         }
-        public TextClassifierResult PredictLabelOrDefault(string text, List<LabeledExample> labeledExamples)
-                => PredictLabelOrDefault(text, DefaultNGramTokenizerRuleSet, labeledExamples);
+        public TextClassifierResult ClassifyOrDefault(string text, List<LabeledExample> labeledExamples)
+                => ClassifyOrDefault(text, DefaultNGramTokenizerRuleSet, labeledExamples);
 
         #endregion
 

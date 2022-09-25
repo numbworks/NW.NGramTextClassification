@@ -40,47 +40,47 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(textClassifierExceptionTestCases)}_02")
 
         };
-        private static TestCaseData[] predictLabelOrDefaultExceptionTestCases =
+        private static TestCaseData[] classifyOrDefaultExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .PredictLabelOrDefault(
+                                    .ClassifyOrDefault(
                                         text: null,
                                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                                         labeledExamples: ObjectMother.Shared_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .PredictLabelOrDefault(
+                                    .ClassifyOrDefault(
                                         text: ObjectMother.Shared_LabeledExample01.Text,
                                         tokenizerRuleSet: null,
                                         labeledExamples: ObjectMother.Shared_LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizerRuleSet").Message
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultExceptionTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .PredictLabelOrDefault(
+                                    .ClassifyOrDefault(
                                         text: ObjectMother.Shared_LabeledExample01.Text,
                                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExamples").Message
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultExceptionTestCases)}_03")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultExceptionTestCases)}_03")
 
         };
-        private static TestCaseData[] predictLabelOrDefaultWhenAllRulesFailedTestCases =
+        private static TestCaseData[] classifyOrDefaultWhenAllRulesFailedTestCases =
         {
 
            new TestCaseData(
@@ -98,7 +98,7 @@ namespace NW.NGramTextClassification.UnitTests
                             indexes: new List<SimilarityIndex>(),
                             indexAverages: new List<SimilarityIndexAverage>()
                         )
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
             new TestCaseData(
                     "hi",
@@ -115,11 +115,11 @@ namespace NW.NGramTextClassification.UnitTests
                             indexes: new List<SimilarityIndex>(),
                             indexAverages: new List<SimilarityIndexAverage>()
                         )
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_02"),
 
 
         };
-        private static TestCaseData[] predictLabelOrDefaultWhenUntokenizableExamples =
+        private static TestCaseData[] classifyOrDefaultWhenUntokenizableExamples =
        {
 
             new TestCaseData(
@@ -127,10 +127,10 @@ namespace NW.NGramTextClassification.UnitTests
                     ObjectMother.Shared_RuleSet_Five,
                     ObjectMother.Shared_LabeledExamples_Untokenizable,
                     TextClassifier.DefaultTextClassifierResult
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenUntokenizableExamples)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
         };
-        private static TestCaseData[] predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction =
+        private static TestCaseData[] classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction =
         {
 
             new TestCaseData(
@@ -144,10 +144,10 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                     ObjectMother.CreateThirtyLabeledExamples().GetRange(0, 1),
                     ObjectMother.CreateThirtyLabeledExamples()[0].Label
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction)}_01")
 
         };
-        private static TestCaseData[] predictLabelOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction =
+        private static TestCaseData[] classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction =
         {
 
             new TestCaseData(
@@ -161,7 +161,7 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                     ObjectMother.CreateThirtyLabeledExamples(),
                     ObjectMother.TextClassifier_TextClassifierResult_LabeledExamples00
-                ).SetArgDisplayNames($"{nameof(predictLabelOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
 
@@ -177,8 +177,8 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
-        [TestCaseSource(nameof(predictLabelOrDefaultExceptionTestCases))]
-        public void PredictLabel_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(classifyOrDefaultExceptionTestCases))]
+        public void ClassifyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
@@ -201,8 +201,8 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
 
-        [TestCaseSource(nameof(predictLabelOrDefaultWhenAllRulesFailedTestCases))]
-        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenAllRulesFailed
+        [TestCaseSource(nameof(classifyOrDefaultWhenAllRulesFailedTestCases))]
+        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierResult_WhenAllRulesFailed
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
         {
 
@@ -222,7 +222,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
 
             // Act
-            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -232,8 +232,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(predictLabelOrDefaultWhenUntokenizableExamples))]
-        public void PredictLabelOrDefault_ShouldReturnDefaultClassifierResult_WhenUntokenizableExamples
+        [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableExamples))]
+        public void ClassifyOrDefault_ShouldReturnDefaultClassifierResult_WhenUntokenizableExamples
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
         {
 
@@ -260,7 +260,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -277,8 +277,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(predictLabelOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction))]
-        public void PredictLabelOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulPrediction
+        [TestCaseSource(nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction))]
+        public void ClassifyOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulPrediction
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
         {
 
@@ -306,7 +306,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.AreEqual(expectedLabel, actual.Label);
@@ -321,8 +321,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(predictLabelOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction))]
-        public void PredictLabelOrDefault_ShouldReturnExpectedTextClassifierResult_WhenThirtyLabeledExamplesAndSuccessfulPrediction
+        [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction))]
+        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierResult_WhenThirtyLabeledExamplesAndSuccessfulPrediction
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
         {
 
@@ -350,7 +350,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            TextClassifierResult actual = textClassifier.PredictLabelOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
