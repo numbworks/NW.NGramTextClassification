@@ -11,19 +11,6 @@ namespace NW.NGramTextClassification.Messages
     public static class MessageCollection
     {
 
-        #region Validator
-
-        public static Func<string, string, string> Validator_FirstValueIsGreaterOrEqualThanSecondValue
-            = (variableName1, variableName2) => $"The '{variableName1}''s value is greater or equal than '{variableName2}''s value.";
-        public static Func<string, string, string> Validator_FirstValueIsGreaterThanSecondValue
-            = (variableName1, variableName2) => $"The '{variableName1}''s value is greater than '{variableName2}''s value.";
-        public static Func<string, string> Validator_VariableContainsZeroItems
-            = (variableName) => $"'{variableName}' contains zero items.";
-        public static Func<string, string> Validator_VariableCantBeLessThanOne
-            = (variableName) => $"'{variableName}' can't be less than one.";
-
-        #endregion
-
         #region NGramsTokenizer
 
         public static Func<ITokenizationStrategy, string> NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches =
@@ -116,5 +103,5 @@ namespace NW.NGramTextClassification.Messages
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2021
+    Last Update: 25.09.2022
 */

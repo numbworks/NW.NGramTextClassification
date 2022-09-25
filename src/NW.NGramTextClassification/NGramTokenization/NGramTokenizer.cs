@@ -204,7 +204,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
             MatchCollection matches = GetMatches(text);
             if (matches.Count == 0)
-                throw new ArgumentException(MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(_tokenizationStrategy));
+                throw new ArgumentException(Messages.MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(_tokenizationStrategy));
 
             ushort N = GetN<T>();
             Validator.ThrowIfFirstIsGreater<ArgumentException>(N, nameof(N), matches.Count, nameof(matches.Count));

@@ -35,7 +35,7 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         ObjectMother.Array01_Delimiter01)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems("arr")
+                NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems("arr")
                 ).SetArgDisplayNames($"{nameof(addDelimiterExceptionTestCases)}_02"),
 
             // ValidateStringNullOrEmpty
@@ -89,7 +89,7 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         ObjectMother.Array01_Length01)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableContainsZeroItems("arr")
+                NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems("arr")
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_02"),
 
             // ValidateLength
@@ -102,7 +102,7 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         0)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableCantBeLessThanOne("length")
+                NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne("length")
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_03"),
 
             // ThrowIfFirstIsGreaterOrEqual
@@ -115,7 +115,7 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         ObjectMother.Array01_Length01)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_FirstValueIsGreaterOrEqualThanSecondValue("startIndex", "arr.Length")
+                NGramTextClassification.Validation.MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue("startIndex", "arr.Length")
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_04"),
 
             // ThrowIfFirstIsGreater
@@ -128,7 +128,7 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         5)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_FirstValueIsGreaterThanSecondValue("length", "arr.Length")
+                NGramTextClassification.Validation.MessageCollection.FirstValueIsGreaterThanSecondValue("length", "arr.Length")
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_05"),
 
             // ThrowIfFirstIsGreater
@@ -141,7 +141,7 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         3)
                     ),
                 typeof(ArgumentException),
-                MessageCollection.Validator_FirstValueIsGreaterThanSecondValue("startIndex + length", "arr.Length")
+                NGramTextClassification.Validation.MessageCollection.FirstValueIsGreaterThanSecondValue("startIndex + length", "arr.Length")
                 ).SetArgDisplayNames($"{nameof(getSubsetExceptionTestCases)}_06")
 
         };

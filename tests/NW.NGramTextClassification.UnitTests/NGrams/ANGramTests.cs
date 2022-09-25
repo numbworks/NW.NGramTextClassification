@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.UnitTests.Utilities;
@@ -25,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                                     LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableCantBeLessThanOne("n")
+                NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne("n")
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_01"),
 
             // ValidateObject
