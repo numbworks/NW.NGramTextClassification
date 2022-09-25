@@ -108,7 +108,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+                    NGrams.ObjectMother.AreEqual(expected, actual)
                 );
 
         }
@@ -145,7 +145,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Monograms, actual)
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Monograms, actual)
                 );
 
         }
@@ -162,7 +162,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Bigrams, actual)
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Bigrams, actual)
                 );
 
         }
@@ -179,7 +179,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Trigrams, actual)
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Trigrams, actual)
                 );
 
         }
@@ -196,7 +196,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Fourgrams, actual)
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Fourgrams, actual)
                 );
 
         }
@@ -213,7 +213,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Fivegrams, actual)
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.LabeledExample01_Fivegrams, actual)
                 );
 
         }
@@ -236,7 +236,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+                    NGrams.ObjectMother.AreEqual(expected, actual)
                 );
 
         }

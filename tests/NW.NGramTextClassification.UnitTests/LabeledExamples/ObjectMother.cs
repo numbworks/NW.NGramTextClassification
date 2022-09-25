@@ -405,7 +405,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         {
 
             return AreEqual(obj1.LabeledExample, obj2.LabeledExample)
-                    && UnitTests.ObjectMother.AreEqual(obj1.NGrams, obj2.NGrams);
+                    && NGrams.ObjectMother.AreEqual(obj1.NGrams, obj2.NGrams);
 
         }
         public static bool AreEqual(List<TokenizedExample> list1, List<TokenizedExample> list2)

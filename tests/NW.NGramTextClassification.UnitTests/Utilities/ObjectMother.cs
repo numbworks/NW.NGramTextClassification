@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NUnit.Framework;
-using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -30,19 +29,6 @@ namespace NW.NGramTextClassification.UnitTests
             = new NGramTokenizerRuleSet(true, true, true, true, true);
         public static INGramTokenizerRuleSet Shared_RuleSet_Five
             = new NGramTokenizerRuleSet(false, false, false, false, true);
-
-        #endregion
-
-        #region ANGram
-
-        public static ushort ANGram_FakeGram1_N = 1;
-        public static ushort ANGram_FakeGram2_N = 1;
-        public static FakeGram ANGram_FakeGram1
-            = new FakeGram(ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value);
-        public static FakeGram ANGram_FakeGram2
-            = new FakeGram(ANGram_FakeGram2_N, Shared_TokenizationStrategyDefault, LabeledExamples.ObjectMother.LabeledExample01_Monograms[1].Value);
-        public static int ANGram_FakeGram1_HashCode
-            = (ANGram_FakeGram1_N, Shared_TokenizationStrategyDefault, LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value).GetHashCode();
 
         #endregion
 
@@ -216,24 +202,10 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-
         public static bool AreEqual(List<SimilarityIndex> list1, List<SimilarityIndex> list2)
             => AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
         public static bool AreEqual(List<SimilarityIndexAverage> list1, List<SimilarityIndexAverage> list2)
             => AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
-
-        public static bool AreEqual(List<Monogram> list1, List<Monogram> list2)
-            => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
-        public static bool AreEqual(List<Bigram> list1, List<Bigram> list2)
-            => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
-        public static bool AreEqual(List<Trigram> list1, List<Trigram> list2)
-            => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
-        public static bool AreEqual(List<Fourgram> list1, List<Fourgram> list2)
-            => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
-        public static bool AreEqual(List<Fivegram> list1, List<Fivegram> list2)
-            => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
-        public static bool AreEqual(List<INGram> list1, List<INGram> list2)
-            => AreEqual(list1, list2, (obj1, obj2) => obj1.Equals(obj2));
 
         public static TReturn CallPrivateMethod<TClass, TReturn>(TClass obj, string methodName, object[] args)
         {

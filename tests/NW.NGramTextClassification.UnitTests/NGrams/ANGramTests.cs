@@ -4,7 +4,7 @@ using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.NGrams
 {
     [TestFixture]
     public class ANGramTests
@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new FakeGram(
                                     1,
                                     new TokenizationStrategy(),
-                                    ObjectMother.Validator_StringOnlyWhiteSpaces
+                                    UnitTests.ObjectMother.Validator_StringOnlyWhiteSpaces
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("value").Message
@@ -55,37 +55,37 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] equalityMethodsTestCases = {
 
             new TestCaseData(
-                    ObjectMother.ANGram_FakeGram1,
-                    ObjectMother.ANGram_FakeGram1,
+                    ObjectMother.FakeGram01,
+                    ObjectMother.FakeGram01,
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.ANGram_FakeGram1,
+                    ObjectMother.FakeGram01,
                     new FakeGram(
-                        ObjectMother.ANGram_FakeGram1_N,
+                        ObjectMother.FakeGram01_N,
                         new TokenizationStrategy(), // Tests if TokenizationStrategy.Equals() works as expected.
                         LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value),
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.ANGram_FakeGram1,
+                    ObjectMother.FakeGram01,
                     new FakeGram(
-                        ObjectMother.ANGram_FakeGram1_N,
-                        ObjectMother.Shared_TokenizationStrategyCustom,
+                        ObjectMother.FakeGram01_N,
+                        UnitTests.ObjectMother.Shared_TokenizationStrategyCustom,
                         LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value),
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
 
             new TestCaseData(
-                    ObjectMother.ANGram_FakeGram1,
-                    ObjectMother.ANGram_FakeGram2,
+                    ObjectMother.FakeGram01,
+                    ObjectMother.FakeGram02,
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_04"),
 
             new TestCaseData(
-                    ObjectMother.ANGram_FakeGram1,
+                    ObjectMother.FakeGram01,
                     null,
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_05")
@@ -102,7 +102,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(aNGramExceptionTestCases))]
         public void ANGram_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(equalityMethodsTestCases))]
         public void EqualsAndEqualityOperators_ShouldReturnTheExpectedBoolean_WhenInvoked
@@ -128,7 +128,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            bool actual = ObjectMother.ANGram_FakeGram1.Equals("some_string");
+            bool actual = ObjectMother.FakeGram01.Equals("some_string");
 
             // Assert
             Assert.IsFalse(actual);
@@ -141,7 +141,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            bool actual = null == ObjectMother.ANGram_FakeGram1;
+            bool actual = null == ObjectMother.FakeGram01;
 
             // Assert
             Assert.IsFalse(actual);
@@ -154,10 +154,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            int actual = ObjectMother.ANGram_FakeGram1.GetHashCode();
+            int actual = ObjectMother.FakeGram01.GetHashCode();
 
             // Assert
-            Assert.AreEqual(ObjectMother.ANGram_FakeGram1_HashCode, actual);
+            Assert.AreEqual(ObjectMother.FakeGram01_HashCode, actual);
 
         }
 

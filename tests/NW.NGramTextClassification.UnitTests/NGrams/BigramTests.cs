@@ -2,7 +2,7 @@
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.NGrams
 {
     [TestFixture]
     public class BigramTests

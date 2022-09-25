@@ -2,7 +2,7 @@
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.NGrams
 {
     [TestFixture]
     public class TrigramTests
