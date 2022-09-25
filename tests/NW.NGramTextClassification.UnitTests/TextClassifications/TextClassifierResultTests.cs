@@ -1,7 +1,8 @@
 ﻿using System;
+using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.TextClassifications
 {
     [TestFixture]
     public class TextClassifierResultTests
@@ -18,7 +19,7 @@ namespace NW.NGramTextClassification.UnitTests
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
-                    Utilities.ObjectMother.TextClassifierResult01_AsString
+                    ObjectMother.TextClassifierResult01_AsString
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_01"),
 
             new TestCaseData(
@@ -27,7 +28,7 @@ namespace NW.NGramTextClassification.UnitTests
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
-                    Utilities.ObjectMother.TextClassifierResult_AsStringWithNullLabel
+                    ObjectMother.TextClassifierResult_AsStringWithNullLabel
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
 
             new TestCaseData(
@@ -36,7 +37,7 @@ namespace NW.NGramTextClassification.UnitTests
                         indexes: null,
                         indexAverages: null
                         ),
-                    Utilities.ObjectMother.TextClassifierResult_AllNulls
+                    ObjectMother.TextClassifierResult_AllNulls
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_03")
 
         };

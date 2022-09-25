@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.Validation;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.TextClassifications
 {
     /// <summary>The result of a text classification.</summary>
     public class TextClassifierResult
@@ -60,5 +59,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2021
+    Last Update: 25.09.2022
 */

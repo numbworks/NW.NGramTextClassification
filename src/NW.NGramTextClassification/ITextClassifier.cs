@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextClassifications;
 
 namespace NW.NGramTextClassification
 {
@@ -32,5 +33,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2022
+    Last Update: 25.09.2022
 */

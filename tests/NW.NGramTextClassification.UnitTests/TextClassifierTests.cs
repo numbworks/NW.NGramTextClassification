@@ -5,6 +5,7 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -159,7 +160,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyLabeledExamples(),
-                    Utilities.ObjectMother.TextClassifierResult02_LabeledExamples00
+                    TextClassifications.ObjectMother.TextClassifierResult02_LabeledExamples00
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
@@ -225,7 +226,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    Utilities.ObjectMother.AreEqual(expected, actual)
+                    TextClassifications.ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
@@ -254,7 +255,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> finalLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized
+                NGramTextClassification.TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized
 
             };
 
@@ -263,7 +264,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    Utilities.ObjectMother.AreEqual(expected, actual)
+                    TextClassifications.ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(
                     initialLogMessages,
@@ -299,8 +300,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> finalLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.PredictedLabelIs(expectedLabel),
-                TextClassifications.MessageCollection.PredictionHasBeenSuccessful
+                NGramTextClassification.TextClassifications.MessageCollection.PredictedLabelIs(expectedLabel),
+                NGramTextClassification.TextClassifications.MessageCollection.PredictionHasBeenSuccessful
 
             };
 
@@ -343,8 +344,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> finalLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.PredictedLabelIs(expected.Label),
-                TextClassifications.MessageCollection.PredictionHasBeenSuccessful
+                NGramTextClassification.TextClassifications.MessageCollection.PredictedLabelIs(expected.Label),
+                NGramTextClassification.TextClassifications.MessageCollection.PredictionHasBeenSuccessful
 
             };
 
@@ -353,7 +354,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    Utilities.ObjectMother.AreEqual(expected, actual)
+                    TextClassifications.ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(
                     initialLogMessages,
@@ -396,7 +397,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-               TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsAtLeastOneNonZeroIndexAverage")
+               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsAtLeastOneNonZeroIndexAverage")
 
             };
 
@@ -444,8 +445,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
-                TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsAtLeastOneDifferentIndexAverage")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsAtLeastOneDifferentIndexAverage")
 
             };
 
@@ -493,9 +494,9 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
-                TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsTwoDifferentHighestIndexAverages")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsTwoDifferentHighestIndexAverages")
 
             };
 
@@ -541,8 +542,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
-                TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
 
@@ -590,10 +591,10 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
-                TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsTwoDifferentHighestIndexAverages"),
-                TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsTwoDifferentHighestIndexAverages"),
+                NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
 
@@ -632,13 +633,13 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedMessages = new List<string>()
             {
 
-                TextClassifications.MessageCollection.AttemptingToPredictLabel,
-                TextClassifications.MessageCollection.FollowingTextHasBeenProvided(expectedText),
-                TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
-                TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples),
-                TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToPredictLabel,
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingTextHasBeenProvided(expectedText),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
+                NGramTextClassification.TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples),
+                NGramTextClassification.TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
 
-                TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(text)
+                NGramTextClassification.TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(text)
 
             };
 
