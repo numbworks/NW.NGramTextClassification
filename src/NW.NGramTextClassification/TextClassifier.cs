@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification
@@ -59,21 +59,21 @@ namespace NW.NGramTextClassification
             ValidateAndBeginPrediction(text, tokenizerRuleSet, labeledExamples);
 
             List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
-            _components.LoggingAction(Messages.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(nGrams));
+            _components.LoggingAction(TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(nGrams));
             if (nGrams == null)
             {
 
-                _components.LoggingAction(Messages.MessageCollection.AllRulesInProvidedRulesetFailed(text));
+                _components.LoggingAction(TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(text));
                 return DefaultTextClassifierResult;
 
             }
 
             List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples, tokenizerRuleSet);
-            _components.LoggingAction(Messages.MessageCollection.ProvidedLabeledExamplesThruTokenizationProcess);
+            _components.LoggingAction(TextClassifications.MessageCollection.ProvidedLabeledExamplesThruTokenizationProcess);
             if (tokenizedExamples == null)
             {
 
-                _components.LoggingAction(Messages.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
+                _components.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
                 return DefaultTextClassifierResult;
 
             }
@@ -95,32 +95,32 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            _components.LoggingAction(Messages.MessageCollection.AttemptingToPredictLabel);
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToPredictLabel);
 
             string truncatedText = _components.TextTruncatingFunction(text, _settings.TruncateTextInLogMessagesAfter);
-            _components.LoggingAction(Messages.MessageCollection.FollowingTextHasBeenProvided(truncatedText));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingTextHasBeenProvided(truncatedText));
 
-            _components.LoggingAction(Messages.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet));
-            _components.LoggingAction(Messages.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet));
+            _components.LoggingAction(TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples));
 
         }
         private TextClassifierResult CreateResult(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
-            _components.LoggingAction(Messages.MessageCollection.TokenizedTextComparedAgainstProvidedTokenizedExamples);
-            _components.LoggingAction(Messages.MessageCollection.XSimilarityIndexObjectsHaveBeenComputed(indexes));
+            _components.LoggingAction(TextClassifications.MessageCollection.TokenizedTextComparedAgainstProvidedTokenizedExamples);
+            _components.LoggingAction(TextClassifications.MessageCollection.XSimilarityIndexObjectsHaveBeenComputed(indexes));
 
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
-            _components.LoggingAction(Messages.MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
+            _components.LoggingAction(TextClassifications.MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
             string label = GetLabel(indexAverages);
-            _components.LoggingAction(Messages.MessageCollection.PredictedLabelIs(label));
+            _components.LoggingAction(TextClassifications.MessageCollection.PredictedLabelIs(label));
 
             if (label == null)
-                _components.LoggingAction(Messages.MessageCollection.PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+                _components.LoggingAction(TextClassifications.MessageCollection.PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
             else
-                _components.LoggingAction(Messages.MessageCollection.PredictionHasBeenSuccessful);
+                _components.LoggingAction(TextClassifications.MessageCollection.PredictionHasBeenSuccessful);
 
             TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
@@ -145,18 +145,18 @@ namespace NW.NGramTextClassification
             for (int i = 0; i < tokenizedExamples.Count; i++)
             {
 
-                _components.LoggingAction(Messages.MessageCollection.ComparingProvidedTextAgainstFollowingTokenizedExample(tokenizedExamples[i]));
+                _components.LoggingAction(TextClassifications.MessageCollection.ComparingProvidedTextAgainstFollowingTokenizedExample(tokenizedExamples[i]));
 
                 double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, tokenizedExamples[i].NGrams, _components.RoundingFunction);
                 double roundedValue = _components.RoundingFunction(indexValue);
 
-                _components.LoggingAction(Messages.MessageCollection.CalculatedSimilarityIndexValueIs(indexValue));
-                _components.LoggingAction(Messages.MessageCollection.RoundedSimilarityIndexValueIs(roundedValue));
+                _components.LoggingAction(TextClassifications.MessageCollection.CalculatedSimilarityIndexValueIs(indexValue));
+                _components.LoggingAction(TextClassifications.MessageCollection.RoundedSimilarityIndexValueIs(roundedValue));
 
                 SimilarityIndex similarityIndex = new SimilarityIndex(tokenizedExamples[i].LabeledExample.Text, tokenizedExamples[i].LabeledExample.Label, roundedValue);
                 similarityIndexes.Add(similarityIndex);
 
-                _components.LoggingAction(Messages.MessageCollection.FollowingSimilarityIndexObjectHasBeenAddedToTheList(similarityIndex));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingSimilarityIndexObjectHasBeenAddedToTheList(similarityIndex));
 
             }
 
@@ -167,26 +167,26 @@ namespace NW.NGramTextClassification
         {
 
             List<string> uniqueLabels = GetUniqueLabels(indexes);
-            _components.LoggingAction(Messages.MessageCollection.FollowingUniqueLabelsHaveBeenFound(uniqueLabels));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingUniqueLabelsHaveBeenFound(uniqueLabels));
 
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
                 string currentLabel = uniqueLabels[i];
-                _components.LoggingAction(Messages.MessageCollection.CalculatingIndexAverageForTheFollowingLabel(currentLabel));
+                _components.LoggingAction(TextClassifications.MessageCollection.CalculatingIndexAverageForTheFollowingLabel(currentLabel));
 
                 List<double> indexValues = GetSimilarityIndexValues(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
                 double roundedValue = _components.RoundingFunction(averageValue);
 
-                _components.LoggingAction(Messages.MessageCollection.CalculatedSimilarityIndexAverageValueIs(averageValue));
-                _components.LoggingAction(Messages.MessageCollection.RoundedSimilarityIndexAverageValueIs(roundedValue));
+                _components.LoggingAction(TextClassifications.MessageCollection.CalculatedSimilarityIndexAverageValueIs(averageValue));
+                _components.LoggingAction(TextClassifications.MessageCollection.RoundedSimilarityIndexAverageValueIs(roundedValue));
 
                 SimilarityIndexAverage indexAverage = new SimilarityIndexAverage(currentLabel, roundedValue);
                 similarityAverages.Add(indexAverage);
 
-                _components.LoggingAction(Messages.MessageCollection.FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList(indexAverage));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList(indexAverage));
 
             }
 
@@ -263,33 +263,33 @@ namespace NW.NGramTextClassification
 
             if (!ContainsAtLeastOneNonZeroIndexAverage(indexAverages))
             {
-                _components.LoggingAction(Messages.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
                 return null;
             }
-            _components.LoggingAction(Messages.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
 
             if (indexAverages.Count == 1)
             {
-                _components.LoggingAction(Messages.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
+                _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
                 return indexAverages[0].Label;
             }
 
             if (!ContainsAtLeastOneDifferentIndexAverage(indexAverages))
             {
-                _components.LoggingAction(Messages.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsAtLeastOneDifferentIndexAverage)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsAtLeastOneDifferentIndexAverage)));
                 return null;
             }
-            _components.LoggingAction(Messages.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneDifferentIndexAverage)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneDifferentIndexAverage)));
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
             if (!ContainsTwoDifferentHighestIndexAverages(orderedByhighest[0].Value, orderedByhighest[1].Value))
             {
-                _components.LoggingAction(Messages.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsTwoDifferentHighestIndexAverages)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsTwoDifferentHighestIndexAverages)));
                 return null;
             }
-            _components.LoggingAction(Messages.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsTwoDifferentHighestIndexAverages)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsTwoDifferentHighestIndexAverages)));
 
-            _components.LoggingAction(Messages.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(orderedByhighest[0]));
+            _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(orderedByhighest[0]));
 
             return orderedByhighest[0].Label;
 
@@ -365,5 +365,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2022
+    Last Update: 25.09.2022
 */

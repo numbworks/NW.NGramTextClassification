@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.Validation;
 using NUnit.Framework;
 

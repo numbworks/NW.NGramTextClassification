@@ -1,6 +1,5 @@
 ﻿using System;
 using NW.NGramTextClassification.Arrays;
-using NW.NGramTextClassification.Messages;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests.Arrays

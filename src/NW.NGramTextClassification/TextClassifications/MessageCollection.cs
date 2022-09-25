@@ -5,9 +5,9 @@ using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 
-namespace NW.NGramTextClassification.Messages
+namespace NW.NGramTextClassification.TextClassifications
 {
-    ///<summary>Collects all the messages used for logging and exceptions.</summary>
+    ///<summary>Collects all the messages used for logging and exceptions for <see cref="NW.NGramTextClassification.TextClassifications"/>.</summary>
     public static class MessageCollection
     {
 

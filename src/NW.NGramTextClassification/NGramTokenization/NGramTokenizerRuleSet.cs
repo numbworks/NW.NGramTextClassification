@@ -1,5 +1,4 @@
-﻿using NW.NGramTextClassification.Messages;
-using System;
+﻿using System;
 
 namespace NW.NGramTextClassification.NGramTokenization
 {
