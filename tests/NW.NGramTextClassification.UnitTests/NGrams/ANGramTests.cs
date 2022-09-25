@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new FakeGram(
                                     0,
                                     new TokenizationStrategy(),
-                                    ObjectMother.Shared_LabeledExample01_Monograms[0].Value
+                                    ObjectMother.LabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentException),
                 MessageCollection.Validator_VariableCantBeLessThanOne("n")
@@ -33,7 +33,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new FakeGram(
                                     1,
                                     null,
-                                    ObjectMother.Shared_LabeledExample01_Monograms[0].Value
+                                    ObjectMother.LabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("strategy").Message
@@ -65,7 +65,7 @@ namespace NW.NGramTextClassification.UnitTests
                     new FakeGram(
                         ObjectMother.ANGram_FakeGram1_N,
                         new TokenizationStrategy(), // Tests if TokenizationStrategy.Equals() works as expected.
-                        ObjectMother.Shared_LabeledExample01_Monograms[0].Value),
+                        ObjectMother.LabeledExample01_Monograms[0].Value),
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
 
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification.UnitTests
                     new FakeGram(
                         ObjectMother.ANGram_FakeGram1_N,
                         ObjectMother.Shared_TokenizationStrategyCustom,
-                        ObjectMother.Shared_LabeledExample01_Monograms[0].Value),
+                        ObjectMother.LabeledExample01_Monograms[0].Value),
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
 

@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests
             Monogram actual1
                 = new Monogram(
                         new TokenizationStrategy(),
-                        ObjectMother.Shared_LabeledExample01_Monograms[0].Value
+                        ObjectMother.LabeledExample01_Monograms[0].Value
                     );
             Monogram actual2
                 = new Monogram(
-                        ObjectMother.Shared_LabeledExample01_Monograms[0].Value
+                        ObjectMother.LabeledExample01_Monograms[0].Value
                     );
 
             // Assert

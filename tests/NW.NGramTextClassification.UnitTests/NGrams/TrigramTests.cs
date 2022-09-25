@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests
             Trigram actual1
                 = new Trigram(
                         new TokenizationStrategy(),
-                        ObjectMother.Shared_LabeledExample01_Trigrams[0].Value
+                        ObjectMother.LabeledExample01_Trigrams[0].Value
                     );
             Trigram actual2
                 = new Trigram(
-                        ObjectMother.Shared_LabeledExample01_Trigrams[0].Value
+                        ObjectMother.LabeledExample01_Trigrams[0].Value
                     );
 
             // Assert

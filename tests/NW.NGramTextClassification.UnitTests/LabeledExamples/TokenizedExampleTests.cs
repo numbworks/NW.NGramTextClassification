@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.NGrams;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 {
     [TestFixture]
     public class TokenizedExampleTests
@@ -91,5 +89,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2022
+    Last Update: 25.09.2022
 */

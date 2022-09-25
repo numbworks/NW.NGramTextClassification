@@ -49,7 +49,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     .ClassifyOrDefault(
                                         text: null,
                                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
-                                        labeledExamples: ObjectMother.Shared_LabeledExamples
+                                        labeledExamples: ObjectMother.LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("text").Message
@@ -59,9 +59,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: ObjectMother.Shared_LabeledExample01.Text,
+                                        text: ObjectMother.LabeledExample01.Text,
                                         tokenizerRuleSet: null,
-                                        labeledExamples: ObjectMother.Shared_LabeledExamples
+                                        labeledExamples: ObjectMother.LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizerRuleSet").Message
@@ -71,7 +71,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: ObjectMother.Shared_LabeledExample01.Text,
+                                        text: ObjectMother.LabeledExample01.Text,
                                         tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),
@@ -125,7 +125,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                     ObjectMother.CreateThirtyLabeledExamples()[0].Text,
                     ObjectMother.Shared_RuleSet_Five,
-                    ObjectMother.Shared_LabeledExamples_Untokenizable,
+                    ObjectMother.LabeledExamples_Untokenizable,
                     TextClassifier.DefaultTextClassifierResult
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 

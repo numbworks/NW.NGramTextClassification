@@ -15,7 +15,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     new TextClassifierResult(
-                        label: ObjectMother.Shared_LabeledExample01.Label,
+                        label: ObjectMother.LabeledExample01.Label,
                         indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
                         indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
                         ),
@@ -75,7 +75,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             TextClassifierResult actual
                 = new TextClassifierResult(
-                        label: ObjectMother.Shared_LabeledExample01.Label,
+                        label: ObjectMother.LabeledExample01.Label,
                         indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
                         indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
                     );

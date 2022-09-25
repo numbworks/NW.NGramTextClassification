@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests
             Fivegram actual1
                 = new Fivegram(
                         new TokenizationStrategy(),
-                        ObjectMother.Shared_LabeledExample01_Fivegrams[0].Value
+                        ObjectMother.LabeledExample01_Fivegrams[0].Value
                     );
             Fivegram actual2
                 = new Fivegram(
-                        ObjectMother.Shared_LabeledExample01_Fivegrams[0].Value
+                        ObjectMother.LabeledExample01_Fivegrams[0].Value
                     );
 
             // Assert
