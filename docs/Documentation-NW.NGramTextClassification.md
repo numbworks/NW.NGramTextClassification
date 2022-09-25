@@ -34,6 +34,7 @@ using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
 using NW.NGramTextClassification.LabeledExamples;
+using NW.NGramTextClassification.TextClassifications;
 
 /*...*/
 
