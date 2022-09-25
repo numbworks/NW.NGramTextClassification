@@ -5,7 +5,7 @@ using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.Similarity
 {
     [TestFixture]
     public class SimilarityIndexCalculatorJaccardTests
@@ -113,7 +113,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(doExceptionTestCases))]
         public void Do_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(doTestCases))]
         public void Do_ShouldReturnTheExpectedValue_WhenProperArguments
@@ -141,5 +141,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2021
+    Last Update: 25.09.2022
 */

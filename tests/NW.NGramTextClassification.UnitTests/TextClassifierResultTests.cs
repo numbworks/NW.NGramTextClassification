@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -16,17 +15,17 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                     new TextClassifierResult(
                         label: LabeledExamples.ObjectMother.LabeledExample01.Label,
-                        indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
-                        indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
+                        indexes: Similarity.ObjectMother.SimilarityIndexes,
+                        indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
-                    ObjectMother.TextClassifierResult_AsString
+                    ObjectMother.TextClassifierResult01_AsString
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_01"),
 
             new TestCaseData(
                     new TextClassifierResult(
                         label: null,
-                        indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
-                        ObjectMother.TextClassifierResult_SimilarityIndexAverages
+                        indexes: Similarity.ObjectMother.SimilarityIndexes,
+                        indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
                     ObjectMother.TextClassifierResult_AsStringWithNullLabel
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
@@ -76,8 +75,8 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierResult actual
                 = new TextClassifierResult(
                         label: LabeledExamples.ObjectMother.LabeledExample01.Label,
-                        indexes: ObjectMother.TextClassifierResult_SimilarityIndexes,
-                        indexAverages: ObjectMother.TextClassifierResult_SimilarityIndexAverages
+                        indexes: Similarity.ObjectMother.SimilarityIndexes,
+                        indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                     );
 
             // Assert

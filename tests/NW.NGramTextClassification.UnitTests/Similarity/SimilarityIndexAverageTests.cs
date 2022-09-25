@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using NW.NGramTextClassification.Similarity;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.Similarity
 {
     [TestFixture]
     public class SimilarityIndexAverageTests
@@ -26,7 +26,7 @@ namespace NW.NGramTextClassification.UnitTests
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndexAverage(
-                                    ObjectMother.Validator_StringOnlyWhiteSpaces,
+                                    UnitTests.ObjectMother.Validator_StringOnlyWhiteSpaces,
                                     ObjectMother.SimilarityIndexAverage01_Value
                                 )),
                 typeof(ArgumentNullException),
@@ -77,7 +77,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(similarityIndexAverageExceptionTestCases))]
         public void SimilarityIndexAverage_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         #endregion
 
@@ -90,6 +90,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 25.09.2022
 
 */
