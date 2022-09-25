@@ -1,5 +1,4 @@
 ﻿using System;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
 
@@ -17,7 +16,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             new TestCaseData(
                     new TestDelegate( () => new NGramTokenizerRuleSet(false, false, false, false, false) ),
                     typeof(ArgumentException),
-                    MessageCollection.NGramTokenizerRuleSet_AtLeastOneArgumentMustBeTrue
+                    MessageCollection.AtLeastOneArgumentMustBeTrue
                 ).SetArgDisplayNames($"{nameof(nGramTokenizerRuleSetExceptionTestCases)}_01")
         };
         private static TestCaseData[] nGramTokenizerRuleSetTestCases =

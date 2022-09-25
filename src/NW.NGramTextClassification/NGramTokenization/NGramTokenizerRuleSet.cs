@@ -86,7 +86,7 @@ namespace NW.NGramTextClassification.NGramTokenization
                     && doForTrigram == false
                     && doForFourgram == false
                     && doForFivegram == false)
-                throw new ArgumentException(MessageCollection.NGramTokenizerRuleSet_AtLeastOneArgumentMustBeTrue);
+                throw new ArgumentException(MessageCollection.AtLeastOneArgumentMustBeTrue);
 
         }
 

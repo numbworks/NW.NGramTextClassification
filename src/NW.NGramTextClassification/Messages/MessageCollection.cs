@@ -11,20 +11,7 @@ namespace NW.NGramTextClassification.Messages
     public static class MessageCollection
     {
 
-        #region NGramsTokenizer
-
-        public static Func<ITokenizationStrategy, string> NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches =
-            (tokenizationStrategy) => $"The provided {nameof(ITokenizationStrategy)} pattern ('{tokenizationStrategy.Pattern}') retuns zero matches against the provided text.";
-
-        #endregion
-
-        #region NGramTokenizerRuleSet
-
-        public static string NGramTokenizerRuleSet_AtLeastOneArgumentMustBeTrue = "At least one argument must be true.";
-
-        #endregion
-
-        #region TextClassifier
+        #region Properties
 
         public static string TextClassifier_AttemptingToPredictLabel = "Attempting to predict the label of the provided text...";
         public static Func<string, string> TextClassifier_FollowingTextHasBeenProvided =
@@ -82,7 +69,7 @@ namespace NW.NGramTextClassification.Messages
 
         #endregion
 
-        #region Fields
+        #region Methods
 
         public static string RollOutCollection(IEnumerable<object> coll)
         {

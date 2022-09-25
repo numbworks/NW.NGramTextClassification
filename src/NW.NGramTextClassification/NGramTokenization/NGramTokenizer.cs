@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using NW.NGramTextClassification.Arrays;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Validation;
 
@@ -204,7 +203,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
             MatchCollection matches = GetMatches(text);
             if (matches.Count == 0)
-                throw new ArgumentException(Messages.MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(_tokenizationStrategy));
+                throw new ArgumentException(MessageCollection.ProvidedTokenizationStrategyPatternReturnsZeroMatches(_tokenizationStrategy));
 
             ushort N = GetN<T>();
             Validator.ThrowIfFirstIsGreater<ArgumentException>(N, nameof(N), matches.Count, nameof(matches.Count));
@@ -284,5 +283,5 @@ namespace NW.NGramTextClassification.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 25.09.2022
 */

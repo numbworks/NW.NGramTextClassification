@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification.Arrays;
-using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
@@ -44,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                                         tokenizerRuleSet: new NGramTokenizerRuleSet()
                         )),
                     typeof(ArgumentException),
-                    MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(ObjectMother.TokenizationStrategy_NonAlphanumerical)
+                    MessageCollection.ProvidedTokenizationStrategyPatternReturnsZeroMatches(ObjectMother.TokenizationStrategy_NonAlphanumerical)
                 ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_01"),
 
             new TestCaseData(
