@@ -44,7 +44,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         tokenizerRuleSet: new NGramTokenizerRuleSet()
                         )),
                     typeof(ArgumentException),
-                    MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches.Invoke(ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical)
+                    MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical)
                 ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_01"),
 
             new TestCaseData(

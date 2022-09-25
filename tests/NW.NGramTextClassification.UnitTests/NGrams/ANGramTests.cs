@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests
                                     ObjectMother.Shared_LabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentException),
-                MessageCollection.Validator_VariableCantBeLessThanOne.Invoke("n")
+                MessageCollection.Validator_VariableCantBeLessThanOne("n")
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_01"),
 
             // ValidateObject

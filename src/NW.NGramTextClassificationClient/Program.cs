@@ -28,7 +28,7 @@ namespace NW.NGramTextClassificationClient
             Console.WriteLine(new string('=', 60));
             Console.WriteLine(Environment.NewLine);
 
-            action.Invoke();
+            action();
 
             Console.WriteLine(Environment.NewLine);
 

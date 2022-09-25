@@ -624,7 +624,7 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             string expectedText
-                = TextClassifierComponents.DefaultTextTruncatingFunction.Invoke(
+                = TextClassifierComponents.DefaultTextTruncatingFunction(
                         text,
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
 
