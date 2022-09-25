@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
@@ -216,7 +217,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
@@ -247,7 +249,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -292,7 +295,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -336,7 +340,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -382,7 +387,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -429,7 +435,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -478,7 +485,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -528,7 +536,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -575,7 +584,8 @@ namespace NW.NGramTextClassification.UnitTests
                           roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
-                          labeledExampleManager: new LabeledExampleManager());
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()

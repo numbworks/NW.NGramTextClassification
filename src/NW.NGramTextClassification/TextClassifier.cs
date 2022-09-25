@@ -29,7 +29,7 @@ namespace NW.NGramTextClassification
         public static TextClassifierResult DefaultTextClassifierResult { get; }
             = new TextClassifierResult(null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
         
-            #endregion
+        #endregion
 
         #region Constructors
 

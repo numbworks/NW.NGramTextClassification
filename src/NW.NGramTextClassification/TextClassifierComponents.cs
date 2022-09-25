@@ -1,4 +1,5 @@
 ﻿using System;
+using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
@@ -39,6 +40,7 @@ namespace NW.NGramTextClassification
         public Func<string, uint, string> TextTruncatingFunction { get; }
         public Action<string> LoggingAction { get; }
         public ILabeledExampleManager LabeledExampleManager { get; }
+        public IAsciiBannerManager AsciiBannerManager { get; }
 
         #endregion
 
@@ -51,7 +53,8 @@ namespace NW.NGramTextClassification
                     Func<double, double> roundingFunction,
                     Func<string, uint, string> textTruncatingFunction,
                     Action<string> loggingAction,
-                    ILabeledExampleManager labeledExampleManager)
+                    ILabeledExampleManager labeledExampleManager,
+                    IAsciiBannerManager asciiBannerManager)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -60,6 +63,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(textTruncatingFunction, nameof(textTruncatingFunction));
             Validator.ValidateObject(loggingAction, nameof(loggingAction));
             Validator.ValidateObject(labeledExampleManager, nameof(labeledExampleManager));
+            Validator.ValidateObject(asciiBannerManager, nameof(asciiBannerManager));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -67,6 +71,7 @@ namespace NW.NGramTextClassification
             TextTruncatingFunction = textTruncatingFunction;
             LoggingAction = loggingAction;
             LabeledExampleManager = labeledExampleManager;
+            AsciiBannerManager = asciiBannerManager;
 
         }
 
@@ -78,7 +83,8 @@ namespace NW.NGramTextClassification
                   DefaultRoundingFunction,
                   DefaultTextTruncatingFunction,
                   DefaultLoggingAction,
-                  new LabeledExampleManager())
+                  new LabeledExampleManager(),
+                  new AsciiBannerManager())
         { }
 
         #endregion
@@ -91,5 +97,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 25.09.2022
 */
