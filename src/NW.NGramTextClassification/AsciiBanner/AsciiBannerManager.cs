@@ -57,7 +57,7 @@ namespace NW.NGramTextClassification.AsciiBanner
 
             string versionToken = $"Version: {version}";
 
-            int maxLength = 98;
+            int maxLength = 101;
             int marginLength = 5;
 
             string topLine = new string('*', maxLength);
