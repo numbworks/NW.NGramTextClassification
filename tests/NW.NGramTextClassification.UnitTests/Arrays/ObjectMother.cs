@@ -5,22 +5,22 @@
 
         #region Properties
 
-        public static string ArrayManager_Delimiter01 = ";";
-        public static uint ArrayManager_StartIndex01 = 0;
-        public static uint ArrayManager_Length01 = 2;
+        public static string Array01_Delimiter01 = ";";
+        public static uint Array01_StartIndex01 = 0;
+        public static uint Array01_Length01 = 2;
 
-        public static string[] ArrayManager_Array01_WithDelimiter01
+        public static string[] Array01_WithDelimiter01
             = new[] {
                 "Dodge",
-                ArrayManager_Delimiter01,
+                Array01_Delimiter01,
                 "Datsun",
-                ArrayManager_Delimiter01,
+                Array01_Delimiter01,
                 "Jaguar",
-                ArrayManager_Delimiter01,
+                Array01_Delimiter01,
                 "DeLorean"
             };
 
-        public static string[] ArrayManager_Array01_Subset01 = new[] { "Dodge", "Datsun" };
+        public static string[] Array01_Subset01 = new[] { "Dodge", "Datsun" };
 
         #endregion
 
