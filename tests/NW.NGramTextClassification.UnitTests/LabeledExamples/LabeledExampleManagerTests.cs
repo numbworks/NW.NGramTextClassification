@@ -80,31 +80,31 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // First method signature
             new TestCaseData(
                     ObjectMother.LabeledExample01,
-                    UnitTests.ObjectMother.Shared_RuleSet_Mono,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Mono,
                     ObjectMother.TokenizedExample01_Mono
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_01"),
 
             new TestCaseData(
                     ObjectMother.LabeledExample01,
-                    UnitTests.ObjectMother.Shared_RuleSet_MonoBi,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBi,
                     ObjectMother.TokenizedExample01_MonoBi
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_02"),
 
             new TestCaseData(
                     ObjectMother.LabeledExample01,
-                    UnitTests.ObjectMother.Shared_RuleSet_MonoBiTri,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTri,
                     ObjectMother.TokenizedExample01_MonoBiTri
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_03"),
 
             new TestCaseData(
                     ObjectMother.LabeledExample01,
-                    UnitTests.ObjectMother.Shared_RuleSet_MonoBiTriFour,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFour,
                     ObjectMother.TokenizedExample01_MonoBiTriFour
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_04"),
 
             new TestCaseData(
                     ObjectMother.LabeledExample01,
-                    UnitTests.ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                     ObjectMother.TokenizedExample01_MonoBiTriFourFive
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
 
@@ -207,7 +207,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 = labeledExampleManager
                     .CreateOrDefault(
                         labeledExample: ObjectMother.LabeledExample03_Untokenizable,
-                        tokenizerRuleSet: UnitTests.ObjectMother.Shared_RuleSet_Five
+                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five
                         );
 
             // Assert
@@ -227,7 +227,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 = labeledExampleManager
                     .CreateOrDefault(
                         labeledExamples: ObjectMother.LabeledExamples_Untokenizable,
-                        tokenizerRuleSet: UnitTests.ObjectMother.Shared_RuleSet_Five
+                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five
                         );
 
             // Assert

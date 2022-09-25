@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
                                         text: null,
-                                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
+                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
@@ -72,7 +72,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
                                         text: LabeledExamples.ObjectMother.LabeledExample01.Text,
-                                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
+                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),
                 typeof(ArgumentNullException),
@@ -124,7 +124,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                     LabeledExamples.ObjectMother.CreateThirtyLabeledExamples()[0].Text,
-                    ObjectMother.Shared_RuleSet_Five,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.LabeledExamples_Untokenizable,
                     TextClassifier.DefaultTextClassifierResult
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")

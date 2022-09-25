@@ -3,7 +3,7 @@ using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 {
     [TestFixture]
     public class NGramTokenizerRuleSetTests
@@ -62,7 +62,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(nGramTokenizerRuleSetExceptionTestCases))]
         public void NGramTokenizerRuleSet_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(nGramTokenizerRuleSetTestCases))]
         public void NGramTokenizerRuleSet_ShouldCreateAnInstanceOfThisType_WhenProperArgument
@@ -137,5 +137,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 20.09.2022
+    Last Update: 25.09.2022
 */

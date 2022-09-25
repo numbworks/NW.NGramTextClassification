@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using NW.NGramTextClassification.NGramTokenization;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 {
     [TestFixture]
     public class TokenizationStrategyTests
@@ -61,25 +61,25 @@ namespace NW.NGramTextClassification.UnitTests
         private static TestCaseData[] equalityMethodsTestCases = {
 
             new TestCaseData(
-                    ObjectMother.Shared_TokenizationStrategyDefault,
-                    ObjectMother.Shared_TokenizationStrategyDefault,
+                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.TokenizationStrategy_Default,
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.Shared_TokenizationStrategyDefault,
+                    ObjectMother.TokenizationStrategy_Default,
                     new TokenizationStrategy(),
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.Shared_TokenizationStrategyDefault,
-                    ObjectMother.Shared_TokenizationStrategyCustom,
+                    ObjectMother.TokenizationStrategy_Default,
+                    ObjectMother.TokenizationStrategy_LettersSemicolon,
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
 
             new TestCaseData(
-                    ObjectMother.Shared_TokenizationStrategyDefault,
+                    ObjectMother.TokenizationStrategy_Default,
                     null,
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_04")
@@ -96,7 +96,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(tokenizationStrategyExceptionTestCases))]
         public void TokenizationStrategy_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ToString_ShouldReturnTheExpectedString_WhenInvoked()
@@ -109,7 +109,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsTrue(
                 string.Equals(
-                    ObjectMother.TokenizationStrategy_ToString,
+                    ObjectMother.TokenizationStrategy_Default_AsString,
                     actual,
                     StringComparison.InvariantCulture));
 
@@ -160,7 +160,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            bool actual = ObjectMother.Shared_TokenizationStrategyDefault.Equals("some_string");
+            bool actual = ObjectMother.TokenizationStrategy_Default.Equals("some_string");
 
             // Assert
             Assert.IsFalse(actual);
@@ -173,7 +173,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            bool actual = null == ObjectMother.Shared_TokenizationStrategyDefault;
+            bool actual = null == ObjectMother.TokenizationStrategy_Default;
 
             // Assert
             Assert.IsFalse(actual);
@@ -186,10 +186,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            int actual = ObjectMother.Shared_TokenizationStrategyDefault.GetHashCode();
+            int actual = ObjectMother.TokenizationStrategy_Default.GetHashCode();
 
             // Assert
-            Assert.AreEqual(ObjectMother.TokenizationStrategy_DefaultHashCode, actual);
+            Assert.AreEqual(ObjectMother.TokenizationStrategy_Default_HashCode, actual);
 
         }
 
@@ -204,5 +204,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 25.09.2021
 */

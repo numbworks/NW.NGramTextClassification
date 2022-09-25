@@ -6,7 +6,7 @@ using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 {
     [TestFixture]
     public class NGramTokenizerTests
@@ -37,14 +37,14 @@ namespace NW.NGramTextClassification.UnitTests
                     new TestDelegate( 
                             () => new NGramTokenizer(
                                             arrayManager: new ArrayManager(),
-                                            tokenizationStrategy: ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical
+                                            tokenizationStrategy: ObjectMother.TokenizationStrategy_NonAlphanumerical
                                         )
                                     .DoForRuleSet(
                                         text: LabeledExamples.ObjectMother.LabeledExample03_Untokenizable.Text,
                                         tokenizerRuleSet: new NGramTokenizerRuleSet()
                         )),
                     typeof(ArgumentException),
-                    MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(ObjectMother.NGramTokenizer_TokenizationStrategy_NonAlphanumerical)
+                    MessageCollection.NGramsTokenizer_ProvidedTokenizationStrategyPatternReturnsZeroMatches(ObjectMother.TokenizationStrategy_NonAlphanumerical)
                 ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_01"),
 
             new TestCaseData(
@@ -72,7 +72,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(nGramTokenizerExceptionTestCases))]
         public void NGramTokenizer_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void NGramTokenizer_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -92,7 +92,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(validateExceptionTestCases))]
         public void Validate_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(doForRuleSetOrDefaultTestCases))]
         public void DoForRuleSetOrDefault_ShouldReturnExpectedCollectionOfNGrams_WhenProperParameters
@@ -125,7 +125,7 @@ namespace NW.NGramTextClassification.UnitTests
                 = nGramTokenizer
                     .DoForRuleSetOrDefault(
                         text: LabeledExamples.ObjectMother.LabeledExample03_Untokenizable.Text, 
-                        tokenizerRuleSet: ObjectMother.Shared_RuleSet_Five
+                        tokenizerRuleSet: ObjectMother.NGramTokenizerRuleSet_Five
                         );
 
             // Assert
@@ -256,7 +256,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         LabeledExamples.ObjectMother.LabeledExample01.Text,
-                        ObjectMother.Shared_RuleSet_Mono,
+                        ObjectMother.NGramTokenizerRuleSet_Mono,
                         LabeledExamples.ObjectMother.CreateNGrams(
                             LabeledExamples.ObjectMother.LabeledExample01_Monograms
                             )
@@ -264,7 +264,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         LabeledExamples.ObjectMother.LabeledExample01.Text,
-                        ObjectMother.Shared_RuleSet_MonoBi,
+                        ObjectMother.NGramTokenizerRuleSet_MonoBi,
                         LabeledExamples.ObjectMother.CreateNGrams(
                             LabeledExamples.ObjectMother.LabeledExample01_Monograms,
                             LabeledExamples.ObjectMother.LabeledExample01_Bigrams
@@ -273,7 +273,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         LabeledExamples.ObjectMother.LabeledExample01.Text,
-                        ObjectMother.Shared_RuleSet_MonoBiTri,
+                        ObjectMother.NGramTokenizerRuleSet_MonoBiTri,
                         LabeledExamples.ObjectMother.CreateNGrams(
                             LabeledExamples.ObjectMother.LabeledExample01_Monograms,
                             LabeledExamples.ObjectMother.LabeledExample01_Bigrams,
@@ -283,7 +283,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         LabeledExamples.ObjectMother.LabeledExample01.Text,
-                        ObjectMother.Shared_RuleSet_MonoBiTriFour,
+                        ObjectMother.NGramTokenizerRuleSet_MonoBiTriFour,
                         LabeledExamples.ObjectMother.CreateNGrams(
                             LabeledExamples.ObjectMother.LabeledExample01_Monograms,
                             LabeledExamples.ObjectMother.LabeledExample01_Bigrams,
@@ -294,7 +294,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 new TestCaseData(
                         LabeledExamples.ObjectMother.LabeledExample01.Text,
-                        ObjectMother.Shared_RuleSet_MonoBiTriFourFive,
+                        ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                         LabeledExamples.ObjectMother.CreateNGrams(
                             LabeledExamples.ObjectMother.LabeledExample01_Monograms,
                             LabeledExamples.ObjectMother.LabeledExample01_Bigrams,

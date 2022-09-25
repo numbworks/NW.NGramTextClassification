@@ -15,91 +15,91 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         public static List<Monogram> LabeledExample01_Monograms = new List<Monogram>()
         {
 
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "we"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "are"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "looking"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "for"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "several"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "skilled"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "and"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "driven"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "developers"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "to"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "join"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "our"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "team")
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "are"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "looking"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "for"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "several"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "skilled"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "and"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "driven"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "developers"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "to"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "join"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "our"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
         public static List<Bigram> LabeledExample01_Bigrams = new List<Bigram>()
         {
 
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "we are"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "are looking"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "looking for"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "for several"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "several skilled"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "skilled and"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "and driven"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "driven developers"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "developers to"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "to join"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "join our"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "our team"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "team")
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "are looking"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "looking for"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "for several"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "several skilled"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "skilled and"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "and driven"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "driven developers"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "developers to"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "to join"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "join our"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "our team"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
         public static List<Trigram> LabeledExample01_Trigrams = new List<Trigram>()
         {
 
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "we are looking"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "are looking for"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "looking for several"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "for several skilled"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "several skilled and"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "skilled and driven"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "and driven developers"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "driven developers to"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "developers to join"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "to join our"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "join our team"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "our team"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "team")
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are looking"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "are looking for"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "looking for several"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "for several skilled"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "several skilled and"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "skilled and driven"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "and driven developers"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "driven developers to"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "developers to join"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "to join our"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "join our team"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "our team"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
         public static List<Fourgram> LabeledExample01_Fourgrams = new List<Fourgram>()
         {
 
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "we are looking for"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "are looking for several"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "looking for several skilled"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "for several skilled and"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "several skilled and driven"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "skilled and driven developers"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "and driven developers to"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "driven developers to join"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "developers to join our"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "to join our team"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "join our team"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "our team"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "team")
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are looking for"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "are looking for several"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "looking for several skilled"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "for several skilled and"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "several skilled and driven"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "skilled and driven developers"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "and driven developers to"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "driven developers to join"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "developers to join our"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "to join our team"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "join our team"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "our team"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
         public static List<Fivegram> LabeledExample01_Fivegrams = new List<Fivegram>()
         {
 
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "we are looking for several"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "are looking for several skilled"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "looking for several skilled and"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "for several skilled and driven"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "several skilled and driven developers"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "skilled and driven developers to"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "and driven developers to join"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "driven developers to join our"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "developers to join our team"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "to join our team"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "join our team"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "our team"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "team")
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are looking for several"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "are looking for several skilled"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "looking for several skilled and"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "for several skilled and driven"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "several skilled and driven developers"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "skilled and driven developers to"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "and driven developers to join"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "driven developers to join our"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "developers to join our team"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "to join our team"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "join our team"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "our team"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
         public static List<INGram> LabeledExample01_NGrams = new List<INGram>() 
@@ -199,71 +199,71 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         public static List<Monogram> LabeledExample02_Monograms = new List<Monogram>()
         {
 
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "vår"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "kund"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "erbjuder"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trivsel"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsglädje"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "och"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "en"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trygg"),
-            new Monogram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsmiljö")
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "kund"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "erbjuder"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trivsel"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsglädje"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "och"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "en"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trygg"),
+            new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
         public static List<Bigram> LabeledExample02_Bigrams = new List<Bigram>()
         {
 
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "vår kund"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "kund erbjuder"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "erbjuder trivsel"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trivsel arbetsglädje"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsglädje och"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "och en"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "en trygg"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trygg arbetsmiljö"),
-            new Bigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsmiljö")
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "kund erbjuder"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "erbjuder trivsel"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trivsel arbetsglädje"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsglädje och"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "och en"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "en trygg"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trygg arbetsmiljö"),
+            new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
         public static List<Trigram> LabeledExample02_Trigrams = new List<Trigram>()
         {
 
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "vår kund erbjuder"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "kund erbjuder trivsel"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "erbjuder trivsel arbetsglädje"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trivsel arbetsglädje och"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsglädje och en"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "och en trygg"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "en trygg arbetsmiljö"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trygg arbetsmiljö"),
-            new Trigram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsmiljö")
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund erbjuder"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "kund erbjuder trivsel"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "erbjuder trivsel arbetsglädje"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trivsel arbetsglädje och"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsglädje och en"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "och en trygg"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "en trygg arbetsmiljö"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trygg arbetsmiljö"),
+            new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
         public static List<Fourgram> LabeledExample02_Fourgrams = new List<Fourgram>()
         {
 
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "vår kund erbjuder trivsel"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "kund erbjuder trivsel arbetsglädje"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "erbjuder trivsel arbetsglädje och"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trivsel arbetsglädje och en"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsglädje och en trygg"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "och en trygg arbetsmiljö"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "en trygg arbetsmiljö"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trygg arbetsmiljö"),
-            new Fourgram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsmiljö")
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund erbjuder trivsel"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "kund erbjuder trivsel arbetsglädje"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "erbjuder trivsel arbetsglädje och"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trivsel arbetsglädje och en"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsglädje och en trygg"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "och en trygg arbetsmiljö"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "en trygg arbetsmiljö"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trygg arbetsmiljö"),
+            new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
         public static List<Fivegram> LabeledExample02_Fivegrams = new List<Fivegram>()
         {
 
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "vår kund erbjuder trivsel arbetsglädje"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "kund erbjuder trivsel arbetsglädje och"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "erbjuder trivsel arbetsglädje och en"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trivsel arbetsglädje och en trygg"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsglädje och en trygg arbetsmiljö"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "och en trygg arbetsmiljö"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "en trygg arbetsmiljö"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "trygg arbetsmiljö"),
-            new Fivegram(UnitTests.ObjectMother.Shared_TokenizationStrategyDefault, "arbetsmiljö")
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund erbjuder trivsel arbetsglädje"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "kund erbjuder trivsel arbetsglädje och"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "erbjuder trivsel arbetsglädje och en"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trivsel arbetsglädje och en trygg"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsglädje och en trygg arbetsmiljö"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "och en trygg arbetsmiljö"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "en trygg arbetsmiljö"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "trygg arbetsmiljö"),
+            new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
         public static List<INGram> LabeledExample02_NGrams = new List<INGram>()

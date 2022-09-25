@@ -12,38 +12,6 @@ namespace NW.NGramTextClassification.UnitTests
     public static class ObjectMother
     {
 
-        #region Shared
-
-        public static ITokenizationStrategy Shared_TokenizationStrategyDefault = new TokenizationStrategy();
-        public static TokenizationStrategy Shared_TokenizationStrategyCustom = new TokenizationStrategy("[a-Z]", ";", false);
-
-        public static INGramTokenizerRuleSet Shared_RuleSet_Mono
-            = new NGramTokenizerRuleSet(true, false, false, false, false);
-        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBi
-            = new NGramTokenizerRuleSet(true, true, false, false, false);
-        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBiTri
-            = new NGramTokenizerRuleSet(true, true, true, false, false);
-        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBiTriFour
-            = new NGramTokenizerRuleSet(true, true, true, true, false);
-        public static INGramTokenizerRuleSet Shared_RuleSet_MonoBiTriFourFive
-            = new NGramTokenizerRuleSet(true, true, true, true, true);
-        public static INGramTokenizerRuleSet Shared_RuleSet_Five
-            = new NGramTokenizerRuleSet(false, false, false, false, true);
-
-        #endregion
-
-        #region NGramTokenizer
-
-        public static string NGramTokenizer_Text_NonAlphanumerical = ";;;-- £/£&$£";
-        public static TokenizationStrategy NGramTokenizer_TokenizationStrategy_NonAlphanumerical
-            = new TokenizationStrategy(
-                    pattern: NGramTokenizer_Text_NonAlphanumerical,
-                    delimiter: TokenizationStrategy.DefaultDelimiter,
-                    toLowercase: TokenizationStrategy.DefaultToLowercase
-                );
-
-        #endregion
-
         #region SimilarityIndex
 
         public static string SimilarityIndex01_Text = LabeledExamples.ObjectMother.LabeledExample01.Text;
@@ -145,14 +113,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region TokenizationStrategy
-
-        public static string TokenizationStrategy_ToString
-            = $"[ Pattern: '{TokenizationStrategy.DefaultPattern}', Delimiter: '{TokenizationStrategy.DefaultDelimiter}', ToLowercase: '{TokenizationStrategy.DefaultToLowercase}' ]";
-        public static int TokenizationStrategy_DefaultHashCode
-            = (TokenizationStrategy.DefaultPattern, TokenizationStrategy.DefaultDelimiter, TokenizationStrategy.DefaultToLowercase).GetHashCode();
-
-        #endregion
 
         #region Validator
 
