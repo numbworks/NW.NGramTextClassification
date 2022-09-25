@@ -1,3 +1,6 @@
+v3.0.0 - BREAKING CHANGES
+- Decoupled LabeledExample class from the tokenization process; TokenizedExample class added.
+
 v2.2.0
 - Fixed root cause for a System.NullReferenceException when running TryPredictLabel() for "/".
 - TextClassifierTests: added tests for TryPredictLabel().
