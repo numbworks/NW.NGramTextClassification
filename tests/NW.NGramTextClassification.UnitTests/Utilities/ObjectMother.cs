@@ -426,25 +426,6 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
-        #region ArrayManager
-
-        public static string ArrayManager_Delimiter1 = ";";
-        public static uint ArrayManager_StartIndex1 = 0;
-        public static uint ArrayManager_Length1 = 2;
-        public static string[] ArrayManager_Array1_WithDelimiter1
-            = new[] {
-                "Dodge",
-                ArrayManager_Delimiter1,
-                "Datsun",
-                ArrayManager_Delimiter1,
-                "Jaguar",
-                ArrayManager_Delimiter1,
-                "DeLorean"
-            };
-        public static string[] ArrayManager_Array1_Subset1 = new[] { "Dodge", "Datsun" };
-
-        #endregion
-
         #region NGramTokenizer
 
         public static string NGramTokenizer_Text_NonAlphanumerical = ";;;-- £/£&$£";
@@ -832,5 +813,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 24.09.2022
+    Last Update: 25.09.2022
 */

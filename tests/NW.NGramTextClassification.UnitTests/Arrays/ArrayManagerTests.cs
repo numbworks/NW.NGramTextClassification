@@ -1,9 +1,9 @@
 ﻿using System;
-using NUnit.Framework;
 using NW.NGramTextClassification.Arrays;
 using NW.NGramTextClassification.Messages;
+using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.Arrays
 {
     [TestFixture]
     public class ArrayManagerTests
@@ -20,7 +20,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new ArrayManager()
                                     .AddDelimiter(
                                         null,
-                                        ObjectMother.ArrayManager_Delimiter1)
+                                        ObjectMother.ArrayManager_Delimiter01)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("arr").Message
@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new ArrayManager()
                                     .AddDelimiter(
                                         Array.Empty<string>(),
-                                        ObjectMother.ArrayManager_Delimiter1)
+                                        ObjectMother.ArrayManager_Delimiter01)
                     ),
                 typeof(ArgumentException),
                 MessageCollection.Validator_VariableContainsZeroItems("arr")
@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .AddDelimiter(
-                                        ObjectMother.Validator_Array1,
+                                        UnitTests.ObjectMother.Validator_Array1,
                                         null)
                     ),
                 typeof(ArgumentNullException),
@@ -55,7 +55,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .AddDelimiter(
-                                        ObjectMother.Validator_Array1,
+                                        UnitTests.ObjectMother.Validator_Array1,
                                         string.Empty)
                     ),
                 typeof(ArgumentNullException),
@@ -72,8 +72,8 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new ArrayManager()
                                     .GetSubset(
                                         null,
-                                        ObjectMother.ArrayManager_StartIndex1,
-                                        ObjectMother.ArrayManager_Length1)
+                                        ObjectMother.ArrayManager_StartIndex01,
+                                        ObjectMother.ArrayManager_Length01)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("arr").Message
@@ -85,8 +85,8 @@ namespace NW.NGramTextClassification.UnitTests
                         () => new ArrayManager()
                                     .GetSubset(
                                         Array.Empty<string>(),
-                                        ObjectMother.ArrayManager_StartIndex1,
-                                        ObjectMother.ArrayManager_Length1)
+                                        ObjectMother.ArrayManager_StartIndex01,
+                                        ObjectMother.ArrayManager_Length01)
                     ),
                 typeof(ArgumentException),
                 MessageCollection.Validator_VariableContainsZeroItems("arr")
@@ -97,8 +97,8 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .GetSubset(
-                                        ObjectMother.Validator_Array1,
-                                        ObjectMother.ArrayManager_StartIndex1,
+                                        UnitTests.ObjectMother.Validator_Array1,
+                                        ObjectMother.ArrayManager_StartIndex01,
                                         0)
                     ),
                 typeof(ArgumentException),
@@ -110,9 +110,9 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .GetSubset(
-                                        ObjectMother.Validator_Array1, // arr.Length = 4
+                                        UnitTests.ObjectMother.Validator_Array1, // arr.Length = 4
                                         4,
-                                        ObjectMother.ArrayManager_Length1)
+                                        ObjectMother.ArrayManager_Length01)
                     ),
                 typeof(ArgumentException),
                 MessageCollection.Validator_FirstValueIsGreaterOrEqualThanSecondValue("startIndex", "arr.Length")
@@ -123,7 +123,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .GetSubset(
-                                        ObjectMother.Validator_Array1, // arr.Length = 4
+                                        UnitTests.ObjectMother.Validator_Array1, // arr.Length = 4
                                         0,
                                         5)
                     ),
@@ -136,7 +136,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new ArrayManager()
                                     .GetSubset(
-                                        ObjectMother.Validator_Array1, // arr.Length = 4
+                                        UnitTests.ObjectMother.Validator_Array1, // arr.Length = 4
                                         2,
                                         3)
                     ),
@@ -156,12 +156,12 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(addDelimiterExceptionTestCases))]
         public void AddDelimiter_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(getSubsetExceptionTestCases))]
         public void GetSubset_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void AddDelimiter_ShouldAddADelimiterItemBetweenTheOtherItems_WhenProperArguments()
@@ -171,12 +171,12 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             string[] actual 
                 = new ArrayManager().AddDelimiter(
-                                        ObjectMother.Validator_Array1,
-                                        ObjectMother.ArrayManager_Delimiter1);
+                                        UnitTests.ObjectMother.Validator_Array1,
+                                        ObjectMother.ArrayManager_Delimiter01);
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.ArrayManager_Array1_WithDelimiter1,
+                    ObjectMother.ArrayManager_Array01_WithDelimiter01,
                     actual);
 
         }
@@ -189,13 +189,13 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             string[] actual 
                 = new ArrayManager().GetSubset(
-                                        ObjectMother.Validator_Array1,
-                                        ObjectMother.ArrayManager_StartIndex1,
-                                        ObjectMother.ArrayManager_Length1);
+                                        UnitTests.ObjectMother.Validator_Array1,
+                                        ObjectMother.ArrayManager_StartIndex01,
+                                        ObjectMother.ArrayManager_Length01);
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.ArrayManager_Array1_Subset1,
+                    ObjectMother.ArrayManager_Array01_Subset01,
                     actual);
 
         }
@@ -210,5 +210,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2021
+    Last Update: 25.09.2022
 */
