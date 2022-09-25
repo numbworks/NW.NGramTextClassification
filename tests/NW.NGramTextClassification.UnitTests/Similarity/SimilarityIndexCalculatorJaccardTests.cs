@@ -113,7 +113,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
         [TestCaseSource(nameof(doExceptionTestCases))]
         public void Do_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(doTestCases))]
         public void Do_ShouldReturnTheExpectedValue_WhenProperArguments

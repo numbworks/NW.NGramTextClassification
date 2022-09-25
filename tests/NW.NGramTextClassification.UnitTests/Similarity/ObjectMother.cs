@@ -73,9 +73,9 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
         }
 
         public static bool AreEqual(List<SimilarityIndex> list1, List<SimilarityIndex> list2)
-            => UnitTests.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
+            => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
         public static bool AreEqual(List<SimilarityIndexAverage> list1, List<SimilarityIndexAverage> list2)
-            => UnitTests.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
+            => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
 
         public static List<SimilarityIndex> CreateThirtySimilarityIndexes()
         {

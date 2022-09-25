@@ -160,7 +160,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyLabeledExamples(),
-                    ObjectMother.TextClassifierResult02_LabeledExamples00
+                    Utilities.ObjectMother.TextClassifierResult02_LabeledExamples00
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
@@ -175,12 +175,12 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(textClassifierExceptionTestCases))]
         public void TextClassifier_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(classifyOrDefaultExceptionTestCases))]
         public void ClassifyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void TextClassifier_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -226,7 +226,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+                    Utilities.ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
@@ -264,7 +264,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+                    Utilities.ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(
                     initialLogMessages,
@@ -354,7 +354,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+                    Utilities.ObjectMother.AreEqual(expected, actual)
                 );
             Assert.AreEqual(
                     initialLogMessages,
@@ -403,7 +403,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: new object[] { indexAverages }
@@ -452,7 +452,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: new object[] { indexAverages }
@@ -502,7 +502,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: new object[] { indexAverages }
@@ -549,7 +549,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: new object[] { indexAverages }
@@ -600,7 +600,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: new object[] { indexAverages }

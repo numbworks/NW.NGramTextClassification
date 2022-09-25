@@ -96,7 +96,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
         [TestCaseSource(nameof(tokenizationStrategyExceptionTestCases))]
         public void TokenizationStrategy_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ToString_ShouldReturnTheExpectedString_WhenInvoked()

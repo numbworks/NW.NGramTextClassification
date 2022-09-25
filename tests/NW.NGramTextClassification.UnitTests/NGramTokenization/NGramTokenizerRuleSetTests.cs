@@ -62,7 +62,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
         [TestCaseSource(nameof(nGramTokenizerRuleSetExceptionTestCases))]
         public void NGramTokenizerRuleSet_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(nGramTokenizerRuleSetTestCases))]
         public void NGramTokenizerRuleSet_ShouldCreateAnInstanceOfThisType_WhenProperArgument

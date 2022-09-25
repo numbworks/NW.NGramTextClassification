@@ -1,7 +1,7 @@
 ﻿using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.Utilities
 {
     public class FakeGram : ANGram, INGram
     {
@@ -27,5 +27,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 25.09.2022
 */

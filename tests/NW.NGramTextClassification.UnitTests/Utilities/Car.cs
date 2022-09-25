@@ -1,4 +1,4 @@
-﻿namespace NW.NGramTextClassification.UnitTests
+﻿namespace NW.NGramTextClassification.UnitTests.Utilities
 {
     public class Car
     {
@@ -30,5 +30,5 @@
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2021
+    Last Update: 25.09.2022
 */

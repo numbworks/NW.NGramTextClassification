@@ -409,7 +409,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         }
         public static bool AreEqual(List<TokenizedExample> list1, List<TokenizedExample> list2)
-            => UnitTests.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
+            => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
 
         public static List<LabeledExample> CreateThirtyLabeledExamples()
         {

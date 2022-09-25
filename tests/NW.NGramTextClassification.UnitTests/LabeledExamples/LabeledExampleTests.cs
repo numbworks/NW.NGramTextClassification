@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         [TestCaseSource(nameof(labeledExampleExceptionTestCases))]
         public void LabeledExample_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void ToString_ShouldReturnExpectedString_WhenInvoked()

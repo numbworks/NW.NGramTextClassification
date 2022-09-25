@@ -111,7 +111,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(textClassifierComponentsExceptionTestCases))]
         public void TextClassifierComponents_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void TextClassifierComponents_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -154,5 +154,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2022
+    Last Update: 25.09.2022
 */

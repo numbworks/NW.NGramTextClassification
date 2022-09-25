@@ -120,12 +120,12 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         [TestCaseSource(nameof(labeledExampleManagerExceptionTestCases))]
         public void LabeledExampleManager_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(createOrDefaultExceptionTestCases))]
         public void CreateOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(createOrDefaultTestCases))]
         public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenProperParameters

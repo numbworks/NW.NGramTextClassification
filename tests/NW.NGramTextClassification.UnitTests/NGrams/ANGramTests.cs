@@ -3,6 +3,7 @@ using NUnit.Framework;
 using NW.NGramTextClassification.Messages;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.UnitTests.Utilities;
 
 namespace NW.NGramTextClassification.UnitTests.NGrams
 {
@@ -102,7 +103,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
         [TestCaseSource(nameof(aNGramExceptionTestCases))]
         public void ANGram_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(equalityMethodsTestCases))]
         public void EqualsAndEqualityOperators_ShouldReturnTheExpectedBoolean_WhenInvoked

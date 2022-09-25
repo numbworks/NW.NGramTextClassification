@@ -77,7 +77,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
         [TestCaseSource(nameof(similarityIndexAverageExceptionTestCases))]
         public void SimilarityIndexAverage_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => UnitTests.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         #endregion
 

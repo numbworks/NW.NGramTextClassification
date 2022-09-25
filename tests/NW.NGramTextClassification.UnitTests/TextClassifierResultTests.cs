@@ -18,7 +18,7 @@ namespace NW.NGramTextClassification.UnitTests
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
-                    ObjectMother.TextClassifierResult01_AsString
+                    Utilities.ObjectMother.TextClassifierResult01_AsString
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_01"),
 
             new TestCaseData(
@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.UnitTests
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
-                    ObjectMother.TextClassifierResult_AsStringWithNullLabel
+                    Utilities.ObjectMother.TextClassifierResult_AsStringWithNullLabel
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
 
             new TestCaseData(
@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests
                         indexes: null,
                         indexAverages: null
                         ),
-                    ObjectMother.TextClassifierResult_AllNulls
+                    Utilities.ObjectMother.TextClassifierResult_AllNulls
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_03")
 
         };
