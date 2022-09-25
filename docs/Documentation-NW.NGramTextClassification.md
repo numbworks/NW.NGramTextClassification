@@ -9,6 +9,7 @@ Contact: numbworks@gmail.com
 | 2021-01-30 | numbworks | Added examples, re-organized the document. |
 | 2021-02-15 | numbworks | Completed "Example 1: Main Scenario". |
 | 2021-09-24 | numbworks | Version numbers removed, updated examples for v2.0.0. |
+| 2022-09-24 | numbworks | Updated to v3.0.0. |
 
 ## Introduction
 
@@ -16,15 +17,15 @@ Contact: numbworks@gmail.com
 
 `Text Classification` is a `machine learning` technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library to learn from it. 
 
-The `accuracy` of the classification process can be augmented by finetuning the technique used to split the text strings before performing the `similarity calculation` process, which is based on collections of `N-Grams` instead of collections of single words. In this context, a `n-gram` is a contiguous sequence of `n words`, where `n` can be equal to 1 (`monogram`), 2 (`bigram`), 3 (`trigram`) and so on.
+Every string of text is decomposed in collections of `n-grams` and compared by using a `similarity calculator`. A `n-gram` is a contiguous sequence of `n words`, where `n` can be equal to 1 (`monogram`), 2 (`bigram`), 3 (`trigram`) and so on.
 
-A `Text Classification` library can be super-useful for the resolution of many problems, such as `spam detection` or `language detection` in an automated environment.
+A `Text Classification` library can be very useful for the resolution of many problems, such as `spam detection` or `language detection` in an automated environment.
 
-## Example 1: Main Scenario 
+## A use case scenario: language detection
 
-Let's imagine we do have `several strings of text` we need to `detect the language` for, but `we don't want to pay` for using the `Google Translate API` or we are working in an environment that lacks of internet access. 
+We have several strings of text and we want to detect their language. 
 
-We do know that these strings of text can be among three different languages (English, Swedish and Danish), but nothing more than that.
+We do know beforehand that these strings of text can be among three different languages, and we do have a batch of pre-labeled strings for each of them, but nothing more than that.
 
 To perform the task above you need only few lines of code:
 
@@ -40,62 +41,70 @@ string text = "We are looking for several skilled and driven developers to join 
 List<LabeledExample> labeledExamples = CreateLabeledExamples();
 
 ITextClassifier textClassifier = new TextClassifier();
-TextClassifierResult result = textClassifier.PredictLabel(text, labeledExamples);
+TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
 
 Console.WriteLine(result.Label);
 ```
 
-As you can see, the entry point of the library is the `TextClassifier` class and it offers a quite self-explanatory `PredictLabel` method.
+The entry point of the library (`TextClassifier`) offers a quite self-explanatory `ClassifyOrDefault` method.
 
 The `text` variable contains the string of text that we need to categorize, while the `labeledExamples` variable contains the collection of strings that already have a label associated to them and that we will use to train the library.
 
-Here how `labeledExamples` is getting populated (strings are truncated for a readibility purpose):
+Here how `labeledExamples` is getting populated (strings are truncated at `[...]` for a readibility purpose):
 
 ```csharp
-/*...*/
-
 private static List<LabeledExample> CreateLabeledExamples()
 {
 
-    List<(string label, string text)> tuples = new List<(string label, string text)>()
+    List<LabeledExample> labeledExamples = new List<LabeledExample>()
     {
 
-        ("en", "VerksamhetsbeskrivningGoGift is a company which focuses on [...]"),
-        ("en", "You will report to the Team Manager. You will get the opportunity [...]"),
+        new LabeledExample(label: "en", text: "VerksamhetsbeskrivningGoGift is a company which focuses on [...]"),
+        new LabeledExample(label: "en", text: "You will report to the Team Manager. You will get the opportunity [...]"),
         /*...*/
-        ("sv", "Conic Restaurants AB äger och driver idag SUBWAY restauranger [...]"),
-        ("sv", "Du ska vara noggrann, van vid att ta eget ansvar och gilla att [...]"),
-        /*...*/ 
-        ("dk", "Har du lyst til et nært samarbejde med kolleger i en klinik [...]"),
-        ("dk", "Lægesekretær/SOSU-assistent 20-25 timer ugentligt til almen [...]"),
+        new LabeledExample(label: "sv", text: "Conic Restaurants AB äger och driver idag SUBWAY restauranger [...]"),
+        new LabeledExample(label: "sv", text: "Du ska vara noggrann, van vid att ta eget ansvar och gilla att [...]"),
+        /*...*/
+        new LabeledExample(label: "dk", text: "Har du lyst til et nært samarbejde med kolleger i en klinik [...]"),
+        new LabeledExample(label: "dk", text: "Lægesekretær/SOSU-assistent 20-25 timer ugentligt til almen [...]"),
+        /*...*/
 
     };
 
-    return new LabeledExampleFactory().TryCreateForRuleSet(tuples);
+    return labeledExamples;
 
 }
-
-/*...*/
 ```
 
-A collection of `(label, text)` tuples can get easily converted to a collection of `LabeledExamples` by using the provided `LabeledExampleFactory`.
+Once you have both `text` and `labeledExamples` variables properly set, you can initialize a `TextClassifier` object and call its `ClassifyOrDefault` method.
 
-Once you have both `text` and `labeledExamples` variables properly set, you can initialize a `TextClassifier` object and call its `PredictLabel` method, which at its core looks like the following (logging statements have been removed for readibility purpose):
+Apart from `Label`, the `TextClassifierResult` object contains some diagnostic information, which we can use to improve the accuracy of the classsification. 
+
+Here how the `TextClassifierResult` class definition looks like:
 
 ```csharp
-/*...*/
-
-public TextClassifierResult PredictLabel
-    (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+public class TextClassifierResult
 {
 
-    /*...*/
+    public string Label { get; }
+    public List<SimilarityIndex> SimilarityIndexes { get; }
+    public List<SimilarityIndexAverage> SimilarityIndexAverages { get; }
 
-    List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSet(text, tokenizerRuleSet);
-    List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, labeledExamples);
+    /* ... */
+}
+```
+
+The core logic of the `ClassifyOrDefault` method is the following one (some logging statements have been removed for readibility purpose):
+
+```csharp
+private TextClassifierResult CreateResult(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
+{
+
+    List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
     List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 
-    string label = PredictLabel(indexAverages);
+    string label = GetLabel(indexAverages);
+    _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs(label));
 
     if (label == null)
         _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
@@ -106,9 +115,7 @@ public TextClassifierResult PredictLabel
 
     return result;
 
-}
-
-/*...*/
+} 
 ```
 
 The content of the `text` variable gets tokenized into a collection of `INGrams`, and each of them is compared to the provided collection of `LabeledExamples`.
@@ -135,67 +142,18 @@ All these values need to be averaged, so that we have one average value for each
 |sv|0,000942|
 |dk|0,003026|
 
-The `PredictLabel` method will run this collection of `SimilarityIndexAverage` objects thru a bunch of strategies, and eventually return the label with the highest average value (highest similarity). 
+The `GetLabel` method will run this collection of `SimilarityIndexAverage` objects thru a bunch of strategies, and eventually return the label with the highest average value (highest similarity), which in this case is `en`.
 
-That label is the most likely categorization possible, which in this case will be `en`.
+ The `ClassifyOrDefault` method can return:
 
-If it's not possible to predict the label, a `null` will be returned.
+- a `TextClassifierResult` object containing the presumed label
+- a `TextClassifierResult` object containing a `null` label.
 
-## Labeled Examples?
+## The tokenizazion process
 
-A `LabeledExample` is defined as following:
+The library component responsible for the tokenization process is `NGramTokenizer` and it requires a `NGramTokenizerRuleSet` in order to create a collection of `INGram` objects our of whatever string of text. 
 
-```csharp
-/*...*/
-
-public class LabeledExample
-{
-
-    /*...*/
-
-    public ulong Id { get; }
-    public string Label { get; }
-    public string Text { get; }
-    public List<INGram> TextAsNGrams { get; }
-
-    /*...*/
-
-    public LabeledExample
-        (ulong id, string label, string text, List<INGram> textAsNGrams) { /*...*/ }
-
-    /*...*/
-
-}
-```
-
-`LabeledExample` objects can be created very easily by using the provided `LabeledExampleFactory` helper class, which automates the creation of the collection of `NGrams` for the `text` you provide:
-
-```csharp
-/*...*/
-
-public class LabeledExampleFactory : ILabeledExampleFactory
-{
-
-    /*...*/
-
-    public LabeledExampleFactory
-        (INGramTokenizer tokenizer, uint initialId) { /*...*/ }
-    public LabeledExampleFactory()
-        : this(new NGramTokenizer(), DefaultInitialId) { }
-
-    /*...*/
-
-    public LabeledExample TryCreateForRuleSet
-        (ulong id, string label, string text, INGramTokenizerRuleSet tokenizerRuleSet) { /*...*/ }
-            
-    /*...*/
-
-}
-```
-
-It requires you to provide an `INGramTokenizer` and an `INGramTokenizerRuleSet` that will influence how the `List<INGram>` property of the `LabeledExample` object will be populated.
-
-If your `text` is "*We are looking for several skilled and driven developers to join our team.*" and you tokenize it by using the following `NGramTokenizerRuleSet`:
+A `NGramTokenizerRuleSet` looks like the following:
 
 ```csharp
 INGramTokenizerRuleSet nGramTokenizerRuleSet 
@@ -206,13 +164,12 @@ INGramTokenizerRuleSet nGramTokenizerRuleSet
             doForFourgram: false, 
             doForFivegram: false
         );
-
 ```
 
- the resulting `List<INGram>` will look like:
+If your `text` is "*We are looking for several skilled and driven developers to join our team.*", the `NGramTokenizerRuleSet` above will generate the following collection of `INGram` objects:
 
 ```csharp
-List<INGram> textAsNGrams = new List<INGram>() {
+List<INGram> nGrams = new List<INGram>() {
 
     new Monogram("we"),
     new Monogram("are"),
@@ -257,16 +214,13 @@ List<INGram> textAsNGrams = new List<INGram>() {
 };
 ```
 
-Using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available.
+## Improving the accuracy of the classification
 
-## Better predictions?
-
-The accuracy of the prediction can be improved:
+The accuracy of the classification can be improved:
 
 1. by increasing the number of `LabeledExamples` for each label
-2. by using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text
-
-An example of the second bullet point could be the attempt of predicting the language of a piece of text about anthropology using a collection of multilingual `LabeledExamples` about the same topic.
+2. by using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text - for ex. attempting to detect the language of a piece of text about anthropology using a collection of multilingual `LabeledExample` objects about the same topic.
+3. Increasing the number of `INGram` objects - for ex. using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available in the library.
 
 ## Markdown Toolset
 
