@@ -6,7 +6,7 @@ namespace NW.NGramTextClassification.Validation
     public static class MessageCollection
     {
 
-        #region Validator
+        #region Properties
 
         public static Func<string, string, string> FirstValueIsGreaterOrEqualThanSecondValue
             = (variableName1, variableName2) => $"The '{variableName1}''s value is greater or equal than '{variableName2}''s value.";
