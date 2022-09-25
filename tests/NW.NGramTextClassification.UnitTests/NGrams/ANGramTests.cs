@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                         () => new FakeGram(
                                     1,
                                     new TokenizationStrategy(),
-                                    UnitTests.ObjectMother.Validator_StringOnlyWhiteSpaces
+                                    Validation.ObjectMother.StringOnlyWhiteSpaces
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("value").Message

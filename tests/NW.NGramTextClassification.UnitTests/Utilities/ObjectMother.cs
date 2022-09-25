@@ -11,7 +11,7 @@ namespace NW.NGramTextClassification.UnitTests
     public static class ObjectMother
     {
 
-        #region TextClassifier
+        #region Properties
 
         public static SimilarityIndex TextClassifier_Text1_SimilarityIndex1 = new SimilarityIndex(LabeledExamples.ObjectMother.LabeledExample01.Text, "en", 1);
         public static SimilarityIndex TextClassifier_Text1_SimilarityIndex2 = new SimilarityIndex(LabeledExamples.ObjectMother.LabeledExample02.Text, "sv", 0);
@@ -51,39 +51,12 @@ namespace NW.NGramTextClassification.UnitTests
                     indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForThirty()
                 );
 
-        #endregion
-
-        #region TextClassifierResult
-
         public static string TextClassifierResult01_AsString
             = $"[ Label: '{LabeledExamples.ObjectMother.LabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";       
         public static string TextClassifierResult_AsStringWithNullLabel
             = $"[ Label: 'null', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AllNulls
             = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
-
-        #endregion
-
-
-        #region Validator
-
-        public static string[] Validator_Array1 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
-        public static Car Validator_Object1 = new Car()
-        {
-            Brand = "Dodge",
-            Model = "Charger",
-            Year = 1966,
-            Price = 13500,
-            Currency = "USD"
-        };
-        public static uint Validator_Length1 = 3;
-        public static string Validator_VariableName_Variable = "variable";
-        public static string Validator_VariableName_Length = "length";
-        public static string Validator_VariableName_N = "n";
-        public static List<string> List1 = Validator_Array1.ToList();
-        public static ushort N1 = (ushort)Validator_Length1;
-        public static string Validator_String1 = "Dodge";
-        public static string Validator_StringOnlyWhiteSpaces = "   ";
 
         #endregion
 
