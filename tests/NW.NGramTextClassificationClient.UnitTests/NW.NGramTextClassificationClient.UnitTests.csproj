@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
     <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
     <Authors>numbworks</Authors>
-    <Company>numbworksnumbworks</Company>
+    <Company>numbworks</Company>
     <Copyright>numbworks 2022</Copyright>
   </PropertyGroup>
 

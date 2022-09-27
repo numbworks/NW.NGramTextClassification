@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>numbworks</Authors>
-    <Description>ngramtc is a CLI application to perform text classification tasks.</Description>
+    <Description>ngramtc is a command-line application to perform text classification tasks based on the NW.NGramTextClassification library.</Description>
     <Copyright>numbworks 2022</Copyright>
     <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>

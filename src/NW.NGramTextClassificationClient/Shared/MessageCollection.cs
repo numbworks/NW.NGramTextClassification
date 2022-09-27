@@ -7,7 +7,7 @@
         #region Properties
 
         public static string Application_Name { get; } = "ngramtc";
-        public static string Application_Description { get; } = "CLI application to perform text classification tasks.";
+        public static string Application_Description { get; } = "Command-line application to perform text classification tasks.";
 
         public static string About_Name { get; } = "about";
         public static string About_Description { get; } = "About this application.";
