@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <Folder Include="Application\" />
+    <Folder Include="ApplicationAbout\" />
   </ItemGroup>
 
 </Project>
