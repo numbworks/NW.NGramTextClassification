@@ -13,7 +13,6 @@ namespace NW.NGramTextClassification.LabeledExamples
         #region Fields
 
         private NGramTokenization.INGramTokenizer _tokenizer;
-        private uint _initialId;
 
         #endregion
 
