@@ -46,7 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApplicationAbout\" />
     <Folder Include="ApplicationSession\" />
     <Folder Include="Shared\" />
   </ItemGroup>
