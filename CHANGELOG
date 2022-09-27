@@ -4,6 +4,7 @@ v3.0.0 - BREAKING CHANGES
 - Split the monolithic ObjectMother class to namespace-based ObjectMother classes to improve maintainability.
 - Split the monolithic MessageCollection class to namespace-based MessageCollection classes to improve maintainability.
 - TextClassifier, added LogAsciiBanner() method.
+- Add a preliminary client structure for NW.NGramTextClassificationClient.
 
 v2.2.0
 - Fixed root cause for a System.NullReferenceException when running TryPredictLabel() for "/".
