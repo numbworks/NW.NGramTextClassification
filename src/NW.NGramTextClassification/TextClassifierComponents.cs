@@ -31,8 +31,11 @@ namespace NW.NGramTextClassification
                 return text;
 
             };
+        public static string DefaultLoggingActionDateFormat { get; } = "yyyy-MM-dd HH:mm:ss:fff";
         public static Action<string> DefaultLoggingAction { get; }
-            = (message) => Console.WriteLine(message);
+            = (message) => Console.WriteLine($"[{DateTime.UtcNow.ToString(DefaultLoggingActionDateFormat)}] {message}");
+        public static Action<string> DefaultLoggingActionAsciiBanner { get; }
+            = (message) => Console.WriteLine($"{message}");
 
         public INGramTokenizer NGramsTokenizer { get; }
         public ISimilarityIndexCalculator SimilarityIndexCalculator { get; }
@@ -41,6 +44,7 @@ namespace NW.NGramTextClassification
         public Action<string> LoggingAction { get; }
         public ILabeledExampleManager LabeledExampleManager { get; }
         public IAsciiBannerManager AsciiBannerManager { get; }
+        public Action<string> LoggingActionAsciiBanner { get; }
 
         #endregion
 
@@ -54,7 +58,8 @@ namespace NW.NGramTextClassification
                     Func<string, uint, string> textTruncatingFunction,
                     Action<string> loggingAction,
                     ILabeledExampleManager labeledExampleManager,
-                    IAsciiBannerManager asciiBannerManager)
+                    IAsciiBannerManager asciiBannerManager,
+                    Action<string> loggingActionAsciiBanner)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -64,6 +69,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(loggingAction, nameof(loggingAction));
             Validator.ValidateObject(labeledExampleManager, nameof(labeledExampleManager));
             Validator.ValidateObject(asciiBannerManager, nameof(asciiBannerManager));
+            Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -72,19 +78,21 @@ namespace NW.NGramTextClassification
             LoggingAction = loggingAction;
             LabeledExampleManager = labeledExampleManager;
             AsciiBannerManager = asciiBannerManager;
+            LoggingActionAsciiBanner = loggingActionAsciiBanner;
 
         }
 
         /// <summary>Initializes a <see cref="TextClassifierComponents"/> instance using default parameters.</summary>
         public TextClassifierComponents()
             : this(
-                  new NGramTokenizer(),
-                  new SimilarityIndexCalculatorJaccard(),
-                  DefaultRoundingFunction,
-                  DefaultTextTruncatingFunction,
-                  DefaultLoggingAction,
-                  new LabeledExampleManager(),
-                  new AsciiBannerManager())
+                  nGramsTokenizer: new NGramTokenizer(),
+                  similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                  roundingFunction: DefaultRoundingFunction,
+                  textTruncatingFunction: DefaultTextTruncatingFunction,
+                  loggingAction: DefaultLoggingAction,
+                  labeledExampleManager: new LabeledExampleManager(),
+                  asciiBannerManager: new AsciiBannerManager(),
+                  loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner)
         { }
 
         #endregion
@@ -97,5 +105,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 27.09.2022
 */

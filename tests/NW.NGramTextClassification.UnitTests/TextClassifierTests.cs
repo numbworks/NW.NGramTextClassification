@@ -218,7 +218,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
@@ -250,7 +251,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -296,7 +298,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -341,7 +344,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -388,7 +392,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -436,7 +441,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -486,7 +492,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -537,7 +544,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -585,7 +593,8 @@ namespace NW.NGramTextClassification.UnitTests
                           textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager());
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -664,5 +673,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 27.09.2022
 */

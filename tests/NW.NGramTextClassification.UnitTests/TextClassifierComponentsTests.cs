@@ -25,7 +25,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                                         loggingAction: TextClassifierComponents.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager()
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nGramsTokenizer").Message
@@ -40,7 +41,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                                         loggingAction: TextClassifierComponents.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager()
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("similarityIndexCalculator").Message
@@ -55,7 +57,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                                         loggingAction: TextClassifierComponents.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager()
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("roundingFunction").Message
@@ -70,7 +73,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: null,
                                         loggingAction: TextClassifierComponents.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager()
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textTruncatingFunction").Message
@@ -85,7 +89,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                                         loggingAction: null,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager()
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingAction").Message
@@ -100,7 +105,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                                         loggingAction: TextClassifierComponents.DefaultLoggingAction,
                                         labeledExampleManager: null,
-                                        asciiBannerManager: new AsciiBannerManager()
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExampleManager").Message
@@ -115,11 +121,28 @@ namespace NW.NGramTextClassification.UnitTests
                                         textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
                                         loggingAction: TextClassifierComponents.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: null
+                                        asciiBannerManager: null,
+                                        loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("asciiBannerManager").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_07")
+                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_07"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifierComponents(
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager(),
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner:  null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("loggingActionAsciiBanner").Message
+                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_08")
 
         };
 
@@ -145,6 +168,21 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.IsInstanceOf<TextClassifierComponents>(actual);
+
+            Assert.IsInstanceOf<INGramTokenizer>(actual.NGramsTokenizer);
+            Assert.IsInstanceOf<ISimilarityIndexCalculator>(actual.SimilarityIndexCalculator);
+            Assert.IsInstanceOf<Func<double, double>>(actual.RoundingFunction);
+            Assert.IsInstanceOf<Func<string, uint, string>>(actual.TextTruncatingFunction);
+            Assert.IsInstanceOf<Action<string>>(actual.LoggingAction);
+            Assert.IsInstanceOf<ILabeledExampleManager>(actual.LabeledExampleManager);
+            Assert.IsInstanceOf<IAsciiBannerManager>(actual.AsciiBannerManager);
+            Assert.IsInstanceOf<Action<string>>(actual.LoggingActionAsciiBanner);
+
+            Assert.IsInstanceOf<Func<double, double>>(TextClassifierComponents.DefaultRoundingFunction);
+            Assert.IsInstanceOf<Func<string, uint, string>>(TextClassifierComponents.DefaultTextTruncatingFunction);
+            Assert.IsInstanceOf<string>(TextClassifierComponents.DefaultLoggingActionDateFormat);
+            Assert.IsInstanceOf<Action<string>>(TextClassifierComponents.DefaultLoggingAction);
+            Assert.IsInstanceOf<Action<string>>(TextClassifierComponents.DefaultLoggingActionAsciiBanner);
 
         }
 
