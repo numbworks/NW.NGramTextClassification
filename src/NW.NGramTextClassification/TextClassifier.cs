@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
@@ -28,7 +29,10 @@ namespace NW.NGramTextClassification
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
         public static TextClassifierResult DefaultTextClassifierResult { get; }
             = new TextClassifierResult(null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
-        
+
+        public string Version { get; }
+        public string AsciiBanner { get; }
+
         #endregion
 
         #region Constructors
@@ -42,6 +46,9 @@ namespace NW.NGramTextClassification
 
             _components = components;
             _settings = settings;
+
+            Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            AsciiBanner = _components.AsciiBannerManager.Create(Version);
 
         }
 

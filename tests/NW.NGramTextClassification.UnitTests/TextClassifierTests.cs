@@ -194,6 +194,9 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.IsInstanceOf<TextClassifier>(actual);
 
+            Assert.IsInstanceOf<string>(actual.AsciiBanner);
+            Assert.IsInstanceOf<string>(actual.Version);
+
             Assert.IsInstanceOf<TextClassifierComponents>(TextClassifier.DefaultTextClassifierComponents);
             Assert.IsInstanceOf<TextClassifierSettings>(TextClassifier.DefaultTextClassifierSettings);
             Assert.IsInstanceOf<INGramTokenizerRuleSet>(TextClassifier.DefaultNGramTokenizerRuleSet);
