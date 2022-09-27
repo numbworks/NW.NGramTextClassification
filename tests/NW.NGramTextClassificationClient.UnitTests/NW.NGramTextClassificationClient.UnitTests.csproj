@@ -50,6 +50,7 @@
   <ItemGroup>
     <Folder Include="Application\" />
     <Folder Include="ApplicationAbout\" />
+    <Folder Include="ApplicationSession\" />
   </ItemGroup>
 
 </Project>
