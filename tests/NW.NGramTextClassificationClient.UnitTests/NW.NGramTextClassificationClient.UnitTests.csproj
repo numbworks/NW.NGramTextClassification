@@ -45,8 +45,4 @@
     <ProjectReference Include="..\..\src\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Shared\" />
-  </ItemGroup>
-
 </Project>
