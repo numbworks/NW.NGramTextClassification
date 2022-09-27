@@ -91,6 +91,9 @@ namespace NW.NGramTextClassification
         public TextClassifierResult ClassifyOrDefault(string text, List<LabeledExample> labeledExamples)
                 => ClassifyOrDefault(text, DefaultNGramTokenizerRuleSet, labeledExamples);
 
+        public void LogAsciiBanner()
+            => _components.LoggingActionAsciiBanner(AsciiBanner);
+
         #endregion
 
         #region Methods_private
@@ -372,5 +375,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 27.09.2022
 */

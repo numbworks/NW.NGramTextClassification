@@ -28,10 +28,13 @@ namespace NW.NGramTextClassification
         /// <exception cref="ArgumentException"/>       
         TextClassifierResult ClassifyOrDefault(string text, List<LabeledExample> labeledExamples);
 
+        /// <summary>Logs the library's ascii banner.</summary>
+        void LogAsciiBanner();
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 27.09.2022
 */

@@ -634,6 +634,41 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+
+        [Test]
+        public void LogAsciiBanner_ShouldLogAsExpected_WhenInvoked()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggerAsciiBanner = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: fakeLoggerAsciiBanner);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> expectedMessages = new List<string>()
+            {
+
+                new AsciiBannerManager().Create(textClassifier.Version)
+
+            };
+
+            // Act            
+            textClassifier.LogAsciiBanner();
+
+            // Assert
+            Assert.AreEqual(expectedMessages, actualLogMessages);
+
+        }
+
         #endregion
 
         #region TearDown
