@@ -42,4 +42,13 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NW.NGramTextClassificationClient\NW.NGramTextClassificationClient.csproj" />
+    <ProjectReference Include="..\..\src\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>

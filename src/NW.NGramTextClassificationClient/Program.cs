@@ -1,80 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using NW.NGramTextClassification;
-using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.TextClassifications;
-using NW.NGramTextClassification.UnitTests.LabeledExamples;
+﻿using NW.NGramTextClassificationClient.Application;
 
 namespace NW.NGramTextClassificationClient
 {
     class Program
     {
-        static void Main(string[] args)
+
+        static int Main(string[] args)
         {
 
-            Run(() => RunExample1(), nameof(RunExample1));
-            Run(() => RunExample2(), nameof(RunExample2));
-            Run(() => RunExample3(), nameof(RunExample3));
+            ApplicationManager applicationManager = new ApplicationManager();
 
-            Console.ReadKey();
-
-        }
-
-        // Private methods
-        private static void Run(Action action, string actionName)
-        {
-
-            Console.WriteLine(new string('=', 60));
-            Console.WriteLine(actionName);
-            Console.WriteLine(new string('=', 60));
-            Console.WriteLine(Environment.NewLine);
-
-            action();
-
-            Console.WriteLine(Environment.NewLine);
-
-        }
-        private static void RunExample1()
-        {
-
-            string text = "We are looking for several skilled and driven developers to join our team.";
-            List<LabeledExample> labeledExamples = ObjectMother.CreateThirtyLabeledExamples();
-
-            ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
-
-            Console.WriteLine(result.Label);
-
-        }
-        private static void RunExample2()
-        {
-
-            string text = "Vår kund erbjuder trivsel";
-            List<LabeledExample> labeledExamples = ObjectMother.CreateThirtyLabeledExamples();
-
-            ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
-
-            Console.WriteLine(result.Label);
-
-        }
-        private static void RunExample3()
-        {
-
-            string text = "/";
-            List<LabeledExample> labeledExamples = ObjectMother.CreateThirtyLabeledExamples();
-
-            ITextClassifier textClassifier = new TextClassifier();
-            TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
-
-            Console.WriteLine(result.Label);
+            return applicationManager.Execute(args);
 
         }
 
     }
+
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 27.09.2022
 */
