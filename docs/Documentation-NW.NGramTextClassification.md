@@ -13,7 +13,9 @@ Contact: numbworks@gmail.com
 
 ## Introduction
 
-`NW.NGramTextClassification` is a `.NET Standard` library written in `C#` to perform `Text Classification` on the string of text you provide. 
+`NW.NGramTextClassification` is a .NET Standard library to perform text classification tasks on the text snippets you provide.
+
+## What does "text classification" mean?
 
 `Text Classification` is a `machine learning` technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library to learn from it. 
 
