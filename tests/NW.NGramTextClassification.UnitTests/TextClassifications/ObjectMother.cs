@@ -12,24 +12,24 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         #region Properties
 
         public static string TextClassifierResult01_AsString
-            = $"[ Label: '{LabeledExamples.ObjectMother.LabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
+            = $"[ Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AsStringWithNullLabel
             = $"[ Label: 'null', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AllNulls
             = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
 
-        public static TextClassifierResult TextClassifierResult02_LabeledExamples00
+        public static TextClassifierResult TextClassifierResult02_CompleteLabeledExamples00
             = new TextClassifierResult(
-                    label: LabeledExamples.ObjectMother.CreateThirtyTokenizedExamples()[0].LabeledExample.Label,
-                    indexes: Similarity.ObjectMother.CreateThirtySimilarityIndexes(),
-                    indexAverages: Similarity.ObjectMother.CreateThirtySimilarityIndexAverages()
+                    label: LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
+                    indexes: Similarity.ObjectMother.CreateSimilarityIndexesForCompleteLabeledExample00(),
+                    indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample00()
                 );
 
-        public static List<string> Snippets01_Success = new List<string>()
+        public static List<string> Snippets_ShortLabeledExamples0102 = new List<string>()
         {
 
-            LabeledExamples.ObjectMother.LabeledExample01.Text,
-            LabeledExamples.ObjectMother.LabeledExample02.Text
+            LabeledExamples.ObjectMother.ShortLabeledExample01.Text,
+            LabeledExamples.ObjectMother.ShortLabeledExample02.Text
 
         };
 
@@ -53,5 +53,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 29.09.2022
 */

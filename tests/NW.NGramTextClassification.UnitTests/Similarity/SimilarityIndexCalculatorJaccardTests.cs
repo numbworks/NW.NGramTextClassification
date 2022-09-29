@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
                                         null,
-                                        LabeledExamples.ObjectMother.LabeledExample02_NGrams,
+                                        LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
@@ -33,7 +33,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
                                         new List<INGram>(),
-                                        LabeledExamples.ObjectMother.LabeledExample02_NGrams,
+                                        LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        LabeledExamples.ObjectMother.LabeledExample01_NGrams,
+                                        LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                                         null,
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
@@ -57,7 +57,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        LabeledExamples.ObjectMother.LabeledExample01_NGrams,
+                                        LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                                         new List<INGram>(),
                                         TextClassifierComponents.DefaultRoundingFunction
                                 )),
@@ -70,8 +70,8 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                 new TestDelegate(
                         () => new SimilarityIndexCalculatorJaccard()
                                     .Do(
-                                        LabeledExamples.ObjectMother.LabeledExample01_NGrams,
-                                        LabeledExamples.ObjectMother.LabeledExample02_NGrams,
+                                        LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
+                                        LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
                                         null
                                 )),
                 typeof(ArgumentNullException),
@@ -83,20 +83,20 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
         {
 
             new TestCaseData(
-                    LabeledExamples.ObjectMother.LabeledExample01_NGrams,
-                    LabeledExamples.ObjectMother.LabeledExample01_NGrams,
+                    LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
+                    LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                     1.00
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_01"),
 
             new TestCaseData(
-                    LabeledExamples.ObjectMother.LabeledExample01_NGrams,
-                    LabeledExamples.ObjectMother.LabeledExample02_NGrams,
+                    LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
+                    LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
                     0.00
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_02"),
 
             new TestCaseData(
-                    LabeledExamples.ObjectMother.LabeledExample01_NGrams.GetRange(0, 2),
-                    LabeledExamples.ObjectMother.LabeledExample01_NGrams.GetRange(0, 4),
+                    LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams.GetRange(0, 2),
+                    LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams.GetRange(0, 4),
                     0.50
                 ).SetArgDisplayNames($"{nameof(doTestCases)}_03")
 

@@ -10,9 +10,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         #region Properties
 
-        public static LabeledExample LabeledExample01 
+        public static LabeledExample ShortLabeledExample01 
             = new LabeledExample(label: "en", text: "We are looking for several skilled and driven developers to join our team.");
-        public static List<Monogram> LabeledExample01_Monograms = new List<Monogram>()
+        public static List<Monogram> ShortLabeledExample01_Monograms = new List<Monogram>()
         {
 
             new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we"),
@@ -30,7 +30,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
-        public static List<Bigram> LabeledExample01_Bigrams = new List<Bigram>()
+        public static List<Bigram> ShortLabeledExample01_Bigrams = new List<Bigram>()
         {
 
             new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are"),
@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
-        public static List<Trigram> LabeledExample01_Trigrams = new List<Trigram>()
+        public static List<Trigram> ShortLabeledExample01_Trigrams = new List<Trigram>()
         {
 
             new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are looking"),
@@ -66,7 +66,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
-        public static List<Fourgram> LabeledExample01_Fourgrams = new List<Fourgram>()
+        public static List<Fourgram> ShortLabeledExample01_Fourgrams = new List<Fourgram>()
         {
 
             new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are looking for"),
@@ -84,7 +84,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
-        public static List<Fivegram> LabeledExample01_Fivegrams = new List<Fivegram>()
+        public static List<Fivegram> ShortLabeledExample01_Fivegrams = new List<Fivegram>()
         {
 
             new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "we are looking for several"),
@@ -102,101 +102,101 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "team")
 
         };
-        public static List<INGram> LabeledExample01_NGrams = new List<INGram>() 
+        public static List<INGram> ShortLabeledExample01_NGrams = new List<INGram>() 
         {
 
-            LabeledExample01_Monograms[0],
-            LabeledExample01_Monograms[1],
-            LabeledExample01_Monograms[2],
-            LabeledExample01_Monograms[3],
-            LabeledExample01_Monograms[4],
-            LabeledExample01_Monograms[5],
-            LabeledExample01_Monograms[6],
-            LabeledExample01_Monograms[7],
-            LabeledExample01_Monograms[8],
-            LabeledExample01_Monograms[9],
-            LabeledExample01_Monograms[10],
-            LabeledExample01_Monograms[11],
-            LabeledExample01_Monograms[12],
+            ShortLabeledExample01_Monograms[0],
+            ShortLabeledExample01_Monograms[1],
+            ShortLabeledExample01_Monograms[2],
+            ShortLabeledExample01_Monograms[3],
+            ShortLabeledExample01_Monograms[4],
+            ShortLabeledExample01_Monograms[5],
+            ShortLabeledExample01_Monograms[6],
+            ShortLabeledExample01_Monograms[7],
+            ShortLabeledExample01_Monograms[8],
+            ShortLabeledExample01_Monograms[9],
+            ShortLabeledExample01_Monograms[10],
+            ShortLabeledExample01_Monograms[11],
+            ShortLabeledExample01_Monograms[12],
 
-            LabeledExample01_Bigrams[0],
-            LabeledExample01_Bigrams[1],
-            LabeledExample01_Bigrams[2],
-            LabeledExample01_Bigrams[3],
-            LabeledExample01_Bigrams[4],
-            LabeledExample01_Bigrams[5],
-            LabeledExample01_Bigrams[6],
-            LabeledExample01_Bigrams[7],
-            LabeledExample01_Bigrams[8],
-            LabeledExample01_Bigrams[9],
-            LabeledExample01_Bigrams[10],
-            LabeledExample01_Bigrams[11],
-            LabeledExample01_Bigrams[12],
+            ShortLabeledExample01_Bigrams[0],
+            ShortLabeledExample01_Bigrams[1],
+            ShortLabeledExample01_Bigrams[2],
+            ShortLabeledExample01_Bigrams[3],
+            ShortLabeledExample01_Bigrams[4],
+            ShortLabeledExample01_Bigrams[5],
+            ShortLabeledExample01_Bigrams[6],
+            ShortLabeledExample01_Bigrams[7],
+            ShortLabeledExample01_Bigrams[8],
+            ShortLabeledExample01_Bigrams[9],
+            ShortLabeledExample01_Bigrams[10],
+            ShortLabeledExample01_Bigrams[11],
+            ShortLabeledExample01_Bigrams[12],
 
-            LabeledExample01_Trigrams[0],
-            LabeledExample01_Trigrams[1],
-            LabeledExample01_Trigrams[2],
-            LabeledExample01_Trigrams[3],
-            LabeledExample01_Trigrams[4],
-            LabeledExample01_Trigrams[5],
-            LabeledExample01_Trigrams[6],
-            LabeledExample01_Trigrams[7],
-            LabeledExample01_Trigrams[8],
-            LabeledExample01_Trigrams[9],
-            LabeledExample01_Trigrams[10],
-            LabeledExample01_Trigrams[11],
-            LabeledExample01_Trigrams[12],
+            ShortLabeledExample01_Trigrams[0],
+            ShortLabeledExample01_Trigrams[1],
+            ShortLabeledExample01_Trigrams[2],
+            ShortLabeledExample01_Trigrams[3],
+            ShortLabeledExample01_Trigrams[4],
+            ShortLabeledExample01_Trigrams[5],
+            ShortLabeledExample01_Trigrams[6],
+            ShortLabeledExample01_Trigrams[7],
+            ShortLabeledExample01_Trigrams[8],
+            ShortLabeledExample01_Trigrams[9],
+            ShortLabeledExample01_Trigrams[10],
+            ShortLabeledExample01_Trigrams[11],
+            ShortLabeledExample01_Trigrams[12],
 
-            LabeledExample01_Fourgrams[0],
-            LabeledExample01_Fourgrams[1],
-            LabeledExample01_Fourgrams[2],
-            LabeledExample01_Fourgrams[3],
-            LabeledExample01_Fourgrams[4],
-            LabeledExample01_Fourgrams[5],
-            LabeledExample01_Fourgrams[6],
-            LabeledExample01_Fourgrams[7],
-            LabeledExample01_Fourgrams[8],
-            LabeledExample01_Fourgrams[9],
-            LabeledExample01_Fourgrams[10],
-            LabeledExample01_Fourgrams[11],
-            LabeledExample01_Fourgrams[12],
+            ShortLabeledExample01_Fourgrams[0],
+            ShortLabeledExample01_Fourgrams[1],
+            ShortLabeledExample01_Fourgrams[2],
+            ShortLabeledExample01_Fourgrams[3],
+            ShortLabeledExample01_Fourgrams[4],
+            ShortLabeledExample01_Fourgrams[5],
+            ShortLabeledExample01_Fourgrams[6],
+            ShortLabeledExample01_Fourgrams[7],
+            ShortLabeledExample01_Fourgrams[8],
+            ShortLabeledExample01_Fourgrams[9],
+            ShortLabeledExample01_Fourgrams[10],
+            ShortLabeledExample01_Fourgrams[11],
+            ShortLabeledExample01_Fourgrams[12],
 
-            LabeledExample01_Fivegrams[0],
-            LabeledExample01_Fivegrams[1],
-            LabeledExample01_Fivegrams[2],
-            LabeledExample01_Fivegrams[3],
-            LabeledExample01_Fivegrams[4],
-            LabeledExample01_Fivegrams[5],
-            LabeledExample01_Fivegrams[6],
-            LabeledExample01_Fivegrams[7],
-            LabeledExample01_Fivegrams[8],
-            LabeledExample01_Fivegrams[9],
-            LabeledExample01_Fivegrams[10],
-            LabeledExample01_Fivegrams[11],
-            LabeledExample01_Fivegrams[12]
+            ShortLabeledExample01_Fivegrams[0],
+            ShortLabeledExample01_Fivegrams[1],
+            ShortLabeledExample01_Fivegrams[2],
+            ShortLabeledExample01_Fivegrams[3],
+            ShortLabeledExample01_Fivegrams[4],
+            ShortLabeledExample01_Fivegrams[5],
+            ShortLabeledExample01_Fivegrams[6],
+            ShortLabeledExample01_Fivegrams[7],
+            ShortLabeledExample01_Fivegrams[8],
+            ShortLabeledExample01_Fivegrams[9],
+            ShortLabeledExample01_Fivegrams[10],
+            ShortLabeledExample01_Fivegrams[11],
+            ShortLabeledExample01_Fivegrams[12]
 
         };
-        public static TokenizedExample TokenizedExample01
-            = new TokenizedExample(labeledExample: LabeledExample01, nGrams: LabeledExample01_NGrams);
-        public static string LabeledExample01_AsString
+        public static TokenizedExample ShortTokenizedExample01
+            = new TokenizedExample(labeledExample: ShortLabeledExample01, nGrams: ShortLabeledExample01_NGrams);
+        public static string ShortLabeledExample01_AsString
             = string.Concat(
                         "[ ",
-                        $"Label: '{LabeledExample01.Label}', ",
-                        $"Text: '{LabeledExample01.Text}' ",
+                        $"Label: '{ShortLabeledExample01.Label}', ",
+                        $"Text: '{ShortLabeledExample01.Text}' ",
                         "]"
                     );
-        public static string TokenizedExample01_AsString
+        public static string ShortTokenizedExample01_AsString
             = string.Concat(
                         "[ ",
-                        $"Label: '{TokenizedExample01.LabeledExample.Label}', ",
-                        $"Text: '{TokenizedExample01.LabeledExample.Text}', ",
-                        $"NGrams: '{TokenizedExample01.NGrams.Count}' ",
+                        $"Label: '{ShortTokenizedExample01.LabeledExample.Label}', ",
+                        $"Text: '{ShortTokenizedExample01.LabeledExample.Text}', ",
+                        $"NGrams: '{ShortTokenizedExample01.NGrams.Count}' ",
                         "]"
                     );
 
-        public static LabeledExample LabeledExample02
+        public static LabeledExample ShortLabeledExample02
             = new LabeledExample(label: "sv", text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.");
-        public static List<Monogram> LabeledExample02_Monograms = new List<Monogram>()
+        public static List<Monogram> ShortLabeledExample02_Monograms = new List<Monogram>()
         {
 
             new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår"),
@@ -210,7 +210,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Monogram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
-        public static List<Bigram> LabeledExample02_Bigrams = new List<Bigram>()
+        public static List<Bigram> ShortLabeledExample02_Bigrams = new List<Bigram>()
         {
 
             new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund"),
@@ -224,7 +224,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Bigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
-        public static List<Trigram> LabeledExample02_Trigrams = new List<Trigram>()
+        public static List<Trigram> ShortLabeledExample02_Trigrams = new List<Trigram>()
         {
 
             new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund erbjuder"),
@@ -238,7 +238,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Trigram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
-        public static List<Fourgram> LabeledExample02_Fourgrams = new List<Fourgram>()
+        public static List<Fourgram> ShortLabeledExample02_Fourgrams = new List<Fourgram>()
         {
 
             new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund erbjuder trivsel"),
@@ -252,7 +252,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Fourgram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
-        public static List<Fivegram> LabeledExample02_Fivegrams = new List<Fivegram>()
+        public static List<Fivegram> ShortLabeledExample02_Fivegrams = new List<Fivegram>()
         {
 
             new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "vår kund erbjuder trivsel arbetsglädje"),
@@ -266,127 +266,127 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new Fivegram(NGramTokenization.ObjectMother.TokenizationStrategy_Default, "arbetsmiljö")
 
         };
-        public static List<INGram> LabeledExample02_NGrams = new List<INGram>()
+        public static List<INGram> ShortLabeledExample02_NGrams = new List<INGram>()
         {
 
-            LabeledExample02_Monograms[0],
-            LabeledExample02_Monograms[1],
-            LabeledExample02_Monograms[2],
-            LabeledExample02_Monograms[3],
-            LabeledExample02_Monograms[4],
-            LabeledExample02_Monograms[5],
-            LabeledExample02_Monograms[6],
-            LabeledExample02_Monograms[7],
-            LabeledExample02_Monograms[8],
+            ShortLabeledExample02_Monograms[0],
+            ShortLabeledExample02_Monograms[1],
+            ShortLabeledExample02_Monograms[2],
+            ShortLabeledExample02_Monograms[3],
+            ShortLabeledExample02_Monograms[4],
+            ShortLabeledExample02_Monograms[5],
+            ShortLabeledExample02_Monograms[6],
+            ShortLabeledExample02_Monograms[7],
+            ShortLabeledExample02_Monograms[8],
 
-            LabeledExample02_Bigrams[0],
-            LabeledExample02_Bigrams[1],
-            LabeledExample02_Bigrams[2],
-            LabeledExample02_Bigrams[3],
-            LabeledExample02_Bigrams[4],
-            LabeledExample02_Bigrams[5],
-            LabeledExample02_Bigrams[6],
-            LabeledExample02_Bigrams[7],
-            LabeledExample02_Bigrams[8],
+            ShortLabeledExample02_Bigrams[0],
+            ShortLabeledExample02_Bigrams[1],
+            ShortLabeledExample02_Bigrams[2],
+            ShortLabeledExample02_Bigrams[3],
+            ShortLabeledExample02_Bigrams[4],
+            ShortLabeledExample02_Bigrams[5],
+            ShortLabeledExample02_Bigrams[6],
+            ShortLabeledExample02_Bigrams[7],
+            ShortLabeledExample02_Bigrams[8],
 
-            LabeledExample02_Trigrams[0],
-            LabeledExample02_Trigrams[1],
-            LabeledExample02_Trigrams[2],
-            LabeledExample02_Trigrams[3],
-            LabeledExample02_Trigrams[4],
-            LabeledExample02_Trigrams[5],
-            LabeledExample02_Trigrams[6],
-            LabeledExample02_Trigrams[7],
-            LabeledExample02_Trigrams[8],
+            ShortLabeledExample02_Trigrams[0],
+            ShortLabeledExample02_Trigrams[1],
+            ShortLabeledExample02_Trigrams[2],
+            ShortLabeledExample02_Trigrams[3],
+            ShortLabeledExample02_Trigrams[4],
+            ShortLabeledExample02_Trigrams[5],
+            ShortLabeledExample02_Trigrams[6],
+            ShortLabeledExample02_Trigrams[7],
+            ShortLabeledExample02_Trigrams[8],
 
-            LabeledExample02_Fourgrams[0],
-            LabeledExample02_Fourgrams[1],
-            LabeledExample02_Fourgrams[2],
-            LabeledExample02_Fourgrams[3],
-            LabeledExample02_Fourgrams[4],
-            LabeledExample02_Fourgrams[5],
-            LabeledExample02_Fourgrams[6],
-            LabeledExample02_Fourgrams[7],
-            LabeledExample02_Fourgrams[8],
+            ShortLabeledExample02_Fourgrams[0],
+            ShortLabeledExample02_Fourgrams[1],
+            ShortLabeledExample02_Fourgrams[2],
+            ShortLabeledExample02_Fourgrams[3],
+            ShortLabeledExample02_Fourgrams[4],
+            ShortLabeledExample02_Fourgrams[5],
+            ShortLabeledExample02_Fourgrams[6],
+            ShortLabeledExample02_Fourgrams[7],
+            ShortLabeledExample02_Fourgrams[8],
 
-            LabeledExample02_Fivegrams[0],
-            LabeledExample02_Fivegrams[1],
-            LabeledExample02_Fivegrams[2],
-            LabeledExample02_Fivegrams[3],
-            LabeledExample02_Fivegrams[4],
-            LabeledExample02_Fivegrams[5],
-            LabeledExample02_Fivegrams[6],
-            LabeledExample02_Fivegrams[7],
-            LabeledExample02_Fivegrams[8]
+            ShortLabeledExample02_Fivegrams[0],
+            ShortLabeledExample02_Fivegrams[1],
+            ShortLabeledExample02_Fivegrams[2],
+            ShortLabeledExample02_Fivegrams[3],
+            ShortLabeledExample02_Fivegrams[4],
+            ShortLabeledExample02_Fivegrams[5],
+            ShortLabeledExample02_Fivegrams[6],
+            ShortLabeledExample02_Fivegrams[7],
+            ShortLabeledExample02_Fivegrams[8]
 
         };
-        public static TokenizedExample TokenizedExample02
-            = new TokenizedExample(labeledExample: LabeledExample02, nGrams: LabeledExample02_NGrams);
+        public static TokenizedExample ShortTokenizedExample02
+            = new TokenizedExample(labeledExample: ShortLabeledExample02, nGrams: ShortLabeledExample02_NGrams);
 
-        public static List<LabeledExample> LabeledExamples = new List<LabeledExample>()
+        public static List<LabeledExample> ShortLabeledExamples = new List<LabeledExample>()
         {
 
-            LabeledExample01,
-            LabeledExample02
+            ShortLabeledExample01,
+            ShortLabeledExample02
 
         };
-        public static List<TokenizedExample> TokenizedExamples = new List<TokenizedExample>()
+        public static List<TokenizedExample> ShortTokenizedExamples = new List<TokenizedExample>()
         {
 
-            TokenizedExample01,
-            TokenizedExample02
+            ShortTokenizedExample01,
+            ShortTokenizedExample02
 
         };
 
-        public static TokenizedExample TokenizedExample01_Mono
+        public static TokenizedExample ShortTokenizedExample01_Mono
             = new TokenizedExample(
-                    labeledExample: LabeledExample01,
+                    labeledExample: ShortLabeledExample01,
                     nGrams: CreateNGrams(
-                                monograms: LabeledExample01_Monograms
+                                monograms: ShortLabeledExample01_Monograms
                         ));
-        public static TokenizedExample TokenizedExample01_MonoBi
+        public static TokenizedExample ShortTokenizedExample01_MonoBi
             = new TokenizedExample(
-                    labeledExample: LabeledExample01,
+                    labeledExample: ShortLabeledExample01,
                     nGrams: CreateNGrams(
-                                monograms: LabeledExample01_Monograms,
-                                bigrams: LabeledExample01_Bigrams
+                                monograms: ShortLabeledExample01_Monograms,
+                                bigrams: ShortLabeledExample01_Bigrams
                         ));
-        public static TokenizedExample TokenizedExample01_MonoBiTri
+        public static TokenizedExample ShortTokenizedExample01_MonoBiTri
             = new TokenizedExample(
-                    labeledExample: LabeledExample01,
+                    labeledExample: ShortLabeledExample01,
                     nGrams: CreateNGrams(
-                                monograms: LabeledExample01_Monograms,
-                                bigrams: LabeledExample01_Bigrams,
-                                trigrams: LabeledExample01_Trigrams
+                                monograms: ShortLabeledExample01_Monograms,
+                                bigrams: ShortLabeledExample01_Bigrams,
+                                trigrams: ShortLabeledExample01_Trigrams
                         ));
-        public static TokenizedExample TokenizedExample01_MonoBiTriFour
+        public static TokenizedExample ShortTokenizedExample01_MonoBiTriFour
             = new TokenizedExample(
-                    labeledExample: LabeledExample01,
+                    labeledExample: ShortLabeledExample01,
                     nGrams: CreateNGrams(
-                                monograms: LabeledExample01_Monograms,
-                                bigrams: LabeledExample01_Bigrams,
-                                trigrams: LabeledExample01_Trigrams,
-                                fourgrams: LabeledExample01_Fourgrams
+                                monograms: ShortLabeledExample01_Monograms,
+                                bigrams: ShortLabeledExample01_Bigrams,
+                                trigrams: ShortLabeledExample01_Trigrams,
+                                fourgrams: ShortLabeledExample01_Fourgrams
                         ));
-        public static TokenizedExample TokenizedExample01_MonoBiTriFourFive
+        public static TokenizedExample ShortTokenizedExample01_MonoBiTriFourFive
             = new TokenizedExample(
-                        labeledExample: LabeledExample01,
+                        labeledExample: ShortLabeledExample01,
                         nGrams: CreateNGrams(
-                                    monograms: LabeledExample01_Monograms,
-                                    bigrams: LabeledExample01_Bigrams,
-                                    trigrams: LabeledExample01_Trigrams,
-                                    fourgrams: LabeledExample01_Fourgrams,
-                                    fivegrams: LabeledExample01_Fivegrams
+                                    monograms: ShortLabeledExample01_Monograms,
+                                    bigrams: ShortLabeledExample01_Bigrams,
+                                    trigrams: ShortLabeledExample01_Trigrams,
+                                    fourgrams: ShortLabeledExample01_Fourgrams,
+                                    fivegrams: ShortLabeledExample01_Fivegrams
                             ));
 
-        public static LabeledExample LabeledExample03_Untokenizable
+        public static LabeledExample ShortLabeledExample03_Untokenizable
             = new LabeledExample(label: "en", text: "We");
-        public static List<LabeledExample> LabeledExamples_Untokenizable = new List<LabeledExample>()
+        public static List<LabeledExample> ShortLabeledExamples_Untokenizable = new List<LabeledExample>()
         {
 
-            LabeledExample01,
-            LabeledExample02,
-            LabeledExample03_Untokenizable
+            ShortLabeledExample01,
+            ShortLabeledExample02,
+            ShortLabeledExample03_Untokenizable
 
         };
 
@@ -411,7 +411,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         public static bool AreEqual(List<TokenizedExample> list1, List<TokenizedExample> list2)
             => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
 
-        public static List<LabeledExample> CreateThirtyLabeledExamples()
+        public static List<LabeledExample> CreateThirtyCompleteLabeledExamples()
         {
 
             List<LabeledExample> labeledExamples = new List<LabeledExample>()
@@ -456,10 +456,10 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             return labeledExamples;
 
         }
-        public static List<TokenizedExample> CreateThirtyTokenizedExamples()
+        public static List<TokenizedExample> CreateThirtyCompleteTokenizedExamples()
         {
 
-            List<LabeledExample> labeledExamples = CreateThirtyLabeledExamples();
+            List<LabeledExample> labeledExamples = CreateThirtyCompleteLabeledExamples();
             List<TokenizedExample> tokenizedExamples = new LabeledExampleManager().CreateOrDefault(labeledExamples);
 
             return tokenizedExamples;
@@ -496,5 +496,5 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 29.09.2022
 */

@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 new TestDelegate(
                         () => new LabeledExampleManager()
                                     .CreateOrDefault(
-                                        labeledExample: ObjectMother.LabeledExample01,
+                                        labeledExample: ObjectMother.ShortLabeledExample01,
                                         tokenizerRuleSet: null
                             )),
                 typeof(ArgumentNullException),
@@ -66,7 +66,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 new TestDelegate(
                         () => new LabeledExampleManager()
                                     .CreateOrDefault(
-                                        labeledExamples: ObjectMother.LabeledExamples,
+                                        labeledExamples: ObjectMother.ShortLabeledExamples,
                                         tokenizerRuleSet: null
                             )),
                 typeof(ArgumentNullException),
@@ -79,33 +79,33 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             // First method signature
             new TestCaseData(
-                    ObjectMother.LabeledExample01,
+                    ObjectMother.ShortLabeledExample01,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Mono,
-                    ObjectMother.TokenizedExample01_Mono
+                    ObjectMother.ShortTokenizedExample01_Mono
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_01"),
 
             new TestCaseData(
-                    ObjectMother.LabeledExample01,
+                    ObjectMother.ShortLabeledExample01,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBi,
-                    ObjectMother.TokenizedExample01_MonoBi
+                    ObjectMother.ShortTokenizedExample01_MonoBi
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_02"),
 
             new TestCaseData(
-                    ObjectMother.LabeledExample01,
+                    ObjectMother.ShortLabeledExample01,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTri,
-                    ObjectMother.TokenizedExample01_MonoBiTri
+                    ObjectMother.ShortTokenizedExample01_MonoBiTri
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_03"),
 
             new TestCaseData(
-                    ObjectMother.LabeledExample01,
+                    ObjectMother.ShortLabeledExample01,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFour,
-                    ObjectMother.TokenizedExample01_MonoBiTriFour
+                    ObjectMother.ShortTokenizedExample01_MonoBiTriFour
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_04"),
 
             new TestCaseData(
-                    ObjectMother.LabeledExample01,
+                    ObjectMother.ShortLabeledExample01,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
-                    ObjectMother.TokenizedExample01_MonoBiTriFourFive
+                    ObjectMother.ShortTokenizedExample01_MonoBiTriFourFive
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
 
         };
@@ -155,11 +155,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             // Act
             List<TokenizedExample> actual 
-                = labeledExampleManager.CreateOrDefault(ObjectMother.LabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
+                = labeledExampleManager.CreateOrDefault(ObjectMother.ShortLabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.TokenizedExamples, actual)
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual)
                 );
 
         }
@@ -206,7 +206,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             TokenizedExample actual 
                 = labeledExampleManager
                     .CreateOrDefault(
-                        labeledExample: ObjectMother.LabeledExample03_Untokenizable,
+                        labeledExample: ObjectMother.ShortLabeledExample03_Untokenizable,
                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five
                         );
 
@@ -226,7 +226,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             List<TokenizedExample> actual
                 = labeledExampleManager
                     .CreateOrDefault(
-                        labeledExamples: ObjectMother.LabeledExamples_Untokenizable,
+                        labeledExamples: ObjectMother.ShortLabeledExamples_Untokenizable,
                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five
                         );
 
@@ -243,11 +243,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
             // Act
-            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample: ObjectMother.LabeledExample01);
+            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample: ObjectMother.ShortLabeledExample01);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.TokenizedExample01, actual)
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExample01, actual)
                 );
 
         }
@@ -260,11 +260,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
             // Act
-            List<TokenizedExample> actual = labeledExampleManager.CreateOrDefault(labeledExamples: ObjectMother.LabeledExamples);
+            List<TokenizedExample> actual = labeledExampleManager.CreateOrDefault(labeledExamples: ObjectMother.ShortLabeledExamples);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.TokenizedExamples, actual)
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual)
                 );
 
         }

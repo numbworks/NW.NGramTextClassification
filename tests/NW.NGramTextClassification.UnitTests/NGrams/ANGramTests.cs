@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                         () => new FakeGram(
                                     0,
                                     new TokenizationStrategy(),
-                                    LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value
+                                    LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentException),
                 NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne("n")
@@ -33,7 +33,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                         () => new FakeGram(
                                     1,
                                     null,
-                                    LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value
+                                    LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("strategy").Message
@@ -65,7 +65,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                     new FakeGram(
                         ObjectMother.FakeGram01_N,
                         new TokenizationStrategy(), // Tests if TokenizationStrategy.Equals() works as expected.
-                        LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value),
+                        LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value),
                     true
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_02"),
 
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                     new FakeGram(
                         ObjectMother.FakeGram01_N,
                         NGramTokenization.ObjectMother.TokenizationStrategy_LettersSemicolon,
-                        LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value),
+                        LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value),
                     false
                 ).SetArgDisplayNames($"{nameof(equalityMethodsTestCases)}_03"),
 

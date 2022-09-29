@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new TestCaseData(
                 new TestDelegate( () => new LabeledExample(
                                                 label: null,
-                                                text: ObjectMother.LabeledExample01.Text
+                                                text: ObjectMother.ShortLabeledExample01.Text
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("label").Message
@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             new TestCaseData(
                 new TestDelegate( () => new LabeledExample(
-                                                label: ObjectMother.LabeledExample01.Label,
+                                                label: ObjectMother.ShortLabeledExample01.Label,
                                                 text: null
                                             )),
                 typeof(ArgumentNullException),
@@ -52,11 +52,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Arrange
             // Act
             string actual
-                = ObjectMother.LabeledExample01.ToString();
+                = ObjectMother.ShortLabeledExample01.ToString();
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.LabeledExample01_AsString,
+                    ObjectMother.ShortLabeledExample01_AsString,
                     actual);
 
         }
@@ -69,8 +69,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Act
             LabeledExample actual
                 = new LabeledExample(
-                        label: ObjectMother.LabeledExample01.Label,
-                        text: ObjectMother.LabeledExample01.Text
+                        label: ObjectMother.ShortLabeledExample01.Label,
+                        text: ObjectMother.ShortLabeledExample01.Text
                     );
 
             // Assert

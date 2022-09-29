@@ -16,17 +16,17 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             = new FakeGram(
                     n: FakeGram01_N, 
                     strategy: NGramTokenization.ObjectMother.TokenizationStrategy_Default, 
-                    value: LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value
+                    value: LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value
                 );
         public static FakeGram FakeGram02
             = new FakeGram(
                     n: FakeGram02_N,
                     strategy: NGramTokenization.ObjectMother.TokenizationStrategy_Default,
-                    value: LabeledExamples.ObjectMother.LabeledExample01_Monograms[1].Value
+                    value: LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[1].Value
                 );
         
         public static int FakeGram01_HashCode
-            = (FakeGram01_N, NGramTokenization.ObjectMother.TokenizationStrategy_Default, LabeledExamples.ObjectMother.LabeledExample01_Monograms[0].Value).GetHashCode();
+            = (FakeGram01_N, NGramTokenization.ObjectMother.TokenizationStrategy_Default, LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value).GetHashCode();
 
         #endregion
 

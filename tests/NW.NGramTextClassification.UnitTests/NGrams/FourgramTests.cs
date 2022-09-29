@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             Fourgram actual1
                 = new Fourgram(
                         new TokenizationStrategy(),
-                        LabeledExamples.ObjectMother.LabeledExample01_Fourgrams[0].Value
+                        LabeledExamples.ObjectMother.ShortLabeledExample01_Fourgrams[0].Value
                     );
             Fourgram actual2
                 = new Fourgram(
-                        LabeledExamples.ObjectMother.LabeledExample01_Fourgrams[0].Value
+                        LabeledExamples.ObjectMother.ShortLabeledExample01_Fourgrams[0].Value
                     );
 
             // Assert

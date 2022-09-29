@@ -25,11 +25,11 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             Bigram actual1
                 = new Bigram(
                         new TokenizationStrategy(),
-                        LabeledExamples.ObjectMother.LabeledExample01_Bigrams[0].Value
+                        LabeledExamples.ObjectMother.ShortLabeledExample01_Bigrams[0].Value
                     );
             Bigram actual2
                 = new Bigram(
-                        LabeledExamples.ObjectMother.LabeledExample01_Bigrams[0].Value
+                        LabeledExamples.ObjectMother.ShortLabeledExample01_Bigrams[0].Value
                     );
 
             // Assert

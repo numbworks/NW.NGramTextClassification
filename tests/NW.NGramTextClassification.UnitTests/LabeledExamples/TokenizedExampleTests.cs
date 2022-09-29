@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             new TestCaseData(
                 new TestDelegate( () => new TokenizedExample(
                                                 labeledExample: null,
-                                                nGrams: ObjectMother.TokenizedExample01.NGrams
+                                                nGrams: ObjectMother.ShortTokenizedExample01.NGrams
                                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExample").Message
@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             new TestCaseData(
                 new TestDelegate( () => new TokenizedExample(
-                                                labeledExample: ObjectMother.LabeledExample01,
+                                                labeledExample: ObjectMother.ShortLabeledExample01,
                                                 nGrams: null
                                             )),
                 typeof(ArgumentNullException),
@@ -52,11 +52,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Arrange
             // Act
             string actual
-                = ObjectMother.TokenizedExample01.ToString();
+                = ObjectMother.ShortTokenizedExample01.ToString();
 
             // Assert
             Assert.AreEqual(
-                    ObjectMother.TokenizedExample01_AsString,
+                    ObjectMother.ShortTokenizedExample01_AsString,
                     actual);
 
         }
@@ -69,8 +69,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             // Act
             TokenizedExample actual
                 = new TokenizedExample(
-                        labeledExample: ObjectMother.TokenizedExample01.LabeledExample,
-                        nGrams: ObjectMother.TokenizedExample01.NGrams
+                        labeledExample: ObjectMother.ShortTokenizedExample01.LabeledExample,
+                        nGrams: ObjectMother.ShortTokenizedExample01.NGrams
                     );
 
             // Assert
