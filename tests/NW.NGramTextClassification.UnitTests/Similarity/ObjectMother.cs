@@ -121,7 +121,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
             return similarityIndexes;
 
         }
-        public static List<SimilarityIndexAverage> CreateSimilarityIndexAveragesForThirty()
+        public static List<SimilarityIndexAverage> CreateThirtySimilarityIndexAverages()
         {
 
             List<SimilarityIndexAverage> similarityIndexAverages = new List<SimilarityIndexAverage>()

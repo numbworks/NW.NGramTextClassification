@@ -165,6 +165,58 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
+        private static TestCaseData[] classifyManyExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyMany(
+                                        snippets: null,
+                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                        labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("snippets").Message
+                ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyMany(
+                                        snippets: new List<string> { string.Empty },
+                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                        labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException(NGramTextClassification.TextClassifications.MessageCollection.SnippetsIndex(0)).Message
+                ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyMany(
+                                        snippets: TextClassifications.ObjectMother.Snippets01_Success,
+                                        tokenizerRuleSet: null,
+                                        labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("tokenizerRuleSet").Message
+                ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_03"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyMany(
+                                        snippets: TextClassifications.ObjectMother.Snippets01_Success,
+                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                        labeledExamples: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("labeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_04")
+
+        };
 
         #endregion
 
@@ -668,6 +720,12 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.AreEqual(expectedMessages, actualLogMessages);
 
         }
+
+
+        [TestCaseSource(nameof(classifyManyExceptionTestCases))]
+        public void ClassifyMany_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         #endregion
 

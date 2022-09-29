@@ -14,6 +14,7 @@ namespace NW.NGramTextClassification.TextClassifications
         #region Properties
 
         public static Func<int, string> ProvidedSnippetsAre = (count) => $"The provided snippets are: '{count}'.";
+        public static Func<int, string> SnippetsIndex = (i) => $"snippets[{i}]";
 
         public static string AttemptingToClassifyProvidedSnippet = "Attempting to predict the provided snippet of text...";
         public static Func<string, string> FollowingSnippetHasBeenProvided =

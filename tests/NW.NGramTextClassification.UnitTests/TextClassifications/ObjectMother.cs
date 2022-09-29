@@ -12,7 +12,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         #region Properties
 
         public static string TextClassifierResult01_AsString
-            = $"[ Label: '{LabeledExamples.ObjectMother.LabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";       
+            = $"[ Label: '{LabeledExamples.ObjectMother.LabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AsStringWithNullLabel
             = $"[ Label: 'null', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AllNulls
@@ -22,8 +22,16 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             = new TextClassifierResult(
                     label: LabeledExamples.ObjectMother.CreateThirtyTokenizedExamples()[0].LabeledExample.Label,
                     indexes: Similarity.ObjectMother.CreateThirtySimilarityIndexes(),
-                    indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForThirty()
+                    indexAverages: Similarity.ObjectMother.CreateThirtySimilarityIndexAverages()
                 );
+
+        public static List<string> Snippets01_Success = new List<string>()
+        {
+
+            LabeledExamples.ObjectMother.LabeledExample01.Text,
+            LabeledExamples.ObjectMother.LabeledExample02.Text
+
+        };
 
         #endregion
 

@@ -81,7 +81,7 @@ namespace NW.NGramTextClassification
         {
 
             Validator.ValidateList(snippets, nameof(snippets));
-            snippets.ForEach(snippet => Validator.ValidateStringNullOrWhiteSpace(snippet, nameof(snippet)));
+            ValidateSnippets(snippets);
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
@@ -108,6 +108,14 @@ namespace NW.NGramTextClassification
         #endregion
 
         #region Methods_private
+
+        private void ValidateSnippets(List<string> snippets)
+        {
+
+            for (int i = 0; i < snippets.Count; i++)
+                Validator.ValidateStringNullOrWhiteSpace(snippets[i], TextClassifications.MessageCollection.SnippetsIndex(i));
+
+        }
 
         private void LogInitialMessages(string snippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
