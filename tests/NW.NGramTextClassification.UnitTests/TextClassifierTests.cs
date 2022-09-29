@@ -48,19 +48,19 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: null,
+                                        snippet: null,
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("text").Message
+                new ArgumentNullException("snippet").Message
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: LabeledExamples.ObjectMother.LabeledExample01.Text,
+                                        snippet: LabeledExamples.ObjectMother.LabeledExample01.Text,
                                         tokenizerRuleSet: null,
                                         labeledExamples: LabeledExamples.ObjectMother.LabeledExamples
                                 )),
@@ -72,7 +72,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
-                                        text: LabeledExamples.ObjectMother.LabeledExample01.Text,
+                                        snippet: LabeledExamples.ObjectMother.LabeledExample01.Text,
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),
@@ -310,8 +310,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> finalLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.PredictedLabelIs(expectedLabel),
-                NGramTextClassification.TextClassifications.MessageCollection.PredictionHasBeenSuccessful
+                NGramTextClassification.TextClassifications.MessageCollection.ResultOfClassificationTaskIs(expectedLabel),
+                NGramTextClassification.TextClassifications.MessageCollection.ClassificationTaskHasBeenSuccessful
 
             };
 
@@ -356,8 +356,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> finalLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.PredictedLabelIs(expected.Label),
-                NGramTextClassification.TextClassifications.MessageCollection.PredictionHasBeenSuccessful
+                NGramTextClassification.TextClassifications.MessageCollection.ResultOfClassificationTaskIs(expected.Label),
+                NGramTextClassification.TextClassifications.MessageCollection.ClassificationTaskHasBeenSuccessful
 
             };
 
@@ -690,8 +690,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToPredictLabel,
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingTextHasBeenProvided(expectedText),
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToClassifyProvidedSnippet,
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingSnippetHasBeenProvided(expectedText),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
                 NGramTextClassification.TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples),
                 NGramTextClassification.TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
@@ -711,5 +711,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 29.09.2022
 */

@@ -13,13 +13,15 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #region Properties
 
-        public static string AttemptingToPredictLabel = "Attempting to predict the label of the provided text...";
-        public static Func<string, string> FollowingTextHasBeenProvided =
-            (text) => $"The following text has been provided: '{text}'.";
+        public static Func<int, string> ProvidedSnippetsAre = (count) => $"The provided snippets are: '{count}'.";
+
+        public static string AttemptingToClassifyProvidedSnippet = "Attempting to predict the provided snippet of text...";
+        public static Func<string, string> FollowingSnippetHasBeenProvided =
+            (snippet) => $"The following snippet has been provided: '{snippet}'.";
         public static Func<List<LabeledExample>, string> XLabeledExamplesHaveBeenProvided =
             (labeledExamples) => $"'{labeledExamples.Count}' {nameof(LabeledExample)} objects have been provided.";
         public static Func<List<INGram>, string> ProvidedTextHasBeenTokenizedIntoXNGrams =
-            (nGrams) => $"The provided text has been tokenized into '{nGrams?.Count ?? 0}' {nameof(INGram)} object.";
+            (nGrams) => $"The provided snippet has been tokenized into '{nGrams?.Count ?? 0}' {nameof(INGram)} object.";
 
         public static string ProvidedLabeledExamplesThruTokenizationProcess 
             = $"The provided {nameof(LabeledExample)} objects have been thru the tokenization process.";
@@ -28,22 +30,22 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static Func<INGramTokenizerRuleSet, string> FollowingNGramsTokenizerRuleSetWillBeUsed =
             (ruleset) => $"The following '{nameof(INGramTokenizerRuleSet)}' object will be used: '{ruleset}'.";
-        public static string TokenizedTextComparedAgainstProvidedTokenizedExamples =
-            $"The tokenized text has been successfully compared against the provided list of {nameof(TokenizedExample)} objects.";
+        public static string TokenizedSnippetComparedAgainstProvidedTokenizedExamples =
+            $"The tokenized snippet has been successfully compared against the provided list of {nameof(TokenizedExample)} objects.";
         public static Func<List<SimilarityIndex>, string> XSimilarityIndexObjectsHaveBeenComputed =
             (similarityIndexes) => $"'{similarityIndexes.Count}' {nameof(SimilarityIndex)} objects have been computed.";
         public static Func<List<SimilarityIndexAverage>, string> XSimilarityIndexAverageObjectsHaveBeenComputed =
             (indexAverages) => $"'{indexAverages.Count}' {nameof(SimilarityIndexAverage)} objects have been computed.";
 
-        public static Func<string, string> PredictedLabelIs =
-            (label) => $"The predicted label is: '{label}'.";
-        public static string PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples =
-                $"The prediction has failed. Try increasing the amount of provided {nameof(LabeledExample)} objects.";
-        public static string PredictionHasBeenSuccessful =
-                $"The prediction has been successful.";
+        public static Func<string, string> ResultOfClassificationTaskIs =
+            (label) => $"The result of the classification task is: '{label}'.";
+        public static string ClassificationTaskHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples =
+                $"The classification task has failed. Try increasing the amount of provided {nameof(LabeledExample)} objects.";
+        public static string ClassificationTaskHasBeenSuccessful =
+                $"The classification task has been successful.";
 
-        public static Func<TokenizedExample, string> ComparingProvidedTextAgainstFollowingTokenizedExample =
-            (tokenizedExample) => $"Comparing the provided text against the following {nameof(TokenizedExample)}: '{tokenizedExample}'...";
+        public static Func<TokenizedExample, string> ComparingProvidedSnippetAgainstFollowingTokenizedExample =
+            (tokenizedExample) => $"Comparing the provided snippet against the following {nameof(TokenizedExample)}: '{tokenizedExample}'...";
         public static Func<double, string> CalculatedSimilarityIndexValueIs =
             (indexValue) => $"The calculated '{nameof(SimilarityIndex)}' value is '{indexValue}'.";
         public static Func<double, string> RoundedSimilarityIndexValueIs =
@@ -69,7 +71,7 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<SimilarityIndexAverage, string> SimilarityIndexAverageWithTheHighestValueIs =
             (indexAverage) => $"The '{nameof(SimilarityIndexAverage)}' object with the highest value is: '{indexAverage}'.";
         public static Func<string, string> AllRulesInProvidedRulesetFailed
-            = (text) => $"All the rules in the provided ruleset failed for the provided text ('{text}'), therefore a 'null' label will be returned.";
+            = (snippet) => $"All the rules in the provided ruleset failed for the provided snippet ('{snippet}'), therefore a 'null' label will be returned.";
 
         #endregion
 

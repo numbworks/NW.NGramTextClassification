@@ -60,17 +60,75 @@ namespace NW.NGramTextClassification
 
         #region Methods_public
 
-        public TextClassifierResult ClassifyOrDefault(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierResult ClassifyOrDefault(string snippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
-            ValidateAndBeginPrediction(text, tokenizerRuleSet, labeledExamples);
+            Validator.ValidateStringNullOrWhiteSpace(snippet, nameof(snippet));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
+            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
+            LogInitialMessages(snippet, tokenizerRuleSet, labeledExamples);
+
+            TextClassifierResult textClassifierResult = ClassifySingleOrDefault(snippet, tokenizerRuleSet, labeledExamples);
+
+            return textClassifierResult;
+
+        }
+        public TextClassifierResult ClassifyOrDefault(string snippet, List<LabeledExample> labeledExamples)
+                => ClassifyOrDefault(snippet, DefaultNGramTokenizerRuleSet, labeledExamples);
+
+        public List<TextClassifierResult> ClassifyMany(List<string> snippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples) 
+        {
+
+            Validator.ValidateList(snippets, nameof(snippets));
+            snippets.ForEach(snippet => Validator.ValidateStringNullOrWhiteSpace(snippet, nameof(snippet)));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
+            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
+
+            _components.LoggingAction(TextClassifications.MessageCollection.ProvidedSnippetsAre(snippets.Count));
+
+            List<TextClassifierResult> textClassifierResults = new List<TextClassifierResult>();
+            for (int i = 0; i < snippets.Count; i++)
+            {
+
+                TextClassifierResult textClassifierResult = ClassifySingleOrDefault(snippets[i], tokenizerRuleSet, labeledExamples);
+                textClassifierResults.Add(textClassifierResult);
+
+            }
+                
+            return textClassifierResults;
+
+        }
+        public List<TextClassifierResult> ClassifyMany(List<string> snippets, List<LabeledExample> labeledExamples)
+                => ClassifyMany(snippets, DefaultNGramTokenizerRuleSet, labeledExamples);
+
+        public void LogAsciiBanner()
+            => _components.LoggingActionAsciiBanner(AsciiBanner);
+
+        #endregion
+
+        #region Methods_private
+
+        private void LogInitialMessages(string snippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        {
+
+            snippet = _components.TextTruncatingFunction(snippet, _settings.TruncateTextInLogMessagesAfter);
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToClassifyProvidedSnippet);
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingSnippetHasBeenProvided(snippet));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet));
+            _components.LoggingAction(TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples));
+
+        }
+        private TextClassifierResult ClassifySingleOrDefault(string snippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        {
+
+            List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSetOrDefault(snippet, tokenizerRuleSet);
             _components.LoggingAction(TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(nGrams));
             if (nGrams == null)
             {
 
-                _components.LoggingAction(TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(text));
+                _components.LoggingAction(TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(snippet));
                 return DefaultTextClassifierResult;
 
             }
@@ -88,49 +146,23 @@ namespace NW.NGramTextClassification
             return CreateResult(nGrams, tokenizedExamples);
 
         }
-        public TextClassifierResult ClassifyOrDefault(string text, List<LabeledExample> labeledExamples)
-                => ClassifyOrDefault(text, DefaultNGramTokenizerRuleSet, labeledExamples);
-
-        public void LogAsciiBanner()
-            => _components.LoggingActionAsciiBanner(AsciiBanner);
-
-        #endregion
-
-        #region Methods_private
-
-        private void ValidateAndBeginPrediction(string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
-        {
-
-            Validator.ValidateStringNullOrWhiteSpace(text, nameof(text));
-            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
-            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
-
-            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToPredictLabel);
-
-            string truncatedText = _components.TextTruncatingFunction(text, _settings.TruncateTextInLogMessagesAfter);
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingTextHasBeenProvided(truncatedText));
-
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet));
-            _components.LoggingAction(TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples));
-
-        }
         private TextClassifierResult CreateResult(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
-            _components.LoggingAction(TextClassifications.MessageCollection.TokenizedTextComparedAgainstProvidedTokenizedExamples);
+            _components.LoggingAction(TextClassifications.MessageCollection.TokenizedSnippetComparedAgainstProvidedTokenizedExamples);
             _components.LoggingAction(TextClassifications.MessageCollection.XSimilarityIndexObjectsHaveBeenComputed(indexes));
 
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
             _components.LoggingAction(TextClassifications.MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
             string label = GetLabel(indexAverages);
-            _components.LoggingAction(TextClassifications.MessageCollection.PredictedLabelIs(label));
+            _components.LoggingAction(TextClassifications.MessageCollection.ResultOfClassificationTaskIs(label));
 
             if (label == null)
-                _components.LoggingAction(TextClassifications.MessageCollection.PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+                _components.LoggingAction(TextClassifications.MessageCollection.ClassificationTaskHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
             else
-                _components.LoggingAction(TextClassifications.MessageCollection.PredictionHasBeenSuccessful);
+                _components.LoggingAction(TextClassifications.MessageCollection.ClassificationTaskHasBeenSuccessful);
 
             TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
@@ -155,7 +187,7 @@ namespace NW.NGramTextClassification
             for (int i = 0; i < tokenizedExamples.Count; i++)
             {
 
-                _components.LoggingAction(TextClassifications.MessageCollection.ComparingProvidedTextAgainstFollowingTokenizedExample(tokenizedExamples[i]));
+                _components.LoggingAction(TextClassifications.MessageCollection.ComparingProvidedSnippetAgainstFollowingTokenizedExample(tokenizedExamples[i]));
 
                 double indexValue = _components.SimilarityIndexCalculator.Do(nGrams, tokenizedExamples[i].NGrams, _components.RoundingFunction);
                 double roundedValue = _components.RoundingFunction(indexValue);
@@ -375,5 +407,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 29.09.2022
 */
