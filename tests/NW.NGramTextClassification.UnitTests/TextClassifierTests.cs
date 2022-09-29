@@ -161,7 +161,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierResult02_CompleteLabeledExamples00
+                    TextClassifications.ObjectMother.TextClassifierResult_CompleteLabeledExamples00
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
 
         };
@@ -196,7 +196,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyMany(
-                                        snippets: TextClassifications.ObjectMother.Snippets_ShortLabeledExamples0102,
+                                        snippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00And01,
                                         tokenizerRuleSet: null,
                                         labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples
                                 )),
@@ -208,7 +208,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyMany(
-                                        snippets: TextClassifications.ObjectMother.Snippets_ShortLabeledExamples0102,
+                                        snippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00And01,
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),

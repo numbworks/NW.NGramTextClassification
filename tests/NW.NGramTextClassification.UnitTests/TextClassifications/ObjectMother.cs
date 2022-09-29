@@ -11,25 +11,53 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         #region Properties
 
-        public static string TextClassifierResult01_AsString
+        public static string TextClassifierResult_AsString
             = $"[ Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AsStringWithNullLabel
             = $"[ Label: 'null', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
         public static string TextClassifierResult_AllNulls
             = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
 
-        public static TextClassifierResult TextClassifierResult02_CompleteLabeledExamples00
+        public static TextClassifierResult TextClassifierResult_CompleteLabeledExamples00
             = new TextClassifierResult(
                     label: LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
                     indexes: Similarity.ObjectMother.CreateSimilarityIndexesForCompleteLabeledExample00(),
                     indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample00()
                 );
+        public static TextClassifierResult TextClassifierResult_CompleteLabeledExamples01
+            = new TextClassifierResult(
+                    label: LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
+                    indexes: null,      // TO-DO: Similarity.ObjectMother.CreateSimilarityIndexesForCompleteLabeledExample01(),
+                    indexAverages: null // TO-DO: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample01()
+                );
 
-        public static List<string> Snippets_ShortLabeledExamples0102 = new List<string>()
+        public static List<string> Snippets_CompleteLabeledExamples00And01 = new List<string>()
         {
 
-            LabeledExamples.ObjectMother.ShortLabeledExample01.Text,
-            LabeledExamples.ObjectMother.ShortLabeledExample02.Text
+            LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
+            LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[1].LabeledExample.Label,
+
+        };
+        public static List<TextClassifierResult> TextClassifierResults_CompleteLabeledExamples00And01 = new List<TextClassifierResult>()
+        {
+
+            TextClassifierResult_CompleteLabeledExamples00,
+            TextClassifierResult_CompleteLabeledExamples01
+
+        };
+
+        public static List<string> Snippets_CompleteLabeledExamples00AndUntokenizable = new List<string>()
+        {
+
+            LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
+            LabeledExamples.ObjectMother.ShortLabeledExample03_Untokenizable.Text                               // TO-DO: 
+
+        };
+        public static List<TextClassifierResult> TextClassifierResults_CompleteLabeledExamples00AndDefault = new List<TextClassifierResult>()
+        {
+
+            TextClassifierResult_CompleteLabeledExamples00,
+            TextClassifier.DefaultTextClassifierResult
 
         };
 

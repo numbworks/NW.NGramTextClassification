@@ -19,7 +19,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
-                    ObjectMother.TextClassifierResult01_AsString
+                    ObjectMother.TextClassifierResult_AsString
                 ).SetArgDisplayNames($"{nameof(toStringTestCases)}_01"),
 
             new TestCaseData(
