@@ -333,12 +333,12 @@ namespace NW.NGramTextClassification
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
             
-            if (!AreTwoHighestIndexAveragesDifferent(orderedByhighest[0].Value, orderedByhighest[1].Value))
+            if (AreTwoHighestIndexAveragesSameValue(orderedByhighest[0].Value, orderedByhighest[1].Value))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreTwoHighestIndexAveragesDifferent)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreTwoHighestIndexAveragesSameValue)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreTwoHighestIndexAveragesDifferent)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreTwoHighestIndexAveragesSameValue)));
 
             _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(orderedByhighest[0]));
 
@@ -388,7 +388,7 @@ namespace NW.NGramTextClassification
             return false;
 
         }
-        private bool AreTwoHighestIndexAveragesDifferent(double first, double second)
+        private bool AreTwoHighestIndexAveragesSameValue(double first, double second)
         {
 
             /*
@@ -403,7 +403,7 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            return (first != second);
+            return (first == second);
 
         }
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
