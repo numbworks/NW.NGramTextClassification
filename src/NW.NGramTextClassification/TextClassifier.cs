@@ -324,12 +324,12 @@ namespace NW.NGramTextClassification
                 return indexAverages[0].Label;
             }
 
-            if (!ContainsAtLeastOneDifferentIndexAverage(indexAverages))
+            if (AreAllIndexAveragesSameValue(indexAverages))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsAtLeastOneDifferentIndexAverage)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreAllIndexAveragesSameValue)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneDifferentIndexAverage)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreAllIndexAveragesSameValue)));
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
             
@@ -365,7 +365,7 @@ namespace NW.NGramTextClassification
             return false;
 
         }
-        private bool ContainsAtLeastOneDifferentIndexAverage(List<SimilarityIndexAverage> indexAverages)
+        private bool AreAllIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -378,14 +378,14 @@ namespace NW.NGramTextClassification
              * 		=> { 0.1, 0.1, 0.1 } 
              * 		=> 1 
              * 		=> 1 == 1
-             * 		=> false
+             * 		=> true
              * 
              */
 
-            if (indexAverages.Select(Item => Item.Value).Distinct().Count() == 1) // all with the same value
-                return false;
+            if (indexAverages.Select(Item => Item.Value).Distinct().Count() == 1) // All with the same value
+                return true;
 
-            return true;
+            return false;
 
         }
         private bool AreTwoHighestIndexAveragesDifferent(double first, double second)
