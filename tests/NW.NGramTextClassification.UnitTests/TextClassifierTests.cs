@@ -217,6 +217,17 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_04")
 
         };
+        private static TestCaseData[] classifyManyTestCases =
+        {
+
+            new TestCaseData(
+                    TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00And01,
+                    TextClassifier.DefaultNGramTokenizerRuleSet,
+                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                    TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00And01
+                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01")
+
+        };
 
         #endregion
 
@@ -726,6 +737,24 @@ namespace NW.NGramTextClassification.UnitTests
         public void ClassifyMany_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(classifyManyTestCases))]
+        public void ClassifyMany_ShouldReturnExpectedCollectionOfTextClassifierResults_WhenInvoked
+            (List<string> snippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, List<TextClassifierResult> expected)
+        {
+
+            // Arrange
+            // Act
+            List<TextClassifierResult> actual
+                = new TextClassifier().ClassifyMany(snippets: snippets, tokenizerRuleSet: tokenizerRuleSet, labeledExamples: labeledExamples);
+
+            // Assert
+            Assert.IsTrue(
+                    TextClassifications.ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
 
         #endregion
 

@@ -34,15 +34,15 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         public static List<string> Snippets_CompleteLabeledExamples00And01 = new List<string>()
         {
 
-            LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
-            LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[1].LabeledExample.Label,
+            LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text,
+            //LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[1].LabeledExample.Label,
 
         };
         public static List<TextClassifierResult> TextClassifierResults_CompleteLabeledExamples00And01 = new List<TextClassifierResult>()
         {
 
             TextClassifierResult_CompleteLabeledExamples00,
-            TextClassifierResult_CompleteLabeledExamples01
+            //TextClassifierResult_CompleteLabeledExamples01
 
         };
 
@@ -73,6 +73,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     && Similarity.ObjectMother.AreEqual(obj1.SimilarityIndexes, obj2.SimilarityIndexes);
 
         }
+        public static bool AreEqual(List<TextClassifierResult> list1, List<TextClassifierResult> list2)
+            => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
 
         #endregion
 
