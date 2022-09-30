@@ -332,12 +332,13 @@ namespace NW.NGramTextClassification
             _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneDifferentIndexAverage)));
 
             List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
-            if (!ContainsTwoDifferentHighestIndexAverages(orderedByhighest[0].Value, orderedByhighest[1].Value))
+            
+            if (!AreTwoHighestIndexAveragesDifferent(orderedByhighest[0].Value, orderedByhighest[1].Value))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsTwoDifferentHighestIndexAverages)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreTwoHighestIndexAveragesDifferent)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsTwoDifferentHighestIndexAverages)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreTwoHighestIndexAveragesDifferent)));
 
             _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(orderedByhighest[0]));
 
@@ -387,7 +388,7 @@ namespace NW.NGramTextClassification
             return true;
 
         }
-        private bool ContainsTwoDifferentHighestIndexAverages(double first, double second)
+        private bool AreTwoHighestIndexAveragesDifferent(double first, double second)
         {
 
             /*
@@ -415,5 +416,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 29.09.2022
+    Last Update: 30.09.2022
 */

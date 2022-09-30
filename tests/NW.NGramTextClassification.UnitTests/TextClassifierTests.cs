@@ -584,7 +584,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsTwoDifferentHighestIndexAverages")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("AreTwoHighestIndexAveragesDifferent")
 
             };
 
@@ -685,7 +685,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsTwoDifferentHighestIndexAverages"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreTwoHighestIndexAveragesDifferent"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
