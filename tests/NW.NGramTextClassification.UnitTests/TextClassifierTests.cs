@@ -196,7 +196,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyMany(
-                                        snippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00And01,
+                                        snippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00,
                                         tokenizerRuleSet: null,
                                         labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples
                                 )),
@@ -208,7 +208,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyMany(
-                                        snippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00And01,
+                                        snippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00,
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: null
                                 )),
@@ -221,11 +221,18 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00And01,
+                    TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00,
                     TextClassifier.DefaultNGramTokenizerRuleSet,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00And01
-                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01")
+                    TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01"),
+
+            new TestCaseData(
+                    TextClassifications.ObjectMother.Snippets_Untokenizable,
+                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
+                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                    TextClassifications.ObjectMother.TextClassifierResults_Untokenizable
+                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_02")
 
         };
 
@@ -820,5 +827,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 29.09.2022
+    Last Update: 30.09.2022
 */
