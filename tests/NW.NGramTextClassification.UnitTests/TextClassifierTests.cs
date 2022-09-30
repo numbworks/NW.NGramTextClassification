@@ -481,7 +481,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsAtLeastOneNonZeroIndexAverage")
+               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("AreAllIndexAveragesEqualToZero")
 
             };
 
@@ -531,7 +531,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("ContainsAtLeastOneDifferentIndexAverage")
 
             };
@@ -582,7 +582,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("AreTwoHighestIndexAveragesDifferent")
 
@@ -632,7 +632,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
@@ -683,7 +683,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneNonZeroIndexAverage"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("ContainsAtLeastOneDifferentIndexAverage"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreTwoHighestIndexAveragesDifferent"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))

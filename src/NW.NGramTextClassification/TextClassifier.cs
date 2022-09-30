@@ -311,12 +311,12 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            if (!ContainsAtLeastOneNonZeroIndexAverage(indexAverages))
+            if (AreAllIndexAveragesEqualToZero(indexAverages))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreAllIndexAveragesEqualToZero)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(ContainsAtLeastOneNonZeroIndexAverage)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreAllIndexAveragesEqualToZero)));
 
             if (indexAverages.Count == 1)
             {
@@ -345,7 +345,7 @@ namespace NW.NGramTextClassification
             return orderedByhighest[0].Label;
 
         }
-        private bool ContainsAtLeastOneNonZeroIndexAverage(List<SimilarityIndexAverage> indexAverages)
+        private bool AreAllIndexAveragesEqualToZero(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -359,10 +359,10 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            if (indexAverages.Where(Item => Item.Value == 0).Count() == indexAverages.Count) // all equal to zero
-                return false;
+            if (indexAverages.Where(Item => Item.Value == 0).Count() == indexAverages.Count) // All equal to zero
+                return true;
 
-            return true;
+            return false;
 
         }
         private bool ContainsAtLeastOneDifferentIndexAverage(List<SimilarityIndexAverage> indexAverages)
