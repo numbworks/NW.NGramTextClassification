@@ -744,14 +744,36 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.ProvidedSnippetsAre(snippets.Count)
+
+            };
+
             // Act
-            List<TextClassifierResult> actual
-                = new TextClassifier().ClassifyMany(snippets: snippets, tokenizerRuleSet: tokenizerRuleSet, labeledExamples: labeledExamples);
+            List <TextClassifierResult> actual
+                = textClassifier.ClassifyMany(snippets: snippets, tokenizerRuleSet: tokenizerRuleSet, labeledExamples: labeledExamples);
 
             // Assert
             Assert.IsTrue(
                     TextClassifications.ObjectMother.AreEqual(expected, actual)
                 );
+            Assert.AreEqual(expectedLogMessages[0], actualLogMessages[0]); // The only messages that it's different from ClassifyOrDefault() is the first one.
 
         }
 
