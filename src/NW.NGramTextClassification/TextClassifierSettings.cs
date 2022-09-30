@@ -10,24 +10,38 @@
         #region Properties
 
         public static uint DefaultTruncateTextInLogMessagesAfter { get; } = 20;
+        public static double? DefaultMinimumAccuracySingleLabel { get; } = 0.5;
+        public static double? DefaultMinimumAccuracyMultipleLabels { get; } = null;
 
-        public uint TruncateTextInLogMessagesAfter { get; private set; }
+        public uint TruncateTextInLogMessagesAfter { get; }
+        public double? MinimumAccuracySingleLabel { get; }
+        public double? MinimumAccuracyMultipleLabels { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>Initializes a <see cref="TextClassifierSettings"/> instance.</summary>
-        public TextClassifierSettings(uint truncateTextInLogMessagesAfter)
+        public TextClassifierSettings(
+                    uint truncateTextInLogMessagesAfter,
+                    double? minimumAccuracySingleLabel,
+                    double? minimumAccuracyMultipleLabels
+            )
         {
 
             TruncateTextInLogMessagesAfter = truncateTextInLogMessagesAfter;
+            MinimumAccuracySingleLabel = minimumAccuracySingleLabel;
+            MinimumAccuracyMultipleLabels = minimumAccuracyMultipleLabels;
 
         }
 
         /// <summary>Initializes a <see cref="TextClassifierSettings"/> instance using default parameters.</summary>
         public TextClassifierSettings()
-            : this(DefaultTruncateTextInLogMessagesAfter) { }
+            : this(
+                  truncateTextInLogMessagesAfter: DefaultTruncateTextInLogMessagesAfter,
+                  minimumAccuracySingleLabel: DefaultMinimumAccuracySingleLabel,
+                  minimumAccuracyMultipleLabels: DefaultMinimumAccuracyMultipleLabels
+                  ) { }
 
         #endregion
 
@@ -39,5 +53,5 @@
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.09.2021
+    Last Update: 30.09.2021
 */

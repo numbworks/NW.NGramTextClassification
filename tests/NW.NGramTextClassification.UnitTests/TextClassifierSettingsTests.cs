@@ -21,7 +21,12 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             // Act
             TextClassifierSettings actual1 = new TextClassifierSettings();
-            TextClassifierSettings actual2 = new TextClassifierSettings(10);
+            TextClassifierSettings actual2 
+                = new TextClassifierSettings(
+                        truncateTextInLogMessagesAfter: 10,
+                        minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                        minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                        );
 
             // Assert
             Assert.IsInstanceOf<TextClassifierSettings>(actual1);
@@ -40,6 +45,6 @@ namespace NW.NGramTextClassification.UnitTests
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 26.01.2021
+    Last Update: 30.09.2022
 
 */
