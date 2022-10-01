@@ -307,7 +307,7 @@ namespace NW.NGramTextClassification
              * en       0.45
              * dk       0.27 
              * 
-             *      => { Label: "en", Average: 0.45 } => "en"
+             *      => { Label: "en", Average: 0.45 } => "en" (main use case scenario)
              * 
              */
 
@@ -341,12 +341,19 @@ namespace NW.NGramTextClassification
 
             indexAverages = OrderByHighest(indexAverages);
             
-            if (AreTwoHighestIndexAveragesSameValue(indexAverages[0].Value, indexAverages[1].Value))
+            if (AreTwoHighestIndexAveragesSameValue(indexAverages))
             {
                 _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreTwoHighestIndexAveragesSameValue)));
                 return null;
             }
             _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreTwoHighestIndexAveragesSameValue)));
+
+            if (IsLessThanMinimumAccuracyMultipleLabels(indexAverages, _settings))
+            {
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsLessThanMinimumAccuracyMultipleLabels)));
+                return null;
+            }
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsLessThanMinimumAccuracyMultipleLabels)));
 
             return LogAndReturnLabel(indexAverages);
 
@@ -375,7 +382,6 @@ namespace NW.NGramTextClassification
             => (indexAverages[0].Value >= settings.MinimumAccuracySingleLabel);
         private bool IsSingleLabelAndLessThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
             => (indexAverages[0].Value < settings.MinimumAccuracySingleLabel);
-
         private bool AreAllIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 
@@ -399,7 +405,7 @@ namespace NW.NGramTextClassification
             return false;
 
         }
-        private bool AreTwoHighestIndexAveragesSameValue(double first, double second)
+        private bool AreTwoHighestIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 
             /*
@@ -414,10 +420,11 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            return (first == second);
+            return (indexAverages[0].Value == indexAverages[1].Value);
 
         }
-
+        private bool IsLessThanMinimumAccuracyMultipleLabels(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
+            => (indexAverages[0].Value < settings.MinimumAccuracyMultipleLabels);
         private string LogAndReturnLabel(List<SimilarityIndexAverage> indexAverages)
         {
 
