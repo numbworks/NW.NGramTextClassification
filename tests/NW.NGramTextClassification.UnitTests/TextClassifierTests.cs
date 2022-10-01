@@ -473,7 +473,13 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifierSettings settings
+                = new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    );
+            TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -487,7 +493,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero")
+               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero")
 
             };
 
@@ -579,7 +585,13 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifierSettings settings
+                = new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    );
+            TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
