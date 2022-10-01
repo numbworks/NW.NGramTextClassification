@@ -313,36 +313,42 @@ namespace NW.NGramTextClassification
 
             if (AreAllIndexAveragesEqualToZero(indexAverages))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreAllIndexAveragesEqualToZero)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreAllIndexAveragesEqualToZero)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreAllIndexAveragesEqualToZero)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreAllIndexAveragesEqualToZero)));
 
-            if (indexAverages.Count == 1)
+            if (IsSingleLabelAndHigherEqualThanMinimumAccuracy(indexAverages, _settings))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
-                return indexAverages[0].Label;
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsSingleLabelAndHigherEqualThanMinimumAccuracy)));           
+                return LogAndReturnLabel(indexAverages);
             }
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsSingleLabelAndHigherEqualThanMinimumAccuracy)));
+
+            if (IsSingleLabelAndLessThanMinimumAccuracy(indexAverages, _settings))
+            {
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsSingleLabelAndLessThanMinimumAccuracy)));
+                return null;
+            }
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsSingleLabelAndLessThanMinimumAccuracy)));
 
             if (AreAllIndexAveragesSameValue(indexAverages))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreAllIndexAveragesSameValue)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreAllIndexAveragesSameValue)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreAllIndexAveragesSameValue)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreAllIndexAveragesSameValue)));
 
-            List<SimilarityIndexAverage> orderedByhighest = OrderByHighest(indexAverages);
+            indexAverages = OrderByHighest(indexAverages);
             
-            if (AreTwoHighestIndexAveragesSameValue(orderedByhighest[0].Value, orderedByhighest[1].Value))
+            if (AreTwoHighestIndexAveragesSameValue(indexAverages[0].Value, indexAverages[1].Value))
             {
-                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasFailed(nameof(AreTwoHighestIndexAveragesSameValue)));
+                _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreTwoHighestIndexAveragesSameValue)));
                 return null;
             }
-            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful(nameof(AreTwoHighestIndexAveragesSameValue)));
+            _components.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreTwoHighestIndexAveragesSameValue)));
 
-            _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(orderedByhighest[0]));
-
-            return orderedByhighest[0].Label;
+            return LogAndReturnLabel(indexAverages);
 
         }
         private bool AreAllIndexAveragesEqualToZero(List<SimilarityIndexAverage> indexAverages)
@@ -365,6 +371,11 @@ namespace NW.NGramTextClassification
             return false;
 
         }
+        private bool IsSingleLabelAndHigherEqualThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
+            => (indexAverages[0].Value >= settings.MinimumAccuracySingleLabel);
+        private bool IsSingleLabelAndLessThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
+            => (indexAverages[0].Value < settings.MinimumAccuracySingleLabel);
+
         private bool AreAllIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 
@@ -404,6 +415,15 @@ namespace NW.NGramTextClassification
              */
 
             return (first == second);
+
+        }
+
+        private string LogAndReturnLabel(List<SimilarityIndexAverage> indexAverages)
+        {
+
+            _components.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
+
+            return indexAverages[0].Label;
 
         }
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)

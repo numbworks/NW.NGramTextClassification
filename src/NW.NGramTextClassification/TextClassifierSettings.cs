@@ -10,12 +10,12 @@
         #region Properties
 
         public static uint DefaultTruncateTextInLogMessagesAfter { get; } = 20;
-        public static double? DefaultMinimumAccuracySingleLabel { get; } = 0.5;
-        public static double? DefaultMinimumAccuracyMultipleLabels { get; } = null;
+        public static double DefaultMinimumAccuracySingleLabel { get; } = 0.5;
+        public static double DefaultMinimumAccuracyMultipleLabels { get; } = 0.0;
 
         public uint TruncateTextInLogMessagesAfter { get; }
-        public double? MinimumAccuracySingleLabel { get; }
-        public double? MinimumAccuracyMultipleLabels { get; }
+        public double MinimumAccuracySingleLabel { get; }
+        public double MinimumAccuracyMultipleLabels { get; }
 
         #endregion
 
@@ -24,8 +24,8 @@
         /// <summary>Initializes a <see cref="TextClassifierSettings"/> instance.</summary>
         public TextClassifierSettings(
                     uint truncateTextInLogMessagesAfter,
-                    double? minimumAccuracySingleLabel,
-                    double? minimumAccuracyMultipleLabels
+                    double minimumAccuracySingleLabel,
+                    double minimumAccuracyMultipleLabels
             )
         {
 

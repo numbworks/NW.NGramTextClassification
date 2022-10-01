@@ -131,7 +131,7 @@ namespace NW.NGramTextClassification.UnitTests
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
         };
-        private static TestCaseData[] classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction =
+        private static TestCaseData[] classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification =
         {
 
             new TestCaseData(
@@ -145,10 +145,10 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples().GetRange(0, 1),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Label
-                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification)}_01")
 
         };
-        private static TestCaseData[] classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction =
+        private static TestCaseData[] classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification =
         {
 
             new TestCaseData(
@@ -162,7 +162,7 @@ namespace NW.NGramTextClassification.UnitTests
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
                     TextClassifications.ObjectMother.TextClassifierResult_CompleteLabeledExamples00
-                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification)}_01")
 
         };
         private static TestCaseData[] classifyManyExceptionTestCases =
@@ -355,8 +355,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulPrediction))]
-        public void ClassifyOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulPrediction
+        [TestCaseSource(nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification))]
+        public void ClassifyOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulClassification
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
         {
 
@@ -401,8 +401,8 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulPrediction))]
-        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierResult_WhenThirtyLabeledExamplesAndSuccessfulPrediction
+        [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification))]
+        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierResult_WhenThirtyLabeledExamplesAndSuccessfulClassification
             (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
         {
 
@@ -419,7 +419,13 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifierSettings settings
+                = new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: 0.0,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    );
+            TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
             // We skip all the messages in the middle, otherwise the test would be too complex.
@@ -481,7 +487,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("AreAllIndexAveragesEqualToZero")
+               NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero")
 
             };
 
@@ -531,8 +537,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("AreAllIndexAveragesSameValue")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesSameValue")
 
             };
 
@@ -582,9 +588,9 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesSameValue"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasFailed("AreTwoHighestIndexAveragesSameValue")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreTwoHighestIndexAveragesSameValue")
 
             };
 
@@ -632,7 +638,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
@@ -683,9 +689,9 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreAllIndexAveragesSameValue"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationHasBeenSuccessful("AreTwoHighestIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreTwoHighestIndexAveragesSameValue"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
@@ -763,7 +769,13 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifierSettings settings
+                = new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: 0.0,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    );
+            TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = new List<string>()
             {

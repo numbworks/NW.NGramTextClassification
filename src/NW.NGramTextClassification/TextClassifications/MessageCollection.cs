@@ -65,10 +65,11 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<SimilarityIndexAverage, string> FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList =
             (indexAverage) => $"The following {nameof(SimilarityIndexAverage)} object has been added to the list: '{indexAverage}'.";
 
-        public static Func<string, string> FollowingVerificationHasBeenSuccessful =
-            (name) => $"The following verification has been successful: '{name}'.";
-        public static Func<string, string> FollowingVerificationHasFailed =
-            (name) => $"The following verification has failed: '{name}'.";
+        public static Func<string, string> FollowingVerificationReturnedTrue =
+            (name) => $"The following verification returned true: '{name}'.";
+        public static Func<string, string> FollowingVerificationReturnedFalse =
+            (name) => $"The following verification returned false: '{name}'.";
+
         public static Func<SimilarityIndexAverage, string> SimilarityIndexAverageWithTheHighestValueIs =
             (indexAverage) => $"The '{nameof(SimilarityIndexAverage)}' object with the highest value is: '{indexAverage}'.";
         public static Func<string, string> AllRulesInProvidedRulesetFailed
