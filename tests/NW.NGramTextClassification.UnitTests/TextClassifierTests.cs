@@ -512,7 +512,119 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetLabel_ShouldReturnNull_AreAllIndexAveragesSameValueReturnsTrue()
+        public void GetLabel_ShouldReturnExpectedLabel_WhenIsSingleLabelAndHigherEqualThanMinimumAccuracyReturnsTrue()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+            TextClassifierSettings settings
+                = new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    );
+            TextClassifier textClassifier = new TextClassifier(components, settings);
+
+            List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
+            {
+
+                new SimilarityIndexAverage(label: "sv", value: 0.98)
+
+            };
+
+            string expected = "sv";
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
+
+            };
+
+            // Act
+            string actual
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                        obj: textClassifier,
+                        methodName: "GetLabel",
+                        args: new object[] { indexAverages }
+                    );
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void GetLabel_ShouldReturnNull_WhenIsSingleLabelAndLessThanMinimumAccuracyReturnsTrue()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+            TextClassifierSettings settings
+                = new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: 1.0,                                                                 // 0.98 < 1.0 
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    );
+            TextClassifier textClassifier = new TextClassifier(components, settings);
+
+            List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
+            {
+
+                new SimilarityIndexAverage(label: "sv", value: 0.98)
+
+            };
+
+            string expected = null;
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("IsSingleLabelAndLessThanMinimumAccuracy")
+
+            };
+
+            // Act
+            string actual
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                        obj: textClassifier,
+                        methodName: "GetLabel",
+                        args: new object[] { indexAverages }
+                    );
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void GetLabel_ShouldReturnNull_WhenAreAllIndexAveragesSameValueReturnsTrue()
         {
 
             // Arrange
@@ -571,7 +683,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetLabel_ShouldReturnNull_AreTwoHighestIndexAveragesSameValueReturnsTrue()
+        public void GetLabel_ShouldReturnNull_WhenAreTwoHighestIndexAveragesSameValueReturnsTrue()
         {
 
             // Arrange
@@ -631,7 +743,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetLabel_ShouldReturnExpectedLabel_OneSimilarityIndexAverageValue()
+        public void GetLabel_ShouldReturnNull_WhenIsLessThanMinimumAccuracyMultipleLabelsReturnsTrue()
         {
 
             // Arrange
@@ -650,27 +762,30 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                          minimumAccuracyMultipleLabels: 1.0                                                            // 0.98 <= 1.0
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
 
-                new SimilarityIndexAverage(label: "sv", value: 0.98)
+                new SimilarityIndexAverage(label: "sv", value: 0.98),
+                new SimilarityIndexAverage(label: "en", value: 0.75),
+                new SimilarityIndexAverage(label: "dk", value: 0.32)
 
             };
 
-            string expected = "sv";
+            string expected = null;
             List<string> expectedLogMessages = new List<string>()
             {
 
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndLessThanMinimumAccuracy"),
-
-                NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreTwoHighestIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("IsLessThanMinimumAccuracyMultipleLabels"),
 
             };
 
@@ -689,7 +804,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetLabel_ShouldReturnExpectedLabel_ThreeDifferentSimilarityIndexAverageValues()
+        public void GetLabel_ShouldReturnExpectedLabel_WhenIsLessThanMinimumAccuracyMultipleLabelsReturnsFalse()
         {
 
             // Arrange
@@ -708,8 +823,8 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels        // 0.98 > 0.5
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
@@ -727,9 +842,13 @@ namespace NW.NGramTextClassification.UnitTests
             {
 
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndLessThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreTwoHighestIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsLessThanMinimumAccuracyMultipleLabels"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
-
+            
             };
 
             // Act
