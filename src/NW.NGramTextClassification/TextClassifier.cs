@@ -379,9 +379,9 @@ namespace NW.NGramTextClassification
 
         }
         private bool IsSingleLabelAndHigherEqualThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
-            => (indexAverages[0].Value >= settings.MinimumAccuracySingleLabel);
+            => (indexAverages.Count == 1 && indexAverages[0].Value >= settings.MinimumAccuracySingleLabel);
         private bool IsSingleLabelAndLessThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
-            => (indexAverages[0].Value < settings.MinimumAccuracySingleLabel);
+            => (indexAverages.Count == 1 && indexAverages[0].Value < settings.MinimumAccuracySingleLabel);
         private bool AreAllIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 

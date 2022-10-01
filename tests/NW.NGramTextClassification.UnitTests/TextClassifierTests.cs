@@ -457,7 +457,7 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         [Test]
-        public void GetLabel_ShouldReturnNull_WhenContainsAtLeastOneNonZeroIndexAverageReturnsFalse()
+        public void GetLabel_ShouldReturnNull_WhenAreAllIndexAveragesEqualToZeroReturnsTrue()
         {
 
             // Arrange
@@ -512,7 +512,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetLabel_ShouldReturnNull_ContainsAtLeastOneDifferentIndexAverageReturnsFalse()
+        public void GetLabel_ShouldReturnNull_AreAllIndexAveragesSameValueReturnsTrue()
         {
 
             // Arrange
@@ -531,7 +531,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
+                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
@@ -549,8 +549,10 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesSameValue")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndLessThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesSameValue")
 
             };
 
@@ -569,7 +571,7 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [Test]
-        public void GetLabel_ShouldReturnNull_ContainsTwoDifferentHighestIndexAveragesReturnsFalse()
+        public void GetLabel_ShouldReturnNull_AreTwoHighestIndexAveragesSameValueReturnsTrue()
         {
 
             // Arrange
@@ -606,9 +608,11 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesSameValue"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreTwoHighestIndexAveragesSameValue")
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndLessThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreTwoHighestIndexAveragesSameValue")
 
             };
 
@@ -663,7 +667,9 @@ namespace NW.NGramTextClassification.UnitTests
             {
 
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("IsSingleLabelAndLessThanMinimumAccuracy"),
+
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
@@ -720,9 +726,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesEqualToZero"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreAllIndexAveragesSameValue"),
-                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("AreTwoHighestIndexAveragesSameValue"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedFalse("AreAllIndexAveragesEqualToZero"),
+                NGramTextClassification.TextClassifications.MessageCollection.FollowingVerificationReturnedTrue("IsSingleLabelAndHigherEqualThanMinimumAccuracy"),
                 NGramTextClassification.TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(new SimilarityIndexAverage(label: expected, value: 0.98))
 
             };
