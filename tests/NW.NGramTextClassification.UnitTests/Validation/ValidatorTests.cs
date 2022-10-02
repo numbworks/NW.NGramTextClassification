@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                     ),
                 typeof(Exception),
                 new Exception(
-                        NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_Length)).Message
+                        MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_Length)).Message
                 ).SetArgDisplayNames($"{nameof(validateLengthExceptionTestCases)}_01"),
 
             // ValidateLength
@@ -31,7 +31,7 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                     ),
                 typeof(ArgumentException),
                 new ArgumentException(
-                        NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_Length)).Message
+                        MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_Length)).Message
                 ).SetArgDisplayNames($"{nameof(validateLengthExceptionTestCases)}_02")
 
         };
@@ -79,7 +79,7 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                                 ObjectMother.VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems(ObjectMother.VariableName_Variable)
+                MessageCollection.VariableContainsZeroItems(ObjectMother.VariableName_Variable)
                 ).SetArgDisplayNames($"{nameof(validateArrayExceptionTestCases)}_02")
 
         };
@@ -105,30 +105,8 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                                 ObjectMother.VariableName_Variable)
                     ),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems(ObjectMother.VariableName_Variable)
+                MessageCollection.VariableContainsZeroItems(ObjectMother.VariableName_Variable)
                 ).SetArgDisplayNames($"{nameof(validateListExceptionTestCases)}_02"),
-
-        };
-        private static TestCaseData[] throwIfLessThanOneExceptionTestCases =
-        {
-
-            // ThrowIfLessThanOne<T>
-            new TestCaseData(
-                new TestDelegate(
-                        () => Validator.ThrowIfLessThanOne<Exception>(0, ObjectMother.VariableName_N)
-                    ),
-                typeof(Exception),
-                NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_N)
-                ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_01"),
-
-            // ThrowIfLessThanOne
-            new TestCaseData(
-                new TestDelegate(
-                        () => Validator.ThrowIfLessThanOne(0, ObjectMother.VariableName_N)
-                    ),
-                typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_N)
-                ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_02")
 
         };
         private static TestCaseData[] validateStringNullOrWhiteSpaceExceptionTestCases =
@@ -228,6 +206,148 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                 ).SetArgDisplayNames($"{nameof(validateStringNullOrEmptyTestCases)}_02")
 
         };
+        private static TestCaseData[] throwIfLessThanOneExceptionTestCases =
+        {
+
+            // ThrowIfLessThanOne<T>
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfLessThanOne<Exception>(0, ObjectMother.VariableName_N1)
+                    ),
+                typeof(Exception),
+                MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_N1)
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_01"),
+
+            // ThrowIfLessThanOne
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfLessThanOne(0, ObjectMother.VariableName_N1)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.VariableCantBeLessThanOne(ObjectMother.VariableName_N1)
+                ).SetArgDisplayNames($"{nameof(throwIfLessThanOneExceptionTestCases)}_02")
+
+        };
+        private static TestCaseData[] throwIfFirstIsGreaterExceptionTestCases =
+        {
+
+            // ThrowIfFirstIsGreater<T>
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfFirstIsGreater<Exception>(
+                                4,
+                                ObjectMother.VariableName_N1,
+                                1,
+                                ObjectMother.VariableName_N2)
+                    ),
+                typeof(Exception),
+                MessageCollection.FirstValueIsGreaterThanSecondValue(
+                                        ObjectMother.VariableName_N1,
+                                        ObjectMother.VariableName_N2
+                                    )
+                ).SetArgDisplayNames($"{nameof(throwIfFirstIsGreaterExceptionTestCases)}_01"),
+
+            // ThrowIfFirstIsGreater
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfFirstIsGreater(
+                                4,
+                                ObjectMother.VariableName_N1,
+                                1,
+                                ObjectMother.VariableName_N2)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.FirstValueIsGreaterThanSecondValue(
+                                        ObjectMother.VariableName_N1,
+                                        ObjectMother.VariableName_N2
+                                    )
+                ).SetArgDisplayNames($"{nameof(throwIfFirstIsGreaterExceptionTestCases)}_02")
+
+        };
+        private static TestCaseData[] throwIfFirstIsGreaterOrEqualExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfFirstIsGreaterOrEqual<Exception>(
+                                4,
+                                ObjectMother.VariableName_N1,
+                                1,
+                                ObjectMother.VariableName_N2)
+                    ),
+                typeof(Exception),
+                MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue(
+                                        ObjectMother.VariableName_N1,
+                                        ObjectMother.VariableName_N2
+                                    )
+                ).SetArgDisplayNames($"{nameof(throwIfFirstIsGreaterOrEqualExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfFirstIsGreaterOrEqual(
+                                4,
+                                ObjectMother.VariableName_N1,
+                                1,
+                                ObjectMother.VariableName_N2)
+                    ),
+                typeof(ArgumentException),
+                MessageCollection.FirstValueIsGreaterOrEqualThanSecondValue(
+                                        ObjectMother.VariableName_N1,
+                                        ObjectMother.VariableName_N2
+                                    )
+                ).SetArgDisplayNames($"{nameof(throwIfFirstIsGreaterOrEqualExceptionTestCases)}_02")
+
+        };
+        private static TestCaseData[] throwIfCountsAreNotEqualExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfCountsAreNotEqual<Exception>(ObjectMother.SubScrapers_Wrong
+                            )),
+                typeof(Exception),
+                MessageCollection.AtLeastOneSubScraper(ObjectMother.SubScrapers_Wrong)
+                ).SetArgDisplayNames($"{nameof(throwIfCountsAreNotEqualExceptionTestCases)}_01")
+
+        };
+        private static TestCaseData[] throwIfModuloIsNotZeroExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfModuloIsNotZero(
+                                            4,
+                                            ObjectMother.VariableName_N1,
+                                            3,
+                                            ObjectMother.VariableName_N2
+                            )),
+                typeof(ArgumentException),
+                MessageCollection.DividingMustReturnWholeNumber(
+                                        ObjectMother.VariableName_N1,
+                                        ObjectMother.VariableName_N2
+                                    )
+                ).SetArgDisplayNames($"{nameof(throwIfModuloIsNotZeroExceptionTestCases)}_01")
+
+        };
+        private static TestCaseData[] throwIfFirstIsOlderOrEqualExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => Validator.ThrowIfFirstIsOlderOrEqual(
+                                            ObjectMother.DateTimeOlder,
+                                            nameof(ObjectMother.DateTimeOlder),
+                                            ObjectMother.DateTimeNewer,
+                                            nameof(ObjectMother.DateTimeNewer)
+                            )),
+                typeof(ArgumentException),
+                MessageCollection.FirstDateIsOlderOrEqual(
+                                        nameof(ObjectMother.DateTimeOlder),
+                                        nameof(ObjectMother.DateTimeNewer)
+                                    )
+                ).SetArgDisplayNames($"{nameof(throwIfFirstIsOlderOrEqualExceptionTestCases)}_01")
+
+        };
 
         #endregion
 
@@ -240,28 +360,59 @@ namespace NW.NGramTextClassification.UnitTests.Validation
         public void ValidateLength_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(validateObjectExceptionTestCases))]
         public void ValidateObject_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(validateArrayExceptionTestCases))]
         public void ValidateArray_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(validateListExceptionTestCases))]
         public void ValidateList_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-        [TestCaseSource(nameof(throwIfLessThanOneExceptionTestCases))]
-        public void ThrowIfLessThanOne_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(validateStringNullOrWhiteSpaceExceptionTestCases))]
         public void ValidateStringNullOrWhiteSpace_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(validateStringNullOrEmptyExceptionTestCases))]
         public void ValidateStringNullOrEmpty_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(throwIfLessThanOneExceptionTestCases))]
+        public void ThrowIfLessThanOne_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(throwIfFirstIsGreaterExceptionTestCases))]
+        public void ThrowIfFirstIsGreater_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(throwIfFirstIsGreaterOrEqualExceptionTestCases))]
+        public void ThrowIfFirstIsGreaterOrEqual_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(throwIfCountsAreNotEqualExceptionTestCases))]
+        public void ThrowIfCountsAreNotEqual_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(throwIfModuloIsNotZeroExceptionTestCases))]
+        public void ThrowIfModuloIsNotZero_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(throwIfFirstIsOlderOrEqualExceptionTestCases))]
+        public void ThrowIfFirstIsOlderOrEqual_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
@@ -296,13 +447,6 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                     });
 
         [Test]
-        public void ThrowIfLessThanOne_ShouldDoNothing_WhenProperArgument()
-            => Method_ShouldDoNothing_WhenProperArgument(
-                    new Action[] {
-                        () => Validator.ThrowIfLessThanOne(ObjectMother.N01, ObjectMother.VariableName_N)
-                    });
-
-        [Test]
         public void ValidateStringNullOrWhiteSpace_ShouldDoNothing_WhenProperArgument()
             => Method_ShouldDoNothing_WhenProperArgument(
                     new Action[] {
@@ -330,9 +474,50 @@ namespace NW.NGramTextClassification.UnitTests.Validation
                         () => Validator.ThrowIfFirstIsGreater(3, "n1", 4, "n2")
                     });
 
+        [Test]
+        public void ThrowIfLessThanOne_ShouldDoNothing_WhenProperArgument()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfLessThanOne(ObjectMother.Value01, nameof(ObjectMother.Value01))
+                    });
+
+        [Test]
+        public void ThrowIfCountsAreNotEqual_ShouldDoNothing_WhenProperArgument()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfCountsAreNotEqual<Exception>(ObjectMother.SubScrapers_Proper)
+                    });
+
+        [Test]
+        public void ThrowIfModuloIsNotZero_ShouldDoNothing_WhenProperArgument()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfModuloIsNotZero(
+                                2,
+                                ObjectMother.VariableName_N1,
+                                1,
+                                ObjectMother.VariableName_N2
+                            )
+                    });
+
+        [Test]
+        public void ThrowIfFirstIsOlderOrEqual_ShouldDoNothing_WhenProperArgument()
+            => Method_ShouldDoNothing_WhenProperArgument(
+                    new Action[] {
+                        () => Validator.ThrowIfFirstIsOlderOrEqual(
+                                ObjectMother.DateTimeNewer,
+                                nameof(ObjectMother.DateTimeNewer),
+                                ObjectMother.DateTimeOlder,
+                                nameof(ObjectMother.DateTimeOlder)
+                            )
+                    });
+
         #endregion
 
         #region TearDown
+        #endregion
+
+        #region Support_methods
 
         public void Method_ShouldDoNothing_WhenProperArgument(Action[] actions)
         {
@@ -363,5 +548,5 @@ namespace NW.NGramTextClassification.UnitTests.Validation
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 30.06.2022
 */

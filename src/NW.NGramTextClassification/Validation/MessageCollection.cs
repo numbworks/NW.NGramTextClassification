@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NW.NGramTextClassification.Files;
 
 namespace NW.NGramTextClassification.Validation
 {
@@ -16,6 +19,32 @@ namespace NW.NGramTextClassification.Validation
             = (variableName) => $"'{variableName}' contains zero items.";
         public static Func<string, string> VariableCantBeLessThanOne
             = (variableName) => $"'{variableName}' can't be less than one.";
+        public static Func<string, string, string> DividingMustReturnWholeNumber
+            = (variableName1, variableName2) => $"Dividing '{variableName1}' by '{variableName2}' must return a whole number.";
+        public static Func<Dictionary<string, int>, string> AtLeastOneSubScraper =
+                (subscrapers)
+                    => {
+
+                        /*
+                            At least one sub-scraper didn't return the expected amount of results 
+                            ('urls':'20','titles':'20','createDates':'20','applicationDates':'20','workAreas':'20',
+                            'workAreasWithoutZones':'20','workingHours':'20','jobTypes':'20','jobIds':'20').
+                        */
+
+                        List<string> results = subscrapers.Select(item => $"'{item.Key}':'{item.Value}'").ToList();
+                        string joined = string.Join(",", results);
+
+                        return string.Concat(
+                                "At least one sub-scraper didn't return the expected amount of results (",
+                                joined,
+                                ")."
+                                );
+
+                    };
+        public static Func<string, string, string> FirstDateIsOlderOrEqual
+            = (variableName1, variableName2) => $"'{variableName1}''s is older or equal than '{variableName2}'.";
+        public static Func<IFileInfoAdapter, string> ProvidedPathDoesntExist
+            = (file) => $"The provided path doesn't exist: '{file.FullName}'.";
 
         #endregion
 
@@ -24,5 +53,5 @@ namespace NW.NGramTextClassification.Validation
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 29.06.2022
 */
