@@ -2,6 +2,7 @@ v3.5.0 - BREAKING CHANGES
 - Feature: TextClassifier, added support for the classification of a collection of snippets of texts.
 - Feature: TextClassifierSettings, added support for Minimum Accuracy* fields.
 - Feature: Added support for "Files" namespace.
+- Feature: Added the possibility to load and save labeled examples using JSON format.
 
 v3.0.0 - BREAKING CHANGES
 - Decoupled LabeledExample class from the tokenization process; TokenizedExample class added.
