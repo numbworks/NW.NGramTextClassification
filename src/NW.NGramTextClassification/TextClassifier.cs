@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
@@ -107,6 +108,28 @@ namespace NW.NGramTextClassification
 
         public void LogAsciiBanner()
             => _components.LoggingActionAsciiBanner(AsciiBanner);
+
+        public List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile)
+        {
+
+            Validator.ValidateObject(jsonFile, nameof(jsonFile));
+            Validator.ValidateFileExistance(jsonFile);
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadLabeledExamplesFrom(jsonFile));
+
+            string content = _components.FileManager.ReadAllText(jsonFile);
+            List<LabeledExample> labeledExamples = _components.LabeledExampleSerializer.DeserializeFromJsonOrDefault(content);
+
+            if (labeledExamples == LabeledExampleSerializer.Default)
+                _components.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesFailedToLoad);
+            else
+                _components.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesSuccessfullyLoaded);
+
+            return labeledExamples;
+
+        }
+        public List<LabeledExample> LoadLabeledExamples(string filePath)
+            => LoadLabeledExamplesOrDefault(_components.FileManager.Create(filePath));
 
         #endregion
 

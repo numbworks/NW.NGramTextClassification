@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
@@ -48,6 +49,22 @@ namespace NW.NGramTextClassification
 
         /// <summary>Logs the library's ascii banner.</summary>
         void LogAsciiBanner();
+
+        /// <summary>
+        /// Loads a collection of <see cref="LabeledExample"/> objects from the provided <paramref name="jsonFile"/>. 
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="LabeledExampleSerializer.Default"/> will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>     
+        List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile);
+
+        /// <summary>
+        /// Loads a collection of <see cref="LabeledExample"/> objects from the provided <paramref name="filePath"/>. 
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="LabeledExampleSerializer.Default"/> will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>   
+        List<LabeledExample> LoadLabeledExamples(string filePath);
 
     }
 }

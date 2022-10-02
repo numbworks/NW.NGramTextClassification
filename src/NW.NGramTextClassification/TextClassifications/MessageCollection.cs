@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
@@ -72,8 +73,13 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static Func<SimilarityIndexAverage, string> SimilarityIndexAverageWithTheHighestValueIs =
             (indexAverage) => $"The '{nameof(SimilarityIndexAverage)}' object with the highest value is: '{indexAverage}'.";
-        public static Func<string, string> AllRulesInProvidedRulesetFailed
-            = (snippet) => $"All the rules in the provided ruleset failed for the provided snippet ('{snippet}'), therefore a 'null' label will be returned.";
+        public static Func<string, string> AllRulesInProvidedRulesetFailed = 
+            (snippet) => $"All the rules in the provided ruleset failed for the provided snippet ('{snippet}'), therefore a 'null' label will be returned.";
+
+        public static Func<IFileInfoAdapter, string> AttemptingToLoadLabeledExamplesFrom = 
+            (jsonFile) => $"Attempting to load a collection of '{nameof(LabeledExample)}' objects from: {jsonFile.FullName}.";
+        public static string LabeledExamplesSuccessfullyLoaded = $"A collection of '{nameof(LabeledExample)}' objects has been successfully loaded.";
+        public static string LabeledExamplesFailedToLoad = $"A collection of '{nameof(LabeledExample)}' objects failed to load. Default value is returned";
 
         #endregion
 
