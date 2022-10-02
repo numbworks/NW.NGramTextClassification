@@ -47,6 +47,7 @@ namespace NW.NGramTextClassification
         public IAsciiBannerManager AsciiBannerManager { get; }
         public Action<string> LoggingActionAsciiBanner { get; }
         public IFileManager FileManager { get; }
+        public ILabeledExampleSerializer LabeledExampleSerializer { get; }
 
         #endregion
 
@@ -62,7 +63,8 @@ namespace NW.NGramTextClassification
                     ILabeledExampleManager labeledExampleManager,
                     IAsciiBannerManager asciiBannerManager,
                     Action<string> loggingActionAsciiBanner,
-                    IFileManager fileManager)
+                    IFileManager fileManager,
+                    ILabeledExampleSerializer labeledExampleSerializer)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -74,6 +76,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(asciiBannerManager, nameof(asciiBannerManager));
             Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
             Validator.ValidateObject(fileManager, nameof(fileManager));
+            Validator.ValidateObject(labeledExampleSerializer, nameof(labeledExampleSerializer));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -84,6 +87,7 @@ namespace NW.NGramTextClassification
             AsciiBannerManager = asciiBannerManager;
             LoggingActionAsciiBanner = loggingActionAsciiBanner;
             FileManager = fileManager;
+            LabeledExampleSerializer = labeledExampleSerializer;
 
         }
 
@@ -98,7 +102,8 @@ namespace NW.NGramTextClassification
                   labeledExampleManager: new LabeledExampleManager(),
                   asciiBannerManager: new AsciiBannerManager(),
                   loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
-                  fileManager: new FileManager())
+                  fileManager: new FileManager(),
+                  labeledExampleSerializer: new LabeledExampleSerializer())
         { }
 
         #endregion
@@ -111,5 +116,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 02.10.2022
 */
