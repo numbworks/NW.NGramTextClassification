@@ -44,6 +44,9 @@ namespace NW.NGramTextClassification.LabeledExamples
 
                 List<LabeledExample> labeledExamples = JsonSerializer.Deserialize<List<LabeledExample>>(json, CreateJsonSerializerOptions());
 
+                if (labeledExamples.Count == 0)
+                    return Default;
+
                 return labeledExamples;
 
             }

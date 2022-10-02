@@ -390,6 +390,8 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         };
 
+        public static string ShortLabeledExamplesAsJson_Content = Properties.Resources.ShortLabeledExamplesAsJson;
+
         #endregion
 
         #region Methods
@@ -408,6 +410,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                     && NGrams.ObjectMother.AreEqual(obj1.NGrams, obj2.NGrams);
 
         }
+
+        public static bool AreEqual(List<LabeledExample> list1, List<LabeledExample> list2)
+            => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
         public static bool AreEqual(List<TokenizedExample> list1, List<TokenizedExample> list2)
             => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
 
@@ -496,5 +501,5 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 29.09.2022
+    Last Update: 02.10.2022
 */

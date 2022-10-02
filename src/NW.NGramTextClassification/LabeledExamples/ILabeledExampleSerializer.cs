@@ -9,7 +9,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         /// <summary>
         /// Deserializes the provided Json string to a collection of <see cref="LabeledExample"/> objects. 
-        /// <para>If <paramref name="json"/> is empty or an exception is thrown, <see cref="LabeledExampleSerializer.Default"/> will be  returned.</para>
+        /// <para>If <paramref name="json"/> is null/empty/invalid or an exception is thrown, <see cref="LabeledExampleSerializer.Default"/> will be returned.</para>
         /// </summary>
         List<LabeledExample> DeserializeFromJsonOrDefault(string json);
 
