@@ -10,6 +10,7 @@ Contact: numbworks@gmail.com
 | 2021-02-15 | numbworks | Completed "Example 1: Main Scenario". |
 | 2021-09-24 | numbworks | Version numbers removed, updated examples for v2.0.0. |
 | 2022-09-24 | numbworks | Updated to v3.0.0. |
+| 2022-10-02 | numbworks | Updated to v3.5.0. |
 
 ## Introduction
 
@@ -44,9 +45,9 @@ string text = "We are looking for several skilled and driven developers to join 
 List<LabeledExample> labeledExamples = CreateLabeledExamples();
 
 ITextClassifier textClassifier = new TextClassifier();
-TextClassifierResult result = textClassifier.ClassifyOrDefault(text, labeledExamples);
+TextClassifierSession session = textClassifier.ClassifyOrDefault(text, labeledExamples);
 
-Console.WriteLine(result.Label);
+Console.WriteLine(session.Results[0].Label);
 ```
 
 The entry point of the library (`TextClassifier`) offers a quite self-explanatory `ClassifyOrDefault` method.
@@ -152,6 +153,24 @@ The `GetLabel` method will run this collection of `SimilarityIndexAverage` objec
 - a `TextClassifierResult` object containing the presumed label
 - a `TextClassifierResult` object containing a `null` label.
 
+The `TextClassifierResult` object is contained into a `TextClassifierSession` object, which contains additional information about the classification process. 
+
+The `TextClassifierSession` class definition looks like:
+
+```csharp
+public class TextClassifierSession
+{
+
+    public double MinimumAccuracySingleLabel { get; }
+    public double MinimumAccuracyMultipleLabels { get; }
+    public List<TextClassifierResult> Results { get; }
+    public string Version { get; }
+
+    /* ... */
+
+}
+```
+
 ## The tokenizazion process
 
 The library component responsible for the tokenization process is `NGramTokenizer` and it requires a `NGramTokenizerRuleSet` in order to create a collection of `INGram` objects our of whatever string of text. 
@@ -224,6 +243,14 @@ The accuracy of the classification can be improved:
 1. by increasing the number of `LabeledExamples` for each label
 2. by using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text - for ex. attempting to detect the language of a piece of text about anthropology using a collection of multilingual `LabeledExample` objects about the same topic.
 3. Increasing the number of `INGram` objects - for ex. using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available in the library.
+
+## Load and save
+
+The library is able to load and save different key-objects using JSON format. 
+
+Here an example of each JSON file produced by the library:
+
+1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
 
 ## Markdown Toolset
 
