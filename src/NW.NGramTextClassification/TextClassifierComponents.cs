@@ -1,5 +1,6 @@
 ﻿using System;
 using NW.NGramTextClassification.AsciiBanner;
+using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
@@ -45,6 +46,7 @@ namespace NW.NGramTextClassification
         public ILabeledExampleManager LabeledExampleManager { get; }
         public IAsciiBannerManager AsciiBannerManager { get; }
         public Action<string> LoggingActionAsciiBanner { get; }
+        public IFileManager FileManager { get; }
 
         #endregion
 
@@ -59,7 +61,8 @@ namespace NW.NGramTextClassification
                     Action<string> loggingAction,
                     ILabeledExampleManager labeledExampleManager,
                     IAsciiBannerManager asciiBannerManager,
-                    Action<string> loggingActionAsciiBanner)
+                    Action<string> loggingActionAsciiBanner,
+                    IFileManager fileManager)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -70,6 +73,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(labeledExampleManager, nameof(labeledExampleManager));
             Validator.ValidateObject(asciiBannerManager, nameof(asciiBannerManager));
             Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
+            Validator.ValidateObject(fileManager, nameof(fileManager));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -79,6 +83,7 @@ namespace NW.NGramTextClassification
             LabeledExampleManager = labeledExampleManager;
             AsciiBannerManager = asciiBannerManager;
             LoggingActionAsciiBanner = loggingActionAsciiBanner;
+            FileManager = fileManager;
 
         }
 
@@ -92,7 +97,8 @@ namespace NW.NGramTextClassification
                   loggingAction: DefaultLoggingAction,
                   labeledExampleManager: new LabeledExampleManager(),
                   asciiBannerManager: new AsciiBannerManager(),
-                  loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner)
+                  loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
+                  fileManager: new FileManager())
         { }
 
         #endregion

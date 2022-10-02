@@ -8,6 +8,7 @@ using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
+using NW.NGramTextClassification.Files;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -326,7 +327,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
@@ -359,7 +361,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -406,7 +409,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner, 
+                          fileManager: new FileManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -452,7 +456,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -500,7 +505,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -555,7 +561,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -611,7 +618,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -667,7 +675,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -726,7 +735,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -786,7 +796,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -847,7 +858,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -910,7 +922,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: TextClassifierComponents.DefaultLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: fakeLoggerAsciiBanner);
+                          loggingActionAsciiBanner: fakeLoggerAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> expectedMessages = new List<string>()
@@ -951,7 +964,8 @@ namespace NW.NGramTextClassification.UnitTests
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = new List<string>()
