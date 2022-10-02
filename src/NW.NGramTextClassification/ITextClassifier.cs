@@ -64,7 +64,7 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>   
-        List<LabeledExample> LoadLabeledExamples(string filePath);
+        List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath);
 
     }
 }

@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         {
 
             new TestCaseData(
-                    "2396329869326"
+                    "Unproper Json content"
                 ).SetArgDisplayNames($"{nameof(deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases)}_01"),
 
             new TestCaseData(

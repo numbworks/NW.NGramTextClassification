@@ -128,7 +128,7 @@ namespace NW.NGramTextClassification
             return labeledExamples;
 
         }
-        public List<LabeledExample> LoadLabeledExamples(string filePath)
+        public List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath)
             => LoadLabeledExamplesOrDefault(_components.FileManager.Create(filePath));
 
         #endregion
