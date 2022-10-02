@@ -1,3 +1,7 @@
+v3.5.0 - BREAKING CHANGES
+- Feature: TextClassifier, added support for the classification of a collection of snippets of texts.
+- Feature: TextClassifierSettings, added support for Minimum Accuracy* fields.
+
 v3.0.0 - BREAKING CHANGES
 - Decoupled LabeledExample class from the tokenization process; TokenizedExample class added.
 - Removed all the Invoke() statements to make the code is more compact.
