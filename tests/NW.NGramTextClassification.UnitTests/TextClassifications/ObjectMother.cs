@@ -25,6 +25,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample00()
                 );
 
+
         public static List<string> Snippets_CompleteLabeledExamples00 = new List<string>()
         {
 
@@ -51,6 +52,13 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         };
 
+        public static TextClassifierSession TextClassifierSession_Default 
+            = new TextClassifierSession(
+                settings: new TextClassifierSettings(),
+                results: new List<TextClassifierResult>() {
+                                TextClassifier.DefaultTextClassifierResult
+                });
+
         #endregion
 
         #region Methods
@@ -65,6 +73,16 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         }
         public static bool AreEqual(List<TextClassifierResult> list1, List<TextClassifierResult> list2)
             => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
+        public static bool AreEqual(double double1, double double2)
+            => Math.Abs(double1 - double2) < 0.0001;
+        public static bool AreEqual(TextClassifierSession obj1, TextClassifierSession obj2)
+        {
+
+            return AreEqual(obj1.MinimumAccuracySingleLabel, obj2.MinimumAccuracySingleLabel)
+                    && AreEqual(obj1.MinimumAccuracyMultipleLabels, obj2.MinimumAccuracyMultipleLabels)
+                    && AreEqual(obj1.Results, obj2.Results);
+
+        }
 
         #endregion
 
@@ -73,5 +91,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 29.09.2022
+    Last Update: 02.10.2022
 */

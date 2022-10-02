@@ -94,11 +94,8 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new TextClassifierResult(
-                            label: null,
-                            indexes: new List<SimilarityIndex>(),
-                            indexAverages: new List<SimilarityIndexAverage>()
-                        )
+                    new TextClassifierSettings(),
+                    TextClassifications.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
             new TestCaseData(
@@ -111,11 +108,8 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new TextClassifierResult(
-                            label: null,
-                            indexes: new List<SimilarityIndex>(),
-                            indexAverages: new List<SimilarityIndexAverage>()
-                        )
+                    new TextClassifierSettings(),
+                    TextClassifications.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_02"),
 
 
@@ -127,7 +121,8 @@ namespace NW.NGramTextClassification.UnitTests
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.ShortLabeledExamples_Untokenizable,
-                    TextClassifier.DefaultTextClassifierResult
+                    new TextClassifierSettings(),
+                    TextClassifications.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
         };
@@ -161,7 +156,19 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierResult_CompleteLabeledExamples00
+                    new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: 0.0,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    ),
+                    new TextClassifierSession(
+                            settings: new TextClassifierSettings(
+                                            truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                                            minimumAccuracySingleLabel: 0.0,
+                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                                        ),
+                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                        )
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification)}_01")
 
         };
@@ -224,14 +231,38 @@ namespace NW.NGramTextClassification.UnitTests
                     TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00,
                     TextClassifier.DefaultNGramTokenizerRuleSet,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                    new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: 0.0,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    ),
+                    new TextClassifierSession(
+                            settings: new TextClassifierSettings(
+                                            truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                                            minimumAccuracySingleLabel: 0.0,
+                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                                        ),
+                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                        )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01"),
 
             new TestCaseData(
                     TextClassifications.ObjectMother.Snippets_Untokenizable,
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierResults_Untokenizable
+                    new TextClassifierSettings(
+                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: 0.0,
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                    ),
+                    new TextClassifierSession(
+                            settings: new TextClassifierSettings(
+                                            truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                                            minimumAccuracySingleLabel: 0.0,
+                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                                        ),
+                            results: TextClassifications.ObjectMother.TextClassifierResults_Untokenizable
+                        )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_02")
 
         };
@@ -276,8 +307,8 @@ namespace NW.NGramTextClassification.UnitTests
 
 
         [TestCaseSource(nameof(classifyOrDefaultWhenAllRulesFailedTestCases))]
-        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierResult_WhenAllRulesFailed
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenAllRulesFailed
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierSettings settings, TextClassifierSession expected)
         {
 
             // Arrange
@@ -293,12 +324,12 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components);
 
             // Act
-            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierSession actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -309,8 +340,8 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableExamples))]
-        public void ClassifyOrDefault_ShouldReturnDefaultClassifierResult_WhenUntokenizableExamples
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        public void ClassifyOrDefault_ShouldReturnSessionWithDefaultClassifierResult_WhenUntokenizableExamples
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierSettings settings, TextClassifierSession expected)
         {
 
             // Arrange
@@ -326,7 +357,7 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
             // We skip all the messages in the middle, otherwise the test would be too complex.
@@ -338,7 +369,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierSession actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -386,10 +417,10 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierSession actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
-            Assert.AreEqual(expectedLabel, actual.Label);
+            Assert.AreEqual(expectedLabel, actual.Results[0].Label);
             Assert.AreEqual(
                     initialLogMessages, 
                     actualLogMessages.GetRange(0, 5)
@@ -402,8 +433,8 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
         [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification))]
-        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierResult_WhenThirtyLabeledExamplesAndSuccessfulClassification
-            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierResult expected)
+        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenThirtyLabeledExamplesAndSuccessfulClassification
+            (string text, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierSettings settings, TextClassifierSession expected)
         {
 
             // Arrange
@@ -419,12 +450,6 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifierSettings settings
-                = new TextClassifierSettings(
-                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
-                    );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(text, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -432,13 +457,13 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> finalLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.ResultOfClassificationTaskIs(expected.Label),
+                NGramTextClassification.TextClassifications.MessageCollection.ResultOfClassificationTaskIs(expected.Results[0].Label),
                 NGramTextClassification.TextClassifications.MessageCollection.ClassificationTaskHasBeenSuccessful
 
             };
 
             // Act
-            TextClassifierResult actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
+            TextClassifierSession actual = textClassifier.ClassifyOrDefault(text, tokenizerRuleSet, labeledExamples);
 
             // Assert
             Assert.IsTrue(
@@ -907,8 +932,8 @@ namespace NW.NGramTextClassification.UnitTests
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(classifyManyTestCases))]
-        public void ClassifyMany_ShouldReturnExpectedCollectionOfTextClassifierResults_WhenInvoked
-            (List<string> snippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, List<TextClassifierResult> expected)
+        public void ClassifyMany_ShouldReturnExpectedTextClassifierSession_WhenInvoked
+            (List<string> snippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierSettings settings, TextClassifierSession expected)
         {
 
             // Arrange
@@ -924,12 +949,6 @@ namespace NW.NGramTextClassification.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner);
-            TextClassifierSettings settings
-                = new TextClassifierSettings(
-                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
-                    );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = new List<string>()
@@ -940,7 +959,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            List <TextClassifierResult> actual
+            TextClassifierSession actual
                 = textClassifier.ClassifyMany(snippets: snippets, tokenizerRuleSet: tokenizerRuleSet, labeledExamples: labeledExamples);
 
             // Assert
@@ -994,5 +1013,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 30.09.2022
+    Last Update: 02.10.2022
 */

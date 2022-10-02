@@ -60,7 +60,7 @@ namespace NW.NGramTextClassification
 
         #region Methods_public
 
-        public TextClassifierResult ClassifyOrDefault(string snippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        public TextClassifierSession ClassifyOrDefault(string snippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
             Validator.ValidateStringNullOrWhiteSpace(snippet, nameof(snippet));
@@ -69,15 +69,16 @@ namespace NW.NGramTextClassification
 
             LogInitialMessages(snippet, tokenizerRuleSet, labeledExamples);
 
-            TextClassifierResult textClassifierResult = ClassifySingleOrDefault(snippet, tokenizerRuleSet, labeledExamples);
+            TextClassifierResult result = ClassifySingleOrDefault(snippet, tokenizerRuleSet, labeledExamples);
+            TextClassifierSession session = CreateSession(_settings, result);
 
-            return textClassifierResult;
+            return session;
 
         }
-        public TextClassifierResult ClassifyOrDefault(string snippet, List<LabeledExample> labeledExamples)
+        public TextClassifierSession ClassifyOrDefault(string snippet, List<LabeledExample> labeledExamples)
                 => ClassifyOrDefault(snippet, DefaultNGramTokenizerRuleSet, labeledExamples);
 
-        public List<TextClassifierResult> ClassifyMany(List<string> snippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples) 
+        public TextClassifierSession ClassifyMany(List<string> snippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples) 
         {
 
             Validator.ValidateList(snippets, nameof(snippets));
@@ -87,19 +88,21 @@ namespace NW.NGramTextClassification
 
             _components.LoggingAction(TextClassifications.MessageCollection.ProvidedSnippetsAre(snippets.Count));
 
-            List<TextClassifierResult> textClassifierResults = new List<TextClassifierResult>();
+            List<TextClassifierResult> results = new List<TextClassifierResult>();
             for (int i = 0; i < snippets.Count; i++)
             {
 
                 TextClassifierResult textClassifierResult = ClassifySingleOrDefault(snippets[i], tokenizerRuleSet, labeledExamples);
-                textClassifierResults.Add(textClassifierResult);
+                results.Add(textClassifierResult);
 
             }
-                
-            return textClassifierResults;
+
+            TextClassifierSession session = CreateSession(_settings, results);
+
+            return session;
 
         }
-        public List<TextClassifierResult> ClassifyMany(List<string> snippets, List<LabeledExample> labeledExamples)
+        public TextClassifierSession ClassifyMany(List<string> snippets, List<LabeledExample> labeledExamples)
                 => ClassifyMany(snippets, DefaultNGramTokenizerRuleSet, labeledExamples);
 
         public void LogAsciiBanner()
@@ -177,7 +180,18 @@ namespace NW.NGramTextClassification
             return result;
 
         }        
-        
+        private TextClassifierSession CreateSession(TextClassifierSettings settings, TextClassifierResult result)
+        {
+
+            List<TextClassifierResult> results = new List<TextClassifierResult>();
+            results.Add(result);
+
+            return new TextClassifierSession(settings: settings, results: results);
+
+        }
+        private TextClassifierSession CreateSession(TextClassifierSettings settings, List<TextClassifierResult> results)
+            => new TextClassifierSession(settings: settings, results: results);
+
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
@@ -443,5 +457,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 30.09.2022
+    Last Update: 02.10.2022
 */
