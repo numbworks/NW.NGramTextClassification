@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace NW.NGramTextClassification.LabeledExamples
 {
@@ -14,6 +13,8 @@ namespace NW.NGramTextClassification.LabeledExamples
         #endregion
 
         #region Properties
+
+        public static List<LabeledExample> Default { get; } = null;
         #endregion
 
         #region Constructors
@@ -30,21 +31,47 @@ namespace NW.NGramTextClassification.LabeledExamples
 
             Validation.Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            string json = "";
+            string json = JsonSerializer.Serialize(labeledExamples, CreateJsonSerializerOptions());
 
             return json;
 
         }
-        public List<LabeledExample> DeserializeFromJson(string json)
+        public List<LabeledExample> DeserializeFromJsonOrDefault(string json)
         {
 
-            return null;
+            try
+            {
+
+                List<LabeledExample> labeledExamples = JsonSerializer.Deserialize<List<LabeledExample>>(json, CreateJsonSerializerOptions());
+
+                return labeledExamples;
+
+            }
+            catch
+            {
+
+                return Default;
+
+            }
 
         }
 
         #endregion
 
         #region Methods_private
+
+        private JsonSerializerOptions CreateJsonSerializerOptions()
+        {
+
+            JsonSerializerOptions options = new JsonSerializerOptions();
+
+            options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            options.WriteIndented = true;
+
+            return options;
+
+        }
+
         #endregion
 
     }
