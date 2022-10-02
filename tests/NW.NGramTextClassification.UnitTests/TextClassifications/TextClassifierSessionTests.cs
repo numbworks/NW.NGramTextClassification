@@ -17,7 +17,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                 new TestDelegate(
                         () => new TextClassifierSession(
                                     settings: null,
-                                    results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                                    results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                                    version: new TextClassifier().Version
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("settings").Message
@@ -27,11 +28,23 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                 new TestDelegate(
                         () => new TextClassifierSession(
                                     settings: new TextClassifierSettings(),
-                                    results: null
+                                    results: null,
+                                    version: new TextClassifier().Version
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("results").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifierSession(
+                                    settings: new TextClassifierSettings(),
+                                    results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                                    version: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("version").Message
+                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_03")
 
         };
 
@@ -56,7 +69,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             TextClassifierSession actual
                 = new TextClassifierSession(
                         settings: new TextClassifierSettings(),
-                        results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                        results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                        version: new TextClassifier().Version
                     );
 
             // Assert

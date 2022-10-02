@@ -167,7 +167,8 @@ namespace NW.NGramTextClassification.UnitTests
                                             minimumAccuracySingleLabel: 0.0,
                                             minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
                                         ),
-                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                            version: new TextClassifier().Version
                         )
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification)}_01")
 
@@ -242,7 +243,8 @@ namespace NW.NGramTextClassification.UnitTests
                                             minimumAccuracySingleLabel: 0.0,
                                             minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
                                         ),
-                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00
+                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                            version: new TextClassifier().Version
                         )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01"),
 
@@ -261,7 +263,8 @@ namespace NW.NGramTextClassification.UnitTests
                                             minimumAccuracySingleLabel: 0.0,
                                             minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
                                         ),
-                            results: TextClassifications.ObjectMother.TextClassifierResults_Untokenizable
+                            results: TextClassifications.ObjectMother.TextClassifierResults_Untokenizable,
+                            version: new TextClassifier().Version
                         )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_02")
 

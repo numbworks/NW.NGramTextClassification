@@ -15,6 +15,7 @@ namespace NW.NGramTextClassification.TextClassifications
         public double MinimumAccuracySingleLabel { get; }
         public double MinimumAccuracyMultipleLabels { get; }
         public List<TextClassifierResult> Results { get; }
+        public string Version { get; }
 
         #endregion
 
@@ -23,16 +24,18 @@ namespace NW.NGramTextClassification.TextClassifications
         /// <summary>
         /// Initializes a <see cref="TextClassifierSession"/> instance.
         /// </summary>
-        public TextClassifierSession(TextClassifierSettings settings, List<TextClassifierResult> results)
+        public TextClassifierSession(TextClassifierSettings settings, List<TextClassifierResult> results, string version)
         {
 
             Validator.ValidateObject(settings, nameof(settings));
             Validator.ValidateList(results, nameof(results));
+            Validator.ValidateStringNullOrWhiteSpace(version, nameof(version));
 
             MinimumAccuracySingleLabel = settings.MinimumAccuracySingleLabel;
             MinimumAccuracyMultipleLabels = settings.MinimumAccuracyMultipleLabels;
 
             Results = results;
+            Version = version;
 
         }
 

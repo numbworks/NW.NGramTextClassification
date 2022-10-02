@@ -52,12 +52,13 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         };
 
-        public static TextClassifierSession TextClassifierSession_Default 
+        public static TextClassifierSession TextClassifierSession_Default
             = new TextClassifierSession(
                 settings: new TextClassifierSettings(),
                 results: new List<TextClassifierResult>() {
-                                TextClassifier.DefaultTextClassifierResult
-                });
+                                TextClassifier.DefaultTextClassifierResult },
+                version: new TextClassifier().Version
+                );
 
         #endregion
 
@@ -80,7 +81,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
             return AreEqual(obj1.MinimumAccuracySingleLabel, obj2.MinimumAccuracySingleLabel)
                     && AreEqual(obj1.MinimumAccuracyMultipleLabels, obj2.MinimumAccuracyMultipleLabels)
-                    && AreEqual(obj1.Results, obj2.Results);
+                    && AreEqual(obj1.Results, obj2.Results)
+                    && string.Equals(obj1.Version, obj2.Version, StringComparison.InvariantCulture);
 
         }
 

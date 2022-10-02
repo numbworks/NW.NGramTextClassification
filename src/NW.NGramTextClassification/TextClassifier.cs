@@ -70,7 +70,7 @@ namespace NW.NGramTextClassification
             LogInitialMessages(snippet, tokenizerRuleSet, labeledExamples);
 
             TextClassifierResult result = ClassifySingleOrDefault(snippet, tokenizerRuleSet, labeledExamples);
-            TextClassifierSession session = CreateSession(_settings, result);
+            TextClassifierSession session = CreateSession(_settings, result, Version);
 
             return session;
 
@@ -97,7 +97,7 @@ namespace NW.NGramTextClassification
 
             }
 
-            TextClassifierSession session = CreateSession(_settings, results);
+            TextClassifierSession session = CreateSession(_settings, results, Version);
 
             return session;
 
@@ -180,17 +180,17 @@ namespace NW.NGramTextClassification
             return result;
 
         }        
-        private TextClassifierSession CreateSession(TextClassifierSettings settings, TextClassifierResult result)
+        private TextClassifierSession CreateSession(TextClassifierSettings settings, TextClassifierResult result, string version)
         {
 
             List<TextClassifierResult> results = new List<TextClassifierResult>();
             results.Add(result);
 
-            return new TextClassifierSession(settings: settings, results: results);
+            return new TextClassifierSession(settings: settings, results: results, version: version);
 
         }
-        private TextClassifierSession CreateSession(TextClassifierSettings settings, List<TextClassifierResult> results)
-            => new TextClassifierSession(settings: settings, results: results);
+        private TextClassifierSession CreateSession(TextClassifierSettings settings, List<TextClassifierResult> results, string version)
+            => new TextClassifierSession(settings: settings, results: results, version: version);
 
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
