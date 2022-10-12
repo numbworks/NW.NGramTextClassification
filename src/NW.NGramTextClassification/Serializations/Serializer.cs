@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace NW.NGramTextClassification.Serializations
 {
     /// <inheritdoc cref="ISerializer{T}"/>
-    public class Serializer<T>
+    public class Serializer<T> : ISerializer<T>
     {
 
         #region Fields
