@@ -77,5 +77,21 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
                 return ResourceManager.GetString("ShortLabeledExamplesAsJson", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  {
+        ///    &quot;Text&quot;: &quot;We are looking for several skilled and driven developers to join our team.&quot;
+        ///  },
+        ///  {
+        ///    &quot;Text&quot;: &quot;Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.&quot;
+        ///  }
+        ///].
+        /// </summary>
+        public static string TextSnippetsAsJson {
+            get {
+                return ResourceManager.GetString("TextSnippetsAsJson", resourceCulture);
+            }
+        }
     }
 }

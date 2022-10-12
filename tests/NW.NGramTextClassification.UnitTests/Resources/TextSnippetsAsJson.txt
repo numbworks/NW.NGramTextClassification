@@ -1,0 +1,8 @@
+﻿[
+  {
+    "Text": "We are looking for several skilled and driven developers to join our team."
+  },
+  {
+    "Text": "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö."
+  }
+]
