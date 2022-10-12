@@ -1131,7 +1131,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<LabeledExample> actual = textClassifier.LoadLabeledExamplesOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.AreEqual(LabeledExampleSerializer.Default, actual);
+            Assert.AreEqual(Serializer<LabeledExample>.Default, actual);
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
         }
@@ -1217,7 +1217,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<TextSnippet> actual = textClassifier.LoadTextSnippetsOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.AreEqual(TextSnippetSerializer.Default, actual);
+            Assert.AreEqual(Serializer<TextSnippet>.Default, actual);
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
         }
