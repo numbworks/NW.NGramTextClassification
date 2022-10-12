@@ -4,6 +4,7 @@ using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextSnippets;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests
@@ -29,7 +30,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nGramsTokenizer").Message
@@ -47,7 +49,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("similarityIndexCalculator").Message
@@ -65,7 +68,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("roundingFunction").Message
@@ -83,7 +87,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textTruncatingFunction").Message
@@ -101,7 +106,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingAction").Message
@@ -119,7 +125,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExampleManager").Message
@@ -137,7 +144,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: null,
                                         loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("asciiBannerManager").Message
@@ -155,7 +163,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner:  null,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingActionAsciiBanner").Message
@@ -173,7 +182,8 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner:  TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: null,
-                                        labeledExampleSerializer: new LabeledExampleSerializer()
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("fileManager").Message
@@ -191,11 +201,31 @@ namespace NW.NGramTextClassification.UnitTests
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner:  TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
-                                        labeledExampleSerializer: null
+                                        labeledExampleSerializer: null,
+                                        textSnippetSerializer: new TextSnippetSerializer()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExampleSerializer").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_10")
+                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_10"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifierComponents(
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                                        textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                                        loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager(),
+                                        asciiBannerManager: new AsciiBannerManager(),
+                                        loggingActionAsciiBanner:  TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                                        fileManager: new FileManager(),
+                                        labeledExampleSerializer: new LabeledExampleSerializer(),
+                                        textSnippetSerializer: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("textSnippetSerializer").Message
+                ).SetArgDisplayNames($"{nameof(textClassifierComponentsExceptionTestCases)}_11")
 
         };
 
@@ -232,6 +262,7 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsInstanceOf<Action<string>>(actual.LoggingActionAsciiBanner);
             Assert.IsInstanceOf<IFileManager>(actual.FileManager);
             Assert.IsInstanceOf<ILabeledExampleSerializer>(actual.LabeledExampleSerializer);
+            Assert.IsInstanceOf<ITextSnippetSerializer>(actual.TextSnippetSerializer);
 
             Assert.IsInstanceOf<Func<double, double>>(TextClassifierComponents.DefaultRoundingFunction);
             Assert.IsInstanceOf<Func<string, uint, string>>(TextClassifierComponents.DefaultTextTruncatingFunction);
@@ -269,5 +300,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update: 12.10.2022
 */
