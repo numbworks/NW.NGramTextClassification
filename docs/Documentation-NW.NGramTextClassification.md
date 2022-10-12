@@ -38,21 +38,23 @@ using System.Collections.Generic;
 using NW.NGramTextClassification;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextSnippets;
 
 /*...*/
 
-string text = "We are looking for several skilled and driven developers to join our team.";
+TextSnippet textSnippet 
+    = new TextSnippet(text: "We are looking for several skilled and driven developers to join our team.");
 List<LabeledExample> labeledExamples = CreateLabeledExamples();
 
 ITextClassifier textClassifier = new TextClassifier();
-TextClassifierSession session = textClassifier.ClassifyOrDefault(text, labeledExamples);
+TextClassifierSession session = textClassifier.ClassifyOrDefault(textSnippet, labeledExamples);
 
 Console.WriteLine(session.Results[0].Label);
 ```
 
 The entry point of the library (`TextClassifier`) offers a quite self-explanatory `ClassifyOrDefault` method.
 
-The `text` variable contains the string of text that we need to categorize, while the `labeledExamples` variable contains the collection of strings that already have a label associated to them and that we will use to train the library.
+The `textSnippet` object contains the string of text that we need to categorize, while the `labeledExamples` is a collection of strings that already have a label associated to them and that we will use to train the library.
 
 Here how `labeledExamples` is getting populated (strings are truncated at `[...]` for a readibility purpose):
 
@@ -80,7 +82,7 @@ private static List<LabeledExample> CreateLabeledExamples()
 }
 ```
 
-Once you have both `text` and `labeledExamples` variables properly set, you can initialize a `TextClassifier` object and call its `ClassifyOrDefault` method.
+Once you have both `textSnippet` and `labeledExamples` variables properly set, you can initialize a `TextClassifier` object and call its `ClassifyOrDefault` method.
 
 Apart from `Label`, the `TextClassifierResult` object contains some diagnostic information, which we can use to improve the accuracy of the classsification. 
 
@@ -122,7 +124,7 @@ private TextClassifierResult CreateResult(List<INGram> nGrams, List<TokenizedExa
 } 
 ```
 
-The content of the `text` variable gets tokenized into a collection of `INGrams`, and each of them is compared to the provided collection of `LabeledExamples`.
+The content of the `textSnippet` variable gets tokenized into a collection of `INGrams`, and each of them is compared to the provided collection of `LabeledExamples`.
 
 The outcome is a collection of `SimilarityIndexes`, which looks like:
 
@@ -188,7 +190,7 @@ INGramTokenizerRuleSet nGramTokenizerRuleSet
         );
 ```
 
-If your `text` is "*We are looking for several skilled and driven developers to join our team.*", the `NGramTokenizerRuleSet` above will generate the following collection of `INGram` objects:
+If your `textSnippet` is "*We are looking for several skilled and driven developers to join our team.*", the `NGramTokenizerRuleSet` above will generate the following collection of `INGram` objects:
 
 ```csharp
 List<INGram> nGrams = new List<INGram>() {
@@ -251,6 +253,7 @@ The library is able to load and save different key-objects using JSON format.
 Here an example of each JSON file produced by the library:
 
 1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
+2. [TextSnippets.json](ExampleFiles/TextSnippets.json)
 
 ## Markdown Toolset
 
