@@ -5,6 +5,7 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
@@ -79,6 +80,11 @@ namespace NW.NGramTextClassification.TextClassifications
             (jsonFile) => $"Attempting to load a collection of '{nameof(LabeledExample)}' objects from: {jsonFile.FullName}.";
         public static string LabeledExamplesSuccessfullyLoaded = $"A collection of '{nameof(LabeledExample)}' objects has been successfully loaded.";
         public static string LabeledExamplesFailedToLoad = $"A collection of '{nameof(LabeledExample)}' objects failed to load. Default value is returned";
+
+        public static Func<IFileInfoAdapter, string> AttemptingToLoadTextSnippetsFrom =
+            (jsonFile) => $"Attempting to load a collection of '{nameof(TextSnippet)}' objects from: {jsonFile.FullName}.";
+        public static string TextSnippetsSuccessfullyLoaded = $"A collection of '{nameof(TextSnippet)}' objects has been successfully loaded.";
+        public static string TextSnippetsFailedToLoad = $"A collection of '{nameof(TextSnippet)}' objects failed to load. Default value is returned";
 
         #endregion
 

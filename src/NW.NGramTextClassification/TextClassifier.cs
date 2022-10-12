@@ -131,6 +131,28 @@ namespace NW.NGramTextClassification
         public List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath)
             => LoadLabeledExamplesOrDefault(_components.FileManager.Create(filePath));
 
+        public List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile)
+        {
+
+            Validator.ValidateObject(jsonFile, nameof(jsonFile));
+            Validator.ValidateFileExistance(jsonFile);
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadTextSnippetsFrom(jsonFile));
+
+            string content = _components.FileManager.ReadAllText(jsonFile);
+            List<TextSnippet> textSnippets = _components.TextSnippetSerializer.DeserializeFromJsonOrDefault(content);
+
+            if (textSnippets == TextSnippetSerializer.Default)
+                _components.LoggingAction(TextClassifications.MessageCollection.TextSnippetsFailedToLoad);
+            else
+                _components.LoggingAction(TextClassifications.MessageCollection.TextSnippetsSuccessfullyLoaded);
+
+            return textSnippets;
+
+        }
+        public List<TextSnippet> LoadTextSnippetsOrDefault(string filePath)
+            => LoadTextSnippetsOrDefault(_components.FileManager.Create(filePath));
+
         #endregion
 
         #region Methods_private

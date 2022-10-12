@@ -291,6 +291,34 @@ namespace NW.NGramTextClassification.UnitTests
             ).SetArgDisplayNames($"{nameof(loadLabeledExamplesOrDefaultExceptionTestCases)}_03")
 
         };
+        private static TestCaseData[] loadTextSnippetsOrDefaultExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier().LoadTextSnippetsOrDefault(jsonFile: (IFileInfoAdapter)null)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("jsonFile").Message
+            ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier().LoadTextSnippetsOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
+                    ),
+                typeof(ArgumentException),
+                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
+            ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier().LoadTextSnippetsOrDefault(filePath: (string)null)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("filePath").Message
+            ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_03")
+
+        };
 
         #endregion
 
@@ -1119,6 +1147,94 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.AreEqual(LabeledExampleSerializer.Default, actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+
+        [TestCaseSource(nameof(loadTextSnippetsOrDefaultExceptionTestCases))]
+        public void LoadTextSnippetsOrDefault_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [Test]
+        public void LoadTextSnippetsOrDefault_ShouldReturnExpectedCollectionOfTextSnippets_WhenProperJsonFileContent()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                          labeledExampleSerializer: new LabeledExampleSerializer(),
+                          textSnippetSerializer: new TextSnippetSerializer());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadTextSnippetsFrom(fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.TextSnippetsSuccessfullyLoaded
+
+            };
+
+            // Act
+            List<TextSnippet> actual = textClassifier.LoadTextSnippetsOrDefault(fakeJsonFile);
+
+            // Assert
+            Assert.IsTrue(
+                    TextSnippets.ObjectMother.AreEqual(TextSnippets.ObjectMother.TextSnippets, actual)
+                );
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void LoadTextSnippetsOrDefault_ShouldReturnDefault_WhenUnproperJsonFileContent()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager("Unproper Json content"),
+                          labeledExampleSerializer: new LabeledExampleSerializer(),
+                          textSnippetSerializer: new TextSnippetSerializer());
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadTextSnippetsFrom(fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.TextSnippetsFailedToLoad
+
+            };
+
+            // Act
+            List<TextSnippet> actual = textClassifier.LoadTextSnippetsOrDefault(fakeJsonFile);
+
+            // Assert
+            Assert.AreEqual(TextSnippetSerializer.Default, actual);
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
         }

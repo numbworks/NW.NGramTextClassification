@@ -67,6 +67,22 @@ namespace NW.NGramTextClassification
         /// <exception cref="ArgumentException"/>   
         List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath);
 
+        /// <summary>
+        /// Loads a collection of <see cref="TextSnippet"/> objects from the provided <paramref name="jsonFile"/>. 
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="TextSnippetSerializer.Default"/> will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>     
+        List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile);
+
+        /// <summary>
+        /// Loads a collection of <see cref="TextSnippet"/> objects from the provided <paramref name="filePath"/>. 
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="TextSnippetSerializer.Default"/> will be returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>   
+        List<TextSnippet> LoadTextSnippetsOrDefault(string filePath);
+
     }
 }
 
