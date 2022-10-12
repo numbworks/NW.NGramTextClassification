@@ -3,8 +3,8 @@ using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification
@@ -48,8 +48,7 @@ namespace NW.NGramTextClassification
         public IAsciiBannerManager AsciiBannerManager { get; }
         public Action<string> LoggingActionAsciiBanner { get; }
         public IFileManager FileManager { get; }
-        public ILabeledExampleSerializer LabeledExampleSerializer { get; }
-        public ITextSnippetSerializer TextSnippetSerializer { get; }
+        public ISerializerFactory SerializerFactory { get; }
 
         #endregion
 
@@ -66,8 +65,7 @@ namespace NW.NGramTextClassification
                     IAsciiBannerManager asciiBannerManager,
                     Action<string> loggingActionAsciiBanner,
                     IFileManager fileManager,
-                    ILabeledExampleSerializer labeledExampleSerializer,
-                    ITextSnippetSerializer textSnippetSerializer)
+                    ISerializerFactory serializerFactory)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -79,8 +77,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(asciiBannerManager, nameof(asciiBannerManager));
             Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
             Validator.ValidateObject(fileManager, nameof(fileManager));
-            Validator.ValidateObject(labeledExampleSerializer, nameof(labeledExampleSerializer));
-            Validator.ValidateObject(textSnippetSerializer, nameof(textSnippetSerializer));
+            Validator.ValidateObject(serializerFactory, nameof(serializerFactory));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -91,8 +88,7 @@ namespace NW.NGramTextClassification
             AsciiBannerManager = asciiBannerManager;
             LoggingActionAsciiBanner = loggingActionAsciiBanner;
             FileManager = fileManager;
-            LabeledExampleSerializer = labeledExampleSerializer;
-            TextSnippetSerializer = textSnippetSerializer;
+            SerializerFactory = serializerFactory;
 
         }
 
@@ -108,8 +104,7 @@ namespace NW.NGramTextClassification
                   asciiBannerManager: new AsciiBannerManager(),
                   loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
                   fileManager: new FileManager(),
-                  labeledExampleSerializer: new LabeledExampleSerializer(),
-                  textSnippetSerializer: new TextSnippetSerializer())
+                  serializerFactory: new SerializerFactory())
         { }
 
         #endregion

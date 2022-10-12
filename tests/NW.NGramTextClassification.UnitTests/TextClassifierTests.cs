@@ -6,6 +6,7 @@ using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
@@ -378,8 +379,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components);
@@ -414,8 +414,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -464,8 +463,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner, 
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -513,8 +511,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
@@ -564,9 +561,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer()
-                          );
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -623,8 +618,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -682,8 +676,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -741,8 +734,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -803,8 +795,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -866,8 +857,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -930,8 +920,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -996,8 +985,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: fakeLoggerAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             List<string> expectedMessages = new List<string>()
@@ -1040,8 +1028,7 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<string> expectedLogMessages = new List<string>()
@@ -1087,16 +1074,15 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadLabeledExamplesFrom(fakeJsonFile),
-                NGramTextClassification.TextClassifications.MessageCollection.LabeledExamplesSuccessfullyLoaded
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(LabeledExample), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsSuccessfullyLoaded(typeof(LabeledExample))
 
             };
 
@@ -1129,16 +1115,15 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager("Unproper Json content"),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadLabeledExamplesFrom(fakeJsonFile),
-                NGramTextClassification.TextClassifications.MessageCollection.LabeledExamplesFailedToLoad
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(LabeledExample), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsFailedToLoad(typeof(LabeledExample))
 
             };
 
@@ -1175,16 +1160,15 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadTextSnippetsFrom(fakeJsonFile),
-                NGramTextClassification.TextClassifications.MessageCollection.TextSnippetsSuccessfullyLoaded
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(TextSnippet), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsSuccessfullyLoaded(typeof(TextSnippet))
 
             };
 
@@ -1217,16 +1201,15 @@ namespace NW.NGramTextClassification.UnitTests
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager("Unproper Json content"),
-                          labeledExampleSerializer: new LabeledExampleSerializer(),
-                          textSnippetSerializer: new TextSnippetSerializer());
+                          serializerFactory: new SerializerFactory());
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
             List<string> expectedLogMessages = new List<string>()
             {
 
-                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadTextSnippetsFrom(fakeJsonFile),
-                NGramTextClassification.TextClassifications.MessageCollection.TextSnippetsFailedToLoad
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(TextSnippet), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsFailedToLoad(typeof(TextSnippet))
 
             };
 

@@ -6,6 +6,7 @@ using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
@@ -110,48 +111,14 @@ namespace NW.NGramTextClassification
             => _components.LoggingActionAsciiBanner(AsciiBanner);
 
         public List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile)
-        {
-
-            Validator.ValidateObject(jsonFile, nameof(jsonFile));
-            Validator.ValidateFileExistance(jsonFile);
-
-            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadLabeledExamplesFrom(jsonFile));
-
-            string content = _components.FileManager.ReadAllText(jsonFile);
-            List<LabeledExample> labeledExamples = _components.LabeledExampleSerializer.DeserializeFromJsonOrDefault(content);
-
-            if (labeledExamples == LabeledExampleSerializer.Default)
-                _components.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesFailedToLoad);
-            else
-                _components.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesSuccessfullyLoaded);
-
-            return labeledExamples;
-
-        }
+            => LoadObjectsOrDefault<LabeledExample>(jsonFile);
         public List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath)
-            => LoadLabeledExamplesOrDefault(_components.FileManager.Create(filePath));
+            => LoadObjectsOrDefault<LabeledExample>(_components.FileManager.Create(filePath));
 
         public List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile)
-        {
-
-            Validator.ValidateObject(jsonFile, nameof(jsonFile));
-            Validator.ValidateFileExistance(jsonFile);
-
-            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadTextSnippetsFrom(jsonFile));
-
-            string content = _components.FileManager.ReadAllText(jsonFile);
-            List<TextSnippet> textSnippets = _components.TextSnippetSerializer.DeserializeFromJsonOrDefault(content);
-
-            if (textSnippets == TextSnippetSerializer.Default)
-                _components.LoggingAction(TextClassifications.MessageCollection.TextSnippetsFailedToLoad);
-            else
-                _components.LoggingAction(TextClassifications.MessageCollection.TextSnippetsSuccessfullyLoaded);
-
-            return textSnippets;
-
-        }
+            => LoadObjectsOrDefault<TextSnippet>(jsonFile);
         public List<TextSnippet> LoadTextSnippetsOrDefault(string filePath)
-            => LoadTextSnippetsOrDefault(_components.FileManager.Create(filePath));
+            => LoadObjectsOrDefault<TextSnippet>(_components.FileManager.Create(filePath));
 
         #endregion
 
@@ -486,6 +453,28 @@ namespace NW.NGramTextClassification
         }
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
             => indexAverages.OrderByDescending(Item => Item.Value).ToList();
+
+        private List<T> LoadObjectsOrDefault<T>(IFileInfoAdapter jsonFile)
+        {
+
+            Validator.ValidateObject(jsonFile, nameof(jsonFile));
+            Validator.ValidateFileExistance(jsonFile);
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(T), jsonFile));
+
+            string content = _components.FileManager.ReadAllText(jsonFile);
+
+            ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
+            List<T> objects = serializer.DeserializeFromJsonOrDefault(content);
+
+            if (objects == Serializer<T>.Default)
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectsFailedToLoad(typeof(T)));
+            else
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectsSuccessfullyLoaded(typeof(T)));
+
+            return objects;
+
+        }
 
         #endregion
 
