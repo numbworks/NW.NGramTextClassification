@@ -60,6 +60,7 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
 
             // Assert
             Assert.IsInstanceOf<TextSnippet>(actual);
+            Assert.IsInstanceOf<string>(actual.Text);
 
         }
 
