@@ -1,5 +1,6 @@
 ﻿using System;
 using NW.NGramTextClassification.AsciiBanner;
+using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
@@ -49,6 +50,7 @@ namespace NW.NGramTextClassification
         public Action<string> LoggingActionAsciiBanner { get; }
         public IFileManager FileManager { get; }
         public ISerializerFactory SerializerFactory { get; }
+        public IFilenameFactory FilenameFactory { get; }
 
         #endregion
 
@@ -65,7 +67,8 @@ namespace NW.NGramTextClassification
                     IAsciiBannerManager asciiBannerManager,
                     Action<string> loggingActionAsciiBanner,
                     IFileManager fileManager,
-                    ISerializerFactory serializerFactory)
+                    ISerializerFactory serializerFactory,
+                    IFilenameFactory filenameFactory)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -78,6 +81,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
             Validator.ValidateObject(fileManager, nameof(fileManager));
             Validator.ValidateObject(serializerFactory, nameof(serializerFactory));
+            Validator.ValidateObject(filenameFactory, nameof(filenameFactory));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -89,6 +93,7 @@ namespace NW.NGramTextClassification
             LoggingActionAsciiBanner = loggingActionAsciiBanner;
             FileManager = fileManager;
             SerializerFactory = serializerFactory;
+            FilenameFactory = filenameFactory;
 
         }
 
@@ -104,7 +109,8 @@ namespace NW.NGramTextClassification
                   asciiBannerManager: new AsciiBannerManager(),
                   loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
                   fileManager: new FileManager(),
-                  serializerFactory: new SerializerFactory())
+                  serializerFactory: new SerializerFactory(),
+                  filenameFactory: new FilenameFactory())
         { }
 
         #endregion
@@ -117,5 +123,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */
