@@ -13,6 +13,7 @@ using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.UnitTests.Utilities;
 using NUnit.Framework;
+using System.IO;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -1253,6 +1254,100 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.AreEqual(Serializer<TextSnippet>.Default, actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void SaveLabeledExamples_ShouldSaveCollectionOfLabeledExamples_WhenProperArguments()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+
+            Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: FakeNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            string folderPath = Filenames.ObjectMother.FakeFilePath;
+            string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
+            string filePath = Path.Combine(folderPath, fileName);
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToSaveObjectsAs(typeof(LabeledExample), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsSuccessfullySaved(typeof(LabeledExample))
+
+            };
+
+            // Act
+            textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath);
+
+            // Assert
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void SaveTextSnippets_ShouldSaveCollectionOfTextSnippets_WhenProperArguments()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+
+            Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: FakeNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            string folderPath = Filenames.ObjectMother.FakeFilePath;
+            string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
+            string filePath = Path.Combine(folderPath, fileName);
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToSaveObjectsAs(typeof(TextSnippet), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsSuccessfullySaved(typeof(TextSnippet))
+
+            };
+
+            // Act
+            textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath);
+
+            // Assert
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
         }
