@@ -18,6 +18,10 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
         };
         public static string TextSnippetsAsJson_Content = Properties.Resources.TextSnippetsAsJson;
 
+        public static TextSnippet TextSnippet
+            = new TextSnippet(text: "We are looking for several skilled and driven developers to join our team.");
+        public static string TextSnippetAsJson_Content = Properties.Resources.TextSnippetAsJson;
+
         #endregion
 
         #region Methods
@@ -38,5 +42,5 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */

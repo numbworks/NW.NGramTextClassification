@@ -82,6 +82,19 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
         ///   Looks up a localized string similar to [
         ///  {
         ///    &quot;Text&quot;: &quot;We are looking for several skilled and driven developers to join our team.&quot;
+        ///  }
+        ///].
+        /// </summary>
+        public static string TextSnippetAsJson {
+            get {
+                return ResourceManager.GetString("TextSnippetAsJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [
+        ///  {
+        ///    &quot;Text&quot;: &quot;We are looking for several skilled and driven developers to join our team.&quot;
         ///  },
         ///  {
         ///    &quot;Text&quot;: &quot;Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.&quot;

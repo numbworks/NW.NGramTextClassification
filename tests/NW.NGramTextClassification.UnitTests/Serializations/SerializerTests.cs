@@ -18,11 +18,17 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new Serializer<LabeledExample>().SerializeToJson(objects: null)
-                            ),
+                        () => new Serializer<LabeledExample>().SerializeToJson(objects: null)),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("objects").Message
-                ).SetArgDisplayNames($"{nameof(serializeToJsonExceptionTestCases)}_01")
+                ).SetArgDisplayNames($"{nameof(serializeToJsonExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new Serializer<LabeledExample>().SerializeToJson(obj: null)),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("obj").Message
+                ).SetArgDisplayNames($"{nameof(serializeToJsonExceptionTestCases)}_02")
 
         };
         private static TestCaseData[] deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases =
@@ -60,7 +66,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void SerializeToJson_ShouldReturnExpectedString_WhenTypeIsLabeledExample()
+        public void SerializeToJson_ShouldReturnExpectedString_WhenArgumentIsCollectionAndTypeIsLabeledExample()
         {
 
             // Arrange
@@ -76,7 +82,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
         }
 
         [Test]
-        public void SerializeToJson_ShouldReturnExpectedString_WhenTypeIsTextSnippet()
+        public void SerializeToJson_ShouldReturnExpectedString_WhenArgumentIsCollectionAndTypeIsTextSnippet()
         {
 
             // Arrange
@@ -85,6 +91,23 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
             // Act
             string actual = new Serializer<TextSnippet>().SerializeToJson(objects: objects);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+
+
+        [Test]
+        public void SerializeToJson_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsTextSnippet()
+        {
+
+            // Arrange
+            TextSnippet obj = TextSnippets.ObjectMother.TextSnippet;
+            string expected = TextSnippets.ObjectMother.TextSnippetAsJson_Content;
+
+            // Act
+            string actual = new Serializer<TextSnippet>().SerializeToJson(obj: obj);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -152,5 +175,5 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */
