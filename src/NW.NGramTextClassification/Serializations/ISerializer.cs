@@ -8,6 +8,12 @@ namespace NW.NGramTextClassification.Serializations
     {
 
         /// <summary>
+        /// Serializes the provided object of type T to a Json string. 
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        string SerializeToJson(T obj);
+
+        /// <summary>
         /// Serializes the provided collection of objects of type T to a Json string. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
@@ -24,5 +30,5 @@ namespace NW.NGramTextClassification.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */

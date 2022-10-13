@@ -28,6 +28,17 @@ namespace NW.NGramTextClassification.Serializations
 
         #region Methods_public
 
+        public string SerializeToJson(T obj)
+        {
+
+            Validation.Validator.ValidateObject(obj, nameof(obj));
+
+            List<T> objects = new List<T>();
+            objects.Add(obj);
+
+            return SerializeToJson(objects);
+
+        }
         public string SerializeToJson(List<T> objects)
         {
 
@@ -38,6 +49,7 @@ namespace NW.NGramTextClassification.Serializations
             return json;
 
         }
+        
         public List<T> DeserializeFromJsonOrDefault(string json)
         {
 
@@ -84,5 +96,5 @@ namespace NW.NGramTextClassification.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */
