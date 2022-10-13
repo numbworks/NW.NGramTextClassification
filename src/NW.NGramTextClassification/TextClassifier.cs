@@ -120,6 +120,13 @@ namespace NW.NGramTextClassification
         public List<TextSnippet> LoadTextSnippetsOrDefault(string filePath)
             => LoadObjectsOrDefault<TextSnippet>(_components.FileManager.Create(filePath));
 
+        public void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath)
+            => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: DateTime.Now));
+        public void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath)
+            => Save(objects: textSnippets, jsonFile: Create<TextSnippet>(folderPath: folderPath, now: DateTime.Now));
+        public void SaveSession(TextClassifierSession session, string folderPath)
+            => Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: DateTime.Now));
+
         #endregion
 
         #region Methods_private
@@ -475,6 +482,73 @@ namespace NW.NGramTextClassification
             return objects;
 
         }
+        private void Save<T>(List<T> objects, IFileInfoAdapter jsonFile)
+        {
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToSaveObjectsAs(typeof(T), jsonFile));
+
+            try
+            {
+
+                ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
+                string content = serializer.SerializeToJson(objects);
+
+                _components.FileManager.WriteAllText(jsonFile, content);
+
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectsSuccessfullySaved(typeof(T)));
+
+            }
+            catch
+            {
+
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectsFailedToSave(typeof(T)));
+
+            }
+
+        }
+        private void Save<T>(T obj, IFileInfoAdapter jsonFile)
+        {
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToSaveObjectAs(typeof(T), jsonFile));
+
+            try
+            {
+
+                ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
+                string content = serializer.SerializeToJson(obj);
+
+                _components.FileManager.WriteAllText(jsonFile, content);
+
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectSuccessfullySaved(typeof(T)));
+
+            }
+            catch
+            {
+
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectFailedToSave(typeof(T)));
+
+            }
+
+        }
+        private IFileInfoAdapter Create<T>(string folderPath, DateTime now)
+        {
+
+            string filePath;
+
+            if (typeof(T) == typeof(LabeledExample))
+                filePath = _components.FilenameFactory.CreateForLabeledExamplesJson(folderPath: folderPath, now: now);
+            else if (typeof(T) == typeof(TextSnippet))
+                filePath = _components.FilenameFactory.CreateForTextSnippetsJson(folderPath: folderPath, now: now);
+            else if (typeof(T) == typeof(TextClassifierSession))
+                filePath = _components.FilenameFactory.CreateForSessionJson(folderPath: folderPath, now: now);
+            else
+                throw new Exception();
+
+            IFileInfoAdapter jsonFile = new FileInfoAdapter(fileName: filePath);
+
+            return jsonFile;
+
+        }
 
         #endregion
 
@@ -483,5 +557,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */

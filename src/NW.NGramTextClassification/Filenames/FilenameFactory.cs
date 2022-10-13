@@ -32,28 +32,28 @@ namespace NW.NGramTextClassification.Filenames
 
         #region Methods_public
 
-        public string CreateForTextSnippetsJson(string filePath, DateTime now)
-            => ValidateAndCreate(filePath, DefaultMainToken, DefaultTextSnippetsToken, now, DefaultJsonExtension);
-        public string CreateForLabeledExamplesJson(string filePath, DateTime now)
-            => ValidateAndCreate(filePath, DefaultMainToken, DefaultLabeledExamplesToken, now, DefaultJsonExtension);
-        public string CreateForSessionJson(string filePath, DateTime now)
-            => ValidateAndCreate(filePath, DefaultMainToken, DefaultSessionToken, now, DefaultJsonExtension);
+        public string CreateForTextSnippetsJson(string folderPath, DateTime now)
+            => ValidateAndCreate(folderPath, DefaultMainToken, DefaultTextSnippetsToken, now, DefaultJsonExtension);
+        public string CreateForLabeledExamplesJson(string folderPath, DateTime now)
+            => ValidateAndCreate(folderPath, DefaultMainToken, DefaultLabeledExamplesToken, now, DefaultJsonExtension);
+        public string CreateForSessionJson(string folderPath, DateTime now)
+            => ValidateAndCreate(folderPath, DefaultMainToken, DefaultSessionToken, now, DefaultJsonExtension);
 
         #endregion
 
         #region Methods_private
 
-        private string ValidateAndCreate(string filePath, string mainToken, string secondaryToken, DateTime now, string extension)
+        private string ValidateAndCreate(string folderPath, string mainToken, string secondaryToken, DateTime now, string extension)
         {
 
-            Validator.ValidateStringNullOrWhiteSpace(filePath, nameof(filePath));
+            Validator.ValidateStringNullOrWhiteSpace(folderPath, nameof(folderPath));
 
             string template = DefaultFileNameTemplate;
             string nowstring = now.ToString(DefaultFormatNow);
 
             string fileName = string.Format(template, mainToken, secondaryToken, nowstring, extension);
 
-            return Path.Combine(filePath, fileName);
+            return Path.Combine(folderPath, fileName);
 
         }
 
@@ -64,5 +64,5 @@ namespace NW.NGramTextClassification.Filenames
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */

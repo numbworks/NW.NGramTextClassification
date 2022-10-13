@@ -7,27 +7,27 @@ namespace NW.NGramTextClassification.Filenames
     {
 
         /// <summary>
-        /// Returns a dated filename based on <paramref name="filePath"/> and <see cref="FilenameFactory.DefaultLabeledExamplesToken"/>.
+        /// Returns a dated filename based on <paramref name="folderPath"/> and <see cref="FilenameFactory.DefaultLabeledExamplesToken"/>.
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        string CreateForLabeledExamplesJson(string filePath, DateTime now);
+        string CreateForLabeledExamplesJson(string folderPath, DateTime now);
 
         /// <summary>
-        /// Returns a dated filename based on <paramref name="filePath"/> and <see cref="FilenameFactory.DefaultSessionToken"/>.
+        /// Returns a dated filename based on <paramref name="folderPath"/> and <see cref="FilenameFactory.DefaultSessionToken"/>.
         /// </summary>
         /// <exception cref="ArgumentNullException"/>        
-        string CreateForSessionJson(string filePath, DateTime now);
+        string CreateForSessionJson(string folderPath, DateTime now);
 
         /// <summary>
-        /// Returns a dated filename based on <paramref name="filePath"/> and <see cref="FilenameFactory.DefaultTextSnippetsToken"/>.
+        /// Returns a dated filename based on <paramref name="folderPath"/> and <see cref="FilenameFactory.DefaultTextSnippetsToken"/>.
         /// </summary>
         /// <exception cref="ArgumentNullException"/>           
-        string CreateForTextSnippetsJson(string filePath, DateTime now);
+        string CreateForTextSnippetsJson(string folderPath, DateTime now);
     
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */

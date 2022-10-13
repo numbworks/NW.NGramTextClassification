@@ -15,7 +15,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new FilenameFactory().CreateForTextSnippetsJson(filePath: null, now: ObjectMother.FakeNow)
+                    () => new FilenameFactory().CreateForTextSnippetsJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filePath").Message
@@ -23,7 +23,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new FilenameFactory().CreateForLabeledExamplesJson(filePath: null, now: ObjectMother.FakeNow)
+                    () => new FilenameFactory().CreateForLabeledExamplesJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filePath").Message
@@ -31,7 +31,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new FilenameFactory().CreateForSessionJson(filePath: null, now: ObjectMother.FakeNow)
+                    () => new FilenameFactory().CreateForSessionJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filePath").Message
@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                     new Func<string>(
                             () => new FilenameFactory()
                                         .CreateForTextSnippetsJson(
-                                            filePath: ObjectMother.FakeFilePath,
+                                            folderPath: ObjectMother.FakeFilePath,
                                             now: ObjectMother.FakeNow)
                         ),
                     ObjectMother.Filename_TextSnippetsJson
@@ -55,7 +55,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                     new Func<string>(
                             () => new FilenameFactory()
                                         .CreateForLabeledExamplesJson(
-                                            filePath: ObjectMother.FakeFilePath,
+                                            folderPath: ObjectMother.FakeFilePath,
                                             now: ObjectMother.FakeNow)
                         ),
                     ObjectMother.Filename_LabeledExamplesJson
@@ -65,7 +65,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                     new Func<string>(
                             () => new FilenameFactory()
                                         .CreateForSessionJson(
-                                            filePath: ObjectMother.FakeFilePath,
+                                            folderPath: ObjectMother.FakeFilePath,
                                             now: ObjectMother.FakeNow)
                         ),
                     ObjectMother.Filename_SessionJson

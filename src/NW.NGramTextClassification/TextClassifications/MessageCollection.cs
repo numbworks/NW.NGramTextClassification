@@ -81,7 +81,21 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<Type, string> ObjectsSuccessfullyLoaded =
             (type) => $"A collection of '{type}' objects has been successfully loaded.";
         public static Func<Type, string> ObjectsFailedToLoad =
-            (type) => $"A collection of '{type}' objects failed to load. Default value is returned";
+            (type) => $"A collection of '{type}' objects failed to load. Default value is returned.";
+
+        public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectsAs =
+            (type, jsonFile) => $"Attempting to save the provided collection of '{type}' objects as: {jsonFile.FullName}.";
+        public static Func<Type, string> ObjectsSuccessfullySaved =
+            (type) => $"The provided collection of '{type}' objects has been successfully saved.";
+        public static Func<Type, string> ObjectsFailedToSave =
+            (type) => $"The provided collection of '{type}' objects failed to save.";
+
+        public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectAs =
+            (type, jsonFile) => $"Attempting to save the provided '{type}' object as: {jsonFile.FullName}.";
+        public static Func<Type, string> ObjectSuccessfullySaved =
+            (type) => $"The provided '{type}' object has been successfully saved.";
+        public static Func<Type, string> ObjectFailedToSave =
+            (type) => $"The provided '{type}' object failed to save.";
 
         #endregion
 
@@ -106,5 +120,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13.10.2022
 */
