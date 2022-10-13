@@ -18,7 +18,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                     () => new FilenameFactory().CreateForTextSnippetsJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("filePath").Message
+                new ArgumentNullException("folderPath").Message
             ).SetArgDisplayNames($"{nameof(createMethodExceptionTestCases)}_01"),
 
             new TestCaseData(
@@ -26,7 +26,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                     () => new FilenameFactory().CreateForLabeledExamplesJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("filePath").Message
+                new ArgumentNullException("folderPath").Message
             ).SetArgDisplayNames($"{nameof(createMethodExceptionTestCases)}_02"),
 
             new TestCaseData(
@@ -34,7 +34,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                     () => new FilenameFactory().CreateForSessionJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("filePath").Message
+                new ArgumentNullException("folderPath").Message
             ).SetArgDisplayNames($"{nameof(createMethodExceptionTestCases)}_03")
 
         };

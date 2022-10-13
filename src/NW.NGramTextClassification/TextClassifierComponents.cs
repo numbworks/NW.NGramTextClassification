@@ -39,6 +39,7 @@ namespace NW.NGramTextClassification
             = (message) => Console.WriteLine($"[{DateTime.UtcNow.ToString(DefaultLoggingActionDateFormat)}] {message}");
         public static Action<string> DefaultLoggingActionAsciiBanner { get; }
             = (message) => Console.WriteLine($"{message}");
+        public static Func<DateTime> DefaultNowFunction { get; } = () => DateTime.Now;
 
         public INGramTokenizer NGramsTokenizer { get; }
         public ISimilarityIndexCalculator SimilarityIndexCalculator { get; }
@@ -51,6 +52,7 @@ namespace NW.NGramTextClassification
         public IFileManager FileManager { get; }
         public ISerializerFactory SerializerFactory { get; }
         public IFilenameFactory FilenameFactory { get; }
+        public Func<DateTime> NowFunction { get; }
 
         #endregion
 
@@ -68,7 +70,8 @@ namespace NW.NGramTextClassification
                     Action<string> loggingActionAsciiBanner,
                     IFileManager fileManager,
                     ISerializerFactory serializerFactory,
-                    IFilenameFactory filenameFactory)
+                    IFilenameFactory filenameFactory,
+                    Func<DateTime> nowFunction)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -82,6 +85,7 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(fileManager, nameof(fileManager));
             Validator.ValidateObject(serializerFactory, nameof(serializerFactory));
             Validator.ValidateObject(filenameFactory, nameof(filenameFactory));
+            Validator.ValidateObject(nowFunction, nameof(nowFunction));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -94,6 +98,7 @@ namespace NW.NGramTextClassification
             FileManager = fileManager;
             SerializerFactory = serializerFactory;
             FilenameFactory = filenameFactory;
+            NowFunction = nowFunction;
 
         }
 
@@ -110,7 +115,8 @@ namespace NW.NGramTextClassification
                   loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
                   fileManager: new FileManager(),
                   serializerFactory: new SerializerFactory(),
-                  filenameFactory: new FilenameFactory())
+                  filenameFactory: new FilenameFactory(),
+                  nowFunction: DefaultNowFunction)
         { }
 
         #endregion
