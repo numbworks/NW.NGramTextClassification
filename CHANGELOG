@@ -2,6 +2,7 @@ v3.5.0 - BREAKING CHANGES
 - Feature: TextClassifier, added support for the classification of a collection of snippets of texts.
 - Feature: TextClassifierSettings, added support for Minimum Accuracy* fields.
 - Feature: Added support for "Files" namespace.
+- Feature: Added support for "Filenames" namespace.
 - Feature: Added the possibility to load labeled examples using JSON format.
 - Feature: Added the possibility to load text snippets using JSON format.
 
