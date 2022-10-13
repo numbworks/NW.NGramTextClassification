@@ -542,7 +542,7 @@ namespace NW.NGramTextClassification
             else if (typeof(T) == typeof(TextClassifierSession))
                 filePath = _components.FilenameFactory.CreateForSessionJson(folderPath: folderPath, now: now);
             else
-                throw new Exception();
+                throw new Exception(TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(T)));
 
             IFileInfoAdapter jsonFile = new FileInfoAdapter(fileName: filePath);
 

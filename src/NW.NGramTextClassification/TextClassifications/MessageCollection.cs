@@ -5,7 +5,6 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
@@ -96,6 +95,9 @@ namespace NW.NGramTextClassification.TextClassifications
             (type) => $"The provided '{type}' object has been successfully saved.";
         public static Func<Type, string> ObjectFailedToSave =
             (type) => $"The provided '{type}' object failed to save.";
+
+        public static Func<Type, string> ThereIsNoStrategyOutOfType =
+             (type) => $"There is no built-in strategy to create a filename out of a '{type}' object.";
 
         #endregion
 
