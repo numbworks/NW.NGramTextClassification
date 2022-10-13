@@ -121,11 +121,11 @@ namespace NW.NGramTextClassification
             => LoadObjectsOrDefault<TextSnippet>(_components.FileManager.Create(filePath));
 
         public void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath)
-            => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: DateTime.Now));
+            => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _components.NowFunction()));
         public void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath)
-            => Save(objects: textSnippets, jsonFile: Create<TextSnippet>(folderPath: folderPath, now: DateTime.Now));
+            => Save(objects: textSnippets, jsonFile: Create<TextSnippet>(folderPath: folderPath, now: _components.NowFunction()));
         public void SaveSession(TextClassifierSession session, string folderPath)
-            => Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: DateTime.Now));
+            => Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _components.NowFunction()));
 
         #endregion
 
