@@ -84,10 +84,28 @@ namespace NW.NGramTextClassification
         /// <exception cref="ArgumentException"/>   
         List<TextSnippet> LoadTextSnippetsOrDefault(string filePath);
 
+        /// <summary>
+        /// Saves the provided collection of <see cref="LabeledExample"/> objects as JSON into <paramref name="folderPath"/>. 
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath);
+
+        /// <summary>
+        /// Saves the provided collection of <see cref="TextSnippet"/> objects as JSON into <paramref name="folderPath"/>. 
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath);
+
+        /// <summary>
+        /// Saves the provided <see cref="TextClassifierSession"/> object as JSON into <paramref name="folderPath"/>. 
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        void SaveSession(TextClassifierSession session, string folderPath);
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 13+.10.2022
 */
