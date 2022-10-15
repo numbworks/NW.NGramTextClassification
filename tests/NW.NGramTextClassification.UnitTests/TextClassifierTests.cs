@@ -1403,6 +1403,55 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void SaveTextSnippets_ShouldLogExpectedMessage_WhenWriteAllTextThrowsException()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+
+            Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManagerThrowingWriteExceptions(
+                                                content: LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content,
+                                                writeExceptionMessage: "A random write-to-disk issue."),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: FakeNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            string folderPath = Filenames.ObjectMother.FakeFilePath;
+            string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
+            string filePath = Path.Combine(folderPath, fileName);
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToSaveObjectsAs(typeof(TextSnippet), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectsFailedToSave(typeof(TextSnippet))
+
+            };
+
+            // Act
+            textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath);
+
+            // Assert
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
 
         [Test]
         public void Create_ShouldThrowExpectedException_WhenProvidedTypeIsNotSupported()
