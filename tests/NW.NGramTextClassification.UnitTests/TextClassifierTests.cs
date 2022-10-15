@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassification.Files;
@@ -13,7 +15,6 @@ using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.UnitTests.Utilities;
 using NUnit.Framework;
-using System.IO;
 
 namespace NW.NGramTextClassification.UnitTests
 {
@@ -1352,6 +1353,40 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+
+        [Test]
+        public void Create_ShouldThrowExpectedException_WhenProvidedTypeIsNotSupported()
+        {
+
+            // Arrange
+            TextClassifier textClassifier = new TextClassifier();
+
+            try
+            {
+
+                // Act
+                IFileInfoAdapter actual
+                    = ObjectMother.CallPrivateGenericMethod<TextClassifier, IFileInfoAdapter>(
+                            obj: textClassifier,
+                            methodName: "Create",
+                            args: new object[] { @"C:\", DateTime.Now },
+                            methodType: typeof(Monogram) // "Monogram" is a not supported type.
+                        );
+
+            }
+            catch(TargetInvocationException e)
+            {
+
+                // Assert
+                Assert.IsInstanceOf<Exception>(e.InnerException);
+                Assert.AreEqual(
+                    NGramTextClassification.TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(Monogram)),
+                    e.InnerException.Message);
+
+            }
+
+        }
+
         #endregion
 
         #region TearDown
@@ -1394,5 +1429,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13.10.2022
+    Last Update: 15.10.2022
 */

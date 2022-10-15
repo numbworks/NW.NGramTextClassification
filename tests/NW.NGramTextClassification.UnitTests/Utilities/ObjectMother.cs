@@ -18,6 +18,16 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
             return (TReturn)type.GetTypeInfo().GetDeclaredMethod(methodName).Invoke(obj, args);
 
         }
+        public static TReturn CallPrivateGenericMethod<TClass, TReturn>(TClass obj, string methodName, object[] args, Type methodType)
+        {
+
+            MethodInfo methodInfo = obj.GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
+            var genericMethod = methodInfo.MakeGenericMethod(methodType);
+
+            return (TReturn)genericMethod.Invoke(obj, args);
+
+        }
+
         public static void Method_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
         {
@@ -56,5 +66,5 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 15.10.2022
 */
