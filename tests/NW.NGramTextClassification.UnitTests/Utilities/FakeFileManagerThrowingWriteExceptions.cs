@@ -44,9 +44,9 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
             => new FakeFileInfoAdapter(true, fileInfo.FullName);
 
         public void WriteAllLines(IFileInfoAdapter file, IEnumerable<string> content)
-            => new Exception(WriteExceptionMessage);
+            => throw new Exception(WriteExceptionMessage);
         public void WriteAllText(IFileInfoAdapter file, string content)
-            => new Exception(WriteExceptionMessage);
+            => throw new Exception(WriteExceptionMessage);
 
         #endregion
 
