@@ -65,7 +65,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             = new TextClassifierSession(
                     settings: new TextClassifierSettings(),
                     results: TextClassifierResults_CompleteLabeledExamples00,
-                    version: new TextClassifier().Version
+                    version: "3.5.0.0"
                 );
 
         #endregion
@@ -101,5 +101,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update: 16.10.2022
 */
