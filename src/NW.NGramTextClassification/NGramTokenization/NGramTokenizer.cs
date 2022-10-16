@@ -23,6 +23,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         public static IArrayManager DefaultArrayManager { get; } = new ArrayManager();
         public static ITokenizationStrategy DefaultTokenizationStrategy { get; } = new TokenizationStrategy();
+        public static List<INGram> DefaultNGrams { get; } = null;
 
         #endregion
 
@@ -165,7 +166,7 @@ namespace NW.NGramTextClassification.NGramTokenization
             }
 
             if (ngrams.Count == 0)
-                return null;
+                return DefaultNGrams;
 
             return ngrams;
 
@@ -283,5 +284,5 @@ namespace NW.NGramTextClassification.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 16.10.2022
 */

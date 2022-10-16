@@ -113,7 +113,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
         }
 
         [Test]
-        public void DoForRuleSetOrDefault_ShouldReturnNullInsteadOfALabeledExample_WhenUnproperParameters()
+        public void DoForRuleSetOrDefault_ShouldReturnDefault_WhenUnproperParameters()
         {
 
             // Arrange
@@ -128,7 +128,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                         );
 
             // Assert
-            Assert.IsNull(actual);
+            Assert.IsTrue(
+                    NGrams.ObjectMother.AreEqual(NGramTokenizer.DefaultNGrams, actual)
+                );
 
         }
 
