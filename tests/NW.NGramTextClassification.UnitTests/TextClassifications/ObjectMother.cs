@@ -60,6 +60,14 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                 version: new TextClassifier().Version
                 );
 
+        public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
+        public static TextClassifierSession TextClassifierSession_CompleteLabeledExamples00
+            = new TextClassifierSession(
+                    settings: new TextClassifierSettings(),
+                    results: TextClassifierResults_CompleteLabeledExamples00,
+                    version: new TextClassifier().Version
+                );
+
         #endregion
 
         #region Methods

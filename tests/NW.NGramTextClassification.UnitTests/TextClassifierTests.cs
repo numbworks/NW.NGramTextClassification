@@ -1259,6 +1259,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+
         [Test]
         public void SaveLabeledExamples_ShouldSaveCollectionOfLabeledExamples_WhenProperArguments()
         {
@@ -1347,6 +1348,53 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath);
+
+            // Assert
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void SaveSession_ShouldSaveSession_WhenProperArguments()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+
+            Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager(TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: FakeNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            string folderPath = Filenames.ObjectMother.FakeFilePath;
+            string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
+            string filePath = Path.Combine(folderPath, fileName);
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToSaveObjectAs(typeof(TextClassifierSession), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectSuccessfullySaved(typeof(TextClassifierSession))
+
+            };
+
+            // Act
+            textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath);
 
             // Assert
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
@@ -1528,5 +1576,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 15.10.2022
+    Last Update: 16.10.2022
 */
