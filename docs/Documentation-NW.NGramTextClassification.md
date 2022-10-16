@@ -9,8 +9,8 @@ Contact: numbworks@gmail.com
 | 2021-01-30 | numbworks | Added examples, re-organized the document. |
 | 2021-02-15 | numbworks | Completed "Example 1: Main Scenario". |
 | 2021-09-24 | numbworks | Version numbers removed, updated examples for v2.0.0. |
-| 2022-09-24 | numbworks | Updated to v3.0.0. |
-| 2022-10-02 | numbworks | Updated to v3.5.0. |
+| 2022-09-27 | numbworks | Updated to v3.0.0. |
+| 2022-10-16 | numbworks | Updated to v3.5.0. |
 
 ## Introduction
 
