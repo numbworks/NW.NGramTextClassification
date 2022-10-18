@@ -13,42 +13,42 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
         #region Fields
 
-        private static TestCaseData[] serializeToJsonExceptionTestCases =
+        private static TestCaseData[] serializeExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new Serializer<LabeledExample>().SerializeToJson(objects: null)),
+                        () => new Serializer<LabeledExample>().Serialize(objects: null)),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("objects").Message
-                ).SetArgDisplayNames($"{nameof(serializeToJsonExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(serializeExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new Serializer<LabeledExample>().SerializeToJson(obj: null)),
+                        () => new Serializer<LabeledExample>().Serialize(obj: null)),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("obj").Message
-                ).SetArgDisplayNames($"{nameof(serializeToJsonExceptionTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(serializeExceptionTestCases)}_02")
 
         };
-        private static TestCaseData[] deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases =
+        private static TestCaseData[] deserializeManyOrDefaultWhenUnproperArgumentTestCases =
         {
 
             new TestCaseData(
                     "Unproper Json content"
-                ).SetArgDisplayNames($"{nameof(deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases)}_01"),
 
             new TestCaseData(
                     string.Empty
-                ).SetArgDisplayNames($"{nameof(deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases)}_02"),
 
             new TestCaseData(
                     null
-                ).SetArgDisplayNames($"{nameof(deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases)}_03"),
+                ).SetArgDisplayNames($"{nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases)}_03"),
 
             new TestCaseData(
                     "[]"
-                ).SetArgDisplayNames($"{nameof(deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases)}_04")
+                ).SetArgDisplayNames($"{nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases)}_04")
 
         };
 
@@ -60,13 +60,13 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
         #region Tests
 
-        [TestCaseSource(nameof(serializeToJsonExceptionTestCases))]
-        public void SerializeToJson_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(serializeExceptionTestCases))]
+        public void Serialize_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void SerializeToJson_ShouldReturnExpectedString_WhenArgumentIsCollectionAndTypeIsLabeledExample()
+        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsCollectionAndTypeIsLabeledExample()
         {
 
             // Arrange
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string expected = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content;
 
             // Act
-            string actual = new Serializer<LabeledExample>().SerializeToJson(objects: objects);
+            string actual = new Serializer<LabeledExample>().Serialize(objects: objects);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -82,7 +82,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
         }
 
         [Test]
-        public void SerializeToJson_ShouldReturnExpectedString_WhenArgumentIsCollectionAndTypeIsTextSnippet()
+        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsCollectionAndTypeIsTextSnippet()
         {
 
             // Arrange
@@ -90,7 +90,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string expected = TextSnippets.ObjectMother.TextSnippetsAsJson_Content;
 
             // Act
-            string actual = new Serializer<TextSnippet>().SerializeToJson(objects: objects);
+            string actual = new Serializer<TextSnippet>().Serialize(objects: objects);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -99,7 +99,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 
         [Test]
-        public void SerializeToJson_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsTextSnippet()
+        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsTextSnippet()
         {
 
             // Arrange
@@ -107,7 +107,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string expected = TextSnippets.ObjectMother.TextSnippetAsJson_Content;
 
             // Act
-            string actual = new Serializer<TextSnippet>().SerializeToJson(obj: obj);
+            string actual = new Serializer<TextSnippet>().Serialize(obj: obj);
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -115,13 +115,13 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
         }
 
 
-        [TestCaseSource(nameof(deserializeFromJsonOrDefaultWhenUnproperArgumentTestCases))]
-        public void DeserializeFromJsonOrDefault_ShouldReturnDefault_WhenTypeIsLabeledExample(string json)
+        [TestCaseSource(nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases))]
+        public void DeserializeManyOrDefault_ShouldReturnDefault_WhenTypeIsLabeledExample(string json)
         {
 
             // Arrange
             // Act
-            List<LabeledExample> actual = new Serializer<LabeledExample>().DeserializeFromJsonOrDefault(json: json);
+            List<LabeledExample> actual = new Serializer<LabeledExample>().DeserializeManyOrDefault(json: json);
 
             // Assert
             Assert.AreEqual(Serializer<LabeledExample>.Default, actual);
@@ -129,7 +129,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
         }
 
         [Test]
-        public void DeserializeFromJsonOrDefault_ShouldReturnExpectedCollectionOfObjects_WhenTypeIsLabeledExample()
+        public void DeserializeManyOrDefault_ShouldReturnExpectedCollectionOfObjects_WhenTypeIsLabeledExample()
         {
 
             // Arrange
@@ -137,7 +137,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             List<LabeledExample> expected = LabeledExamples.ObjectMother.ShortLabeledExamples;
 
             // Act
-            List<LabeledExample> actual = new Serializer<LabeledExample>().DeserializeFromJsonOrDefault(json: json);
+            List<LabeledExample> actual = new Serializer<LabeledExample>().DeserializeManyOrDefault(json: json);
 
             // Assert
             Assert.IsTrue(
@@ -147,7 +147,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
         }
 
         [Test]
-        public void DeserializeFromJsonOrDefault_ShouldReturnExpectedCollectionOfObjects_WhenTypeIsTextSnippet()
+        public void DeserializeManyOrDefault_ShouldReturnExpectedCollectionOfObjects_WhenTypeIsTextSnippet()
         {
 
             // Arrange
@@ -155,7 +155,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             List<TextSnippet> expected = TextSnippets.ObjectMother.TextSnippets;
 
             // Act
-            List<TextSnippet> actual = new Serializer<TextSnippet>().DeserializeFromJsonOrDefault(json: json);
+            List<TextSnippet> actual = new Serializer<TextSnippet>().DeserializeManyOrDefault(json: json);
 
             // Assert
             Assert.IsTrue(
@@ -175,5 +175,5 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13.10.2022
+    Last Update: 18.10.2022
 */

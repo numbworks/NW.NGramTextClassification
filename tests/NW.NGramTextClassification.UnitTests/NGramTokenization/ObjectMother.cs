@@ -38,10 +38,25 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 
         #endregion
 
+        #region Methods
+
+        public static bool AreEqual(NGramTokenizerRuleSet obj1, NGramTokenizerRuleSet obj2)
+        {
+
+            return Equals(obj1.DoForMonogram, obj2.DoForMonogram)
+                    && Equals(obj1.DoForBigram, obj2.DoForBigram)
+                    && Equals(obj1.DoForTrigram, obj2.DoForTrigram)
+                    && Equals(obj1.DoForFourgram, obj2.DoForFourgram)
+                    && Equals(obj1.DoForFivegram, obj2.DoForFivegram);
+
+        }
+
+        #endregion
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 18.10.2022
 */

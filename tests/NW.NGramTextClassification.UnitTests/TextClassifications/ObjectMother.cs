@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
+using NW.NGramTextClassification.NGramTokenization;
 
 namespace NW.NGramTextClassification.UnitTests.TextClassifications
 {
@@ -67,6 +68,16 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     results: TextClassifierResults_CompleteLabeledExamples00,
                     version: "3.5.0.0"
                 );
+
+        public static string TokenizerRuleSetAsJson_Content = Properties.Resources.TokenizerRuleSetAsJson;
+        public static NGramTokenizerRuleSet TokenizerRuleSet
+            = new NGramTokenizerRuleSet(
+                    doForMonogram: true,
+                    doForBigram: true,
+                    doForTrigram: true,
+                    doForFourgram: true,
+                    doForFivegram: true
+                    );
 
         #endregion
 

@@ -11,24 +11,30 @@ namespace NW.NGramTextClassification.Serializations
         /// Serializes the provided object of type T to a Json string. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        string SerializeToJson(T obj);
+        string Serialize(T obj);
 
         /// <summary>
         /// Serializes the provided collection of objects of type T to a Json string. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        string SerializeToJson(List<T> objects);
+        string Serialize(List<T> objects);
 
         /// <summary>
         /// Deserializes the provided Json string to a collection of objects of type T. 
         /// <para>If <paramref name="json"/> is null/empty/invalid or an exception is thrown, <see cref="Serializer{T}.Default"/> will be returned.</para>
         /// </summary>
-        List<T> DeserializeFromJsonOrDefault(string json);
+        List<T> DeserializeManyOrDefault(string json);
+
+        /// <summary>
+        /// Deserializes the provided Json string to an object of type T. 
+        /// <para>If <paramref name="json"/> is null/empty/invalid or an exception is thrown, default of T will be returned.</para>
+        /// </summary>
+        T DeserializeOrDefault(string json);
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13.10.2022
+    Last Update: 18.10.2022
 */

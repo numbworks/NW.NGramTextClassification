@@ -28,7 +28,7 @@ namespace NW.NGramTextClassification.Serializations
 
         #region Methods_public
 
-        public string SerializeToJson(T obj)
+        public string Serialize(T obj)
         {
 
             Validation.Validator.ValidateObject(obj, nameof(obj));
@@ -36,10 +36,10 @@ namespace NW.NGramTextClassification.Serializations
             List<T> objects = new List<T>();
             objects.Add(obj);
 
-            return SerializeToJson(objects);
+            return Serialize(objects);
 
         }
-        public string SerializeToJson(List<T> objects)
+        public string Serialize(List<T> objects)
         {
 
             Validation.Validator.ValidateList(objects, nameof(objects));
@@ -50,7 +50,7 @@ namespace NW.NGramTextClassification.Serializations
 
         }
         
-        public List<T> DeserializeFromJsonOrDefault(string json)
+        public List<T> DeserializeManyOrDefault(string json)
         {
 
             try
@@ -68,6 +68,25 @@ namespace NW.NGramTextClassification.Serializations
             {
 
                 return Default;
+
+            }
+
+        }
+        public T DeserializeOrDefault(string json)
+        {
+
+            try
+            {
+
+                T obj = JsonSerializer.Deserialize<T>(json, CreateJsonSerializerOptions());
+
+                return obj;
+
+            }
+            catch
+            {
+
+                return default(T);
 
             }
 
@@ -96,5 +115,5 @@ namespace NW.NGramTextClassification.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13.10.2022
+    Last Update: 18.10.2022
 */

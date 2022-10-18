@@ -82,6 +82,13 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<Type, string> ObjectsFailedToLoad =
             (type) => $"A collection of '{type}' objects failed to load. Default value is returned.";
 
+        public static Func<Type, IFileInfoAdapter, string> AttemptingToLoadObjectFrom =
+            (type, jsonFile) => $"Attempting to load a '{type}' object from: {jsonFile.FullName}.";
+        public static Func<Type, string> ObjectSuccessfullyLoaded =
+            (type) => $"A '{type}' object has been successfully loaded.";
+        public static Func<Type, string> ObjectFailedToLoad =
+            (type) => $"A '{type}' object failed to load. Default value is returned.";
+
         public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectsAs =
             (type, jsonFile) => $"Attempting to save the provided collection of '{type}' objects as: {jsonFile.FullName}.";
         public static Func<Type, string> ObjectsSuccessfullySaved =
@@ -122,5 +129,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13.10.2022
+    Last Update: 18.10.2022
 */

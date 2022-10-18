@@ -113,11 +113,11 @@ namespace NW.NGramTextClassification
             => _components.FileManager.Create(filePath);
 
         public List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile)
-            => LoadObjectsOrDefault<LabeledExample>(jsonFile);
+            => LoadManyOrDefault<LabeledExample>(jsonFile);
         public List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile)
-            => LoadObjectsOrDefault<TextSnippet>(jsonFile);
-        public List<NGramTokenizerRuleSet> LoadTokenizerRulesetOrDefault(IFileInfoAdapter jsonFile)
-            => LoadObjectsOrDefault<NGramTokenizerRuleSet>(jsonFile);
+            => LoadManyOrDefault<TextSnippet>(jsonFile);
+        public NGramTokenizerRuleSet LoadTokenizerRuleSetOrDefault(IFileInfoAdapter jsonFile)
+            => LoadOrDefault<NGramTokenizerRuleSet>(jsonFile);
 
         public void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath)
             => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _components.NowFunction()));
@@ -460,7 +460,7 @@ namespace NW.NGramTextClassification
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
             => indexAverages.OrderByDescending(Item => Item.Value).ToList();
 
-        private List<T> LoadObjectsOrDefault<T>(IFileInfoAdapter jsonFile)
+        private List<T> LoadManyOrDefault<T>(IFileInfoAdapter jsonFile)
         {
 
             Validator.ValidateObject(jsonFile, nameof(jsonFile));
@@ -471,7 +471,7 @@ namespace NW.NGramTextClassification
             string content = _components.FileManager.ReadAllText(jsonFile);
 
             ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
-            List<T> objects = serializer.DeserializeFromJsonOrDefault(content);
+            List<T> objects = serializer.DeserializeManyOrDefault(content);
 
             if (objects == Serializer<T>.Default)
                 _components.LoggingAction(TextClassifications.MessageCollection.ObjectsFailedToLoad(typeof(T)));
@@ -479,6 +479,27 @@ namespace NW.NGramTextClassification
                 _components.LoggingAction(TextClassifications.MessageCollection.ObjectsSuccessfullyLoaded(typeof(T)));
 
             return objects;
+
+        }
+        private T LoadOrDefault<T>(IFileInfoAdapter jsonFile)
+        {
+
+            Validator.ValidateObject(jsonFile, nameof(jsonFile));
+            Validator.ValidateFileExistance(jsonFile);
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadObjectFrom(typeof(T), jsonFile));
+
+            string content = _components.FileManager.ReadAllText(jsonFile);
+
+            ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
+            T obj = serializer.DeserializeOrDefault(content);
+
+            if (EqualityComparer<T>.Default.Equals(obj, default(T)))
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectFailedToLoad(typeof(T)));
+            else
+                _components.LoggingAction(TextClassifications.MessageCollection.ObjectSuccessfullyLoaded(typeof(T)));
+
+            return obj;
 
         }
         private void Save<T>(List<T> objects, IFileInfoAdapter jsonFile)
@@ -490,7 +511,7 @@ namespace NW.NGramTextClassification
             {
 
                 ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
-                string content = serializer.SerializeToJson(objects);
+                string content = serializer.Serialize(objects);
 
                 _components.FileManager.WriteAllText(jsonFile, content);
 
@@ -514,7 +535,7 @@ namespace NW.NGramTextClassification
             {
 
                 ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
-                string content = serializer.SerializeToJson(obj);
+                string content = serializer.Serialize(obj);
 
                 _components.FileManager.WriteAllText(jsonFile, content);
 

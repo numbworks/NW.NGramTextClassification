@@ -123,5 +123,20 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
                 return ResourceManager.GetString("TextSnippetsAsJson", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///    &quot;DoForMonogram&quot;: true,
+        ///    &quot;DoForBigram&quot;: true,
+        ///    &quot;DoForTrigram&quot;: true,
+        ///    &quot;DoForFourgram&quot;: true,
+        ///    &quot;DoForFivegram&quot;: true
+        ///}.
+        /// </summary>
+        public static string TokenizerRuleSetAsJson {
+            get {
+                return ResourceManager.GetString("TokenizerRuleSetAsJson", resourceCulture);
+            }
+        }
     }
 }

@@ -307,24 +307,24 @@ namespace NW.NGramTextClassification.UnitTests
             ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02")
 
         };
-        private static TestCaseData[] loadTokenizerRulesetOrDefaultExceptionTestCases =
+        private static TestCaseData[] loadTokenizerRuleSetOrDefaultExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTokenizerRulesetOrDefault(jsonFile: (IFileInfoAdapter)null)
+                        () => new TextClassifier().LoadTokenizerRuleSetOrDefault(jsonFile: (IFileInfoAdapter)null)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("jsonFile").Message
-            ).SetArgDisplayNames($"{nameof(loadTokenizerRulesetOrDefaultExceptionTestCases)}_01"),
+            ).SetArgDisplayNames($"{nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTokenizerRulesetOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadTokenizerRuleSetOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
                     ),
                 typeof(ArgumentException),
                 NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
-            ).SetArgDisplayNames($"{nameof(loadTokenizerRulesetOrDefaultExceptionTestCases)}_02")
+            ).SetArgDisplayNames($"{nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases)}_02")
 
         };
         private static TestCaseData[] convertExceptionTestCases =
@@ -1276,11 +1276,94 @@ namespace NW.NGramTextClassification.UnitTests
         }
 
 
-        [TestCaseSource(nameof(loadTokenizerRulesetOrDefaultExceptionTestCases))]
-        public void LoadTokenizerRulesetOrDefault_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases))]
+        public void LoadTokenizerRuleSetOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [Test]
+        public void LoadTokenizerRuleSetOrDefault_ShouldReturnExpectedTokenizerRuleSet_WhenProperJsonFileContent()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager(TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadObjectFrom(typeof(NGramTokenizerRuleSet), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectSuccessfullyLoaded(typeof(NGramTokenizerRuleSet))
+
+            };
+
+            // Act
+            NGramTokenizerRuleSet actual = textClassifier.LoadTokenizerRuleSetOrDefault(fakeJsonFile);
+
+            // Assert
+            Assert.IsTrue(
+                    NGramTokenization.ObjectMother.AreEqual(TextClassifications.ObjectMother.TokenizerRuleSet, actual)
+                );
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
+        [Test]
+        public void LoadTokenizerRuleSetOrDefault_ShouldReturnDefault_WhenUnproperJsonFileContent()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FakeFileManager("Unproper Json content"),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToLoadObjectFrom(typeof(NGramTokenizerRuleSet), fakeJsonFile),
+                NGramTextClassification.TextClassifications.MessageCollection.ObjectFailedToLoad(typeof(NGramTokenizerRuleSet))
+
+            };
+
+            // Act
+            NGramTokenizerRuleSet actual = textClassifier.LoadTokenizerRuleSetOrDefault(fakeJsonFile);
+
+            // Assert
+            Assert.AreEqual(default(NGramTokenizerRuleSet), actual);
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
 
 
         [Test]
