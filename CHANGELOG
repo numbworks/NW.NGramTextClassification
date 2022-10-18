@@ -5,6 +5,7 @@ v3.5.0 - BREAKING CHANGES
 - Feature: Added support for "Filenames" namespace.
 - Feature: Added the possibility to load and save labeled examples from/as JSON file.
 - Feature: Added the possibility to load and save text snippets from/as JSON file.
+- Feature: Added the possibility to load a NGramTokenizerRuleSet from a JSON file.
 - Feature: Added the possibility to save a TextClassifierSession as JSON file.
 
 v3.0.0 - BREAKING CHANGES
