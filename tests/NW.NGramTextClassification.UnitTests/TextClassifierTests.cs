@@ -307,6 +307,26 @@ namespace NW.NGramTextClassification.UnitTests
             ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02")
 
         };
+        private static TestCaseData[] loadTokenizerRulesetOrDefaultExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier().LoadTokenizerRulesetOrDefault(jsonFile: (IFileInfoAdapter)null)
+                    ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("jsonFile").Message
+            ).SetArgDisplayNames($"{nameof(loadTokenizerRulesetOrDefaultExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier().LoadTokenizerRulesetOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
+                    ),
+                typeof(ArgumentException),
+                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
+            ).SetArgDisplayNames($"{nameof(loadTokenizerRulesetOrDefaultExceptionTestCases)}_02")
+
+        };
         private static TestCaseData[] convertExceptionTestCases =
         {
 
@@ -1254,6 +1274,13 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.AreEqual(expectedLogMessages, actualLogMessages);
 
         }
+
+
+        [TestCaseSource(nameof(loadTokenizerRulesetOrDefaultExceptionTestCases))]
+        public void LoadTokenizerRulesetOrDefault_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
 
 
         [Test]
