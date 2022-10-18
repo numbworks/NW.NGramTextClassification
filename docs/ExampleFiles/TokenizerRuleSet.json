@@ -1,0 +1,7 @@
+{
+    "DoForMonogram": true,
+    "DoForBigram": true,
+    "DoForTrigram": true,
+    "DoForFourgram": true,
+    "DoForFivegram": true
+}
