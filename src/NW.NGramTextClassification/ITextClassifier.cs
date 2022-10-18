@@ -49,8 +49,16 @@ namespace NW.NGramTextClassification
         /// <exception cref="ArgumentException"/>      
         TextClassifierSession ClassifyMany(List<TextSnippet> textSnippets, List<LabeledExample> labeledExamples);
 
-        /// <summary>Logs the library's ascii banner.</summary>
+        /// <summary>
+        /// Logs the library's ascii banner.
+        /// </summary>
         void LogAsciiBanner();
+
+        /// <summary>
+        /// Convert <paramref name="filePath"/> to <see cref="IFileInfoAdapter"/>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        IFileInfoAdapter Convert(string filePath);
 
         /// <summary>
         /// Loads a collection of <see cref="LabeledExample"/> objects from the provided <paramref name="jsonFile"/>. 
@@ -61,14 +69,6 @@ namespace NW.NGramTextClassification
         List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile);
 
         /// <summary>
-        /// Loads a collection of <see cref="LabeledExample"/> objects from the provided <paramref name="filePath"/>. 
-        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{LabeledExample}.Default"/> will be returned.</para>
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>   
-        List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath);
-
-        /// <summary>
         /// Loads a collection of <see cref="TextSnippet"/> objects from the provided <paramref name="jsonFile"/>. 
         /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{TextSnippet}.Default"/> will be returned.</para>
         /// </summary>
@@ -77,12 +77,12 @@ namespace NW.NGramTextClassification
         List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile);
 
         /// <summary>
-        /// Loads a collection of <see cref="TextSnippet"/> objects from the provided <paramref name="filePath"/>. 
-        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{TextSnippet}.Default"/> will be returned.</para>
+        /// Loads a collection of <see cref="NGramTokenizerRuleSet"/> objects from the provided <paramref name="jsonFile"/>. 
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{NGramTokenizerRuleSet}.Default"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>   
-        List<TextSnippet> LoadTextSnippetsOrDefault(string filePath);
+        /// <exception cref="ArgumentException"/>     
+        List<NGramTokenizerRuleSet> LoadTokenizerRulesetOrDefault(IFileInfoAdapter jsonFile);
 
         /// <summary>
         /// Saves the provided collection of <see cref="LabeledExample"/> objects as JSON into <paramref name="folderPath"/>. 
@@ -110,5 +110,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13+.10.2022
+    Last Update: 18.10.2022
 */

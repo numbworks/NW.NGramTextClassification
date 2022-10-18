@@ -284,15 +284,7 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(ArgumentException),
                 NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
-            ).SetArgDisplayNames($"{nameof(loadLabeledExamplesOrDefaultExceptionTestCases)}_02"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifier().LoadLabeledExamplesOrDefault(filePath: (string)null)
-                    ),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("filePath").Message
-            ).SetArgDisplayNames($"{nameof(loadLabeledExamplesOrDefaultExceptionTestCases)}_03")
+            ).SetArgDisplayNames($"{nameof(loadLabeledExamplesOrDefaultExceptionTestCases)}_02")
 
         };
         private static TestCaseData[] loadTextSnippetsOrDefaultExceptionTestCases =
@@ -312,15 +304,19 @@ namespace NW.NGramTextClassification.UnitTests
                     ),
                 typeof(ArgumentException),
                 NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
-            ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02"),
+            ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02")
+
+        };
+        private static TestCaseData[] convertExceptionTestCases =
+        {
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTextSnippetsOrDefault(filePath: (string)null)
+                        () => new TextClassifier().Convert(filePath: null)
                     ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filePath").Message
-            ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_03")
+            ).SetArgDisplayNames($"{nameof(convertExceptionTestCases)}_01")
 
         };
 
@@ -1583,6 +1579,11 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [TestCaseSource(nameof(convertExceptionTestCases))]
+        public void Convert_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         #endregion
 
         #region TearDown
@@ -1625,5 +1626,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 16.10.2022
+    Last Update: 18.10.2022
 */

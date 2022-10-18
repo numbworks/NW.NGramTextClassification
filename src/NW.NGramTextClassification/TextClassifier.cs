@@ -109,16 +109,15 @@ namespace NW.NGramTextClassification
 
         public void LogAsciiBanner()
             => _components.LoggingActionAsciiBanner(AsciiBanner);
+        public IFileInfoAdapter Convert(string filePath)
+            => _components.FileManager.Create(filePath);
 
         public List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile)
             => LoadObjectsOrDefault<LabeledExample>(jsonFile);
-        public List<LabeledExample> LoadLabeledExamplesOrDefault(string filePath)
-            => LoadObjectsOrDefault<LabeledExample>(_components.FileManager.Create(filePath));
-
         public List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile)
             => LoadObjectsOrDefault<TextSnippet>(jsonFile);
-        public List<TextSnippet> LoadTextSnippetsOrDefault(string filePath)
-            => LoadObjectsOrDefault<TextSnippet>(_components.FileManager.Create(filePath));
+        public List<NGramTokenizerRuleSet> LoadTokenizerRulesetOrDefault(IFileInfoAdapter jsonFile)
+            => LoadObjectsOrDefault<NGramTokenizerRuleSet>(jsonFile);
 
         public void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath)
             => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _components.NowFunction()));
@@ -557,5 +556,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 15.10.2022
+    Last Update: 18.10.2022
 */
