@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
+using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.TextSnippets;
 using NUnit.Framework;
@@ -49,6 +50,26 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             new TestCaseData(
                     "[]"
                 ).SetArgDisplayNames($"{nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases)}_04")
+
+        };
+        private static TestCaseData[] deserializeOrDefaultWhenUnproperArgumentTestCases =
+        {
+
+            new TestCaseData(
+                    "Unproper Json content"
+                ).SetArgDisplayNames($"{nameof(deserializeOrDefaultWhenUnproperArgumentTestCases)}_01"),
+
+            new TestCaseData(
+                    string.Empty
+                ).SetArgDisplayNames($"{nameof(deserializeOrDefaultWhenUnproperArgumentTestCases)}_02"),
+
+            new TestCaseData(
+                    null
+                ).SetArgDisplayNames($"{nameof(deserializeOrDefaultWhenUnproperArgumentTestCases)}_03"),
+
+            new TestCaseData(
+                    "[]"
+                ).SetArgDisplayNames($"{nameof(deserializeOrDefaultWhenUnproperArgumentTestCases)}_04")
 
         };
 
@@ -160,6 +181,38 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             // Assert
             Assert.IsTrue(
                     TextSnippets.ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
+
+        [TestCaseSource(nameof(deserializeOrDefaultWhenUnproperArgumentTestCases))]
+        public void DeserializeOrDefault_ShouldReturnDefault_WhenTypeIsNGramTokenizerRuleSet(string json)
+        {
+
+            // Arrange
+            // Act
+            NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);
+
+            // Assert
+            Assert.AreEqual(default(NGramTokenizerRuleSet), actual);
+
+        }
+
+        [Test]
+        public void DeserializeOrDefault_ShouldReturnExpectedObject_WhenTypeIsNGramTokenizerRuleSet()
+        {
+
+            // Arrange
+            string json = TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content;
+            NGramTokenizerRuleSet expected = TextClassifications.ObjectMother.TokenizerRuleSet;
+
+            // Act
+            NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);
+
+            // Assert
+            Assert.IsTrue(
+                    NGramTokenization.ObjectMother.AreEqual(expected, actual)
                 );
 
         }
