@@ -103,6 +103,8 @@ namespace NW.NGramTextClassificationClient.Shared
 
                 Validator.ValidateObject(classifyData, nameof(classifyData));
 
+                classifyData = Defaultize(classifyData);
+
                 TextClassifierComponents components = new TextClassifierComponents();
                 TextClassifierSettings settings = Create(classifyData);
                 TextClassifier textClassifier = Create(components, settings);
@@ -167,6 +169,23 @@ namespace NW.NGramTextClassificationClient.Shared
         {
 
             components.LoggingActionAsciiBanner(SeparatorLine);
+
+        }
+
+        private ClassifyData Defaultize(ClassifyData classifyData)
+        {
+
+            ClassifyData updated = new ClassifyData(
+                    labeledExamples: classifyData.LabeledExamples,
+                    textSnippets: classifyData.TextSnippets,
+                    folderPath: classifyData.FolderPath ?? TextClassifierSettings.DefaultFolderPath,
+                    tokenizerRuleSet: classifyData.TokenizerRuleSet,
+                    minAccuracySingle: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                    minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                    saveSession: classifyData.SaveSession
+                );
+
+            return updated;
 
         }
 
