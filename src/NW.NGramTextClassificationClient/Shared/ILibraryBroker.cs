@@ -11,14 +11,18 @@ namespace NW.NGramTextClassificationClient.Shared
         /// <returns>Always <see cref="ExitCodes.Success"/></returns>
         int ShowHeader();
 
-        /// <summary>Runs the <c>About</c> command of the CLI application.</summary>
+        /// <summary>Runs the <c>about</c> command of the CLI application.</summary>
         /// <returns>Always <see cref="ExitCodes.Success"/></returns>
         int RunAboutMain();
+
+        /// <summary>Runs the <c>classify</c> sub-command of the CLI application.</summary>
+        /// <returns><see cref="ExitCodes"/></returns>
+        int RunSessionClassify(ClassifyData classifyData);
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 22.10.2022
 */

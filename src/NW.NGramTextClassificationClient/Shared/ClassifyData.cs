@@ -14,10 +14,10 @@ namespace NW.NGramTextClassificationClient.Shared
 
         #region Properties
 
-        public string FolderPath { get; }
         public string LabeledExamples { get; }
         public string TextSnippets { get; }
-        public string TokenizerRuleset { get; }
+        public string FolderPath { get; }
+        public string TokenizerRuleSet { get; }
         public double? MinAccuracySingle { get; }
         public double? MinAccuracyMultiple { get; }
         public bool SaveSession { get; }
@@ -28,27 +28,24 @@ namespace NW.NGramTextClassificationClient.Shared
 
         /// <summary>Initializes a <see cref="ClassifyData"/> instance using default parameters.</summary>	
         public ClassifyData(
-                string folderPath,
                 string labeledExamples,
                 string textSnippets,
-                string tokenizerRuleset,
+                string folderPath,
+                string tokenizerRuleSet,
                 double? minAccuracySingle,
                 double? minAccuracyMultiple,
-                bool? saveSession
+                bool saveSession
             ) 
         {
 
-            FolderPath = folderPath;
             LabeledExamples = labeledExamples;
             TextSnippets = textSnippets;
-            TokenizerRuleset = tokenizerRuleset;
+
+            FolderPath = folderPath;
+            TokenizerRuleSet = tokenizerRuleSet;
             MinAccuracySingle = minAccuracySingle;
             MinAccuracyMultiple = minAccuracyMultiple;
-
-            if (saveSession == null)
-                SaveSession = false;
-            else
-                SaveSession = (bool)saveSession;
+            SaveSession = saveSession;
 
         }
 

@@ -113,7 +113,7 @@ namespace NW.NGramTextClassificationClient.Shared
                 List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(classifyData, textClassifier);
 
                 NGramTokenizerRuleSet tokenizerRuleSet;
-                if (string.IsNullOrWhiteSpace(classifyData.TokenizerRuleset))
+                if (string.IsNullOrWhiteSpace(classifyData.TokenizerRuleSet))
                     tokenizerRuleSet = DefaultTokenizerRuleSet;
                 else
                     tokenizerRuleSet = LoadTokenizerRuleSetOrThrow(classifyData, textClassifier);
@@ -223,12 +223,12 @@ namespace NW.NGramTextClassificationClient.Shared
         private NGramTokenizerRuleSet LoadTokenizerRuleSetOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
         {
 
-            string filePath = Path.Combine(classifyData.FolderPath, classifyData.TokenizerRuleset);
+            string filePath = Path.Combine(classifyData.FolderPath, classifyData.TokenizerRuleSet);
             IFileInfoAdapter file = textClassifier.Convert(filePath);
 
             NGramTokenizerRuleSet tokenizerRuleset = textClassifier.LoadTokenizerRuleSetOrDefault(file);
             if (tokenizerRuleset == default(NGramTokenizerRuleSet))
-                throw new Exception(MessageCollection.LoadingFileNameReturnedDefault(classifyData.TokenizerRuleset));
+                throw new Exception(MessageCollection.LoadingFileNameReturnedDefault(classifyData.TokenizerRuleSet));
 
             return tokenizerRuleset;
 

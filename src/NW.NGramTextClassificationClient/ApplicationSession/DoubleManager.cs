@@ -43,6 +43,8 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
             }
 
         }
+        public double Parse(string value)
+            => double.Parse(value);
 
         #endregion
 

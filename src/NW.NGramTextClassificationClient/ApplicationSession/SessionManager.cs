@@ -47,6 +47,7 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
             {
 
                 sessionCommand = AddMain(sessionCommand);
+                sessionCommand = AddClassify(sessionCommand);
 
             });
 
@@ -69,6 +70,45 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                 command.ShowHelp();
 
                 return exitCode;
+
+            });
+
+            return command;
+
+        }
+        private CommandLineApplication AddClassify(CommandLineApplication command)
+        {
+
+            command.Command(Shared.MessageCollection.Session_Classify_Name, subCommand =>
+            {
+
+                subCommand.Description = Shared.MessageCollection.Session_Classify_Description;
+
+                CommandOption labeledExamplesOption = CreateRequiredLabeledExamplesOption(subCommand);
+                CommandOption textSnippetsOption = CreateRequiredTextSnippetsOption(subCommand);
+                CommandOption folderPathOption = CreateOptionalFolderPathOption(subCommand);
+                CommandOption tokenizerRuleSetOption = CreateOptionalTokenizerRuleSetOption(subCommand);
+                CommandOption minAccuracySingleOption = CreateOptionalMinAccuracySingleOption(subCommand);
+                CommandOption minAccuracyMultipleOption = CreateOptionalMinAccuracyMultipleOption(subCommand);
+                CommandOption saveSessionOption = CreateOptionalSaveSessionOption(subCommand);
+
+                subCommand.OnExecute(() =>
+                {
+
+                    ClassifyData classifyData
+                        = new ClassifyData(
+                                labeledExamples: labeledExamplesOption.Value(),
+                                textSnippets: textSnippetsOption.Value(),
+                                folderPath: folderPathOption.Value(),
+                                tokenizerRuleSet: tokenizerRuleSetOption.Value(),
+                                minAccuracySingle: _sessionManagerComponents.DoubleManager.Parse(minAccuracySingleOption.Value()),
+                                minAccuracyMultiple: _sessionManagerComponents.DoubleManager.Parse(minAccuracyMultipleOption.Value()),
+                                saveSession: saveSessionOption.HasValue()
+                        );
+
+                    return _libraryBroker.RunSessionClassify(classifyData);
+
+                });
 
             });
 
@@ -108,6 +148,17 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
             return result;
 
         }
+        private CommandOption CreateOptionalFolderPathOption(CommandLineApplication subCommand)
+        {
+
+            return subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_FolderPath_Template,
+                        Shared.MessageCollection.Session_Option_FolderPath_Description,
+                        CommandOptionType.SingleValue)
+                    .Accepts(validator => validator.ExistingDirectory());
+
+        }
         private CommandOption CreateOptionalTokenizerRuleSetOption(CommandLineApplication subCommand)
         {
 
@@ -119,17 +170,6 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                         CommandOptionType.SingleValue);
 
             return result;
-
-        }
-        private CommandOption CreateOptionalFolderPathOption(CommandLineApplication subCommand)
-        {
-
-            return subCommand
-                    .Option(
-                        Shared.MessageCollection.Session_Option_FolderPath_Template,
-                        Shared.MessageCollection.Session_Option_FolderPath_Description,
-                        CommandOptionType.SingleValue)
-                    .Accepts(validator => validator.ExistingDirectory());
 
         }
         private CommandOption CreateOptionalSaveSessionOption(CommandLineApplication subCommand)
