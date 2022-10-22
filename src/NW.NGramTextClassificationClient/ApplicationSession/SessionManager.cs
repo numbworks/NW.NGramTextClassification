@@ -76,6 +76,51 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
         }
 
+        private CommandOption CreateRequiredLabeledExamplesOption(CommandLineApplication subCommand)
+        {
+
+            CommandOption result
+                = subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_LabeledExamples_Template,
+                        Shared.MessageCollection.Session_Option_LabeledExamples_Description,
+                        CommandOptionType.SingleValue)
+                    .IsRequired(
+                        false,
+                        Shared.MessageCollection.Session_Option_LabeledExamples_ErrorMessage);
+
+            return result;
+
+        }
+        private CommandOption CreateRequiredTextSnippetsOption(CommandLineApplication subCommand)
+        {
+
+            CommandOption result
+                = subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_TextSnippets_Template,
+                        Shared.MessageCollection.Session_Option_TextSnippets_Description,
+                        CommandOptionType.SingleValue)
+                    .IsRequired(
+                        false,
+                        Shared.MessageCollection.Session_Option_TextSnippets_ErrorMessage);
+
+            return result;
+
+        }
+        private CommandOption CreateOptionalTokenizerRuleSetOption(CommandLineApplication subCommand)
+        {
+
+            CommandOption result
+                = subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_TokenizerRuleSet_Template,
+                        Shared.MessageCollection.Session_Option_TokenizerRuleSet_Description,
+                        CommandOptionType.SingleValue);
+
+            return result;
+
+        }
         private CommandOption CreateOptionalFolderPathOption(CommandLineApplication subCommand)
         {
 

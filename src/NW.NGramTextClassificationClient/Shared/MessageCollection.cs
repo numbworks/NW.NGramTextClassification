@@ -39,8 +39,8 @@ namespace NW.NGramTextClassificationClient.Shared
         public static string Session_Option_TextSnippets_ErrorMessage { get; } 
             = $"{Session_Option_TextSnippets_Template} is mandatory.";
 
-        public static string Session_Option_TokenizerRuleset_Template { get; } = "--tokenizerruleset";
-        public static string Session_Option_TokenizerRuleset_Description { get; } 
+        public static string Session_Option_TokenizerRuleSet_Template { get; } = "--tokenizerruleset";
+        public static string Session_Option_TokenizerRuleSet_Description { get; } 
             = $"The filename of the JSON file containing the tokenizer ruleset. The file needs to be stored in the working folder. If not specified, default rules will be used.";
         public static string Session_Option_FolderPath_Template { get; } = "--folderpath";
         public static string Session_Option_FolderPath_Description { get; } 
