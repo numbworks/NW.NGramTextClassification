@@ -1,4 +1,5 @@
 ﻿using NW.NGramTextClassification;
+using NW.NGramTextClassificationClient.ApplicationSession;
 using System;
 
 namespace NW.NGramTextClassificationClient.Shared
@@ -65,6 +66,8 @@ namespace NW.NGramTextClassificationClient.Shared
 
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
+        public static Func<string, string, string> ValueIsInvalidOrNotWithinRange
+            = (name, value) => $"{name} ('{value}') is invalid or not within the expected range ('{nameof(DoubleManager.MininumValue)}':'{DoubleManager.MininumValue}', '{nameof(DoubleManager.MaximumValue)}':'{DoubleManager.MaximumValue}').";
 
         public static string PressAButtonToCloseTheWindow = "Press a button to close the window.";
 

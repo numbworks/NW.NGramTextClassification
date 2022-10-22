@@ -1,4 +1,6 @@
-﻿namespace NW.NGramTextClassificationClient.ApplicationSession
+﻿using System.Linq;
+
+namespace NW.NGramTextClassificationClient.ApplicationSession
 {
     /// <inheritdoc cref="IDoubleManager"/>
     public class DoubleManager : IDoubleManager
@@ -8,6 +10,10 @@
         #endregion
 
         #region Properties
+
+        public static double MininumValue { get; } = 0.0;
+        public static double MaximumValue { get; } = 1.0;
+
         #endregion
 
         #region Constructors
@@ -26,7 +32,7 @@
             {
                 double parsed = double.Parse(value);
 
-                return true;
+                return parsed >= 0.0 && parsed <= 1.0;
 
             }
             catch
@@ -35,12 +41,6 @@
                 return false;
 
             }
-
-        }
-        public bool IsWithinRange(double value)
-        {
-
-            return value >= 0.0 && value <= 1.0;
 
         }
 

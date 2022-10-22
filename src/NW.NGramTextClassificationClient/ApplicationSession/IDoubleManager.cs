@@ -5,14 +5,9 @@
     {
 
         /// <summary>
-        /// Establishes if the <see cref="uint"/> option value is valid or not.
+        /// Establishes if <paramref name="value"/> is valid or not.
         /// </summary>
         bool IsValid(string value);
-
-        /// <summary>
-        /// Returns true if <paramref name="value"/> is between 0.0 and 1.0.
-        /// </summary>        
-        bool IsWithinRange(double value);
     
     }
 }
