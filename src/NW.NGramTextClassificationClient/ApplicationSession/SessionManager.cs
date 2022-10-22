@@ -89,6 +89,17 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
         }
 
 
+        private CommandOption CreateOptionalSaveSessionOption(CommandLineApplication subCommand)
+        {
+
+            return subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_SaveSession_Template,
+                        Shared.MessageCollection.Session_Option_SaveSession_Description,
+                        CommandOptionType.NoValue);
+
+        }
+
         #endregion
 
     }
