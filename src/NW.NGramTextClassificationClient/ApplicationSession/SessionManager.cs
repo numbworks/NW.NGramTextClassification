@@ -76,6 +76,19 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
         }
 
+        private CommandOption CreateOptionalFolderPathOption(CommandLineApplication subCommand)
+        {
+
+            return subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_FolderPath_Template,
+                        Shared.MessageCollection.Session_Option_FolderPath_Description,
+                        CommandOptionType.SingleValue)
+                    .Accepts(validator => validator.ExistingDirectory());
+
+        }
+
+
         #endregion
 
     }
@@ -83,5 +96,5 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 22.10.2022
 */
