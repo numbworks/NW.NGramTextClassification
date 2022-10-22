@@ -1,7 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using NW.NGramTextClassification;
+using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.Validation;
+using NW.NGramTextClassification.LabeledExamples;
+using NW.NGramTextClassification.TextSnippets;
+using NW.NGramTextClassification.Serializations;
+using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextClassifications;
 
 namespace NW.NGramTextClassificationClient.Shared
 {
@@ -23,6 +30,8 @@ namespace NW.NGramTextClassificationClient.Shared
         public static int Failure { get; } = ((int)ExitCodes.Failure);
         public static string SeparatorLine { get; } = string.Empty;
         public static Func<string, string> ErrorMessageFormatter = (message) => $"ERROR: {message}";
+
+        public NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
 
         #endregion
 
@@ -86,6 +95,47 @@ namespace NW.NGramTextClassificationClient.Shared
             return Success;
 
         }
+        public int RunSessionClassify(ClassifyData classifyData)
+        {
+
+            try
+            {
+
+                Validator.ValidateObject(classifyData, nameof(classifyData));
+
+                TextClassifierComponents components = new TextClassifierComponents();
+                TextClassifierSettings settings = Create(classifyData);
+                TextClassifier textClassifier = Create(components, settings);
+
+                ShowHeader(components, textClassifier);
+
+                List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(classifyData, textClassifier);
+                List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(classifyData, textClassifier);
+
+                NGramTokenizerRuleSet tokenizerRuleSet;
+                if (string.IsNullOrWhiteSpace(classifyData.TokenizerRuleset))
+                    tokenizerRuleSet = DefaultTokenizerRuleSet;
+                else
+                    tokenizerRuleSet = LoadTokenizerRuleSetOrThrow(classifyData, textClassifier);
+
+                TextClassifierSession session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples);
+
+                if (classifyData.SaveSession)
+                    textClassifier.SaveSession(session, classifyData.FolderPath);
+
+                ShowFooter(components);
+
+                return Success;
+
+            }
+            catch (Exception e)
+            {
+
+                return LogAndReturnFailure(e);
+
+            }
+        
+        }
 
         #endregion
 
@@ -120,6 +170,70 @@ namespace NW.NGramTextClassificationClient.Shared
 
         }
 
+        private TextClassifierSettings Create(ClassifyData classifyData)
+        {
+
+            TextClassifierSettings settings = new TextClassifierSettings(
+
+                  truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                  minimumAccuracySingleLabel: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                  minimumAccuracyMultipleLabels: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                  folderPath: classifyData.FolderPath ?? TextClassifierSettings.DefaultFolderPath
+
+                );
+
+            return settings;
+
+        }
+        private TextClassifier Create(TextClassifierComponents components, TextClassifierSettings settings)
+        {
+
+            TextClassifier textClassifier = new TextClassifier(components, settings);
+
+            return textClassifier;
+
+        }
+
+        private List<LabeledExample> LoadLabeledExamplesOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
+        {
+
+            string filePath = Path.Combine(classifyData.FolderPath, classifyData.LabeledExamples);
+            IFileInfoAdapter file = textClassifier.Convert(filePath);
+
+            List<LabeledExample> labeledExamples = textClassifier.LoadLabeledExamplesOrDefault(file);
+            if (labeledExamples == Serializer<LabeledExample>.Default)
+                throw new Exception(MessageCollection.LoadingFileNameReturnedDefault(classifyData.LabeledExamples));
+
+            return labeledExamples;
+
+        }
+        private List<TextSnippet> LoadTextSnippetsOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
+        {
+
+            string filePath = Path.Combine(classifyData.FolderPath, classifyData.TextSnippets);
+            IFileInfoAdapter file = textClassifier.Convert(filePath);
+
+            List<TextSnippet> textSnippets = textClassifier.LoadTextSnippetsOrDefault(file);
+            if (textSnippets == Serializer<TextSnippet>.Default)
+                throw new Exception(MessageCollection.LoadingFileNameReturnedDefault(classifyData.TextSnippets));
+
+            return textSnippets;
+
+        }
+        private NGramTokenizerRuleSet LoadTokenizerRuleSetOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
+        {
+
+            string filePath = Path.Combine(classifyData.FolderPath, classifyData.TokenizerRuleset);
+            IFileInfoAdapter file = textClassifier.Convert(filePath);
+
+            NGramTokenizerRuleSet tokenizerRuleset = textClassifier.LoadTokenizerRuleSetOrDefault(file);
+            if (tokenizerRuleset == default(NGramTokenizerRuleSet))
+                throw new Exception(MessageCollection.LoadingFileNameReturnedDefault(classifyData.TokenizerRuleset));
+
+            return tokenizerRuleset;
+
+        }
+
         #endregion
 
     }
@@ -127,5 +241,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 22.10.2022
 */

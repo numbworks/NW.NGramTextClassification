@@ -62,7 +62,7 @@ namespace NW.NGramTextClassification
 
         /// <summary>
         /// Loads a collection of <see cref="LabeledExample"/> objects from the provided <paramref name="jsonFile"/>. 
-        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{LabeledExample}.DefaultObject"/> will be returned.</para>
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{LabeledExample}.Default"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>     
@@ -70,7 +70,7 @@ namespace NW.NGramTextClassification
 
         /// <summary>
         /// Loads a collection of <see cref="TextSnippet"/> objects from the provided <paramref name="jsonFile"/>. 
-        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{TextSnippet}.DefaultObject"/> will be returned.</para>
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{TextSnippet}.Default"/> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>     
@@ -78,7 +78,7 @@ namespace NW.NGramTextClassification
 
         /// <summary>
         /// Loads a <see cref="NGramTokenizerRuleSet"/> object from the provided <paramref name="jsonFile"/>. 
-        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <see cref="Serializer{NGramTokenizerRuleSet}.DefaultObject"/> will be returned.</para>
+        /// <para>If the content of the file is null/empty/invalid or an exception is thrown, <c>default(NGramTokenizerRuleSet)</c> will be returned.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>     
