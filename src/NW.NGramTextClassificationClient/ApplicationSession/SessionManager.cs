@@ -87,8 +87,6 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                     .Accepts(validator => validator.ExistingDirectory());
 
         }
-
-
         private CommandOption CreateOptionalSaveSessionOption(CommandLineApplication subCommand)
         {
 
@@ -97,6 +95,28 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                         Shared.MessageCollection.Session_Option_SaveSession_Template,
                         Shared.MessageCollection.Session_Option_SaveSession_Description,
                         CommandOptionType.NoValue);
+
+        }
+        private CommandOption CreateOptionalMinAccuracySingleOption(CommandLineApplication subCommand)
+        {
+
+            return subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_MinAccuracySingle_Template,
+                        Shared.MessageCollection.Session_Option_MinAccuracySingle_Description,
+                        CommandOptionType.SingleValue)
+                    .Accepts(validator => validator.Use(_sessionManagerComponents.MinimumAccuracyValidator));
+
+        }
+        private CommandOption CreateOptionalMinAccuracyMultipleOption(CommandLineApplication subCommand)
+        {
+
+            return subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_MinAccuracyMultiple_Template,
+                        Shared.MessageCollection.Session_Option_MinAccuracyMultiple_Description,
+                        CommandOptionType.SingleValue)
+                    .Accepts(validator => validator.Use(_sessionManagerComponents.MinimumAccuracyValidator));
 
         }
 

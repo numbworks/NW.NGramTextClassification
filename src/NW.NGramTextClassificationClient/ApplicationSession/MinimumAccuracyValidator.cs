@@ -62,5 +62,5 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.07.2022
+    Last Update: 22.10.2022
 */
