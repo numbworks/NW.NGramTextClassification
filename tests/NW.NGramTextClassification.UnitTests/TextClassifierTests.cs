@@ -169,13 +169,15 @@ namespace NW.NGramTextClassification.UnitTests
                     new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     ),
                     new TextClassifierSession(
                             settings: new TextClassifierSettings(
                                             truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                                             minimumAccuracySingleLabel: 0.0,
-                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                                            folderPath: TextClassifierSettings.DefaultFolderPath
                                         ),
                             results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: new TextClassifier().Version
@@ -233,13 +235,15 @@ namespace NW.NGramTextClassification.UnitTests
                     new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     ),
                     new TextClassifierSession(
                             settings: new TextClassifierSettings(
                                             truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                                             minimumAccuracySingleLabel: 0.0,
-                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                                            folderPath: TextClassifierSettings.DefaultFolderPath
                                         ),
                             results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: new TextClassifier().Version
@@ -253,13 +257,15 @@ namespace NW.NGramTextClassification.UnitTests
                     new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     ),
                     new TextClassifierSession(
                             settings: new TextClassifierSettings(
                                             truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                                             minimumAccuracySingleLabel: 0.0,
-                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                                            minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                                            folderPath: TextClassifierSettings.DefaultFolderPath
                                         ),
                             results: TextClassifications.ObjectMother.TextClassifierResults_Untokenizable,
                             version: new TextClassifier().Version
@@ -595,7 +601,8 @@ namespace NW.NGramTextClassification.UnitTests
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
@@ -654,7 +661,8 @@ namespace NW.NGramTextClassification.UnitTests
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
@@ -714,7 +722,8 @@ namespace NW.NGramTextClassification.UnitTests
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 1.0,                                                                 // 0.98 < 1.0 
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
@@ -774,7 +783,8 @@ namespace NW.NGramTextClassification.UnitTests
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
@@ -837,7 +847,8 @@ namespace NW.NGramTextClassification.UnitTests
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
@@ -899,10 +910,11 @@ namespace NW.NGramTextClassification.UnitTests
                           nowFunction: TextClassifierComponents.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
-                          truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: 1.0                                                            // 0.98 <= 1.0
-                    );
+                            truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                            minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                            minimumAccuracyMultipleLabels: 1.0,                                                            // 0.98 <= 1.0
+                            folderPath: TextClassifierSettings.DefaultFolderPath
+                        );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
@@ -966,7 +978,8 @@ namespace NW.NGramTextClassification.UnitTests
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels        // 0.98 > 0.5
+                          minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,        // 0.98 > 0.5
+                          folderPath: TextClassifierSettings.DefaultFolderPath
                     );
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
