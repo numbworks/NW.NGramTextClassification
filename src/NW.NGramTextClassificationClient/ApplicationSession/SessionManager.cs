@@ -101,8 +101,8 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                                 textSnippets: textSnippetsOption.Value(),
                                 folderPath: folderPathOption.Value(),
                                 tokenizerRuleSet: tokenizerRuleSetOption.Value(),
-                                minAccuracySingle: _sessionManagerComponents.DoubleManager.Parse(minAccuracySingleOption.Value()),
-                                minAccuracyMultiple: _sessionManagerComponents.DoubleManager.Parse(minAccuracyMultipleOption.Value()),
+                                minAccuracySingle: _sessionManagerComponents.DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
+                                minAccuracyMultiple: _sessionManagerComponents.DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
                                 saveSession: saveSessionOption.HasValue()
                         );
 

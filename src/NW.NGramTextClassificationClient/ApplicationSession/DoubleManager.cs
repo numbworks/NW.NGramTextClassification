@@ -43,8 +43,15 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
             }
 
         }
-        public double Parse(string value)
-            => double.Parse(value);
+        public double? ParseOrDefault(string value)
+        {
+
+            if (value == null)
+                return null;
+
+            return double.Parse(value);
+
+        }
 
         #endregion
 

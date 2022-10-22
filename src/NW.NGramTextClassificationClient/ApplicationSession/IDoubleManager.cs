@@ -11,11 +11,11 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
         /// </summary>
         bool IsValid(string value);
 
-        /// <summary>Parses <paramref name="value"/>.</summary>
+        /// <summary>Parses <paramref name="value"/> or returns null if <paramref name="value"/> is null.</summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="FormatException"></exception>
         /// <exception cref="OverflowException"></exception>
-        double Parse(string value);
+        double? ParseOrDefault(string value);
 
     }
 }
