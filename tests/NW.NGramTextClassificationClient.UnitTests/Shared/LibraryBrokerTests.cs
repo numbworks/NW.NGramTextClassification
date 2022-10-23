@@ -1,5 +1,6 @@
 ﻿using System;
 using NW.NGramTextClassificationClient.Shared;
+using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassificationClient.UnitTests
@@ -74,6 +75,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             Assert.IsInstanceOf<int>(LibraryBroker.Failure);
             Assert.IsInstanceOf<string>(LibraryBroker.SeparatorLine);
             Assert.IsInstanceOf<Func<string, string>>(LibraryBroker.ErrorMessageFormatter);
+            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LibraryBroker.DefaultTokenizerRuleSet);
 
         }
 
@@ -82,14 +84,10 @@ namespace NW.NGramTextClassificationClient.UnitTests
         #region TearDown
         #endregion
 
-        #region Support_methods
-
-        #endregion
-
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 23.10.2022
 */

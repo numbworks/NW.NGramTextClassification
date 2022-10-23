@@ -31,7 +31,7 @@ namespace NW.NGramTextClassificationClient.Shared
         public static string SeparatorLine { get; } = string.Empty;
         public static Func<string, string> ErrorMessageFormatter = (message) => $"ERROR: {message}";
 
-        public NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
+        public static NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
 
         #endregion
 
