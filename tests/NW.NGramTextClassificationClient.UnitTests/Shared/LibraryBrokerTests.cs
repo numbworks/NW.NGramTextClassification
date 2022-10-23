@@ -146,7 +146,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
-                        saveSession: false
+                        saveSession: true
                     );
 
             // Act
