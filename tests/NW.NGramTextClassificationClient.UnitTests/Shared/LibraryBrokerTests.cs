@@ -124,10 +124,14 @@ namespace NW.NGramTextClassificationClient.UnitTests
         {
 
             // Arrange
-            List<(string fileName, string content)> readBehaviours = new List<(string fileName, string content)>();
-            readBehaviours.Add(("LabeledExamples.json", NGramTextClassification.UnitTests.LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content));
-            readBehaviours.Add(("TextSnippets.json", NGramTextClassification.UnitTests.TextSnippets.ObjectMother.TextSnippetsAsJson_Content));
-            readBehaviours.Add(("TokenizerRuleSet.json", NGramTextClassification.UnitTests.TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content));
+            List<(string fileName, string content)> readBehaviours = new List<(string fileName, string content)>()
+            {
+
+                (fileName: "LabeledExamples.json", content: NGramTextClassification.UnitTests.LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                (fileName: "TextSnippets.json", content: NGramTextClassification.UnitTests.TextSnippets.ObjectMother.TextSnippetsAsJson_Content),
+                (fileName: "TokenizerRuleSet.json", content: NGramTextClassification.UnitTests.TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content)
+
+            };
 
             (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
 
