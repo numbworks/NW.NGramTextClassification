@@ -119,6 +119,71 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         }
 
+        [Test]
+        public void RunSessionClassify_ShouldReturnSuccess_WhenClassifyDataIsNotNull()
+        {
+
+            // Arrange
+            List<(string fileName, string content)> readBehaviours = new List<(string fileName, string content)>();
+            readBehaviours.Add(("LabeledExamples.json", NGramTextClassification.UnitTests.LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content));
+            readBehaviours.Add(("TextSnippets.json", NGramTextClassification.UnitTests.TextSnippets.ObjectMother.TextSnippetsAsJson_Content));
+            readBehaviours.Add(("TokenizerRuleSet.json", NGramTextClassification.UnitTests.TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content));
+
+            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+
+            LibraryBroker libraryBroker
+                = new LibraryBroker(
+                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        settingsFactory: new TextClassifierSettingsFactory(),
+                        textClassifierFactory: new TextClassifierFactory()
+                    );
+
+            ClassifyData classifyData
+                = new ClassifyData(
+                        labeledExamples: "LabeledExamples.json",
+                        textSnippets: "TextSnippets.json",
+                        folderPath: @"C:\ngramtc\",
+                        tokenizerRuleSet: "TokenizerRuleSet.json",
+                        minAccuracySingle: 0.4,
+                        minAccuracyMultiple: 0.7,
+                        saveSession: false
+                    );
+
+            // Act
+            
+            int actual = libraryBroker.RunSessionClassify(classifyData);
+
+            // Assert
+            Assert.AreEqual(LibraryBroker.Success, actual);
+
+            Assert.AreEqual(
+                    expected: "Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\LabeledExamples.json.",
+                    actual: messages[0]
+                    );
+            Assert.AreEqual(
+                    expected: "Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\TextSnippets.json.",
+                    actual: messages[2]
+                    );
+            Assert.AreEqual(
+                    expected: "Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\TokenizerRuleSet.json.",
+                    actual: messages[4]
+                    );
+
+            Assert.AreEqual(
+                    expected: LibraryBroker.SeparatorLine,
+                    actual: messagesAsciiBanner[0]
+                    );
+            Assert.AreEqual(
+                    expected: new TextClassifier().AsciiBanner,
+                    actual: messagesAsciiBanner[1]
+                    );
+            Assert.AreEqual(
+                    expected: LibraryBroker.SeparatorLine,
+                    actual: messagesAsciiBanner[2]
+                    );
+
+        }
+
         #endregion
 
         #region TearDown
@@ -126,7 +191,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Support_methods
 
-        private (List<string>, List<string>, TextClassifierComponents) CreateTuple()
+        private (List<string>, List<string>, TextClassifierComponents) CreateTuple
+            (List<(string fileName, string content)> readBehaviours = null)
         {
 
             List<string> messages = new List<string>();
@@ -145,7 +211,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: fakeLoggingActionAsciiBanner,
-                          fileManager: new FileManager(),
+                          fileManager: new FakeFileManagerWithDynamicRead(readBehaviours), // When we pass null, it means the test won't use it.
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: TextClassifierComponents.DefaultNowFunction);
