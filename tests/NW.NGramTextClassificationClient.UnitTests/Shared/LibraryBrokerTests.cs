@@ -189,7 +189,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
         }
 
         [Test]
-        public void RunSessionClassify_ShouldThrowExceptionAndReturnFailure_WhenLabaledExamplesFailsToLoad()
+        public void RunSessionClassify_ShouldThrowExceptionAndReturnFailure_WhenLabeledExamplesFailsToLoad()
         {
 
             // Arrange
@@ -234,6 +234,56 @@ namespace NW.NGramTextClassificationClient.UnitTests
             Assert.AreEqual(
                     expected: expected,
                     actual: messages[2]
+                    );
+        }
+
+        [Test]
+        public void RunSessionClassify_ShouldThrowExceptionAndReturnFailure_WhenTextSnippetsFailsToLoad()
+        {
+
+            // Arrange
+            List<(string fileName, string content)> readBehaviours = new List<(string fileName, string content)>()
+            {
+
+                (fileName: "LabeledExamples.json", content: NGramTextClassification.UnitTests.LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                (fileName: "TextSnippets.json", content: @"{ ""SomeField"": ""SomeValue"" }")
+
+            };
+
+            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+
+            LibraryBroker libraryBroker
+                = new LibraryBroker(
+                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        settingsFactory: new TextClassifierSettingsFactory(),
+                        textClassifierFactory: new TextClassifierFactory()
+                    );
+
+            ClassifyData classifyData
+                = new ClassifyData(
+                        labeledExamples: "LabeledExamples.json",
+                        textSnippets: "TextSnippets.json",
+                        folderPath: @"C:\ngramtc\",
+                        tokenizerRuleSet: "TokenizerRuleSet.json",
+                        minAccuracySingle: 0.4,
+                        minAccuracyMultiple: 0.7,
+                        saveSession: true
+                    );
+
+            Exception e
+                = new Exception(NGramTextClassificationClient.Shared.MessageCollection.LoadingFileNameReturnedDefault("TextSnippets.json"));
+            string expected = LibraryBroker.ErrorMessageFormatter(e.Message);
+
+            // Act
+
+            int actual = libraryBroker.RunSessionClassify(classifyData);
+
+            // Assert
+            Assert.AreEqual(LibraryBroker.Failure, actual);
+
+            Assert.AreEqual(
+                    expected: expected,
+                    actual: messages[4]
                     );
         }
 
