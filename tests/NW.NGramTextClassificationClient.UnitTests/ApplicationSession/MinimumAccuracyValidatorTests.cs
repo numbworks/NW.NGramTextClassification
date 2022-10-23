@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using NW.NGramTextClassificationClient.ApplicationSession;
+using NW.NGramTextClassificationClient.Shared;
 using NUnit.Framework;
 using McMaster.Extensions.CommandLineUtils;
 
@@ -56,11 +57,11 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
         {
 
             // Arrange
-            CommandOption option = new CommandOption(Shared.MessageCollection.Session_Option_MinAccuracySingle_Template, CommandOptionType.SingleValue);
+            CommandOption option = new CommandOption(MessageCollection.Session_Option_MinAccuracySingle_Template, CommandOptionType.SingleValue);
             option.DefaultValue = value;
             ValidationContext context = new ValidationContext(option);
             string valueName = nameof(MinimumAccuracyValidator).Replace("Validator", string.Empty);
-            string expected = Shared.MessageCollection.ValueIsInvalidOrNotWithinRange(valueName, option.Value());
+            string expected = MessageCollection.ValueIsInvalidOrNotWithinRange(valueName, option.Value());
 
             // Act
             ValidationResult actual = new MinimumAccuracyValidator(new DoubleManager()).GetValidationResult(option, context);
@@ -79,7 +80,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
         {
 
             // Arrange
-            CommandOption option = new CommandOption(Shared.MessageCollection.Session_Option_MinAccuracySingle_Template, CommandOptionType.SingleValue);
+            CommandOption option = new CommandOption(MessageCollection.Session_Option_MinAccuracySingle_Template, CommandOptionType.SingleValue);
             option.DefaultValue = value;
             ValidationContext context = new ValidationContext(option);
 
