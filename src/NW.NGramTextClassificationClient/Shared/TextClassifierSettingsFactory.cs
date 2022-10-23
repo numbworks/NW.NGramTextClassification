@@ -24,6 +24,22 @@ namespace NW.NGramTextClassificationClient.Shared
         public TextClassifierSettings Create()
             => new TextClassifierSettings();
 
+        public TextClassifierSettings Create(ClassifyData classifyData)
+        {
+
+            TextClassifierSettings settings = new TextClassifierSettings(
+
+                  truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
+                  minimumAccuracySingleLabel: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
+                  minimumAccuracyMultipleLabels: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                  folderPath: classifyData.FolderPath ?? TextClassifierSettings.DefaultFolderPath
+
+                );
+
+            return settings;
+
+        }
+
         #endregion
 
     }
@@ -31,5 +47,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 23.10.2022
 */

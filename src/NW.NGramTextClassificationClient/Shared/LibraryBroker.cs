@@ -105,9 +105,9 @@ namespace NW.NGramTextClassificationClient.Shared
 
                 classifyData = Defaultize(classifyData);
 
-                TextClassifierComponents components = new TextClassifierComponents();
-                TextClassifierSettings settings = Create(classifyData);
-                TextClassifier textClassifier = Create(components, settings);
+                TextClassifierComponents components = _componentsFactory.Create();
+                TextClassifierSettings settings = _settingsFactory.Create(classifyData);
+                TextClassifier textClassifier = _textClassifierFactory.Create(components, settings);
 
                 ShowHeader(components, textClassifier);
 
@@ -188,31 +188,6 @@ namespace NW.NGramTextClassificationClient.Shared
             return updated;
 
         }
-
-        private TextClassifierSettings Create(ClassifyData classifyData)
-        {
-
-            TextClassifierSettings settings = new TextClassifierSettings(
-
-                  truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
-                  minimumAccuracySingleLabel: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
-                  minimumAccuracyMultipleLabels: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
-                  folderPath: classifyData.FolderPath ?? TextClassifierSettings.DefaultFolderPath
-
-                );
-
-            return settings;
-
-        }
-        private TextClassifier Create(TextClassifierComponents components, TextClassifierSettings settings)
-        {
-
-            TextClassifier textClassifier = new TextClassifier(components, settings);
-
-            return textClassifier;
-
-        }
-
         private List<LabeledExample> LoadLabeledExamplesOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
         {
 
@@ -260,5 +235,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.10.2022
+    Last Update: 23.10.2022
 */
