@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace NW.NGramTextClassificationClient.ApplicationSession
+﻿namespace NW.NGramTextClassificationClient.ApplicationSession
 {
     /// <inheritdoc cref="IDoubleManager"/>
     public class DoubleManager : IDoubleManager
