@@ -1,5 +1,7 @@
-﻿using NW.NGramTextClassificationClient.ApplicationSession;
+﻿using System;
+using NW.NGramTextClassificationClient.ApplicationSession;
 using NUnit.Framework;
+using McMaster.Extensions.CommandLineUtils.Validation;
 
 namespace NW.NGramTextClassificationClient.UnitTests
 {
@@ -8,6 +10,20 @@ namespace NW.NGramTextClassificationClient.UnitTests
     {
 
         #region Fields
+
+        private static TestCaseData[] sessionManagerComponentsExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                    () => new SessionManagerComponents(null)
+                ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("doubleManager").Message
+            ).SetArgDisplayNames($"{nameof(sessionManagerComponentsExceptionTestCases)}_01")
+
+        };
+
         #endregion
 
         #region SetUp
@@ -15,17 +31,26 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Tests
 
+        [TestCaseSource(nameof(sessionManagerComponentsExceptionTestCases))]
+        public void SessionManagerComponents_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [Test]
-        public void SessionManagerComponents_ShouldCreateAnObjectOfTypeSessionManagerComponents_WhenInvoked()
+        public void SessionManagerComponents_ShouldCreateAnObjectOfThisType_WhenInvoked()
         {
 
             // Arrange
             // Act
-            SessionManagerComponents actual
-                    = new SessionManagerComponents();
+            SessionManagerComponents actual1 = new SessionManagerComponents();
+            SessionManagerComponents actual2 = new SessionManagerComponents(new DoubleManager());
 
             // Assert
-            Assert.IsInstanceOf<SessionManagerComponents>(actual);
+            Assert.IsInstanceOf<SessionManagerComponents>(actual1);
+            Assert.IsInstanceOf<SessionManagerComponents>(actual2);
+
+            Assert.IsInstanceOf<IDoubleManager>(actual1.DoubleManager);
+            Assert.IsInstanceOf<IOptionValidator>(actual1.MinimumAccuracyValidator);
 
         }
 
@@ -42,5 +67,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 23.10.2022
 */
