@@ -10,7 +10,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Methods
 
-        internal static void Method_ShouldThrowACertainException_WhenUnproperArguments
+        public static void Method_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
         {
 
@@ -21,7 +21,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             Assert.AreEqual(expectedMessage, objActual.Message);
 
         }
-        internal static void Method_ShouldThrowACertainInnnerException_WhenCallPrivateMethodAndUnproperArguments
+        public static void Method_ShouldThrowACertainInnnerException_WhenCallPrivateMethodAndUnproperArguments
             (TestDelegate del, Type expectedInnerType, string expectedInnerMessage)
         {
 
@@ -35,7 +35,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             Assert.AreEqual(expectedInnerMessage, actual.Message);
 
         }
-        internal static TReturn CallPrivateMethod<TClass, TReturn>
+        public static TReturn CallPrivateMethod<TClass, TReturn>
             (TClass obj, string methodName, object[] args)
         {
 
