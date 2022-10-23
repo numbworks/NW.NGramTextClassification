@@ -76,35 +76,35 @@ namespace NW.NGramTextClassification.TextClassifications
             (snippet) => $"All the rules in the provided ruleset failed for the provided snippet ('{snippet}'), therefore a 'null' label will be returned.";
 
         public static Func<Type, IFileInfoAdapter, string> AttemptingToLoadObjectsFrom =
-            (type, jsonFile) => $"Attempting to load a collection of '{type}' objects from: {jsonFile.FullName}.";
+            (type, jsonFile) => $"Attempting to load a collection of '{type.Name}' objects from: {jsonFile.FullName}.";
         public static Func<Type, string> ObjectsSuccessfullyLoaded =
-            (type) => $"A collection of '{type}' objects has been successfully loaded.";
+            (type) => $"A collection of '{type.Name}' objects has been successfully loaded.";
         public static Func<Type, string> ObjectsFailedToLoad =
-            (type) => $"A collection of '{type}' objects failed to load. Default value is returned.";
+            (type) => $"A collection of '{type.Name}' objects failed to load. Default value is returned.";
 
         public static Func<Type, IFileInfoAdapter, string> AttemptingToLoadObjectFrom =
-            (type, jsonFile) => $"Attempting to load a '{type}' object from: {jsonFile.FullName}.";
+            (type, jsonFile) => $"Attempting to load a '{type.Name}' object from: {jsonFile.FullName}.";
         public static Func<Type, string> ObjectSuccessfullyLoaded =
-            (type) => $"A '{type}' object has been successfully loaded.";
+            (type) => $"A '{type.Name}' object has been successfully loaded.";
         public static Func<Type, string> ObjectFailedToLoad =
-            (type) => $"A '{type}' object failed to load. Default value is returned.";
+            (type) => $"A '{type.Name}' object failed to load. Default value is returned.";
 
         public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectsAs =
-            (type, jsonFile) => $"Attempting to save the provided collection of '{type}' objects as: {jsonFile.FullName}.";
+            (type, jsonFile) => $"Attempting to save the provided collection of '{type.Name}' objects as: {jsonFile.FullName}.";
         public static Func<Type, string> ObjectsSuccessfullySaved =
-            (type) => $"The provided collection of '{type}' objects has been successfully saved.";
+            (type) => $"The provided collection of '{type.Name}' objects has been successfully saved.";
         public static Func<Type, string> ObjectsFailedToSave =
-            (type) => $"The provided collection of '{type}' objects failed to save.";
+            (type) => $"The provided collection of '{type.Name}' objects failed to save.";
 
         public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectAs =
-            (type, jsonFile) => $"Attempting to save the provided '{type}' object as: {jsonFile.FullName}.";
+            (type, jsonFile) => $"Attempting to save the provided '{type.Name}' object as: {jsonFile.FullName}.";
         public static Func<Type, string> ObjectSuccessfullySaved =
-            (type) => $"The provided '{type}' object has been successfully saved.";
+            (type) => $"The provided '{type.Name}' object has been successfully saved.";
         public static Func<Type, string> ObjectFailedToSave =
-            (type) => $"The provided '{type}' object failed to save.";
+            (type) => $"The provided '{type.Name}' object failed to save.";
 
         public static Func<Type, string> ThereIsNoStrategyOutOfType =
-             (type) => $"There is no built-in strategy to create a filename out of a '{type}' object.";
+             (type) => $"There is no built-in strategy to create a filename out of a '{type.Name}' object.";
 
         #endregion
 
@@ -129,5 +129,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.10.2022
+    Last Update: 23.10.2022
 */
