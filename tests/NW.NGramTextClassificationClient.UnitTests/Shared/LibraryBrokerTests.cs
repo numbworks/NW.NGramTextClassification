@@ -1,17 +1,15 @@
 ﻿using System;
-using NW.NGramTextClassificationClient.Shared;
-using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.UnitTests.Utilities;
-using NUnit.Framework;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.AsciiBanner;
-using NW.NGramTextClassification.Files;
+using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Filenames;
+using NW.NGramTextClassificationClient.Shared;
 using NW.NGramTextClassificationClient.UnitTests.Utilities;
+using NUnit.Framework;
 
 namespace NW.NGramTextClassificationClient.UnitTests
 {
@@ -287,6 +285,58 @@ namespace NW.NGramTextClassificationClient.UnitTests
                     );
         }
 
+        [Test]
+        public void RunSessionClassify_ShouldThrowExceptionAndReturnFailure_WhenTokenizerRuleSetFailsToLoad()
+        {
+
+            // Arrange
+            List<(string fileName, string content)> readBehaviours = new List<(string fileName, string content)>()
+            {
+
+                (fileName: "LabeledExamples.json", content: NGramTextClassification.UnitTests.LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                (fileName: "TextSnippets.json", content: NGramTextClassification.UnitTests.TextSnippets.ObjectMother.TextSnippetsAsJson_Content),
+                (fileName: "TokenizerRuleSet.json", content: @"{ ""SomeField"": ""SomeValue"" }")
+
+            };
+
+            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+
+            LibraryBroker libraryBroker
+                = new LibraryBroker(
+                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        settingsFactory: new TextClassifierSettingsFactory(),
+                        textClassifierFactory: new TextClassifierFactory()
+                    );
+
+            ClassifyData classifyData
+                = new ClassifyData(
+                        labeledExamples: "LabeledExamples.json",
+                        textSnippets: "TextSnippets.json",
+                        folderPath: @"C:\ngramtc\",
+                        tokenizerRuleSet: "TokenizerRuleSet.json",
+                        minAccuracySingle: 0.4,
+                        minAccuracyMultiple: 0.7,
+                        saveSession: true
+                    );
+
+            Exception e
+                = new Exception(NGramTextClassificationClient.Shared.MessageCollection.LoadingFileNameReturnedDefault("TokenizerRuleSet.json"));
+            string expected = LibraryBroker.ErrorMessageFormatter(e.Message);
+
+            // Act
+
+            
+            int actual = libraryBroker.RunSessionClassify(classifyData);
+
+            // Assert
+            Assert.AreEqual(LibraryBroker.Failure, actual);
+
+            Assert.AreEqual(
+                    expected: expected,
+                    actual: messages[6]
+                    );
+
+        }
 
         #endregion
 
@@ -331,5 +381,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 26.10.2022
 */

@@ -83,7 +83,7 @@ namespace NW.NGramTextClassification.Serializations
                 return obj;
 
             }
-            catch
+            catch(Exception e)
             {
 
                 return default(T);

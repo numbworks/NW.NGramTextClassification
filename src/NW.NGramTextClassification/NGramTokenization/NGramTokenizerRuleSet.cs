@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace NW.NGramTextClassification.NGramTokenization
 {
@@ -29,7 +30,8 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         /// <summary>Initializes a <see cref="NGramTokenizerRuleSet"/> instance.</summary>
         /// <exception cref="ArgumentException"></exception>
-        public NGramTokenizerRuleSet(bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
+        [JsonConstructor] public NGramTokenizerRuleSet
+            (bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
         {
 
             Validate(doForMonogram, doForBigram, doForTrigram, doForFourgram, doForFivegram);
