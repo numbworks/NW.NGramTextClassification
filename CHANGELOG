@@ -1,12 +1,15 @@
 v3.5.0 - BREAKING CHANGES
-- Feature: TextClassifier, added support for the classification of a collection of snippets of texts.
-- Feature: TextClassifierSettings, added support for Minimum Accuracy* fields.
-- Feature: Added support for "Files" namespace.
-- Feature: Added support for "Filenames" namespace.
-- Feature: Added the possibility to load and save labeled examples from/as JSON file.
-- Feature: Added the possibility to load and save text snippets from/as JSON file.
-- Feature: Added the possibility to load a NGramTokenizerRuleSet from a JSON file.
-- Feature: Added the possibility to save a TextClassifierSession as JSON file.
+- Library:
+	- Feature: added support for the classification of a collection of snippets of texts.
+	- Feature: added support for Minimum Accuracy* fields in TextClassifierSettings.
+	- Feature: added support for "Files" namespace.
+	- Feature: added support for "Filenames" namespace.
+	- Feature: added the possibility to load and save labeled examples from/as JSON file.
+	- Feature: added the possibility to load and save text snippets from/as JSON file.
+	- Feature: added the possibility to load a NGramTokenizerRuleSet from a JSON file.
+	- Feature: added the possibility to save a TextClassifierSession as JSON file.
+- Client:
+	- Feature: added "classify" sub-command and its options.
 
 v3.0.0 - BREAKING CHANGES
 - Decoupled LabeledExample class from the tokenization process; TokenizedExample class added.
