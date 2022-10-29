@@ -10,6 +10,8 @@ v3.5.0 - BREAKING CHANGES
 	- Feature: added the possibility to save a TextClassifierSession as JSON file.
 - Client:
 	- Feature: added "classify" sub-command and its options.
+- Documentation:
+	- Feature: updated to v3.5.0.
 
 v3.0.0 - BREAKING CHANGES
 - Decoupled LabeledExample class from the tokenization process; TokenizedExample class added.
