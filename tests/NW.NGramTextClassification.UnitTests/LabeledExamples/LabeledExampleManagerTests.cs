@@ -301,6 +301,40 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         }
 
+        [Test]
+        public void CleanLabeledExamples_ShouldReturnExpectedCollections_WhenUntokenizableLabeledExamples()
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+            List<LabeledExample> expectedRemoved = new List<LabeledExample>() 
+            {
+
+                new LabeledExample(label: "some_label", text: ":)"),
+                new LabeledExample(label: "some_label", text: ":-) :-)")
+
+            };
+            List<LabeledExample> expected = new List<LabeledExample>();
+
+            // Act
+            List<LabeledExample> actualRemoved;
+            List<LabeledExample> actual 
+                = labeledExampleManager
+                    .CleanLabeledExamples(
+                        labeledExamples: expectedRemoved,
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(),
+                        out actualRemoved);
+
+            // Assert
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expectedRemoved, actualRemoved)
+                );
+            Assert.IsTrue(
+                    ObjectMother.AreEqual(expected, actual)
+                );
+
+        }
+
         #endregion
 
         #region TearDown
