@@ -345,6 +345,32 @@ namespace NW.NGramTextClassification.UnitTests
             ).SetArgDisplayNames($"{nameof(convertExceptionTestCases)}_01")
 
         };
+        private static TestCaseData[] cleanLabeledExamplesExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .CleanLabeledExamples(
+                                        labeledExamples: null,
+                                        tokenizerRuleSet: new NGramTokenizerRuleSet()
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("labeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(cleanLabeledExamplesExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .CleanLabeledExamples(
+                                        labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
+                                        tokenizerRuleSet: null
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("tokenizerRuleSet").Message
+                ).SetArgDisplayNames($"{nameof(cleanLabeledExamplesExceptionTestCases)}_02")
+
+        };
 
         #endregion
 
@@ -1704,6 +1730,11 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(convertExceptionTestCases))]
         public void Convert_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
+        public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
