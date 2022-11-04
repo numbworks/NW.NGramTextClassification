@@ -2,6 +2,10 @@ v3.6.0
 - Library:
 	- Feature: added support for the "CleanLabeledExamples" functionality.
 	- Performance: the tokenization process of the provided labeled examples now happens only once, despite of the number of text snippets.
+- Client:
+	- Feature: added "--cleanlabeledexamples" option to the "classify" sub-command
+- Documentation:
+	- Feature: updated to v3.6.0.
 
 v3.5.0 - BREAKING CHANGES
 - Library:
