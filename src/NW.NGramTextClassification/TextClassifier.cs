@@ -72,10 +72,28 @@ namespace NW.NGramTextClassification
 
             LogInitialMessages(textSnippet, tokenizerRuleSet, labeledExamples);
 
-            TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, labeledExamples);
-            TextClassifierSession session = CreateSession(_settings, result, Version);
+            List<TokenizedExample> tokenizedExamples = TokenizeAndLog(tokenizerRuleSet, labeledExamples);
+            
+            if (tokenizedExamples == null)
+            {
 
-            return session;
+                _components.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
+               
+                TextClassifierResult result = DefaultTextClassifierResult;
+                TextClassifierSession session = CreateSession(_settings, result, Version);
+
+                return session;
+
+            }
+            else
+            {
+
+                TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples);
+                TextClassifierSession session = CreateSession(_settings, result, Version);
+
+                return session;
+
+            }               
 
         }
         public TextClassifierSession ClassifyOrDefault(TextSnippet textSnippet, List<LabeledExample> labeledExamples)
@@ -90,18 +108,38 @@ namespace NW.NGramTextClassification
 
             _components.LoggingAction(TextClassifications.MessageCollection.ProvidedSnippetsAre(textSnippets.Count));
 
-            List<TextClassifierResult> results = new List<TextClassifierResult>();
-            for (int i = 0; i < textSnippets.Count; i++)
+            List<TokenizedExample> tokenizedExamples = TokenizeAndLog(tokenizerRuleSet, labeledExamples);
+
+            if (tokenizedExamples == null)
             {
 
-                TextClassifierResult textClassifierResult = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, labeledExamples);
-                results.Add(textClassifierResult);
+                _components.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
+
+                List<TextClassifierResult> results = new List<TextClassifierResult>();
+                results.Add(DefaultTextClassifierResult);
+
+                TextClassifierSession session = CreateSession(_settings, results, Version);
+
+                return session;
 
             }
+            else
+            {
 
-            TextClassifierSession session = CreateSession(_settings, results, Version);
+                List<TextClassifierResult> results = new List<TextClassifierResult>();
+                for (int i = 0; i < textSnippets.Count; i++)
+                {
 
-            return session;
+                    TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples);
+                    results.Add(result);
+
+                }
+
+                TextClassifierSession session = CreateSession(_settings, results, Version);
+
+                return session;
+
+            }
 
         }
         public TextClassifierSession ClassifyMany(List<TextSnippet> textSnippets, List<LabeledExample> labeledExamples)
@@ -141,7 +179,16 @@ namespace NW.NGramTextClassification
             _components.LoggingAction(TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples));
 
         }
-        private TextClassifierResult ClassifySingleOrDefault(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        private List<TokenizedExample> TokenizeAndLog(INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        {
+
+            List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples, tokenizerRuleSet);
+            _components.LoggingAction(TextClassifications.MessageCollection.ProvidedLabeledExamplesThruTokenizationProcess);
+
+            return tokenizedExamples;
+
+        }
+        private TextClassifierResult ClassifySingleOrDefault(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<TokenizedExample> tokenizedExamples)
         {
 
             List<INGram> nGrams = _components.NGramsTokenizer.DoForRuleSetOrDefault(textSnippet.Text, tokenizerRuleSet);
@@ -150,16 +197,6 @@ namespace NW.NGramTextClassification
             {
 
                 _components.LoggingAction(TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(textSnippet.Text));
-                return DefaultTextClassifierResult;
-
-            }
-
-            List<TokenizedExample> tokenizedExamples = _components.LabeledExampleManager.CreateOrDefault(labeledExamples, tokenizerRuleSet);
-            _components.LoggingAction(TextClassifications.MessageCollection.ProvidedLabeledExamplesThruTokenizationProcess);
-            if (tokenizedExamples == null)
-            {
-
-                _components.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
                 return DefaultTextClassifierResult;
 
             }
@@ -577,5 +614,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.10.2022
+    Last Update: 03.11.2022
 */
