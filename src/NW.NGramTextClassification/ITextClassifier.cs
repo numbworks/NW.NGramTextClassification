@@ -105,10 +105,18 @@ namespace NW.NGramTextClassification
         /// <exception cref="Exception"/>
         void SaveSession(TextClassifierSession session, string folderPath);
 
+        /// <summary>
+        /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.
+        /// <para>The method logs the objects that get removed.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet);
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.10.2022
+    Last Update: 04.11.2022
 */

@@ -164,6 +164,26 @@ namespace NW.NGramTextClassification
         public void SaveSession(TextClassifierSession session, string folderPath)
             => Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _components.NowFunction()));
 
+        public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
+        {
+
+            _components.LoggingAction(TextClassifications.MessageCollection.AttemptingToCleanLabeledExamples);
+
+            List<LabeledExample> removed;
+            List<LabeledExample> clean = _components.LabeledExampleManager.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out removed);
+
+            _components.LoggingAction(TextClassifications.MessageCollection.ProvidedLabeledExamplesThruCleaningProcess);
+
+            if (removed.Count > 0)
+                foreach (LabeledExample labeledExample in removed)
+                    _components.LoggingAction(TextClassifications.MessageCollection.ThisLabeledExampleHasBeenRemoved(labeledExample));
+            else
+                _components.LoggingAction(TextClassifications.MessageCollection.NoLabeledExampleHasBeenRemoved);
+
+            return clean;
+
+        }
+
         #endregion
 
         #region Methods_private
@@ -614,5 +634,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 03.11.2022
+    Last Update: 04.11.2022
 */

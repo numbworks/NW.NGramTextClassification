@@ -106,6 +106,15 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<Type, string> ThereIsNoStrategyOutOfType =
              (type) => $"There is no built-in strategy to create a filename out of a '{type.Name}' object.";
 
+        public static string AttemptingToCleanLabeledExamples = 
+            $"Attempting to clean the provided {nameof(LabeledExample)} objects...";
+        public static string ProvidedLabeledExamplesThruCleaningProcess = 
+            $"The provided {nameof(LabeledExample)} objects have been thru the cleaning process.";
+        public static Func<LabeledExample, string> ThisLabeledExampleHasBeenRemoved =
+            (labeledExample) => $"This {nameof(LabeledExample)} object has been removed: '{labeledExample.Text}'.";
+        public static string NoLabeledExampleHasBeenRemoved =
+            $"No {nameof(LabeledExample)} object has been removed.";
+
         #endregion
 
         #region Methods
