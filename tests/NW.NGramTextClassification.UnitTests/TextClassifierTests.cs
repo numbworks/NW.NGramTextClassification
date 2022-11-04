@@ -497,7 +497,7 @@ namespace NW.NGramTextClassification.UnitTests
                           nowFunction: TextClassifierComponents.DefaultNowFunction);
             TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
 
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 6);
             // We skip all the messages in the middle, otherwise the test would be too complex.
             List<string> finalLogMessages = new List<string>()
             {
@@ -514,7 +514,7 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.AreEqual(expectedLabel, actual.Results[0].Label);
             Assert.AreEqual(
                     initialLogMessages, 
-                    actualLogMessages.GetRange(0, 5)
+                    actualLogMessages.GetRange(0, 6)
                 );
             Assert.AreEqual(
                     finalLogMessages, 
@@ -547,7 +547,7 @@ namespace NW.NGramTextClassification.UnitTests
                           nowFunction: TextClassifierComponents.DefaultNowFunction);
             TextClassifier textClassifier = new TextClassifier(components, settings);
 
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 6);
             // We skip all the messages in the middle, otherwise the test would be too complex.
             List<string> finalLogMessages = new List<string>()
             {
@@ -566,7 +566,7 @@ namespace NW.NGramTextClassification.UnitTests
                 );
             Assert.AreEqual(
                     initialLogMessages,
-                    actualLogMessages.GetRange(0, 5)
+                    actualLogMessages.GetRange(0, 6)
                 );
             Assert.AreEqual(
                     finalLogMessages,
@@ -1732,6 +1732,7 @@ namespace NW.NGramTextClassification.UnitTests
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingSnippetHasBeenProvided(expectedText),
                 NGramTextClassification.TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet),
                 NGramTextClassification.TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples),
+                NGramTextClassification.TextClassifications.MessageCollection.ProvidedLabeledExamplesThruTokenizationProcess,
                 NGramTextClassification.TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(expectedNGrams),
 
                 NGramTextClassification.TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(expectedText)
@@ -1749,5 +1750,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.10.2022
+    Last Update: 04.11.2022
 */
