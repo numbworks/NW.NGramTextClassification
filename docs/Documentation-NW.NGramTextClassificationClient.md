@@ -8,6 +8,7 @@ Contact: numbworks@gmail.com
 | 2021-10-13 | numbworks | Created. |
 | 2022-09-27 | numbworks | Updated to v3.0.0. |
 | 2022-10-29 | numbworks | Updated to v3.5.0. |
+| 2022-11-04 | numbworks | Updated to v3.6.0. |
 
 ## Introduction
 
@@ -23,7 +24,7 @@ The command-line interface for `NW.NGramTextClassificationClient` is summarized 
 |---|---|---|---|
 |about|||Success|
 |session|||Success|
-|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--savesession*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*|Success<br />Failure|
+|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*|Success<br />Failure|
 
 The regular font indicates the mandatory options, while the *italic*  font indicates an optional ones.
 
