@@ -1,3 +1,7 @@
+v3.6.0
+- Library:
+	- Performance: the tokenization process of the provided labeled examples now happens only once, despite of the number of text snippets.
+
 v3.5.0 - BREAKING CHANGES
 - Library:
 	- Feature: added support for the classification of a collection of snippets of texts.
