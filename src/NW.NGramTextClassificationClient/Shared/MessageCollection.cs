@@ -42,12 +42,11 @@ namespace NW.NGramTextClassificationClient.Shared
         public static string Session_Option_TokenizerRuleSet_Template { get; } = "--tokenizerruleset";
         public static string Session_Option_TokenizerRuleSet_Description { get; } 
             = $"The filename of the JSON file containing the tokenizer ruleset. The file needs to be stored in the working folder. If not specified, default rules will be used.";
+
         public static string Session_Option_FolderPath_Template { get; } = "--folderpath";
         public static string Session_Option_FolderPath_Description { get; } 
             = $"The path of the working folder. If not specified, '{TextClassifierSettings.DefaultFolderPath}' will be used.";
-        public static string Session_Option_SaveSession_Template { get; } = "--savesession";
-        public static string Session_Option_SaveSession_Description { get; } 
-            = $"If provided, the text classification session will be saved as JSON in the working folder.";
+
         public static string Session_Option_MinAccuracySingle_Template { get; } = "--minaccuracysingle";
         public static string Session_Option_MinAccuracySingle_Description { get; }
             = string.Concat(
@@ -63,6 +62,13 @@ namespace NW.NGramTextClassificationClient.Shared
                 $"If not specified, '{TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels}' will be used."
             );
 
+        public static string Session_Option_SaveSession_Template { get; } = "--savesession";
+        public static string Session_Option_SaveSession_Description { get; }
+            = $"If provided, the text classification session will be saved as JSON in the working folder.";
+
+        public static string Session_Option_CleanLabeledExamples_Template { get; } = "--cleanlabeledexamples";
+        public static string Session_Option_CleanLabeledExamples_Description { get; }
+            = $"If provided, the labeled examples among the provided ones that make the tokenizer to fail will be removed before starting the classification session.";
 
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
@@ -78,5 +84,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.10.2022
+    Last Update: 04.11.2022
 */

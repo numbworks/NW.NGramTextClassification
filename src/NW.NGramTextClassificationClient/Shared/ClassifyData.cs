@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace NW.NGramTextClassificationClient.Shared
+﻿namespace NW.NGramTextClassificationClient.Shared
 {
     /// <summary>Collects all the data required by the <c>classify</c> sub-command.</summary>
     public class ClassifyData
@@ -21,6 +17,7 @@ namespace NW.NGramTextClassificationClient.Shared
         public double? MinAccuracySingle { get; }
         public double? MinAccuracyMultiple { get; }
         public bool SaveSession { get; }
+        public bool CleanLabeledExamples { get; }
 
         #endregion
 
@@ -34,7 +31,8 @@ namespace NW.NGramTextClassificationClient.Shared
                 string tokenizerRuleSet,
                 double? minAccuracySingle,
                 double? minAccuracyMultiple,
-                bool saveSession
+                bool saveSession,
+                bool cleanLabeledExamples
             ) 
         {
 
@@ -46,6 +44,7 @@ namespace NW.NGramTextClassificationClient.Shared
             MinAccuracySingle = minAccuracySingle;
             MinAccuracyMultiple = minAccuracyMultiple;
             SaveSession = saveSession;
+            CleanLabeledExamples = cleanLabeledExamples;
 
         }
 
@@ -64,5 +63,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.10.2022
+    Last Update: 04.11.2022
 */

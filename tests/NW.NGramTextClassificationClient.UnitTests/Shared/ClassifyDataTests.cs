@@ -31,7 +31,8 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
-                        saveSession: true                                        
+                        saveSession: true,
+                        cleanLabeledExamples: true
                     );
 
             // Assert
@@ -44,6 +45,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
             Assert.IsInstanceOf<double?>(actual.MinAccuracySingle);
             Assert.IsInstanceOf<double?>(actual.MinAccuracyMultiple);
             Assert.IsInstanceOf<bool>(actual.SaveSession);
+            Assert.IsInstanceOf<bool>(actual.CleanLabeledExamples);
 
         }
 
@@ -58,5 +60,5 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 04.11.2022
 */

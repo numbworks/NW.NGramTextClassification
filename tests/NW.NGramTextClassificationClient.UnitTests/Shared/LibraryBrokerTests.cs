@@ -148,7 +148,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
-                        saveSession: true
+                        saveSession: true,
+                        cleanLabeledExamples: true
                     );
 
             // Act
@@ -215,7 +216,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
-                        saveSession: true
+                        saveSession: true,
+                        cleanLabeledExamples: true
                     );
 
             Exception e 
@@ -265,7 +267,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
-                        saveSession: true
+                        saveSession: true,
+                        cleanLabeledExamples: true
                     );
 
             Exception e
@@ -316,7 +319,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
-                        saveSession: true
+                        saveSession: true,
+                        cleanLabeledExamples: true
                     );
 
             Exception e
@@ -381,5 +385,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.10.2022
+    Last Update: 11.11.2022
 */

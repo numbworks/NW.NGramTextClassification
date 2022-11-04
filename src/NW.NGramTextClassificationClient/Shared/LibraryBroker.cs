@@ -120,6 +120,9 @@ namespace NW.NGramTextClassificationClient.Shared
                 else
                     tokenizerRuleSet = LoadTokenizerRuleSetOrThrow(classifyData, textClassifier);
 
+                if (classifyData.CleanLabeledExamples)
+                    labeledExamples = textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
+
                 TextClassifierSession session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples);
 
                 if (classifyData.SaveSession)
@@ -182,7 +185,8 @@ namespace NW.NGramTextClassificationClient.Shared
                     tokenizerRuleSet: classifyData.TokenizerRuleSet,
                     minAccuracySingle: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
                     minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
-                    saveSession: classifyData.SaveSession
+                    saveSession: classifyData.SaveSession,
+                    cleanLabeledExamples: classifyData.CleanLabeledExamples
                 );
 
             return updated;
@@ -235,5 +239,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 04.11.2022
 */
