@@ -392,6 +392,14 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         public static string ShortLabeledExamplesAsJson_Content = Properties.Resources.ShortLabeledExamplesAsJson;
 
+        public static List<LabeledExample> UntokenizableLabeledExamples = new List<LabeledExample>()
+            {
+
+                new LabeledExample(label: "some_label", text: ":)"),
+                new LabeledExample(label: "some_label", text: ":-) :-)")
+
+            };
+
         #endregion
 
         #region Methods
@@ -501,5 +509,5 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update: 04.11.2022
 */

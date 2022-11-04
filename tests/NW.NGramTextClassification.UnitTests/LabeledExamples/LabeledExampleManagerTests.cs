@@ -307,13 +307,6 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             // Arrange
             LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
-            List<LabeledExample> expectedRemoved = new List<LabeledExample>() 
-            {
-
-                new LabeledExample(label: "some_label", text: ":)"),
-                new LabeledExample(label: "some_label", text: ":-) :-)")
-
-            };
             List<LabeledExample> expected = new List<LabeledExample>();
 
             // Act
@@ -321,13 +314,13 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             List<LabeledExample> actual 
                 = labeledExampleManager
                     .CleanLabeledExamples(
-                        labeledExamples: expectedRemoved,
+                        labeledExamples: ObjectMother.UntokenizableLabeledExamples,
                         tokenizerRuleSet: new NGramTokenizerRuleSet(),
                         out actualRemoved);
 
             // Assert
             Assert.IsTrue(
-                    ObjectMother.AreEqual(expectedRemoved, actualRemoved)
+                    ObjectMother.AreEqual(ObjectMother.UntokenizableLabeledExamples, actualRemoved)
                 );
             Assert.IsTrue(
                     ObjectMother.AreEqual(expected, actual)

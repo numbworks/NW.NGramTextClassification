@@ -1738,6 +1738,99 @@ namespace NW.NGramTextClassification.UnitTests
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
+        [Test]
+        public void CleanLabeledExamples_ShouldLogExpectedMessage_WhenLabeledExamplesAreRemoved()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+
+            Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager(),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: FakeNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToCleanLabeledExamples,
+                NGramTextClassification.TextClassifications.MessageCollection.ProvidedLabeledExamplesThruCleaningProcess,
+                NGramTextClassification.TextClassifications.MessageCollection.ThisLabeledExampleHasBeenRemoved(LabeledExamples.ObjectMother.UntokenizableLabeledExamples[0]),
+                NGramTextClassification.TextClassifications.MessageCollection.ThisLabeledExampleHasBeenRemoved(LabeledExamples.ObjectMother.UntokenizableLabeledExamples[1])
+
+            };
+
+            // Act
+            textClassifier.CleanLabeledExamples(
+                labeledExamples: LabeledExamples.ObjectMother.UntokenizableLabeledExamples,
+                tokenizerRuleSet: new NGramTokenizerRuleSet()
+                );
+
+            // Assert
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+        
+        [Test]
+        public void CleanLabeledExamples_ShouldLogExpectedMessage_WhenLabeledExamplesAreNotRemoved()
+        {
+
+            // Arrange
+            List<string> actualLogMessages = new List<string>();
+            Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
+
+            Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+
+            TextClassifierComponents components
+                = new TextClassifierComponents(
+                          nGramsTokenizer: new NGramTokenizer(),
+                          similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
+                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          loggingAction: fakeLoggingAction,
+                          labeledExampleManager: new LabeledExampleManager(),
+                          asciiBannerManager: new AsciiBannerManager(),
+                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          fileManager: new FileManager(),
+                          serializerFactory: new SerializerFactory(),
+                          filenameFactory: new FilenameFactory(),
+                          nowFunction: FakeNowFunction);
+            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+
+            List<string> expectedLogMessages = new List<string>()
+            {
+
+                NGramTextClassification.TextClassifications.MessageCollection.AttemptingToCleanLabeledExamples,
+                NGramTextClassification.TextClassifications.MessageCollection.ProvidedLabeledExamplesThruCleaningProcess,
+                NGramTextClassification.TextClassifications.MessageCollection.NoLabeledExampleHasBeenRemoved
+
+            };
+
+            // Act
+            textClassifier.CleanLabeledExamples(
+                labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
+                tokenizerRuleSet: new NGramTokenizerRuleSet()
+                );
+
+            // Assert
+            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+
+        }
+
         #endregion
 
         #region TearDown
