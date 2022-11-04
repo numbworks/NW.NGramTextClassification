@@ -11,7 +11,6 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
     {
 
         #region Fields
-
         private static TestCaseData[] labeledExampleManagerExceptionTestCases =
         {
 
@@ -109,6 +108,34 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 ).SetArgDisplayNames($"{nameof(createOrDefaultTestCases)}_05")
 
         };
+        private static TestCaseData[] cleanLabeledExamplesExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleManager()
+                                    .CleanLabeledExamples(
+                                        labeledExamples: null,
+                                        tokenizerRuleSet: new NGramTokenizerRuleSet(),
+                                        out _
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("labeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(cleanLabeledExamplesExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new LabeledExampleManager()
+                                    .CleanLabeledExamples(
+                                        labeledExamples: ObjectMother.ShortLabeledExamples,
+                                        tokenizerRuleSet: null,
+                                        out _
+                            )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("tokenizerRuleSet").Message
+                ).SetArgDisplayNames($"{nameof(cleanLabeledExamplesExceptionTestCases)}_02")
+
+        };
 
         #endregion
 
@@ -145,6 +172,11 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 );
 
         }
+
+        [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
+        public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenListLabeledExamplesAndProperParameters()
@@ -279,5 +311,5 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 04.11.2022
 */
