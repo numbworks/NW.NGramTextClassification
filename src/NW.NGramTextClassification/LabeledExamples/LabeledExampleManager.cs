@@ -86,6 +86,32 @@ namespace NW.NGramTextClassification.LabeledExamples
         public List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples)
             => CreateOrDefault(labeledExamples, DefaultTokenizerRuleSet);
 
+        public List<LabeledExample> CleanLabeledExamples
+            (List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed)
+        {
+
+            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
+
+            List<LabeledExample> clean = new List<LabeledExample>();
+            removed = new List<LabeledExample>();
+
+            foreach (LabeledExample labeledExample in labeledExamples)
+            {
+
+                TokenizedExample tokenizedExample = CreateOrDefault(labeledExample, tokenizerRuleSet);
+
+                if (tokenizedExample == null)
+                    removed.Add(labeledExample);
+                else
+                    clean.Add(labeledExample);
+
+            }
+
+            return clean;
+
+        }
+
         #endregion
 
         #region Methods_private
@@ -97,5 +123,5 @@ namespace NW.NGramTextClassification.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2022
+    Last Update: 04.11.2022
 */

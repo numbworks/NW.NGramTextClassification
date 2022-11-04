@@ -42,10 +42,17 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <exception cref="ArgumentException"/>
         List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples);
 
+        /// <summary>
+        /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed);
+
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 19.09.2022
+    Last Update: 04.11.2022
 */
