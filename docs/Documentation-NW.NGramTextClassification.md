@@ -11,6 +11,7 @@ Contact: numbworks@gmail.com
 | 2021-09-24 | numbworks | Version numbers removed, updated examples for v2.0.0. |
 | 2022-09-27 | numbworks | Updated to v3.0.0. |
 | 2022-10-16 | numbworks | Updated to v3.5.0. |
+| 2022-11-04 | numbworks | Updated to v3.6.0. |
 
 ## Introduction
 
@@ -254,7 +255,7 @@ Here an example of each JSON file produced by the library:
 
 1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
 2. [TextSnippets.json](ExampleFiles/TextSnippets.json)
-3. [Session.json](ExampleFiles/Session.json) - v.3.5.0.0
+3. [Session.json](ExampleFiles/Session.json) - v.3.6.0.0
 4. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
 
 ## Markdown Toolset
