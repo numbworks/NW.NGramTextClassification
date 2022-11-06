@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.Serializations
             Validation.Validator.ValidateObject(modifier, nameof(modifier));
 
             dynamic modified = modifier(obj);
-            string json = JsonSerializer.Serialize(modified, CreateJsonSerializerOptions());
+            string json = JsonSerializer.Serialize<dynamic>(modified, CreateJsonSerializerOptions());
 
             return json;
 
