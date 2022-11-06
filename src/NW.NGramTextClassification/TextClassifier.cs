@@ -30,8 +30,8 @@ namespace NW.NGramTextClassification
         public static TextClassifierComponents DefaultTextClassifierComponents { get; } = new TextClassifierComponents();
         public static TextClassifierSettings DefaultTextClassifierSettings { get; } = new TextClassifierSettings();
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
-        public static TextClassifierResult DefaultTextClassifierResult { get; }
-            = new TextClassifierResult(null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
+        public static TextClassifierResult DefaultTextClassifierResult { get; } 
+            = new TextClassifierResult(null, null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
 
         public string Version { get; }
         public string AsciiBanner { get; }
@@ -221,10 +221,10 @@ namespace NW.NGramTextClassification
 
             }
 
-            return CreateResult(nGrams, tokenizedExamples);
+            return CreateResult(textSnippet, nGrams, tokenizedExamples);
 
         }
-        private TextClassifierResult CreateResult(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
+        private TextClassifierResult CreateResult(TextSnippet textSnippet, List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
@@ -242,7 +242,7 @@ namespace NW.NGramTextClassification
             else
                 _components.LoggingAction(TextClassifications.MessageCollection.ClassificationTaskHasBeenSuccessful);
 
-            TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
+            TextClassifierResult result = new TextClassifierResult(textSnippet, label, indexes, indexAverages);
 
             return result;
 

@@ -29,6 +29,12 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
         public static bool AreEqual(TextSnippet obj1, TextSnippet obj2)
         {
 
+            if (obj1 == null && obj2 == null)
+                return true;
+
+            if (obj1 == null || obj2 == null)
+                return false;
+
             return string.Equals(obj1.Text, obj2.Text, StringComparison.InvariantCulture);
 
         }

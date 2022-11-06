@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextSnippets;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests.TextClassifications
@@ -15,6 +18,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
             new TestCaseData(
                     new TextClassifierResult(
+                        textSnippet: TextSnippets.ObjectMother.TextSnippet,
                         label: LabeledExamples.ObjectMother.ShortLabeledExample01.Label,
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
@@ -24,21 +28,33 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
             new TestCaseData(
                     new TextClassifierResult(
+                        textSnippet: null,
+                        label: LabeledExamples.ObjectMother.ShortLabeledExample01.Label,
+                        indexes: Similarity.ObjectMother.SimilarityIndexes,
+                        indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
+                        ),
+                    ObjectMother.TextClassifierResult_AsStringWithNullTextSnippet
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
+
+            new TestCaseData(
+                    new TextClassifierResult(
+                        textSnippet: TextSnippets.ObjectMother.TextSnippet,
                         label: null,
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
                         ),
                     ObjectMother.TextClassifierResult_AsStringWithNullLabel
-                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_03"),
 
             new TestCaseData(
                     new TextClassifierResult(
-                        label: null,
-                        indexes: null,
-                        indexAverages: null
+                            textSnippet: null,
+                            label: null,
+                            indexes: null,
+                            indexAverages: null
                         ),
                     ObjectMother.TextClassifierResult_AllNulls
-                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_03")
+                ).SetArgDisplayNames($"{nameof(toStringTestCases)}_04")
 
         };
 
@@ -50,8 +66,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         #region Tests
 
         [TestCaseSource(nameof(toStringTestCases))]
-        public void ToString_ShouldReturnTheExpectedString_WhenInvoked
-            (TextClassifierResult textClassifierResult, string expected)
+        public void ToString_ShouldReturnTheExpectedString_WhenInvoked(TextClassifierResult textClassifierResult, string expected)
         {
 
             // Arrange
@@ -75,6 +90,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             // Act
             TextClassifierResult actual
                 = new TextClassifierResult(
+                        textSnippet: TextSnippets.ObjectMother.TextSnippet,
                         label: LabeledExamples.ObjectMother.ShortLabeledExample01.Label,
                         indexes: Similarity.ObjectMother.SimilarityIndexes,
                         indexAverages: Similarity.ObjectMother.SimilarityIndexAverages
@@ -82,6 +98,11 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
             // Assert
             Assert.IsInstanceOf<TextClassifierResult>(actual);
+
+            Assert.IsInstanceOf<TextSnippet>(actual.TextSnippet);
+            Assert.IsInstanceOf<string>(actual.Label);
+            Assert.IsInstanceOf<List<SimilarityIndex>>(actual.SimilarityIndexes);
+            Assert.IsInstanceOf<List<SimilarityIndexAverage>>(actual.SimilarityIndexAverages);
 
         }
 
@@ -95,5 +116,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 06.11.2022
 */

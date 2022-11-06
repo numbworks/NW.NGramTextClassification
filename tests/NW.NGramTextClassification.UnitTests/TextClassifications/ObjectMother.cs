@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using NW.NGramTextClassification.TextClassifications;
-using NUnit.Framework;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.UnitTests.TextClassifications
 {
@@ -13,14 +12,41 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         #region Properties
 
         public static string TextClassifierResult_AsString
-            = $"[ Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
+            = string.Concat(
+                    $"[ ",
+                    $"TextSnippet: '{TextSnippets.ObjectMother.TextSnippet}', ",
+                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', ",
+                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
+                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
+                    "]"
+                );
+
         public static string TextClassifierResult_AsStringWithNullLabel
-            = $"[ Label: 'null', SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ]";
+            = string.Concat(
+                    $"[ ",
+                    $"TextSnippet: '{TextSnippets.ObjectMother.TextSnippet}', ",
+                    $"Label: 'null', ",
+                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
+                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
+                    "]"
+                );
+
+        public static string TextClassifierResult_AsStringWithNullTextSnippet
+            = string.Concat(
+                    $"[ ",
+                    $"TextSnippet: 'null', ",
+                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', ",
+                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
+                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
+                    "]"
+                );
+
         public static string TextClassifierResult_AllNulls
-            = $"[ Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
+            = $"[ TextSnippet: 'null', Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
 
         public static TextClassifierResult TextClassifierResult_CompleteLabeledExamples00
             = new TextClassifierResult(
+                    textSnippet: new TextSnippet(text: LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Text),
                     label: LabeledExamples.ObjectMother.CreateThirtyCompleteTokenizedExamples()[0].LabeledExample.Label,
                     indexes: Similarity.ObjectMother.CreateSimilarityIndexesForCompleteLabeledExample00(),
                     indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample00()
@@ -86,7 +112,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         public static bool AreEqual(TextClassifierResult obj1, TextClassifierResult obj2)
         {
 
-            return string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
+            return TextSnippets.ObjectMother.AreEqual(obj1.TextSnippet, obj2.TextSnippet)
+                    && string.Equals(obj1.Label, obj2.Label, StringComparison.InvariantCulture)
                     && Similarity.ObjectMother.AreEqual(obj1.SimilarityIndexAverages, obj2.SimilarityIndexAverages)
                     && Similarity.ObjectMother.AreEqual(obj1.SimilarityIndexes, obj2.SimilarityIndexes);
 
@@ -112,5 +139,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 16.10.2022
+    Last Update: 04.11.2022
 */

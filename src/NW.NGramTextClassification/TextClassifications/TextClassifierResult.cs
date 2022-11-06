@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
@@ -12,6 +13,7 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #region Properties
 
+        public TextSnippet TextSnippet { get; }
         public string Label { get; }
         public List<SimilarityIndex> SimilarityIndexes { get; }
         public List<SimilarityIndexAverage> SimilarityIndexAverages { get; }
@@ -24,9 +26,10 @@ namespace NW.NGramTextClassification.TextClassifications
         /// Initializes a <see cref="TextClassifierResult"/> instance.
         /// <para>When the text classification doesn't return any value, parameters can be null.</para>
         /// </summary>
-        public TextClassifierResult(string label, List<SimilarityIndex> indexes, List<SimilarityIndexAverage> indexAverages)
+        public TextClassifierResult(TextSnippet textSnippet, string label, List<SimilarityIndex> indexes, List<SimilarityIndexAverage> indexAverages)
         {
 
+            TextSnippet = textSnippet;
             Label = label;
             SimilarityIndexes = indexes;
             SimilarityIndexAverages = indexAverages;
@@ -43,6 +46,7 @@ namespace NW.NGramTextClassification.TextClassifications
             string content
                 = string.Join(
                     ", ",
+                    $"{nameof(TextSnippet)}: '{TextSnippet?.ToString() ?? "null"}'",
                     $"{nameof(Label)}: '{Label ?? "null"}'",
                     $"{nameof(SimilarityIndexes)}: '{SimilarityIndexes?.Count.ToString() ?? "null"}'",
                     $"{nameof(SimilarityIndexAverages)}: '{SimilarityIndexAverages?.Count.ToString() ?? "null"}'"
@@ -59,5 +63,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 04.11.2022
 */
