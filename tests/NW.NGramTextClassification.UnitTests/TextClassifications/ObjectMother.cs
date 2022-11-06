@@ -92,7 +92,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             = new TextClassifierSession(
                     settings: new TextClassifierSettings(),
                     results: TextClassifierResults_CompleteLabeledExamples00,
-                    version: "3.5.0.0"
+                    version: "3.6.0.0"
                 );
 
         public static string TokenizerRuleSetAsJson_Content = Properties.Resources.TokenizerRuleSetAsJson;
@@ -139,5 +139,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 06.11.2022
 */

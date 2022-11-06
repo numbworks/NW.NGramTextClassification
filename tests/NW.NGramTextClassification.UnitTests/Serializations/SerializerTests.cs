@@ -5,6 +5,7 @@ using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.TextSnippets;
 using NUnit.Framework;
+using NW.NGramTextClassification.TextClassifications;
 
 namespace NW.NGramTextClassification.UnitTests.Serializations
 {
@@ -135,6 +136,22 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
         }
 
+        [Test]
+        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsTextClassifierSession()
+        {
+
+            // Arrange
+            TextClassifierSession obj = TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00;
+            string expected = TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content;
+
+            // Act
+            string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+
 
         [TestCaseSource(nameof(deserializeManyOrDefaultWhenUnproperArgumentTestCases))]
         public void DeserializeManyOrDefault_ShouldReturnDefault_WhenTypeIsLabeledExample(string json)
@@ -228,5 +245,5 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.10.2022
+    Last Update: 06.11.2022
 */

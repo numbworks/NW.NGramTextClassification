@@ -33,10 +33,9 @@ namespace NW.NGramTextClassification.Serializations
 
             Validation.Validator.ValidateObject(obj, nameof(obj));
 
-            List<T> objects = new List<T>();
-            objects.Add(obj);
+            string json = JsonSerializer.Serialize(obj, CreateJsonSerializerOptions());
 
-            return Serialize(objects);
+            return json;
 
         }
         public string Serialize(List<T> objects)
@@ -115,5 +114,5 @@ namespace NW.NGramTextClassification.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 18.10.2022
+    Last Update: 06.11.2022
 */
