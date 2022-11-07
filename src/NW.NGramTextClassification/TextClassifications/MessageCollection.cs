@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
@@ -97,11 +98,35 @@ namespace NW.NGramTextClassification.TextClassifications
             (type) => $"The provided collection of '{type.Name}' objects failed to save.";
 
         public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectAs =
-            (type, jsonFile) => $"Attempting to save the provided '{type.Name}' object as: {jsonFile.FullName}.";
+            (type, jsonFile) =>
+                {
+
+                    if (type == typeof(ExpandoObject))
+                        return $"Attempting to save the provided '{typeof(TextClassifierSession).Name}' object as: {jsonFile.FullName}.";
+
+                    return $"Attempting to save the provided '{type.Name}' object as: {jsonFile.FullName}.";
+
+                };
         public static Func<Type, string> ObjectSuccessfullySaved =
-            (type) => $"The provided '{type.Name}' object has been successfully saved.";
+            (type) =>
+                {
+
+                    if (type == typeof(ExpandoObject))
+                        return $"The provided '{typeof(TextClassifierSession).Name}' object has been successfully saved.";
+
+                    return $"The provided '{type.Name}' object has been successfully saved.";
+
+                };
         public static Func<Type, string> ObjectFailedToSave =
-            (type) => $"The provided '{type.Name}' object failed to save.";
+            (type) =>
+                {
+
+                    if (type == typeof(ExpandoObject))
+                        return $"The provided '{typeof(TextClassifierSession).Name}' object failed to save.";
+
+                    return $"The provided '{type.Name}' object failed to save.";
+
+                };
 
         public static Func<Type, string> ThereIsNoStrategyOutOfType =
              (type) => $"There is no built-in strategy to create a filename out of a '{type.Name}' object.";
@@ -138,5 +163,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 07.11.2022
 */

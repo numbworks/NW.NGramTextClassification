@@ -1499,8 +1499,9 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
-        [Test]
-        public void SaveSession_ShouldSaveSession_WhenInvokedAndDisableIndexSerializationIsFalse()
+        [TestCase(false)]
+        [TestCase(true)]
+        public void SaveSession_ShouldSaveSession_WhenInvoked(bool disableIndexSerialization)
         {
 
             // Arrange
@@ -1539,7 +1540,7 @@ namespace NW.NGramTextClassification.UnitTests
             };
 
             // Act
-            textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, false);
+            textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, disableIndexSerialization);
 
             // Assert
             Assert.AreEqual(expectedLogMessages, actualLogMessages);

@@ -84,10 +84,8 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
         ///  &quot;MinimumAccuracyMultipleLabels&quot;: 0,
         ///  &quot;Results&quot;: [
         ///    {
-        ///      &quot;Label&quot;: &quot;en&quot;,
-        ///      &quot;SimilarityIndexes&quot;: [
-        ///        {
-        ///          &quot;Text&quot;: &quot;VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Supe [rest of string was truncated]&quot;;.
+        ///      &quot;TextSnippet&quot;: {
+        ///        &quot;Text&quot;: &quot;VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most popular gift [rest of string was truncated]&quot;;.
         /// </summary>
         public static string TextClassifierrSessionCLE00AsJson {
             get {
@@ -96,11 +94,24 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [
-        ///  {
-        ///    &quot;Text&quot;: &quot;We are looking for several skilled and driven developers to join our team.&quot;
-        ///  }
-        ///].
+        ///   Looks up a localized string similar to {
+        ///    &quot;MinimumAccuracySingleLabel&quot;: 0.5,
+        ///    &quot;MinimumAccuracyMultipleLabels&quot;: 0,
+        ///    &quot;Results&quot;: [
+        ///      {
+        ///        &quot;TextSnippet&quot;: {
+        ///          &quot;Text&quot;: &quot;VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string TextClassifierrSessionCLE00DisabledAsJson {
+            get {
+                return ResourceManager.GetString("TextClassifierrSessionCLE00DisabledAsJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;Text&quot;: &quot;We are looking for several skilled and driven developers to join our team.&quot;
+        ///}.
         /// </summary>
         public static string TextSnippetAsJson {
             get {

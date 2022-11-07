@@ -197,7 +197,7 @@ namespace NW.NGramTextClassification
             {
 
                 dynamic newSession = SimilarityIndexDisabler(session);
-                Save(obj: newSession, jsonFile: Create<dynamic>(folderPath: folderPath, now: _components.NowFunction()));
+                Save(obj: newSession, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _components.NowFunction()));
 
             }
             else

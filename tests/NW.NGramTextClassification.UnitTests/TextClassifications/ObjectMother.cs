@@ -105,6 +105,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     doForFivegram: true
                     );
 
+        public static string TextClassifierrSessionCLE00DisabledAsJson_Content = Properties.Resources.TextClassifierrSessionCLE00DisabledAsJson;
+
         #endregion
 
         #region Methods
@@ -139,5 +141,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 06.11.2022
+    Last Update: 07.11.2022
 */
