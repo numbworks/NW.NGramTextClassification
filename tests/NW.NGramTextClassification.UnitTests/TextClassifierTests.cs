@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -382,12 +383,12 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(textClassifierExceptionTestCases))]
         public void TextClassifier_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(classifyOrDefaultExceptionTestCases))]
         public void ClassifyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void TextClassifier_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -407,6 +408,7 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsInstanceOf<TextClassifierSettings>(TextClassifier.DefaultTextClassifierSettings);
             Assert.IsInstanceOf<INGramTokenizerRuleSet>(TextClassifier.DefaultNGramTokenizerRuleSet);
             Assert.IsInstanceOf<TextClassifierResult>(TextClassifier.DefaultTextClassifierResult);
+            Assert.IsInstanceOf<Func<TextClassifierSession, dynamic>>(TextClassifier.SimilarityIndexDisabler);
 
         }
 
@@ -1089,7 +1091,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(classifyManyExceptionTestCases))]
         public void ClassifyMany_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(classifyManyTestCases))]
         public void ClassifyMany_ShouldReturnExpectedTextClassifierSession_WhenInvoked
@@ -1138,7 +1140,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(loadLabeledExamplesOrDefaultExceptionTestCases))]
         public void LoadLabeledExamplesOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void LoadLabeledExamplesOrDefault_ShouldReturnExpectedCollectionOfLabeledExamples_WhenProperJsonFileContent()
@@ -1737,7 +1739,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
         public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void CleanLabeledExamples_ShouldLogExpectedMessage_WhenLabeledExamplesAreRemoved()
@@ -1832,6 +1834,26 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+
+        [Test]
+        public void SimilarityIndexDisabler_ShouldReplaceEverySimilarityIndexesWithAnEmptyCollection_WhenInvoked()
+        {
+
+            // Arrange
+            // Act
+            dynamic actual = TextClassifier.SimilarityIndexDisabler(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00);
+
+            // Assert
+            foreach (ExpandoObject result in actual.Results)
+            {
+
+                var similarityIndexes = ((ExpandoObject)actual.Results[0]).FirstOrDefault(x => x.Key == "SimilarityIndexes").Value;
+                Assert.AreEqual(0, ((List<SimilarityIndex>)similarityIndexes).Count);
+
+            }
+
+        }
+
         #endregion
 
         #region TearDown
@@ -1875,5 +1897,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */
