@@ -32,7 +32,8 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
-                        cleanLabeledExamples: true
+                        cleanLabeledExamples: true,
+                        disableIndexSerialization: false
                     );
 
             // Assert
@@ -46,6 +47,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
             Assert.IsInstanceOf<double?>(actual.MinAccuracyMultiple);
             Assert.IsInstanceOf<bool>(actual.SaveSession);
             Assert.IsInstanceOf<bool>(actual.CleanLabeledExamples);
+            Assert.IsInstanceOf<bool>(actual.DisableIndexSerialization);
 
         }
 
@@ -60,5 +62,5 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */

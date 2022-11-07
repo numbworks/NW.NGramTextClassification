@@ -103,7 +103,7 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="Exception"/>
-        void SaveSession(TextClassifierSession session, string folderPath);
+        void SaveSession(TextClassifierSession session, string folderPath, bool disableIndexSerialization);
 
         /// <summary>
         /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.
@@ -118,5 +118,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */

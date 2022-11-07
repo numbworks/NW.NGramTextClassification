@@ -149,7 +149,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
-                        cleanLabeledExamples: true
+                        cleanLabeledExamples: true,
+                        disableIndexSerialization: false
                     );
 
             // Act
@@ -217,7 +218,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
-                        cleanLabeledExamples: true
+                        cleanLabeledExamples: true,
+                        disableIndexSerialization: false
                     );
 
             Exception e 
@@ -268,7 +270,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
-                        cleanLabeledExamples: true
+                        cleanLabeledExamples: true,
+                        disableIndexSerialization: false
                     );
 
             Exception e
@@ -320,7 +323,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
-                        cleanLabeledExamples: true
+                        cleanLabeledExamples: true,
+                        disableIndexSerialization: false
                     );
 
             Exception e
@@ -385,5 +389,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 11.11.2022
+    Last Update: 07.11.2022
 */

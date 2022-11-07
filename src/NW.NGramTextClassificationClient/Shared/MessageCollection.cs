@@ -70,6 +70,10 @@ namespace NW.NGramTextClassificationClient.Shared
         public static string Session_Option_CleanLabeledExamples_Description { get; }
             = $"If provided, the labeled examples among the provided ones that make the tokenizer to fail will be removed before starting the classification session.";
 
+        public static string Session_Option_DisableIndexSerialization_Template { get; } = "--disableindexserialization";
+        public static string Session_Option_DisableIndexSerialization_Description { get; }
+            = $"To use in conjunction with '--savesession'. It has no effect if provided by its own.";
+
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
         public static Func<string, string, string> ValueIsInvalidOrNotWithinRange
@@ -84,5 +88,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */

@@ -126,7 +126,7 @@ namespace NW.NGramTextClassificationClient.Shared
                 TextClassifierSession session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples);
 
                 if (classifyData.SaveSession)
-                    textClassifier.SaveSession(session, classifyData.FolderPath);
+                    textClassifier.SaveSession(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);
 
                 ShowFooter(components);
 
@@ -186,7 +186,8 @@ namespace NW.NGramTextClassificationClient.Shared
                     minAccuracySingle: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
                     minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
                     saveSession: classifyData.SaveSession,
-                    cleanLabeledExamples: classifyData.CleanLabeledExamples
+                    cleanLabeledExamples: classifyData.CleanLabeledExamples,
+                    disableIndexSerialization: classifyData.DisableIndexSerialization
                 );
 
             return updated;
@@ -239,5 +240,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using NW.NGramTextClassification.Files;
@@ -32,6 +33,34 @@ namespace NW.NGramTextClassification
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
         public static TextClassifierResult DefaultTextClassifierResult { get; } 
             = new TextClassifierResult(null, null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
+        public static Func<TextClassifierSession, dynamic> SimilarityIndexDisabler
+            = (textClassifierSession) =>
+            {
+
+                List<dynamic> newResults = new List<dynamic>();
+                foreach(TextClassifierResult result in textClassifierSession.Results)
+                {
+
+                    dynamic newResult = new ExpandoObject();
+
+                    newResult.TextSnippet = result.TextSnippet;
+                    newResult.Label = result.Label;
+                    newResult.SimilarityIndexes = new List<SimilarityIndex>();
+                    newResult.SimilarityIndexAverages = result.SimilarityIndexAverages;
+
+                    newResults.Add(newResult);
+
+                }
+
+                dynamic newSession = new ExpandoObject();
+
+                newSession.MinimumAccuracySingleLabel = textClassifierSession.MinimumAccuracySingleLabel;
+                newSession.MinimumAccuracyMultipleLabels = textClassifierSession.MinimumAccuracyMultipleLabels;
+                newSession.Results = newResults;
+                newSession.Version = textClassifierSession.Version;
+
+                return newSession;
+            };
 
         public string Version { get; }
         public string AsciiBanner { get; }
@@ -161,8 +190,20 @@ namespace NW.NGramTextClassification
             => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _components.NowFunction()));
         public void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath)
             => Save(objects: textSnippets, jsonFile: Create<TextSnippet>(folderPath: folderPath, now: _components.NowFunction()));
-        public void SaveSession(TextClassifierSession session, string folderPath)
-            => Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _components.NowFunction()));
+        public void SaveSession(TextClassifierSession session, string folderPath, bool disableIndexSerialization)
+        {
+
+            if(disableIndexSerialization)
+            {
+
+                dynamic newSession = SimilarityIndexDisabler(session);
+                Save(obj: newSession, jsonFile: Create<dynamic>(folderPath: folderPath, now: _components.NowFunction()));
+
+            }
+            else
+                Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _components.NowFunction()));
+
+        }
 
         public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
         {
@@ -591,7 +632,7 @@ namespace NW.NGramTextClassification
             try
             {
 
-                ISerializer<T> serializer = _components.SerializerFactory.Create<T>();
+                ISerializer<T> serializer = _components.SerializerFactory.Create<T>();              
                 string content = serializer.Serialize(obj);
 
                 _components.FileManager.WriteAllText(jsonFile, content);
@@ -634,5 +675,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */

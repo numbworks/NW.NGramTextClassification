@@ -92,6 +92,7 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                 CommandOption minAccuracyMultipleOption = CreateOptionalMinAccuracyMultipleOption(subCommand);
                 CommandOption saveSessionOption = CreateOptionalSaveSessionOption(subCommand);
                 CommandOption cleanLabeledExamplesOption = CreateOptionalCleanLabeledExamplesOption(subCommand);
+                CommandOption disableIndexSerializationOption = CreateOptionalDisableIndexSerializationOption(subCommand);
 
                 subCommand.OnExecute(() =>
                 {
@@ -105,7 +106,8 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                                 minAccuracySingle: _sessionManagerComponents.DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
                                 minAccuracyMultiple: _sessionManagerComponents.DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
                                 saveSession: saveSessionOption.HasValue(),
-                                cleanLabeledExamples: cleanLabeledExamplesOption.HasValue()
+                                cleanLabeledExamples: cleanLabeledExamplesOption.HasValue(),
+                                disableIndexSerialization: disableIndexSerializationOption.HasValue()
                         );
 
                     return _libraryBroker.RunSessionClassify(classifyData);
@@ -216,6 +218,16 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                         CommandOptionType.NoValue);
 
         }
+        private CommandOption CreateOptionalDisableIndexSerializationOption(CommandLineApplication subCommand)
+        {
+
+            return subCommand
+                    .Option(
+                        Shared.MessageCollection.Session_Option_DisableIndexSerialization_Template,
+                        Shared.MessageCollection.Session_Option_DisableIndexSerialization_Description,
+                        CommandOptionType.NoValue);
+
+        }
 
         #endregion
 
@@ -224,5 +236,5 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */

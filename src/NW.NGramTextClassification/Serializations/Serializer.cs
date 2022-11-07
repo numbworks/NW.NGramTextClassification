@@ -38,18 +38,6 @@ namespace NW.NGramTextClassification.Serializations
             return json;
 
         }
-        public string Serialize(T obj, Func<T, dynamic> modifier)
-        {
-
-            Validation.Validator.ValidateObject(obj, nameof(obj));
-            Validation.Validator.ValidateObject(modifier, nameof(modifier));
-
-            dynamic modified = modifier(obj);
-            string json = JsonSerializer.Serialize<dynamic>(modified, CreateJsonSerializerOptions());
-
-            return json;
-
-        }
         public string Serialize(List<T> objects)
         {
 

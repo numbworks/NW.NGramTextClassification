@@ -14,12 +14,6 @@ namespace NW.NGramTextClassification.Serializations
         string Serialize(T obj);
 
         /// <summary>
-        /// Invokes <paramref name="modifier"/> on <paramref name="obj"/>, and then serializes the resulting dynamic object to a Json string. 
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        string Serialize(T obj, Func<T, dynamic> modifier);
-
-        /// <summary>
         /// Serializes the provided collection of objects of type T to a Json string. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>

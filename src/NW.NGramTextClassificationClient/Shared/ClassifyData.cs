@@ -18,6 +18,7 @@
         public double? MinAccuracyMultiple { get; }
         public bool SaveSession { get; }
         public bool CleanLabeledExamples { get; }
+        public bool DisableIndexSerialization { get; }
 
         #endregion
 
@@ -32,7 +33,8 @@
                 double? minAccuracySingle,
                 double? minAccuracyMultiple,
                 bool saveSession,
-                bool cleanLabeledExamples
+                bool cleanLabeledExamples,
+                bool disableIndexSerialization
             ) 
         {
 
@@ -45,6 +47,7 @@
             MinAccuracyMultiple = minAccuracyMultiple;
             SaveSession = saveSession;
             CleanLabeledExamples = cleanLabeledExamples;
+            DisableIndexSerialization = disableIndexSerialization;
 
         }
 
@@ -63,5 +66,5 @@
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 04.11.2022
+    Last Update: 07.11.2022
 */
