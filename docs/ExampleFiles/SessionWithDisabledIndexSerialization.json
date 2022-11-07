@@ -1,0 +1,28 @@
+{
+    "MinimumAccuracySingleLabel": 0.5,
+    "MinimumAccuracyMultipleLabels": 0,
+    "Results": [
+      {
+        "TextSnippet": {
+          "Text": "VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most popular gifts, makes it possible for the gift recipient to choose their own gift at GoGift.com. With more than 7000 business to business customers worldwide GoGift is also a preferred supplier of corporate gifts.ArbetsuppgifterYou will play a very important role developing and maintaining our core platform as well as numerous APIs, applications and websites. You will be a key player in our dev team with highly skilled and experienced software developers (public and external), UX/UI designers, dev ops specialists and online content manager."
+        },
+        "Label": "en",
+        "SimilarityIndexes": [],
+        "SimilarityIndexAverages": [
+          {
+            "Label": "en",
+            "Value": 0.1185
+          },
+          {
+            "Label": "sv",
+            "Value": 0.000553
+          },
+          {
+            "Label": "dk",
+            "Value": 0.002648
+          }
+        ]
+      }
+    ],
+    "Version": "3.6.0.0"
+  }

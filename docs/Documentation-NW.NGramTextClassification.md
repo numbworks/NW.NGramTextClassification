@@ -256,7 +256,8 @@ Here an example of each JSON file produced by the library:
 1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
 2. [TextSnippets.json](ExampleFiles/TextSnippets.json)
 3. [Session.json](ExampleFiles/Session.json) - v.3.6.0.0
-4. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
+4. [SessionWithDisabledIndexSerialization.json](ExampleFiles/SessionWithDisabledIndexSerialization.json) - v.3.6.0.0
+5. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
 
 ## Markdown Toolset
 
