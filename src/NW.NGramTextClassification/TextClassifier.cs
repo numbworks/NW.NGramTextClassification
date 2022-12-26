@@ -157,16 +157,20 @@ namespace NW.NGramTextClassification
             else
             {
 
-                ConcurrentQueue<TextClassifierResult> queue = new ConcurrentQueue<TextClassifierResult>();
+                ConcurrentBag<TextClassifierResult> bag = new ConcurrentBag<TextClassifierResult>();
                 Parallel.For(0, textSnippets.Count, i =>
                 {
 
                     TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples);
-                    queue.Enqueue(result);
+                    bag.Add(result);
 
                 });
 
-                TextClassifierSession session = CreateSession(_settings, queue.ToList(), Version);
+                // Thread-safe collections don't guarantee the source order, therefore additional re-ordering logic must be implemented.
+                List<string> ids = textSnippets.Select(textSnippet => textSnippet.Text).ToList();
+                List<TextClassifierResult> results = bag.ToList().OrderBy(result => ids.IndexOf(result.TextSnippet.Text)).ToList();
+
+                TextClassifierSession session = CreateSession(_settings, results, Version);
 
                 return session;
 
@@ -677,5 +681,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 26.12.2022
 */
