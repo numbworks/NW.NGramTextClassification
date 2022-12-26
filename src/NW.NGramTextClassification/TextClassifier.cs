@@ -157,20 +157,17 @@ namespace NW.NGramTextClassification
             else
             {
 
-                ConcurrentBag<TextClassifierResult> bag = new ConcurrentBag<TextClassifierResult>();
+                ConcurrentBag<TextClassifierResult> tempResults = new ConcurrentBag<TextClassifierResult>();
                 Parallel.For(0, textSnippets.Count, i =>
                 {
 
                     TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples);
-                    bag.Add(result);
+                    tempResults.Add(result);
 
                 });
 
-                // Thread-safe collections don't guarantee the source order, therefore additional re-ordering logic must be implemented.
-                List<string> ids = textSnippets.Select(textSnippet => textSnippet.Text).ToList();
-                List<TextClassifierResult> results = bag.ToList().OrderBy(result => ids.IndexOf(result.TextSnippet.Text)).ToList();
-
-                TextClassifierSession session = CreateSession(_settings, results, Version);
+                List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
+                TextClassifierSession session = CreateSession(_settings, finalResults, Version);
 
                 return session;
 
@@ -671,6 +668,38 @@ namespace NW.NGramTextClassification
             IFileInfoAdapter jsonFile = new FileInfoAdapter(fileName: filePath);
 
             return jsonFile;
+
+        }
+
+        private List<TextClassifierResult> RestoreOrderOrDefault(ConcurrentBag<TextClassifierResult> tempResults, List<TextSnippet> textSnippets)
+        {
+
+            // Thread-safe collections don't guarantee the source order, therefore defaultResults are not in the same order as textSnippets.
+            List<TextClassifierResult> defaultResults = tempResults.ToList();
+
+            try
+            {
+
+                // If textSnippets contains duplicates, we can't perform the ConcurrentBag re-ordering using TextSnippet.Text as unique identifier.
+                HashSet<TextSnippet> uniqueTextSnippets = new HashSet<TextSnippet>(textSnippets);
+                if (textSnippets.Count > uniqueTextSnippets.Count)
+                    return defaultResults;
+
+                List<string> ids = textSnippets.Select(textSnippet => textSnippet.Text).ToList();
+
+                // In some cases, a TextClassifierResult.TextSnippet is null, but it corresponds to TextSnippet.Text = null.
+                List<TextClassifierResult> finalResults = defaultResults.OrderBy(result => ids.IndexOf(result.TextSnippet?.Text ?? null)).ToList();
+
+                return finalResults;
+
+            }
+            catch
+            {
+
+                // If some other unpredictable error happens, we don't make the application fail but just return the default unordered result.
+                return defaultResults;
+
+            }
 
         }
 
