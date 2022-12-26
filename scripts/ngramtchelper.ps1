@@ -11,8 +11,8 @@
 
             - Load a dataset in CSV format intended for text classification tasks;
                 - For ex.: "Spam Text Message Classification" dataset on Kaggle
-            - Convert all its rows to Labeled Examples and Text Snippets
-            - Save the outcomes as Json files
+            - Convert all its rows to Labeled Examples and Text Snippets;
+            - Save the outcomes as Json files.
             
         To use this script, please:
 
@@ -66,10 +66,35 @@ class Validator {
     static [void] ThrowsIfStringNullOrEmpty([string]$str, [string]$variableName)
     {
 
-        if ([string]::IsNullOrWhiteSpace($str))
-        {
+        if ([string]::IsNullOrWhiteSpace($str)) {
+
             throw [string]::Format("'{0}' can't be empty or whitespace.", $variableName)
+
         }  
+
+    }
+    static [void] ThrowsIfDirectoryDoesntExist([string]$fullPath)
+    {
+
+        [System.IO.DirectoryInfo]$directory = [System.IO.DirectoryInfo]::new($fullPath)
+
+        if ($directory.Exists.Equals($false)) {
+
+            throw [string]::Format("'{0}' doesn't exist.", $fullPath)
+            
+        }
+
+    }
+    static [void] ThrowsIfFileDoesntExist([string]$fullPath)
+    {
+
+        [System.IO.FileInfo]$file = [System.IO.FileInfo]::new($fullPath)
+
+        if ($file.Exists.Equals($false)) {
+
+            throw [string]::Format("'{0}' doesn't exist.", $fullPath)
+            
+        }
 
     }
 
@@ -124,9 +149,7 @@ function Get-File {
 	    [parameter(Mandatory=$true)] [System.IO.DirectoryInfo]$Folder,
         [parameter(Mandatory=$true)] [string]$FileName,
         [parameter(Mandatory=$false)] [bool]$SkipExistanceCheck = $true
-    )
-
-    # TO-DO: validation    
+    )  
 
     [string]$fullPath = [System.IO.Path]::Combine($Folder, $FileName)
     [System.IO.FileInfo]$file = [System.IO.FileInfo]::new($fullPath)
@@ -150,8 +173,6 @@ function Convert-CSVToLabeledExamples {
         [parameter(Mandatory=$true)] [string]$TextColumnName
     )
 
-    # TO-DO: validation
-
     [System.Array]$csvLines = 
         $(Import-Csv -Path $File -Delimiter $Delimiter | 
             Select-Object -Property @{Name='Label'; Expression=$LabelColumnName}, @{Name='Text'; Expression=$TextColumnName})
@@ -172,9 +193,7 @@ function Convert-LabeledExamplesToTextSnippets {
     [OutputType([System.Collections.Generic.List[TextSnippet]])]
     param(
 	    [parameter(Mandatory=$true)] [System.Collections.Generic.List[LabeledExample]]$LabeledExamples
-    )
-
-    # TO-DO: validation    
+    )    
 
     [System.Collections.Generic.List[TextSnippet]]$textSnippets = [System.Collections.Generic.List[TextSnippet]]::new()
     for ( $i = 0; $i -lt $LabeledExamples.Count; $i++ ) { 
@@ -192,9 +211,7 @@ function Convert-LabeledExamplesToJson {
     [OutputType([string])]
     param(
 	    [parameter(Mandatory=$true)] [System.Collections.Generic.List[LabeledExample]]$LabeledExamples
-    )
-
-    # TO-DO: validation    
+    )   
 
     [string]$json = $(ConvertTo-Json -InputObject $LabeledExamples)
 
@@ -206,9 +223,7 @@ function Convert-TextSnippetsToJson {
     [OutputType([string])]
     param(
 	    [parameter(Mandatory=$true)] [System.Collections.Generic.List[TextSnippet]]$TextSnippets
-    )
-
-    # TO-DO: validation    
+    )   
 
     [string]$json = $(ConvertTo-Json -InputObject $TextSnippets)
 
@@ -222,8 +237,6 @@ function New-TextFile {
 	    [parameter(Mandatory=$true)] [System.IO.FileInfo]$File,
 		[parameter(Mandatory=$true)] [string]$Content
     )
-
-    # TO-DO: validation 
 
 	if (Test-Path -Path $File) {
 
@@ -248,6 +261,7 @@ function Invoke-Script {
 
         [Logger]::Log("Validating the provided variables...")
 
+        [Validator]::ThrowsIfDirectoryDoesntExist($workingFolder)
         [Validator]::ThrowsIfStringNullOrEmpty($datasetFileName, "datasetFileName")
         [Validator]::ThrowsIfStringNullOrEmpty($delimiter, "delimiter")
         [Validator]::ThrowsIfStringNullOrEmpty($labelColumnName, "labelColumnName")
@@ -265,7 +279,12 @@ function Invoke-Script {
         [Logger]::Log([string]::Format("LabeledExamplesFileName: '{0}'.", $labeledExamplesFileName))
         [Logger]::Log([string]::Format("TextSnippetsFileName: '{0}'.", $textSnippetsFileName))
 
+        [Logger]::Log("Loading the provided dataset...")
+
         [System.IO.FileInfo]$datasetFile = $(Get-File -Folder $workingFolder -FileName $datasetFileName)
+        [Validator]::ThrowsIfFileDoesntExist($datasetFile.FullName)
+
+        [Logger]::Log("The provided dataset has been loaded.")
 
         [System.Collections.Generic.List[LabeledExample]]$labeledExamples = 
             $(Convert-CSVToLabeledExamples -File $datasetFile -Delimiter $delimiter -LabelColumnName $labelColumnName -TextColumnName $textColumnName)
