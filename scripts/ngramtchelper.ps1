@@ -63,7 +63,7 @@ class Validator {
     hidden Validator() { }
 
     # Methods
-    static [void] ValidateStringNullOrEmpty([string]$str, [string]$variableName)
+    static [void] ThrowsIfStringNullOrEmpty([string]$str, [string]$variableName)
     {
 
         if ([string]::IsNullOrWhiteSpace($str))
@@ -85,8 +85,8 @@ class LabeledExample {
     LabeledExample([string]$label, [string]$text)
     {
 
-        [Validator]::ValidateStringNullOrEmpty($label, "label")
-        [Validator]::ValidateStringNullOrEmpty($text, "text") 
+        [Validator]::ThrowsIfStringNullOrEmpty($label, "label")
+        [Validator]::ThrowsIfStringNullOrEmpty($text, "text") 
 
         $this.Label = $label
         $this.Text = $text
@@ -106,7 +106,7 @@ class TextSnippet {
     TextSnippet([string]$text)
     {
 
-        [Validator]::ValidateStringNullOrEmpty($text, "text") 
+        [Validator]::ThrowsIfStringNullOrEmpty($text, "text") 
 
         $this.Text = $text
 
@@ -245,6 +245,17 @@ function Invoke-Script {
     try { 
 
         [Logger]::Log("Beginning processing the provided dataset...")
+
+        [Logger]::Log("Validating the provided variables...")
+
+        [Validator]::ThrowsIfStringNullOrEmpty($datasetFileName, "datasetFileName")
+        [Validator]::ThrowsIfStringNullOrEmpty($delimiter, "delimiter")
+        [Validator]::ThrowsIfStringNullOrEmpty($labelColumnName, "labelColumnName")
+        [Validator]::ThrowsIfStringNullOrEmpty($textColumnName, "textColumnName")
+        [Validator]::ThrowsIfStringNullOrEmpty($labeledExamplesFileName, "labeledExamplesFileName")
+        [Validator]::ThrowsIfStringNullOrEmpty($textSnippetsFileName, "textSnippetsFileName")
+
+        [Logger]::Log("The provided variables have been validated.")
 
         [Logger]::Log([string]::Format("WorkingFolder: '{0}'.", $workingFolder))
         [Logger]::Log([string]::Format("DatasetFileName: '{0}'.", $datasetFileName))
