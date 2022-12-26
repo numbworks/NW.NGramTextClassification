@@ -12,6 +12,7 @@ Contact: numbworks@gmail.com
 | 2022-09-27 | numbworks | Updated to v3.0.0. |
 | 2022-10-16 | numbworks | Updated to v3.5.0. |
 | 2022-11-04 | numbworks | Updated to v3.6.0. |
+| 2022-12-26 | numbworks | Added "Appendix - NGramTokenizerRuleSet". |
 
 ## Introduction
 
@@ -258,6 +259,26 @@ Here an example of each JSON file produced by the library:
 3. [Session.json](ExampleFiles/Session.json) - v.3.6.0.0
 4. [SessionWithDisabledIndexSerialization.json](ExampleFiles/SessionWithDisabledIndexSerialization.json) - v.3.6.0.0
 5. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
+
+## Appendix - NGramTokenizerRuleSet
+
+One of the two constructors in the `NGramTokenizerRuleSet` class is decorated with the `[JsonConstructor]` attribute because otherwise `System.Text.Json.JsonSerializer` would use the default constructor to perform the serialization:
+
+```csharp
+[JsonConstructor] public NGramTokenizerRuleSet
+    (bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
+{
+
+    Validate(doForMonogram, doForBigram, doForTrigram, doForFourgram, doForFivegram);
+
+    DoForMonogram = doForMonogram;
+    DoForBigram = doForBigram;
+    DoForTrigram = doForTrigram;
+    DoForFourgram = doForFourgram;
+    DoForFivegram = doForFivegram;
+
+}
+```
 
 ## Markdown Toolset
 

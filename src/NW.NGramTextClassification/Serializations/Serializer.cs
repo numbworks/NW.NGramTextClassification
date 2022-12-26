@@ -82,7 +82,7 @@ namespace NW.NGramTextClassification.Serializations
                 return obj;
 
             }
-            catch(Exception e)
+            catch
             {
 
                 return default(T);
@@ -114,5 +114,5 @@ namespace NW.NGramTextClassification.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 06.11.2022
+    Last Update: 26.12.2022
 */
