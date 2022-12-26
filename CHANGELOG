@@ -1,4 +1,6 @@
 v3.7.0
+- Library:
+	- Performance: ClassifyMany() now performs 75% faster thanks to parallelism.
 - Documentation:
 	- Feature: added Documentation-NW.NGramTextClassificationScripts.md.
 - Scripts:
