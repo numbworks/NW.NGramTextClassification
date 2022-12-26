@@ -1,3 +1,9 @@
+v3.7.0
+- Documentation:
+	- Feature: added Documentation-NW.NGramTextClassificationScripts.md.
+- Scripts:
+	- Feature: added ngramtchelper.ps1.
+
 v3.6.0
 - Library:
 	- Feature: added support for the "CleanLabeledExamples" functionality.
