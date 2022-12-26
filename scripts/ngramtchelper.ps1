@@ -10,7 +10,7 @@
 #>
 
 # Variables
-[System.IO.DirectoryInfo]$workingFolder = [System.IO.DirectoryInfo]::new("C:\Users\Rubèn\Desktop\wf-ngramtc")
+[System.IO.DirectoryInfo]$workingFolder = [System.IO.DirectoryInfo]::new("C:\wf-ngramtc")
 [string]$datasetFileName = "dataset.csv"
 [string]$delimiter = ","
 [string]$labelColumnName = "Category"
