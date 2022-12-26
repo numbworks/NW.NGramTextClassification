@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
@@ -155,16 +157,17 @@ namespace NW.NGramTextClassification
             else
             {
 
-                List<TextClassifierResult> results = new List<TextClassifierResult>();
-                for (int i = 0; i < textSnippets.Count; i++)
+                ConcurrentBag<TextClassifierResult> tempResults = new ConcurrentBag<TextClassifierResult>();
+                Parallel.For(0, textSnippets.Count, i =>
                 {
 
                     TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples);
-                    results.Add(result);
+                    tempResults.Add(result);
 
-                }
+                });
 
-                TextClassifierSession session = CreateSession(_settings, results, Version);
+                List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
+                TextClassifierSession session = CreateSession(_settings, finalResults, Version);
 
                 return session;
 
@@ -668,6 +671,38 @@ namespace NW.NGramTextClassification
 
         }
 
+        private List<TextClassifierResult> RestoreOrderOrDefault(ConcurrentBag<TextClassifierResult> tempResults, List<TextSnippet> textSnippets)
+        {
+
+            // Thread-safe collections don't guarantee the source order, therefore defaultResults are not in the same order as textSnippets.
+            List<TextClassifierResult> defaultResults = tempResults.ToList();
+
+            try
+            {
+
+                // If textSnippets contains duplicates, we can't perform the ConcurrentBag re-ordering using TextSnippet.Text as unique identifier.
+                HashSet<TextSnippet> uniqueTextSnippets = new HashSet<TextSnippet>(textSnippets);
+                if (textSnippets.Count > uniqueTextSnippets.Count)
+                    return defaultResults;
+
+                List<string> ids = textSnippets.Select(textSnippet => textSnippet.Text).ToList();
+
+                // In some cases, a TextClassifierResult.TextSnippet is null, but it corresponds to TextSnippet.Text = null.
+                List<TextClassifierResult> finalResults = defaultResults.OrderBy(result => ids.IndexOf(result.TextSnippet?.Text ?? null)).ToList();
+
+                return finalResults;
+
+            }
+            catch
+            {
+
+                // If some other unpredictable error happens, we don't make the application fail but just return the default unordered result.
+                return defaultResults;
+
+            }
+
+        }
+
         #endregion
 
     }
@@ -675,5 +710,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 26.12.2022
 */

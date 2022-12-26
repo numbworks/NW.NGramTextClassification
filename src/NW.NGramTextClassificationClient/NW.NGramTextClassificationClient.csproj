@@ -13,10 +13,12 @@
 	<IsPackable>false</IsPackable>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>3.6.0</Version>
+		<Version>3.7.0</Version>
 		<AssemblyName>ngramtc</AssemblyName>
 		<ApplicationIcon>numbworks_logo_128x128px.ico</ApplicationIcon>
 		<PackageIcon>numbworks_logo_128x128px.png</PackageIcon>
+		<AssemblyVersion>3.7.0.0</AssemblyVersion>
+		<FileVersion>3.7.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

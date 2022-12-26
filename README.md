@@ -14,6 +14,7 @@ Contact: numbworks@gmail.com
 | 2021-02-15 | numbworks | Updated paragraphs with the correct content. |
 | 2021-09-24 | numbworks | Version numbers removed. |
 | 2022-09-27 | numbworks | Updated to v3.0.0. |
+| 2022-12-26 | numbworks | Updated to v3.7.0. |
 
 ## In Short
 
@@ -51,6 +52,7 @@ If you are an non-developer user, you can download the client from the [Releases
 
 - [Documentation: Library](docs/Documentation-NW.NGramTextClassification.md)
 - [Documentation: Client](docs/Documentation-NW.NGramTextClassificationClient.md)
+- [Documentation: Scripts](docs/Documentation-NW.NGramTextClassificationScripts.md)
 
 ## Other Links
 
