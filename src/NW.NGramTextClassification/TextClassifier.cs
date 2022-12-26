@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
@@ -155,16 +157,16 @@ namespace NW.NGramTextClassification
             else
             {
 
-                List<TextClassifierResult> results = new List<TextClassifierResult>();
-                for (int i = 0; i < textSnippets.Count; i++)
+                ConcurrentQueue<TextClassifierResult> queue = new ConcurrentQueue<TextClassifierResult>();
+                Parallel.For(0, textSnippets.Count, i =>
                 {
 
                     TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples);
-                    results.Add(result);
+                    queue.Enqueue(result);
 
-                }
+                });
 
-                TextClassifierSession session = CreateSession(_settings, results, Version);
+                TextClassifierSession session = CreateSession(_settings, queue.ToList(), Version);
 
                 return session;
 
