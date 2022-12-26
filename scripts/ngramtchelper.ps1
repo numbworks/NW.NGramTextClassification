@@ -5,23 +5,7 @@
     Last Update: 25.12.2022
     Description: 
 
-        This script is multiplatform (Powershell 7.x), but it has been tested on Windows only.
-
-        This script will:
-
-            - Load a dataset in CSV format intended for text classification tasks;
-                - For ex.: "Spam Text Message Classification" dataset on Kaggle
-            - Convert all its rows to Labeled Examples and Text Snippets;
-            - Save the outcomes as Json files.
-            
-        To use this script, please:
-
-            1. Create a working folder somewhere on your computer;
-            2. Store a CSV dataset in it;
-            3. Open this script in VSCode or similar code editor;
-            4. Edit the "Variables" section according to your CSV dataset file;
-            5. Run the script;
-            6. Done!
+        Please check: docs/Documentation-NW.NGramTextClassificationScripts.md
 
 #>
 
