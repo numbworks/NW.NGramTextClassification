@@ -35,13 +35,13 @@ namespace NW.NGramTextClassification.UnitTests
                                         new TextClassifierSettings()
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("components").Message
+                new ArgumentNullException("componentCollection").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier(
-                                        new TextClassifierComponents(),
+                                        new ComponentCollection(),
                                         null
                                 )),
                 typeof(ArgumentNullException),
@@ -404,7 +404,7 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsInstanceOf<string>(actual.AsciiBanner);
             Assert.IsInstanceOf<string>(actual.Version);
 
-            Assert.IsInstanceOf<TextClassifierComponents>(TextClassifier.DefaultTextClassifierComponents);
+            Assert.IsInstanceOf<ComponentCollection>(TextClassifier.DefaultComponentCollection);
             Assert.IsInstanceOf<TextClassifierSettings>(TextClassifier.DefaultTextClassifierSettings);
             Assert.IsInstanceOf<INGramTokenizerRuleSet>(TextClassifier.DefaultNGramTokenizerRuleSet);
             Assert.IsInstanceOf<TextClassifierResult>(TextClassifier.DefaultTextClassifierResult);
@@ -421,23 +421,23 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
-            List<string> expectedLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components);
+            List<string> expectedLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentCollection);
 
             // Act
             TextClassifierSession actual = textClassifier.ClassifyOrDefault(textSnippet, tokenizerRuleSet, labeledExamples);
@@ -458,23 +458,23 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 5);
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentCollection).GetRange(0, 5);
             // We skip all the messages in the middle, otherwise the test would be too complex.
             List<string> finalLogMessages = new List<string>()
             {
@@ -509,23 +509,23 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner, 
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner, 
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 6);
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentCollection).GetRange(0, 6);
             // We skip all the messages in the middle, otherwise the test would be too complex.
             List<string> finalLogMessages = new List<string>()
             {
@@ -559,23 +559,23 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
-            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, components).GetRange(0, 6);
+            List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentCollection).GetRange(0, 6);
             // We skip all the messages in the middle, otherwise the test would be too complex.
             List<string> finalLogMessages = new List<string>()
             {
@@ -611,20 +611,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -632,7 +632,7 @@ namespace NW.NGramTextClassification.UnitTests
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
                           folderPath: TextClassifierSettings.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -671,20 +671,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -692,7 +692,7 @@ namespace NW.NGramTextClassification.UnitTests
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
                           folderPath: TextClassifierSettings.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -732,20 +732,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -753,7 +753,7 @@ namespace NW.NGramTextClassification.UnitTests
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
                           folderPath: TextClassifierSettings.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -793,20 +793,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -814,7 +814,7 @@ namespace NW.NGramTextClassification.UnitTests
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
                           folderPath: TextClassifierSettings.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -857,20 +857,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -878,7 +878,7 @@ namespace NW.NGramTextClassification.UnitTests
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
                           folderPath: TextClassifierSettings.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -922,20 +922,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                             truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -943,7 +943,7 @@ namespace NW.NGramTextClassification.UnitTests
                             minimumAccuracyMultipleLabels: 1.0,                                                            // 0.98 <= 1.0
                             folderPath: TextClassifierSettings.DefaultFolderPath
                         );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -988,20 +988,20 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
             TextClassifierSettings settings
                 = new TextClassifierSettings(
                           truncateTextInLogMessagesAfter: TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter,
@@ -1009,7 +1009,7 @@ namespace NW.NGramTextClassification.UnitTests
                           minimumAccuracyMultipleLabels: TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,        // 0.98 > 0.5
                           folderPath: TextClassifierSettings.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -1056,21 +1056,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggerAsciiBanner = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
-                          loggingAction: TextClassifierComponents.DefaultLoggingAction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
+                          loggingAction: ComponentCollection.DefaultLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: fakeLoggerAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             List<string> expectedMessages = new List<string>()
             {
@@ -1101,21 +1101,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, settings);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, settings);
 
             List<string> expectedLogMessages = new List<string>()
             {
@@ -1149,21 +1149,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1192,21 +1192,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager("Unproper Json content"),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1239,21 +1239,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1282,21 +1282,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager("Unproper Json content"),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1329,21 +1329,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1372,21 +1372,21 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             List<string> actualLogMessages = new List<string>();
             Action<string> fakeLoggingAction = (message) => actualLogMessages.Add(message);
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager("Unproper Json content"),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+                          nowFunction: ComponentCollection.DefaultNowFunction);
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1417,21 +1417,21 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1464,21 +1464,21 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1512,21 +1512,21 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManager(TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1560,23 +1560,23 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManagerThrowingWriteExceptions(
                                                 content: LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content,
                                                 writeExceptionMessage: "A random write-to-disk issue."),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1609,23 +1609,23 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManagerThrowingWriteExceptions(
                                                 content: LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content,
                                                 writeExceptionMessage: "A random write-to-disk issue."),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1658,23 +1658,23 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FakeFileManagerThrowingWriteExceptions(
                                                 content: TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content,
                                                 writeExceptionMessage: "A random write-to-disk issue."),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1751,21 +1751,21 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             List<string> expectedLogMessages = new List<string>()
             {
@@ -1798,21 +1798,21 @@ namespace NW.NGramTextClassification.UnitTests
 
             Func<DateTime> FakeNowFunction = () => Filenames.ObjectMother.FakeNow;
 
-            TextClassifierComponents components
-                = new TextClassifierComponents(
+            ComponentCollection componentCollection
+                = new ComponentCollection(
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
-                          loggingActionAsciiBanner: TextClassifierComponents.DefaultLoggingActionAsciiBanner,
+                          loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
                           fileManager: new FileManager(),
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(components, new TextClassifierSettings());
+            TextClassifier textClassifier = new TextClassifier(componentCollection, new TextClassifierSettings());
 
             List<string> expectedLogMessages = new List<string>()
             {
@@ -1862,15 +1862,15 @@ namespace NW.NGramTextClassification.UnitTests
         #region SupportMethods
 
         private static List<string> CreateWhenAllRulesFailed
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierComponents components)
+            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, ComponentCollection componentCollection)
         {
 
             string expectedText
-                = TextClassifierComponents.DefaultTextTruncatingFunction(
+                = ComponentCollection.DefaultTextTruncatingFunction(
                         textSnippet.Text,
                         TextClassifierSettings.DefaultTruncateTextInLogMessagesAfter);
 
-            List<INGram> expectedNGrams = components.NGramsTokenizer.DoForRuleSetOrDefault(textSnippet.Text, tokenizerRuleSet);
+            List<INGram> expectedNGrams = componentCollection.NGramsTokenizer.DoForRuleSetOrDefault(textSnippet.Text, tokenizerRuleSet);
 
             List<string> expectedMessages = new List<string>()
             {
@@ -1897,5 +1897,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 25.01.2024
 */

@@ -18,7 +18,7 @@ namespace NW.NGramTextClassificationClient.Shared
 
         #region Fields
 
-        private ITextClassifierComponentsFactory _componentsFactory { get; }
+        private IComponentCollectionFactory _componentCollectionFactory { get; }
         private ITextClassifierSettingsFactory _settingsFactory { get; }
         private ITextClassifierFactory _textClassifierFactory { get; }
 
@@ -40,14 +40,14 @@ namespace NW.NGramTextClassificationClient.Shared
         /// <summary>Initializes a <see cref="LibraryBroker"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
         public LibraryBroker
-            (ITextClassifierComponentsFactory componentsFactory, ITextClassifierSettingsFactory settingsFactory, ITextClassifierFactory textClassifierFactory)
+            (IComponentCollectionFactory componentCollectionFactory, ITextClassifierSettingsFactory settingsFactory, ITextClassifierFactory textClassifierFactory)
         {
 
-            Validator.ValidateObject(componentsFactory, nameof(componentsFactory));
+            Validator.ValidateObject(componentCollectionFactory, nameof(componentCollectionFactory));
             Validator.ValidateObject(settingsFactory, nameof(settingsFactory));
             Validator.ValidateObject(textClassifierFactory, nameof(textClassifierFactory));
 
-            _componentsFactory = componentsFactory;
+            _componentCollectionFactory = componentCollectionFactory;
             _settingsFactory = settingsFactory;
             _textClassifierFactory = textClassifierFactory;
 
@@ -55,7 +55,7 @@ namespace NW.NGramTextClassificationClient.Shared
 
         /// <summary>Initializes a <see cref="LibraryBroker"/> instance using default parameters.</summary>
         public LibraryBroker()
-            : this(new TextClassifierComponentsFactory(), new TextClassifierSettingsFactory(), new TextClassifierFactory()) { }
+            : this(new ComponentCollectionFactory(), new TextClassifierSettingsFactory(), new TextClassifierFactory()) { }
 
         #endregion
 
@@ -64,7 +64,7 @@ namespace NW.NGramTextClassificationClient.Shared
         public int ShowHeader()
         {
 
-            TextClassifierComponents components = _componentsFactory.Create();
+            ComponentCollection components = _componentCollectionFactory.Create();
             TextClassifierSettings settings = _settingsFactory.Create();
             TextClassifier textClassifier = _textClassifierFactory.Create(components, settings);
 
@@ -76,21 +76,21 @@ namespace NW.NGramTextClassificationClient.Shared
         public int RunAboutMain()
         {
 
-            TextClassifierComponents components = _componentsFactory.Create();
+            ComponentCollection componentCollection = _componentCollectionFactory.Create();
             TextClassifierSettings settings = _settingsFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(components, settings);
+            TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settings);
 
-            ShowHeader(components, textClassifier);
+            ShowHeader(componentCollection, textClassifier);
 
-            components.LoggingActionAsciiBanner(Shared.MessageCollection.Application_Description);
-            components.LoggingActionAsciiBanner(SeparatorLine);
+            componentCollection.LoggingActionAsciiBanner(Shared.MessageCollection.Application_Description);
+            componentCollection.LoggingActionAsciiBanner(SeparatorLine);
 
-            components.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Author);
-            components.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Email);
-            components.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Url);
-            components.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_License);
+            componentCollection.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Author);
+            componentCollection.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Email);
+            componentCollection.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Url);
+            componentCollection.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_License);
 
-            ShowFooter(components);
+            ShowFooter(componentCollection);
 
             return Success;
 
@@ -105,11 +105,11 @@ namespace NW.NGramTextClassificationClient.Shared
 
                 classifyData = Defaultize(classifyData);
 
-                TextClassifierComponents components = _componentsFactory.Create();
+                ComponentCollection componentCollection = _componentCollectionFactory.Create();
                 TextClassifierSettings settings = _settingsFactory.Create(classifyData);
-                TextClassifier textClassifier = _textClassifierFactory.Create(components, settings);
+                TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settings);
 
-                ShowHeader(components, textClassifier);
+                ShowHeader(componentCollection, textClassifier);
 
                 List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(classifyData, textClassifier);
                 List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(classifyData, textClassifier);
@@ -128,7 +128,7 @@ namespace NW.NGramTextClassificationClient.Shared
                 if (classifyData.SaveSession)
                     textClassifier.SaveSession(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);
 
-                ShowFooter(components);
+                ShowFooter(componentCollection);
 
                 return Success;
 
@@ -149,29 +149,29 @@ namespace NW.NGramTextClassificationClient.Shared
         private int LogAndReturnFailure(Exception e)
         {
 
-            TextClassifierComponents components = _componentsFactory.Create();
+            ComponentCollection componentCollection = _componentCollectionFactory.Create();
 
-            components.LoggingAction(ErrorMessageFormatter(e.Message));
+            componentCollection.LoggingAction(ErrorMessageFormatter(e.Message));
             if (e.InnerException != null)
-                components.LoggingAction(ErrorMessageFormatter(e.InnerException.Message));
+                componentCollection.LoggingAction(ErrorMessageFormatter(e.InnerException.Message));
 
-            ShowFooter(components);
+            ShowFooter(componentCollection);
 
             return Failure;
 
         }
-        private void ShowHeader(TextClassifierComponents components, TextClassifier textClassifier)
+        private void ShowHeader(ComponentCollection componentCollection, TextClassifier textClassifier)
         {
 
-            components.LoggingActionAsciiBanner(SeparatorLine);
-            components.LoggingActionAsciiBanner(textClassifier.AsciiBanner);
-            components.LoggingActionAsciiBanner(SeparatorLine);
+            componentCollection.LoggingActionAsciiBanner(SeparatorLine);
+            componentCollection.LoggingActionAsciiBanner(textClassifier.AsciiBanner);
+            componentCollection.LoggingActionAsciiBanner(SeparatorLine);
 
         }
-        private void ShowFooter(TextClassifierComponents components)
+        private void ShowFooter(ComponentCollection componentCollection)
         {
 
-            components.LoggingActionAsciiBanner(SeparatorLine);
+            componentCollection.LoggingActionAsciiBanner(SeparatorLine);
 
         }
 
@@ -240,5 +240,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 25.01.2024
 */

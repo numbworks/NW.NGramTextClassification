@@ -25,18 +25,18 @@ namespace NW.NGramTextClassificationClient.UnitTests
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentsFactory: null,
+                                componentCollectionFactory: null,
                                 settingsFactory: new TextClassifierSettingsFactory(),
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("componentsFactory").Message
+                new ArgumentNullException("componentCollectionFactory").Message
             ).SetArgDisplayNames($"{nameof(libraryBrokerExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentsFactory: new TextClassifierComponentsFactory(),
+                                componentCollectionFactory: new ComponentCollectionFactory(),
                                 settingsFactory: null,
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
@@ -47,7 +47,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentsFactory: new TextClassifierComponentsFactory(),
+                                componentCollectionFactory: new ComponentCollectionFactory(),
                                 settingsFactory: new TextClassifierSettingsFactory(),
                                 textClassifierFactory: null)
                 ),
@@ -92,11 +92,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
         {
 
             // Arrange
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple();
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple();
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
                         settingsFactory: new TextClassifierSettingsFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -131,11 +131,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
                         settingsFactory: new TextClassifierSettingsFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -200,11 +200,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
                         settingsFactory: new TextClassifierSettingsFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -252,11 +252,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
                         settingsFactory: new TextClassifierSettingsFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -305,11 +305,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
+                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
                         settingsFactory: new TextClassifierSettingsFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -353,7 +353,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Support_methods
 
-        private (List<string>, List<string>, TextClassifierComponents) CreateTuple
+        private (List<string>, List<string>, ComponentCollection) CreateTuple
             (List<(string fileName, string content)> readBehaviours = null)
         {
 
@@ -363,12 +363,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
             List<string> messagesAsciiBanner = new List<string>();
             Action<string> fakeLoggingActionAsciiBanner = (message) => messagesAsciiBanner.Add(message);
 
-            TextClassifierComponents components = new TextClassifierComponents(
+            ComponentCollection componentCollection = new ComponentCollection(
 
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
@@ -376,9 +376,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
                           fileManager: new FakeFileManagerWithDynamicRead(readBehaviours), // When we pass null, it means the test won't use it.
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentCollection.DefaultNowFunction);
 
-            return (messages, messagesAsciiBanner, components);
+            return (messages, messagesAsciiBanner, componentCollection);
 
         }
 
@@ -389,5 +389,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 25.01.2024
 */

@@ -21,8 +21,8 @@ namespace NW.NGramTextClassificationClient.Shared
 
         #region Methods_public
 
-        public TextClassifier Create(TextClassifierComponents components, TextClassifierSettings settings)
-            => new TextClassifier(components, settings);
+        public TextClassifier Create(ComponentCollection componentCollection, TextClassifierSettings settings)
+            => new TextClassifier(componentCollection, settings);
 
         #endregion
 
@@ -34,5 +34,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 25.01.2024
 */

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace NW.NGramTextClassificationClient.UnitTests
 {
     [TestFixture]
-    public class TextClassifierComponentsFactoryTests
+    public class ComponentCollectionFactoryTests
     {
 
         #region Fields
@@ -17,29 +17,29 @@ namespace NW.NGramTextClassificationClient.UnitTests
         #region Tests
 
         [Test]
-        public void TextClassifierComponentsFactory_ShouldCreateAnObjectOfTypeTextClassifierComponentsFactory_WhenInvoked()
+        public void ComponentCollectionFactory_ShouldCreateAnObjectOfTypeComponentCollectionFactory_WhenInvoked()
         {
 
             // Arrange
             // Act
-            TextClassifierComponentsFactory actual = new TextClassifierComponentsFactory();
+            ComponentCollectionFactory actual = new ComponentCollectionFactory();
 
             // Assert
-            Assert.IsInstanceOf<TextClassifierComponentsFactory>(actual);
+            Assert.IsInstanceOf<ComponentCollectionFactory>(actual);
 
         }
 
         [Test]
-        public void Create_ShouldCreateAnObjectOfTypeTextClassifierComponents_WhenInvoked()
+        public void Create_ShouldCreateAnObjectOfTypeComponentCollection_WhenInvoked()
         {
 
             // Arrange
             // Act
-            TextClassifierComponents actual
-                = new TextClassifierComponentsFactory().Create();
+            ComponentCollection actual
+                = new ComponentCollectionFactory().Create();
 
             // Assert
-            Assert.IsInstanceOf<TextClassifierComponents>(actual);
+            Assert.IsInstanceOf<ComponentCollection>(actual);
 
         }
 
@@ -56,5 +56,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 25.01.2024
 */

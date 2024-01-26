@@ -36,7 +36,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             // Arrange
             // Act
             TextClassifier actual 
-                = new TextClassifierFactory().Create(components: new TextClassifierComponents(), settings: new TextClassifierSettings());
+                = new TextClassifierFactory().Create(componentCollection: new ComponentCollection(), settings: new TextClassifierSettings());
 
             // Assert
             Assert.IsInstanceOf<TextClassifier>(actual);
