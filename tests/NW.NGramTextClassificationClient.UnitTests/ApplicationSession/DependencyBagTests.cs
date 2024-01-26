@@ -6,21 +6,21 @@ using McMaster.Extensions.CommandLineUtils.Validation;
 namespace NW.NGramTextClassificationClient.UnitTests
 {
     [TestFixture]
-    public class SessionManagerComponentsTests
+    public class DependencyBagTests
     {
 
         #region Fields
 
-        private static TestCaseData[] sessionManagerComponentsExceptionTestCases =
+        private static TestCaseData[] dependencyBagExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new SessionManagerComponents(null)
+                    () => new DependencyBag(null)
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("doubleManager").Message
-            ).SetArgDisplayNames($"{nameof(sessionManagerComponentsExceptionTestCases)}_01")
+            ).SetArgDisplayNames($"{nameof(dependencyBagExceptionTestCases)}_01")
 
         };
 
@@ -31,23 +31,23 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Tests
 
-        [TestCaseSource(nameof(sessionManagerComponentsExceptionTestCases))]
-        public void SessionManagerComponents_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(dependencyBagExceptionTestCases))]
+        public void DependencyBag_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void SessionManagerComponents_ShouldCreateAnObjectOfThisType_WhenInvoked()
+        public void DependencyBag_ShouldCreateAnObjectOfThisType_WhenInvoked()
         {
 
             // Arrange
             // Act
-            SessionManagerComponents actual1 = new SessionManagerComponents();
-            SessionManagerComponents actual2 = new SessionManagerComponents(new DoubleManager());
+            DependencyBag actual1 = new DependencyBag();
+            DependencyBag actual2 = new DependencyBag(new DoubleManager());
 
             // Assert
-            Assert.IsInstanceOf<SessionManagerComponents>(actual1);
-            Assert.IsInstanceOf<SessionManagerComponents>(actual2);
+            Assert.IsInstanceOf<DependencyBag>(actual1);
+            Assert.IsInstanceOf<DependencyBag>(actual2);
 
             Assert.IsInstanceOf<IDoubleManager>(actual1.DoubleManager);
             Assert.IsInstanceOf<IOptionValidator>(actual1.MinimumAccuracyValidator);
@@ -67,5 +67,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 26.01.2024
 */

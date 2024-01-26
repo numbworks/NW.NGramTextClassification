@@ -20,7 +20,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                     () => new ApplicationSectionsFactory()
                                 .Create(
                                     libraryBroker: null,
-                                    sessionManagerComponents: new SessionManagerComponents())
+                                    dependencyBag: new DependencyBag())
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("libraryBroker").Message
@@ -31,10 +31,10 @@ namespace NW.NGramTextClassificationClient.UnitTests
                     () => new ApplicationSectionsFactory()
                                 .Create(
                                     libraryBroker: new LibraryBroker(),
-                                    sessionManagerComponents: null)
+                                    dependencyBag: null)
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("sessionManagerComponents").Message
+                new ArgumentNullException("dependencyBag").Message
             ).SetArgDisplayNames($"{nameof(createExceptionTestCases)}_02")
 
         };
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 = new ApplicationSectionsFactory()
                                 .Create(
                                     libraryBroker: new LibraryBroker(),
-                                    sessionManagerComponents: new SessionManagerComponents());
+                                    dependencyBag: new DependencyBag());
 
             // Assert
             Assert.IsInstanceOf<ApplicationSections>(actual);
@@ -94,5 +94,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 26.01.2024
 */

@@ -64,11 +64,11 @@ namespace NW.NGramTextClassificationClient.Shared
         public int ShowHeader()
         {
 
-            ComponentCollection components = _componentCollectionFactory.Create();
+            ComponentCollection componentCollection = _componentCollectionFactory.Create();
             TextClassifierSettings settings = _settingsFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(components, settings);
+            TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settings);
 
-            ShowHeader(components, textClassifier);
+            ShowHeader(componentCollection, textClassifier);
 
             return Success;
 
