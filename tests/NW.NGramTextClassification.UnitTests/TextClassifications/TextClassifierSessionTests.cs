@@ -16,18 +16,18 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settings: null,
+                                    settingCollection: null,
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: new TextClassifier().Version
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settings").Message
+                new ArgumentNullException("settingCollection").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settings: new TextClassifierSettings(),
+                                    settingCollection: new SettingCollection(),
                                     results: null,
                                     version: new TextClassifier().Version
                                 )),
@@ -38,7 +38,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settings: new TextClassifierSettings(),
+                                    settingCollection: new SettingCollection(),
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: null
                                 )),
@@ -68,7 +68,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             // Act
             TextClassifierSession actual
                 = new TextClassifierSession(
-                        settings: new TextClassifierSettings(),
+                        settingCollection: new SettingCollection(),
                         results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                         version: new TextClassifier().Version
                     );
@@ -88,5 +88,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update:26.01.2024
 */

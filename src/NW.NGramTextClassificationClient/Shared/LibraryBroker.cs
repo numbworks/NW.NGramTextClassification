@@ -19,7 +19,7 @@ namespace NW.NGramTextClassificationClient.Shared
         #region Fields
 
         private IComponentCollectionFactory _componentCollectionFactory { get; }
-        private ITextClassifierSettingsFactory _settingsFactory { get; }
+        private ISettingCollectionFactory _settingCollectionFactory { get; }
         private ITextClassifierFactory _textClassifierFactory { get; }
 
         #endregion
@@ -40,22 +40,22 @@ namespace NW.NGramTextClassificationClient.Shared
         /// <summary>Initializes a <see cref="LibraryBroker"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
         public LibraryBroker
-            (IComponentCollectionFactory componentCollectionFactory, ITextClassifierSettingsFactory settingsFactory, ITextClassifierFactory textClassifierFactory)
+            (IComponentCollectionFactory componentCollectionFactory, ISettingCollectionFactory settingCollectionFactory, ITextClassifierFactory textClassifierFactory)
         {
 
             Validator.ValidateObject(componentCollectionFactory, nameof(componentCollectionFactory));
-            Validator.ValidateObject(settingsFactory, nameof(settingsFactory));
+            Validator.ValidateObject(settingCollectionFactory, nameof(settingCollectionFactory));
             Validator.ValidateObject(textClassifierFactory, nameof(textClassifierFactory));
 
             _componentCollectionFactory = componentCollectionFactory;
-            _settingsFactory = settingsFactory;
+            _settingCollectionFactory = settingCollectionFactory;
             _textClassifierFactory = textClassifierFactory;
 
         }
 
         /// <summary>Initializes a <see cref="LibraryBroker"/> instance using default parameters.</summary>
         public LibraryBroker()
-            : this(new ComponentCollectionFactory(), new TextClassifierSettingsFactory(), new TextClassifierFactory()) { }
+            : this(new ComponentCollectionFactory(), new SettingCollectionFactory(), new TextClassifierFactory()) { }
 
         #endregion
 
@@ -65,8 +65,8 @@ namespace NW.NGramTextClassificationClient.Shared
         {
 
             ComponentCollection componentCollection = _componentCollectionFactory.Create();
-            TextClassifierSettings settings = _settingsFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settings);
+            SettingCollection settingCollection = _settingCollectionFactory.Create();
+            TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settingCollection);
 
             ShowHeader(componentCollection, textClassifier);
 
@@ -77,8 +77,8 @@ namespace NW.NGramTextClassificationClient.Shared
         {
 
             ComponentCollection componentCollection = _componentCollectionFactory.Create();
-            TextClassifierSettings settings = _settingsFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settings);
+            SettingCollection settingCollection = _settingCollectionFactory.Create();
+            TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settingCollection);
 
             ShowHeader(componentCollection, textClassifier);
 
@@ -106,8 +106,8 @@ namespace NW.NGramTextClassificationClient.Shared
                 classifyData = Defaultize(classifyData);
 
                 ComponentCollection componentCollection = _componentCollectionFactory.Create();
-                TextClassifierSettings settings = _settingsFactory.Create(classifyData);
-                TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settings);
+                SettingCollection settingCollection = _settingCollectionFactory.Create(classifyData);
+                TextClassifier textClassifier = _textClassifierFactory.Create(componentCollection, settingCollection);
 
                 ShowHeader(componentCollection, textClassifier);
 
@@ -181,10 +181,10 @@ namespace NW.NGramTextClassificationClient.Shared
             ClassifyData updated = new ClassifyData(
                     labeledExamples: classifyData.LabeledExamples,
                     textSnippets: classifyData.TextSnippets,
-                    folderPath: classifyData.FolderPath ?? TextClassifierSettings.DefaultFolderPath,
+                    folderPath: classifyData.FolderPath ?? SettingCollection.DefaultFolderPath,
                     tokenizerRuleSet: classifyData.TokenizerRuleSet,
-                    minAccuracySingle: classifyData.MinAccuracySingle ?? TextClassifierSettings.DefaultMinimumAccuracySingleLabel,
-                    minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels,
+                    minAccuracySingle: classifyData.MinAccuracySingle ?? SettingCollection.DefaultMinimumAccuracySingleLabel,
+                    minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? SettingCollection.DefaultMinimumAccuracyMultipleLabels,
                     saveSession: classifyData.SaveSession,
                     cleanLabeledExamples: classifyData.CleanLabeledExamples,
                     disableIndexSerialization: classifyData.DisableIndexSerialization
@@ -240,5 +240,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.01.2024
+    Last Update: 26.01.2024
 */

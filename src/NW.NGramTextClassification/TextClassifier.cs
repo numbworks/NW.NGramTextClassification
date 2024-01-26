@@ -24,14 +24,14 @@ namespace NW.NGramTextClassification
         #region Fields
 
         private ComponentCollection _componentCollection;
-        private TextClassifierSettings _settings;
+        private SettingCollection _settingCollection;
 
         #endregion
 
         #region Properties
 
         public static ComponentCollection DefaultComponentCollection { get; } = new ComponentCollection();
-        public static TextClassifierSettings DefaultTextClassifierSettings { get; } = new TextClassifierSettings();
+        public static SettingCollection DefaultSettingCollection { get; } = new SettingCollection();
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
         public static TextClassifierResult DefaultTextClassifierResult { get; } 
             = new TextClassifierResult(null, null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
@@ -72,14 +72,14 @@ namespace NW.NGramTextClassification
         #region Constructors
 
         /// <summary>Initializes a <see cref="TextClassifier"/> instance.</summary>
-        public TextClassifier(ComponentCollection componentCollection, TextClassifierSettings settings)
+        public TextClassifier(ComponentCollection componentCollection, SettingCollection settingCollection)
         {
 
             Validator.ValidateObject(componentCollection, nameof(componentCollection));
-            Validator.ValidateObject(settings, nameof(settings));
+            Validator.ValidateObject(settingCollection, nameof(settingCollection));
 
             _componentCollection = componentCollection;
-            _settings = settings;
+            _settingCollection = settingCollection;
 
             Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             AsciiBanner = _componentCollection.AsciiBannerManager.Create(Version);
@@ -88,7 +88,7 @@ namespace NW.NGramTextClassification
 
         /// <summary>Initializes a <see cref="TextClassifier"/> instance using default parameters.</summary>
         public TextClassifier()
-            : this(DefaultComponentCollection, DefaultTextClassifierSettings) { }
+            : this(DefaultComponentCollection, DefaultSettingCollection) { }
 
         #endregion
 
@@ -111,7 +111,7 @@ namespace NW.NGramTextClassification
                 _componentCollection.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
                
                 TextClassifierResult result = DefaultTextClassifierResult;
-                TextClassifierSession session = CreateSession(_settings, result, Version);
+                TextClassifierSession session = CreateSession(_settingCollection, result, Version);
 
                 return session;
 
@@ -120,7 +120,7 @@ namespace NW.NGramTextClassification
             {
 
                 TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples);
-                TextClassifierSession session = CreateSession(_settings, result, Version);
+                TextClassifierSession session = CreateSession(_settingCollection, result, Version);
 
                 return session;
 
@@ -149,7 +149,7 @@ namespace NW.NGramTextClassification
                 List<TextClassifierResult> results = new List<TextClassifierResult>();
                 results.Add(DefaultTextClassifierResult);
 
-                TextClassifierSession session = CreateSession(_settings, results, Version);
+                TextClassifierSession session = CreateSession(_settingCollection, results, Version);
 
                 return session;
 
@@ -167,7 +167,7 @@ namespace NW.NGramTextClassification
                 });
 
                 List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
-                TextClassifierSession session = CreateSession(_settings, finalResults, Version);
+                TextClassifierSession session = CreateSession(_settingCollection, finalResults, Version);
 
                 return session;
 
@@ -235,7 +235,7 @@ namespace NW.NGramTextClassification
         private void LogInitialMessages(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
-            string truncated = _componentCollection.TextTruncatingFunction(textSnippet.Text, _settings.TruncateTextInLogMessagesAfter);
+            string truncated = _componentCollection.TextTruncatingFunction(textSnippet.Text, _settingCollection.TruncateTextInLogMessagesAfter);
 
             _componentCollection.LoggingAction(TextClassifications.MessageCollection.AttemptingToClassifyProvidedSnippet);
             _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingSnippetHasBeenProvided(truncated));
@@ -291,17 +291,17 @@ namespace NW.NGramTextClassification
             return result;
 
         }        
-        private TextClassifierSession CreateSession(TextClassifierSettings settings, TextClassifierResult result, string version)
+        private TextClassifierSession CreateSession(SettingCollection settingCollection, TextClassifierResult result, string version)
         {
 
             List<TextClassifierResult> results = new List<TextClassifierResult>();
             results.Add(result);
 
-            return new TextClassifierSession(settings: settings, results: results, version: version);
+            return new TextClassifierSession(settingCollection: settingCollection, results: results, version: version);
 
         }
-        private TextClassifierSession CreateSession(TextClassifierSettings settings, List<TextClassifierResult> results, string version)
-            => new TextClassifierSession(settings: settings, results: results, version: version);
+        private TextClassifierSession CreateSession(SettingCollection settingCollection, List<TextClassifierResult> results, string version)
+            => new TextClassifierSession(settingCollection: settingCollection, results: results, version: version);
 
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
@@ -443,14 +443,14 @@ namespace NW.NGramTextClassification
             }
             _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreAllIndexAveragesEqualToZero)));
 
-            if (IsSingleLabelAndHigherEqualThanMinimumAccuracy(indexAverages, _settings))
+            if (IsSingleLabelAndHigherEqualThanMinimumAccuracy(indexAverages, _settingCollection))
             {
                 _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsSingleLabelAndHigherEqualThanMinimumAccuracy)));           
                 return LogAndReturnLabel(indexAverages);
             }
             _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsSingleLabelAndHigherEqualThanMinimumAccuracy)));
 
-            if (IsSingleLabelAndLessThanMinimumAccuracy(indexAverages, _settings))
+            if (IsSingleLabelAndLessThanMinimumAccuracy(indexAverages, _settingCollection))
             {
                 _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsSingleLabelAndLessThanMinimumAccuracy)));
                 return null;
@@ -473,7 +473,7 @@ namespace NW.NGramTextClassification
             }
             _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreTwoHighestIndexAveragesSameValue)));
 
-            if (IsLessThanMinimumAccuracyMultipleLabels(indexAverages, _settings))
+            if (IsLessThanMinimumAccuracyMultipleLabels(indexAverages, _settingCollection))
             {
                 _componentCollection.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsLessThanMinimumAccuracyMultipleLabels)));
                 return null;
@@ -503,10 +503,10 @@ namespace NW.NGramTextClassification
             return false;
 
         }
-        private bool IsSingleLabelAndHigherEqualThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
-            => (indexAverages.Count == 1 && indexAverages[0].Value >= settings.MinimumAccuracySingleLabel);
-        private bool IsSingleLabelAndLessThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
-            => (indexAverages.Count == 1 && indexAverages[0].Value < settings.MinimumAccuracySingleLabel);
+        private bool IsSingleLabelAndHigherEqualThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, SettingCollection settingCollection)
+            => (indexAverages.Count == 1 && indexAverages[0].Value >= settingCollection.MinimumAccuracySingleLabel);
+        private bool IsSingleLabelAndLessThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, SettingCollection settingCollection)
+            => (indexAverages.Count == 1 && indexAverages[0].Value < settingCollection.MinimumAccuracySingleLabel);
         private bool AreAllIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 
@@ -548,8 +548,8 @@ namespace NW.NGramTextClassification
             return (indexAverages[0].Value == indexAverages[1].Value);
 
         }
-        private bool IsLessThanMinimumAccuracyMultipleLabels(List<SimilarityIndexAverage> indexAverages, TextClassifierSettings settings)
-            => (indexAverages[0].Value < settings.MinimumAccuracyMultipleLabels);
+        private bool IsLessThanMinimumAccuracyMultipleLabels(List<SimilarityIndexAverage> indexAverages, SettingCollection settingCollection)
+            => (indexAverages[0].Value < settingCollection.MinimumAccuracyMultipleLabels);
         private string LogAndReturnLabel(List<SimilarityIndexAverage> indexAverages)
         {
 

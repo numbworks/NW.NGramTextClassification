@@ -24,15 +24,15 @@ namespace NW.NGramTextClassification.TextClassifications
         /// <summary>
         /// Initializes a <see cref="TextClassifierSession"/> instance.
         /// </summary>
-        public TextClassifierSession(TextClassifierSettings settings, List<TextClassifierResult> results, string version)
+        public TextClassifierSession(SettingCollection settingCollection, List<TextClassifierResult> results, string version)
         {
 
-            Validator.ValidateObject(settings, nameof(settings));
+            Validator.ValidateObject(settingCollection, nameof(settingCollection));
             Validator.ValidateList(results, nameof(results));
             Validator.ValidateStringNullOrWhiteSpace(version, nameof(version));
 
-            MinimumAccuracySingleLabel = settings.MinimumAccuracySingleLabel;
-            MinimumAccuracyMultipleLabels = settings.MinimumAccuracyMultipleLabels;
+            MinimumAccuracySingleLabel = settingCollection.MinimumAccuracySingleLabel;
+            MinimumAccuracyMultipleLabels = settingCollection.MinimumAccuracyMultipleLabels;
 
             Results = results;
             Version = version;
@@ -49,5 +49,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update: 26.01.2024
 */

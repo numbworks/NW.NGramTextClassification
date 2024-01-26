@@ -26,7 +26,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new LibraryBroker(
                                 componentCollectionFactory: null,
-                                settingsFactory: new TextClassifierSettingsFactory(),
+                                settingCollectionFactory: new SettingCollectionFactory(),
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
@@ -37,18 +37,18 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new LibraryBroker(
                                 componentCollectionFactory: new ComponentCollectionFactory(),
-                                settingsFactory: null,
+                                settingCollectionFactory: null,
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settingsFactory").Message
+                new ArgumentNullException("settingCollectionFactory").Message
             ).SetArgDisplayNames($"{nameof(libraryBrokerExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
                                 componentCollectionFactory: new ComponentCollectionFactory(),
-                                settingsFactory: new TextClassifierSettingsFactory(),
+                                settingCollectionFactory: new SettingCollectionFactory(),
                                 textClassifierFactory: null)
                 ),
                 typeof(ArgumentNullException),
@@ -97,7 +97,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -136,7 +136,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -205,7 +205,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -257,7 +257,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -310,7 +310,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -389,5 +389,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.01.2024
+    Last Update: 26.01.2024
 */
