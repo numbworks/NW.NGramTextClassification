@@ -2,8 +2,8 @@
 
 namespace NW.NGramTextClassificationClient.Shared
 {
-    /// <inheritdoc cref="IComponentCollectionFactory/>
-    public class ComponentCollectionFactory : IComponentCollectionFactory
+    /// <inheritdoc cref="IComponentBagFactory/>
+    public class ComponentBagFactory : IComponentBagFactory
     {
 
         #region Fields
@@ -14,15 +14,15 @@ namespace NW.NGramTextClassificationClient.Shared
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="ComponentCollectionFactory"/> instance.</summary>
-        public ComponentCollectionFactory() { }
+        /// <summary>Initializes a <see cref="ComponentBagFactory"/> instance.</summary>
+        public ComponentBagFactory() { }
 
         #endregion
 
         #region Methods_public
 
-        public ComponentCollection Create()
-            => new ComponentCollection();
+        public ComponentBag Create()
+            => new ComponentBag();
 
         #endregion
 

@@ -11,245 +11,245 @@ using NUnit.Framework;
 namespace NW.NGramTextClassification.UnitTests
 {
     [TestFixture]
-    public class ComponentCollectionTests
+    public class ComponentBagTests
     {
 
         #region Fields
 
-        private static TestCaseData[] componentCollectionExceptionTestCases =
+        private static TestCaseData[] componentBagExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: null,
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nGramsTokenizer").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: null,
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("similarityIndexCalculator").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
                                         roundingFunction: null,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("roundingFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_03"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_03"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
                                         textTruncatingFunction: null,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textTruncatingFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_04"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_04"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
                                         loggingAction: null,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingAction").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_05"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_05"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: null,
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExampleManager").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_06"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_06"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: null,
-                                        loggingActionAsciiBanner: ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("asciiBannerManager").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_07"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_07"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner:  null,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingActionAsciiBanner").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_08"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_08"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: null,
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("fileManager").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_09"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_09"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: null,
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("serializerFactory").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_10"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_10"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: null,
-                                        nowFunction: ComponentCollection.DefaultNowFunction
+                                        nowFunction: ComponentBag.DefaultNowFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filenameFactory").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_11"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_11"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new ComponentCollection(
+                        () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentCollection.DefaultLoggingAction,
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
                                         asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentCollection.DefaultLoggingActionAsciiBanner,
+                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
@@ -257,7 +257,7 @@ namespace NW.NGramTextClassification.UnitTests
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nowFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentCollectionExceptionTestCases)}_12")
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_12")
 
         };
 
@@ -268,21 +268,21 @@ namespace NW.NGramTextClassification.UnitTests
 
         #region Tests
 
-        [TestCaseSource(nameof(componentCollectionExceptionTestCases))]
-        public void ComponentCollection_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(componentBagExceptionTestCases))]
+        public void ComponentBag_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void ComponentCollection_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        public void ComponentBag_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
 
             // Arrange
             // Act
-            ComponentCollection actual = new ComponentCollection();
+            ComponentBag actual = new ComponentBag();
 
             // Assert
-            Assert.IsInstanceOf<ComponentCollection>(actual);
+            Assert.IsInstanceOf<ComponentBag>(actual);
 
             Assert.IsInstanceOf<INGramTokenizer>(actual.NGramsTokenizer);
             Assert.IsInstanceOf<ISimilarityIndexCalculator>(actual.SimilarityIndexCalculator);
@@ -297,12 +297,12 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsInstanceOf<IFilenameFactory>(actual.FilenameFactory);
             Assert.IsInstanceOf<Func<DateTime>>(actual.NowFunction);
 
-            Assert.IsInstanceOf<Func<double, double>>(ComponentCollection.DefaultRoundingFunction);
-            Assert.IsInstanceOf<Func<string, uint, string>>(ComponentCollection.DefaultTextTruncatingFunction);
-            Assert.IsInstanceOf<string>(ComponentCollection.DefaultLoggingActionDateFormat);
-            Assert.IsInstanceOf<Action<string>>(ComponentCollection.DefaultLoggingAction);
-            Assert.IsInstanceOf<Action<string>>(ComponentCollection.DefaultLoggingActionAsciiBanner);
-            Assert.IsInstanceOf<Func<DateTime>>(ComponentCollection.DefaultNowFunction);
+            Assert.IsInstanceOf<Func<double, double>>(ComponentBag.DefaultRoundingFunction);
+            Assert.IsInstanceOf<Func<string, uint, string>>(ComponentBag.DefaultTextTruncatingFunction);
+            Assert.IsInstanceOf<string>(ComponentBag.DefaultLoggingActionDateFormat);
+            Assert.IsInstanceOf<Action<string>>(ComponentBag.DefaultLoggingAction);
+            Assert.IsInstanceOf<Action<string>>(ComponentBag.DefaultLoggingActionAsciiBanner);
+            Assert.IsInstanceOf<Func<DateTime>>(ComponentBag.DefaultNowFunction);
 
         }
 
@@ -317,7 +317,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            string actual = ComponentCollection.DefaultTextTruncatingFunction(text, length);
+            string actual = ComponentBag.DefaultTextTruncatingFunction(text, length);
 
             // Assert
             Assert.AreEqual(expected, actual);

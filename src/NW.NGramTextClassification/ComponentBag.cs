@@ -11,7 +11,7 @@ using NW.NGramTextClassification.Validation;
 namespace NW.NGramTextClassification
 {
     /// <summary>Collects all the dependencies required by <see cref="TextClassifier"/>.</summary>
-    public class ComponentCollection
+    public class ComponentBag
     {
 
         #region Fields
@@ -58,8 +58,8 @@ namespace NW.NGramTextClassification
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="ComponentCollection"/> instance.</summary>
-        public ComponentCollection(
+        /// <summary>Initializes a <see cref="ComponentBag"/> instance.</summary>
+        public ComponentBag(
                     INGramTokenizer nGramsTokenizer,
                     ISimilarityIndexCalculator similarityIndexCalculator,
                     Func<double, double> roundingFunction,
@@ -102,8 +102,8 @@ namespace NW.NGramTextClassification
 
         }
 
-        /// <summary>Initializes a <see cref="ComponentCollection"/> instance using default parameters.</summary>
-        public ComponentCollection()
+        /// <summary>Initializes a <see cref="ComponentBag"/> instance using default parameters.</summary>
+        public ComponentBag()
             : this(
                   nGramsTokenizer: new NGramTokenizer(),
                   similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),

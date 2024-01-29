@@ -4,7 +4,7 @@ using NW.NGramTextClassificationClient.Shared;
 namespace NW.NGramTextClassificationClient.UnitTests.Utilities
 {
 
-    public class FakeComponentCollectionFactory : IComponentCollectionFactory
+    public class FakeComponentBagFactory : IComponentBagFactory
     {
 
         #region Fields
@@ -13,16 +13,16 @@ namespace NW.NGramTextClassificationClient.UnitTests.Utilities
 
         #region Properties
 
-        private ComponentCollection _fakeComponentCollection;
+        private ComponentBag _fakeComponentBag;
 
         #endregion
 
         #region Constructors
 
-        public FakeComponentCollectionFactory(ComponentCollection fakeComponentCollection)
+        public FakeComponentBagFactory(ComponentBag fakeComponentBag)
         {
 
-            _fakeComponentCollection = fakeComponentCollection;
+            _fakeComponentBag = fakeComponentBag;
 
         }
 
@@ -30,8 +30,8 @@ namespace NW.NGramTextClassificationClient.UnitTests.Utilities
 
         #region Methods_public
 
-        public ComponentCollection Create()
-                => _fakeComponentCollection;
+        public ComponentBag Create()
+                => _fakeComponentBag;
 
         #endregion
 

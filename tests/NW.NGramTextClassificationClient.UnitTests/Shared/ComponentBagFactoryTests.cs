@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace NW.NGramTextClassificationClient.UnitTests
 {
     [TestFixture]
-    public class ComponentCollectionFactoryTests
+    public class ComponentBagFactoryTests
     {
 
         #region Fields
@@ -17,29 +17,29 @@ namespace NW.NGramTextClassificationClient.UnitTests
         #region Tests
 
         [Test]
-        public void ComponentCollectionFactory_ShouldCreateAnObjectOfTypeComponentCollectionFactory_WhenInvoked()
+        public void ComponentBagFactory_ShouldCreateAnObjectOfTypeComponentBagFactory_WhenInvoked()
         {
 
             // Arrange
             // Act
-            ComponentCollectionFactory actual = new ComponentCollectionFactory();
+            ComponentBagFactory actual = new ComponentBagFactory();
 
             // Assert
-            Assert.IsInstanceOf<ComponentCollectionFactory>(actual);
+            Assert.IsInstanceOf<ComponentBagFactory>(actual);
 
         }
 
         [Test]
-        public void Create_ShouldCreateAnObjectOfTypeComponentCollection_WhenInvoked()
+        public void Create_ShouldCreateAnObjectOfTypeComponentBag_WhenInvoked()
         {
 
             // Arrange
             // Act
-            ComponentCollection actual
-                = new ComponentCollectionFactory().Create();
+            ComponentBag actual
+                = new ComponentBagFactory().Create();
 
             // Assert
-            Assert.IsInstanceOf<ComponentCollection>(actual);
+            Assert.IsInstanceOf<ComponentBag>(actual);
 
         }
 

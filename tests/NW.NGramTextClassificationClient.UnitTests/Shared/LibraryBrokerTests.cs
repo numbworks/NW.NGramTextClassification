@@ -25,18 +25,18 @@ namespace NW.NGramTextClassificationClient.UnitTests
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentCollectionFactory: null,
+                                componentBagFactory: null,
                                 settingCollectionFactory: new SettingCollectionFactory(),
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("componentCollectionFactory").Message
+                new ArgumentNullException("componentBagFactory").Message
             ).SetArgDisplayNames($"{nameof(libraryBrokerExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentCollectionFactory: new ComponentCollectionFactory(),
+                                componentBagFactory: new ComponentBagFactory(),
                                 settingCollectionFactory: null,
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
@@ -47,7 +47,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentCollectionFactory: new ComponentCollectionFactory(),
+                                componentBagFactory: new ComponentBagFactory(),
                                 settingCollectionFactory: new SettingCollectionFactory(),
                                 textClassifierFactory: null)
                 ),
@@ -92,11 +92,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
         {
 
             // Arrange
-            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple();
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple();
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
                         settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -131,11 +131,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
                         settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -200,11 +200,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
                         settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -252,11 +252,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
                         settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -305,11 +305,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, ComponentCollection fakeComponentCollection) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentCollectionFactory: new FakeComponentCollectionFactory(fakeComponentCollection),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
                         settingCollectionFactory: new SettingCollectionFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
@@ -353,7 +353,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Support_methods
 
-        private (List<string>, List<string>, ComponentCollection) CreateTuple
+        private (List<string>, List<string>, ComponentBag) CreateTuple
             (List<(string fileName, string content)> readBehaviours = null)
         {
 
@@ -363,12 +363,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
             List<string> messagesAsciiBanner = new List<string>();
             Action<string> fakeLoggingActionAsciiBanner = (message) => messagesAsciiBanner.Add(message);
 
-            ComponentCollection componentCollection = new ComponentCollection(
+            ComponentBag componentBag = new ComponentBag(
 
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: ComponentCollection.DefaultRoundingFunction,
-                          textTruncatingFunction: ComponentCollection.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentBag.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
@@ -376,9 +376,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
                           fileManager: new FakeFileManagerWithDynamicRead(readBehaviours), // When we pass null, it means the test won't use it.
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: ComponentCollection.DefaultNowFunction);
+                          nowFunction: ComponentBag.DefaultNowFunction);
 
-            return (messages, messagesAsciiBanner, componentCollection);
+            return (messages, messagesAsciiBanner, componentBag);
 
         }
 
