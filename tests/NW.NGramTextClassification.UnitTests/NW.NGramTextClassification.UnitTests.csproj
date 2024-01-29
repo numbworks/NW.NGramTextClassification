@@ -5,15 +5,15 @@
     <IsPackable>false</IsPackable>
     <Authors>numbworks</Authors>
     <Company>numbworks</Company>
-    <Copyright>numbworks 2022</Copyright>
+    <Copyright>numbworks 2024</Copyright>
     <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/numbworks/numbworks/master/numbworks_logo_128x128px.png</PackageIconUrl>
     <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
-    <Version>3.7.0</Version>
+    <Version>4.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>3.7.0.0</AssemblyVersion>
-    <FileVersion>3.7.0.0</FileVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

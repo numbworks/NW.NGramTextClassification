@@ -5,20 +5,20 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>numbworks</Authors>
     <Description>ngramtc is a command-line application to perform text classification tasks based on the NW.NGramTextClassification library.</Description>
-    <Copyright>numbworks 2022</Copyright>
+    <Copyright>numbworks 2024</Copyright>
     <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
     <PackageIconUrl></PackageIconUrl>
-    <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
+    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
 	<IsPackable>false</IsPackable>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>3.7.0</Version>
+		<Version>4.0.0</Version>
 		<AssemblyName>ngramtc</AssemblyName>
 		<ApplicationIcon>numbworks_logo_128x128px.ico</ApplicationIcon>
 		<PackageIcon>numbworks_logo_128x128px.png</PackageIcon>
-		<AssemblyVersion>3.7.0.0</AssemblyVersion>
-		<FileVersion>3.7.0.0</FileVersion>
+		<AssemblyVersion>4.0.0.0</AssemblyVersion>
+		<FileVersion>4.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
