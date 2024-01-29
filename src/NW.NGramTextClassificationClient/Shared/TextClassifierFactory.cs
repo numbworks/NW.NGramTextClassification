@@ -21,8 +21,8 @@ namespace NW.NGramTextClassificationClient.Shared
 
         #region Methods_public
 
-        public TextClassifier Create(ComponentBag componentBag, SettingCollection settingCollection)
-            => new TextClassifier(componentBag, settingCollection);
+        public TextClassifier Create(ComponentBag componentBag, SettingBag settingBag)
+            => new TextClassifier(componentBag, settingBag);
 
         #endregion
 

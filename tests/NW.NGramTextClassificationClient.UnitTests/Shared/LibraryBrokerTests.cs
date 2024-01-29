@@ -26,7 +26,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new LibraryBroker(
                                 componentBagFactory: null,
-                                settingCollectionFactory: new SettingCollectionFactory(),
+                                settingBagFactory: new SettingBagFactory(),
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
@@ -37,18 +37,18 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new LibraryBroker(
                                 componentBagFactory: new ComponentBagFactory(),
-                                settingCollectionFactory: null,
+                                settingBagFactory: null,
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settingCollectionFactory").Message
+                new ArgumentNullException("settingBagFactory").Message
             ).SetArgDisplayNames($"{nameof(libraryBrokerExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
                                 componentBagFactory: new ComponentBagFactory(),
-                                settingCollectionFactory: new SettingCollectionFactory(),
+                                settingBagFactory: new SettingBagFactory(),
                                 textClassifierFactory: null)
                 ),
                 typeof(ArgumentNullException),
@@ -97,7 +97,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
-                        settingCollectionFactory: new SettingCollectionFactory(),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -136,7 +136,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
-                        settingCollectionFactory: new SettingCollectionFactory(),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -205,7 +205,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
-                        settingCollectionFactory: new SettingCollectionFactory(),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -257,7 +257,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
-                        settingCollectionFactory: new SettingCollectionFactory(),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -310,7 +310,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker libraryBroker
                 = new LibraryBroker(
                         componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
-                        settingCollectionFactory: new SettingCollectionFactory(),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 

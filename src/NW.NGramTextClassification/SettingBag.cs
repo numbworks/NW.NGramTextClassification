@@ -4,7 +4,7 @@ using System.IO;
 namespace NW.NGramTextClassification
 {
     /// <summary>Collects all the global settings required by this library.</summary>
-    public class SettingCollection
+    public class SettingBag
     {
 
         #region Fields
@@ -26,8 +26,8 @@ namespace NW.NGramTextClassification
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="SettingCollection"/> instance.</summary>
-        public SettingCollection(
+        /// <summary>Initializes a <see cref="SettingBag"/> instance.</summary>
+        public SettingBag(
                     uint truncateTextInLogMessagesAfter,
                     double minimumAccuracySingleLabel,
                     double minimumAccuracyMultipleLabels,
@@ -43,8 +43,8 @@ namespace NW.NGramTextClassification
 
         }
 
-        /// <summary>Initializes a <see cref="SettingCollection"/> instance using default parameters.</summary>
-        public SettingCollection()
+        /// <summary>Initializes a <see cref="SettingBag"/> instance using default parameters.</summary>
+        public SettingBag()
             : this(
                   truncateTextInLogMessagesAfter: DefaultTruncateTextInLogMessagesAfter,
                   minimumAccuracySingleLabel: DefaultMinimumAccuracySingleLabel,

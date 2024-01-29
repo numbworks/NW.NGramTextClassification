@@ -9,7 +9,7 @@ namespace NW.NGramTextClassificationClient.Shared
 
         /// <summary>Creates an instance of <see cref="TextClassifier"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
-        TextClassifier Create(ComponentBag componentBag, SettingCollection settingCollection);
+        TextClassifier Create(ComponentBag componentBag, SettingBag settingBag);
 
     }
 }

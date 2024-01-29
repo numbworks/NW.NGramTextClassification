@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier(
                                         null,
-                                        new SettingCollection()
+                                        new SettingBag()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("componentBag").Message
@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.UnitTests
                                         null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settingCollection").Message
+                new ArgumentNullException("settingBag").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierExceptionTestCases)}_02")
 
         };
@@ -102,7 +102,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new SettingCollection(),
+                    new SettingBag(),
                     TextClassifications.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
@@ -116,7 +116,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new SettingCollection(),
+                    new SettingBag(),
                     TextClassifications.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_02"),
 
@@ -130,7 +130,7 @@ namespace NW.NGramTextClassification.UnitTests
                             text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.ShortLabeledExamples_Untokenizable,
-                    new SettingCollection(),
+                    new SettingBag(),
                     TextClassifications.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
@@ -167,18 +167,18 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+                    new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     ),
                     new TextClassifierSession(
-                            settingCollection: new SettingCollection(
-                                            truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+                            settingBag: new SettingBag(
+                                            truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                                             minimumAccuracySingleLabel: 0.0,
-                                            minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                                            folderPath: SettingCollection.DefaultFolderPath
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                                            folderPath: SettingBag.DefaultFolderPath
                                         ),
                             results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: new TextClassifier().Version
@@ -233,18 +233,18 @@ namespace NW.NGramTextClassification.UnitTests
                     TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                     TextClassifier.DefaultNGramTokenizerRuleSet,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+                    new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     ),
                     new TextClassifierSession(
-                            settingCollection: new SettingCollection(
-                                            truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+                            settingBag: new SettingBag(
+                                            truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                                             minimumAccuracySingleLabel: 0.0,
-                                            minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                                            folderPath: SettingCollection.DefaultFolderPath
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                                            folderPath: SettingBag.DefaultFolderPath
                                         ),
                             results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: new TextClassifier().Version
@@ -255,18 +255,18 @@ namespace NW.NGramTextClassification.UnitTests
                     TextClassifications.ObjectMother.Snippets_Untokenizable.Select(text => new TextSnippet(text: text)).ToList(),
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+                    new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 0.0,
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     ),
                     new TextClassifierSession(
-                            settingCollection: new SettingCollection(
-                                            truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+                            settingBag: new SettingBag(
+                                            truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                                             minimumAccuracySingleLabel: 0.0,
-                                            minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                                            folderPath: SettingCollection.DefaultFolderPath
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                                            folderPath: SettingBag.DefaultFolderPath
                                         ),
                             results: TextClassifications.ObjectMother.TextClassifierResults_Untokenizable,
                             version: new TextClassifier().Version
@@ -405,7 +405,7 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.IsInstanceOf<string>(actual.Version);
 
             Assert.IsInstanceOf<ComponentBag>(TextClassifier.DefaultComponentBag);
-            Assert.IsInstanceOf<SettingCollection>(TextClassifier.DefaultSettingCollection);
+            Assert.IsInstanceOf<SettingBag>(TextClassifier.DefaultSettingBag);
             Assert.IsInstanceOf<INGramTokenizerRuleSet>(TextClassifier.DefaultNGramTokenizerRuleSet);
             Assert.IsInstanceOf<TextClassifierResult>(TextClassifier.DefaultTextClassifierResult);
             Assert.IsInstanceOf<Func<TextClassifierSession, dynamic>>(TextClassifier.SimilarityIndexDisabler);
@@ -415,7 +415,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(classifyOrDefaultWhenAllRulesFailedTestCases))]
         public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenAllRulesFailed
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingCollection settingCollection, TextClassifierSession expected)
+            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingBag settingBag, TextClassifierSession expected)
         {
 
             // Arrange
@@ -435,7 +435,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<string> expectedLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentBag);
 
@@ -452,7 +452,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableExamples))]
         public void ClassifyOrDefault_ShouldReturnSessionWithDefaultClassifierResult_WhenUntokenizableExamples
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingCollection settingCollection, TextClassifierSession expected)
+            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingBag settingBag, TextClassifierSession expected)
         {
 
             // Arrange
@@ -472,7 +472,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentBag).GetRange(0, 5);
             // We skip all the messages in the middle, otherwise the test would be too complex.
@@ -523,7 +523,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentBag).GetRange(0, 6);
             // We skip all the messages in the middle, otherwise the test would be too complex.
@@ -553,7 +553,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification))]
         public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenThirtyLabeledExamplesAndSuccessfulClassification
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingCollection settingCollection, TextClassifierSession expected)
+            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingBag settingBag, TextClassifierSession expected)
         {
 
             // Arrange
@@ -573,7 +573,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<string> initialLogMessages = CreateWhenAllRulesFailed(textSnippet, tokenizerRuleSet, labeledExamples, componentBag).GetRange(0, 6);
             // We skip all the messages in the middle, otherwise the test would be too complex.
@@ -625,14 +625,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: SettingCollection.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+            SettingBag settingBag
+                = new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -685,14 +685,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: SettingCollection.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+            SettingBag settingBag
+                = new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5 
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -746,14 +746,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
+            SettingBag settingBag
+                = new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
                           minimumAccuracySingleLabel: 1.0,                                                                 // 0.98 < 1.0 
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -807,14 +807,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: SettingCollection.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+            SettingBag settingBag
+                = new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -871,14 +871,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: SettingCollection.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,
-                          folderPath: SettingCollection.DefaultFolderPath
+            SettingBag settingBag
+                = new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,         // 0.98 >= 0.5
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                          folderPath: SettingBag.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -936,14 +936,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                            truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
-                            minimumAccuracySingleLabel: SettingCollection.DefaultMinimumAccuracySingleLabel,
+            SettingBag settingBag
+                = new SettingBag(
+                            truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
+                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                             minimumAccuracyMultipleLabels: 1.0,                                                            // 0.98 <= 1.0
-                            folderPath: SettingCollection.DefaultFolderPath
+                            folderPath: SettingBag.DefaultFolderPath
                         );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -1002,14 +1002,14 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            SettingCollection settingCollection
-                = new SettingCollection(
-                          truncateTextInLogMessagesAfter: SettingCollection.DefaultTruncateTextInLogMessagesAfter,
-                          minimumAccuracySingleLabel: SettingCollection.DefaultMinimumAccuracySingleLabel,
-                          minimumAccuracyMultipleLabels: SettingCollection.DefaultMinimumAccuracyMultipleLabels,        // 0.98 > 0.5
-                          folderPath: SettingCollection.DefaultFolderPath
+            SettingBag settingBag
+                = new SettingBag(
+                          truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
+                          minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                          minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,        // 0.98 > 0.5
+                          folderPath: SettingBag.DefaultFolderPath
                     );
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<SimilarityIndexAverage> indexAverages = new List<SimilarityIndexAverage>()
             {
@@ -1070,7 +1070,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             List<string> expectedMessages = new List<string>()
             {
@@ -1095,7 +1095,7 @@ namespace NW.NGramTextClassification.UnitTests
 
         [TestCaseSource(nameof(classifyManyTestCases))]
         public void ClassifyMany_ShouldReturnExpectedTextClassifierSession_WhenInvoked
-            (List<TextSnippet> textSnippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingCollection settingCollection, TextClassifierSession expected)
+            (List<TextSnippet> textSnippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, SettingBag settingBag, TextClassifierSession expected)
         {
 
             // Arrange
@@ -1115,7 +1115,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, settingCollection);
+            TextClassifier textClassifier = new TextClassifier(componentBag, settingBag);
 
             List<string> expectedLogMessages = new List<string>()
             {
@@ -1163,7 +1163,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1206,7 +1206,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1253,7 +1253,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1296,7 +1296,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1343,7 +1343,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1386,7 +1386,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: ComponentBag.DefaultNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
             List<string> expectedLogMessages = new List<string>()
@@ -1431,7 +1431,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1478,7 +1478,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1526,7 +1526,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1576,7 +1576,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1625,7 +1625,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1674,7 +1674,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Filenames.ObjectMother.FakeFilePath;
             string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
@@ -1765,7 +1765,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             List<string> expectedLogMessages = new List<string>()
             {
@@ -1812,7 +1812,7 @@ namespace NW.NGramTextClassification.UnitTests
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
                           nowFunction: FakeNowFunction);
-            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingCollection());
+            TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             List<string> expectedLogMessages = new List<string>()
             {
@@ -1868,7 +1868,7 @@ namespace NW.NGramTextClassification.UnitTests
             string expectedText
                 = ComponentBag.DefaultTextTruncatingFunction(
                         textSnippet.Text,
-                        SettingCollection.DefaultTruncateTextInLogMessagesAfter);
+                        SettingBag.DefaultTruncateTextInLogMessagesAfter);
 
             List<INGram> expectedNGrams = componentBag.NGramsTokenizer.DoForRuleSetOrDefault(textSnippet.Text, tokenizerRuleSet);
 

@@ -19,7 +19,7 @@ namespace NW.NGramTextClassificationClient.Shared
         #region Fields
 
         private IComponentBagFactory _componentBagFactory { get; }
-        private ISettingCollectionFactory _settingCollectionFactory { get; }
+        private ISettingBagFactory _settingBagFactory { get; }
         private ITextClassifierFactory _textClassifierFactory { get; }
 
         #endregion
@@ -40,22 +40,22 @@ namespace NW.NGramTextClassificationClient.Shared
         /// <summary>Initializes a <see cref="LibraryBroker"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
         public LibraryBroker
-            (IComponentBagFactory componentBagFactory, ISettingCollectionFactory settingCollectionFactory, ITextClassifierFactory textClassifierFactory)
+            (IComponentBagFactory componentBagFactory, ISettingBagFactory settingBagFactory, ITextClassifierFactory textClassifierFactory)
         {
 
             Validator.ValidateObject(componentBagFactory, nameof(componentBagFactory));
-            Validator.ValidateObject(settingCollectionFactory, nameof(settingCollectionFactory));
+            Validator.ValidateObject(settingBagFactory, nameof(settingBagFactory));
             Validator.ValidateObject(textClassifierFactory, nameof(textClassifierFactory));
 
             _componentBagFactory = componentBagFactory;
-            _settingCollectionFactory = settingCollectionFactory;
+            _settingBagFactory = settingBagFactory;
             _textClassifierFactory = textClassifierFactory;
 
         }
 
         /// <summary>Initializes a <see cref="LibraryBroker"/> instance using default parameters.</summary>
         public LibraryBroker()
-            : this(new ComponentBagFactory(), new SettingCollectionFactory(), new TextClassifierFactory()) { }
+            : this(new ComponentBagFactory(), new SettingBagFactory(), new TextClassifierFactory()) { }
 
         #endregion
 
@@ -65,8 +65,8 @@ namespace NW.NGramTextClassificationClient.Shared
         {
 
             ComponentBag componentBag = _componentBagFactory.Create();
-            SettingCollection settingCollection = _settingCollectionFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingCollection);
+            SettingBag settingBag = _settingBagFactory.Create();
+            TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingBag);
 
             ShowHeader(componentBag, textClassifier);
 
@@ -77,8 +77,8 @@ namespace NW.NGramTextClassificationClient.Shared
         {
 
             ComponentBag componentBag = _componentBagFactory.Create();
-            SettingCollection settingCollection = _settingCollectionFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingCollection);
+            SettingBag settingBag = _settingBagFactory.Create();
+            TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingBag);
 
             ShowHeader(componentBag, textClassifier);
 
@@ -106,8 +106,8 @@ namespace NW.NGramTextClassificationClient.Shared
                 classifyData = Defaultize(classifyData);
 
                 ComponentBag componentBag = _componentBagFactory.Create();
-                SettingCollection settingCollection = _settingCollectionFactory.Create(classifyData);
-                TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingCollection);
+                SettingBag settingBag = _settingBagFactory.Create(classifyData);
+                TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingBag);
 
                 ShowHeader(componentBag, textClassifier);
 
@@ -181,10 +181,10 @@ namespace NW.NGramTextClassificationClient.Shared
             ClassifyData updated = new ClassifyData(
                     labeledExamples: classifyData.LabeledExamples,
                     textSnippets: classifyData.TextSnippets,
-                    folderPath: classifyData.FolderPath ?? SettingCollection.DefaultFolderPath,
+                    folderPath: classifyData.FolderPath ?? SettingBag.DefaultFolderPath,
                     tokenizerRuleSet: classifyData.TokenizerRuleSet,
-                    minAccuracySingle: classifyData.MinAccuracySingle ?? SettingCollection.DefaultMinimumAccuracySingleLabel,
-                    minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? SettingCollection.DefaultMinimumAccuracyMultipleLabels,
+                    minAccuracySingle: classifyData.MinAccuracySingle ?? SettingBag.DefaultMinimumAccuracySingleLabel,
+                    minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? SettingBag.DefaultMinimumAccuracyMultipleLabels,
                     saveSession: classifyData.SaveSession,
                     cleanLabeledExamples: classifyData.CleanLabeledExamples,
                     disableIndexSerialization: classifyData.DisableIndexSerialization

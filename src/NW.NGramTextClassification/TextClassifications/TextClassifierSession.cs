@@ -24,15 +24,15 @@ namespace NW.NGramTextClassification.TextClassifications
         /// <summary>
         /// Initializes a <see cref="TextClassifierSession"/> instance.
         /// </summary>
-        public TextClassifierSession(SettingCollection settingCollection, List<TextClassifierResult> results, string version)
+        public TextClassifierSession(SettingBag settingBag, List<TextClassifierResult> results, string version)
         {
 
-            Validator.ValidateObject(settingCollection, nameof(settingCollection));
+            Validator.ValidateObject(settingBag, nameof(settingBag));
             Validator.ValidateList(results, nameof(results));
             Validator.ValidateStringNullOrWhiteSpace(version, nameof(version));
 
-            MinimumAccuracySingleLabel = settingCollection.MinimumAccuracySingleLabel;
-            MinimumAccuracyMultipleLabels = settingCollection.MinimumAccuracyMultipleLabels;
+            MinimumAccuracySingleLabel = settingBag.MinimumAccuracySingleLabel;
+            MinimumAccuracyMultipleLabels = settingBag.MinimumAccuracyMultipleLabels;
 
             Results = results;
             Version = version;

@@ -81,7 +81,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         public static TextClassifierSession TextClassifierSession_Default
             = new TextClassifierSession(
-                settingCollection: new SettingCollection(),
+                settingBag: new SettingBag(),
                 results: new List<TextClassifierResult>() {
                                 TextClassifier.DefaultTextClassifierResult },
                 version: new TextClassifier().Version
@@ -90,7 +90,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
         public static TextClassifierSession TextClassifierSession_CompleteLabeledExamples00
             = new TextClassifierSession(
-                    settingCollection: new SettingCollection(),
+                    settingBag: new SettingBag(),
                     results: TextClassifierResults_CompleteLabeledExamples00,
                     version: "3.6.0.0"
                 );

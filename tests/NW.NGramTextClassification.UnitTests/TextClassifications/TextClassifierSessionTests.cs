@@ -16,18 +16,18 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settingCollection: null,
+                                    settingBag: null,
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: new TextClassifier().Version
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settingCollection").Message
+                new ArgumentNullException("settingBag").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settingCollection: new SettingCollection(),
+                                    settingBag: new SettingBag(),
                                     results: null,
                                     version: new TextClassifier().Version
                                 )),
@@ -38,7 +38,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settingCollection: new SettingCollection(),
+                                    settingBag: new SettingBag(),
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: null
                                 )),
@@ -68,7 +68,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             // Act
             TextClassifierSession actual
                 = new TextClassifierSession(
-                        settingCollection: new SettingCollection(),
+                        settingBag: new SettingBag(),
                         results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                         version: new TextClassifier().Version
                     );
