@@ -1,7 +1,7 @@
 ﻿using NW.NGramTextClassification.Validation;
 using System.IO;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Bags
 {
     /// <summary>Collects all the global settings required by this library.</summary>
     public class SettingBag
@@ -50,7 +50,8 @@ namespace NW.NGramTextClassification
                   minimumAccuracySingleLabel: DefaultMinimumAccuracySingleLabel,
                   minimumAccuracyMultipleLabels: DefaultMinimumAccuracyMultipleLabels,
                   folderPath: DefaultFolderPath
-                  ) { }
+                  )
+        { }
 
         #endregion
 

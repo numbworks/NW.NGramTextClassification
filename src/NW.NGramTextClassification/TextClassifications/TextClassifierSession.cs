@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.TextClassifications

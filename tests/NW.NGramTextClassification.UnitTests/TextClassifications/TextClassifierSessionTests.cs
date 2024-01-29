@@ -1,4 +1,5 @@
 ﻿using System;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.Bags
 {
     [TestFixture]
     public class SettingBagTests
@@ -45,7 +46,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Arrange
             // Act
             SettingBag actual1 = new SettingBag();
-            SettingBag actual2 
+            SettingBag actual2
                 = new SettingBag(
                         truncateTextInLogMessagesAfter: 10,
                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,

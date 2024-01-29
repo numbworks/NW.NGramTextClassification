@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.UnitTests.TextClassifications
