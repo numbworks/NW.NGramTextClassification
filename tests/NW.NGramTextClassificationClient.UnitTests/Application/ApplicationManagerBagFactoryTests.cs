@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace NW.NGramTextClassificationClient.UnitTests
 {
     [TestFixture]
-    public class ApplicationSectionsFactoryTests
+    public class ApplicationManagerBagFactoryTests
     {
 
         #region Fields
@@ -17,7 +17,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new ApplicationSectionsFactory()
+                    () => new ApplicationManagerBagFactory()
                                 .Create(
                                     libraryBroker: null,
                                     sessionManagerBag: new SessionManagerBag())
@@ -28,7 +28,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new ApplicationSectionsFactory()
+                    () => new ApplicationManagerBagFactory()
                                 .Create(
                                     libraryBroker: new LibraryBroker(),
                                     sessionManagerBag: null)
@@ -52,32 +52,32 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void ApplicationSectionsFactory_ShouldCreateAnObjectOfTypeApplicationSectionsFactory_WhenInvoked()
+        public void ApplicationManagerBagFactory_ShouldCreateAnObjectOfTypeApplicationManagerBagFactory_WhenInvoked()
         {
 
             // Arrange
             // Act
-            ApplicationSectionsFactory actual = new ApplicationSectionsFactory();
+            ApplicationManagerBagFactory actual = new ApplicationManagerBagFactory();
 
             // Assert
-            Assert.IsInstanceOf<ApplicationSectionsFactory>(actual);
+            Assert.IsInstanceOf<ApplicationManagerBagFactory>(actual);
 
         }
 
         [Test]
-        public void Create_ShouldCreateAnObjectOfTypeApplicationSections_WhenInvoked()
+        public void Create_ShouldCreateAnObjectOfTypeApplicationManagerBag_WhenInvoked()
         {
 
             // Arrange
             // Act
-            ApplicationSections actual
-                = new ApplicationSectionsFactory()
+            ApplicationManagerBag actual
+                = new ApplicationManagerBagFactory()
                                 .Create(
                                     libraryBroker: new LibraryBroker(),
                                     sessionManagerBag: new SessionManagerBag());
 
             // Assert
-            Assert.IsInstanceOf<ApplicationSections>(actual);
+            Assert.IsInstanceOf<ApplicationManagerBag>(actual);
 
         }
 
