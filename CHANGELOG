@@ -1,3 +1,9 @@
+v4.0.0 - BREAKING CHANGES
+- Library:
+	- Feature: introduced the "Bag Paradigm" into the codebase (*Settings => SettingBag, *Components => ComponentBag, ...).
+- Documentation:
+	- Feature: updated to v4.0.0.
+
 v3.7.0
 - Library:
 	- Performance: ClassifyMany() now performs 75% faster thanks to parallelism.
