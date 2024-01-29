@@ -15,12 +15,13 @@ Contact: numbworks@gmail.com
 | 2021-09-24 | numbworks | Version numbers removed. |
 | 2022-09-27 | numbworks | Updated to v3.0.0. |
 | 2022-12-26 | numbworks | Updated to v3.7.0. |
+| 2024-01-29 | numbworks | Updated to v4.0.0. |
 
 ## In Short
 
 From the documentation:
 
-> `NW.NGramTextClassification` is a .NET Standard library to perform text classification tasks on the text snippets you provide.
+> `NW.NGramTextClassification` is a library to perform text classification tasks on the text snippets you provide.
 
 > `NW.NGramTextClassificationClient` (`ngramtc`) is a command-line application based on the `NW.NGramTextClassification` library.
 
