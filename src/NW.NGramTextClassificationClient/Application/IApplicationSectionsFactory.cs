@@ -10,7 +10,7 @@ namespace NW.NGramTextClassificationClient.Application
 
         /// <summary>Creates a <see cref="ApplicationSections"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
-        ApplicationSections Create(ILibraryBroker libraryBroker, DependencyBag dependencyBag);
+        ApplicationSections Create(ILibraryBroker libraryBroker, SessionManagerBag sessionManagerBag);
 
     }
 }

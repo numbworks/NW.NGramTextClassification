@@ -5,7 +5,7 @@ using NW.NGramTextClassification.Validation;
 namespace NW.NGramTextClassificationClient.ApplicationSession
 {
     /// <summary>Collects all the dependencies required by <see cref="SessionManager"/>.</summary>
-    public class DependencyBag
+    public class SessionManagerBag
     {
 
         #region Fields
@@ -20,9 +20,9 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="DependencyBag"/> instance.</summary>
+        /// <summary>Initializes a <see cref="SessionManagerBag"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
-        public DependencyBag(IDoubleManager doubleManager) 
+        public SessionManagerBag(IDoubleManager doubleManager) 
         {
 
             Validator.ValidateObject(doubleManager, nameof(doubleManager));
@@ -33,8 +33,8 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
         }
 
-        /// <summary>Initializes a <see cref="DependencyBag"/> instance using default parameters.</summary>
-        public DependencyBag()
+        /// <summary>Initializes a <see cref="SessionManagerBag"/> instance using default parameters.</summary>
+        public SessionManagerBag()
             : this(new DoubleManager()) { }
 
         #endregion

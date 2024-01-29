@@ -16,7 +16,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new SessionManager(null, new DependencyBag())
+                    () => new SessionManager(null, new SessionManagerBag())
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("libraryBroker").Message
@@ -27,7 +27,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                     () => new SessionManager(new LibraryBroker(), null)
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("dependencyBag").Message
+                new ArgumentNullException("sessionManagerBag").Message
             ).SetArgDisplayNames($"{nameof(sessionManagerExceptionTestCases)}_02")
 
         };
@@ -38,7 +38,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new SessionManager(
                                 libraryBroker: new LibraryBroker(),
-                                dependencyBag: new DependencyBag()
+                                sessionManagerBag: new SessionManagerBag()
                             ).Add(null)
                 ),
                 typeof(ArgumentNullException),
@@ -73,7 +73,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             SessionManager actual
                 = new SessionManager(
                         libraryBroker: new LibraryBroker(),
-                        dependencyBag: new DependencyBag());
+                        sessionManagerBag: new SessionManagerBag());
 
             // Assert
             Assert.IsInstanceOf<SessionManager>(actual);

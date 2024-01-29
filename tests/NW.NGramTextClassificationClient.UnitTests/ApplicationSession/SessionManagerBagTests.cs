@@ -6,21 +6,21 @@ using McMaster.Extensions.CommandLineUtils.Validation;
 namespace NW.NGramTextClassificationClient.UnitTests
 {
     [TestFixture]
-    public class DependencyBagTests
+    public class SessionManagerBagTests
     {
 
         #region Fields
 
-        private static TestCaseData[] dependencyBagExceptionTestCases =
+        private static TestCaseData[] sessionManagerBagExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new DependencyBag(null)
+                    () => new SessionManagerBag(null)
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("doubleManager").Message
-            ).SetArgDisplayNames($"{nameof(dependencyBagExceptionTestCases)}_01")
+            ).SetArgDisplayNames($"{nameof(sessionManagerBagExceptionTestCases)}_01")
 
         };
 
@@ -31,23 +31,23 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Tests
 
-        [TestCaseSource(nameof(dependencyBagExceptionTestCases))]
-        public void DependencyBag_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(sessionManagerBagExceptionTestCases))]
+        public void SessionManagerBag_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void DependencyBag_ShouldCreateAnObjectOfThisType_WhenInvoked()
+        public void SessionManagerBag_ShouldCreateAnObjectOfThisType_WhenInvoked()
         {
 
             // Arrange
             // Act
-            DependencyBag actual1 = new DependencyBag();
-            DependencyBag actual2 = new DependencyBag(new DoubleManager());
+            SessionManagerBag actual1 = new SessionManagerBag();
+            SessionManagerBag actual2 = new SessionManagerBag(new DoubleManager());
 
             // Assert
-            Assert.IsInstanceOf<DependencyBag>(actual1);
-            Assert.IsInstanceOf<DependencyBag>(actual2);
+            Assert.IsInstanceOf<SessionManagerBag>(actual1);
+            Assert.IsInstanceOf<SessionManagerBag>(actual2);
 
             Assert.IsInstanceOf<IDoubleManager>(actual1.DoubleManager);
             Assert.IsInstanceOf<IOptionValidator>(actual1.MinimumAccuracyValidator);

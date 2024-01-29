@@ -20,7 +20,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new ApplicationSections(
                                 aboutManager: null,
-                                sessionManager: new SessionManager(new LibraryBroker(), new DependencyBag()))
+                                sessionManager: new SessionManager(new LibraryBroker(), new SessionManagerBag()))
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("aboutManager").Message
@@ -59,7 +59,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             ApplicationSections actual
                 = new ApplicationSections(
                         aboutManager: new AboutManager(new LibraryBroker()),
-                        sessionManager: new SessionManager(new LibraryBroker(), new DependencyBag()));
+                        sessionManager: new SessionManager(new LibraryBroker(), new SessionManagerBag()));
 
             // Assert
             Assert.IsInstanceOf<ApplicationSections>(actual);

@@ -12,7 +12,7 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
         #region Fields
 
         private ILibraryBroker _libraryBroker;
-        private DependencyBag _dependencyBag;
+        private SessionManagerBag _sessionManagerBag;
 
         #endregion
 
@@ -23,14 +23,14 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
         /// <summary>Initializes a <see cref="SessionManager"/> instance.</summary>
         /// <exception cref="ArgumentNullException"/>
-        public SessionManager(ILibraryBroker libraryBroker, DependencyBag dependencyBag)
+        public SessionManager(ILibraryBroker libraryBroker, SessionManagerBag sessionManagerBag)
         {
 
             Validator.ValidateObject(libraryBroker, nameof(libraryBroker));
-            Validator.ValidateObject(dependencyBag, nameof(dependencyBag));
+            Validator.ValidateObject(sessionManagerBag, nameof(sessionManagerBag));
 
             _libraryBroker = libraryBroker;
-            _dependencyBag = dependencyBag;
+            _sessionManagerBag = sessionManagerBag;
 
         }
 
@@ -103,8 +103,8 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                                 textSnippets: textSnippetsOption.Value(),
                                 folderPath: folderPathOption.Value(),
                                 tokenizerRuleSet: tokenizerRuleSetOption.Value(),
-                                minAccuracySingle: _dependencyBag.DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
-                                minAccuracyMultiple: _dependencyBag.DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
+                                minAccuracySingle: _sessionManagerBag.DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
+                                minAccuracyMultiple: _sessionManagerBag.DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
                                 saveSession: saveSessionOption.HasValue(),
                                 cleanLabeledExamples: cleanLabeledExamplesOption.HasValue(),
                                 disableIndexSerialization: disableIndexSerializationOption.HasValue()
@@ -184,7 +184,7 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                         Shared.MessageCollection.Session_Option_MinAccuracySingle_Template,
                         Shared.MessageCollection.Session_Option_MinAccuracySingle_Description,
                         CommandOptionType.SingleValue)
-                    .Accepts(validator => validator.Use(_dependencyBag.MinimumAccuracyValidator));
+                    .Accepts(validator => validator.Use(_sessionManagerBag.MinimumAccuracyValidator));
 
         }
         private CommandOption CreateOptionalMinAccuracyMultipleOption(CommandLineApplication subCommand)
@@ -195,7 +195,7 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
                         Shared.MessageCollection.Session_Option_MinAccuracyMultiple_Template,
                         Shared.MessageCollection.Session_Option_MinAccuracyMultiple_Description,
                         CommandOptionType.SingleValue)
-                    .Accepts(validator => validator.Use(_dependencyBag.MinimumAccuracyValidator));
+                    .Accepts(validator => validator.Use(_sessionManagerBag.MinimumAccuracyValidator));
 
         }
         private CommandOption CreateOptionalSaveSessionOption(CommandLineApplication subCommand)

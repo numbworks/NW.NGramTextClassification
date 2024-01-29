@@ -25,14 +25,14 @@ namespace NW.NGramTextClassificationClient.Application
 
         #region Methods_public
 
-        public ApplicationSections Create(ILibraryBroker libraryBroker, DependencyBag dependencyBag)
+        public ApplicationSections Create(ILibraryBroker libraryBroker, SessionManagerBag sessionManagerBag)
         {
 
             Validator.ValidateObject(libraryBroker, nameof(libraryBroker));
-            Validator.ValidateObject(dependencyBag, nameof(dependencyBag));
+            Validator.ValidateObject(sessionManagerBag, nameof(sessionManagerBag));
 
             IAboutManager aboutManager = new AboutManager(libraryBroker);
-            ISessionManager sessionManager = new SessionManager(libraryBroker, dependencyBag);
+            ISessionManager sessionManager = new SessionManager(libraryBroker, sessionManagerBag);
 
             ApplicationSections sections
                 = new ApplicationSections(
