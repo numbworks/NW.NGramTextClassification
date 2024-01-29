@@ -7,8 +7,9 @@ using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.Bags
 {
     [TestFixture]
     public class ComponentBagTests

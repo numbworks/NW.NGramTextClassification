@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.UnitTests.Similarity
 {

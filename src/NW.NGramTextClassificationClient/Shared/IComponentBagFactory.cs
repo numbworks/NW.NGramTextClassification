@@ -1,4 +1,4 @@
-﻿using NW.NGramTextClassification;
+﻿using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.Shared
 {

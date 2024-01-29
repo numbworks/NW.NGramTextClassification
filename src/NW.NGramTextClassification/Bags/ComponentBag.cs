@@ -8,7 +8,7 @@ using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.Validation;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Bags
 {
     /// <summary>Collects all the dependencies required by <see cref="TextClassifier"/>.</summary>
     public class ComponentBag

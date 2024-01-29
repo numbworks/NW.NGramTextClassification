@@ -16,6 +16,7 @@ using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.UnitTests.Utilities;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.UnitTests
 {

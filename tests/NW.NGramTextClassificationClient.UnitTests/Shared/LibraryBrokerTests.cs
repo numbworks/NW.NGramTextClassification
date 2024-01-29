@@ -10,6 +10,7 @@ using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassificationClient.Shared;
 using NW.NGramTextClassificationClient.UnitTests.Utilities;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.UnitTests
 {

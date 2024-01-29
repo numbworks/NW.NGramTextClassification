@@ -1,6 +1,6 @@
-﻿using NW.NGramTextClassification;
-using NW.NGramTextClassificationClient.Shared;
+﻿using NW.NGramTextClassificationClient.Shared;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.UnitTests
 {

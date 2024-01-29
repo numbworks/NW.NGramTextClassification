@@ -9,6 +9,7 @@ using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.Shared
 {
