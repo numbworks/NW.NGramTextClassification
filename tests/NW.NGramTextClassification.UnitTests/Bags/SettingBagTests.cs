@@ -55,18 +55,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                         );
 
             // Assert
-            Assert.IsInstanceOf<SettingBag>(actual1);
-            Assert.IsInstanceOf<SettingBag>(actual2);
+            Assert.That(actual1, Is.InstanceOf<SettingBag>());
+            Assert.That(actual2, Is.InstanceOf<SettingBag>());
 
-            Assert.IsInstanceOf<uint>(actual1.TruncateTextInLogMessagesAfter);
-            Assert.IsInstanceOf<double>(actual1.MinimumAccuracySingleLabel);
-            Assert.IsInstanceOf<double>(actual1.MinimumAccuracyMultipleLabels);
-            Assert.IsInstanceOf<string>(actual1.FolderPath);
+            Assert.That(actual1.TruncateTextInLogMessagesAfter,Is.InstanceOf<uint>());
+            Assert.That(actual1.MinimumAccuracySingleLabel,Is.InstanceOf<double>());
+            Assert.That(actual1.MinimumAccuracyMultipleLabels,Is.InstanceOf<double>());
+            Assert.That(actual1.FolderPath, Is.InstanceOf<string>());
 
-            Assert.IsInstanceOf<uint>(SettingBag.DefaultTruncateTextInLogMessagesAfter);
-            Assert.IsInstanceOf<double>(SettingBag.DefaultMinimumAccuracySingleLabel);
-            Assert.IsInstanceOf<double>(SettingBag.DefaultMinimumAccuracyMultipleLabels);
-            Assert.IsInstanceOf<string>(SettingBag.DefaultFolderPath);
+            Assert.That(SettingBag.DefaultTruncateTextInLogMessagesAfter, Is.InstanceOf<uint>());
+            Assert.That(SettingBag.DefaultMinimumAccuracySingleLabel, Is.InstanceOf<double>());
+            Assert.That(SettingBag.DefaultMinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
+            Assert.That(SettingBag.DefaultFolderPath, Is.InstanceOf<string>());
 
         }
 
@@ -80,5 +80,5 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 30.01.2024
 */

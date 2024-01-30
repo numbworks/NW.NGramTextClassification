@@ -107,11 +107,12 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             string actual = new TokenizationStrategy().ToString();
 
             // Assert
-            Assert.IsTrue(
+            Assert.That(
                 string.Equals(
                     ObjectMother.TokenizationStrategy_Default_AsString,
                     actual,
-                    StringComparison.InvariantCulture));
+                    StringComparison.InvariantCulture), 
+                Is.False);
 
         }
 
@@ -131,8 +132,8 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                 = new TokenizationStrategy();
 
             // Assert
-            Assert.IsInstanceOf<TokenizationStrategy>(actual1);
-            Assert.IsInstanceOf<TokenizationStrategy>(actual2);
+            Assert.That(actual1, Is.InstanceOf<TokenizationStrategy>());
+            Assert.That(actual2, Is.InstanceOf<TokenizationStrategy>());
 
         }
 
@@ -148,9 +149,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             bool actual3 = a != b;
 
             // Assert
-            Assert.AreEqual(expected, actual1);
-            Assert.AreEqual(expected, actual2);
-            Assert.AreNotEqual(expected, actual3);
+            Assert.That(expected, Is.EqualTo(actual1));
+            Assert.That(expected, Is.EqualTo(actual2));
+            Assert.That(expected, Is.Not.EqualTo(actual3));
 
         }
 
@@ -163,7 +164,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             bool actual = ObjectMother.TokenizationStrategy_Default.Equals("some_string");
 
             // Assert
-            Assert.IsFalse(actual);
+            Assert.That(actual, Is.False);
 
         }
 
@@ -176,7 +177,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             bool actual = null == ObjectMother.TokenizationStrategy_Default;
 
             // Assert
-            Assert.IsFalse(actual);
+            Assert.That(actual, Is.False);
 
         }
 
@@ -189,10 +190,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             int actual = ObjectMother.TokenizationStrategy_Default.GetHashCode();
 
             // Assert
-            Assert.AreEqual(ObjectMother.TokenizationStrategy_Default_HashCode, actual);
+            Assert.That(ObjectMother.TokenizationStrategy_Default_HashCode, Is.EqualTo(actual));
 
         }
-
 
         #endregion
 
@@ -204,5 +204,5 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2021
+    Last Update: 30.01.2024
 */

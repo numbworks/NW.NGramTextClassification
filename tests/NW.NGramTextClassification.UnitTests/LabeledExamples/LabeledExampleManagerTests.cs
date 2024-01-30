@@ -159,7 +159,6 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             (LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet, TokenizedExample expected)
         {
 
-
             // Arrange
             LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
 
@@ -167,8 +166,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample, tokenizerRuleSet);
 
             // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
@@ -190,8 +190,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 = labeledExampleManager.CreateOrDefault(ObjectMother.ShortLabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
 
             // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual)
+            Assert.That(
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual),
+                    Is.True
                 );
 
         }
@@ -205,12 +206,12 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             LabeledExampleManager actual = new LabeledExampleManager(new NGramTokenizer());
 
             // Assert
-            Assert.IsInstanceOf<LabeledExampleManager>(actual);
+            Assert.That(actual, Is.InstanceOf<LabeledExampleManager>());
 
-            Assert.IsInstanceOf<NGramTokenizer>(LabeledExampleManager.DefaultNGramTokenizer);
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LabeledExampleManager.DefaultTokenizerRuleSet);
-            Assert.IsNull(LabeledExampleManager.DefaultTokenizedExample);
-            Assert.IsNull(LabeledExampleManager.DefaultTokenizedExamples);
+            Assert.That(LabeledExampleManager.DefaultNGramTokenizer, Is.InstanceOf<NGramTokenizer>());
+            Assert.That(LabeledExampleManager.DefaultTokenizerRuleSet, Is.InstanceOf<NGramTokenizerRuleSet>());
+            Assert.That(LabeledExampleManager.DefaultTokenizedExample, Is.Null);
+            Assert.That(LabeledExampleManager.DefaultTokenizedExamples, Is.Null);
 
         }
 
@@ -223,7 +224,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             LabeledExampleManager actual = new LabeledExampleManager();
 
             // Assert
-            Assert.IsInstanceOf<LabeledExampleManager>(actual);
+            Assert.That(actual, Is.InstanceOf<LabeledExampleManager>());
 
         }
 
@@ -243,7 +244,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                         );
 
             // Assert
-            Assert.IsNull(actual);
+            Assert.That(actual, Is.Null);
 
         }
 
@@ -263,7 +264,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                         );
 
             // Assert
-            Assert.IsNull(actual);
+            Assert.That(actual, Is.Null);
 
         }
 
@@ -278,8 +279,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample: ObjectMother.ShortLabeledExample01);
 
             // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExample01, actual)
+            Assert.That(
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExample01, actual),
+                    Is.True
                 );
 
         }
@@ -295,8 +297,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
             List<TokenizedExample> actual = labeledExampleManager.CreateOrDefault(labeledExamples: ObjectMother.ShortLabeledExamples);
 
             // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual)
+            Assert.That(
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual),
+                    Is.True
                 );
 
         }
@@ -319,11 +322,13 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                         out actualRemoved);
 
             // Assert
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(ObjectMother.UntokenizableLabeledExamples, actualRemoved)
+            Assert.That(
+                    ObjectMother.AreEqual(ObjectMother.UntokenizableLabeledExamples, actualRemoved),
+                    Is.True
                 );
-            Assert.IsTrue(
-                    ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
