@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <FileVersion>4.0.0.0</FileVersion>
@@ -15,23 +14,20 @@
     <Company>numbworks</Company>
     <Copyright>numbworks 2024</Copyright>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.13.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="NUnit" Version="4.0.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\..\numbworks_logo_128x128px.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\NW.NGramTextClassificationClient\NW.NGramTextClassificationClient.csproj" />
     <ProjectReference Include="..\..\src\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
     <ProjectReference Include="..\NW.NGramTextClassification.UnitTests\NW.NGramTextClassification.UnitTests.csproj" />
   </ItemGroup>
-
 </Project>

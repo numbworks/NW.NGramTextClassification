@@ -116,9 +116,9 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             bool actual3 = a != b;
 
             // Assert
-            Assert.AreEqual(expected, actual1);
-            Assert.AreEqual(expected, actual2);
-            Assert.AreNotEqual(expected, actual3);
+            Assert.That(expected, Is.EqualTo(actual1));
+            Assert.That(expected, Is.EqualTo(actual2));
+            Assert.That(expected, Is.Not.EqualTo(actual3));
 
         }
 
@@ -131,7 +131,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             bool actual = ObjectMother.FakeGram01.Equals("some_string");
 
             // Assert
-            Assert.IsFalse(actual);
+            Assert.That(actual, Is.False);
 
         }
 
@@ -144,7 +144,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             bool actual = null == ObjectMother.FakeGram01;
 
             // Assert
-            Assert.IsFalse(actual);
+            Assert.That(actual, Is.False);
 
         }
 
@@ -157,7 +157,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
             int actual = ObjectMother.FakeGram01.GetHashCode();
 
             // Assert
-            Assert.AreEqual(ObjectMother.FakeGram01_HashCode, actual);
+            Assert.That(ObjectMother.FakeGram01_HashCode, Is.EqualTo(actual));
 
         }
 
@@ -171,5 +171,5 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2021
+    Last Update: 30.01.2024
 */

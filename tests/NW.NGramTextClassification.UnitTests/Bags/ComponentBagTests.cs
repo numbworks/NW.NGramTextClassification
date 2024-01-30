@@ -283,27 +283,27 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             ComponentBag actual = new ComponentBag();
 
             // Assert
-            Assert.IsInstanceOf<ComponentBag>(actual);
+            Assert.That(actual, Is.InstanceOf<ComponentBag>());
 
-            Assert.IsInstanceOf<INGramTokenizer>(actual.NGramsTokenizer);
-            Assert.IsInstanceOf<ISimilarityIndexCalculator>(actual.SimilarityIndexCalculator);
-            Assert.IsInstanceOf<Func<double, double>>(actual.RoundingFunction);
-            Assert.IsInstanceOf<Func<string, uint, string>>(actual.TextTruncatingFunction);
-            Assert.IsInstanceOf<Action<string>>(actual.LoggingAction);
-            Assert.IsInstanceOf<ILabeledExampleManager>(actual.LabeledExampleManager);
-            Assert.IsInstanceOf<IAsciiBannerManager>(actual.AsciiBannerManager);
-            Assert.IsInstanceOf<Action<string>>(actual.LoggingActionAsciiBanner);
-            Assert.IsInstanceOf<IFileManager>(actual.FileManager);
-            Assert.IsInstanceOf<ISerializerFactory>(actual.SerializerFactory);
-            Assert.IsInstanceOf<IFilenameFactory>(actual.FilenameFactory);
-            Assert.IsInstanceOf<Func<DateTime>>(actual.NowFunction);
+            Assert.That(actual.NGramsTokenizer, Is.InstanceOf<INGramTokenizer>());
+            Assert.That(actual.SimilarityIndexCalculator, Is.InstanceOf<ISimilarityIndexCalculator>());
+            Assert.That(actual.RoundingFunction, Is.InstanceOf<Func<double, double>>());
+            Assert.That(actual.TextTruncatingFunction, Is.InstanceOf<Func<string, uint, string>>());
+            Assert.That(actual.LoggingAction, Is.InstanceOf<Action<string>>());
+            Assert.That(actual.LabeledExampleManager, Is.InstanceOf<ILabeledExampleManager>());
+            Assert.That(actual.AsciiBannerManager, Is.InstanceOf<IAsciiBannerManager>());
+            Assert.That(actual.LoggingActionAsciiBanner, Is.InstanceOf<Action<string>>());
+            Assert.That(actual.FileManager, Is.InstanceOf<IFileManager>());
+            Assert.That(actual.SerializerFactory, Is.InstanceOf<ISerializerFactory>());
+            Assert.That(actual.FilenameFactory, Is.InstanceOf<IFilenameFactory>());
+            Assert.That(actual.NowFunction, Is.InstanceOf<Func<DateTime>>());
 
-            Assert.IsInstanceOf<Func<double, double>>(ComponentBag.DefaultRoundingFunction);
-            Assert.IsInstanceOf<Func<string, uint, string>>(ComponentBag.DefaultTextTruncatingFunction);
-            Assert.IsInstanceOf<string>(ComponentBag.DefaultLoggingActionDateFormat);
-            Assert.IsInstanceOf<Action<string>>(ComponentBag.DefaultLoggingAction);
-            Assert.IsInstanceOf<Action<string>>(ComponentBag.DefaultLoggingActionAsciiBanner);
-            Assert.IsInstanceOf<Func<DateTime>>(ComponentBag.DefaultNowFunction);
+            Assert.That(ComponentBag.DefaultRoundingFunction, Is.InstanceOf<Func<double, double>>());
+            Assert.That(ComponentBag.DefaultTextTruncatingFunction, Is.InstanceOf<Func<string, uint, string>>());
+            Assert.That(ComponentBag.DefaultLoggingActionDateFormat, Is.InstanceOf<string>());
+            Assert.That(ComponentBag.DefaultLoggingAction, Is.InstanceOf<Action<string>>());
+            Assert.That(ComponentBag.DefaultLoggingActionAsciiBanner, Is.InstanceOf<Action<string>>());
+            Assert.That(ComponentBag.DefaultNowFunction,Is.InstanceOf<Func<DateTime>>());
 
         }
 
@@ -321,7 +321,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             string actual = ComponentBag.DefaultTextTruncatingFunction(text, length);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -335,5 +335,5 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.01.2024
+    Last Update: 30.01.2024
 */

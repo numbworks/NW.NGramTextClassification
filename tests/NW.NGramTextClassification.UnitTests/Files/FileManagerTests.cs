@@ -183,7 +183,7 @@ namespace NW.NGramTextClassification.UnitTests.Files
                             .ReadAllLines(ObjectMother.FileInfoAdapterExists);
 
             // Assert
-            Assert.AreEqual(ObjectMother.ContentMultipleLines, actual);
+            Assert.That(ObjectMother.ContentMultipleLines, Is.EqualTo(actual));
 
         }
 
@@ -202,7 +202,7 @@ namespace NW.NGramTextClassification.UnitTests.Files
                             .ReadAllText(ObjectMother.FileInfoAdapterExists);
 
             // Assert
-            Assert.AreEqual(ObjectMother.ContentSingleLine, actual);
+            Assert.That(ObjectMother.ContentSingleLine, Is.EqualTo(actual));
 
         }
 
@@ -222,13 +222,13 @@ namespace NW.NGramTextClassification.UnitTests.Files
 
                 new FileManager(ObjectMother.FileAdapterAllMethodsWork)
                         .WriteAllLines(ObjectMother.FileInfoAdapterExists, ObjectMother.ContentMultipleLines);
-                Assert.IsTrue(true);
+                Assert.That(true, Is.True);
 
             }
             catch
             {
 
-                Assert.IsFalse(false);
+                Assert.That(false, Is.False);
 
             }
 
@@ -250,13 +250,13 @@ namespace NW.NGramTextClassification.UnitTests.Files
 
                 new FileManager(ObjectMother.FileAdapterAllMethodsWork)
                         .WriteAllText(ObjectMother.FileInfoAdapterExists, ObjectMother.ContentSingleLine);
-                Assert.IsTrue(true);
+                Assert.That(true, Is.True);
 
             }
             catch
             {
 
-                Assert.IsFalse(false);
+                Assert.That(false, Is.False);
 
             }
 
@@ -275,7 +275,7 @@ namespace NW.NGramTextClassification.UnitTests.Files
             IFileInfoAdapter actual = new FileManager().Create(@"J:\");
 
             // Assert
-            Assert.IsInstanceOf<IFileInfoAdapter>(actual);
+            Assert.That(actual, Is.InstanceOf<IFileInfoAdapter>());
 
         }
 
@@ -289,5 +289,5 @@ namespace NW.NGramTextClassification.UnitTests.Files
 }
 /*
     Author: numbworks@gmail.com
-    Last Update: 30.06.2022
+    Last Update: 30.01.2024
 */

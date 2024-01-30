@@ -174,9 +174,9 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         ObjectMother.Array01_Delimiter01);
 
             // Assert
-            Assert.AreEqual(
+            Assert.That(
                     ObjectMother.Array01_WithDelimiter01,
-                    actual);
+                    Is.EqualTo(actual));
 
         }
 
@@ -193,9 +193,9 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
                                         ObjectMother.Array01_Length01);
 
             // Assert
-            Assert.AreEqual(
+            Assert.That(
                     ObjectMother.Array01_Subset01,
-                    actual);
+                    Is.EqualTo(actual));
 
         }
 
@@ -209,5 +209,5 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 30.01.2024
 */
