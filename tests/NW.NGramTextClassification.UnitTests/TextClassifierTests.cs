@@ -400,16 +400,16 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier actual = new TextClassifier();
 
             // Assert
-            Assert.IsInstanceOf<TextClassifier>(actual);
+            Assert.That(actual, Is.InstanceOf<TextClassifier>());
 
-            Assert.IsInstanceOf<string>(actual.AsciiBanner);
-            Assert.IsInstanceOf<string>(actual.Version);
+            Assert.That(actual.AsciiBanner, Is.InstanceOf<string>());
+            Assert.That(actual.Version, Is.InstanceOf<string>());
 
-            Assert.IsInstanceOf<ComponentBag>(TextClassifier.DefaultComponentBag);
-            Assert.IsInstanceOf<SettingBag>(TextClassifier.DefaultSettingBag);
-            Assert.IsInstanceOf<INGramTokenizerRuleSet>(TextClassifier.DefaultNGramTokenizerRuleSet);
-            Assert.IsInstanceOf<TextClassifierResult>(TextClassifier.DefaultTextClassifierResult);
-            Assert.IsInstanceOf<Func<TextClassifierSession, dynamic>>(TextClassifier.SimilarityIndexDisabler);
+            Assert.That(TextClassifier.DefaultComponentBag, Is.InstanceOf<ComponentBag>());
+            Assert.That(TextClassifier.DefaultSettingBag, Is.InstanceOf<SettingBag>());
+            Assert.That(TextClassifier.DefaultNGramTokenizerRuleSet, Is.InstanceOf<INGramTokenizerRuleSet>());
+            Assert.That(TextClassifier.DefaultTextClassifierResult, Is.InstanceOf<TextClassifierResult>());
+            Assert.That(TextClassifier.SimilarityIndexDisabler, Is.InstanceOf<Func<TextClassifierSession, dynamic>>());
 
         }
 
@@ -444,10 +444,11 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSession actual = textClassifier.ClassifyOrDefault(textSnippet, tokenizerRuleSet, labeledExamples);
 
             // Assert
-            Assert.IsTrue(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -488,16 +489,17 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSession actual = textClassifier.ClassifyOrDefault(textSnippet, tokenizerRuleSet, labeledExamples);
 
             // Assert
-            Assert.IsTrue(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
-            Assert.AreEqual(
+            Assert.That(
                     initialLogMessages,
-                    actualLogMessages.GetRange(0, 5)
+                    Is.EqualTo(actualLogMessages.GetRange(0, 5))
                 );
-            Assert.AreEqual(
+            Assert.That(
                     finalLogMessages,
-                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+                    Is.EqualTo(Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList())
                 );
 
         }
@@ -540,14 +542,14 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSession actual = textClassifier.ClassifyOrDefault(textSnippet, tokenizerRuleSet, labeledExamples);
 
             // Assert
-            Assert.AreEqual(expectedLabel, actual.Results[0].Label);
-            Assert.AreEqual(
+            Assert.That(expectedLabel, Is.EqualTo(actual.Results[0].Label));
+            Assert.That(
                     initialLogMessages, 
-                    actualLogMessages.GetRange(0, 6)
+                    Is.EqualTo(actualLogMessages.GetRange(0, 6))
                 );
-            Assert.AreEqual(
-                    finalLogMessages, 
-                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+            Assert.That(
+                    finalLogMessages,
+                    Is.EqualTo(Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList())
                 );
 
         }
@@ -590,16 +592,17 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifierSession actual = textClassifier.ClassifyOrDefault(textSnippet, tokenizerRuleSet, labeledExamples);
 
             // Assert
-            Assert.IsTrue(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
-            Assert.AreEqual(
+            Assert.That(
                     initialLogMessages,
-                    actualLogMessages.GetRange(0, 6)
+                    Is.EqualTo(actualLogMessages.GetRange(0, 6))
                 );
-            Assert.AreEqual(
+            Assert.That(
                     finalLogMessages,
-                    Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList()
+                    Is.EqualTo(Enumerable.Reverse(actualLogMessages).Take(finalLogMessages.Count).Reverse().ToList())
                 );
 
         }
@@ -660,8 +663,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -721,8 +724,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -782,8 +785,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -846,8 +849,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -911,8 +914,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -977,8 +980,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1044,8 +1047,8 @@ namespace NW.NGramTextClassification.UnitTests
                     );
 
             // Assert
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expected, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1084,7 +1087,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.LogAsciiBanner();
 
             // Assert
-            Assert.AreEqual(expectedMessages, actualLogMessages);
+            Assert.That(expectedMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1130,10 +1133,11 @@ namespace NW.NGramTextClassification.UnitTests
                 = textClassifier.ClassifyMany(textSnippets: textSnippets, tokenizerRuleSet: tokenizerRuleSet, labeledExamples: labeledExamples);
 
             // Assert
-            Assert.IsTrue(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
-            Assert.AreEqual(expectedLogMessages[0], actualLogMessages[0]); // The only messages that it's different from ClassifyOrDefault() is the first one.
+            Assert.That(expectedLogMessages[0], Is.EqualTo(actualLogMessages[0])); // The only messages that it's different from ClassifyOrDefault() is the first one.
 
         }
 
@@ -1179,10 +1183,11 @@ namespace NW.NGramTextClassification.UnitTests
             List<LabeledExample> actual = textClassifier.LoadLabeledExamplesOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.IsTrue(
-                    LabeledExamples.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExamples, actual)
+            Assert.That(
+                    LabeledExamples.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExamples, actual),
+                    Is.True
                 );
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1222,8 +1227,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<LabeledExample> actual = textClassifier.LoadLabeledExamplesOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.AreEqual(Serializer<LabeledExample>.Default, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(Serializer<LabeledExample>.Default, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1269,10 +1274,11 @@ namespace NW.NGramTextClassification.UnitTests
             List<TextSnippet> actual = textClassifier.LoadTextSnippetsOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.IsTrue(
-                    TextSnippets.ObjectMother.AreEqual(TextSnippets.ObjectMother.TextSnippets, actual)
+            Assert.That(
+                    TextSnippets.ObjectMother.AreEqual(TextSnippets.ObjectMother.TextSnippets, actual),
+                    Is.True
                 );
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1312,8 +1318,8 @@ namespace NW.NGramTextClassification.UnitTests
             List<TextSnippet> actual = textClassifier.LoadTextSnippetsOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.AreEqual(Serializer<TextSnippet>.Default, actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(Serializer<TextSnippet>.Default, Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1359,10 +1365,11 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizerRuleSet actual = textClassifier.LoadTokenizerRuleSetOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.IsTrue(
-                    NGramTokenization.ObjectMother.AreEqual(TextClassifications.ObjectMother.TokenizerRuleSet, actual)
+            Assert.That(
+                    NGramTokenization.ObjectMother.AreEqual(TextClassifications.ObjectMother.TokenizerRuleSet, actual),
+                    Is.True
                 );
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 

@@ -83,8 +83,8 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             NGramTokenizer actual2 = new NGramTokenizer();
 
             // Assert
-            Assert.IsInstanceOf<NGramTokenizer>(actual1);
-            Assert.IsInstanceOf<NGramTokenizer>(actual2);
+            Assert.That(actual1, Is.InstanceOf<NGramTokenizer>());
+            Assert.That(actual2, Is.InstanceOf<NGramTokenizer>());
 
         }
 
@@ -106,8 +106,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             List<INGram> actual = nGramTokenizer.DoForRuleSetOrDefault(text, tokenizerRuleSet);
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
@@ -128,8 +129,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                         );
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(NGramTokenizer.DefaultNGrams, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(NGramTokenizer.DefaultNGrams, actual),
+                    Is.True
                 );
 
         }
@@ -145,8 +147,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             List<Monogram> actual = nGramTokenizer.DoForMonogram(LabeledExamples.ObjectMother.ShortLabeledExample01.Text);
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms, actual),
+                    Is.True
                 );
 
         }
@@ -162,8 +165,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             List<Bigram> actual = nGramTokenizer.DoForBigram(LabeledExamples.ObjectMother.ShortLabeledExample01.Text);
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Bigrams, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Bigrams, actual),
+                    Is.True
                 );
 
         }
@@ -179,8 +183,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             List<Trigram> actual = nGramTokenizer.DoForTrigram(LabeledExamples.ObjectMother.ShortLabeledExample01.Text);
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Trigrams, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Trigrams, actual),
+                    Is.True
                 );
 
         }
@@ -196,8 +201,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             List<Fourgram> actual = nGramTokenizer.DoForFourgram(LabeledExamples.ObjectMother.ShortLabeledExample01.Text);
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Fourgrams, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Fourgrams, actual),
+                    Is.True
                 );
 
         }
@@ -213,8 +219,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             List<Fivegram> actual = nGramTokenizer.DoForFivegram(LabeledExamples.ObjectMother.ShortLabeledExample01.Text);
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Fivegrams, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(LabeledExamples.ObjectMother.ShortLabeledExample01_Fivegrams, actual),
+                    Is.True
                 );
 
         }
@@ -236,8 +243,9 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                         );
 
             // Assert
-            Assert.IsTrue(
-                    NGrams.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    NGrams.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
@@ -318,5 +326,5 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.01.2024
 */

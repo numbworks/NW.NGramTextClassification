@@ -74,11 +74,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             string actual = textClassifierResult.ToString();
 
             // Assert
-            Assert.IsTrue(
+            Assert.That(
                 string.Equals(
                     expected,
                     actual,
-                    StringComparison.InvariantCulture));
+                    StringComparison.InvariantCulture),
+                Is.True);
 
         }
 
@@ -97,12 +98,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     );
 
             // Assert
-            Assert.IsInstanceOf<TextClassifierResult>(actual);
+            Assert.That(actual, Is.InstanceOf<TextClassifierResult>());
 
-            Assert.IsInstanceOf<TextSnippet>(actual.TextSnippet);
-            Assert.IsInstanceOf<string>(actual.Label);
-            Assert.IsInstanceOf<List<SimilarityIndex>>(actual.SimilarityIndexes);
-            Assert.IsInstanceOf<List<SimilarityIndexAverage>>(actual.SimilarityIndexAverages);
+            Assert.That(actual.TextSnippet, Is.InstanceOf<TextSnippet>());
+            Assert.That(actual.Label, Is.InstanceOf<string>());
+            Assert.That(actual.SimilarityIndexes, Is.InstanceOf<List<SimilarityIndex>>());
+            Assert.That(actual.SimilarityIndexAverages, Is.InstanceOf<List<SimilarityIndexAverage>>());
 
         }
 
@@ -116,5 +117,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 06.11.2022
+    Last Update: 31.01.2024
 */

@@ -75,7 +75,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     );
 
             // Assert
-            Assert.IsInstanceOf<TextClassifierSession>(actual);
+            Assert.That(actual, Is.InstanceOf<TextClassifierSession>());
 
         }
 
@@ -89,5 +89,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update:26.01.2024
+    Last Update:31.01.2024
 */

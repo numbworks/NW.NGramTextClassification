@@ -55,7 +55,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                     );
 
             // Assert
-            Assert.IsInstanceOf<SimilarityIndexAverage>(actual);
+            Assert.That(actual, Is.InstanceOf<SimilarityIndexAverage>());
 
         }
 
@@ -66,11 +66,12 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
             // Arrange
             // Act
             // Assert
-            Assert.IsTrue(
+            Assert.That(
                 string.Equals(
                     ObjectMother.SimilarityIndexAverage01_AsString,
                     ObjectMother.SimilarityIndexAverage01.ToString(),
-                    StringComparison.InvariantCulture));
+                    StringComparison.InvariantCulture),
+                Is.True);
 
         }
 
@@ -90,6 +91,6 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.01.2024
 
 */
