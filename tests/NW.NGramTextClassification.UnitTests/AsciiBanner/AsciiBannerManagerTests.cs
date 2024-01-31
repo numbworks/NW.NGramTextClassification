@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.UnitTests.AsciiBanner
             string actual = new AsciiBannerManager().Create(version);
 
             // Assert
-            StringAssert.Contains(version, actual);
+            Assert.That(actual, Does.Contain(version));
 
         }
 
@@ -60,5 +60,5 @@ namespace NW.NGramTextClassification.UnitTests.AsciiBanner
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.01.2024
 */

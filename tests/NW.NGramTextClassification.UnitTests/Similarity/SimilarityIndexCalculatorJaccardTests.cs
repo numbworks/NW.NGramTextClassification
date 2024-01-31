@@ -127,7 +127,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                         .Do(list1, list2, ComponentBag.DefaultRoundingFunction);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -141,5 +141,5 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.09.2022
 */
