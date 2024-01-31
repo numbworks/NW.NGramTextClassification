@@ -46,7 +46,7 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
             string actual = new TextSnippet(text: text).ToString();
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -59,8 +59,8 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
             TextSnippet actual = new TextSnippet(text: "Some text");
 
             // Assert
-            Assert.IsInstanceOf<TextSnippet>(actual);
-            Assert.IsInstanceOf<string>(actual.Text);
+            Assert.That(actual, Is.InstanceOf<TextSnippet>());
+            Assert.That(actual.Text, Is.InstanceOf<string>());
 
         }
 
@@ -75,5 +75,5 @@ namespace NW.NGramTextClassification.UnitTests.TextSnippets
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 31.01.2024
 */
