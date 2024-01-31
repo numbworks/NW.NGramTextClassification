@@ -99,7 +99,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string actual = new Serializer<LabeledExample>().Serialize(objects: objects);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -115,7 +115,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string actual = new Serializer<TextSnippet>().Serialize(objects: objects);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -132,7 +132,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string actual = new Serializer<TextSnippet>().Serialize(obj: obj);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -148,7 +148,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -162,7 +162,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             List<LabeledExample> actual = new Serializer<LabeledExample>().DeserializeManyOrDefault(json: json);
 
             // Assert
-            Assert.AreEqual(Serializer<LabeledExample>.Default, actual);
+            Assert.That(Serializer<LabeledExample>.Default, Is.EqualTo(actual));
 
         }
 
@@ -178,8 +178,9 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             List<LabeledExample> actual = new Serializer<LabeledExample>().DeserializeManyOrDefault(json: json);
 
             // Assert
-            Assert.IsTrue(
-                    LabeledExamples.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    LabeledExamples.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
@@ -196,8 +197,9 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             List<TextSnippet> actual = new Serializer<TextSnippet>().DeserializeManyOrDefault(json: json);
 
             // Assert
-            Assert.IsTrue(
-                    TextSnippets.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    TextSnippets.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
@@ -212,7 +214,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);
 
             // Assert
-            Assert.AreEqual(default(NGramTokenizerRuleSet), actual);
+            Assert.That(default(NGramTokenizerRuleSet), Is.EqualTo(actual));
 
         }
 
@@ -228,8 +230,9 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);
 
             // Assert
-            Assert.IsTrue(
-                    NGramTokenization.ObjectMother.AreEqual(expected, actual)
+            Assert.That(
+                    NGramTokenization.ObjectMother.AreEqual(expected, actual),
+                    Is.True
                 );
 
         }
@@ -245,5 +248,5 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 06.11.2022
+    Last Update: 31.01.2024
 */

@@ -80,13 +80,13 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                     );
 
             // Assert
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(actual);
+            Assert.That(actual, Is.InstanceOf<NGramTokenizerRuleSet>());
 
-            Assert.IsInstanceOf<bool>(NGramTokenizerRuleSet.DefaultDoForMonogram);
-            Assert.IsInstanceOf<bool>(NGramTokenizerRuleSet.DefaultDoForBigram);
-            Assert.IsInstanceOf<bool>(NGramTokenizerRuleSet.DefaultDoForTrigram);
-            Assert.IsInstanceOf<bool>(NGramTokenizerRuleSet.DefaultDoForFourgram);
-            Assert.IsInstanceOf<bool>(NGramTokenizerRuleSet.DefaultDoForFivegram);
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForMonogram, Is.InstanceOf<bool>());
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForBigram,Is.InstanceOf<bool>());
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForTrigram, Is.InstanceOf<bool>());
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForFourgram, Is.InstanceOf<bool>());
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForFivegram, Is.InstanceOf<bool>());
 
         }
 
@@ -99,13 +99,13 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
             NGramTokenizerRuleSet actual = new NGramTokenizerRuleSet();
 
             // Assert
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(actual);
+            Assert.That(actual, Is.InstanceOf<NGramTokenizerRuleSet>());
 
-            Assert.IsTrue(NGramTokenizerRuleSet.DefaultDoForMonogram);
-            Assert.IsTrue(NGramTokenizerRuleSet.DefaultDoForBigram);
-            Assert.IsTrue(NGramTokenizerRuleSet.DefaultDoForTrigram);
-            Assert.IsTrue(NGramTokenizerRuleSet.DefaultDoForFourgram);
-            Assert.IsTrue(NGramTokenizerRuleSet.DefaultDoForFivegram);
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForMonogram, Is.True);
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForBigram, Is.True);
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForTrigram, Is.True);
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForFourgram, Is.True);
+            Assert.That(NGramTokenizerRuleSet.DefaultDoForFivegram, Is.True);
 
         }
 
@@ -122,7 +122,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -136,5 +136,5 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.01.2024
 */
