@@ -1409,8 +1409,8 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizerRuleSet actual = textClassifier.LoadTokenizerRuleSetOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.AreEqual(default(NGramTokenizerRuleSet), actual);
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(default(NGramTokenizerRuleSet), Is.EqualTo(actual));
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1458,7 +1458,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath);
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1505,7 +1505,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath);
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1553,7 +1553,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, disableIndexSerialization);
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1603,7 +1603,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath);
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1652,7 +1652,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath);
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1701,7 +1701,7 @@ namespace NW.NGramTextClassification.UnitTests
             textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, false);
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1730,10 +1730,10 @@ namespace NW.NGramTextClassification.UnitTests
             {
 
                 // Assert
-                Assert.IsInstanceOf<Exception>(e.InnerException);
-                Assert.AreEqual(
+                Assert.That(e.InnerException, Is.InstanceOf<Exception>());
+                Assert.That(
                     NGramTextClassification.TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(Monogram)),
-                    e.InnerException.Message);
+                    Is.EqualTo(e.InnerException.Message));
 
             }
 
@@ -1792,7 +1792,7 @@ namespace NW.NGramTextClassification.UnitTests
                 );
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
         
@@ -1838,7 +1838,7 @@ namespace NW.NGramTextClassification.UnitTests
                 );
 
             // Assert
-            Assert.AreEqual(expectedLogMessages, actualLogMessages);
+            Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
 
@@ -1856,7 +1856,7 @@ namespace NW.NGramTextClassification.UnitTests
             {
 
                 var similarityIndexes = ((ExpandoObject)actual.Results[0]).FirstOrDefault(x => x.Key == "SimilarityIndexes").Value;
-                Assert.AreEqual(0, ((List<SimilarityIndex>)similarityIndexes).Count);
+                Assert.That(0, Is.EqualTo(((List<SimilarityIndex>)similarityIndexes).Count));
 
             }
 
@@ -1905,5 +1905,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.01.2024
+    Last Update: 01.02.2024
 */
