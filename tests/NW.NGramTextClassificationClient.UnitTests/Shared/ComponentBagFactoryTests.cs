@@ -25,7 +25,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             ComponentBagFactory actual = new ComponentBagFactory();
 
             // Assert
-            Assert.IsInstanceOf<ComponentBagFactory>(actual);
+            Assert.That(actual, Is.InstanceOf<ComponentBagFactory>());
 
         }
 
@@ -39,7 +39,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 = new ComponentBagFactory().Create();
 
             // Assert
-            Assert.IsInstanceOf<ComponentBag>(actual);
+            Assert.That(actual, Is.InstanceOf<ComponentBag>());
 
         }
 
@@ -56,5 +56,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.01.2024
+    Last Update: 01.02.2024
 */

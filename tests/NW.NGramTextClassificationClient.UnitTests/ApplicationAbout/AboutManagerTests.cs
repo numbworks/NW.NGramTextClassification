@@ -62,7 +62,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             AboutManager actual = new AboutManager(libraryBroker: new LibraryBroker());
 
             // Assert
-            Assert.IsInstanceOf<AboutManager>(actual);
+            Assert.That(actual, Is.InstanceOf<AboutManager>());
 
         }
 
@@ -79,5 +79,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 01.02.2024
 */

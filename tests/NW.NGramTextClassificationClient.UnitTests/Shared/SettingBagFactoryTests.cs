@@ -25,7 +25,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             SettingBagFactory actual = new SettingBagFactory();
 
             // Assert
-            Assert.IsInstanceOf<SettingBagFactory>(actual);
+            Assert.That(actual, Is.InstanceOf<SettingBagFactory>());
 
         }
 
@@ -39,7 +39,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 = new SettingBagFactory().Create();
 
             // Assert
-            Assert.IsInstanceOf<SettingBag>(actual);
+            Assert.That(actual, Is.InstanceOf<SettingBag>());
 
         }
 
@@ -56,5 +56,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 01.02.2024
 */

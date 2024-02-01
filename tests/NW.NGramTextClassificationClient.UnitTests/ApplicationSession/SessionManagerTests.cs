@@ -76,7 +76,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                         sessionManagerBag: new SessionManagerBag());
 
             // Assert
-            Assert.IsInstanceOf<SessionManager>(actual);
+            Assert.That(actual, Is.InstanceOf<SessionManager>());
 
         }
 
@@ -93,5 +93,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 01.02.2024
 */

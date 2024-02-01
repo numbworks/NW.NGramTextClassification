@@ -46,11 +46,11 @@ namespace NW.NGramTextClassificationClient.UnitTests
             SessionManagerBag actual2 = new SessionManagerBag(new DoubleManager());
 
             // Assert
-            Assert.IsInstanceOf<SessionManagerBag>(actual1);
-            Assert.IsInstanceOf<SessionManagerBag>(actual2);
+            Assert.That(actual1, Is.InstanceOf<SessionManagerBag>());
+            Assert.That(actual2, Is.InstanceOf<SessionManagerBag>());
 
-            Assert.IsInstanceOf<IDoubleManager>(actual1.DoubleManager);
-            Assert.IsInstanceOf<IOptionValidator>(actual1.MinimumAccuracyValidator);
+            Assert.That(actual1.DoubleManager, Is.InstanceOf<IDoubleManager>());
+            Assert.That(actual1.MinimumAccuracyValidator, Is.InstanceOf<IOptionValidator>());
 
         }
 
@@ -67,5 +67,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 01.02.2024
 */

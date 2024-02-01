@@ -60,7 +60,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             ApplicationManagerBagFactory actual = new ApplicationManagerBagFactory();
 
             // Assert
-            Assert.IsInstanceOf<ApplicationManagerBagFactory>(actual);
+            Assert.That(actual, Is.InstanceOf<ApplicationManagerBagFactory>());
 
         }
 
@@ -77,7 +77,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
                                     sessionManagerBag: new SessionManagerBag());
 
             // Assert
-            Assert.IsInstanceOf<ApplicationManagerBag>(actual);
+            Assert.That(actual, Is.InstanceOf<ApplicationManagerBag>());
 
         }
 
@@ -94,5 +94,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 01.02.2024
 */

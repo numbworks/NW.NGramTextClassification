@@ -85,7 +85,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             ApplicationManager actual = new ApplicationManager();
 
             // Assert
-            Assert.IsInstanceOf<ApplicationManager>(actual);
+            Assert.That(actual, Is.InstanceOf<ApplicationManager>());
 
         }
 
@@ -98,7 +98,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = new ApplicationManager().Execute(args);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -115,5 +115,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 01.02.2024
 */

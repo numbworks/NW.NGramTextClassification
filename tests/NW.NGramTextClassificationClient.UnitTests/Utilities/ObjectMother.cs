@@ -18,7 +18,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             // Act
             // Assert
             Exception objActual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, objActual.Message);
+            Assert.That(expectedMessage, Is.EqualTo(objActual.Message));
 
         }
         public static void Method_ShouldThrowACertainInnnerException_WhenCallPrivateMethodAndUnproperArguments
@@ -31,8 +31,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
             Exception actual = outerException.InnerException;
 
             // Assert
-            Assert.AreEqual(expectedInnerType, actual.GetType());
-            Assert.AreEqual(expectedInnerMessage, actual.Message);
+            Assert.That(expectedInnerType, Is.EqualTo(actual.GetType()));
+            Assert.That(expectedInnerMessage, Is.EqualTo(actual.Message));
 
         }
         public static TReturn CallPrivateMethod<TClass, TReturn>
@@ -52,5 +52,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 29.09.2022
+    Last Update: 01.02.2024
 */

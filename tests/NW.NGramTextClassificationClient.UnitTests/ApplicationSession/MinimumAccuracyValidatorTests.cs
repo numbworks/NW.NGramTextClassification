@@ -48,7 +48,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
             MinimumAccuracyValidator actual = new MinimumAccuracyValidator(new DoubleManager());
 
             // Assert
-            Assert.IsInstanceOf<MinimumAccuracyValidator>(actual);
+            Assert.That(actual, Is.InstanceOf<MinimumAccuracyValidator>());
 
         }
 
@@ -67,7 +67,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
             ValidationResult actual = new MinimumAccuracyValidator(new DoubleManager()).GetValidationResult(option, context);
 
             // Assert
-            Assert.AreEqual(expected, actual.ErrorMessage);
+            Assert.That(expected, Is.EqualTo(actual.ErrorMessage));
 
         }
 
@@ -88,7 +88,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
             ValidationResult actual = new MinimumAccuracyValidator(new DoubleManager()).GetValidationResult(option, context);
 
             // Assert
-            Assert.AreEqual(ValidationResult.Success, actual);
+            Assert.That(ValidationResult.Success, Is.EqualTo(actual));
 
         }
 
@@ -103,5 +103,5 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 01.02.2024
 */
