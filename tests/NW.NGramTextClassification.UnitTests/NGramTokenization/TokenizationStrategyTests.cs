@@ -112,7 +112,7 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                     ObjectMother.TokenizationStrategy_Default_AsString,
                     actual,
                     StringComparison.InvariantCulture), 
-                Is.False);
+                Is.True);
 
         }
 
