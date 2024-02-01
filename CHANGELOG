@@ -1,6 +1,7 @@
 v4.0.0 - BREAKING CHANGES
 - Library:
-	- Feature: introduced the "Bag Paradigm" into the codebase (*Settings => SettingBag, *Components => ComponentBag, ...).
+	- Feature: "Bag Pattern" adopted into the codebase (*Settings => SettingBag, *Components => ComponentBag, ...).
+	- Framework Freeze: migrated projects to .NET 8.0 and NUnit 4.x; updated packages accordingly, implemented new NUnit assertion model.
 - Documentation:
 	- Feature: updated to v4.0.0.
 
