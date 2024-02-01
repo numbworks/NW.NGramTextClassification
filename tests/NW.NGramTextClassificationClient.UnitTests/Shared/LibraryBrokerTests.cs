@@ -79,12 +79,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker actual = new LibraryBroker();
 
             // Assert
-            Assert.IsInstanceOf<LibraryBroker>(actual);
-            Assert.IsInstanceOf<int>(LibraryBroker.Success);
-            Assert.IsInstanceOf<int>(LibraryBroker.Failure);
-            Assert.IsInstanceOf<string>(LibraryBroker.SeparatorLine);
-            Assert.IsInstanceOf<Func<string, string>>(LibraryBroker.ErrorMessageFormatter);
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LibraryBroker.DefaultTokenizerRuleSet);
+            Assert.That(actual, Is.InstanceOf<LibraryBroker>());
+            Assert.That(LibraryBroker.Success, Is.InstanceOf<int>());
+            Assert.That(LibraryBroker.Failure, Is.InstanceOf<int>());
+            Assert.That(LibraryBroker.SeparatorLine, Is.InstanceOf<string>());
+            Assert.That(LibraryBroker.ErrorMessageFormatter, Is.InstanceOf<Func<string, string>>());
+            Assert.That(LibraryBroker.DefaultTokenizerRuleSet, Is.InstanceOf<NGramTokenizerRuleSet>());
 
         }
 
@@ -106,14 +106,14 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(null);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
-            Assert.AreEqual(
-                    expected: LibraryBroker.ErrorMessageFormatter(new ArgumentNullException("classifyData").Message),
-                    actual: messages[0]
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(
+                    LibraryBroker.ErrorMessageFormatter(new ArgumentNullException("classifyData").Message),
+                    Is.EqualTo(messages[0])
                     );
-            Assert.AreEqual(
-                    expected: LibraryBroker.SeparatorLine,
-                    actual: messagesAsciiBanner[0]
+            Assert.That(
+                    LibraryBroker.SeparatorLine,
+                    Is.EqualTo(messagesAsciiBanner[0])
                     );
 
         }
@@ -159,32 +159,32 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Success, actual);
+            Assert.That(LibraryBroker.Success, Is.EqualTo(actual));
 
-            Assert.AreEqual(
-                    expected: "Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\LabeledExamples.json.",
-                    actual: messages[0]
+            Assert.That(
+                    "Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\LabeledExamples.json.",
+                    Is.EqualTo(messages[0])
                     );
-            Assert.AreEqual(
-                    expected: "Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\TextSnippets.json.",
-                    actual: messages[2]
+            Assert.That(
+                    "Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\TextSnippets.json.",
+                    Is.EqualTo(messages[2])
                     );
-            Assert.AreEqual(
-                    expected: "Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\TokenizerRuleSet.json.",
-                    actual: messages[4]
+            Assert.That(
+                    "Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\TokenizerRuleSet.json.",
+                    Is.EqualTo(messages[4])
                     );
 
-            Assert.AreEqual(
-                    expected: LibraryBroker.SeparatorLine,
-                    actual: messagesAsciiBanner[0]
+            Assert.That(
+                    LibraryBroker.SeparatorLine,
+                    Is.EqualTo(messagesAsciiBanner[0])
                     );
-            Assert.AreEqual(
-                    expected: new TextClassifier().AsciiBanner,
-                    actual: messagesAsciiBanner[1]
+            Assert.That(
+                    new TextClassifier().AsciiBanner,
+                    Is.EqualTo(messagesAsciiBanner[1])
                     );
-            Assert.AreEqual(
-                    expected: LibraryBroker.SeparatorLine,
-                    actual: messagesAsciiBanner[2]
+            Assert.That(
+                    LibraryBroker.SeparatorLine,
+                    Is.EqualTo(messagesAsciiBanner[2])
                     );
 
         }
@@ -232,12 +232,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(expected, Is.EqualTo(messages[2]));
 
-            Assert.AreEqual(
-                    expected: expected,
-                    actual: messages[2]
-                    );
         }
 
         [Test]
@@ -284,12 +281,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(expected, Is.EqualTo(messages[4]));
 
-            Assert.AreEqual(
-                    expected: expected,
-                    actual: messages[4]
-                    );
         }
 
         [Test]
@@ -338,12 +332,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
-
-            Assert.AreEqual(
-                    expected: expected,
-                    actual: messages[6]
-                    );
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(expected, Is.EqualTo(messages[6]));
 
         }
 
@@ -390,5 +380,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 01.02.2024
 */
