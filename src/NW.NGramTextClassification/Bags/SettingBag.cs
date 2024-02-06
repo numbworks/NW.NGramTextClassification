@@ -1,10 +1,10 @@
 ﻿using NW.NGramTextClassification.Validation;
 using System.IO;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Bags
 {
     /// <summary>Collects all the global settings required by this library.</summary>
-    public class TextClassifierSettings
+    public class SettingBag
     {
 
         #region Fields
@@ -26,8 +26,8 @@ namespace NW.NGramTextClassification
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="TextClassifierSettings"/> instance.</summary>
-        public TextClassifierSettings(
+        /// <summary>Initializes a <see cref="SettingBag"/> instance.</summary>
+        public SettingBag(
                     uint truncateTextInLogMessagesAfter,
                     double minimumAccuracySingleLabel,
                     double minimumAccuracyMultipleLabels,
@@ -43,14 +43,15 @@ namespace NW.NGramTextClassification
 
         }
 
-        /// <summary>Initializes a <see cref="TextClassifierSettings"/> instance using default parameters.</summary>
-        public TextClassifierSettings()
+        /// <summary>Initializes a <see cref="SettingBag"/> instance using default parameters.</summary>
+        public SettingBag()
             : this(
                   truncateTextInLogMessagesAfter: DefaultTruncateTextInLogMessagesAfter,
                   minimumAccuracySingleLabel: DefaultMinimumAccuracySingleLabel,
                   minimumAccuracyMultipleLabels: DefaultMinimumAccuracyMultipleLabels,
                   folderPath: DefaultFolderPath
-                  ) { }
+                  )
+        { }
 
         #endregion
 
@@ -62,5 +63,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.10.2022
+    Last Update: 26.01.2024
 */

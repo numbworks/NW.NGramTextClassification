@@ -6,8 +6,8 @@ using NW.NGramTextClassificationClient.Shared;
 
 namespace NW.NGramTextClassificationClient.Application
 {
-    /// <inheritdoc cref="IApplicationSectionsFactory"/>
-    public class ApplicationSectionsFactory : IApplicationSectionsFactory
+    /// <inheritdoc cref="IApplicationManagerBagFactory"/>
+    public class ApplicationManagerBagFactory : IApplicationManagerBagFactory
     {
 
         #region Fields
@@ -18,29 +18,29 @@ namespace NW.NGramTextClassificationClient.Application
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="ApplicationSectionsFactory"/> instance.</summary>
-        public ApplicationSectionsFactory() { }
+        /// <summary>Initializes a <see cref="ApplicationManagerBagFactory"/> instance.</summary>
+        public ApplicationManagerBagFactory() { }
 
         #endregion
 
         #region Methods_public
 
-        public ApplicationSections Create(ILibraryBroker libraryBroker, SessionManagerComponents sessionManagerComponents)
+        public ApplicationManagerBag Create(ILibraryBroker libraryBroker, SessionManagerBag sessionManagerBag)
         {
 
             Validator.ValidateObject(libraryBroker, nameof(libraryBroker));
-            Validator.ValidateObject(sessionManagerComponents, nameof(sessionManagerComponents));
+            Validator.ValidateObject(sessionManagerBag, nameof(sessionManagerBag));
 
             IAboutManager aboutManager = new AboutManager(libraryBroker);
-            ISessionManager sessionManager = new SessionManager(libraryBroker, sessionManagerComponents);
+            ISessionManager sessionManager = new SessionManager(libraryBroker, sessionManagerBag);
 
-            ApplicationSections sections
-                = new ApplicationSections(
+            ApplicationManagerBag applicationManagerBag
+                = new ApplicationManagerBag(
                             aboutManager: aboutManager,
                             sessionManager: sessionManager
                         );
 
-            return sections;
+            return applicationManagerBag;
 
         }
 

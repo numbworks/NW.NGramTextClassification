@@ -1,4 +1,5 @@
 ﻿using System;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
 
@@ -16,18 +17,18 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settings: null,
+                                    settingBag: null,
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: new TextClassifier().Version
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settings").Message
+                new ArgumentNullException("settingBag").Message
                 ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settings: new TextClassifierSettings(),
+                                    settingBag: new SettingBag(),
                                     results: null,
                                     version: new TextClassifier().Version
                                 )),
@@ -38,7 +39,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settings: new TextClassifierSettings(),
+                                    settingBag: new SettingBag(),
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: null
                                 )),
@@ -68,13 +69,13 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             // Act
             TextClassifierSession actual
                 = new TextClassifierSession(
-                        settings: new TextClassifierSettings(),
+                        settingBag: new SettingBag(),
                         results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                         version: new TextClassifier().Version
                     );
 
             // Assert
-            Assert.IsInstanceOf<TextClassifierSession>(actual);
+            Assert.That(actual, Is.InstanceOf<TextClassifierSession>());
 
         }
 
@@ -88,5 +89,5 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update:31.01.2024
 */

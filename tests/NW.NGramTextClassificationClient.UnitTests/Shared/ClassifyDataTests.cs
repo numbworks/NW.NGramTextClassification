@@ -37,17 +37,17 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
                     );
 
             // Assert
-            Assert.IsInstanceOf<ClassifyData>(actual);
+            Assert.That(actual, Is.InstanceOf<ClassifyData>());
 
-            Assert.IsInstanceOf<string>(actual.LabeledExamples);
-            Assert.IsInstanceOf<string>(actual.TextSnippets);
-            Assert.IsInstanceOf<string>(actual.FolderPath);
-            Assert.IsInstanceOf<string>(actual.TokenizerRuleSet);
-            Assert.IsInstanceOf<double?>(actual.MinAccuracySingle);
-            Assert.IsInstanceOf<double?>(actual.MinAccuracyMultiple);
-            Assert.IsInstanceOf<bool>(actual.SaveSession);
-            Assert.IsInstanceOf<bool>(actual.CleanLabeledExamples);
-            Assert.IsInstanceOf<bool>(actual.DisableIndexSerialization);
+            Assert.That(actual.LabeledExamples, Is.InstanceOf<string>());
+            Assert.That(actual.TextSnippets, Is.InstanceOf<string>());
+            Assert.That(actual.FolderPath, Is.InstanceOf<string>());
+            Assert.That(actual.TokenizerRuleSet, Is.InstanceOf<string>());
+            Assert.That(actual.MinAccuracySingle, Is.InstanceOf<double?>());
+            Assert.That(actual.MinAccuracyMultiple, Is.InstanceOf<double?>());
+            Assert.That(actual.SaveSession, Is.InstanceOf<bool>());
+            Assert.That(actual.CleanLabeledExamples, Is.InstanceOf<bool>());
+            Assert.That(actual.DisableIndexSerialization, Is.InstanceOf<bool>());
 
         }
 
@@ -62,5 +62,5 @@ namespace NW.NGramTextClassificationClient.UnitTests.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 01.02.2024
 */

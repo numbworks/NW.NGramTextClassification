@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Similarity;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.UnitTests.Similarity
 {
@@ -22,7 +23,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         null,
                                         LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
-                                        TextClassifierComponents.DefaultRoundingFunction
+                                        ComponentBag.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("list1").Message
@@ -34,7 +35,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         new List<INGram>(),
                                         LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
-                                        TextClassifierComponents.DefaultRoundingFunction
+                                        ComponentBag.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
                 NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems("list1")
@@ -47,7 +48,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                                         null,
-                                        TextClassifierComponents.DefaultRoundingFunction
+                                        ComponentBag.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("list2").Message
@@ -59,7 +60,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                                         new List<INGram>(),
-                                        TextClassifierComponents.DefaultRoundingFunction
+                                        ComponentBag.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
                 NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems("list2")
@@ -123,10 +124,10 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
             // Act
             double actual
                 = new SimilarityIndexCalculatorJaccard()
-                        .Do(list1, list2, TextClassifierComponents.DefaultRoundingFunction);
+                        .Do(list1, list2, ComponentBag.DefaultRoundingFunction);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -140,5 +141,5 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.09.2022
 */

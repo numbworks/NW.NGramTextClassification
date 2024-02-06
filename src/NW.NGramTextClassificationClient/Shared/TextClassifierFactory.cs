@@ -1,4 +1,5 @@
 ﻿using NW.NGramTextClassification;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.Shared
 {
@@ -21,8 +22,8 @@ namespace NW.NGramTextClassificationClient.Shared
 
         #region Methods_public
 
-        public TextClassifier Create(TextClassifierComponents components, TextClassifierSettings settings)
-            => new TextClassifier(components, settings);
+        public TextClassifier Create(ComponentBag componentBag, SettingBag settingBag)
+            => new TextClassifier(componentBag, settingBag);
 
         #endregion
 
@@ -34,5 +35,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 26.01.2024
 */

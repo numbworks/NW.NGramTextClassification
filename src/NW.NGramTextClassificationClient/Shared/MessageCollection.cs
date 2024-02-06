@@ -1,4 +1,4 @@
-﻿using NW.NGramTextClassification;
+﻿using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassificationClient.ApplicationSession;
 using System;
 
@@ -45,21 +45,21 @@ namespace NW.NGramTextClassificationClient.Shared
 
         public static string Session_Option_FolderPath_Template { get; } = "--folderpath";
         public static string Session_Option_FolderPath_Description { get; } 
-            = $"The path of the working folder. If not specified, '{TextClassifierSettings.DefaultFolderPath}' will be used.";
+            = $"The path of the working folder. If not specified, '{SettingBag.DefaultFolderPath}' will be used.";
 
         public static string Session_Option_MinAccuracySingle_Template { get; } = "--minaccuracysingle";
         public static string Session_Option_MinAccuracySingle_Description { get; }
             = string.Concat(
                 "When a single label provided as example, the minimum index average required to return it as classification result. ",
                 "Value can be between 0.0 and 1.0. ",
-                $"If not specified, '{TextClassifierSettings.DefaultMinimumAccuracySingleLabel}' will be used."
+                $"If not specified, '{SettingBag.DefaultMinimumAccuracySingleLabel}' will be used."
             );
         public static string Session_Option_MinAccuracyMultiple_Template { get; } = "--minaccuracymultiple";
         public static string Session_Option_MinAccuracyMultiple_Description { get; }
             = string.Concat(
                 "When multiple labels provided as example, the minimum index average required to return the highest among them as classification result. ",
                 "Value can be between 0.0 and 1.0. ",
-                $"If not specified, '{TextClassifierSettings.DefaultMinimumAccuracyMultipleLabels}' will be used."
+                $"If not specified, '{SettingBag.DefaultMinimumAccuracyMultipleLabels}' will be used."
             );
 
         public static string Session_Option_SaveSession_Template { get; } = "--savesession";

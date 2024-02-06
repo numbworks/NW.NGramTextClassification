@@ -19,8 +19,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new ApplicationManager(
                                 libraryBroker: null,
-                                sectionsFactory: new ApplicationSectionsFactory(),
-                                sessionManagerComponents: new SessionManagerComponents())
+                                applicationManagerBagFactory: new ApplicationManagerBagFactory(),
+                                sessionManagerBag: new SessionManagerBag())
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("libraryBroker").Message
@@ -30,22 +30,22 @@ namespace NW.NGramTextClassificationClient.UnitTests
                 new TestDelegate(
                     () => new ApplicationManager(
                                 libraryBroker: new LibraryBroker(),
-                                sectionsFactory: null,
-                                sessionManagerComponents: new SessionManagerComponents())
+                                applicationManagerBagFactory: null,
+                                sessionManagerBag: new SessionManagerBag())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("sectionsFactory").Message
+                new ArgumentNullException("applicationManagerBagFactory").Message
             ).SetArgDisplayNames($"{nameof(applicationManagerExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new ApplicationManager(
                                 libraryBroker: new LibraryBroker(),
-                                sectionsFactory: new ApplicationSectionsFactory(),
-                                sessionManagerComponents: null)
+                                applicationManagerBagFactory: new ApplicationManagerBagFactory(),
+                                sessionManagerBag: null)
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("sessionManagerComponents").Message
+                new ArgumentNullException("sessionManagerBag").Message
             ).SetArgDisplayNames($"{nameof(applicationManagerExceptionTestCases)}_03")
 
         };
@@ -85,7 +85,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             ApplicationManager actual = new ApplicationManager();
 
             // Assert
-            Assert.IsInstanceOf<ApplicationManager>(actual);
+            Assert.That(actual, Is.InstanceOf<ApplicationManager>());
 
         }
 
@@ -98,7 +98,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = new ApplicationManager().Execute(args);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -115,5 +115,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 01.02.2024
 */

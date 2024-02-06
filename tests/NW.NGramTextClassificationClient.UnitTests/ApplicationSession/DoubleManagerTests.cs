@@ -74,7 +74,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
             bool actual = new DoubleManager().IsValid(value);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -87,7 +87,7 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
             double? actual = new DoubleManager().ParseOrDefault(value);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(expected, Is.EqualTo(actual));
 
         }
 
@@ -100,10 +100,10 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
             DoubleManager actual = new DoubleManager();
 
             // Assert
-            Assert.IsInstanceOf<DoubleManager>(actual);
+            Assert.That(actual, Is.InstanceOf<DoubleManager>());
 
-            Assert.IsInstanceOf<double>(DoubleManager.MininumValue);
-            Assert.IsInstanceOf<double>(DoubleManager.MaximumValue);
+            Assert.That(DoubleManager.MininumValue, Is.InstanceOf<double>());
+            Assert.That(DoubleManager.MaximumValue, Is.InstanceOf<double>());
 
         }
 
@@ -118,5 +118,5 @@ namespace NW.NGramTextClassificationClient.UnitTests.ApplicationSession
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 23.10.2022
+    Last Update: 01.02.2024
 */

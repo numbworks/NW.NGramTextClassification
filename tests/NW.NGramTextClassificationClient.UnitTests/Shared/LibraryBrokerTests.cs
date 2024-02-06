@@ -10,6 +10,7 @@ using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassificationClient.Shared;
 using NW.NGramTextClassificationClient.UnitTests.Utilities;
 using NUnit.Framework;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.UnitTests
 {
@@ -25,30 +26,30 @@ namespace NW.NGramTextClassificationClient.UnitTests
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentsFactory: null,
-                                settingsFactory: new TextClassifierSettingsFactory(),
+                                componentBagFactory: null,
+                                settingBagFactory: new SettingBagFactory(),
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("componentsFactory").Message
+                new ArgumentNullException("componentBagFactory").Message
             ).SetArgDisplayNames($"{nameof(libraryBrokerExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentsFactory: new TextClassifierComponentsFactory(),
-                                settingsFactory: null,
+                                componentBagFactory: new ComponentBagFactory(),
+                                settingBagFactory: null,
                                 textClassifierFactory: new TextClassifierFactory())
                 ),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("settingsFactory").Message
+                new ArgumentNullException("settingBagFactory").Message
             ).SetArgDisplayNames($"{nameof(libraryBrokerExceptionTestCases)}_02"),
 
             new TestCaseData(
                 new TestDelegate(
                     () => new LibraryBroker(
-                                componentsFactory: new TextClassifierComponentsFactory(),
-                                settingsFactory: new TextClassifierSettingsFactory(),
+                                componentBagFactory: new ComponentBagFactory(),
+                                settingBagFactory: new SettingBagFactory(),
                                 textClassifierFactory: null)
                 ),
                 typeof(ArgumentNullException),
@@ -78,12 +79,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
             LibraryBroker actual = new LibraryBroker();
 
             // Assert
-            Assert.IsInstanceOf<LibraryBroker>(actual);
-            Assert.IsInstanceOf<int>(LibraryBroker.Success);
-            Assert.IsInstanceOf<int>(LibraryBroker.Failure);
-            Assert.IsInstanceOf<string>(LibraryBroker.SeparatorLine);
-            Assert.IsInstanceOf<Func<string, string>>(LibraryBroker.ErrorMessageFormatter);
-            Assert.IsInstanceOf<NGramTokenizerRuleSet>(LibraryBroker.DefaultTokenizerRuleSet);
+            Assert.That(actual, Is.InstanceOf<LibraryBroker>());
+            Assert.That(LibraryBroker.Success, Is.InstanceOf<int>());
+            Assert.That(LibraryBroker.Failure, Is.InstanceOf<int>());
+            Assert.That(LibraryBroker.SeparatorLine, Is.InstanceOf<string>());
+            Assert.That(LibraryBroker.ErrorMessageFormatter, Is.InstanceOf<Func<string, string>>());
+            Assert.That(LibraryBroker.DefaultTokenizerRuleSet, Is.InstanceOf<NGramTokenizerRuleSet>());
 
         }
 
@@ -92,12 +93,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
         {
 
             // Arrange
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple();
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple();
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -105,14 +106,14 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(null);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
-            Assert.AreEqual(
-                    expected: LibraryBroker.ErrorMessageFormatter(new ArgumentNullException("classifyData").Message),
-                    actual: messages[0]
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(
+                    LibraryBroker.ErrorMessageFormatter(new ArgumentNullException("classifyData").Message),
+                    Is.EqualTo(messages[0])
                     );
-            Assert.AreEqual(
-                    expected: LibraryBroker.SeparatorLine,
-                    actual: messagesAsciiBanner[0]
+            Assert.That(
+                    LibraryBroker.SeparatorLine,
+                    Is.EqualTo(messagesAsciiBanner[0])
                     );
 
         }
@@ -131,12 +132,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -158,32 +159,32 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Success, actual);
+            Assert.That(LibraryBroker.Success, Is.EqualTo(actual));
 
-            Assert.AreEqual(
-                    expected: "Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\LabeledExamples.json.",
-                    actual: messages[0]
+            Assert.That(
+                    "Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\LabeledExamples.json.",
+                    Is.EqualTo(messages[0])
                     );
-            Assert.AreEqual(
-                    expected: "Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\TextSnippets.json.",
-                    actual: messages[2]
+            Assert.That(
+                    "Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\TextSnippets.json.",
+                    Is.EqualTo(messages[2])
                     );
-            Assert.AreEqual(
-                    expected: "Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\TokenizerRuleSet.json.",
-                    actual: messages[4]
+            Assert.That(
+                    "Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\TokenizerRuleSet.json.",
+                    Is.EqualTo(messages[4])
                     );
 
-            Assert.AreEqual(
-                    expected: LibraryBroker.SeparatorLine,
-                    actual: messagesAsciiBanner[0]
+            Assert.That(
+                    LibraryBroker.SeparatorLine,
+                    Is.EqualTo(messagesAsciiBanner[0])
                     );
-            Assert.AreEqual(
-                    expected: new TextClassifier().AsciiBanner,
-                    actual: messagesAsciiBanner[1]
+            Assert.That(
+                    new TextClassifier().AsciiBanner,
+                    Is.EqualTo(messagesAsciiBanner[1])
                     );
-            Assert.AreEqual(
-                    expected: LibraryBroker.SeparatorLine,
-                    actual: messagesAsciiBanner[2]
+            Assert.That(
+                    LibraryBroker.SeparatorLine,
+                    Is.EqualTo(messagesAsciiBanner[2])
                     );
 
         }
@@ -200,12 +201,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -231,12 +232,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(expected, Is.EqualTo(messages[2]));
 
-            Assert.AreEqual(
-                    expected: expected,
-                    actual: messages[2]
-                    );
         }
 
         [Test]
@@ -252,12 +250,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -283,12 +281,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(expected, Is.EqualTo(messages[4]));
 
-            Assert.AreEqual(
-                    expected: expected,
-                    actual: messages[4]
-                    );
         }
 
         [Test]
@@ -305,12 +300,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             };
 
-            (List<string> messages, List<string> messagesAsciiBanner, TextClassifierComponents fakeComponents) = CreateTuple(readBehaviours);
+            (List<string> messages, List<string> messagesAsciiBanner, ComponentBag fakeComponentBag) = CreateTuple(readBehaviours);
 
             LibraryBroker libraryBroker
                 = new LibraryBroker(
-                        componentsFactory: new FakeTextClassifierComponentsFactory(fakeComponents),
-                        settingsFactory: new TextClassifierSettingsFactory(),
+                        componentBagFactory: new FakeComponentBagFactory(fakeComponentBag),
+                        settingBagFactory: new SettingBagFactory(),
                         textClassifierFactory: new TextClassifierFactory()
                     );
 
@@ -337,12 +332,8 @@ namespace NW.NGramTextClassificationClient.UnitTests
             int actual = libraryBroker.RunSessionClassify(classifyData);
 
             // Assert
-            Assert.AreEqual(LibraryBroker.Failure, actual);
-
-            Assert.AreEqual(
-                    expected: expected,
-                    actual: messages[6]
-                    );
+            Assert.That(LibraryBroker.Failure, Is.EqualTo(actual));
+            Assert.That(expected, Is.EqualTo(messages[6]));
 
         }
 
@@ -353,7 +344,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
         #region Support_methods
 
-        private (List<string>, List<string>, TextClassifierComponents) CreateTuple
+        private (List<string>, List<string>, ComponentBag) CreateTuple
             (List<(string fileName, string content)> readBehaviours = null)
         {
 
@@ -363,12 +354,12 @@ namespace NW.NGramTextClassificationClient.UnitTests
             List<string> messagesAsciiBanner = new List<string>();
             Action<string> fakeLoggingActionAsciiBanner = (message) => messagesAsciiBanner.Add(message);
 
-            TextClassifierComponents components = new TextClassifierComponents(
+            ComponentBag componentBag = new ComponentBag(
 
                           nGramsTokenizer: new NGramTokenizer(),
                           similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                          roundingFunction: TextClassifierComponents.DefaultRoundingFunction,
-                          textTruncatingFunction: TextClassifierComponents.DefaultTextTruncatingFunction,
+                          roundingFunction: ComponentBag.DefaultRoundingFunction,
+                          textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
                           asciiBannerManager: new AsciiBannerManager(),
@@ -376,9 +367,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
                           fileManager: new FakeFileManagerWithDynamicRead(readBehaviours), // When we pass null, it means the test won't use it.
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: TextClassifierComponents.DefaultNowFunction);
+                          nowFunction: ComponentBag.DefaultNowFunction);
 
-            return (messages, messagesAsciiBanner, components);
+            return (messages, messagesAsciiBanner, componentBag);
 
         }
 
@@ -389,5 +380,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 01.02.2024
 */

@@ -33,8 +33,8 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                     );
 
             // Assert
-            Assert.IsInstanceOf<Fourgram>(actual1);
-            Assert.IsInstanceOf<Fourgram>(actual2);
+            Assert.That(actual1,Is.InstanceOf<Fourgram>());
+            Assert.That(actual2, Is.InstanceOf<Fourgram>());
 
         }
 
@@ -48,5 +48,5 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2021
+    Last Update: 31.01.2024
 */

@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             ISerializer<LabeledExample> serializer = new SerializerFactory().Create<LabeledExample>();
 
             // Assert
-            Assert.IsInstanceOf<ISerializer<LabeledExample>>(serializer);
+            Assert.That(serializer, Is.InstanceOf<ISerializer<LabeledExample>>());
 
         }
 
@@ -40,7 +40,7 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
             SerializerFactory serializerFactory = new SerializerFactory();
 
             // Assert
-            Assert.IsInstanceOf<SerializerFactory>(serializerFactory);
+            Assert.That(serializerFactory, Is.InstanceOf<SerializerFactory>());
 
         }
 
@@ -55,5 +55,5 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.10.2022
+    Last Update: 31.01.2024
 */

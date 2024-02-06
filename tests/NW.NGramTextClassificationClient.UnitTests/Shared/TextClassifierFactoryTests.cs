@@ -1,4 +1,5 @@
 ﻿using NW.NGramTextClassification;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassificationClient.Shared;
 using NUnit.Framework;
 
@@ -25,7 +26,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
             TextClassifierFactory actual = new TextClassifierFactory();
 
             // Assert
-            Assert.IsInstanceOf<TextClassifierFactory>(actual);
+            Assert.That(actual, Is.InstanceOf<TextClassifierFactory>());
 
         }
 
@@ -36,10 +37,10 @@ namespace NW.NGramTextClassificationClient.UnitTests
             // Arrange
             // Act
             TextClassifier actual 
-                = new TextClassifierFactory().Create(components: new TextClassifierComponents(), settings: new TextClassifierSettings());
+                = new TextClassifierFactory().Create(componentBag: new ComponentBag(), settingBag: new SettingBag());
 
             // Assert
-            Assert.IsInstanceOf<TextClassifier>(actual);
+            Assert.That(actual, Is.InstanceOf<TextClassifier>());
 
         }
 
@@ -56,5 +57,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 01.02.2024
 */

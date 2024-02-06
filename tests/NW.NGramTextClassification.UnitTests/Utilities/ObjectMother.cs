@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
             // Act
             // Assert
             Exception actual = Assert.Throws(expectedType, del);
-            Assert.AreEqual(expectedMessage, actual.Message);
+            Assert.That(expectedMessage, Is.EqualTo(actual.Message));
 
         }
         public static bool AreEqual<T>(List<T> list1, List<T> list2, Func<T, T, bool> comparer)
@@ -66,5 +66,5 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 15.10.2022
+    Last Update: 31.01.2024
 */

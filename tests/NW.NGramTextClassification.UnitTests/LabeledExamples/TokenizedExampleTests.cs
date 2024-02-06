@@ -55,9 +55,9 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                 = ObjectMother.ShortTokenizedExample01.ToString();
 
             // Assert
-            Assert.AreEqual(
+            Assert.That(
                     ObjectMother.ShortTokenizedExample01_AsString,
-                    actual);
+                    Is.EqualTo(actual));
 
         }
 
@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                     );
 
             // Assert
-            Assert.IsInstanceOf<TokenizedExample>(actual);
+            Assert.That(actual, Is.InstanceOf<TokenizedExample>());
 
         }
 
@@ -89,5 +89,5 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.09.2022
+    Last Update: 31.01.2024
 */

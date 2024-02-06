@@ -1,5 +1,6 @@
 ﻿using System;
 using NW.NGramTextClassification;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.Shared
 {
@@ -9,12 +10,12 @@ namespace NW.NGramTextClassificationClient.Shared
 
         /// <summary>Creates an instance of <see cref="TextClassifier"/>.</summary>
         /// <exception cref="ArgumentNullException"/>
-        TextClassifier Create(TextClassifierComponents components, TextClassifierSettings settings);
+        TextClassifier Create(ComponentBag componentBag, SettingBag settingBag);
 
     }
 }
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 26.01.2024
 */

@@ -8,10 +8,10 @@ using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.Validation;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.Bags
 {
     /// <summary>Collects all the dependencies required by <see cref="TextClassifier"/>.</summary>
-    public class TextClassifierComponents
+    public class ComponentBag
     {
 
         #region Fields
@@ -58,8 +58,8 @@ namespace NW.NGramTextClassification
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="TextClassifierComponents"/> instance.</summary>
-        public TextClassifierComponents(
+        /// <summary>Initializes a <see cref="ComponentBag"/> instance.</summary>
+        public ComponentBag(
                     INGramTokenizer nGramsTokenizer,
                     ISimilarityIndexCalculator similarityIndexCalculator,
                     Func<double, double> roundingFunction,
@@ -102,8 +102,8 @@ namespace NW.NGramTextClassification
 
         }
 
-        /// <summary>Initializes a <see cref="TextClassifierComponents"/> instance using default parameters.</summary>
-        public TextClassifierComponents()
+        /// <summary>Initializes a <see cref="ComponentBag"/> instance using default parameters.</summary>
+        public ComponentBag()
             : this(
                   nGramsTokenizer: new NGramTokenizer(),
                   similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -129,5 +129,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 13.10.2022
+    Last Update: 25.01.2024
 */

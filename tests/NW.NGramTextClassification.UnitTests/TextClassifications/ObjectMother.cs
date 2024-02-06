@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.UnitTests.TextClassifications
@@ -81,7 +82,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         public static TextClassifierSession TextClassifierSession_Default
             = new TextClassifierSession(
-                settings: new TextClassifierSettings(),
+                settingBag: new SettingBag(),
                 results: new List<TextClassifierResult>() {
                                 TextClassifier.DefaultTextClassifierResult },
                 version: new TextClassifier().Version
@@ -90,7 +91,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
         public static TextClassifierSession TextClassifierSession_CompleteLabeledExamples00
             = new TextClassifierSession(
-                    settings: new TextClassifierSettings(),
+                    settingBag: new SettingBag(),
                     results: TextClassifierResults_CompleteLabeledExamples00,
                     version: "3.6.0.0"
                 );

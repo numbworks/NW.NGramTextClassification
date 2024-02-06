@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.Validation;
 
 namespace NW.NGramTextClassification.TextClassifications
@@ -24,15 +25,15 @@ namespace NW.NGramTextClassification.TextClassifications
         /// <summary>
         /// Initializes a <see cref="TextClassifierSession"/> instance.
         /// </summary>
-        public TextClassifierSession(TextClassifierSettings settings, List<TextClassifierResult> results, string version)
+        public TextClassifierSession(SettingBag settingBag, List<TextClassifierResult> results, string version)
         {
 
-            Validator.ValidateObject(settings, nameof(settings));
+            Validator.ValidateObject(settingBag, nameof(settingBag));
             Validator.ValidateList(results, nameof(results));
             Validator.ValidateStringNullOrWhiteSpace(version, nameof(version));
 
-            MinimumAccuracySingleLabel = settings.MinimumAccuracySingleLabel;
-            MinimumAccuracyMultipleLabels = settings.MinimumAccuracyMultipleLabels;
+            MinimumAccuracySingleLabel = settingBag.MinimumAccuracySingleLabel;
+            MinimumAccuracyMultipleLabels = settingBag.MinimumAccuracyMultipleLabels;
 
             Results = results;
             Version = version;
@@ -49,5 +50,5 @@ namespace NW.NGramTextClassification.TextClassifications
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 02.10.2022
+    Last Update: 26.01.2024
 */

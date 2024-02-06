@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace NW.NGramTextClassificationClient.UnitTests
 {
     [TestFixture]
-    public class ApplicationSectionsTests
+    public class ApplicationManagerBagTests
     {
 
         #region Fields
@@ -18,9 +18,9 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new ApplicationSections(
+                    () => new ApplicationManagerBag(
                                 aboutManager: null,
-                                sessionManager: new SessionManager(new LibraryBroker(), new SessionManagerComponents()))
+                                sessionManager: new SessionManager(new LibraryBroker(), new SessionManagerBag()))
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("aboutManager").Message
@@ -28,7 +28,7 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new ApplicationSections(
+                    () => new ApplicationManagerBag(
                                 aboutManager: new AboutManager(new LibraryBroker()),
                                 sessionManager: null)
                 ),
@@ -46,25 +46,25 @@ namespace NW.NGramTextClassificationClient.UnitTests
         #region Tests
 
         [TestCaseSource(nameof(applicationSectionsExceptionTestCases))]
-        public void ApplicationSections_ShouldThrowACertainException_WhenUnproperArguments
+        public void ApplicationManagerBag_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void ApplicationSections_ShouldCreateAnObjectOfTypeApplicationSections_WhenInvoked()
+        public void ApplicationManagerBag_ShouldCreateAnObjectOfTypeApplicationManagerBag_WhenInvoked()
         {
 
             // Arrange
             // Act
-            ApplicationSections actual
-                = new ApplicationSections(
+            ApplicationManagerBag actual
+                = new ApplicationManagerBag(
                         aboutManager: new AboutManager(new LibraryBroker()),
-                        sessionManager: new SessionManager(new LibraryBroker(), new SessionManagerComponents()));
+                        sessionManager: new SessionManager(new LibraryBroker(), new SessionManagerBag()));
 
             // Assert
-            Assert.IsInstanceOf<ApplicationSections>(actual);
-            Assert.IsInstanceOf<IAboutManager>(actual.AboutManager);
-            Assert.IsInstanceOf<ISessionManager>(actual.SessionManager);
+            Assert.That(actual, Is.InstanceOf<ApplicationManagerBag>());
+            Assert.That(actual.AboutManager, Is.InstanceOf<IAboutManager>());
+            Assert.That(actual.SessionManager, Is.InstanceOf<ISessionManager>());
 
         }
 
@@ -81,5 +81,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 27.09.2022
+    Last Update: 01.02.2024
 */

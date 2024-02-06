@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32802.440
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassificationClient", "src\NW.NGramTextClassificationClient\NW.NGramTextClassificationClient.csproj", "{7439E782-02C1-4221-963B-6A2860736780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NW.NGramTextClassificationClient.UnitTests", "tests\NW.NGramTextClassificationClient.UnitTests\NW.NGramTextClassificationClient.UnitTests.csproj", "{33D4CC74-60A2-4AD4-B2BF-4CD7B220921E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassificationClient.UnitTests", "tests\NW.NGramTextClassificationClient.UnitTests\NW.NGramTextClassificationClient.UnitTests.csproj", "{33D4CC74-60A2-4AD4-B2BF-4CD7B220921E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

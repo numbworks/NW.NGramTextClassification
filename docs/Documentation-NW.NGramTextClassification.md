@@ -13,10 +13,11 @@ Contact: numbworks@gmail.com
 | 2022-10-16 | numbworks | Updated to v3.5.0. |
 | 2022-11-04 | numbworks | Updated to v3.6.0. |
 | 2022-12-26 | numbworks | Added "Appendix - NGramTokenizerRuleSet". |
+| 2024-01-29 | numbworks | Updated to v4.0.0. |
 
 ## Introduction
 
-`NW.NGramTextClassification` is a .NET Standard library to perform text classification tasks on the text snippets you provide.
+`NW.NGramTextClassification` is a library to perform text classification tasks on the text snippets you provide.
 
 ## What does "text classification" mean?
 
