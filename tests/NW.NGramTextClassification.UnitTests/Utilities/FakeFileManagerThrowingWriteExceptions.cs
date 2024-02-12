@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using NW.NGramTextClassification.Files;
+using NW.Shared.Files;
 
 namespace NW.NGramTextClassification.UnitTests.Utilities
 {

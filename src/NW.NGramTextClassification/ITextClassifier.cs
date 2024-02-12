@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.NGramTextClassification.Files;
+using NW.Shared.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Serializations;

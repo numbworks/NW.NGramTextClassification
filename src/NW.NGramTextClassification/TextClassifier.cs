@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
@@ -15,6 +14,7 @@ using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.Validation;
+using NW.Shared.Files;
 
 namespace NW.NGramTextClassification
 {

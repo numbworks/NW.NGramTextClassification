@@ -24,4 +24,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.xml</DocumentationFile>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NW.Shared.Files" Version="1.0.0" />
+    <PackageReference Include="NW.Shared.Validation" Version="1.0.0" />
+  </ItemGroup>
 </Project>

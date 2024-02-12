@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.Filenames;
-using NW.NGramTextClassification.Files;
+using NW.Shared.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
@@ -288,10 +288,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadLabeledExamplesOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadLabeledExamplesOrDefault(jsonFile: ObjectMother.FileInfoAdapterDoesntExist)
                     ),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
+                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(ObjectMother.FileInfoAdapterDoesntExist)
             ).SetArgDisplayNames($"{nameof(loadLabeledExamplesOrDefaultExceptionTestCases)}_02")
 
         };
@@ -308,10 +308,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTextSnippetsOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadTextSnippetsOrDefault(jsonFile: ObjectMother.FileInfoAdapterDoesntExist)
                     ),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
+                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(ObjectMother.FileInfoAdapterDoesntExist)
             ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02")
 
         };
@@ -328,10 +328,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTokenizerRuleSetOrDefault(jsonFile: Files.ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadTokenizerRuleSetOrDefault(jsonFile: ObjectMother.FileInfoAdapterDoesntExist)
                     ),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(Files.ObjectMother.FileInfoAdapterDoesntExist)
+                NGramTextClassification.Validation.MessageCollection.ProvidedPathDoesntExist(ObjectMother.FileInfoAdapterDoesntExist)
             ).SetArgDisplayNames($"{nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases)}_02")
 
         };
@@ -1905,5 +1905,5 @@ namespace NW.NGramTextClassification.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 01.02.2024
+    Last Update: 12.02.2024
 */
