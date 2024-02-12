@@ -1,6 +1,6 @@
 ﻿using System;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.NGrams
 {

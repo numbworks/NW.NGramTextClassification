@@ -2,9 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
-    <Version>4.0.0</Version>
     <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
     <PackageIcon>numbworks_logo_128x128px.png</PackageIcon>
     <PackageIconUrl />
@@ -13,6 +10,9 @@
     <Authors>numbworks</Authors>
     <Company>numbworks</Company>
     <Copyright>numbworks 2024</Copyright>
+    <Version>4.1.0</Version>
+    <AssemblyVersion>4.1.0.0</AssemblyVersion>
+    <FileVersion>4.1.0.0</FileVersion>	
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NUnit" Version="4.0.1" />

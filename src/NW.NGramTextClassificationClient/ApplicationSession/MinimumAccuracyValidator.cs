@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using McMaster.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassificationClient.ApplicationSession
 {
@@ -26,7 +27,7 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
         public MinimumAccuracyValidator(IDoubleManager doubleManager)
         {
 
-            NGramTextClassification.Validation.Validator.ValidateObject(doubleManager, nameof(doubleManager));
+            NW.Shared.Validation.Validator.ValidateObject(doubleManager, nameof(doubleManager));
 
             _doubleManager = doubleManager;
             _valueName = nameof(MinimumAccuracyValidator).Replace("Validator", string.Empty);
@@ -62,5 +63,5 @@ namespace NW.NGramTextClassificationClient.ApplicationSession
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 22.10.2022
+    Last Update: 12.02.2024
 */

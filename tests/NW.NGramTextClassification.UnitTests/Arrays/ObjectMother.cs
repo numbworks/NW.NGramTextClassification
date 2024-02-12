@@ -5,6 +5,8 @@
 
         #region Properties
 
+        public static string[] Array01 = new[] { "Dodge", "Datsun", "Jaguar", "DeLorean" };
+
         public static string Array01_Delimiter01 = ";";
         public static uint Array01_StartIndex01 = 0;
         public static uint Array01_Length01 = 2;

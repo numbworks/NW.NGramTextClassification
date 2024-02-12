@@ -1,7 +1,7 @@
 ﻿using System;
 using NW.NGramTextClassificationClient.ApplicationAbout;
 using NW.NGramTextClassificationClient.ApplicationSession;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassificationClient.Application
 {

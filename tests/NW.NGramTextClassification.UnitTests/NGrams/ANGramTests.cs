@@ -3,6 +3,7 @@ using NUnit.Framework;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.UnitTests.Utilities;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.UnitTests.NGrams
 {
@@ -24,7 +25,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                                     LabeledExamples.ObjectMother.ShortLabeledExample01_Monograms[0].Value
                             )),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.VariableCantBeLessThanOne("n")
+                Shared.Validation.MessageCollection.VariableCantBeLessThan("n", 1)
                 ).SetArgDisplayNames($"{nameof(aNGramExceptionTestCases)}_01"),
 
             // ValidateObject
@@ -45,7 +46,7 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
                         () => new FakeGram(
                                     1,
                                     new TokenizationStrategy(),
-                                    Validation.ObjectMother.StringOnlyWhiteSpaces
+                                    Utilities.ObjectMother.StringOnlyWhiteSpaces
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("value").Message
@@ -171,5 +172,5 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 30.01.2024
+    Last Update: 12.02.2024
 */

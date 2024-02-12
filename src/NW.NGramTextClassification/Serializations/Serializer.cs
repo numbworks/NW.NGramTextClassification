@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.Serializations
 {
@@ -31,7 +32,7 @@ namespace NW.NGramTextClassification.Serializations
         public string Serialize(T obj)
         {
 
-            Validation.Validator.ValidateObject(obj, nameof(obj));
+            Validator.ValidateObject(obj, nameof(obj));
 
             string json = JsonSerializer.Serialize(obj, CreateJsonSerializerOptions());
 
@@ -41,7 +42,7 @@ namespace NW.NGramTextClassification.Serializations
         public string Serialize(List<T> objects)
         {
 
-            Validation.Validator.ValidateList(objects, nameof(objects));
+            Validator.ValidateList(objects, nameof(objects));
 
             string json = JsonSerializer.Serialize(objects, CreateJsonSerializerOptions());
 
@@ -114,5 +115,5 @@ namespace NW.NGramTextClassification.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.12.2022
+    Last Update: 12.02.2024
 */

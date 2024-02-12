@@ -1,12 +1,12 @@
 ﻿using System;
 using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.Filenames;
-using NW.NGramTextClassification.Files;
+using NW.Shared.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.Bags
 {

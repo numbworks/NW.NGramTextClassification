@@ -2,8 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
-using NW.NGramTextClassification.Files;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Files;
+using NW.Shared.Validation;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.Serializations;

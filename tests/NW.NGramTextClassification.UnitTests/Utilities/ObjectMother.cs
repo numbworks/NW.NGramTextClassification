@@ -1,12 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using NW.Shared.Files;
 using NUnit.Framework;
 
 namespace NW.NGramTextClassification.UnitTests.Utilities
 {
     public static class ObjectMother
     {
+
+        #region Properties
+
+        public static string FileInfoAdapterFullName = @"C:\somefile.txt";
+        public static IFileInfoAdapter FileInfoAdapterDoesntExist
+            => new FakeFileInfoAdapter(false, FileInfoAdapterFullName);
+
+        public static string StringOnlyWhiteSpaces = "   ";
+
+        #endregion
 
         #region Methods
 
@@ -66,5 +77,5 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 31.01.2024
+    Last Update: 12.02.2024
 */

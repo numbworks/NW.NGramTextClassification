@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using NW.NGramTextClassification.Files;
 using NW.NGramTextClassification.UnitTests.Utilities;
+using NW.Shared.Files;
 
 namespace NW.NGramTextClassificationClient.UnitTests.Utilities
 {

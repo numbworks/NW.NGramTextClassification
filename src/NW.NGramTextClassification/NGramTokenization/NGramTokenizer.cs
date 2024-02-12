@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using NW.NGramTextClassification.Arrays;
 using NW.NGramTextClassification.NGrams;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.NGramTokenization
 {
