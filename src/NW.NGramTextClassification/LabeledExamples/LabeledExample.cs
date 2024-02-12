@@ -1,5 +1,5 @@
 ﻿using System;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.LabeledExamples
 {

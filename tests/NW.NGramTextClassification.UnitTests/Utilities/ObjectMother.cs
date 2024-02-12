@@ -15,6 +15,8 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
         public static IFileInfoAdapter FileInfoAdapterDoesntExist
             => new FakeFileInfoAdapter(false, FileInfoAdapterFullName);
 
+        public static string StringOnlyWhiteSpaces = "   ";
+
         #endregion
 
         #region Methods

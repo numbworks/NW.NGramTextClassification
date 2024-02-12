@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.Filenames
 {

@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.0" />
+    <PackageReference Include="NW.Shared.Validation" Version="1.0.0" />
   </ItemGroup>
 </Project>

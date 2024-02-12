@@ -26,7 +26,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
             new TestCaseData(
                 new TestDelegate(
                         () => new SimilarityIndexAverage(
-                                    Validation.ObjectMother.StringOnlyWhiteSpaces,
+                                    Utilities.ObjectMother.StringOnlyWhiteSpaces,
                                     ObjectMother.SimilarityIndexAverage01_Value
                                 )),
                 typeof(ArgumentNullException),
@@ -91,6 +91,6 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 /*
 
     Author: numbworks@gmail.com
-    Last Update: 31.01.2024
+    Last Update: 12.02.2024
 
 */

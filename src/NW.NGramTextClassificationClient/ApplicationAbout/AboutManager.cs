@@ -1,5 +1,5 @@
 ﻿using System;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 using NW.NGramTextClassificationClient.Shared;
 using McMaster.Extensions.CommandLineUtils;
 

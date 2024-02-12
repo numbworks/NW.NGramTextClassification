@@ -1,4 +1,4 @@
-﻿using NW.NGramTextClassification.Validation;
+﻿using NW.Shared.Validation;
 using System.IO;
 
 namespace NW.NGramTextClassification.Bags

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Similarity;
+using NW.Shared.Validation;
 using NUnit.Framework;
-using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.UnitTests.Similarity
 {
@@ -38,7 +39,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                         ComponentBag.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems("list1")
+                MessageCollection.VariableContainsZeroItems("list1")
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_02"),
 
             // ValidateList
@@ -63,7 +64,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                         ComponentBag.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
-                NGramTextClassification.Validation.MessageCollection.VariableContainsZeroItems("list2")
+                MessageCollection.VariableContainsZeroItems("list2")
                 ).SetArgDisplayNames($"{nameof(doExceptionTestCases)}_04"),
 
             // ValidateObject
@@ -141,5 +142,5 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 31.09.2022
+    Last Update: 12.02.2024
 */

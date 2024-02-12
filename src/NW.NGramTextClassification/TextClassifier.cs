@@ -13,8 +13,9 @@ using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 using NW.Shared.Files;
+using NW.Shared.Files.Validation;
 
 namespace NW.NGramTextClassification
 {
@@ -566,7 +567,7 @@ namespace NW.NGramTextClassification
         {
 
             Validator.ValidateObject(jsonFile, nameof(jsonFile));
-            Validator.ValidateFileExistance(jsonFile);
+            FilesValidator.ValidateFileExistance(jsonFile);
 
             _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(T), jsonFile));
 
@@ -587,7 +588,7 @@ namespace NW.NGramTextClassification
         {
 
             Validator.ValidateObject(jsonFile, nameof(jsonFile));
-            Validator.ValidateFileExistance(jsonFile);
+            FilesValidator.ValidateFileExistance(jsonFile);
 
             _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadObjectFrom(typeof(T), jsonFile));
 
@@ -711,5 +712,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.12.2022
+    Last Update: 12.02.2024
 */

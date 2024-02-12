@@ -1,6 +1,6 @@
 ﻿using System;
 using McMaster.Extensions.CommandLineUtils.Validation;
-using NW.NGramTextClassification.Validation;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassificationClient.ApplicationSession
 {
