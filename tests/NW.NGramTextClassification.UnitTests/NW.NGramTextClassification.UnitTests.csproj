@@ -9,10 +9,10 @@
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/numbworks/numbworks/master/numbworks_logo_128x128px.png</PackageIconUrl>
     <PackageTags>library csharp netstandard machine learning text classification ngrams</PackageTags>
-    <Version>4.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
+    <Version>4.1.0</Version>
+    <AssemblyVersion>4.1.0.0</AssemblyVersion>
+    <FileVersion>4.1.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="nunit" Version="4.0.1" />
