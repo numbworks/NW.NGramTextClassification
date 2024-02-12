@@ -1,3 +1,7 @@
+v4.1.0
+- Library:
+	- Refactoring: moved Files and Validation to NW.Shared.Files and NW.Shared.Validation.
+
 v4.0.0 - BREAKING CHANGES
 - Library:
 	- Feature: "Bag Pattern" adopted into the codebase (*Settings => SettingBag, *Components => ComponentBag, ...).
