@@ -1,11 +1,11 @@
 ﻿using System;
 using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.Filenames;
-using NW.Shared.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
+using NW.Shared.Files;
+using NW.Shared.Serialization;
 using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.Bags
@@ -129,5 +129,5 @@ namespace NW.NGramTextClassification.Bags
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 25.01.2024
+    Last Update: 14.02.2024
 */

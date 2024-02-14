@@ -1,3 +1,7 @@
+v4.2.0
+- Library:
+	- Refactoring: moved Serializations namespace to NW.Shared.Serialization.
+
 v4.1.0
 - Library:
 	- Refactoring: moved Files and Validation to NW.Shared.Files and NW.Shared.Validation.

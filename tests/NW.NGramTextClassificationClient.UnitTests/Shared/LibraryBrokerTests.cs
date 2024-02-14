@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassificationClient.Shared;
 using NW.NGramTextClassificationClient.UnitTests.Utilities;
+using NW.Shared.Serialization;
 using NUnit.Framework;
-using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassificationClient.UnitTests
 {
@@ -380,5 +380,5 @@ namespace NW.NGramTextClassificationClient.UnitTests
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 01.02.2024
+    Last Update: 14.02.2024
 */

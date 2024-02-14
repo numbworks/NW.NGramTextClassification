@@ -12,9 +12,9 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
-    <Version>4.1.0</Version>
-    <AssemblyVersion>4.1.0.0</AssemblyVersion>
-    <FileVersion>4.1.0.0</FileVersion>
+    <Version>4.2.0</Version>
+    <AssemblyVersion>4.2.0.0</AssemblyVersion>
+    <FileVersion>4.2.0.0</FileVersion>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NW.Shared.Files" Version="1.0.0" />
+    <PackageReference Include="NW.Shared.Serialization" Version="1.0.0" />
     <PackageReference Include="NW.Shared.Validation" Version="1.0.0" />
   </ItemGroup>
 </Project>

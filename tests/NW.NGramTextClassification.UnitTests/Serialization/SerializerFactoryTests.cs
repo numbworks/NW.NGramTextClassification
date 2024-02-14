@@ -1,8 +1,8 @@
 ﻿using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.Serializations;
+using NW.Shared.Serialization;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests.Serializations
+namespace NW.NGramTextClassification.UnitTests.Serialization
 {
     [TestFixture]
     public class SerializerFactoryTests
@@ -55,5 +55,5 @@ namespace NW.NGramTextClassification.UnitTests.Serializations
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 31.01.2024
+    Last Update: 14.02.2024
 */

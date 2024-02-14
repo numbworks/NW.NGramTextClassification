@@ -2,14 +2,14 @@
 using System.IO;
 using System.Collections.Generic;
 using NW.NGramTextClassification;
-using NW.Shared.Files;
-using NW.Shared.Validation;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.TextSnippets;
-using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
-using NW.NGramTextClassification.Bags;
+using NW.Shared.Files;
+using NW.Shared.Serialization;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassificationClient.Shared
 {
@@ -241,5 +241,5 @@ namespace NW.NGramTextClassificationClient.Shared
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 26.01.2024
+    Last Update: 14.02.2024
 */
