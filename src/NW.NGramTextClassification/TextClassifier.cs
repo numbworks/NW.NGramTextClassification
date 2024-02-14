@@ -9,13 +9,13 @@ using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
-using NW.Shared.Validation;
 using NW.Shared.Files;
 using NW.Shared.Files.Validation;
+using NW.Shared.Serialization;
+using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification
 {
@@ -712,5 +712,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 12.02.2024
+    Last Update: 14.02.2024
 */

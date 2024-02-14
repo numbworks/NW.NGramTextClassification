@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.Shared.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
+using NW.Shared.Files;
+using NW.Shared.Serialization;
 
 namespace NW.NGramTextClassification
 {
@@ -118,5 +118,5 @@ namespace NW.NGramTextClassification
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 07.11.2022
+    Last Update: 14.02.2024
 */

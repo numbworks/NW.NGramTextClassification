@@ -1,13 +1,13 @@
 ﻿using System;
 using NW.NGramTextClassification.AsciiBanner;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.Filenames;
-using NW.Shared.Files;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.Serializations;
 using NW.NGramTextClassification.Similarity;
+using NW.Shared.Files;
+using NW.Shared.Serialization;
 using NUnit.Framework;
-using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.UnitTests.Bags
 {
@@ -335,5 +335,5 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
 /*
     Author: numbworks@gmail.com
-    Last Update: 30.01.2024
+    Last Update: 14.02.2024
 */

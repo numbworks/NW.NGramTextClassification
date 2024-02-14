@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="NW.Shared.Files" Version="1.0.0" />
+    <PackageReference Include="NW.Shared.Serialization" Version="1.0.0" />
     <PackageReference Include="NW.Shared.Validation" Version="1.0.0" />
   </ItemGroup>
 </Project>
