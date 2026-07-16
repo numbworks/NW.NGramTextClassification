@@ -1411,7 +1411,7 @@ namespace NW.NGramTextClassification.UnitTests
             NGramTokenizerRuleSet actual = textClassifier.LoadTokenizerRuleSetOrDefault(fakeJsonFile);
 
             // Assert
-            Assert.That(default(NGramTokenizerRuleSet), Is.EqualTo(actual));
+            Assert.That(actual, Is.EqualTo(default(NGramTokenizerRuleSet)));
             Assert.That(expectedLogMessages, Is.EqualTo(actualLogMessages));
 
         }
@@ -1858,7 +1858,7 @@ namespace NW.NGramTextClassification.UnitTests
             {
 
                 var similarityIndexes = ((ExpandoObject)actual.Results[0]).FirstOrDefault(x => x.Key == "SimilarityIndexes").Value;
-                Assert.That(0, Is.EqualTo(((List<SimilarityIndex>)similarityIndexes).Count));
+                Assert.That(((List<SimilarityIndex>)similarityIndexes).Count, Is.EqualTo(0));
 
             }
 
