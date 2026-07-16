@@ -1,32 +1,51 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="nw.shared.files" Version="1.0.0" />
+    <PackageReference Include="nw.shared.serialization" Version="1.0.0" />
+    <PackageReference Include="nw.shared.validation" Version="1.0.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <NoWarn>$(NoWarn);SYSLIB0014;1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../scripts/nwbuilders/numbworks_logo_256x256px.png" Pack="true" PackagePath="\" />
+    <None Include="../../scripts/nwbuilders/NW.NGramTextClassification.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>4.2.1</Version>
+    <AssemblyVersion>4.2.1.0</AssemblyVersion>
+    <FileVersion>4.2.1.0</FileVersion>
     <Authors>numbworks</Authors>
-    <Copyright>numbworks 2024</Copyright>
-    <PackageIconUrl>https://raw.githubusercontent.com/numbworks/numbworks/master/numbworks_logo_128x128px.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
+    <Copyright>numbworks 2026</Copyright>
     <Description>NW.NGramTextClassification is a library to perform Text Classification on the string of text you provide. Text Classification is a machine learning technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library.</Description>
-    <RepositoryType>
-    </RepositoryType>
+    <IsPackable>true</IsPackable>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
-    <Version>4.2.0</Version>
-    <AssemblyVersion>4.2.0.0</AssemblyVersion>
-    <FileVersion>4.2.0.0</FileVersion>
-    <IsPackable>true</IsPackable>
+    <PackageIcon>numbworks_logo_256x256px.png</PackageIcon>
+    <PackageReadmeFile>NW.ZooSketches.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
+  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="NW.Shared.Files" Version="1.0.0" />
-    <PackageReference Include="NW.Shared.Serialization" Version="1.0.0" />
-    <PackageReference Include="NW.Shared.Validation" Version="1.0.0" />
-  </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32802.440
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification", "src\NW.NGramTextClassification\NW.NGramTextClassification.csproj", "{CE24BB7A-7EF0-4489-85F7-02A1CCC0AD1C}"
 EndProject
