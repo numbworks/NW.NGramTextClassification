@@ -198,4 +198,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.CLI.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateTestingPlatformEntryPoint>false</GenerateTestingPlatformEntryPoint>
+  </PropertyGroup>
+
 </Project>
