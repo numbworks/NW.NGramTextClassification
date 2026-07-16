@@ -214,7 +214,7 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
             NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);
 
             // Assert
-            Assert.That(default(NGramTokenizerRuleSet), Is.EqualTo(actual));
+            Assert.That(actual, Is.EqualTo(default(NGramTokenizerRuleSet)));
 
         }
 
