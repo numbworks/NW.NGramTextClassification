@@ -1,39 +1,201 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
+    <ProjectReference Include="..\..\tests\NW.NGramTextClassification.UnitTests\NW.NGramTextClassification.UnitTests.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <Authors>numbworks</Authors>
-    <Description>ngramtc is a command-line application to perform text classification tasks based on the NW.NGramTextClassification library.</Description>
-    <Copyright>numbworks 2024</Copyright>
-    <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
-    <PackageIconUrl>
-    </PackageIconUrl>
-    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
-    <IsPackable>false</IsPackable>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyName>ngramtc</AssemblyName>
-    <ApplicationIcon>numbworks_logo_128x128px.ico</ApplicationIcon>
-    <PackageIcon>numbworks_logo_128x128px.png</PackageIcon>
-    <Version>4.2.0</Version>
-    <AssemblyVersion>4.2.0.0</AssemblyVersion>
-    <FileVersion>4.2.0.0</FileVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\tests\NW.NGramTextClassification.UnitTests\NW.NGramTextClassification.UnitTests.csproj" />
-    <ProjectReference Include="..\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\numbworks_logo_128x128px.png">
-      <Pack>True</Pack>
-      <PackagePath>
-      </PackagePath>
-    </None>
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.0" />
-    <PackageReference Include="NW.Shared.Serialization" Version="1.0.0" />
-    <PackageReference Include="NW.Shared.Validation" Version="1.0.0" />
+    <PackageReference Include="nw.shared.serialization" Version="1.0.0" />
+    <PackageReference Include="nw.shared.validation" Version="1.0.0" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <AssemblyName>NW.NGramTextClassification.CLI</AssemblyName>
+    <ExecutableName>nwngram</ExecutableName>
+    <Version>4.2.1</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Authors>numbworks</Authors>
+    <Company>numbworks</Company>
+    <Product>NW.NGramTextClassification</Product>
+    <Copyright>numbworks</Copyright>
+    <ApplicationIcon>$(MSBuildThisFileDirectory)../../scripts/nwbuilders/numbworks_logo_256x256px.ico</ApplicationIcon>
+    <Description>nwngram is a CLI application to perform Text Classification on the string of text you provide. Text Classification is a machine learning technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library.</Description>
+  </PropertyGroup>
+
+  <Target Name="RenamePublishedExecutable" AfterTargets="Publish">
+    <Exec Condition="Exists('$(PublishDir)NW.NGramTextClassification.CLI')" 
+          Command="mv &quot;$(PublishDir)NW.NGramTextClassification.CLI&quot; &quot;$(PublishDir)$(ExecutableName)&quot;" />
+
+    <Exec Condition="Exists('$(PublishDir)NW.NGramTextClassification.CLI.exe')" 
+          Command="mv &quot;$(PublishDir)NW.NGramTextClassification.CLI.exe&quot; &quot;$(PublishDir)$(ExecutableName).exe&quot;" />
+  </Target>
+
+  <Target Name="ZipCustomOutput" AfterTargets="Publish">
+    <PropertyGroup>
+      <ExecutableExtension Condition="$(RuntimeIdentifier.StartsWith('win'))">.exe</ExecutableExtension>
+      <ExecutableExtension Condition="!$(RuntimeIdentifier.StartsWith('win'))"></ExecutableExtension>
+
+      <BinaryName>$(ExecutableName)$(ExecutableExtension)</BinaryName>
+
+      <ZipFileName Condition="'$(RuntimeIdentifier)' == 'linux-x64'">$(ExecutableName)-v$(Version)-linux-amd64.zip</ZipFileName>
+      <ZipFileName Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">$(ExecutableName)-v$(Version)-linux-arm64.zip</ZipFileName>
+      <ZipFileName Condition="'$(RuntimeIdentifier)' == 'win-x64'">$(ExecutableName)-v$(Version)-win64.zip</ZipFileName>
+      <ZipFileName Condition="'$(ZipFileName)' == ''">$(ExecutableName)-v$(Version)-$(RuntimeIdentifier).zip</ZipFileName>
+      
+      <SourceFilePath>$(PublishDir)$(BinaryName)</SourceFilePath>
+      <FinalZipPath>$(PublishDir)..\$(ZipFileName)</FinalZipPath>
+    </PropertyGroup>
+
+    <Error Condition="!Exists('$(SourceFilePath)')" Text="Executable not found at $(SourceFilePath)" />
+
+    <ZipDirectory 
+      SourceDirectory="$(PublishDir)" 
+      DestinationFile="$(FinalZipPath)" 
+      Overwrite="true" />
+
+    <RemoveDir Directories="$(PublishDir)" />
+    
+    <Message Importance="high" Text="Zipped package successfully created: $(FinalZipPath)" />
+  </Target>
+
+  <Target Name="CreateDebianPackage" AfterTargets="ZipCustomOutput" Condition="!$(RuntimeIdentifier.StartsWith('win'))">
+    
+    <PropertyGroup>
+      <ZipFileDir>/home/nw.ngramtextclassification/</ZipFileDir>
+
+      <ZipFileRuntimeIdentifier>$(RuntimeIdentifier)</ZipFileRuntimeIdentifier>
+      <ZipFileRuntimeIdentifier Condition="'$(RuntimeIdentifier)' == 'linux-x64'">linux-amd64</ZipFileRuntimeIdentifier>
+      
+      <ZipFileName>$(ExecutableName)-v$(Version)-$(ZipFileRuntimeIdentifier).zip</ZipFileName>
+      <SourceZipPath>$(ZipFileDir)$(ZipFileName)</SourceZipPath>
+
+      <MdSourcePath>$(MSBuildProjectDirectory)/../../scripts/nwbuilders/$(ExecutableName).md</MdSourcePath>
+      <TempManPath>/tmp/$(ExecutableName).1</TempManPath>
+      
+      <DebArch Condition="'$(RuntimeIdentifier)' == 'linux-x64'">amd64</DebArch>
+      <DebArch Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">arm64</DebArch>
+      <DebArch Condition="'$(DebArch)' == ''">all</DebArch>
+
+      <DebLayoutDir>/tmp/$(ExecutableName)-$(DebArch)-layout</DebLayoutDir>
+      <PackageFileName>$(ExecutableName)-v$(Version)-linux-$(DebArch).deb</PackageFileName>
+    </PropertyGroup>
+
+    <Exec Command="go-md2man -in &quot;$(MdSourcePath)&quot; -out &quot;$(TempManPath)&quot;" />
+
+    <RemoveDir Directories="$(DebLayoutDir)" />
+    <MakeDir Directories="$(DebLayoutDir)/DEBIAN" />
+    <MakeDir Directories="$(DebLayoutDir)/usr/bin" />
+    <MakeDir Directories="$(DebLayoutDir)/usr/share/man/man1" />
+    
+    <PropertyGroup>
+      <UnzipTemp>/tmp/unzip-$(DebArch)</UnzipTemp>
+    </PropertyGroup>
+
+    <RemoveDir Directories="$(UnzipTemp)" />
+    <MakeDir Directories="$(UnzipTemp)" />
+    <Exec Command="unzip -q &quot;$(SourceZipPath)&quot; -d &quot;$(UnzipTemp)&quot;" />
+
+    <Exec Command="if [ -f &quot;$(UnzipTemp)/$(ExecutableName)&quot; ]; then cp &quot;$(UnzipTemp)/$(ExecutableName)&quot; &quot;$(DebLayoutDir)/usr/bin/&quot;; else cp &quot;$(UnzipTemp)/$(ExecutableName).dll&quot; &quot;$(DebLayoutDir)/usr/bin/$(ExecutableName)&quot;; fi" />
+    <Exec Command="chmod 755 &quot;$(DebLayoutDir)/usr/bin/$(ExecutableName)&quot;" />
+
+    <Exec Command="cp &quot;$(TempManPath)&quot; &quot;$(DebLayoutDir)/usr/share/man/man1/$(ExecutableName).1&quot;" />
+    <Exec Command="gzip -n9 &quot;$(DebLayoutDir)/usr/share/man/man1/$(ExecutableName).1&quot;" />
+
+    <MakeDir Directories="$(DebLayoutDir)/usr/share/applications" />
+    <MakeDir Directories="$(DebLayoutDir)/usr/share/pixmaps" />
+
+    <Exec Command="cp &quot;$(MSBuildProjectDirectory)/../../scripts/nwbuilders/numbworks_logo_256x256px.png&quot; &quot;$(DebLayoutDir)/usr/share/pixmaps/$(ExecutableName).png&quot;" />
+
+    <ItemGroup>
+      <DesktopLines Include="[Desktop Entry]" />
+      <DesktopLines Include="Name=$(ExecutableName)" />
+      <DesktopLines Include="Exec=/bin/bash -c &quot;/usr/bin/$(ExecutableName)%3B exec bash&quot;" />
+      <DesktopLines Include="Icon=$(ExecutableName)" />
+      <DesktopLines Include="Type=Application" />
+      <DesktopLines Include="Categories=Utility;" />
+      <DesktopLines Include="Terminal=true" />
+    </ItemGroup>
+
+    <WriteLinesToFile 
+        File="$(DebLayoutDir)/usr/share/applications/$(ExecutableName).desktop" 
+        Lines="@(DesktopLines)" 
+        Overwrite="true" />
+
+    <Exec Command="chmod 644 &quot;$(DebLayoutDir)/usr/share/applications/$(ExecutableName).desktop&quot;" />
+    <Exec Command="chmod 644 &quot;$(DebLayoutDir)/usr/share/pixmaps/$(ExecutableName).png&quot;" />
+
+    <ItemGroup>
+      <ControlLines Include="Package: $(ExecutableName)" />
+      <ControlLines Include="Version: $(Version)" />
+      <ControlLines Include="Section: utils" />
+      <ControlLines Include="Priority: optional" />
+      <ControlLines Include="Architecture: $(DebArch)" />
+      <ControlLines Include="Maintainer: $(Authors)" />
+      <ControlLines Include="Description: $(Description)" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(DebLayoutDir)/DEBIAN/control" Lines="@(ControlLines)" Overwrite="true" />
+
+    <ItemGroup>
+      <PostLines Include="#!/bin/sh" />
+      <PostLines Include="set -e" />
+      <PostLines Include="if [ &quot;%241&quot; = &quot;configure&quot; ]; then" />
+      <PostLines Include="    mandb -q" />
+      <PostLines Include="    update-desktop-database /usr/share/applications || true" />
+      <PostLines Include="    update-icon-caches /usr/share/icons/hicolor || true" />
+      <PostLines Include="fi" />
+      <PostLines Include="exit 0" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="$(DebLayoutDir)/DEBIAN/postinst" Lines="@(PostLines)" Overwrite="true" />
+    
+    <Exec Command="chmod 755 &quot;$(DebLayoutDir)/DEBIAN/postinst&quot;" />
+    <Exec Command="cd &quot;$(DebLayoutDir)&quot; &amp;&amp; dpkg-deb --build --root-owner-group . &quot;$(ZipFileDir)/$(PackageFileName)&quot;" />
+
+    <RemoveDir Directories="$(UnzipTemp)" />
+    <RemoveDir Directories="$(DebLayoutDir)" />
+    <Exec Command="rm -f &quot;$(TempManPath)&quot;" />
+
+    <Message Importance="high" Text="Debian package successfully created: $(ZipFileDir)/$(PackageFileName)" />
+  </Target>
+
+  <ItemGroup>
+    <None Include="../../scripts/nwbuilders/numbworks_logo_256x256px.png" Pack="true" PackagePath="\" />
+    <None Include="../../scripts/nwbuilders/NW.NGramTextClassification.CLI.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>nwngram</ToolCommandName>
+    <PackageId>NW.NGramTextClassification.CLI</PackageId>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageReadmeFile>NW.NGramTextClassification.CLI.md</PackageReadmeFile>
+    <PackageIcon>numbworks_logo_256x256px.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.CLI.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.CLI.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
