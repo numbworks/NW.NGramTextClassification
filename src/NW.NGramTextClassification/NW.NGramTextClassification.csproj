@@ -39,13 +39,12 @@
     <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.xml</DocumentationFile>
-    <NoWarn>1701;1702;1591</NoWarn>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NW.NGramTextClassification.xml</DocumentationFile>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
 </Project>
