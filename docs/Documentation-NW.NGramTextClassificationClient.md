@@ -1,4 +1,4 @@
-# NW.NGramTextClassificationClient
+# NW.NGramTextClassification.CLI
 Contact: numbworks@gmail.com
 
 ## Revision History
@@ -14,11 +14,11 @@ Contact: numbworks@gmail.com
 
 ![Screenshot_01](Screenshots/Screenshot_01.png)
 
-`NW.NGramTextClassificationClient` (`ngramtc`) is a command-line application to perform text classification tasks based on the `NW.NGramTextClassification` library.
+`NW.NGramTextClassification.CLI` (`ngramtc`) is a command-line application to perform text classification tasks based on the `NW.NGramTextClassification` library.
 
 ## Overview
 
-The command-line interface for `NW.NGramTextClassificationClient` is summarized by the following table:
+The command-line interface for `NW.NGramTextClassification.CLI` is summarized by the following table:
 
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|

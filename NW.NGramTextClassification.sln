@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification.UnitTests", "tests\NW.NGramTextClassification.UnitTests\NW.NGramTextClassification.UnitTests.csproj", "{DED71858-151D-46C5-89FD-03AF41A44CFD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassificationClient", "src\NW.NGramTextClassificationClient\NW.NGramTextClassificationClient.csproj", "{7439E782-02C1-4221-963B-6A2860736780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification.CLI", "src\NW.NGramTextClassification.CLI\NW.NGramTextClassification.CLI.csproj", "{7439E782-02C1-4221-963B-6A2860736780}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassificationClient.UnitTests", "tests\NW.NGramTextClassificationClient.UnitTests\NW.NGramTextClassificationClient.UnitTests.csproj", "{33D4CC74-60A2-4AD4-B2BF-4CD7B220921E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NW.NGramTextClassification.CLI.UnitTests", "tests\NW.NGramTextClassification.CLI.UnitTests\NW.NGramTextClassification.CLI.UnitTests.csproj", "{33D4CC74-60A2-4AD4-B2BF-4CD7B220921E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
