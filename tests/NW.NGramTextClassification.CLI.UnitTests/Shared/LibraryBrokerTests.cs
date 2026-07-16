@@ -163,15 +163,15 @@ namespace NW.NGramTextClassification.CLI.UnitTests
 
             Assert.That(
                     messages[0],
-                    Is.EqualTo("Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\LabeledExamples.json.")
+                    Is.EqualTo("Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\/LabeledExamples.json.")
                     );
             Assert.That(
                     messages[2],
-                    Is.EqualTo("Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\TextSnippets.json.")
+                    Is.EqualTo("Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\/TextSnippets.json.")
                     );
             Assert.That(
                     messages[4],
-                    Is.EqualTo("Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\TokenizerRuleSet.json.")
+                    Is.EqualTo("Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\/TokenizerRuleSet.json.")
                     );
 
             Assert.That(
