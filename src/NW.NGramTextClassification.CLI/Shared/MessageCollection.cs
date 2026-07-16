@@ -4,7 +4,7 @@ using System;
 
 namespace NW.NGramTextClassification.CLI.Shared
 {
-    ///<summary>Collects all the messages used for logging and exceptions for <see cref="NGramTextClassificationClient"/>.</summary>
+    ///<summary>Collects all the messages used for logging and exceptions for <see cref="NGramTextClassification.CLI"/>.</summary>
     public static class MessageCollection
     {
 

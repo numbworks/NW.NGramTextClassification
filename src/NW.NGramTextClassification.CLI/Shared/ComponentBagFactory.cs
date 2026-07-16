@@ -2,7 +2,7 @@
 
 namespace NW.NGramTextClassification.CLI.Shared
 {
-    /// <inheritdoc cref="IComponentBagFactory/>
+    /// <inheritdoc cref="IComponentBagFactory"/>
     public class ComponentBagFactory : IComponentBagFactory
     {
 
