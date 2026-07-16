@@ -93,10 +93,10 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
             // Arrange
             List<LabeledExample> objects = LabeledExamples.ObjectMother.ShortLabeledExamples;
-            string expected = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content;
+            string expected = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content.Replace("\r\n", "\n");
 
             // Act
-            string actual = new Serializer<LabeledExample>().Serialize(objects: objects);
+            string actual = new Serializer<LabeledExample>().Serialize(objects: objects).Replace("\r\n", "\n");
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));
@@ -109,10 +109,10 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
             // Arrange
             List<TextSnippet> objects = TextSnippets.ObjectMother.TextSnippets;
-            string expected = TextSnippets.ObjectMother.TextSnippetsAsJson_Content;
+            string expected = TextSnippets.ObjectMother.TextSnippetsAsJson_Content.Replace("\r\n", "\n");
 
             // Act
-            string actual = new Serializer<TextSnippet>().Serialize(objects: objects);
+            string actual = new Serializer<TextSnippet>().Serialize(objects: objects).Replace("\r\n", "\n");
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));
@@ -126,10 +126,10 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
             // Arrange
             TextSnippet obj = TextSnippets.ObjectMother.TextSnippet;
-            string expected = TextSnippets.ObjectMother.TextSnippetAsJson_Content;
+            string expected = TextSnippets.ObjectMother.TextSnippetAsJson_Content.Replace("\r\n", "\n");
 
             // Act
-            string actual = new Serializer<TextSnippet>().Serialize(obj: obj);
+            string actual = new Serializer<TextSnippet>().Serialize(obj: obj).Replace("\r\n", "\n");
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));
@@ -142,10 +142,10 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
             // Arrange
             TextClassifierSession obj = TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00;
-            string expected = TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content;
+            string expected = TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content.Replace("\r\n", "\n");
 
             // Act
-            string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj);
+            string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj).Replace("\r\n", "\n");
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));
