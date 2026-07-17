@@ -6,15 +6,11 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2021-10-13 | numbworks | Created. |
-| 2022-09-27 | numbworks | Updated to v3.0.0. |
-| 2022-10-29 | numbworks | Updated to v3.5.0. |
-| 2022-11-04 | numbworks | Updated to v3.6.0. |
+| 2026-07-17 | numbworks | Last update (v4.2.1). |
 
 ## Introduction
 
-![Screenshot_01](Screenshots/Screenshot_01.png)
-
-`NW.NGramTextClassification.CLI` (`ngramtc`) is a command-line application to perform text classification tasks based on the `NW.NGramTextClassification` library.
+`NW.NGramTextClassification.CLI` is a command-line application built on the top of `NW.NGramTextClassification` library.
 
 ## Overview
 

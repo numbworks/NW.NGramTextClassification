@@ -6,14 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2020-12-27 | numbworks | Created. |
-| 2021-01-30 | numbworks | Added examples, re-organized the document. |
-| 2021-02-15 | numbworks | Completed "Example 1: Main Scenario". |
-| 2021-09-24 | numbworks | Version numbers removed, updated examples for v2.0.0. |
-| 2022-09-27 | numbworks | Updated to v3.0.0. |
-| 2022-10-16 | numbworks | Updated to v3.5.0. |
-| 2022-11-04 | numbworks | Updated to v3.6.0. |
-| 2022-12-26 | numbworks | Added "Appendix - NGramTokenizerRuleSet". |
-| 2024-01-29 | numbworks | Updated to v4.0.0. |
+| 2026-07-17 | numbworks | Last update (v4.2.1). |
 
 ## Introduction
 
