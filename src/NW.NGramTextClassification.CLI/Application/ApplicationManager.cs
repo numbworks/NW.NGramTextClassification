@@ -64,8 +64,8 @@ namespace NW.NGramTextClassification.CLI.Application
             CommandLineApplication app = new CommandLineApplication
             {
 
-                Name = Shared.MessageCollection.Application_Name,
-                Description = Shared.MessageCollection.Application_Description
+                Name = Shared.MessageCollection.APPLICATION_NAME,
+                Description = Shared.MessageCollection.APPLICATION_DESCRIPTION
 
             };
 

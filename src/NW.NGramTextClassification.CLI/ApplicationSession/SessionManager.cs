@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             Validator.ValidateObject(app, nameof(app));
 
-            app.Command(Shared.MessageCollection.Session_Name, sessionCommand =>
+            app.Command(Shared.MessageCollection.COMMAND_SESSION_NAME, sessionCommand =>
             {
 
                 sessionCommand = AddMain(sessionCommand);
@@ -62,7 +62,7 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
         private CommandLineApplication AddMain(CommandLineApplication command)
         {
 
-            command.Description = Shared.MessageCollection.Session_Description;
+            command.Description = Shared.MessageCollection.COMMAND_SESSION_DESCR;
             command.OnExecute(() =>
             {
 
@@ -79,10 +79,10 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
         private CommandLineApplication AddClassify(CommandLineApplication command)
         {
 
-            command.Command(Shared.MessageCollection.Session_Classify_Name, subCommand =>
+            command.Command(Shared.MessageCollection.SUBCOMMAND_CLASSIFY_NAME, subCommand =>
             {
 
-                subCommand.Description = Shared.MessageCollection.Session_Classify_Description;
+                subCommand.Description = Shared.MessageCollection.SUBCOMMAND_CLASSIFY_DESCR;
 
                 CommandOption labeledExamplesOption = CreateRequiredLabeledExamplesOption(subCommand);
                 CommandOption textSnippetsOption = CreateRequiredTextSnippetsOption(subCommand);
@@ -126,12 +126,12 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
             CommandOption result
                 = subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_LabeledExamples_Template,
-                        Shared.MessageCollection.Session_Option_LabeledExamples_Description,
+                        Shared.MessageCollection.OPTION_LABELEDEXAMPLES_TEMPL,
+                        Shared.MessageCollection.OPTION_LABELEDEXAMPLES_DESCR,
                         CommandOptionType.SingleValue)
                     .IsRequired(
                         false,
-                        Shared.MessageCollection.Session_Option_LabeledExamples_ErrorMessage);
+                        Shared.MessageCollection.OPTION_LABELEDEXAMPLES_ERRORMESSAGE);
 
             return result;
 
@@ -142,12 +142,12 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
             CommandOption result
                 = subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_TextSnippets_Template,
-                        Shared.MessageCollection.Session_Option_TextSnippets_Description,
+                        Shared.MessageCollection.OPTION_TEXTSNIPPETS_TEMPL,
+                        Shared.MessageCollection.OPTION_TEXTSNIPPETS_DESCR,
                         CommandOptionType.SingleValue)
                     .IsRequired(
                         false,
-                        Shared.MessageCollection.Session_Option_TextSnippets_ErrorMessage);
+                        Shared.MessageCollection.OPTION_TEXTSNIPPETS_ERRORMESSAGE);
 
             return result;
 
@@ -157,8 +157,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             return subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_FolderPath_Template,
-                        Shared.MessageCollection.Session_Option_FolderPath_Description,
+                        Shared.MessageCollection.OPTION_FOLDERPATH_TEMPL,
+                        Shared.MessageCollection.OPTION_FOLDERPATH_DESCR,
                         CommandOptionType.SingleValue)
                     .Accepts(validator => validator.ExistingDirectory());
 
@@ -169,8 +169,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
             CommandOption result
                 = subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_TokenizerRuleSet_Template,
-                        Shared.MessageCollection.Session_Option_TokenizerRuleSet_Description,
+                        Shared.MessageCollection.OPTION_TOKENIZERRULESET_TEMPL,
+                        Shared.MessageCollection.OPTION_TOKENIZERRULESET_DESCR,
                         CommandOptionType.SingleValue);
 
             return result;
@@ -181,8 +181,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             return subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_MinAccuracySingle_Template,
-                        Shared.MessageCollection.Session_Option_MinAccuracySingle_Description,
+                        Shared.MessageCollection.OPTION_MINACCURACYSINGLE_TEMPL,
+                        Shared.MessageCollection.OPTION_MINACCURACYSINGLE_DESCR,
                         CommandOptionType.SingleValue)
                     .Accepts(validator => validator.Use(_sessionManagerBag.MinimumAccuracyValidator));
 
@@ -192,8 +192,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             return subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_MinAccuracyMultiple_Template,
-                        Shared.MessageCollection.Session_Option_MinAccuracyMultiple_Description,
+                        Shared.MessageCollection.OPTION_MINACCURACYMULTIPLE_TEMPL,
+                        Shared.MessageCollection.OPTION_MINACCURACYMULTIPLE_DESCR,
                         CommandOptionType.SingleValue)
                     .Accepts(validator => validator.Use(_sessionManagerBag.MinimumAccuracyValidator));
 
@@ -203,8 +203,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             return subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_SaveSession_Template,
-                        Shared.MessageCollection.Session_Option_SaveSession_Description,
+                        Shared.MessageCollection.OPTION_SAVESESSION_TEMPL,
+                        Shared.MessageCollection.OPTION_SAVESESSION_DESCR,
                         CommandOptionType.NoValue);
 
         }
@@ -213,8 +213,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             return subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_CleanLabeledExamples_Template,
-                        Shared.MessageCollection.Session_Option_CleanLabeledExamples_Description,
+                        Shared.MessageCollection.OPTION_CLEANLABELEDEXAMPLES_TEMPL,
+                        Shared.MessageCollection.OPTION_CLEANLABELEDEXAMPLES_DESCR,
                         CommandOptionType.NoValue);
 
         }
@@ -223,8 +223,8 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
             return subCommand
                     .Option(
-                        Shared.MessageCollection.Session_Option_DisableIndexSerialization_Template,
-                        Shared.MessageCollection.Session_Option_DisableIndexSerialization_Description,
+                        Shared.MessageCollection.OPTION_DISABLEINDEXSERIALIZATION_TEMPL,
+                        Shared.MessageCollection.OPTION_DISABLEINDEXSERIALIZATION_DESCR,
                         CommandOptionType.NoValue);
 
         }

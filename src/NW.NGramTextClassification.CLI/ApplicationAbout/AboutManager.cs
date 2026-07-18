@@ -40,7 +40,7 @@ namespace NW.NGramTextClassification.CLI.ApplicationAbout
 
             Validator.ValidateObject(app, nameof(app));
 
-            app.Command(Shared.MessageCollection.About_Name, command =>
+            app.Command(Shared.MessageCollection.COMMAND_ABOUT_NAME, command =>
             {
 
                 command = AddMain(command);
@@ -58,7 +58,7 @@ namespace NW.NGramTextClassification.CLI.ApplicationAbout
         private CommandLineApplication AddMain(CommandLineApplication app)
         {
 
-            app.Description = Shared.MessageCollection.About_Description;
+            app.Description = Shared.MessageCollection.COMMAND_ABOUT_DESCR;
             app.OnExecute(() =>
             {
 

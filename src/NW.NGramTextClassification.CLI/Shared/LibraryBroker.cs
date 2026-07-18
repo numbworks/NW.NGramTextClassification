@@ -79,12 +79,12 @@ namespace NW.NGramTextClassification.CLI.Shared
 
             LogAsciiBanner(componentBag);
 
-            componentBag.LoggingActionAsciiBanner(MessageCollection.Application_Description);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.APPLICATION_DESCRIPTION);
             componentBag.LoggingActionAsciiBanner(SeparatorLine);
-            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_Author);
-            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_Email);
-            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_Url);
-            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_License);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.COMMAND_ABOUT_INFO_AUTHOR);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.COMMAND_ABOUT_INFO_EMAIL);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.COMMAND_ABOUT_INFO_URL);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.COMMAND_ABOUT_INFO_LICENSE);
 
             LogFooter(componentBag);
 

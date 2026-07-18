@@ -57,7 +57,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ApplicationSession
         {
 
             // Arrange
-            CommandOption option = new CommandOption(MessageCollection.Session_Option_MinAccuracySingle_Template, CommandOptionType.SingleValue);
+            CommandOption option = new CommandOption(MessageCollection.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
             option.DefaultValue = value;
             ValidationContext context = new ValidationContext(option);
             string valueName = nameof(MinimumAccuracyValidator).Replace("Validator", string.Empty);
@@ -80,7 +80,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ApplicationSession
         {
 
             // Arrange
-            CommandOption option = new CommandOption(MessageCollection.Session_Option_MinAccuracySingle_Template, CommandOptionType.SingleValue);
+            CommandOption option = new CommandOption(MessageCollection.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
             option.DefaultValue = value;
             ValidationContext context = new ValidationContext(option);
 

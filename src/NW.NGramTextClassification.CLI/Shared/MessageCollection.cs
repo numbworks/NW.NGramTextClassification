@@ -4,75 +4,98 @@ using System;
 
 namespace NW.NGramTextClassification.CLI.Shared
 {
-    ///<summary>Collects all the messages used for logging and exceptions for <see cref="NGramTextClassification.CLI"/>.</summary>
+    ///<summary>Collects all the messages used for logging and exceptions for <see cref="CLI"/>.</summary>
     public static class MessageCollection
     {
 
-        #region Properties
+        #region Application
+        
+        public static string APPLICATION_NAME { get; } = "nwngram";
+        public static string APPLICATION_DESCRIPTION { get; } = "Command-line application to perform text classification tasks.";
+        
+        #endregion
 
-        public static string Application_Name { get; } = "nwngram";
-        public static string Application_Description { get; } = "Command-line application to perform text classification tasks.";
+        #region About
+        
+        public static string COMMAND_ABOUT_NAME { get; } = "about";
+        public static string COMMAND_ABOUT_DESCR { get; } = "About this application.";
+        public static string COMMAND_ABOUT_INFO_AUTHOR = "Author: numbworks";
+        public static string COMMAND_ABOUT_INFO_EMAIL = "Email: numbworks [AT] gmail [DOT] com";
+        public static string COMMAND_ABOUT_INFO_URL = @"Github: http://www.github.com/numbworks";
+        public static string COMMAND_ABOUT_INFO_LICENSE = "License: MIT License";
+        
+        #endregion
 
-        public static string About_Name { get; } = "about";
-        public static string About_Description { get; } = "About this application.";
-        public static string About_Information_Author = "Author: numbworks";
-        public static string About_Information_Email = "Email: numbworks [AT] gmail [DOT] com";
-        public static string About_Information_Url = @"Github: http://www.github.com/numbworks";
-        public static string About_Information_License = "License: MIT License";
-
-        public static string Session_Name { get; } = "session";
-        public static string Session_Description { get; } 
+        #region Session
+        
+        public static string COMMAND_SESSION_NAME { get; } = "session";
+        public static string COMMAND_SESSION_DESCR { get; } 
             = "Groups all the features related to a single text classification session.";
-
-        public static string Session_Classify_Name { get; } = "classify";
-        public static string Session_Classify_Description { get; } 
+        
+        #endregion
+        
+        #region Session Classify
+        
+        public static string SUBCOMMAND_CLASSIFY_NAME { get; } = "classify";
+        public static string SUBCOMMAND_CLASSIFY_DESCR { get; } 
             = "Attempt to classify the provided text snippet(s) according to the provided labeled examples.";
 
-        public static string Session_Option_LabeledExamples_Template { get; } = "--labeledexamples";
-        public static string Session_Option_LabeledExamples_Description { get; } 
-            = $"The filename of the JSON file containing the labeled examples required to train the classifier. The file needs to be stored in the working folder.";
-        public static string Session_Option_LabeledExamples_ErrorMessage { get; } 
-            = $"{Session_Option_LabeledExamples_Template} is mandatory.";
-        public static string Session_Option_TextSnippets_Template { get; } = "--textsnippets";
-        public static string Session_Option_TextSnippets_Description { get; } 
-            = $"The filename of the JSON file containing the text snippets that the user wants to classify. The file needs to be stored in the working folder.";
-        public static string Session_Option_TextSnippets_ErrorMessage { get; } 
-            = $"{Session_Option_TextSnippets_Template} is mandatory.";
+        public static string OPTION_LABELEDEXAMPLES_TEMPL { get; } = "--labeledexamples";
+        public static string OPTION_LABELEDEXAMPLES_DESCR { get; } 
+            = string.Concat(
+                "The filename of the JSON file containing the labeled examples required to train the classifier. ",
+                "The file needs to be stored in the working folder.");
+        public static string OPTION_LABELEDEXAMPLES_ERRORMESSAGE { get; } 
+            = $"{OPTION_LABELEDEXAMPLES_TEMPL} is mandatory.";
 
-        public static string Session_Option_TokenizerRuleSet_Template { get; } = "--tokenizerruleset";
-        public static string Session_Option_TokenizerRuleSet_Description { get; } 
-            = $"The filename of the JSON file containing the tokenizer ruleset. The file needs to be stored in the working folder. If not specified, default rules will be used.";
+        public static string OPTION_TEXTSNIPPETS_TEMPL { get; } = "--textsnippets";
+        public static string OPTION_TEXTSNIPPETS_DESCR { get; } 
+            = string.Concat(
+                "The filename of the JSON file containing the text snippets that the user wants to classify. ",
+                "The file needs to be stored in the working folder.");
+        public static string OPTION_TEXTSNIPPETS_ERRORMESSAGE { get; } 
+            = $"{OPTION_TEXTSNIPPETS_TEMPL} is mandatory.";
 
-        public static string Session_Option_FolderPath_Template { get; } = "--folderpath";
-        public static string Session_Option_FolderPath_Description { get; } 
+        public static string OPTION_TOKENIZERRULESET_TEMPL { get; } = "--tokenizerruleset";
+        public static string OPTION_TOKENIZERRULESET_DESCR { get; } 
+            = string.Concat(
+                "The filename of the JSON file containing the tokenizer ruleset. ",
+                "The file needs to be stored in the working folder. ",
+                "If not specified, default rules will be used.");
+
+        public static string OPTION_FOLDERPATH_TEMPL { get; } = "--folderpath";
+        public static string OPTION_FOLDERPATH_DESCR { get; } 
             = $"The path of the working folder. If not specified, '{SettingBag.DefaultFolderPath}' will be used.";
 
-        public static string Session_Option_MinAccuracySingle_Template { get; } = "--minaccuracysingle";
-        public static string Session_Option_MinAccuracySingle_Description { get; }
+        public static string OPTION_MINACCURACYSINGLE_TEMPL { get; } = "--minaccuracysingle";
+        public static string OPTION_MINACCURACYSINGLE_DESCR { get; }
             = string.Concat(
                 "When a single label provided as example, the minimum index average required to return it as classification result. ",
                 "Value can be between 0.0 and 1.0. ",
-                $"If not specified, '{SettingBag.DefaultMinimumAccuracySingleLabel}' will be used."
-            );
-        public static string Session_Option_MinAccuracyMultiple_Template { get; } = "--minaccuracymultiple";
-        public static string Session_Option_MinAccuracyMultiple_Description { get; }
+                $"If not specified, '{SettingBag.DefaultMinimumAccuracySingleLabel}' will be used.");
+
+        public static string OPTION_MINACCURACYMULTIPLE_TEMPL { get; } = "--minaccuracymultiple";
+        public static string OPTION_MINACCURACYMULTIPLE_DESCR { get; }
             = string.Concat(
                 "When multiple labels provided as example, the minimum index average required to return the highest among them as classification result. ",
                 "Value can be between 0.0 and 1.0. ",
-                $"If not specified, '{SettingBag.DefaultMinimumAccuracyMultipleLabels}' will be used."
-            );
+                $"If not specified, '{SettingBag.DefaultMinimumAccuracyMultipleLabels}' will be used.");
 
-        public static string Session_Option_SaveSession_Template { get; } = "--savesession";
-        public static string Session_Option_SaveSession_Description { get; }
-            = $"If provided, the text classification session will be saved as JSON in the working folder.";
+        public static string OPTION_SAVESESSION_TEMPL { get; } = "--savesession";
+        public static string OPTION_SAVESESSION_DESCR { get; }
+            = "If provided, the text classification session will be saved as JSON in the working folder.";
 
-        public static string Session_Option_CleanLabeledExamples_Template { get; } = "--cleanlabeledexamples";
-        public static string Session_Option_CleanLabeledExamples_Description { get; }
-            = $"If provided, the labeled examples among the provided ones that make the tokenizer to fail will be removed before starting the classification session.";
+        public static string OPTION_CLEANLABELEDEXAMPLES_TEMPL { get; } = "--cleanlabeledexamples";
+        public static string OPTION_CLEANLABELEDEXAMPLES_DESCR { get; }
+            = "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification session.";
 
-        public static string Session_Option_DisableIndexSerialization_Template { get; } = "--disableindexserialization";
-        public static string Session_Option_DisableIndexSerialization_Description { get; }
-            = $"To use in conjunction with '--savesession'. It has no effect if provided by its own.";
+        public static string OPTION_DISABLEINDEXSERIALIZATION_TEMPL { get; } = "--disableindexserialization";
+        public static string OPTION_DISABLEINDEXSERIALIZATION_DESCR { get; }
+            = "To use in conjunction with '--savesession'. It has no effect if provided by its own.";
+        
+        #endregion
+
+        #region Properties
 
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
