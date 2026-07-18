@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.Shared
                 = new ClassifyData(
                         labeledExamples: "LabeledExamples.json",
                         textSnippets: "TextSnippets.json",
-                        folderPath: @"C:\ngramtc\",
+                        folderPath: @"C:\nwngram\",
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,

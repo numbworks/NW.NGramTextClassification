@@ -10,7 +10,7 @@ namespace NW.NGramTextClassification.CLI.Shared
 
         #region Properties
 
-        public static string Application_Name { get; } = "ngramtc";
+        public static string Application_Name { get; } = "nwngram";
         public static string Application_Description { get; } = "Command-line application to perform text classification tasks.";
 
         public static string About_Name { get; } = "about";

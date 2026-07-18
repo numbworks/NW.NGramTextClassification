@@ -14,7 +14,7 @@ namespace NW.NGramTextClassification.Filenames
         #region Properties
 
         public static string DefaultFileNameTemplate { get; } = "{0}_{1}_{2}.{3}";
-        public static string DefaultMainToken { get; } = "ngramtc";
+        public static string DefaultMainToken { get; } = "nwngram";
         public static string DefaultTextSnippetsToken { get; } = "textsnippets";
         public static string DefaultLabeledExamplesToken { get; } = "labeledexamples";
         public static string DefaultSessionToken { get; } = "session";

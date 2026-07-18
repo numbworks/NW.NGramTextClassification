@@ -1441,7 +1441,7 @@ namespace NW.NGramTextClassification.UnitTests
                           nowFunction: FakeNowFunction);
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 
@@ -1497,7 +1497,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 
@@ -1545,7 +1545,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_session_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 
@@ -1595,7 +1595,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"ngramtc_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 
@@ -1644,7 +1644,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"ngramtc_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 
@@ -1693,7 +1693,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier = new TextClassifier(componentBag, new SettingBag());
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"ngramtc_session_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_session_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 

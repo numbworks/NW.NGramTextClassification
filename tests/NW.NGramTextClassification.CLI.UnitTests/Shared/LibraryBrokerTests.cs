@@ -145,7 +145,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests
                 = new ClassifyData(
                         labeledExamples: "LabeledExamples.json",
                         textSnippets: "TextSnippets.json",
-                        folderPath: @"C:\ngramtc\",
+                        folderPath: @"C:\nwngram\",
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
@@ -163,15 +163,15 @@ namespace NW.NGramTextClassification.CLI.UnitTests
 
             Assert.That(
                     messages[0],
-                    Is.EqualTo("Attempting to load a collection of 'LabeledExample' objects from: C:\\ngramtc\\/LabeledExamples.json.")
+                    Is.EqualTo("Attempting to load a collection of 'LabeledExample' objects from: C:\\nwngram\\/LabeledExamples.json.")
                     );
             Assert.That(
                     messages[2],
-                    Is.EqualTo("Attempting to load a collection of 'TextSnippet' objects from: C:\\ngramtc\\/TextSnippets.json.")
+                    Is.EqualTo("Attempting to load a collection of 'TextSnippet' objects from: C:\\nwngram\\/TextSnippets.json.")
                     );
             Assert.That(
                     messages[4],
-                    Is.EqualTo("Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\ngramtc\\/TokenizerRuleSet.json.")
+                    Is.EqualTo("Attempting to load a 'NGramTokenizerRuleSet' object from: C:\\nwngram\\/TokenizerRuleSet.json.")
                     );
 
             Assert.That(
@@ -214,7 +214,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests
                 = new ClassifyData(
                         labeledExamples: "LabeledExamples.json",
                         textSnippets: "TextSnippets.json",
-                        folderPath: @"C:\ngramtc\",
+                        folderPath: @"C:\nwngram\",
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
@@ -263,7 +263,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests
                 = new ClassifyData(
                         labeledExamples: "LabeledExamples.json",
                         textSnippets: "TextSnippets.json",
-                        folderPath: @"C:\ngramtc\",
+                        folderPath: @"C:\nwngram\",
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
@@ -313,7 +313,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests
                 = new ClassifyData(
                         labeledExamples: "LabeledExamples.json",
                         textSnippets: "TextSnippets.json",
-                        folderPath: @"C:\ngramtc\",
+                        folderPath: @"C:\nwngram\",
                         tokenizerRuleSet: "TokenizerRuleSet.json",
                         minAccuracySingle: 0.4,
                         minAccuracyMultiple: 0.7,
