@@ -57,8 +57,3 @@ namespace NW.NGramTextClassification.UnitTests.AsciiBanner
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 31.01.2024
-*/

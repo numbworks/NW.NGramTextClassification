@@ -245,8 +245,3 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 14.02.2024
-*/

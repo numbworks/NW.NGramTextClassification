@@ -58,8 +58,3 @@
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 22.10.2022
-*/

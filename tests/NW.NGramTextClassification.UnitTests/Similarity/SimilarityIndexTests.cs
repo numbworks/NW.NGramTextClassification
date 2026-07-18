@@ -90,8 +90,3 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 31.01.2024
-*/

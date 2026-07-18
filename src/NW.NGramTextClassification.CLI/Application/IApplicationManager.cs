@@ -9,8 +9,3 @@
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 27.07.2022
-*/

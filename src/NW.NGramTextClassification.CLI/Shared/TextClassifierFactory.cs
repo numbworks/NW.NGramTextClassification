@@ -32,8 +32,3 @@ namespace NW.NGramTextClassification.CLI.Shared
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 26.01.2024
-*/

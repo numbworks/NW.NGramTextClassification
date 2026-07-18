@@ -15,8 +15,3 @@ namespace NW.NGramTextClassification.Similarity
     
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 18.09.2021
-*/

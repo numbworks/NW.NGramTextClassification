@@ -37,8 +37,3 @@ namespace NW.NGramTextClassification.CLI.UnitTests.Utilities
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 25.01.2024
-*/

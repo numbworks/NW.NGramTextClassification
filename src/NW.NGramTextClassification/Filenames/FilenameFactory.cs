@@ -61,8 +61,3 @@ namespace NW.NGramTextClassification.Filenames
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 13.10.2022
-*/

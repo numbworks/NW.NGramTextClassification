@@ -207,8 +207,3 @@ namespace NW.NGramTextClassification.UnitTests.Arrays
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 12.02.2024
-*/

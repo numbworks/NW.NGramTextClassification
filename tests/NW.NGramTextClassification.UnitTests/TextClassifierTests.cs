@@ -1910,8 +1910,3 @@ namespace NW.NGramTextClassification.UnitTests
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 14.02.2024
-*/

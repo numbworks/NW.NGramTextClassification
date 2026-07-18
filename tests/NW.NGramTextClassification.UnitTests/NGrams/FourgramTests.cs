@@ -45,8 +45,3 @@ namespace NW.NGramTextClassification.UnitTests.NGrams
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 31.01.2024
-*/

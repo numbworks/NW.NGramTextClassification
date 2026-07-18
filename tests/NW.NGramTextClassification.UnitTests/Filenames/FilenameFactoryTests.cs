@@ -128,8 +128,3 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 30.01.2024
-*/

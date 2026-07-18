@@ -47,8 +47,3 @@ namespace NW.NGramTextClassification.TextClassifications
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 26.01.2024
-*/

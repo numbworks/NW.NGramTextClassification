@@ -340,8 +340,3 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 04.11.2022
-*/

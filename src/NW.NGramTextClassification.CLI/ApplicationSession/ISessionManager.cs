@@ -10,8 +10,3 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 21.07.2022
-*/
