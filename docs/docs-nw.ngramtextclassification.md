@@ -268,8 +268,8 @@ public NGramTokenizerRuleSet(
 The accuracy of the classification can be improved:
 
 1. By increasing the number of `LabeledExamples` for each label.
-2. By using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text - for ex. attempting to detect the language of a piece of text about anthropology using a collection of multilingual `LabeledExample` objects about the same topic.
-3. Increasing the number of `INGram` objects - for ex. using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available in the library.
+2. By using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text - e.g. attempting to detect the language of a piece of text about anthropology using a collection of multilingual `LabeledExample` objects about the same topic.
+3. Increasing the number of `INGram` objects - e.g. using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available in the library.
 
 ## Example Files
 
