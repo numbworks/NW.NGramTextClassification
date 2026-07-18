@@ -59,7 +59,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         {
             
             DoubleManager = doubleManager ?? new DoubleManager();
-            MinimumAccuracyValidator = new MinimumAccuracyValidator(doubleManager);
+            MinimumAccuracyValidator = new MinimumAccuracyValidator(DoubleManager);
             AsciiBannerManager = asciiBannerManager ?? new AsciiBannerManager();
             TerminalWindowManager = terminalWindowManager ?? new TerminalWindowManager();
             TextClassifierFactory = textClassifierFactory ?? new TextClassifierFactory();
