@@ -1,13 +1,13 @@
 % nwngram
 
 # NAME
-nwngram - sketch download metadata extractor for 'Lo Zoo di 105'
+nwngram - perform text classification tasks on your text snippets
 
 # SYNOPSIS
 **nwngram** [command] [options]
 
 # DESCRIPTION
-**nwngram** is a CLI application that extracts 'Lo Zoo di 105' sketch download metadata (JSON or MetaLink) from 'Radio 105' website.
+**nwngram** is a CLI application to perform text classification tasks on the text snippets you provide.
 
 # OPTIONS
 **-?, -h, --help**
@@ -15,102 +15,43 @@ Show help and usage information.
 
 # COMMANDS
 
-### describe
-Performs the least possible amount of calls to the root webpage in order to describe the current situation.
+### session classify
+Performs a text classification task on the data you provide.
 
-**--sketchmanagertype <PodcastItems|ZooScenette>**
-    Defines the Sketch Manager to use. Default: 'PodcastItems'.
+**--labeledexamples:{filename}**
+    Defines the name of the JSON file containing the pre-labeled training data used to train the classifier. This file must be located in the working folder.
 
-**--enablesave**
-    Enables saving output to disk. Default: 'True'.
+**--textsnippets:{filename}**
+    Defines the name of the JSON file containing the raw, unlabeled text strings that you want the application to classify. This file must be located in the working folder.
 
-**--maxcollections \<maxcollections\>**
-    Maximum number of collections to consider. Default: '65535' (ZooScenette) or '800' (PodcastItems).
+**--folderpath:{path}**
+    Defines the custom path to the working directory where the application will look for input files and save any session outputs, overriding the default application folder.
 
-### fetch
-Performs the highest amount of calls to the root webpage in order to create comprehensive MetaLink files to download the sketches afterwards.
+**--tokenizerruleset:{filename}**
+    Defines the name of the JSON file that specifies the rules and configurations for how the text should be broken down into n-grams during tokenization.
 
-**--sketchmanagertype <PodcastItems|ZooScenette>**
-    Defines the Sketch Manager to use. Default: 'PodcastItems'.
+**--minaccuracysingle:{number}**
+    Defines the minimum accuracy or confidence threshold required to successfully classify a single text snippet.
 
-**--enablesave**
-    Enables saving output to disk. Default: 'True'.
+**--minaccuracymultiple:{number}**
+    Defines the minimum average accuracy or confidence threshold required when evaluating multiple text snippets across the session.
 
-**--onlyselectedcollections \<onlyselectedcollections\>**
-    Restricts processing to the provided collection names (space-separated). Default: 'null' (ZooScenette) or '["Lo Zoo di 105"]' (PodcastItems).
+**--savesession**
+    Defines whether the application should automatically save the results, metrics, and logs of the current classification session to the working folder upon completion.
 
-**--sketchcutoffdate \<sketchcutoffdate\>**
-    Includes only sketches newer than this date, formatted as 'yyyy-MM-dd'. Default: 'Today - 2 months' (ZooScenette) or 'Today - 3 days' (PodcastItems).
+**--cleanlabeledexamples**
+    Defines whether the application should sanitize the labeled examples before running the tokenization process.
 
-**--podcastitemspagerange \<podcastitemspagerange\>**
-    Range of pages to fetch if PodcastItems, formatted as 'firstpage:lastpage' (e.g., 1:25). Ignored if ZooScenette. Default: 'null' (PodcastItems).
-
-### list
-Performs the least possible amount of calls to the root webpage in order to list the most recent sketches available.
-
-**--sketchmanagertype <PodcastItems|ZooScenette>**
-    Defines the Sketch Manager to use. Default: 'PodcastItems'.
-
-**--enablesave**
-    Enables saving output to disk. Default: 'True'.
-
-**--sketchcutoffdate \<sketchcutoffdate\>**
-    Includes only sketches newer than this date, formatted as 'yyyy-MM-dd'. Default: 'Today - 2 months' (ZooScenette) or 'Today - 3 days' (PodcastItems).
+**--disableindexserialization**
+    Defines whether to skip saving the calculated similarity index data to disk.
 
 # EXAMPLES
-**List all the available commands:**
+**Performs a text classification task on the data you provide:**
 
 ```text
-nwngram
+./nwngram session classify --labeledexamples:LabeledExamples.json --textsnippets:TextSnippets.json
 ```
 
-**List all the available options for each command:**
-
-```text
-nwngram describe -h
-nwngram fetch -h
-nwngram list -h
-```
-
-**Run 'describe' with custom options:**
-
-```text
-nwngram describe \
-    --enablesave false \
-    --maxcollections 2
-
-nwngram describe \
-    --sketchmanagertype ZooScenette \
-    --enablesave false \
-    --maxcollections 2
-```
-
-**Run 'fetch' with custom options:**
-
-```text
-nwngram fetch \
-    --enablesave false \
-    --podcastitemspagerange 1:10
-
-nwngram fetch \
-    --sketchmanagertype ZooScenette \
-    --enablesave false \
-    --onlyselectedcollections varie \
-    --sketchcutoffdate 2026-01-01
-```
-
-**Run 'list' with custom options:**
-
-```text
-nwngram list \
-    --enablesave false \
-    --sketchcutoffdate 2026-01-01
-
-nwngram list \
-    --sketchmanagertype ZooScenette \
-    --enablesave false \
-    --sketchcutoffdate 2026-01-01
-```
 
 # AUTHOR
 numbworks (numbworks@gmail.com)
