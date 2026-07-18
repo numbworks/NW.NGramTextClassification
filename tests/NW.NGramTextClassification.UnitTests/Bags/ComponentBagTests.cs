@@ -148,26 +148,6 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                     textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
                                     loggingAction: ComponentBag.DefaultLoggingAction,
                                     labeledExampleManager: new LabeledExampleManager(),
-                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: new FileManager(),
-                                    serializerFactory: new SerializerFactory(),
-                                    filenameFactory: new FilenameFactory(),
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("asciiBannerManager").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_07"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: new NGramTokenizer(),
-                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: new LabeledExampleManager(),
                                     loggingActionAsciiBanner:  null,
                                     fileManager: new FileManager(),
                                     serializerFactory: new SerializerFactory(),
@@ -177,7 +157,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingActionAsciiBanner").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_08"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_07"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -197,7 +177,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("fileManager").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_09"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_08"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -217,7 +197,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("serializerFactory").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_10"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_'09"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -237,7 +217,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filenameFactory").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_11"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_10"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -257,7 +237,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nowFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_12"),
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_11"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -277,7 +257,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("versionFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_13")
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_12")
 
         };
 
