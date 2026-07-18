@@ -12,7 +12,7 @@ Contact: numbworks@gmail.com
 
 `NW.NGramTextClassification` is a library to perform text classification tasks on the text snippets you provide.
 
-## What does "text classification" mean?
+## How Text Classification Works
 
 `Text Classification` is a `machine learning` technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library to learn from it. 
 
@@ -20,7 +20,7 @@ Every string of text is decomposed in collections of `n-grams` and compared by u
 
 A `Text Classification` library can be very useful for the resolution of many problems, such as `spam detection` or `language detection` in an automated environment.
 
-## A use case scenario: language detection
+## Text Classification And Language Detection
 
 We have several strings of text and we want to detect their language. 
 
@@ -36,10 +36,11 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 
-/*...*/
+...
 
 TextSnippet textSnippet 
-    = new TextSnippet(text: "We are looking for several skilled and driven developers to join our team.");
+    = new TextSnippet(
+        text: "We are looking for several skilled and driven developers to join our team.");
 List<LabeledExample> labeledExamples = CreateLabeledExamples();
 
 ITextClassifier textClassifier = new TextClassifier();
@@ -61,15 +62,27 @@ private static List<LabeledExample> CreateLabeledExamples()
     List<LabeledExample> labeledExamples = new List<LabeledExample>()
     {
 
-        new LabeledExample(label: "en", text: "VerksamhetsbeskrivningGoGift is a company which focuses on [...]"),
-        new LabeledExample(label: "en", text: "You will report to the Team Manager. You will get the opportunity [...]"),
-        /*...*/
-        new LabeledExample(label: "sv", text: "Conic Restaurants AB äger och driver idag SUBWAY restauranger [...]"),
-        new LabeledExample(label: "sv", text: "Du ska vara noggrann, van vid att ta eget ansvar och gilla att [...]"),
-        /*...*/
-        new LabeledExample(label: "dk", text: "Har du lyst til et nært samarbejde med kolleger i en klinik [...]"),
-        new LabeledExample(label: "dk", text: "Lægesekretær/SOSU-assistent 20-25 timer ugentligt til almen [...]"),
-        /*...*/
+        new LabeledExample(
+            label: "en", 
+            text: "VerksamhetsbeskrivningGoGift is a company which focuses on [...]"),
+        new LabeledExample(
+            label: "en", 
+            text: "You will report to the Team Manager. You will get the opportunity [...]"),
+        ...
+        new LabeledExample(
+            label: "sv", 
+            text: "Conic Restaurants AB äger och driver idag SUBWAY restauranger [...]"),
+        new LabeledExample(
+            label: "sv", 
+            text: "Du ska vara noggrann, van vid att ta eget ansvar och gilla att [...]"),
+        ...
+        new LabeledExample(
+            label: "dk", 
+            text: "Har du lyst til et nært samarbejde med kolleger i en klinik [...]"),
+        new LabeledExample(
+            label: "dk", 
+            text: "Lægesekretær/SOSU-assistent 20-25 timer ugentligt til almen [...]"),
+        ...
 
     };
 
@@ -91,27 +104,31 @@ public class TextClassifierResult
     public string Label { get; }
     public List<SimilarityIndex> SimilarityIndexes { get; }
     public List<SimilarityIndexAverage> SimilarityIndexAverages { get; }
-
-    /* ... */
+    ...
 }
 ```
 
 The core logic of the `ClassifyOrDefault` method is the following one (some logging statements have been removed for readibility purpose):
 
 ```csharp
-private TextClassifierResult CreateResult(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
+private TextClassifierResult CreateResult(
+    List<INGram> nGrams, 
+    List<TokenizedExample> tokenizedExamples)
 {
 
     List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
     List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
 
     string label = GetLabel(indexAverages);
-    _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictedLabelIs(label));
+    _components.LoggingAction.Invoke(
+        MessageCollection.TextClassifier_PredictedLabelIs(label));
 
     if (label == null)
-        _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
+        _components.LoggingAction.Invoke(
+            MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
     else
-        _components.LoggingAction.Invoke(MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
+        _components.LoggingAction.Invoke(
+            MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
 
     TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
 
@@ -163,13 +180,12 @@ public class TextClassifierSession
     public double MinimumAccuracyMultipleLabels { get; }
     public List<TextClassifierResult> Results { get; }
     public string Version { get; }
-
-    /* ... */
+    ...
 
 }
 ```
 
-## The tokenizazion process
+## The Tokenizazion Process
 
 The library component responsible for the tokenization process is `NGramTokenizer` and it requires a `NGramTokenizerRuleSet` in order to create a collection of `INGram` objects our of whatever string of text. 
 
@@ -234,45 +250,36 @@ List<INGram> nGrams = new List<INGram>() {
 };
 ```
 
-## Improving the accuracy of the classification
+Side note: one of the two constructors in the `NGramTokenizerRuleSet` class is decorated with the `[JsonConstructor]` attribute because otherwise `System.Text.Json.JsonSerializer` would use the default constructor to perform the serialization:
+
+```csharp
+[JsonConstructor] 
+public NGramTokenizerRuleSet(
+    bool doForMonogram, 
+    bool doForBigram, 
+    bool doForTrigram, 
+    bool doForFourgram, 
+    bool doForFivegram)
+{ ... }
+```
+
+## How To Improve The Accuracy
 
 The accuracy of the classification can be improved:
 
-1. by increasing the number of `LabeledExamples` for each label
-2. by using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text - for ex. attempting to detect the language of a piece of text about anthropology using a collection of multilingual `LabeledExample` objects about the same topic.
+1. By increasing the number of `LabeledExamples` for each label.
+2. By using a collection of `LabeledExamples` that is as closer as possible to the knowledge domain of the uncategorized text - for ex. attempting to detect the language of a piece of text about anthropology using a collection of multilingual `LabeledExample` objects about the same topic.
 3. Increasing the number of `INGram` objects - for ex. using only `Monograms`, `Bigrams` and `Trigrams` is good enough in most common scenarios, but `Fourgrams` and `Fivegrams` are also available in the library.
 
-## Load and save
+## Example Files
 
-The library is able to load and save different key-objects using JSON format. 
-
-Here an example of each JSON file produced by the library:
+Here an example of each JSON file supported by the library (load and save):
 
 1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
 2. [TextSnippets.json](ExampleFiles/TextSnippets.json)
 3. [Session.json](ExampleFiles/Session.json) - v.3.6.0.0
 4. [SessionWithDisabledIndexSerialization.json](ExampleFiles/SessionWithDisabledIndexSerialization.json) - v.3.6.0.0
 5. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
-
-## Appendix - NGramTokenizerRuleSet
-
-One of the two constructors in the `NGramTokenizerRuleSet` class is decorated with the `[JsonConstructor]` attribute because otherwise `System.Text.Json.JsonSerializer` would use the default constructor to perform the serialization:
-
-```csharp
-[JsonConstructor] public NGramTokenizerRuleSet
-    (bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
-{
-
-    Validate(doForMonogram, doForBigram, doForTrigram, doForFourgram, doForFivegram);
-
-    DoForMonogram = doForMonogram;
-    DoForBigram = doForBigram;
-    DoForTrigram = doForTrigram;
-    DoForFourgram = doForFourgram;
-    DoForFivegram = doForFivegram;
-
-}
-```
 
 ## Markdown Toolset
 
