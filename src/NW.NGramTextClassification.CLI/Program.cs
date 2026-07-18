@@ -1,19 +1,4 @@
-﻿using NW.NGramTextClassification.CLI.Application;
+﻿using NW.NGramTextClassification.CLI.Shared;
 
-namespace NW.NGramTextClassification.CLI
-{
-    class Program
-    {
-
-        static int Main(string[] args)
-        {
-
-            ApplicationManager applicationManager = new ApplicationManager();
-
-            return applicationManager.Execute(args);
-
-        }
-
-    }
-
-}
+ICLIManager cliManager = new CLIManager();
+return cliManager.TryRun(args);

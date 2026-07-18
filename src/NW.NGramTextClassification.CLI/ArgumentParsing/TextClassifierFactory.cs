@@ -1,7 +1,7 @@
 ﻿using NW.NGramTextClassification;
 using NW.NGramTextClassification.Bags;
 
-namespace NW.NGramTextClassification.CLI.Shared
+namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <inheritdoc cref="ITextClassifierFactory"/>
     public class TextClassifierFactory : ITextClassifierFactory

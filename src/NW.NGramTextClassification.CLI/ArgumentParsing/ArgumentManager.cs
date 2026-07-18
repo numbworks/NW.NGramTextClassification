@@ -6,9 +6,7 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.TextClassifications;
-using NW.NGramTextClassification.CLI.ApplicationSession;
 using NW.NGramTextClassification.CLI.AsciiBanners;
-using NW.NGramTextClassification.CLI.Shared;
 using NW.NGramTextClassification.CLI.TerminalWindows;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
@@ -66,7 +64,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             ComponentBagFactory = componentBagFactory ?? new ComponentBagFactory();
             SettingBagFactory = settingBagFactory ?? new SettingBagFactory();
 
-            _componentBag = componentBagFactory.Create();
+            _componentBag = ComponentBagFactory.Create();
 
         }
         #endregion
@@ -387,7 +385,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
             List<LabeledExample> labeledExamples = textClassifier.LoadLabeledExamplesOrDefault(file);
             if (labeledExamples == Serializer<LabeledExample>.Default)
-                throw new Exception(Shared.MessageCollection.LoadingFileNameReturnedDefault(classifyData.LabeledExamples));
+                throw new Exception(Messages.MessageCollection.LoadingFileNameReturnedDefault(classifyData.LabeledExamples));
 
             return labeledExamples;
 
@@ -400,7 +398,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
             List<TextSnippet> textSnippets = textClassifier.LoadTextSnippetsOrDefault(file);
             if (textSnippets == Serializer<TextSnippet>.Default)
-                throw new Exception(Shared.MessageCollection.LoadingFileNameReturnedDefault(classifyData.TextSnippets));
+                throw new Exception(Messages.MessageCollection.LoadingFileNameReturnedDefault(classifyData.TextSnippets));
 
             return textSnippets;
 
@@ -413,7 +411,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
             NGramTokenizerRuleSet tokenizerRuleset = textClassifier.LoadTokenizerRuleSetOrDefault(file);
             if (tokenizerRuleset == default(NGramTokenizerRuleSet))
-                throw new Exception(Shared.MessageCollection.LoadingFileNameReturnedDefault(classifyData.TokenizerRuleSet));
+                throw new Exception(Messages.MessageCollection.LoadingFileNameReturnedDefault(classifyData.TokenizerRuleSet));
 
             return tokenizerRuleset;
 

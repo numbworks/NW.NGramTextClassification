@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NW.NGramTextClassification.CLI.ApplicationSession
+namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <summary>Collects all the utility methods related to <see cref="double"/> option values.</summary>
     public interface IDoubleManager

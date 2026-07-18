@@ -1,21 +1,19 @@
 using System;
-using McMaster.Extensions.CommandLineUtils;
-using NW.NGramTextClassification.CLI.ArgumentParsing;
-using NW.NGramTextClassification.CLI.ApplicationSession;
-using NW.NGramTextClassification.CLI.AsciiBanners;
-using NW.NGramTextClassification.CLI.TerminalWindows;
-using NW.NGramTextClassification.CLI.Shared;
-using NUnit.Framework;
-using NW.NGramTextClassification.Bags;
 using System.Collections.Generic;
+using System.Linq;
+using NW.NGramTextClassification.Bags;
+using NW.NGramTextClassification.Filenames;
+using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.LabeledExamples;
+using NW.NGramTextClassification.CLI.ArgumentParsing;
+using NW.NGramTextClassification.CLI.AsciiBanners;
+using NW.NGramTextClassification.CLI.TerminalWindows;
 using NW.NGramTextClassification.CLI.UnitTests.Utilities;
 using NW.Shared.Serialization;
-using NW.NGramTextClassification.Filenames;
+using McMaster.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils.Validation;
-using System.Linq;
+using NUnit.Framework;
 
 namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {

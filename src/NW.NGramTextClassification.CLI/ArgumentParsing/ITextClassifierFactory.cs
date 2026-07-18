@@ -2,7 +2,7 @@
 using NW.NGramTextClassification;
 using NW.NGramTextClassification.Bags;
 
-namespace NW.NGramTextClassification.CLI.Shared
+namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <summary>A factory for <see cref="TextClassifier"/>.</summary>
     public interface ITextClassifierFactory

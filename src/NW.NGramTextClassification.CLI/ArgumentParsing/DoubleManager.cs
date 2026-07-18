@@ -1,4 +1,4 @@
-﻿namespace NW.NGramTextClassification.CLI.ApplicationSession
+﻿namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <inheritdoc cref="IDoubleManager"/>
     public class DoubleManager : IDoubleManager

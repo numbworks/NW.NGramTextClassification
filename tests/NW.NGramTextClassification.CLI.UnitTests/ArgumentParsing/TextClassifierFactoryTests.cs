@@ -1,9 +1,9 @@
 ﻿using NW.NGramTextClassification;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.CLI.Shared;
+using NW.NGramTextClassification.CLI.ArgumentParsing;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.CLI.UnitTests
+namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {
     [TestFixture]
     public class TextClassifierFactoryTests

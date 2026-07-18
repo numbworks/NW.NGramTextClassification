@@ -1,8 +1,8 @@
-﻿using NW.NGramTextClassification.CLI.Shared;
+﻿using NW.NGramTextClassification.Bags;
+using NW.NGramTextClassification.CLI.ArgumentParsing;
 using NUnit.Framework;
-using NW.NGramTextClassification.Bags;
 
-namespace NW.NGramTextClassification.CLI.UnitTests
+namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {
     [TestFixture]
     public class SettingBagFactoryTests

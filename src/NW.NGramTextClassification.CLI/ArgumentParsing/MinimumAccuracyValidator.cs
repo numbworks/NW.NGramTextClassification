@@ -2,9 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using McMaster.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils.Validation;
-using NW.Shared.Validation;
 
-namespace NW.NGramTextClassification.CLI.ApplicationSession
+namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <inheritdoc cref="IOptionValidator"/>
     public class MinimumAccuracyValidator : IOptionValidator
@@ -49,7 +48,7 @@ namespace NW.NGramTextClassification.CLI.ApplicationSession
             if (_doubleManager.IsValid(option.Value()))
                 return ValidationResult.Success;
 
-            return new ValidationResult(Shared.MessageCollection.ValueIsInvalidOrNotWithinRange(_valueName, option.Value()));
+            return new ValidationResult(Messages.MessageCollection.ValueIsInvalidOrNotWithinRange(_valueName, option.Value()));
 
         }
 

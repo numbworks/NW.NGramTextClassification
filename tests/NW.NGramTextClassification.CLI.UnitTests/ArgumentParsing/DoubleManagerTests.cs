@@ -1,7 +1,7 @@
-﻿using NW.NGramTextClassification.CLI.ApplicationSession;
+﻿using NW.NGramTextClassification.CLI.ArgumentParsing;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.CLI.UnitTests.ApplicationSession
+namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {
     [TestFixture]
     public class DoubleManagerTests

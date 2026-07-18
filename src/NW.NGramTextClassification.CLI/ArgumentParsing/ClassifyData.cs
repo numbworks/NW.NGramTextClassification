@@ -1,4 +1,4 @@
-﻿namespace NW.NGramTextClassification.CLI.Shared
+﻿namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <summary>Collects all the data required by the <c>classify</c> sub-command.</summary>
     public class ClassifyData

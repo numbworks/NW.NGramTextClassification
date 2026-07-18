@@ -1,5 +1,5 @@
 ﻿using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.CLI.Shared;
+using NW.NGramTextClassification.CLI.ArgumentParsing;
 
 namespace NW.NGramTextClassification.CLI.UnitTests.Utilities
 {

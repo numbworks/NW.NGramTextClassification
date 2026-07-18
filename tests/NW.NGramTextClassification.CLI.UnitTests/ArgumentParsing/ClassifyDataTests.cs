@@ -1,7 +1,7 @@
-﻿using NW.NGramTextClassification.CLI.Shared;
+﻿using NW.NGramTextClassification.CLI.ArgumentParsing;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.CLI.UnitTests.Shared
+namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {
     [TestFixture]
     public class ClassifyDataTests

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using NW.NGramTextClassification.CLI.ApplicationSession;
-using NW.NGramTextClassification.CLI.Shared;
-using NUnit.Framework;
+using NW.NGramTextClassification.CLI.ArgumentParsing;
 using McMaster.Extensions.CommandLineUtils;
+using NUnit.Framework;
 
-namespace NW.NGramTextClassification.CLI.UnitTests.ApplicationSession
+namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {
     [TestFixture]
     public class MinimumAccuracyValidatorTests
@@ -57,11 +56,11 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ApplicationSession
         {
 
             // Arrange
-            CommandOption option = new CommandOption(MessageCollection.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
+            CommandOption option = new CommandOption(CommandLineString.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
             option.DefaultValue = value;
             ValidationContext context = new ValidationContext(option);
             string valueName = nameof(MinimumAccuracyValidator).Replace("Validator", string.Empty);
-            string expected = MessageCollection.ValueIsInvalidOrNotWithinRange(valueName, option.Value());
+            string expected = Messages.MessageCollection.ValueIsInvalidOrNotWithinRange(valueName, option.Value());
 
             // Act
             ValidationResult actual = new MinimumAccuracyValidator(new DoubleManager()).GetValidationResult(option, context);
@@ -80,7 +79,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ApplicationSession
         {
 
             // Arrange
-            CommandOption option = new CommandOption(MessageCollection.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
+            CommandOption option = new CommandOption(CommandLineString.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
             option.DefaultValue = value;
             ValidationContext context = new ValidationContext(option);
 

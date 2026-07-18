@@ -1,6 +1,6 @@
 ﻿using NW.NGramTextClassification.Bags;
 
-namespace NW.NGramTextClassification.CLI.Shared
+namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
     /// <inheritdoc cref="ISettingBagFactory"/>
     public class SettingBagFactory : ISettingBagFactory
