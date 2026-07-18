@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.NGramTextClassification;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassification.CLI.Shared;
@@ -178,10 +176,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests
                     LibraryBroker.SeparatorLine,
                     Is.EqualTo(messagesAsciiBanner[0])
                     );
-            Assert.That(
-                    new TextClassifier().AsciiBanner,
-                    Is.EqualTo(messagesAsciiBanner[1])
-                    );
+
             Assert.That(
                     LibraryBroker.SeparatorLine,
                     Is.EqualTo(messagesAsciiBanner[2])
@@ -362,12 +357,12 @@ namespace NW.NGramTextClassification.CLI.UnitTests
                           textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
                           loggingAction: fakeLoggingAction,
                           labeledExampleManager: new LabeledExampleManager(),
-                          asciiBannerManager: new AsciiBannerManager(),
                           loggingActionAsciiBanner: fakeLoggingActionAsciiBanner,
                           fileManager: new FakeFileManagerWithDynamicRead(readBehaviours), // When we pass null, it means the test won't use it.
                           serializerFactory: new SerializerFactory(),
                           filenameFactory: new FilenameFactory(),
-                          nowFunction: ComponentBag.DefaultNowFunction);
+                          nowFunction: ComponentBag.DefaultNowFunction,
+                          versionFunction: ComponentBag.DefaultVersionFunction);
 
             return (messages, messagesAsciiBanner, componentBag);
 

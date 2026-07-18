@@ -66,9 +66,6 @@ namespace NW.NGramTextClassification
                 return newSession;
             };
 
-        public string Version { get; }
-        public string AsciiBanner { get; }
-
         #endregion
 
         #region Constructors
@@ -82,9 +79,6 @@ namespace NW.NGramTextClassification
 
             _componentBag = componentBag;
             _settingBag = settingBag;
-
-            Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            AsciiBanner = _componentBag.AsciiBannerManager.Create(Version);
 
         }
 
@@ -106,14 +100,15 @@ namespace NW.NGramTextClassification
             LogInitialMessages(textSnippet, tokenizerRuleSet, labeledExamples);
 
             List<TokenizedExample> tokenizedExamples = TokenizeAndLog(tokenizerRuleSet, labeledExamples);
-            
+            string version = _componentBag.VersionFunction();
+
             if (tokenizedExamples == null)
             {
 
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
                
                 TextClassifierResult result = DefaultTextClassifierResult;
-                TextClassifierSession session = CreateSession(_settingBag, result, Version);
+                TextClassifierSession session = CreateSession(_settingBag, result, version);
 
                 return session;
 
@@ -122,7 +117,7 @@ namespace NW.NGramTextClassification
             {
 
                 TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples);
-                TextClassifierSession session = CreateSession(_settingBag, result, Version);
+                TextClassifierSession session = CreateSession(_settingBag, result, version);
 
                 return session;
 
@@ -142,6 +137,7 @@ namespace NW.NGramTextClassification
             _componentBag.LoggingAction(TextClassifications.MessageCollection.ProvidedSnippetsAre(textSnippets.Count));
 
             List<TokenizedExample> tokenizedExamples = TokenizeAndLog(tokenizerRuleSet, labeledExamples);
+            string version = _componentBag.VersionFunction();
 
             if (tokenizedExamples == null)
             {
@@ -151,7 +147,7 @@ namespace NW.NGramTextClassification
                 List<TextClassifierResult> results = new List<TextClassifierResult>();
                 results.Add(DefaultTextClassifierResult);
 
-                TextClassifierSession session = CreateSession(_settingBag, results, Version);
+                TextClassifierSession session = CreateSession(_settingBag, results, version);
 
                 return session;
 
@@ -169,7 +165,7 @@ namespace NW.NGramTextClassification
                 });
 
                 List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
-                TextClassifierSession session = CreateSession(_settingBag, finalResults, Version);
+                TextClassifierSession session = CreateSession(_settingBag, finalResults, version);
 
                 return session;
 
@@ -179,8 +175,6 @@ namespace NW.NGramTextClassification
         public TextClassifierSession ClassifyMany(List<TextSnippet> textSnippets, List<LabeledExample> labeledExamples)
                 => ClassifyMany(textSnippets, DefaultNGramTokenizerRuleSet, labeledExamples);
 
-        public void LogAsciiBanner()
-            => _componentBag.LoggingActionAsciiBanner(AsciiBanner);
         public IFileInfoAdapter Convert(string filePath)
             => _componentBag.FileManager.Create(filePath);
 

@@ -66,10 +66,8 @@ namespace NW.NGramTextClassification.CLI.Shared
         {
 
             ComponentBag componentBag = _componentBagFactory.Create();
-            SettingBag settingBag = _settingBagFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingBag);
 
-            ShowHeader(componentBag, textClassifier);
+            LogAsciiBanner(componentBag);
 
             return Success;
 
@@ -78,20 +76,17 @@ namespace NW.NGramTextClassification.CLI.Shared
         {
 
             ComponentBag componentBag = _componentBagFactory.Create();
-            SettingBag settingBag = _settingBagFactory.Create();
-            TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingBag);
 
-            ShowHeader(componentBag, textClassifier);
+            LogAsciiBanner(componentBag);
 
-            componentBag.LoggingActionAsciiBanner(Shared.MessageCollection.Application_Description);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.Application_Description);
             componentBag.LoggingActionAsciiBanner(SeparatorLine);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_Author);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_Email);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_Url);
+            componentBag.LoggingActionAsciiBanner(MessageCollection.About_Information_License);
 
-            componentBag.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Author);
-            componentBag.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Email);
-            componentBag.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_Url);
-            componentBag.LoggingActionAsciiBanner(Shared.MessageCollection.About_Information_License);
-
-            ShowFooter(componentBag);
+            LogFooter(componentBag);
 
             return Success;
 
@@ -110,7 +105,7 @@ namespace NW.NGramTextClassification.CLI.Shared
                 SettingBag settingBag = _settingBagFactory.Create(classifyData);
                 TextClassifier textClassifier = _textClassifierFactory.Create(componentBag, settingBag);
 
-                ShowHeader(componentBag, textClassifier);
+                LogAsciiBanner(componentBag);
 
                 List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(classifyData, textClassifier);
                 List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(classifyData, textClassifier);
@@ -129,7 +124,7 @@ namespace NW.NGramTextClassification.CLI.Shared
                 if (classifyData.SaveSession)
                     textClassifier.SaveSession(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);
 
-                ShowFooter(componentBag);
+                LogFooter(componentBag);
 
                 return Success;
 
@@ -156,20 +151,22 @@ namespace NW.NGramTextClassification.CLI.Shared
             if (e.InnerException != null)
                 componentBag.LoggingAction(ErrorMessageFormatter(e.InnerException.Message));
 
-            ShowFooter(componentBag);
+            LogFooter(componentBag);
 
             return Failure;
 
         }
-        private void ShowHeader(ComponentBag componentBag, TextClassifier textClassifier)
+        private void LogAsciiBanner(ComponentBag componentBag)
         {
 
+            string version = componentBag.VersionFunction();
+
             componentBag.LoggingActionAsciiBanner(SeparatorLine);
-            componentBag.LoggingActionAsciiBanner(textClassifier.AsciiBanner);
+            componentBag.LoggingActionAsciiBanner(version);
             componentBag.LoggingActionAsciiBanner(SeparatorLine);
 
         }
-        private void ShowFooter(ComponentBag componentBag)
+        private void LogFooter(ComponentBag componentBag)
         {
 
             componentBag.LoggingActionAsciiBanner(SeparatorLine);

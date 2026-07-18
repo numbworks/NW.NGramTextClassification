@@ -1,5 +1,4 @@
 ﻿using System;
-using NW.NGramTextClassification.AsciiBanner;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassification.LabeledExamples;
@@ -23,18 +22,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: null,
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: null,
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nGramsTokenizer").Message
@@ -43,18 +42,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: null,
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: null,
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("similarityIndexCalculator").Message
@@ -63,18 +62,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: null,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: null,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("roundingFunction").Message
@@ -83,18 +82,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: null,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: null,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textTruncatingFunction").Message
@@ -103,18 +102,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: null,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: null,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingAction").Message
@@ -123,18 +122,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: null,
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: null,
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExampleManager").Message
@@ -143,18 +142,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: null,
-                                        loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("asciiBannerManager").Message
@@ -163,18 +162,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  null,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner:  null,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("loggingActionAsciiBanner").Message
@@ -183,18 +182,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: null,
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: null,
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("fileManager").Message
@@ -203,18 +202,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: null,
-                                        filenameFactory: new FilenameFactory(),
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: null,
+                                    filenameFactory: new FilenameFactory(),
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("serializerFactory").Message
@@ -223,18 +222,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             new TestCaseData(
                 new TestDelegate(
                         () => new ComponentBag(
-                                        nGramsTokenizer: new NGramTokenizer(),
-                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                        loggingAction: ComponentBag.DefaultLoggingAction,
-                                        labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
-                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
-                                        fileManager: new FileManager(),
-                                        serializerFactory: new SerializerFactory(),
-                                        filenameFactory: null,
-                                        nowFunction: ComponentBag.DefaultNowFunction
+                                    nGramsTokenizer: new NGramTokenizer(),
+                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                    loggingAction: ComponentBag.DefaultLoggingAction,
+                                    labeledExampleManager: new LabeledExampleManager(),
+                                    loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
+                                    fileManager: new FileManager(),
+                                    serializerFactory: new SerializerFactory(),
+                                    filenameFactory: null,
+                                    nowFunction: ComponentBag.DefaultNowFunction,
+                                    versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("filenameFactory").Message
@@ -249,16 +248,36 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                         textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
                                         loggingAction: ComponentBag.DefaultLoggingAction,
                                         labeledExampleManager: new LabeledExampleManager(),
-                                        asciiBannerManager: new AsciiBannerManager(),
                                         loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
                                         fileManager: new FileManager(),
                                         serializerFactory: new SerializerFactory(),
                                         filenameFactory: new FilenameFactory(),
-                                        nowFunction: null
+                                        nowFunction: null,
+                                        versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("nowFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_12")
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_12"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new ComponentBag(
+                                        nGramsTokenizer: new NGramTokenizer(),
+                                        similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
+                                        roundingFunction: ComponentBag.DefaultRoundingFunction,
+                                        textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
+                                        loggingAction: ComponentBag.DefaultLoggingAction,
+                                        labeledExampleManager: new LabeledExampleManager(),
+                                        loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
+                                        fileManager: new FileManager(),
+                                        serializerFactory: new SerializerFactory(),
+                                        filenameFactory: new FilenameFactory(),
+                                        nowFunction: ComponentBag.DefaultNowFunction,
+                                        versionFunction: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("versionFunction").Message
+                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_13")
 
         };
 
@@ -291,12 +310,12 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(actual.TextTruncatingFunction, Is.InstanceOf<Func<string, uint, string>>());
             Assert.That(actual.LoggingAction, Is.InstanceOf<Action<string>>());
             Assert.That(actual.LabeledExampleManager, Is.InstanceOf<ILabeledExampleManager>());
-            Assert.That(actual.AsciiBannerManager, Is.InstanceOf<IAsciiBannerManager>());
             Assert.That(actual.LoggingActionAsciiBanner, Is.InstanceOf<Action<string>>());
             Assert.That(actual.FileManager, Is.InstanceOf<IFileManager>());
             Assert.That(actual.SerializerFactory, Is.InstanceOf<ISerializerFactory>());
             Assert.That(actual.FilenameFactory, Is.InstanceOf<IFilenameFactory>());
             Assert.That(actual.NowFunction, Is.InstanceOf<Func<DateTime>>());
+            Assert.That(actual.VersionFunction, Is.InstanceOf<Func<string>>());
 
             Assert.That(ComponentBag.DefaultRoundingFunction, Is.InstanceOf<Func<double, double>>());
             Assert.That(ComponentBag.DefaultTextTruncatingFunction, Is.InstanceOf<Func<string, uint, string>>());
@@ -304,6 +323,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(ComponentBag.DefaultLoggingAction, Is.InstanceOf<Action<string>>());
             Assert.That(ComponentBag.DefaultLoggingActionAsciiBanner, Is.InstanceOf<Action<string>>());
             Assert.That(ComponentBag.DefaultNowFunction,Is.InstanceOf<Func<DateTime>>());
+            Assert.That(ComponentBag.DefaultVersionFunction,Is.InstanceOf<Func<string>>());
 
         }
 
