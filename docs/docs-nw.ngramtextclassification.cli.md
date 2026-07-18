@@ -25,9 +25,7 @@ Contact: numbworks@gmail.com
 The simplest command you can run is `session classify`, which performs a text classification task on the data you provide. At very least, the command will look like:
 
 ```powershell
-PS C:\nwngram>.\nwngram.exe session classify \ 
---labeledexamples:LabeledExamples.json \
---textsnippets:TextSnippets.json
+PS C:\nwngram>.\nwngram.exe session classify --labeledexamples:LabeledExamples.json --textsnippets:TextSnippets.json
 ```
 
 The command above requires that you have the two required files (`LabeledExamples.json` and `TextSnippets.json`) located in the same folder as the application, which by default it's the working folder for all the application's activities. 
