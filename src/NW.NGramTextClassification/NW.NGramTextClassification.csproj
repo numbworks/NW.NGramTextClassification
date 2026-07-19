@@ -10,6 +10,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);SYSLIB0014;1701;1702;1591</NoWarn>
   </PropertyGroup>
 
@@ -37,14 +38,6 @@
     <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
 </Project>
