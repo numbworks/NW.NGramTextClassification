@@ -7,7 +7,7 @@
             "request": "launch",
             "preLaunchTask": "solution: build",
             "program": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI/bin/net8.0/NW.NGramTextClassification.CLI.dll",
-            "args": ["session", "classify", "--help"],
+            "args": [],
             "cwd": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI",
             "console": "integratedTerminal",
             "stopAtEntry": false

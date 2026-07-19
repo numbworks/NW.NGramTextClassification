@@ -106,10 +106,9 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             app.OnExecute(() =>
             {
 
-                int exitCode = ShowHeader();
                 app.ShowHelp();
 
-                return exitCode;
+                return Success;
 
             });
 
@@ -138,10 +137,9 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             command.OnExecute(() =>
             {
 
-                int exitCode = ShowHeader();
                 command.ShowHelp();
 
-                return exitCode;
+                return Success;
 
             });
 

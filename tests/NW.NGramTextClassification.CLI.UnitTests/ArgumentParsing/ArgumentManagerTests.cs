@@ -287,30 +287,6 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 
         }
 
-        [Test]
-        public void Create_ShouldLogAsciiBanner_WhenRootCommandExecuted()        {
-
-            // Arrange
-            List<string> messagesAsciiBanner = new List<string>();
-
-            ComponentBag fakeComponentBag = CreateFakeComponentBag( messagesAsciiBanner: messagesAsciiBanner);
-            FakeComponentBagFactory fakeComponentBagFactory = new FakeComponentBagFactory(fakeComponentBag);
-            ArgumentManager argumentManager = new ArgumentManager(componentBagFactory: fakeComponentBagFactory);
-
-            CommandLineApplication app = argumentManager.Create();
-
-            // Act
-            int actual = app.Execute(new string[] { });
-
-            // Assert
-            Assert.That(ArgumentManager.Success, Is.EqualTo(actual));
-            Assert.That(messagesAsciiBanner.Count, Is.EqualTo(3));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[0]));
-            Assert.That(messagesAsciiBanner[1], Is.InstanceOf<string>());
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[2]));
-
-        }
-
 
         [Test]
         public void LogAsciiBanner_ShouldLogExpectedMessages_WhenInvoked()
