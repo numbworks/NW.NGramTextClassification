@@ -38,14 +38,12 @@ jobs:
       working-directory: ./src/NW.NGramTextClassification
       run: dotnet pack --configuration Release --no-build --output bin/Release
 
-    - name: Push library to NuGet.org
-      # if: github.event_name == 'push'
-      run: dotnet nuget push ./src/NW.NGramTextClassification/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+    - name: Publish library to NuGet.org
+      run: Get-ChildItem ./src/NW.NGramTextClassification/bin/Release/*.nupkg | ForEach-Object { dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate }
 
     - name: Pack tool
       working-directory: ./src/NW.NGramTextClassification.CLI
-      run: dotnet pack --configuration Release --no-build --output bin/Release
+      run: dotnet pack --configuration Release --no-build
 
-    - name: Push tool to NuGet.org
-      # if: github.event_name == 'push'
-      run: dotnet nuget push ./src/NW.NGramTextClassification.CLI/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+    - name: Publish tool to NuGet.org
+      run: Get-ChildItem ./src/NW.NGramTextClassification.CLI/nupkg/*.nupkg | ForEach-Object { dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate }
