@@ -85,12 +85,13 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             };
 
             app = AddRoot(app);
-            app = AddAbout(app);
+            // app = AddAbout(app);
             app = AddSession(app);
 
             app.HelpOption(inherited: true);
 
             AddCustomHelpTextGenerator(app);
+            AddValidationErrorHandling(app);
 
             return app;
 
@@ -390,7 +391,25 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 AddCustomHelpTextGenerator(command, customHelpTextGenerator);
         
         }
-        
+        private void AddValidationErrorHandling(CommandLineApplication app)
+        {
+
+            app.OnValidationError(validationResult =>
+            {
+
+                ShowHeader();
+                _componentBag.LoggingAction(ErrorMessageFormatter(validationResult.ErrorMessage));
+                LogFooter();
+
+                return Failure;
+                
+            });
+
+            foreach (CommandLineApplication command in app.Commands)
+                AddValidationErrorHandling(command);
+
+        }        
+
         private ClassifyData Defaultize(ClassifyData classifyData)
         {
 
