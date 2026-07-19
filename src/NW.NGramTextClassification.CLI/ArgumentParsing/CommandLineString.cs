@@ -12,17 +12,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         
         #endregion
 
-        #region About
-        
-        public static string COMMAND_ABOUT_NAME { get; } = "about";
-        public static string COMMAND_ABOUT_DESCR { get; } = "About this application.";
-        public static string COMMAND_ABOUT_INFO_AUTHOR = "Author: numbworks";
-        public static string COMMAND_ABOUT_INFO_EMAIL = "Email: numbworks [AT] gmail [DOT] com";
-        public static string COMMAND_ABOUT_INFO_URL = @"Github: http://www.github.com/numbworks";
-        public static string COMMAND_ABOUT_INFO_LICENSE = "License: MIT License";
-        
-        #endregion
-
         #region Session
         
         public static string COMMAND_SESSION_NAME { get; } = "session";

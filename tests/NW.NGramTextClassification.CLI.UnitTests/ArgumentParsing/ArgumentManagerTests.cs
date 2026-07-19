@@ -32,14 +32,9 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_01"),
 
             new TestCaseData(
-                new string[] { CommandLineString.COMMAND_ABOUT_NAME },
-                ArgumentManager.Success
-            ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_02"),
-
-            new TestCaseData(
                 new string[] { CommandLineString.COMMAND_SESSION_NAME },
                 ArgumentManager.Success
-            ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_03")
+            ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_02")
 
         };
 
@@ -174,34 +169,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             // Assert
             Assert.That(
                 actual.Commands.Any(
-                    command => command.Name == CommandLineString.COMMAND_ABOUT_NAME),
-                Is.True);
-
-            Assert.That(
-                actual.Commands.Any(
                     command => command.Name == CommandLineString.COMMAND_SESSION_NAME),
                 Is.True);
-
-        }
-
-        [Test]
-        public void Create_ShouldAddExpectedAboutCommand_WhenInvoked()
-        {
-
-            // Arrange
-            FakeComponentBagFactory fakeComponentBagFactory = CreateFakeComponentBagFactory();
-            ArgumentManager argumentManager = new ArgumentManager(componentBagFactory: fakeComponentBagFactory);
-
-            // Act
-            CommandLineApplication actual = argumentManager.Create();
-
-            CommandLineApplication aboutCommand
-                = actual.Commands.Single(
-                    command => command.Name == CommandLineString.COMMAND_ABOUT_NAME);
-
-            // Assert
-            Assert.That(aboutCommand, Is.InstanceOf<CommandLineApplication>());
-            Assert.That(CommandLineString.COMMAND_ABOUT_DESCR, Is.EqualTo(aboutCommand.Description));
 
         }
 
@@ -342,61 +311,6 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 
         }
 
-        [Test]
-        public void Create_ShouldLogAboutInformation_WhenAboutCommandExecuted()
-        {
-
-            // Arrange
-            List<string> messagesAsciiBanner = new List<string>();
-
-            ComponentBag fakeComponentBag = CreateFakeComponentBag( messagesAsciiBanner: messagesAsciiBanner);
-            FakeComponentBagFactory fakeComponentBagFactory = new FakeComponentBagFactory(fakeComponentBag);
-            ArgumentManager argumentManager = new ArgumentManager(componentBagFactory: fakeComponentBagFactory);
-
-            CommandLineApplication app = argumentManager.Create();
-
-            // Act
-            int actual = app.Execute(new string[] { CommandLineString.COMMAND_ABOUT_NAME });
-
-            // Assert
-            Assert.That(ArgumentManager.Success, Is.EqualTo(actual));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[0]));
-            Assert.That(CommandLineString.APPLICATION_DESCRIPTION, Is.EqualTo(messagesAsciiBanner[3]));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[4]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_AUTHOR, Is.EqualTo(messagesAsciiBanner[5]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_EMAIL, Is.EqualTo(messagesAsciiBanner[6]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_URL, Is.EqualTo(messagesAsciiBanner[7]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_LICENSE, Is.EqualTo(messagesAsciiBanner[8]));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[9]));
-
-        }
-
-        [Ignore("")]
-        [Test]
-        public void Create_ShouldLogAsciiBanner_WhenSessionCommandExecuted()
-        {
-
-            // Arrange
-            List<string> messagesAsciiBanner = new List<string>();
-
-            ComponentBag fakeComponentBag = CreateFakeComponentBag( messagesAsciiBanner: messagesAsciiBanner);
-            FakeComponentBagFactory fakeComponentBagFactory = new FakeComponentBagFactory(fakeComponentBag);
-            ArgumentManager argumentManager = new ArgumentManager(componentBagFactory: fakeComponentBagFactory);
-
-            CommandLineApplication app = argumentManager.Create();
-
-            // Act
-            int actual = app.Execute(new string[] { CommandLineString.COMMAND_ABOUT_NAME });
-
-            // Assert
-            Assert.That(ArgumentManager.Success, Is.EqualTo(actual));
-            Assert.That(messagesAsciiBanner.Count, Is.EqualTo(3));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[0]));
-            Assert.That(messagesAsciiBanner[1], Is.InstanceOf<string>());
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[2]));
-
-        }
-
 
         [Test]
         public void LogAsciiBanner_ShouldLogExpectedMessages_WhenInvoked()
@@ -431,28 +345,6 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             // Assert
             Assert.That(messagesAsciiBanner.Count, Is.EqualTo(1));
             Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[0]));
-
-        }
-
-        [Test]
-        public void LogAbout_ShouldLogExpectedMessages_WhenInvoked()
-        {
-
-            // Arrange
-            List<string> messagesAsciiBanner = new List<string>();
-            ArgumentManager argumentManager = CreateFakeArgumentManager(messagesAsciiBanner: messagesAsciiBanner);
-
-            // Act
-            ObjectMother.CallPrivateMethod<ArgumentManager, object>(argumentManager, "LogAbout", new object[] { });
-
-            // Assert
-            Assert.That(messagesAsciiBanner.Count, Is.EqualTo(6));
-            Assert.That(CommandLineString.APPLICATION_DESCRIPTION, Is.EqualTo(messagesAsciiBanner[0]));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[1]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_AUTHOR, Is.EqualTo(messagesAsciiBanner[2]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_EMAIL, Is.EqualTo(messagesAsciiBanner[3]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_URL, Is.EqualTo(messagesAsciiBanner[4]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_LICENSE, Is.EqualTo(messagesAsciiBanner[5]));
 
         }
 
@@ -571,32 +463,6 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             Assert.That(SettingBag.DefaultFolderPath, Is.EqualTo(actual.FolderPath));
             Assert.That(SettingBag.DefaultMinimumAccuracySingleLabel, Is.EqualTo(actual.MinAccuracySingle));
             Assert.That(SettingBag.DefaultMinimumAccuracyMultipleLabels, Is.EqualTo(actual.MinAccuracyMultiple));
-
-        }
-
-        [Test]
-        public void RunAboutMain_ShouldReturnSuccessAndLogExpectedMessages_WhenInvoked()
-        {
-
-            // Arrange
-            List<string> messagesAsciiBanner = new List<string>();
-            ArgumentManager argumentManager = CreateFakeArgumentManager(messagesAsciiBanner: messagesAsciiBanner);
-
-            // Act
-            int actual
-                = ObjectMother.CallPrivateMethod<ArgumentManager, int>(
-                    argumentManager,
-                    "RunAboutMain",
-                    new object[] { });
-
-            // Assert
-            Assert.That(ArgumentManager.Success, Is.EqualTo(actual));
-            Assert.That(CommandLineString.APPLICATION_DESCRIPTION, Is.EqualTo(messagesAsciiBanner[3]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_AUTHOR, Is.EqualTo(messagesAsciiBanner[5]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_EMAIL, Is.EqualTo(messagesAsciiBanner[6]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_URL, Is.EqualTo(messagesAsciiBanner[7]));
-            Assert.That(CommandLineString.COMMAND_ABOUT_INFO_LICENSE, Is.EqualTo(messagesAsciiBanner[8]));
-            Assert.That(ArgumentManager.SeparatorLine, Is.EqualTo(messagesAsciiBanner[9]));
 
         }
 

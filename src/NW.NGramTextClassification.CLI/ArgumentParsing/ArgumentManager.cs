@@ -85,7 +85,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             };
 
             app = AddRoot(app);
-            // app = AddAbout(app);
             app = AddSession(app);
 
             app.HelpOption(inherited: true);
@@ -113,29 +112,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 return exitCode;
 
             });
-
-            return app;
-
-        }
-
-        private CommandLineApplication AddAbout(CommandLineApplication app)
-        {
-
-            app.Command(CommandLineString.COMMAND_ABOUT_NAME, command =>
-            {
-
-                command = AddAboutMain(command);
-
-            });
-
-            return app;
-
-        }
-        private CommandLineApplication AddAboutMain(CommandLineApplication app)
-        {
-
-            app.Description = CommandLineString.COMMAND_ABOUT_DESCR;
-            app.OnExecute(RunAboutMain);
 
             return app;
 
@@ -347,17 +323,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         }
         private void LogFooter()
             => _componentBag.LoggingActionAsciiBanner(SeparatorLine);
-        private void LogAbout()
-        {
-            
-            _componentBag.LoggingActionAsciiBanner(CommandLineString.APPLICATION_DESCRIPTION);
-            _componentBag.LoggingActionAsciiBanner(SeparatorLine);
-            _componentBag.LoggingActionAsciiBanner(CommandLineString.COMMAND_ABOUT_INFO_AUTHOR);
-            _componentBag.LoggingActionAsciiBanner(CommandLineString.COMMAND_ABOUT_INFO_EMAIL);
-            _componentBag.LoggingActionAsciiBanner(CommandLineString.COMMAND_ABOUT_INFO_URL);
-            _componentBag.LoggingActionAsciiBanner(CommandLineString.COMMAND_ABOUT_INFO_LICENSE);
-
-        }     
         private int LogAndReturnFailure(Exception e)
         {
 
@@ -472,16 +437,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         {
             
             LogAsciiBanner();
-
-            return Success;
-
-        }
-        private int RunAboutMain()
-        {
-            
-            LogAsciiBanner();
-            LogAbout();
-            LogFooter();
 
             return Success;
 

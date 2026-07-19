@@ -16,7 +16,6 @@ Contact: numbworks@gmail.com
 
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
-|about|||Success|
 |session|||Success|
 |session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*|Success<br />Failure|
 
