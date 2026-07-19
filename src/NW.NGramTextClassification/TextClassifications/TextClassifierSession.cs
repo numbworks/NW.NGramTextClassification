@@ -42,13 +42,8 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
         #endregion
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 26.01.2024
-*/

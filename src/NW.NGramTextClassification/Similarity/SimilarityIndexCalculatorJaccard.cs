@@ -23,7 +23,7 @@ namespace NW.NGramTextClassification.Similarity
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public double Do(List<INGram> list1, List<INGram> list2, Func<double, double> roundingFunction)
         {
@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.Similarity
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private double Do(List<string> list1, List<string> list2, Func<double, double> roundingStrategy)
         {
@@ -64,8 +64,3 @@ namespace NW.NGramTextClassification.Similarity
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 18.09.2021
-*/

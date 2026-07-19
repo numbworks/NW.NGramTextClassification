@@ -77,8 +77,3 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 30.01.2024
-*/

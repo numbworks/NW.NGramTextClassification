@@ -14,7 +14,7 @@ namespace NW.NGramTextClassification.Filenames
         #region Properties
 
         public static string DefaultFileNameTemplate { get; } = "{0}_{1}_{2}.{3}";
-        public static string DefaultMainToken { get; } = "ngramtc";
+        public static string DefaultMainToken { get; } = "nwngram";
         public static string DefaultTextSnippetsToken { get; } = "textsnippets";
         public static string DefaultLabeledExamplesToken { get; } = "labeledexamples";
         public static string DefaultSessionToken { get; } = "session";
@@ -30,7 +30,7 @@ namespace NW.NGramTextClassification.Filenames
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public string CreateForTextSnippetsJson(string folderPath, DateTime now)
             => ValidateAndCreate(folderPath, DefaultMainToken, DefaultTextSnippetsToken, now, DefaultJsonExtension);
@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.Filenames
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private string ValidateAndCreate(string folderPath, string mainToken, string secondaryToken, DateTime now, string extension)
         {
@@ -61,8 +61,3 @@ namespace NW.NGramTextClassification.Filenames
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 13.10.2022
-*/

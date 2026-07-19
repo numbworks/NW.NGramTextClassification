@@ -1,0 +1,101 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using NW.NGramTextClassification.CLI.ArgumentParsing;
+using McMaster.Extensions.CommandLineUtils;
+using NUnit.Framework;
+
+namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
+{
+    [TestFixture]
+    public class MinimumAccuracyValidatorTests
+    {
+
+        #region Fields
+
+        private static TestCaseData[] minimumAccuracyValidatorExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                    () => new MinimumAccuracyValidator(null)
+                ),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("doubleManager").Message
+            ).SetArgDisplayNames($"{nameof(minimumAccuracyValidatorExceptionTestCases)}_01")
+
+        };
+
+        #endregion
+
+        #region SetUp
+
+        #endregion
+
+        #region Tests
+
+        [TestCaseSource(nameof(minimumAccuracyValidatorExceptionTestCases))]
+        public void MinimumAccuracyValidator_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [Test]
+        public void MinimumAccuracyValidator_ShouldCreateAnObjectOfThisType_WhenInvoked()
+        {
+
+            // Arrange
+            // Act
+            MinimumAccuracyValidator actual = new MinimumAccuracyValidator(new DoubleManager());
+
+            // Assert
+            Assert.That(actual, Is.InstanceOf<MinimumAccuracyValidator>());
+
+        }
+
+        [TestCase("somegarbage")]
+        public void GetValidationResult_ShouldReturnExpectedErrorMessage_WhenInvalidOptionValue(string value)
+        {
+
+            // Arrange
+            CommandOption option = new CommandOption(CommandLineString.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
+            option.DefaultValue = value;
+            ValidationContext context = new ValidationContext(option);
+            string valueName = nameof(MinimumAccuracyValidator).Replace("Validator", string.Empty);
+            string expected = Messages.MessageCollection.ValueIsInvalidOrNotWithinRange(valueName, option.Value());
+
+            // Act
+            ValidationResult actual = new MinimumAccuracyValidator(new DoubleManager()).GetValidationResult(option, context);
+
+            // Assert
+            Assert.That(expected, Is.EqualTo(actual.ErrorMessage));
+
+        }
+
+        [TestCase("0.0")]
+        [TestCase("0.3")]
+        [TestCase("1.0")]
+        [TestCase("")]
+        [TestCase((string)null)]
+        public void GetValidationResult_ShouldReturnSuccess_WhenValidOptionValue(string value)
+        {
+
+            // Arrange
+            CommandOption option = new CommandOption(CommandLineString.OPTION_MINACCURACYSINGLE_TEMPL, CommandOptionType.SingleValue);
+            option.DefaultValue = value;
+            ValidationContext context = new ValidationContext(option);
+
+            // Act
+            ValidationResult actual = new MinimumAccuracyValidator(new DoubleManager()).GetValidationResult(option, context);
+
+            // Assert
+            Assert.That(ValidationResult.Success, Is.EqualTo(actual));
+
+        }
+
+        #endregion
+
+        #region TearDown
+
+        #endregion
+
+    }
+}

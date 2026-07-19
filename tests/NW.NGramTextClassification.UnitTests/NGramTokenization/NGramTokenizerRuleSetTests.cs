@@ -133,8 +133,3 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 31.01.2024
-*/

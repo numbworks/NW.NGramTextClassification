@@ -1,0 +1,8 @@
+{
+    "dotnet.defaultSolution": "NW.NGramTextClassification.sln",
+	"dotnet.server.useOmnisharp": false,
+    "dotnet.preferCSharpExtension": false,
+    "dotnet.unitTestDebuggingOptions": {
+        "stopAtEntry": false
+    }
+}

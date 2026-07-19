@@ -19,7 +19,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                         () => new TextClassifierSession(
                                     settingBag: null,
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
-                                    version: new TextClassifier().Version
+                                    version: ComponentBag.DefaultVersionFunction()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("settingBag").Message
@@ -30,7 +30,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                         () => new TextClassifierSession(
                                     settingBag: new SettingBag(),
                                     results: null,
-                                    version: new TextClassifier().Version
+                                    version: ComponentBag.DefaultVersionFunction()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("results").Message
@@ -71,7 +71,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                 = new TextClassifierSession(
                         settingBag: new SettingBag(),
                         results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
-                        version: new TextClassifier().Version
+                        version: ComponentBag.DefaultVersionFunction()
                     );
 
             // Assert
@@ -86,8 +86,3 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update:31.01.2024
-*/

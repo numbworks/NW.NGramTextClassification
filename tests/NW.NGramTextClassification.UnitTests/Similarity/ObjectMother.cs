@@ -141,8 +141,3 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 29.09.2022
-*/

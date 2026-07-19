@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NW.NGramTextClassification.Filenames;
 
 namespace NW.NGramTextClassification.UnitTests.Filenames
@@ -8,7 +9,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
         #region Proprietes
 
-        public static string FakeFilePath = @"C:\";
+        public static string FakeFilePath = "Folder" + Path.DirectorySeparatorChar + "SubFolder" + Path.DirectorySeparatorChar;
 
         public static DateTime FakeNow = new DateTime(2021, 05, 01);
         public static string FakeNowString = FakeNow.ToString(FilenameFactory.DefaultFormatNow);
@@ -53,8 +54,3 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 13.10.2022
-*/

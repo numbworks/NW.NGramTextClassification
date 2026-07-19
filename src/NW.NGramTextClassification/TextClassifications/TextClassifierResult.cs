@@ -38,7 +38,7 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public override string ToString()
         {
@@ -60,8 +60,3 @@ namespace NW.NGramTextClassification.TextClassifications
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 04.11.2022
-*/

@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.NGrams
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public override int GetHashCode()
             => (N, Strategy, Value).GetHashCode();
@@ -76,8 +76,3 @@ namespace NW.NGramTextClassification.NGrams
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 17.09.2021
-*/

@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public ushort GetN<T>() where T : INGram
             => ((INGram)CreateInstance<T>(DefaultTokenizationStrategy, "whatever_value")).N;
@@ -174,7 +174,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private T CreateInstance<T>(params object[] args)
             => (T)Activator.CreateInstance(typeof(T), args);
@@ -281,8 +281,3 @@ namespace NW.NGramTextClassification.NGramTokenization
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 16.10.2022
-*/

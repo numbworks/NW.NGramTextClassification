@@ -81,7 +81,7 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public StreamWriter AppendText()
             => throw new NotImplementedException();
@@ -126,8 +126,3 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 08.10.2021
-*/

@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public TokenizedExample CreateOrDefault(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet)
         {
@@ -114,14 +114,9 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         #endregion
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 04.11.2022
-*/
