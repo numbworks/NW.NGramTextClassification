@@ -65,6 +65,7 @@ private int RunValidation()
     }
 
     return totalMissing;
+    
 }
 private IEnumerable<string> GetProjectsFromSolution(string solutionFilePath)
 {
@@ -91,6 +92,7 @@ private IEnumerable<string> GetProjectsFromSolution(string solutionFilePath)
     }
 
     return projectPaths;
+
 }
 private bool IsBuildArtifact(string path)
 {
@@ -140,6 +142,7 @@ private int AnalyzeFile(string filePath)
     }
 
     return missingInFile;
+
 }
 private bool ShouldSkipMember(BaseMethodDeclarationSyntax member)
 {
@@ -192,9 +195,11 @@ private bool IsMissingDocumentation(BaseMethodDeclarationSyntax member)
     }
 
     return !hasSummary && !hasLocalInheritDoc;
+
 }
 private Location GetIdentifierLocation(BaseMethodDeclarationSyntax member)
 {
+
     if (member is MethodDeclarationSyntax method) 
         return method.Identifier.GetLocation();
     
@@ -209,11 +214,13 @@ private Location GetIdentifierLocation(BaseMethodDeclarationSyntax member)
 }
 private string GetMemberName(BaseMethodDeclarationSyntax member)
 {
+
     if (member is MethodDeclarationSyntax method) 
         return method.Identifier.Text;
     
     if (member is ConstructorDeclarationSyntax ctor) 
         return $"{ctor.Identifier.Text} (Constructor)";
+
     if (member is OperatorDeclarationSyntax op) 
         return $"operator {op.OperatorToken.Text}";
     
