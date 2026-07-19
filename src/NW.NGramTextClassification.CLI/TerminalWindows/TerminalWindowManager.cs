@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace NW.NGramTextClassification.CLI.TerminalWindows
 {
+    /// <inheritdoc cref="ITerminalWindowManager"/>
     public class TerminalWindowManager : ITerminalWindowManager
     {
 
@@ -59,11 +60,14 @@ namespace NW.NGramTextClassification.CLI.TerminalWindows
         #endregion
 
         #region Constructors
+
+        /// <summary>Initializes a <see cref="TerminalWindowManager"/> instance.</summary>
         public TerminalWindowManager(Func<uint?> consoleWidthFunction = null, Func<uint?> sttySizeFunction = null)
         {
             ConsoleWidthFunction = consoleWidthFunction ?? DefaultConsoleWidthFunction;
             SttySizeFunction = sttySizeFunction ?? DefaultSttySizeFunction;
         }
+        
         #endregion
 
         #region Methods (public)
