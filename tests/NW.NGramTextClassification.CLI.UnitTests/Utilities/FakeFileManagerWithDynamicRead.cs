@@ -61,7 +61,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.Utilities
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         #endregion
 

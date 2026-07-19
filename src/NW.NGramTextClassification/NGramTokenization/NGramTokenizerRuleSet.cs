@@ -77,7 +77,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private void Validate(bool doForMonogram, bool doForBigram, bool doForTrigram, bool doForFourgram, bool doForFivegram)
         {

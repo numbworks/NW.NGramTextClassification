@@ -226,7 +226,7 @@ namespace NW.NGramTextClassification
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private void LogInitialMessages(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {

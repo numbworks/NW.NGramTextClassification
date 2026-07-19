@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.Similarity
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private double Do(List<string> list1, List<string> list2, Func<double, double> roundingStrategy)
         {

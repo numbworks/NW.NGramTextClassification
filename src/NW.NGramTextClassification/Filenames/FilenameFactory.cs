@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.Filenames
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private string ValidateAndCreate(string folderPath, string mainToken, string secondaryToken, DateTime now, string extension)
         {

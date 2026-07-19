@@ -52,7 +52,7 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         #endregion
 

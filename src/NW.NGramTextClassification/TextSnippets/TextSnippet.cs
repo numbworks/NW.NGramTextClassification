@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.TextSnippets
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         #endregion
 

@@ -26,7 +26,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
         #endregion
 
     }

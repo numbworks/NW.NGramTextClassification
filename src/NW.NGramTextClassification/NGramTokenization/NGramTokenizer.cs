@@ -174,7 +174,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         private T CreateInstance<T>(params object[] args)
             => (T)Activator.CreateInstance(typeof(T), args);
