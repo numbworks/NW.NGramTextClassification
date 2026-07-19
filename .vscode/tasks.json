@@ -32,7 +32,7 @@
             "type": "process",
             "args": [
                 "script",
-                "${workspaceFolder}/scripts/nwmakefiles/nwdocstringchecking.csx",
+                "${workspaceFolder}/scripts/nwmakefiles/nwxmldocchecking.csx",
                 "${workspaceFolder}/NW.NGramTextClassification.sln"
             ],
             "problemMatcher": []
