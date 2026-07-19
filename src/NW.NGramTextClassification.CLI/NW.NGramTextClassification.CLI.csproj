@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
-    <ProjectReference Include="..\..\tests\NW.NGramTextClassification.UnitTests\NW.NGramTextClassification.UnitTests.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
