@@ -32,7 +32,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 "The filename of the JSON file containing the labeled examples required to train the classifier. ",
                 "The file needs to be stored in the working folder.");
         public static string OPTION_LABELEDEXAMPLES_ERRORMESSAGE { get; } 
-            = $"{OPTION_LABELEDEXAMPLES_TEMPL} is mandatory.";
+            = $"{OPTION_LABELEDEXAMPLES_TEMPL} is required.";
 
         public static string OPTION_TEXTSNIPPETS_TEMPL { get; } = "--textsnippets";
         public static string OPTION_TEXTSNIPPETS_DESCR { get; } 
@@ -40,7 +40,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 "The filename of the JSON file containing the text snippets that the user wants to classify. ",
                 "The file needs to be stored in the working folder.");
         public static string OPTION_TEXTSNIPPETS_ERRORMESSAGE { get; } 
-            = $"{OPTION_TEXTSNIPPETS_TEMPL} is mandatory.";
+            = $"{OPTION_TEXTSNIPPETS_TEMPL} is required.";
 
         public static string OPTION_TOKENIZERRULESET_TEMPL { get; } = "--tokenizerruleset";
         public static string OPTION_TOKENIZERRULESET_DESCR { get; } 
