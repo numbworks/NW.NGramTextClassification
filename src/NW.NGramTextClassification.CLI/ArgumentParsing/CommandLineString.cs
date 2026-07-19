@@ -45,17 +45,22 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         public static string OPTION_TOKENIZERRULESET_TEMPL { get; } = "--tokenizerruleset";
         public static string OPTION_TOKENIZERRULESET_DESCR { get; } 
             = string.Concat(
+                "(Optional) ",
                 "The filename of the JSON file containing the tokenizer ruleset. ",
                 "The file needs to be stored in the working folder. ",
                 "If not specified, default rules will be used.");
 
         public static string OPTION_FOLDERPATH_TEMPL { get; } = "--folderpath";
         public static string OPTION_FOLDERPATH_DESCR { get; } 
-            = $"The path of the working folder. If not specified, '{SettingBag.DefaultFolderPath}' will be used.";
+            = string.Concat(
+                "(Optional) ",
+                "The path of the working folder. ",
+                $"If not specified, '{SettingBag.DefaultFolderPath}' will be used.");
 
         public static string OPTION_MINACCURACYSINGLE_TEMPL { get; } = "--minaccuracysingle";
         public static string OPTION_MINACCURACYSINGLE_DESCR { get; }
             = string.Concat(
+                "(Optional) ",
                 "When a single label provided as example, the minimum index average required to return it as classification result. ",
                 "Value can be between 0.0 and 1.0. ",
                 $"If not specified, '{SettingBag.DefaultMinimumAccuracySingleLabel}' will be used.");
@@ -63,21 +68,28 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         public static string OPTION_MINACCURACYMULTIPLE_TEMPL { get; } = "--minaccuracymultiple";
         public static string OPTION_MINACCURACYMULTIPLE_DESCR { get; }
             = string.Concat(
+                "(Optional) ",
                 "When multiple labels provided as example, the minimum index average required to return the highest among them as classification result. ",
                 "Value can be between 0.0 and 1.0. ",
                 $"If not specified, '{SettingBag.DefaultMinimumAccuracyMultipleLabels}' will be used.");
 
         public static string OPTION_SAVESESSION_TEMPL { get; } = "--savesession";
         public static string OPTION_SAVESESSION_DESCR { get; }
-            = "If provided, the text classification session will be saved as JSON in the working folder.";
+            = string.Concat(
+                "(Optional) ",
+                "If provided, the text classification session will be saved as JSON in the working folder.");
 
         public static string OPTION_CLEANLABELEDEXAMPLES_TEMPL { get; } = "--cleanlabeledexamples";
         public static string OPTION_CLEANLABELEDEXAMPLES_DESCR { get; }
-            = "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification session.";
+            = string.Concat(
+                "(Optional) ",
+                "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification session.");
 
         public static string OPTION_DISABLEINDEXSERIALIZATION_TEMPL { get; } = "--disableindexserialization";
         public static string OPTION_DISABLEINDEXSERIALIZATION_DESCR { get; }
-            = "To use in conjunction with '--savesession'. It has no effect if provided by its own.";
+            = string.Concat(
+                "(Optional) ",
+                "To use in conjunction with '--savesession'. It has no effect if provided by its own.");
         
         #endregion
 
