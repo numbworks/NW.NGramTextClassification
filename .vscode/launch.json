@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug CLI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "solution: build",
+            "program": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI/bin/net8.0/NW.NGramTextClassification.CLI.dll",
+            "args": ["session", "classify"],
+            "cwd": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug CLI (no build)",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/NW.NGramTextClassification.CLI/bin/Debug/net8.0/NW.NGramTextClassification.CLI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug CLI (dotnet run)",
+            "type": "coreclr",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
+            "console": "integratedTerminal",
+            "program": "/usr/bin/dotnet",
+            "args": [ "run", "--project", "${workspaceFolder}/src/NW.NGramTextClassification.CLI" ],
+            "stopAtEntry": false
+        }
+    ]
+}

@@ -1,0 +1,148 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+
+        /* ======= WHOLE SOLUTION ======= */
+
+        {
+            "label": "solution: build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/NW.NGramTextClassification.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "solution: calculate-commitavg",
+            "type": "shell",
+            "command": "clear && nwcavg",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "solution: pack and publish",
+            "type": "shell",
+            "command": "echo \"Executing all pack and publish tasks...\"",
+            "dependsOn": [
+                "library: pack",
+                "cli: pack",
+                "cli: publish"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+
+        /* ======= LIBRARY ======= */
+
+        {
+            "label": "library: coverage-verbose",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "export CSPROJ=\"tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj\"; export FLT=\"NW.NGramTextClassification\"; set -euo pipefail; resultsdir=\"$(mktemp -d)\"; reportdir=\"$(mktemp -d)\"; cleanup(){ rm -rf \"$resultsdir\" \"$reportdir\"; }; trap cleanup EXIT; dotnet test \"$CSPROJ\" --collect:\"XPlat Code Coverage\" --results-directory \"$resultsdir\" && reportgenerator -reports:\"$resultsdir/**/coverage.cobertura.xml\" -targetdir:\"$reportdir\" -reporttypes:TextSummary -assemblyfilters:+\"$FLT\" && cat \"$reportdir/Summary.txt\""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "library: pack",
+            "type": "shell",
+            "command": "dotnet pack -c Release --output /home/nw.ngramtextclassification/",
+            "options": {
+                "cwd": "${workspaceFolder}/src/NW.NGramTextClassification"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "library: update-codecoverage",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "export CSPROJ=\"tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj\"; export FLT=\"NW.NGramTextClassification\"; export SUFFIX=\"NW.NGramTextClassification\"; set -euo pipefail; resultsdir=\"$(mktemp -d)\"; reportdir=\"$(mktemp -d)\"; cleanup(){ rm -rf \"$resultsdir\" \"$reportdir\"; }; trap cleanup EXIT; dotnet test \"$CSPROJ\" --collect:\"XPlat Code Coverage\" --results-directory \"$resultsdir\" >/dev/null 2>&1 && reportgenerator -reports:\"$resultsdir/**/coverage.cobertura.xml\" -targetdir:\"$reportdir\" -reporttypes:TextSummary -assemblyfilters:+\"$FLT\" >/dev/null 2>&1; value=$(grep -oP \"Line coverage:\\s+\\K\\d+(\\.\\d+)?(?=%)\" \"$reportdir/Summary.txt\" || true); if [ -z \"$value\" ]; then value=\"0\"; fi; int_value=$(echo \"$value\" | cut -d. -f1); if [ \"$int_value\" -le 39 ]; then color=\"red\"; elif [ \"$int_value\" -le 69 ]; then color=\"orange\"; else color=\"green\"; fi; url=\"https://img.shields.io/badge/coverage-${value}%25-${color}\"; echo \"$url\" > \"./codecoverage-${SUFFIX}.txt\"; curl -s \"$url\" -o \"./codecoverage-${SUFFIX}.svg\" >/dev/null 2>&1 && echo \"coverage-${SUFFIX} updated successfully!\" || echo \"coverage-${SUFFIX} failed to update coverage badge.\""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+
+        /* ======= CLI ======= */
+
+        {
+            "label": "cli: coverage-verbose",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "export CSPROJ=\"tests/NW.NGramTextClassification.CLI.UnitTests/NW.NGramTextClassification.CLI.UnitTests.csproj\"; export FLT=\"NW.NGramTextClassification.CLI\"; set -euo pipefail; resultsdir=\"$(mktemp -d)\"; reportdir=\"$(mktemp -d)\"; cleanup(){ rm -rf \"$resultsdir\" \"$reportdir\"; }; trap cleanup EXIT; dotnet test \"$CSPROJ\" --collect:\"XPlat Code Coverage\" --results-directory \"$resultsdir\" && reportgenerator -reports:\"$resultsdir/**/coverage.cobertura.xml\" -targetdir:\"$reportdir\" -reporttypes:TextSummary -assemblyfilters:+\"$FLT\" && cat \"$reportdir/Summary.txt\""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "cli: pack",
+            "type": "shell",
+            "command": "dotnet pack -c Release --output /home/nw.ngramtextclassification/",
+            "options": {
+                "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "cli: publish",
+            "type": "shell",
+            "command": "for RID in linux-arm64 win-x64 linux-x64; do dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=false /p:DebugType=None --self-contained true -c Release -r $RID --output /home/nw.ngramtextclassification/temp/; done",
+            "options": {
+                "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "cli: update-codecoverage",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "export CSPROJ=\"tests/NW.NGramTextClassification.CLI.UnitTests/NW.NGramTextClassification.CLI.UnitTests.csproj\"; export FLT=\"NW.NGramTextClassification.CLI\"; export SUFFIX=\"NW.NGramTextClassification.cli\"; set -euo pipefail; resultsdir=\"$(mktemp -d)\"; reportdir=\"$(mktemp -d)\"; cleanup(){ rm -rf \"$resultsdir\" \"$reportdir\"; }; trap cleanup EXIT; dotnet test \"$CSPROJ\" --collect:\"XPlat Code Coverage\" --results-directory \"$resultsdir\" >/dev/null 2>&1 && reportgenerator -reports:\"$resultsdir/**/coverage.cobertura.xml\" -targetdir:\"$reportdir\" -reporttypes:TextSummary -assemblyfilters:+\"$FLT\" >/dev/null 2>&1; value=$(grep -oP \"Line coverage:\\s+\\K\\d+(\\.\\d+)?(?=%)\" \"$reportdir/Summary.txt\" || true); if [ -z \"$value\" ]; then value=\"0\"; fi; int_value=$(echo \"$value\" | cut -d. -f1); if [ \"$int_value\" -le 39 ]; then color=\"red\"; elif [ \"$int_value\" -le 69 ]; then color=\"orange\"; else color=\"green\"; fi; url=\"https://img.shields.io/badge/coverage-${value}%25-${color}\"; echo \"$url\" > \"./codecoverage-${SUFFIX}.txt\"; curl -s \"$url\" -o \"./codecoverage-${SUFFIX}.svg\" >/dev/null 2>&1 && echo \"coverage-${SUFFIX} updated successfully!\" || echo \"coverage-${SUFFIX} failed to update coverage badge.\""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        }
+        
+    ]
+}
