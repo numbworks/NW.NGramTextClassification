@@ -30,7 +30,7 @@ namespace NW.NGramTextClassification.Filenames
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public string CreateForTextSnippetsJson(string folderPath, DateTime now)
             => ValidateAndCreate(folderPath, DefaultMainToken, DefaultTextSnippetsToken, now, DefaultJsonExtension);

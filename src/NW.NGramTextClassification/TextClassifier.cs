@@ -88,7 +88,7 @@ namespace NW.NGramTextClassification
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public TextClassifierSession ClassifyOrDefault(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {

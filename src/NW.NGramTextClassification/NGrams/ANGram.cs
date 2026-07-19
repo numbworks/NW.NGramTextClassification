@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.NGrams
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public override int GetHashCode()
             => (N, Strategy, Value).GetHashCode();

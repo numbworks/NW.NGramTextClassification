@@ -19,7 +19,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public ComponentBag Create()
             => new ComponentBag();

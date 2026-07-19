@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification.NGramTokenization
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public ushort GetN<T>() where T : INGram
             => ((INGram)CreateInstance<T>(DefaultTokenizationStrategy, "whatever_value")).N;

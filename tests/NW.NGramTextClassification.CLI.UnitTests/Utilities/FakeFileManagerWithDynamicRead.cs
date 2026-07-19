@@ -30,7 +30,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.Utilities
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public IEnumerable<string> ReadAllLines(IFileInfoAdapter file)
             => throw new NotImplementedException();

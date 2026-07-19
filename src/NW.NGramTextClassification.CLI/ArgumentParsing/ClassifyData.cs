@@ -53,7 +53,7 @@
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         #endregion
 

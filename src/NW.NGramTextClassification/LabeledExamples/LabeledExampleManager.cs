@@ -43,7 +43,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public TokenizedExample CreateOrDefault(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet)
         {

@@ -35,7 +35,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public ValidationResult GetValidationResult(CommandOption option, ValidationContext context)
         {

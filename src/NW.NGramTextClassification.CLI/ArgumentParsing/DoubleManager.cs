@@ -21,7 +21,7 @@
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public bool IsValid(string value)
         {

@@ -21,7 +21,7 @@ namespace NW.NGramTextClassification.Arrays
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public string[] AddDelimiter(string[] arr, string delimiter)
         {
