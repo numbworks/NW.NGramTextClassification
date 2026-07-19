@@ -27,8 +27,8 @@ The command above requires that you have the two required files (`LabeledExample
 
 At very least, the command will look like:
 
-```powershell
-PS C:\nwngram>.\nwngram.exe session classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json
+```
+.\nwngram.exe session classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json
 ```
 
 The command above will log something like this to the console:
