@@ -3,6 +3,7 @@ using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.CLI.AsciiBanners
 {
+    /// <inheritdoc cref="IAsciiBannerManager"/>
     public class AsciiBannerManager : IAsciiBannerManager
     {
 
@@ -13,7 +14,10 @@ namespace NW.NGramTextClassification.CLI.AsciiBanners
         #endregion
 
         #region Constructors
+
+        /// <summary>Initializes a <see cref="AsciiBannerManager"/> instance.</summary>
         public AsciiBannerManager() { }
+
         #endregion
 
         #region Methods (public)
