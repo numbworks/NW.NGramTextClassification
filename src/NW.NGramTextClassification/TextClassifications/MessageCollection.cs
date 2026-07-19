@@ -144,7 +144,7 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #region Methods
 
-        public static string RollOutCollection(IEnumerable<object> coll)
+        private static string RollOutCollection(IEnumerable<object> coll)
         {
 
             List<string> list = new List<string>();
