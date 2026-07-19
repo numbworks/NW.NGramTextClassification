@@ -12,9 +12,11 @@ using NW.Shared.Files;
 using NW.Shared.Serialization;
 using McMaster.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils.Validation;
+using McMaster.Extensions.CommandLineUtils.HelpText;
 
 namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
+
     /// <inheritdoc cref="IArgumentManager"/>
     public class ArgumentManager : IArgumentManager
     {
@@ -87,6 +89,8 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             app = AddSession(app);
 
             app.HelpOption(inherited: true);
+
+            AddCustomHelpTextGenerator(app);
 
             return app;
 
@@ -320,12 +324,20 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         }
 
-        private void LogAsciiBanner()
+        private string CreateAsciiBanner()
         {
 
             string version = _componentBag.VersionFunction();
             uint terminalWidth = TerminalWindowManager.GetOrCutoff();
             string asciiBanner = AsciiBannerManager.Create(version, terminalWidth);
+
+            return asciiBanner;
+        
+        }
+        private void LogAsciiBanner()
+        {
+
+            string asciiBanner = CreateAsciiBanner();
 
             _componentBag.LoggingActionAsciiBanner(SeparatorLine);
             _componentBag.LoggingActionAsciiBanner(asciiBanner);
@@ -359,6 +371,26 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         }
 
+        private void AddCustomHelpTextGenerator(CommandLineApplication command, IHelpTextGenerator helpTextGenerator)
+        {
+
+            command.HelpTextGenerator = helpTextGenerator;
+            
+            foreach (CommandLineApplication subCommand in command.Commands)
+                AddCustomHelpTextGenerator(subCommand, helpTextGenerator);
+
+        }
+        private void AddCustomHelpTextGenerator(CommandLineApplication app)
+        {
+
+            CustomHelpTextGenerator customHelpTextGenerator = new CustomHelpTextGenerator(CreateAsciiBanner);
+            app.HelpTextGenerator = customHelpTextGenerator;
+
+            foreach (CommandLineApplication command in app.Commands)
+                AddCustomHelpTextGenerator(command, customHelpTextGenerator);
+        
+        }
+        
         private ClassifyData Defaultize(ClassifyData classifyData)
         {
 
@@ -482,4 +514,5 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         #endregion
 
     }
+
 }
