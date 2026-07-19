@@ -31,10 +31,19 @@ jobs:
       working-directory: ./
       run: dotnet test --no-build --verbosity normal
       
-    - name: Pack
+    - name: Pack library
       working-directory: ./src/NW.NGramTextClassification/
       run: dotnet pack --configuration Release NW.NGramTextClassification.csproj
 
-    - name: Push to NuGet.org
+    - name: Push library to NuGet.org
       working-directory: ./src/NW.NGramTextClassification/bin/Release/
+      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+
+    - name: Pack tool
+      working-directory: ./src/NW.NGramTextClassification.CLI/
+      run: dotnet pack --configuration Release NW.NGramTextClassification.CLI.csproj
+
+      # The 'working-directory' field is different because of <PackageOutputPath>./nupkg</PackageOutputPath>
+    - name: Push tool to NuGet.org
+      working-directory: ./src/NW.NGramTextClassification.CLI/nupkg/
       run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
