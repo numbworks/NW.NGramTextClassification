@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.Similarity
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public override string ToString()
         {
@@ -57,8 +57,3 @@ namespace NW.NGramTextClassification.Similarity
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 18.09.2022
-*/

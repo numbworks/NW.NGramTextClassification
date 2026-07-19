@@ -1,5 +1,5 @@
 ﻿using System;
-using NW.NGramTextClassification.AsciiBanner;
+using System.Reflection;
 using NW.NGramTextClassification.Filenames;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
@@ -36,10 +36,22 @@ namespace NW.NGramTextClassification.Bags
             };
         public static string DefaultLoggingActionDateFormat { get; } = "yyyy-MM-dd HH:mm:ss:fff";
         public static Action<string> DefaultLoggingAction { get; }
-            = (message) => Console.WriteLine($"[{DateTime.UtcNow.ToString(DefaultLoggingActionDateFormat)}] {message}");
+            = (message) => Console.WriteLine($"[{DefaultNowFunction().ToString(DefaultLoggingActionDateFormat)}] {message}");
         public static Action<string> DefaultLoggingActionAsciiBanner { get; }
             = (message) => Console.WriteLine($"{message}");
         public static Func<DateTime> DefaultNowFunction { get; } = () => DateTime.Now;
+        public static Func<string> DefaultVersionFunction { get; }
+            = () =>
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                Version version = assembly.GetName().Version;
+               
+                if (version is not null)
+                    return $"{version.Major}.{version.Minor}.{version.Build}";
+
+                return "0.0.0";
+                
+            };
 
         public INGramTokenizer NGramsTokenizer { get; }
         public ISimilarityIndexCalculator SimilarityIndexCalculator { get; }
@@ -47,12 +59,12 @@ namespace NW.NGramTextClassification.Bags
         public Func<string, uint, string> TextTruncatingFunction { get; }
         public Action<string> LoggingAction { get; }
         public ILabeledExampleManager LabeledExampleManager { get; }
-        public IAsciiBannerManager AsciiBannerManager { get; }
         public Action<string> LoggingActionAsciiBanner { get; }
         public IFileManager FileManager { get; }
         public ISerializerFactory SerializerFactory { get; }
         public IFilenameFactory FilenameFactory { get; }
         public Func<DateTime> NowFunction { get; }
+        public Func<string> VersionFunction { get; }
 
         #endregion
 
@@ -66,12 +78,12 @@ namespace NW.NGramTextClassification.Bags
                     Func<string, uint, string> textTruncatingFunction,
                     Action<string> loggingAction,
                     ILabeledExampleManager labeledExampleManager,
-                    IAsciiBannerManager asciiBannerManager,
                     Action<string> loggingActionAsciiBanner,
                     IFileManager fileManager,
                     ISerializerFactory serializerFactory,
                     IFilenameFactory filenameFactory,
-                    Func<DateTime> nowFunction)
+                    Func<DateTime> nowFunction,
+                    Func<string> versionFunction)
         {
 
             Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
@@ -80,12 +92,12 @@ namespace NW.NGramTextClassification.Bags
             Validator.ValidateObject(textTruncatingFunction, nameof(textTruncatingFunction));
             Validator.ValidateObject(loggingAction, nameof(loggingAction));
             Validator.ValidateObject(labeledExampleManager, nameof(labeledExampleManager));
-            Validator.ValidateObject(asciiBannerManager, nameof(asciiBannerManager));
             Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
             Validator.ValidateObject(fileManager, nameof(fileManager));
             Validator.ValidateObject(serializerFactory, nameof(serializerFactory));
             Validator.ValidateObject(filenameFactory, nameof(filenameFactory));
             Validator.ValidateObject(nowFunction, nameof(nowFunction));
+            Validator.ValidateObject(versionFunction, nameof(versionFunction));
 
             NGramsTokenizer = nGramsTokenizer;
             SimilarityIndexCalculator = similarityIndexCalculator;
@@ -93,12 +105,12 @@ namespace NW.NGramTextClassification.Bags
             TextTruncatingFunction = textTruncatingFunction;
             LoggingAction = loggingAction;
             LabeledExampleManager = labeledExampleManager;
-            AsciiBannerManager = asciiBannerManager;
             LoggingActionAsciiBanner = loggingActionAsciiBanner;
             FileManager = fileManager;
             SerializerFactory = serializerFactory;
             FilenameFactory = filenameFactory;
             NowFunction = nowFunction;
+            VersionFunction = versionFunction;
 
         }
 
@@ -111,23 +123,18 @@ namespace NW.NGramTextClassification.Bags
                   textTruncatingFunction: DefaultTextTruncatingFunction,
                   loggingAction: DefaultLoggingAction,
                   labeledExampleManager: new LabeledExampleManager(),
-                  asciiBannerManager: new AsciiBannerManager(),
                   loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
                   fileManager: new FileManager(),
                   serializerFactory: new SerializerFactory(),
                   filenameFactory: new FilenameFactory(),
-                  nowFunction: DefaultNowFunction)
+                  nowFunction: DefaultNowFunction,
+                  versionFunction: DefaultVersionFunction)
         { }
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
         #endregion
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 14.02.2024
-*/

@@ -22,13 +22,8 @@
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
         #endregion
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 25.09.2022
-*/

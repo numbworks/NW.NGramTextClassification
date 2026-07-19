@@ -1,0 +1,27 @@
+<Project>
+
+  <PropertyGroup>
+    <AssemblyVersion>4.2.1</AssemblyVersion>
+    <FileVersion>4.2.1</FileVersion>
+    <Version>4.2.1</Version>
+    <InformationalVersion>4.2.1</InformationalVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>/workspaces/.dotnet-obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)obj/</IntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)msbuild/</MSBuildProjectExtensionsPath>
+    <RestoreBaseIntermediateOutputPath>$(BaseIntermediateOutputPath)</RestoreBaseIntermediateOutputPath>
+    <RestoreIntermediateOutputPath>$(BaseIntermediateOutputPath)restore/</RestoreIntermediateOutputPath>
+
+    <BaseOutputPath>/workspaces/.dotnet-bin/$(MSBuildProjectName)/</BaseOutputPath>
+    <OutputPath>$(BaseOutputPath)bin/</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+  </PropertyGroup>
+
+</Project>

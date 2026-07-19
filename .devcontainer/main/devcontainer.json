@@ -1,0 +1,26 @@
+{
+    "name": "nw.ngramtextclassification",
+    "image": "nw.ngramtextclassification:main",
+    "initializeCommand": "cd .devcontainer/main && docker build -f Dockerfile -t nw.ngramtextclassification:main ../..",
+    "runArgs": ["--name", "nw.ngramtextclassification-main"],
+    "containerEnv": {
+        "DEVCONTAINER_NAME": "nw.ngramtextclassification",
+        "DOTNET_BIN_PATH": "/workspaces/.dotnet-bin"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {},
+            "extensions": [
+                "ms-dotnettools.csdevkit",
+                "ms-dotnettools.csharp",
+                "ms-vscode.PowerShell",
+                "shd101wyy.markdown-preview-enhanced"
+            ]
+        }
+    },
+    "mounts": [
+        "source=nw.ngramtextclassification-cache,target=/cache,type=volume",
+        "source=${localEnv:USERPROFILE}/Desktop/nw.ngramtextclassification/,target=/home/nw.ngramtextclassification/,type=bind,consistency=cached"
+    ],
+    "postStartCommand": "bash .devcontainer/main/devcontainer.sh"
+}

@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public override string ToString()
         {
@@ -56,8 +56,3 @@ namespace NW.NGramTextClassification.LabeledExamples
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 18.09.2022
-*/

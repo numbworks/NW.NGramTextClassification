@@ -85,7 +85,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                 settingBag: new SettingBag(),
                 results: new List<TextClassifierResult>() {
                                 TextClassifier.DefaultTextClassifierResult },
-                version: new TextClassifier().Version
+                version: ComponentBag.DefaultVersionFunction()
                 );
 
         public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
@@ -139,8 +139,3 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 07.11.2022
-*/

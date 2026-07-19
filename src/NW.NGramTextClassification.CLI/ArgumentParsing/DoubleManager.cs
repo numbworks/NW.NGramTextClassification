@@ -1,0 +1,60 @@
+﻿namespace NW.NGramTextClassification.CLI.ArgumentParsing
+{
+    /// <inheritdoc cref="IDoubleManager"/>
+    public class DoubleManager : IDoubleManager
+    {
+
+        #region Fields
+        #endregion
+
+        #region Properties
+
+        public static double MininumValue { get; } = 0.0;
+        public static double MaximumValue { get; } = 1.0;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>Initializes a <see cref="DoubleManager"/> instance.</summary>	
+        public DoubleManager() { }
+
+        #endregion
+
+        #region Methods (public)
+
+        public bool IsValid(string value)
+        {
+
+            try
+            {
+                double parsed = double.Parse(value);
+
+                return parsed >= 0.0 && parsed <= 1.0;
+
+            }
+            catch
+            {
+
+                return false;
+
+            }
+
+        }
+        public double? ParseOrDefault(string value)
+        {
+
+            if (value == null)
+                return null;
+
+            return double.Parse(value);
+
+        }
+
+        #endregion
+
+        #region Methods (private)
+        #endregion
+
+    }
+}

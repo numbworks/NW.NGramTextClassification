@@ -31,10 +31,18 @@ jobs:
       working-directory: ./
       run: dotnet test --no-build --verbosity normal
       
-    - name: Pack
-      working-directory: ./src/NW.NGramTextClassification/
-      run: dotnet pack --configuration Release NW.NGramTextClassification.csproj
+    - name: Pack library
+      working-directory: ./src/NW.NGramTextClassification
+      run: dotnet pack --configuration Release --no-build --output bin/Release
 
-    - name: Push to NuGet.org
-      working-directory: ./src/NW.NGramTextClassification/bin/Release/
-      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} --skip-duplicate
+    - name: Push library to NuGet.org
+      if: github.event_name == 'push'
+      run: dotnet nuget push ./src/NW.NGramTextClassification/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+
+    - name: Pack tool
+      working-directory: ./src/NW.NGramTextClassification.CLI
+      run: dotnet pack --configuration Release --no-build --output bin/Release
+
+    - name: Push tool to NuGet.org
+      if: github.event_name == 'push'
+      run: dotnet nuget push ./src/NW.NGramTextClassification.CLI/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate

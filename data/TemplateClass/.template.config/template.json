@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "numbworks",
+    "classifications": [ "C#", "Class" ],
+    "identity": "classtemplate",
+    "name": "classtemplate",
+    "shortName": "classtemplate",
+    "sourceName": "__Class__",
+    "type": "item",
+    "tags": {
+      "language": "C#",
+      "type": "item"
+    },
+    "symbols": {
+      "namespace": {
+        "type": "parameter",
+        "datatype": "text",
+        "defaultValue": "MyNamespace",
+        "replaces": "__NAMESPACE__"
+      }
+    }
+}

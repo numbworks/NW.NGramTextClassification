@@ -29,7 +29,7 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
         #endregion
 
-        #region Methods_public
+        #region Methods (public)
 
         public IEnumerable<string> ReadAllLines(IFileInfoAdapter file)
             => Content.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
@@ -52,14 +52,9 @@ namespace NW.NGramTextClassification.UnitTests.Utilities
 
         #endregion
 
-        #region Methods_private
+        #region Methods (private)
 
         #endregion
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 18.08.2021
-*/

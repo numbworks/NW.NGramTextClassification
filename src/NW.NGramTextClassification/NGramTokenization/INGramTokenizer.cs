@@ -53,8 +53,3 @@ namespace NW.NGramTextClassification.NGramTokenization
 
     }
 }
-
-/*
-    Author: numbworks@gmail.com
-    Last Update: 16.10.2022
-*/
