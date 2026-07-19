@@ -29,7 +29,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>numbworks_logo_256x256px.png</PackageIcon>
-    <PackageReadmeFile>NW.ZooSketches.md</PackageReadmeFile>
+    <PackageReadmeFile>NW.NGramTextClassification.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup>
