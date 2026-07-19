@@ -27,6 +27,17 @@
             "problemMatcher": []
         },
         {
+            "label": "solution: docstrings-verbose",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "script",
+                "${workspaceFolder}/scripts/nwmakefiles/nwdocstringchecking.csx",
+                "${workspaceFolder}/NW.NGramTextClassification.sln"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "solution: pack and publish",
             "type": "shell",
             "command": "echo \"Executing all pack and publish tasks...\"",
