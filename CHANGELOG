@@ -4,11 +4,11 @@ v4.2.1 - BREAKING CHANGES
     - Feature: displays Ascii Banner before all --help commands.
     - Feature: migrated ApplicationManager to ArgumentManager and CLIManager.
 - Maintenance:
-    - Added support for named container, tasks.json, nwbuilders. 
+    - Added support for named devcontainer, tasks.json, nwbuilders, nwmakefiles (docstrings-verbose).
 		- Renamed CLI project from *Client to *.CLI, and executable from ngramtc to nwngram.
+    - Enforced LF for EOL-sensitive files via .gitattributes. Actualized .gitignore.
     - SeeAlso: added docs-asciibannermanager.md, docs-developerguide-csharp.md, docs-frameworkfreeze-csharp.md.
     - SeeAlso: added docs-knownissues-csharp.md, docs-userguide-csharp.md.
-    - Enforced LF for EOL-sensitive files via .gitattributes. Actualized .gitignore.
 - Documentation:
 	- Feature: updated to v4.2.1.
 
