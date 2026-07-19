@@ -30,6 +30,8 @@
     <Copyright>numbworks</Copyright>
     <ApplicationIcon>$(MSBuildThisFileDirectory)../../scripts/nwbuilders/numbworks_logo_256x256px.ico</ApplicationIcon>
     <Description>nwngram is a CLI application to perform Text Classification on the string of text you provide. Text Classification is a machine learning technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>  
   </PropertyGroup>
 
   <Target Name="RenamePublishedExecutable" AfterTargets="Publish">
