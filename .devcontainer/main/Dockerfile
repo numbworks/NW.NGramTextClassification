@@ -13,3 +13,4 @@ RUN dotnet new install /opt/templates/TemplateClass
 
 USER vscode
 RUN dotnet tool install -g dotnet-reportgenerator-globaltool
+RUN dotnet tool install -g dotnet-script
