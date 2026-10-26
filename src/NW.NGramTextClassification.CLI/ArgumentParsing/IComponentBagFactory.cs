@@ -7,7 +7,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
     {
 
         /// <summary>Creates an instance of <see cref="ComponentBag"/>.</summary>
-        ComponentBag Create();
+        ComponentBag Create(bool enableUTC = false);
 
     }
 }
