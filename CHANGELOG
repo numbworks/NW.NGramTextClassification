@@ -4,7 +4,7 @@ v4.3.0
 - Maintenance:
 	- Resources.resx: made Linux-compatible.
 	- SeeAlso-contributionguide, SeeAlso-nwmakefiles, SeeAlso-nwpublishers: added.
-	- SeeAlso-developerguide, SeeAlso-nwbuilders: updated.
+	- SeeAlso-developerguide, SeeAlso-nwbuilders, SeeAlso-knownissues: updated.
 - Documentation:
 	- Feature: updated to v4.3.0.
 
