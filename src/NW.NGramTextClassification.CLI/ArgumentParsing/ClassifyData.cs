@@ -19,6 +19,7 @@
         public bool SaveSession { get; }
         public bool CleanLabeledExamples { get; }
         public bool DisableIndexSerialization { get; }
+        public bool EnableUTC { get; }
 
         #endregion
 
@@ -34,7 +35,8 @@
                 double? minAccuracyMultiple,
                 bool saveSession,
                 bool cleanLabeledExamples,
-                bool disableIndexSerialization
+                bool disableIndexSerialization,
+                bool enableUTC
             ) 
         {
 
@@ -48,6 +50,7 @@
             SaveSession = saveSession;
             CleanLabeledExamples = cleanLabeledExamples;
             DisableIndexSerialization = disableIndexSerialization;
+            EnableUTC = enableUTC;
 
         }
 

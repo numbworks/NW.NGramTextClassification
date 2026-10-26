@@ -118,22 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  
   <data name="ShortLabeledExamplesAsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shortlabeledexamplesasjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Resources\ShortLabeledExamplesAsJson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="TextClassifierrSessionCLE00AsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textclassifierrsessioncle00asjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Resources\TextClassifierrSessionCLE00AsJson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="TextClassifierrSessionCLE00DisabledAsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textclassifierrsessioncle00disabledasjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\TextClassifierrSessionCLE00DisabledAsJson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="TextSnippetAsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textsnippetasjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Resources\TextSnippetAsJson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="TextSnippetsAsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textsnippetsasjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\Resources\TextSnippetsAsJson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="TokenizerRuleSetAsJson" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\tokenizerrulesetasjson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\TokenizerRuleSetAsJson.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  
 </root>

@@ -1,6 +1,7 @@
 ﻿using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.CLI.ArgumentParsing;
 using NUnit.Framework;
+using System;
 
 namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 {
@@ -9,6 +10,22 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
     {
 
         #region Fields
+
+        private static TestCaseData[] componentBagFactoryCreateTestCases =
+        {
+
+            new TestCaseData(
+                false,
+                new Action<ComponentBag>(actual => Assert.That(actual.NowFunction, Is.EqualTo(ComponentBag.DefaultNowFunction)))
+            ).SetArgDisplayNames($"{nameof(componentBagFactoryCreateTestCases)}_01"),
+
+            new TestCaseData(
+                true,
+                new Action<ComponentBag>(actual => Assert.That(actual.NowFunction, Is.EqualTo(ComponentBag.DefaultUTCNowFunction)))
+            ).SetArgDisplayNames($"{nameof(componentBagFactoryCreateTestCases)}_02")
+
+        };
+
         #endregion
 
         #region SetUp
@@ -16,30 +33,17 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
 
         #region Tests
 
-        [Test]
-        public void ComponentBagFactory_ShouldCreateAnObjectOfTypeComponentBagFactory_WhenInvoked()
+        [TestCaseSource(nameof(componentBagFactoryCreateTestCases))]
+        public void Create_ShouldCreateTheExpectedComponentBag_WhenInvoked(bool enableUTC, Action<ComponentBag> assertAction)
         {
 
             // Arrange
             // Act
-            ComponentBagFactory actual = new ComponentBagFactory();
-
-            // Assert
-            Assert.That(actual, Is.InstanceOf<ComponentBagFactory>());
-
-        }
-
-        [Test]
-        public void Create_ShouldCreateAnObjectOfTypeComponentBag_WhenInvoked()
-        {
-
-            // Arrange
-            // Act
-            ComponentBag actual
-                = new ComponentBagFactory().Create();
+            ComponentBag actual = new ComponentBagFactory().Create(enableUTC: enableUTC);
 
             // Assert
             Assert.That(actual, Is.InstanceOf<ComponentBag>());
+            assertAction(actual);
 
         }
 

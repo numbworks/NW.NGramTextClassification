@@ -6,7 +6,6 @@ using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
-using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.Bags
 {
@@ -40,6 +39,7 @@ namespace NW.NGramTextClassification.Bags
         public static Action<string> DefaultLoggingActionAsciiBanner { get; }
             = (message) => Console.WriteLine($"{message}");
         public static Func<DateTime> DefaultNowFunction { get; } = () => DateTime.Now;
+        public static Func<DateTime> DefaultUTCNowFunction { get; }= () => DateTime.UtcNow;
         public static Func<string> DefaultVersionFunction { get; }
             = () =>
             {
@@ -72,64 +72,34 @@ namespace NW.NGramTextClassification.Bags
 
         /// <summary>Initializes a <see cref="ComponentBag"/> instance.</summary>
         public ComponentBag(
-                    INGramTokenizer nGramsTokenizer,
-                    ISimilarityIndexCalculator similarityIndexCalculator,
-                    Func<double, double> roundingFunction,
-                    Func<string, uint, string> textTruncatingFunction,
-                    Action<string> loggingAction,
-                    ILabeledExampleManager labeledExampleManager,
-                    Action<string> loggingActionAsciiBanner,
-                    IFileManager fileManager,
-                    ISerializerFactory serializerFactory,
-                    IFilenameFactory filenameFactory,
-                    Func<DateTime> nowFunction,
-                    Func<string> versionFunction)
+                    INGramTokenizer nGramsTokenizer = null,
+                    ISimilarityIndexCalculator similarityIndexCalculator = null,
+                    Func<double, double> roundingFunction = null,
+                    Func<string, uint, string> textTruncatingFunction = null,
+                    Action<string> loggingAction = null,
+                    ILabeledExampleManager labeledExampleManager = null,
+                    Action<string> loggingActionAsciiBanner = null,
+                    IFileManager fileManager = null,
+                    ISerializerFactory serializerFactory = null,
+                    IFilenameFactory filenameFactory = null,
+                    Func<DateTime> nowFunction = null,
+                    Func<string> versionFunction = null)
         {
 
-            Validator.ValidateObject(nGramsTokenizer, nameof(nGramsTokenizer));
-            Validator.ValidateObject(similarityIndexCalculator, nameof(similarityIndexCalculator));
-            Validator.ValidateObject(roundingFunction, nameof(roundingFunction));
-            Validator.ValidateObject(textTruncatingFunction, nameof(textTruncatingFunction));
-            Validator.ValidateObject(loggingAction, nameof(loggingAction));
-            Validator.ValidateObject(labeledExampleManager, nameof(labeledExampleManager));
-            Validator.ValidateObject(loggingActionAsciiBanner, nameof(loggingActionAsciiBanner));
-            Validator.ValidateObject(fileManager, nameof(fileManager));
-            Validator.ValidateObject(serializerFactory, nameof(serializerFactory));
-            Validator.ValidateObject(filenameFactory, nameof(filenameFactory));
-            Validator.ValidateObject(nowFunction, nameof(nowFunction));
-            Validator.ValidateObject(versionFunction, nameof(versionFunction));
-
-            NGramsTokenizer = nGramsTokenizer;
-            SimilarityIndexCalculator = similarityIndexCalculator;
-            RoundingFunction = roundingFunction;
-            TextTruncatingFunction = textTruncatingFunction;
-            LoggingAction = loggingAction;
-            LabeledExampleManager = labeledExampleManager;
-            LoggingActionAsciiBanner = loggingActionAsciiBanner;
-            FileManager = fileManager;
-            SerializerFactory = serializerFactory;
-            FilenameFactory = filenameFactory;
-            NowFunction = nowFunction;
-            VersionFunction = versionFunction;
+            NGramsTokenizer = nGramsTokenizer ?? new NGramTokenizer();
+            SimilarityIndexCalculator = similarityIndexCalculator ?? new SimilarityIndexCalculatorJaccard();
+            RoundingFunction = roundingFunction ?? DefaultRoundingFunction;
+            TextTruncatingFunction = textTruncatingFunction ?? DefaultTextTruncatingFunction;
+            LoggingAction = loggingAction ?? DefaultLoggingAction;
+            LabeledExampleManager = labeledExampleManager ?? new LabeledExampleManager();
+            LoggingActionAsciiBanner = loggingActionAsciiBanner ?? DefaultLoggingActionAsciiBanner;
+            FileManager = fileManager ?? new FileManager();
+            SerializerFactory = serializerFactory ?? new SerializerFactory();
+            FilenameFactory = filenameFactory ?? new FilenameFactory();
+            NowFunction = nowFunction ?? DefaultNowFunction;
+            VersionFunction = versionFunction ?? DefaultVersionFunction;
 
         }
-
-        /// <summary>Initializes a <see cref="ComponentBag"/> instance using default parameters.</summary>
-        public ComponentBag()
-            : this(
-                  nGramsTokenizer: new NGramTokenizer(),
-                  similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                  roundingFunction: DefaultRoundingFunction,
-                  textTruncatingFunction: DefaultTextTruncatingFunction,
-                  loggingAction: DefaultLoggingAction,
-                  labeledExampleManager: new LabeledExampleManager(),
-                  loggingActionAsciiBanner: DefaultLoggingActionAsciiBanner,
-                  fileManager: new FileManager(),
-                  serializerFactory: new SerializerFactory(),
-                  filenameFactory: new FilenameFactory(),
-                  nowFunction: DefaultNowFunction,
-                  versionFunction: DefaultVersionFunction)
-        { }
 
         #endregion
 

@@ -387,7 +387,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
                         cleanLabeledExamples: true,
-                        disableIndexSerialization: true);
+                        disableIndexSerialization: true,
+                        enableUTC: true);
 
             // Act
             ClassifyData actual
@@ -406,6 +407,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             Assert.That(expected.SaveSession, Is.EqualTo(actual.SaveSession));
             Assert.That(expected.CleanLabeledExamples, Is.EqualTo(actual.CleanLabeledExamples));
             Assert.That(expected.DisableIndexSerialization, Is.EqualTo(actual.DisableIndexSerialization));
+            Assert.That(expected.EnableUTC, Is.EqualTo(actual.EnableUTC));
 
         }
 
@@ -426,7 +428,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
                         minAccuracyMultiple: null,
                         saveSession: false,
                         cleanLabeledExamples: false,
-                        disableIndexSerialization: false);
+                        disableIndexSerialization: false,
+                        enableUTC: true);
 
             // Act
             ClassifyData actual

@@ -16,51 +16,11 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
         #region Fields
 
-        private static TestCaseData[] componentBagExceptionTestCases =
+        private static TestCaseData[] componentBagDefaultValueTestCases =
         {
 
             new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: null,
-                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: new LabeledExampleManager(),
-                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: new FileManager(),
-                                    serializerFactory: new SerializerFactory(),
-                                    filenameFactory: new FilenameFactory(),
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("nGramsTokenizer").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_01"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: new NGramTokenizer(),
-                                    similarityIndexCalculator: null,
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: new LabeledExampleManager(),
-                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: new FileManager(),
-                                    serializerFactory: new SerializerFactory(),
-                                    filenameFactory: new FilenameFactory(),
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("similarityIndexCalculator").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_02"),
-
-            new TestCaseData(
-                new TestDelegate(
+                new Func<ComponentBag>(
                         () => new ComponentBag(
                                     nGramsTokenizer: new NGramTokenizer(),
                                     similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -75,12 +35,11 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                     nowFunction: ComponentBag.DefaultNowFunction,
                                     versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("roundingFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_03"),
+                new Action<ComponentBag>(componentBag => Assert.That(componentBag.RoundingFunction, Is.EqualTo(ComponentBag.DefaultRoundingFunction)))
+                ).SetArgDisplayNames($"{nameof(componentBagDefaultValueTestCases)}_01"),
 
             new TestCaseData(
-                new TestDelegate(
+                new Func<ComponentBag>(
                         () => new ComponentBag(
                                     nGramsTokenizer: new NGramTokenizer(),
                                     similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -95,12 +54,11 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                     nowFunction: ComponentBag.DefaultNowFunction,
                                     versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("textTruncatingFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_04"),
+                new Action<ComponentBag>(componentBag => Assert.That(componentBag.TextTruncatingFunction, Is.EqualTo(ComponentBag.DefaultTextTruncatingFunction)))
+                ).SetArgDisplayNames($"{nameof(componentBagDefaultValueTestCases)}_02"),
 
             new TestCaseData(
-                new TestDelegate(
+                new Func<ComponentBag>(
                         () => new ComponentBag(
                                     nGramsTokenizer: new NGramTokenizer(),
                                     similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -115,32 +73,11 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                     nowFunction: ComponentBag.DefaultNowFunction,
                                     versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("loggingAction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_05"),
+                new Action<ComponentBag>(componentBag => Assert.That(componentBag.LoggingAction, Is.EqualTo(ComponentBag.DefaultLoggingAction)))
+                ).SetArgDisplayNames($"{nameof(componentBagDefaultValueTestCases)}_03"),
 
             new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: new NGramTokenizer(),
-                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: null,
-                                    loggingActionAsciiBanner: ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: new FileManager(),
-                                    serializerFactory: new SerializerFactory(),
-                                    filenameFactory: new FilenameFactory(),
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("labeledExampleManager").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_06"),
-
-            new TestCaseData(
-                new TestDelegate(
+                new Func<ComponentBag>(
                         () => new ComponentBag(
                                     nGramsTokenizer: new NGramTokenizer(),
                                     similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -155,72 +92,11 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                     nowFunction: ComponentBag.DefaultNowFunction,
                                     versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("loggingActionAsciiBanner").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_07"),
+                new Action<ComponentBag>(componentBag => Assert.That(componentBag.LoggingActionAsciiBanner, Is.EqualTo(ComponentBag.DefaultLoggingActionAsciiBanner)))
+                ).SetArgDisplayNames($"{nameof(componentBagDefaultValueTestCases)}_04"),
 
             new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: new NGramTokenizer(),
-                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: new LabeledExampleManager(),
-                                    loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: null,
-                                    serializerFactory: new SerializerFactory(),
-                                    filenameFactory: new FilenameFactory(),
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("fileManager").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_08"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: new NGramTokenizer(),
-                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: new LabeledExampleManager(),
-                                    loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: new FileManager(),
-                                    serializerFactory: null,
-                                    filenameFactory: new FilenameFactory(),
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("serializerFactory").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_'09"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new ComponentBag(
-                                    nGramsTokenizer: new NGramTokenizer(),
-                                    similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
-                                    roundingFunction: ComponentBag.DefaultRoundingFunction,
-                                    textTruncatingFunction: ComponentBag.DefaultTextTruncatingFunction,
-                                    loggingAction: ComponentBag.DefaultLoggingAction,
-                                    labeledExampleManager: new LabeledExampleManager(),
-                                    loggingActionAsciiBanner:  ComponentBag.DefaultLoggingActionAsciiBanner,
-                                    fileManager: new FileManager(),
-                                    serializerFactory: new SerializerFactory(),
-                                    filenameFactory: null,
-                                    nowFunction: ComponentBag.DefaultNowFunction,
-                                    versionFunction: ComponentBag.DefaultVersionFunction
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("filenameFactory").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_10"),
-
-            new TestCaseData(
-                new TestDelegate(
+                new Func<ComponentBag>(
                         () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -235,12 +111,11 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                         nowFunction: null,
                                         versionFunction: ComponentBag.DefaultVersionFunction
                                 )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("nowFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_11"),
+                new Action<ComponentBag>(componentBag => Assert.That(componentBag.NowFunction, Is.EqualTo(ComponentBag.DefaultNowFunction)))
+                ).SetArgDisplayNames($"{nameof(componentBagDefaultValueTestCases)}_05"),
 
             new TestCaseData(
-                new TestDelegate(
+                new Func<ComponentBag>(
                         () => new ComponentBag(
                                         nGramsTokenizer: new NGramTokenizer(),
                                         similarityIndexCalculator: new SimilarityIndexCalculatorJaccard(),
@@ -255,9 +130,8 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                                         nowFunction: ComponentBag.DefaultNowFunction,
                                         versionFunction: null
                                 )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("versionFunction").Message
-                ).SetArgDisplayNames($"{nameof(componentBagExceptionTestCases)}_12")
+                new Action<ComponentBag>(componentBag => Assert.That(componentBag.VersionFunction, Is.EqualTo(ComponentBag.DefaultVersionFunction)))
+                ).SetArgDisplayNames($"{nameof(componentBagDefaultValueTestCases)}_06")
 
         };
 
@@ -268,10 +142,18 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
         #region Tests
 
-        [TestCaseSource(nameof(componentBagExceptionTestCases))]
-        public void ComponentBag_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        [TestCaseSource(nameof(componentBagDefaultValueTestCases))]
+        public void ComponentBag_ShouldUseDefaultValue_WhenParameterIsNull(Func<ComponentBag> initFunction, Action<ComponentBag> assertAction)
+        {
+
+            // Arrange
+            // Act
+            ComponentBag componentBag = initFunction();
+
+            // Assert
+            assertAction(componentBag);
+
+        }
 
         [Test]
         public void ComponentBag_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -303,6 +185,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(ComponentBag.DefaultLoggingAction, Is.InstanceOf<Action<string>>());
             Assert.That(ComponentBag.DefaultLoggingActionAsciiBanner, Is.InstanceOf<Action<string>>());
             Assert.That(ComponentBag.DefaultNowFunction,Is.InstanceOf<Func<DateTime>>());
+            Assert.That(ComponentBag.DefaultUTCNowFunction,Is.InstanceOf<Func<DateTime>>());
             Assert.That(ComponentBag.DefaultVersionFunction,Is.InstanceOf<Func<string>>());
 
         }
