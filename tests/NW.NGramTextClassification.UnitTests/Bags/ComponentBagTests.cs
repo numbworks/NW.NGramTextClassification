@@ -185,6 +185,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(ComponentBag.DefaultLoggingAction, Is.InstanceOf<Action<string>>());
             Assert.That(ComponentBag.DefaultLoggingActionAsciiBanner, Is.InstanceOf<Action<string>>());
             Assert.That(ComponentBag.DefaultNowFunction,Is.InstanceOf<Func<DateTime>>());
+            Assert.That(ComponentBag.DefaultUTCNowFunction,Is.InstanceOf<Func<DateTime>>());
             Assert.That(ComponentBag.DefaultVersionFunction,Is.InstanceOf<Func<string>>());
 
         }

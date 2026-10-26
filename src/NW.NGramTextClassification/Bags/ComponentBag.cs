@@ -39,6 +39,7 @@ namespace NW.NGramTextClassification.Bags
         public static Action<string> DefaultLoggingActionAsciiBanner { get; }
             = (message) => Console.WriteLine($"{message}");
         public static Func<DateTime> DefaultNowFunction { get; } = () => DateTime.Now;
+        public static Func<DateTime> DefaultUTCNowFunction { get; }= () => DateTime.UtcNow;
         public static Func<string> DefaultVersionFunction { get; }
             = () =>
             {
