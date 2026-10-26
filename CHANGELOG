@@ -1,3 +1,13 @@
+v4.3.0
+- CLI:
+	- Feature: added support for the --enableutc flag.
+- Maintenance:
+	- Resources.resx: made Linux-compatible.
+	- SeeAlso-contributionguide, SeeAlso-nwmakefiles, SeeAlso-nwpublishers: added.
+	- SeeAlso-developerguide, SeeAlso-nwbuilders, SeeAlso-knownissues: updated.
+- Documentation:
+	- Feature: updated to v4.3.0.
+
 v4.2.1 - BREAKING CHANGES
 - CLI:
     - Feature: added support for mini-banner in AsciiBannerManager.

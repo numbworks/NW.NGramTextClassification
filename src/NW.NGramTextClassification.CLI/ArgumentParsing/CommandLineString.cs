@@ -90,7 +90,13 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             = string.Concat(
                 "(Optional) ",
                 "To use in conjunction with '--savesession'. It has no effect if provided by its own.");
-        
+
+        public static string OPTION_ENABLEUTC_TEMPL { get; } = "--enableutc";
+        public static string OPTION_ENABLEUTC_DESCR { get; }
+            = string.Concat(
+                "(Optional) ",
+                "Replaces local time with UTC time in timestamps.");
+
         #endregion
 
     }

@@ -6,24 +6,38 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2026-03-10 | numbworks | Created. |
-| 2026-04-06 | numbworks | Last update. |
+| 2026-07-27 | numbworks | Last update. |
 
 ## Introduction
 
 `nwbuilders` is a collection of guidelines and configuration templates that simplify and standardize the cross-compilation and packaging workflow for CLI applications on local build agents.
 
-## Overview
+## Target Architectures
 
-We target the following architectures and operating systems:
+We target the following operating systems and architectures:
 
-- Linux executables (AMD64 and ARM64)
+- Debian Linux installers (AMD64 and ARM64)
+- Generic Linux executables (AMD64 and ARM64)
 - Windows executables (AMD64)
 
-The `dotnet publish` command supports all of them via cross-compilation, therefore it's a smooth sailing.
+**Disclaimer**: as an open‑source developer, I intentionally and firmly chose not to target Apple's MacOS.
 
-## The Configuration
+The reasons are:
 
-Here the expected structure of the project:
+- <u>Paid certification</u>: distributing binaries requires an annual developer license, which is incompatible with free software distribution.
+- <u>Expensive hardware</u>: building and testing MacOS apps requires proprietary Apple hardware with a high entry cost and a closed ecosystem.
+- <u>Lack of open‑source investment</u>: Apple is not among the companies that actively support open‑source projects with funding or engineering resources.
+- <u>No local cross‑compilation</u>: Python applications cannot be cross‑compiled for MacOS from Linux or Windows, breaking my unified build workflow.
+
+If you are a MacOS user, you can still attempt to compile or run my applications from the source code.
+
+## Application Packaging Tools
+
+The `dotnet publish` command supports all of the targetted architectures and operating systems via cross-compilation, therefore it's a smooth sailing.
+
+## Project Structure And File Roles
+
+An example of the project structure:
 
 ```
 ...
@@ -31,126 +45,319 @@ scripts/
 ├── nwbuilders
     ├── numbworks_logo_256x256px.ico
     ├── numbworks_logo_256x256px.png
-    └── <cli_name>.md
+    ├── NW.NGramTextClassification.CLI.md
+    ├── NW.NGramTextClassification.md
+    └── nwngram.md
 └── ...
 src/
-├── ...
-├── ...
-├── NW.<library_name>
+├── NW.NGramTextClassification
     ├── ...
-    ├── NW.<library_name>.csproj
+    ├── NW.NGramTextClassification.csproj
     └── ...
-└── NW.<library_name>.CLI
+└── NW.NGramTextClassification.CLI
     ├── ...
-    ├── NW.<library_name>.CLI.csproj
+    ├── NW.NGramTextClassification.CLI.csproj
     └── Program.cs
+...
+.gitattributes
+...
+Directory.Build.props
 ...
 ```
 
-As shown, all the business logic is encapsulated in the `NW.<library_name>` project, while an additional `NW.<library_name>.CLI` project is responsible for exposing its entry-point(s) thru a command-line interface.
+|File|Role|
+|---|---|
+|`numbworks_logo_256x256px.ico`|This is the icon file for the Linux executable.|
+|`numbworks_logo_256x256px.png`|This is the icon file for the Windows executable.|
+|`NW.NGramTextClassification.CLI.md`|This is the source file for the NuGet tool's documentation file.|
+|`NW.NGramTextClassification.md`|This is the source file for the NuGet package's documentation file.|
+|`nwngram.md`|This is the source file for the `man` entry installed with the Debian packages.|
+|`NW.NGramTextClassification.csproj`|This contains the building instructions for the NuGet package.|
+|`NW.NGramTextClassification.CLI.csproj`|This contains the building instructions for the NuGet tool and for the CLI executable.|
+|`.gitattributes`|This enforces LF end‑of‑line formatting for Linux‑sensitive files (such as `*.sh` and `man` source files).|
+|`Directory.Build.props`|This contains the key information about the application (name, version, description).|
 
-In order to build and package the executable according to our needs, we'll need to customize `NW.<library_name>.CLI.csproj` and store the required files in `scripts/nwbuilders`.
+## The GitAttributes File
+
+The `.gitattributes` file must include the following lines (replace the `md` file as needed):
+
+```
+...
+# Force LF for EOL‑sensitive files (CRLF breaks them on Linux)
+nwngram.md text eol=lf
+```
+
+If these rules were added after the corresponding files were already created, open the devcontainer terminal and apply the normalization:
+
+```bash
+git add --renormalize .
+git commit -m "Apply EOL rules"
+```
+
+To verify that the rules are now applied correctly:
+
+```bash
+git ls-files --eol
+```
 
 ## The Host Machine
 
-For our setup, a separate build agent is not required. 
+For this build pipeline, a separate host machine is not required. The `dotnet publish` command runs flawlessy in the same Linux devcontainer used for application development (AMD64). Once the build pipeline has been triggered, the resulting artifacts are saved to a folder on the development machine's hard drive via a mount point.
 
-The `dotnet publish` command runs flawlessy in the same Linux devcontainer used for application development and, once triggered, it will save the resulting packages on a folder on the development's machine hard drive using a mount point.
-
-To launch the `nwbuilders` configuration:
+To trigger the build pipeline:
 
 1. Open the solution's folder in Visual Studio Code
-2. Click on `Terminal` > `Run Task` > `publish`
-3. Done!
+2. Add the following tasks to `.vscode/tasks.json`:
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "solution: pack and publish",
+            "type": "shell",
+            "command": "echo \"Executing all pack and publish tasks...\"",
+            "dependsOn": [
+                "library: pack",
+                "cli: pack",
+                "cli: publish"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "library: pack",
+            "type": "shell",
+            "command": "dotnet pack -c Release --output /home/nw.ngramtextclassification/",
+            "options": {
+                "cwd": "${workspaceFolder}/src/NW.NGramTextClassification"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "cli: pack",
+            "type": "shell",
+            "command": "dotnet pack -c Release --output /home/nw.ngramtextclassification/",
+            "options": {
+                "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "cli: publish",
+            "type": "shell",
+            "command": "for RID in linux-arm64 win-x64 linux-x64; do dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=false /p:DebugType=None --self-contained true -c Release -r $RID --output /home/nw.ngramtextclassification/temp/; done",
+            "options": {
+                "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI"
+            },
+            "problemMatcher": "$msCompile"
+        }
+        
+    ]
+}
+```
+
+3. Click on `Terminal` > `Run Task` > `solution: pack and publish`
+4. Done!
 
 ## The Artifacts
 
-Here the list of the expected artifacts:
+An example of the expected artifacts generated by the build pipeline:
 
-- `<cli_name>-v<version>-linux-arm64.zip`
-- `<cli_name>-v<version>-linux-arm64.deb`
-- `<cli_name>-v<version>-linux-amd64.zip`
-- `<cli_name>-v<version>-linux-amd64.deb`
-- `<cli_name>-v<version>-win-amd64.zip`
+|Artifact|Description|
+|---|---|
+|`nwngram-v4.2.1-linux-amd64.deb`|Debian installer for AMD64.|
+|`nwngram-v4.2.1-linux-amd64.zip`|Generic Linux executable for AMD64.|
+|`nwngram-v4.2.1-linux-arm64.deb`|Debian installer for ARM64.|
+|`nwngram-v4.2.1-linux-arm64.zip`|Generic Linux executable for ARM64.|
+|`nwngram-v4.2.1-win64.zip`|Windows executable for AMD64.|
+|`NW.NGramTextClassification.4.2.1.nupkg`|NuGet package.|
+|`NW.NGramTextClassification.CLI.4.2.1.nupkg`|NuGet tool.|
 
-More context:
+Additional information:
 
 1. Each ZIP package contains only the executable. The Windows variant will be supplemented with an application icon and embedded metadata.
 2. The DEB packages, once installed, will provide the executable file, the menu item with the icon and a `man` page.
 
-## Notes About The Metadata
+## The Building Instructions
 
-Here an example of how to define metadata in `NW.<library_name>.CLI.csproj`:
+The building instructions are encapsulated in the following files. The version number and the referenced documentation files need to be updated before each new release.
+
+`Directory.Build.props`:
 
 ```xml
-<PropertyGroup>
+<Project>
+
+  <PropertyGroup>
+    <AssemblyVersion>4.2.1</AssemblyVersion>
+    <FileVersion>4.2.1</FileVersion>
+    <Version>4.2.1</Version>
+    <InformationalVersion>4.2.1</InformationalVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>/workspaces/.dotnet-obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)obj/</IntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)msbuild/</MSBuildProjectExtensionsPath>
+    <RestoreBaseIntermediateOutputPath>$(BaseIntermediateOutputPath)</RestoreBaseIntermediateOutputPath>
+    <RestoreIntermediateOutputPath>$(BaseIntermediateOutputPath)restore/</RestoreIntermediateOutputPath>
+
+    <BaseOutputPath>/workspaces/.dotnet-bin/$(MSBuildProjectName)/</BaseOutputPath>
+    <OutputPath>$(BaseOutputPath)bin/</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+  </PropertyGroup>
+
+</Project>
+```
+
+`NW.NGramTextClassification.csproj`:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="nw.shared.files" Version="1.0.0" />
+    <PackageReference Include="nw.shared.serialization" Version="1.0.0" />
+    <PackageReference Include="nw.shared.validation" Version="1.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);SYSLIB0014;1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../scripts/nwbuilders/numbworks_logo_256x256px.png" Pack="true" PackagePath="\" />
+    <None Include="../../scripts/nwbuilders/NW.NGramTextClassification.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Version>4.2.1</Version>
+    <AssemblyVersion>4.2.1.0</AssemblyVersion>
+    <FileVersion>4.2.1.0</FileVersion>
+    <Authors>numbworks</Authors>
+    <Copyright>numbworks 2026</Copyright>
+    <Description>NW.NGramTextClassification is a library to perform Text Classification on the string of text you provide. Text Classification is a machine learning technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library.</Description>
+    <IsPackable>true</IsPackable>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>numbworks_logo_256x256px.png</PackageIcon>
+    <PackageReadmeFile>NW.NGramTextClassification.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
+  </PropertyGroup>
+
+</Project>
+```
+
+`NW.NGramTextClassification.CLI.csproj`:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\NW.NGramTextClassification\NW.NGramTextClassification.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-    ...
-</PropertyGroup>
-...
-<PropertyGroup>
-    <AssemblyName>nwzsd</AssemblyName>
-    <Version>2.0.0</Version>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);SYSLIB0014;1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.0" />
+    <PackageReference Include="nw.shared.serialization" Version="1.0.0" />
+    <PackageReference Include="nw.shared.validation" Version="1.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AssemblyName>NW.NGramTextClassification.CLI</AssemblyName>
+    <ExecutableName>nwngram</ExecutableName>
+    <Version>4.2.1</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <Authors>numbworks</Authors>
     <Company>numbworks</Company>
-    <Product>NW.ZooSketchDownloader</Product>
+    <Product>NW.NGramTextClassification</Product>
     <Copyright>numbworks</Copyright>
     <ApplicationIcon>$(MSBuildThisFileDirectory)../../scripts/nwbuilders/numbworks_logo_256x256px.ico</ApplicationIcon>
-    <Description>nwzsd (NW.ZooSketchDownloader) is an application that extracts 'Lo Zoo di 105' sketch download metadata (JSON or MetaLink) from 'Radio 105' website.</Description>
-</PropertyGroup>
-```
+    <Description>nwngram is a CLI application to perform Text Classification on the string of text you provide. Text Classification is a machine learning technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>  
+  </PropertyGroup>
 
-## Notes About The `ZipCustomOutput` Target
+  <Target Name="RenamePublishedExecutable" AfterTargets="Publish">
+    <Exec Condition="Exists('$(PublishDir)NW.NGramTextClassification.CLI')" 
+          Command="mv &quot;$(PublishDir)NW.NGramTextClassification.CLI&quot; &quot;$(PublishDir)$(ExecutableName)&quot;" />
 
-Here how the `ZipCustomOutput` target is defined in `NW.<library_name>.CLI.csproj`:
+    <Exec Condition="Exists('$(PublishDir)NW.NGramTextClassification.CLI.exe')" 
+          Command="mv &quot;$(PublishDir)NW.NGramTextClassification.CLI.exe&quot; &quot;$(PublishDir)$(ExecutableName).exe&quot;" />
+  </Target>
 
-```xml
-<Target Name="ZipCustomOutput" AfterTargets="Publish">
-<PropertyGroup>
-    <ExecutableExtension Condition="$(RuntimeIdentifier.StartsWith('win'))">.exe</ExecutableExtension>
-    <ExecutableExtension Condition="!$(RuntimeIdentifier.StartsWith('win'))"></ExecutableExtension>
-
-    <BinaryName>$(AssemblyName)$(ExecutableExtension)</BinaryName>
-    <ZipFileName>$(AssemblyName)-$(Version)-$(RuntimeIdentifier).zip</ZipFileName>
-    
-    <SourceFilePath>$(PublishDir)$(BinaryName)</SourceFilePath>
-    <FinalZipPath>$(PublishDir)..\$(ZipFileName)</FinalZipPath>
-</PropertyGroup>
-
-<Error Condition="!Exists('$(SourceFilePath)')" Text="Executable not found at $(SourceFilePath)" />
-
-<ZipDirectory 
-    SourceDirectory="$(PublishDir)" 
-    DestinationFile="$(FinalZipPath)" 
-    Overwrite="true" />
-
-<RemoveDir Directories="$(PublishDir)" />
-
-<Message Importance="high" Text="Zipped package successfully created: $(FinalZipPath)" />
-</Target>
-```
-
-## Notes About The `CreateDebianPackage` Target
-
-Here how the `CreateDebianPackage` target is defined in `NW.<library_name>.CLI.csproj`:
-
-```xml
-<Target Name="CreateDebianPackage" AfterTargets="ZipCustomOutput" Condition="!$(RuntimeIdentifier.StartsWith('win'))">
-
+  <Target Name="ZipCustomOutput" AfterTargets="Publish">
     <PropertyGroup>
-        <ZipFileDir>/home/nw.zoosketchdownloader/</ZipFileDir>
-        <ZipFileName>$(AssemblyName)-$(Version)-$(RuntimeIdentifier).zip</ZipFileName>
-        <SourceZipPath>$(ZipFileDir)$(ZipFileName)</SourceZipPath>
-        <MdSourcePath>$(MSBuildProjectDirectory)/../../scripts/nwbuilders/$(AssemblyName).md</MdSourcePath>
-        <TempManPath>/tmp/$(AssemblyName).1</TempManPath>
+      <ExecutableExtension Condition="$(RuntimeIdentifier.StartsWith('win'))">.exe</ExecutableExtension>
+      <ExecutableExtension Condition="!$(RuntimeIdentifier.StartsWith('win'))"></ExecutableExtension>
 
-        <DebArch Condition="'$(RuntimeIdentifier)' == 'linux-x64'">amd64</DebArch>
-        <DebArch Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">arm64</DebArch>
-        <DebArch Condition="'$(DebArch)' == ''">all</DebArch>
+      <BinaryName>$(ExecutableName)$(ExecutableExtension)</BinaryName>
 
-        <DebLayoutDir>/tmp/$(AssemblyName)-$(DebArch)-layout</DebLayoutDir>
-        <PackageFileName>$(AssemblyName)-$(Version)-$(DebArch).deb</PackageFileName>
+      <ZipFileName Condition="'$(RuntimeIdentifier)' == 'linux-x64'">$(ExecutableName)-v$(Version)-linux-amd64.zip</ZipFileName>
+      <ZipFileName Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">$(ExecutableName)-v$(Version)-linux-arm64.zip</ZipFileName>
+      <ZipFileName Condition="'$(RuntimeIdentifier)' == 'win-x64'">$(ExecutableName)-v$(Version)-win64.zip</ZipFileName>
+      <ZipFileName Condition="'$(ZipFileName)' == ''">$(ExecutableName)-v$(Version)-$(RuntimeIdentifier).zip</ZipFileName>
+      
+      <SourceFilePath>$(PublishDir)$(BinaryName)</SourceFilePath>
+      <FinalZipPath>$(PublishDir)..\$(ZipFileName)</FinalZipPath>
+    </PropertyGroup>
+
+    <Error Condition="!Exists('$(SourceFilePath)')" Text="Executable not found at $(SourceFilePath)" />
+
+    <ZipDirectory 
+      SourceDirectory="$(PublishDir)" 
+      DestinationFile="$(FinalZipPath)" 
+      Overwrite="true" />
+
+    <RemoveDir Directories="$(PublishDir)" />
+    
+    <Message Importance="high" Text="Zipped package successfully created: $(FinalZipPath)" />
+  </Target>
+
+  <Target Name="CreateDebianPackage" AfterTargets="ZipCustomOutput" Condition="!$(RuntimeIdentifier.StartsWith('win'))">
+    
+    <PropertyGroup>
+      <ZipFileDir>/home/nw.ngramtextclassification/</ZipFileDir>
+
+      <ZipFileRuntimeIdentifier>$(RuntimeIdentifier)</ZipFileRuntimeIdentifier>
+      <ZipFileRuntimeIdentifier Condition="'$(RuntimeIdentifier)' == 'linux-x64'">linux-amd64</ZipFileRuntimeIdentifier>
+      
+      <ZipFileName>$(ExecutableName)-v$(Version)-$(ZipFileRuntimeIdentifier).zip</ZipFileName>
+      <SourceZipPath>$(ZipFileDir)$(ZipFileName)</SourceZipPath>
+
+      <MdSourcePath>$(MSBuildProjectDirectory)/../../scripts/nwbuilders/$(ExecutableName).md</MdSourcePath>
+      <TempManPath>/tmp/$(ExecutableName).1</TempManPath>
+      
+      <DebArch Condition="'$(RuntimeIdentifier)' == 'linux-x64'">amd64</DebArch>
+      <DebArch Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">arm64</DebArch>
+      <DebArch Condition="'$(DebArch)' == ''">all</DebArch>
+
+      <DebLayoutDir>/tmp/$(ExecutableName)-$(DebArch)-layout</DebLayoutDir>
+      <PackageFileName>$(ExecutableName)-v$(Version)-linux-$(DebArch).deb</PackageFileName>
     </PropertyGroup>
 
     <Exec Command="go-md2man -in &quot;$(MdSourcePath)&quot; -out &quot;$(TempManPath)&quot;" />
@@ -159,118 +366,192 @@ Here how the `CreateDebianPackage` target is defined in `NW.<library_name>.CLI.c
     <MakeDir Directories="$(DebLayoutDir)/DEBIAN" />
     <MakeDir Directories="$(DebLayoutDir)/usr/bin" />
     <MakeDir Directories="$(DebLayoutDir)/usr/share/man/man1" />
-
+    
     <PropertyGroup>
-        <UnzipTemp>/tmp/unzip-$(DebArch)</UnzipTemp>
+      <UnzipTemp>/tmp/unzip-$(DebArch)</UnzipTemp>
     </PropertyGroup>
 
     <RemoveDir Directories="$(UnzipTemp)" />
     <MakeDir Directories="$(UnzipTemp)" />
     <Exec Command="unzip -q &quot;$(SourceZipPath)&quot; -d &quot;$(UnzipTemp)&quot;" />
 
-    <Exec Command="if [ -f &quot;$(UnzipTemp)/$(AssemblyName)&quot; ]; then cp &quot;$(UnzipTemp)/$(AssemblyName)&quot; &quot;$(DebLayoutDir)/usr/bin/&quot;; else cp &quot;$(UnzipTemp)/$(AssemblyName).dll&quot; &quot;$(DebLayoutDir)/usr/bin/$(AssemblyName)&quot;; fi" />
-    <Exec Command="chmod 755 &quot;$(DebLayoutDir)/usr/bin/$(AssemblyName)&quot;" />
+    <Exec Command="if [ -f &quot;$(UnzipTemp)/$(ExecutableName)&quot; ]; then cp &quot;$(UnzipTemp)/$(ExecutableName)&quot; &quot;$(DebLayoutDir)/usr/bin/&quot;; else cp &quot;$(UnzipTemp)/$(ExecutableName).dll&quot; &quot;$(DebLayoutDir)/usr/bin/$(ExecutableName)&quot;; fi" />
+    <Exec Command="chmod 755 &quot;$(DebLayoutDir)/usr/bin/$(ExecutableName)&quot;" />
 
-    <Exec Command="cp &quot;$(TempManPath)&quot; &quot;$(DebLayoutDir)/usr/share/man/man1/$(AssemblyName).1&quot;" />
-    <Exec Command="gzip -n9 &quot;$(DebLayoutDir)/usr/share/man/man1/$(AssemblyName).1&quot;" />
+    <Exec Command="cp &quot;$(TempManPath)&quot; &quot;$(DebLayoutDir)/usr/share/man/man1/$(ExecutableName).1&quot;" />
+    <Exec Command="gzip -n9 &quot;$(DebLayoutDir)/usr/share/man/man1/$(ExecutableName).1&quot;" />
 
     <MakeDir Directories="$(DebLayoutDir)/usr/share/applications" />
     <MakeDir Directories="$(DebLayoutDir)/usr/share/pixmaps" />
 
-    <Exec Command="cp &quot;$(MSBuildProjectDirectory)/../../scripts/nwbuilders/numbworks_logo_256x256px.png&quot; &quot;$(DebLayoutDir)/usr/share/pixmaps/$(AssemblyName).png&quot;" />
+    <Exec Command="cp &quot;$(MSBuildProjectDirectory)/../../scripts/nwbuilders/numbworks_logo_256x256px.png&quot; &quot;$(DebLayoutDir)/usr/share/pixmaps/$(ExecutableName).png&quot;" />
 
-<ItemGroup>
-    <DesktopLines Include="[Desktop Entry]" />
-    <DesktopLines Include="Name=$(AssemblyName)" />
-    <DesktopLines Include="Exec=/bin/bash -c &quot;/usr/bin/$(AssemblyName)%3B exec bash&quot;" />
-    <DesktopLines Include="Icon=$(AssemblyName)" />
-    <DesktopLines Include="Type=Application" />
-    <DesktopLines Include="Categories=Utility;" />
-    <DesktopLines Include="Terminal=true" />
-</ItemGroup>
+    <ItemGroup>
+      <DesktopLines Include="[Desktop Entry]" />
+      <DesktopLines Include="Name=$(ExecutableName)" />
+      <DesktopLines Include="Exec=/bin/bash -c &quot;/usr/bin/$(ExecutableName)%3B exec bash&quot;" />
+      <DesktopLines Include="Icon=$(ExecutableName)" />
+      <DesktopLines Include="Type=Application" />
+      <DesktopLines Include="Categories=Utility;" />
+      <DesktopLines Include="Terminal=true" />
+    </ItemGroup>
 
-<WriteLinesToFile 
-    File="$(DebLayoutDir)/usr/share/applications/$(AssemblyName).desktop" 
-    Lines="@(DesktopLines)" 
-    Overwrite="true" />
+    <WriteLinesToFile 
+        File="$(DebLayoutDir)/usr/share/applications/$(ExecutableName).desktop" 
+        Lines="@(DesktopLines)" 
+        Overwrite="true" />
 
-<Exec Command="chmod 644 &quot;$(DebLayoutDir)/usr/share/applications/$(AssemblyName).desktop&quot;" />
-<Exec Command="chmod 644 &quot;$(DebLayoutDir)/usr/share/pixmaps/$(AssemblyName).png&quot;" />
+    <Exec Command="chmod 644 &quot;$(DebLayoutDir)/usr/share/applications/$(ExecutableName).desktop&quot;" />
+    <Exec Command="chmod 644 &quot;$(DebLayoutDir)/usr/share/pixmaps/$(ExecutableName).png&quot;" />
 
-<ItemGroup>
-    <ControlLines Include="Package: $(AssemblyName)" />
-    <ControlLines Include="Version: $(Version)" />
-    <ControlLines Include="Section: utils" />
-    <ControlLines Include="Priority: optional" />
-    <ControlLines Include="Architecture: $(DebArch)" />
-    <ControlLines Include="Maintainer: $(Authors)" />
-    <ControlLines Include="Description: $(Description)" />
-</ItemGroup>
+    <ItemGroup>
+      <ControlLines Include="Package: $(ExecutableName)" />
+      <ControlLines Include="Version: $(Version)" />
+      <ControlLines Include="Section: utils" />
+      <ControlLines Include="Priority: optional" />
+      <ControlLines Include="Architecture: $(DebArch)" />
+      <ControlLines Include="Maintainer: $(Authors)" />
+      <ControlLines Include="Description: $(Description)" />
+    </ItemGroup>
 
-<WriteLinesToFile File="$(DebLayoutDir)/DEBIAN/control" Lines="@(ControlLines)" Overwrite="true" />
+    <WriteLinesToFile File="$(DebLayoutDir)/DEBIAN/control" Lines="@(ControlLines)" Overwrite="true" />
 
-<ItemGroup>
-    <PostLines Include="#!/bin/sh" />
-    <PostLines Include="set -e" />
-    <PostLines Include="if [ &quot;%241&quot; = &quot;configure&quot; ]; then" />
-    <PostLines Include="    mandb -q" />
-    <PostLines Include="    update-desktop-database /usr/share/applications || true" />
-    <PostLines Include="    update-icon-caches /usr/share/icons/hicolor || true" />
-    <PostLines Include="fi" />
-    <PostLines Include="exit 0" />
-</ItemGroup>
+    <ItemGroup>
+      <PostLines Include="#!/bin/sh" />
+      <PostLines Include="set -e" />
+      <PostLines Include="if [ &quot;%241&quot; = &quot;configure&quot; ]; then" />
+      <PostLines Include="    mandb -q" />
+      <PostLines Include="    update-desktop-database /usr/share/applications || true" />
+      <PostLines Include="    update-icon-caches /usr/share/icons/hicolor || true" />
+      <PostLines Include="fi" />
+      <PostLines Include="exit 0" />
+    </ItemGroup>
 
-<WriteLinesToFile File="$(DebLayoutDir)/DEBIAN/postinst" Lines="@(PostLines)" Overwrite="true" />
+    <WriteLinesToFile File="$(DebLayoutDir)/DEBIAN/postinst" Lines="@(PostLines)" Overwrite="true" />
+    
+    <Exec Command="chmod 755 &quot;$(DebLayoutDir)/DEBIAN/postinst&quot;" />
+    <Exec Command="cd &quot;$(DebLayoutDir)&quot; &amp;&amp; dpkg-deb --build --root-owner-group . &quot;$(ZipFileDir)/$(PackageFileName)&quot;" />
 
-<Exec Command="chmod 755 &quot;$(DebLayoutDir)/DEBIAN/postinst&quot;" />
-<Exec Command="cd &quot;$(DebLayoutDir)&quot; &amp;&amp; dpkg-deb --build --root-owner-group . &quot;$(ZipFileDir)/$(PackageFileName)&quot;" />
+    <RemoveDir Directories="$(UnzipTemp)" />
+    <RemoveDir Directories="$(DebLayoutDir)" />
+    <Exec Command="rm -f &quot;$(TempManPath)&quot;" />
 
-<RemoveDir Directories="$(UnzipTemp)" />
-<RemoveDir Directories="$(DebLayoutDir)" />
-<Exec Command="rm -f &quot;$(TempManPath)&quot;" />
+    <Message Importance="high" Text="Debian package successfully created: $(ZipFileDir)/$(PackageFileName)" />
+  </Target>
 
-<Message Importance="high" Text="Debian package successfully created: $(ZipFileDir)/$(PackageFileName)" />
-</Target>
+  <ItemGroup>
+    <None Include="../../scripts/nwbuilders/numbworks_logo_256x256px.png" Pack="true" PackagePath="\" />
+    <None Include="../../scripts/nwbuilders/NW.NGramTextClassification.CLI.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>nwngram</ToolCommandName>
+    <PackageId>NW.NGramTextClassification.CLI</PackageId>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageReadmeFile>NW.NGramTextClassification.CLI.md</PackageReadmeFile>
+    <PackageIcon>numbworks_logo_256x256px.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/numbworks/NW.NGramTextClassification</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/numbworks/NW.NGramTextClassification</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>library csharp machine learning text classification ngrams</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsTestProject>false</IsTestProject>
+    <IsTestingPlatformApplication>false</IsTestingPlatformApplication>
+    <GenerateTestingPlatformEntryPoint>false</GenerateTestingPlatformEntryPoint>
+  </PropertyGroup>
+
+</Project>
 ```
 
-For converting `<cli_name>.md` to `<cli_name>.man`, the `go-md2man` application is required to be installed in the devcontainer, as shown in this example `.devcontainer/Dockerfile`:
+`NW.NGramTextClassification.UnitTests.csproj`, `NW.NGramTextClassification.CLI.UnitTests.csproj`:
 
-```Dockerfile
-FROM mcr.microsoft.com/devcontainers/dotnet@sha256:e4fbb49c3ee92933e40c6974b42dda3051827b7ff932463edbd0b575f63a612c
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
 
-RUN apt -y update && \
-    apt -y upgrade && \
-    apt -y install git && \
-    apt -y install go-md2man
-...
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  ...
+
+</Project>
 ```
 
-## Notes About `publish` In `launch.json`
+## The Publishing Strategies
 
-Here the excerpt of `.vscode/launch.json` that is responsible to trigger the targets in `NW.<library_name>.CLI.csproj` via `Run Task`:
+The artifacts generated by the build pipeline are manually attached to the Github release.
 
-```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "publish",
-            "type": "shell",
-            "command": "for RID in linux-arm64 win-x64 linux-x64; do dotnet publish /p:PublishSingleFile=true /p:PublishTrimmed=false /p:DebugType=None --self-contained true -c Release -r $RID --output /home/nw.zoosketchdownloader/temp/; done",
-            "options": {
-                "cwd": "${workspaceFolder}/src/NW.ZooSketches.CLI"
-            },
-            "problemMatcher": "$msCompile"
-        },
-        ...
-}
+The NuGet package and the NuGet tool are automatically published on NuGet\.org via GitHub Actions.
+
+`.github/workflows/dotnet.yml`:
+
+```yaml
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install dotnet SDK 8.x
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.x
+
+    - name: Display installed SDKs
+      run:  dotnet --info
+      
+    - name: Restore dependencies
+      run: dotnet restore -s https://api.nuget.org/v3/index.json --verbosity n
+      
+    - name: Build
+      working-directory: ./
+      run: dotnet build --no-restore
+      
+    - name: Run unit tests
+      working-directory: ./
+      run: dotnet test --no-build --verbosity normal
+      
+    - name: Find packages
+      run: Get-ChildItem -Recurse -Filter *.nupkg | Select-Object FullName
+
+    - name: Pack library
+      working-directory: ./src/NW.NGramTextClassification
+      run: dotnet pack --configuration Release --no-build --output bin/Release
+
+    - name: Publish library to NuGet.org
+      run: Get-ChildItem ./src/NW.NGramTextClassification/bin/Release/*.nupkg | ForEach-Object { dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate }
+
+    - name: Pack tool
+      working-directory: ./src/NW.NGramTextClassification.CLI
+      run: dotnet pack --configuration Release --no-build
+
+    - name: Publish tool to NuGet.org
+      run: Get-ChildItem ./src/NW.NGramTextClassification.CLI/nupkg/*.nupkg | ForEach-Object { dotnet nuget push $_.FullName --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate }
 ```
 
-## Notes About The Debian Packages
+## The Debian Packages
 
-- `Exec=/bin/bash -c '/usr/bin/${PROJECT_ALIAS}; exec bash'` will launch the installed CLI application without closing the terminal window afterwards. Bash's full-path is used to increase compatibility.
+`Exec=/bin/bash -c '/usr/bin/${PROJECT_ALIAS}; exec bash'` will launch the installed CLI application without closing the terminal window afterwards. Bash's full-path is used to increase compatibility.
 
-## Notes About The `man` Pages
+## The Man Page
 
 Let's say that the source file for the `man` page is called `nwxxx.md`.
 
@@ -306,6 +587,35 @@ $ nano /etc/dpkg/dpkg.cfg.d/docker
 path-exclude /usr/share/man/*
 ....
 ```
+
+Side note: the Markdown file used for `go-md2man` must have LF as end-of-line.
+
+## Notes: Publishing On NuGet\.org
+
+Publishing on NuGet\.org requires the following manual processes:
+
+1. Creating an API key on NuGet.org:
+    - Go to http://nuget.org and login.
+    - Go to https://www.nuget.org/account/apikeys?forceApiKeys=true
+    - Add or regerate an API Key.
+    - Copy and paste the API key somewhere.
+    - Done!
+2. Adding the API key on Github:
+    - Go to the repository's main page - e.g. https://github.com/numbworks/NW.NGramTextClassification
+    - Click on `Settings` tab => `Secrets and variables` => `Actions` => Add or update `NUGET_API_KEY`.
+    - Done!
+3. (Optional) Previewing the documentation of the `.nupkg` packages before publishing:
+    - Go to http://nuget.org and login.
+    - Click on `Upload` in the top navigation bar.
+    - Drag and drop your generated `.nupkg` file.
+    - Stop here! Do not click the final `Submit` button! Once done, just click on `Cancel`!
+    - Done!
+
+## Source
+
+The following project is used for the examples in this document:
+
+- [NW.NGramTextClassification](https://github.com/numbworks/NW.NGramTextClassification)
 
 ## Markdown Toolset
 

@@ -20,9 +20,9 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Version>4.2.1</Version>
-    <AssemblyVersion>4.2.1.0</AssemblyVersion>
-    <FileVersion>4.2.1.0</FileVersion>
+    <Version>4.3.0</Version>
+    <AssemblyVersion>4.3.0.0</AssemblyVersion>
+    <FileVersion>4.3.0.0</FileVersion>
     <Authors>numbworks</Authors>
     <Copyright>numbworks 2026</Copyright>
     <Description>NW.NGramTextClassification is a library to perform Text Classification on the string of text you provide. Text Classification is a machine learning technique that calculates the similarity between the string of text you need to categorize and a collection of already categorized strings you provide to the library.</Description>

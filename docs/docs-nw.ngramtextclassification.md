@@ -6,7 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2020-12-27 | numbworks | Created. |
-| 2026-07-19 | numbworks | Last update (v4.2.1). |
+| 2026-10-26 | numbworks | Last update (v4.3.0). |
 
 ## Introduction
 
@@ -287,6 +287,12 @@ This project includes portions of the `asciibannermanager` project, which is doc
 
 - [docs-asciibannermanager.md](SeeAlso-asciibannermanager/docs-asciibannermanager.md)
 
+## See Also: `contributionguide`
+
+If you would like to contribute to this project, please take a look at the following document first:
+
+- [docs-contributionguide-csharp.md](SeeAlso-contributionguide/docs-contributionguide-csharp.md)
+
 ## See Also: `developerguide`
 
 To get started with this project as a developer, please give a look to the following document:
@@ -310,6 +316,18 @@ To learn more about some known issues that might have required a workaround to m
 This project includes portions of the `nwbuilders` project, which is documented here:
 
 - [docs-nwbuilders-csharp.md](SeeAlso-nwbuilders/docs-nwbuilders-csharp.md)
+
+## See Also: `nwmakefiles`
+
+This project includes portions of the `nwmakefiles` project, which is documented here:
+
+- [docs-nwmakefiles-csharp.md](SeeAlso-nwmakefiles/docs-nwmakefiles-csharp.md)
+
+## See Also: `nwpublishers`
+
+To know more about the package publishing logic, please give a look to the following document:
+
+- [docs-nwpublishers-csharp.md](SeeAlso-nwpublishers/docs-nwpublishers-csharp.md)
 
 ## See Also: `userguide`
 

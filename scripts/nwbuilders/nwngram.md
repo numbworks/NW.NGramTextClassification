@@ -45,13 +45,15 @@ Performs a text classification task on the data you provide.
 **--disableindexserialization**
     Defines whether to skip saving the calculated similarity index data to disk.
 
+**--enableutc**
+    Replaces local time with UTC time in timestamps.
+
 # EXAMPLES
 **Performs a text classification task on the data you provide:**
 
 ```text
 ./nwngram session classify --labeledexamples:LabeledExamples.json --textsnippets:TextSnippets.json
 ```
-
 
 # AUTHOR
 numbworks (numbworks@gmail.com)

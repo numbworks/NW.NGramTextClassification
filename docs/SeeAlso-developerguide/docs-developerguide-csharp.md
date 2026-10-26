@@ -6,7 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2026-05-10 | numbworks | Created. |
-| 2026-07-04 | numbworks | Last update. |
+| 2026-07-26 | numbworks | Last update. |
 
 ## Introduction
 
@@ -32,8 +32,8 @@ To run this application as a developer:
 To run the executable you just build:
 
 ```bash
-cd /workspaces/.dotnet-bin/NW.ZooSketches.CLI/bin/net8.0
-./nwzsd
+cd /workspaces/.dotnet-bin/NW.NGramTextClassification.CLI/bin/net8.0
+./nwngram
 ```
 
 ## Unit Tests
@@ -46,13 +46,10 @@ In order to run the unit tests, you have two options:
 If you want to run the tests of a specific project of the solution:
 
 ```bash
-dotnet test tests/NW.XPaths.UnitTests/NW.XPaths.UnitTests.csproj
+dotnet test tests/NW.NW.NGramTextClassification.UnitTests/NW.NW.NGramTextClassification.UnitTests.csproj
 ```
 
-In order to see the unit tests coverage, you have two options as well:
-
-1. VSCode menubar -> `Terminal` -> `Run Task` -> `test coverage summary`.
-2. VSCode menubar -> `Terminal` -> `New Terminal` and run the following command:
+In order to see the unit tests coverage, VSCode menubar -> `Terminal` -> `New Terminal` and run the following command:
 
   ```bash
   resultsdir="$(mktemp -d)" reportdir="$(mktemp -d)" ; trap 'rm -rf "$resultsdir" "$reportdir"' EXIT ; dotnet test --collect:"XPlat Code Coverage" --results-directory "$resultsdir" && reportgenerator -reports:"$resultsdir/**/coverage.cobertura.xml" -targetdir:"$reportdir" -reporttypes:TextSummary && cat "$reportdir/Summary.txt"
@@ -83,26 +80,26 @@ private static TestCaseData[] exceptionTestCases =
 Managing a C# solution in VSCode instead of Visual Studio requires the user to rely upon the `dotnet` command for the majority of the operations:
 
 ```bash
-dotnet new sln -n NW.ZooSketchDownloader
+dotnet new sln -n NW.NW.NGramTextClassification
 ```
 
 ```bash
-dotnet new classlib -n NW.ZooSketches -o src/NW.ZooSketches
-dotnet sln add src/NW.ZooSketches/NW.ZooSketches.csproj
-dotnet add src/NW.ZooSketches/NW.ZooSketches.csproj package HtmlAgilityPack
+dotnet new classlib -n NW.NGramTextClassification -o src/NW.NGramTextClassification
+dotnet sln add src/NW.NGramTextClassification/NW.NGramTextClassification.csproj
+dotnet add src/NW.NGramTextClassification/NW.NGramTextClassification.csproj package HtmlAgilityPack
 ```
 
 ```bash
-dotnet new nunit -n NW.ZooSketches.UnitTests -o tests/NW.ZooSketches.UnitTests
-dotnet sln add tests/NW.ZooSketches.UnitTests/NW.ZooSketches.UnitTests.csproj
-dotnet add tests/NW.ZooSketches.UnitTests/NW.ZooSketches.UnitTests.csproj reference src/NW.ZooSketches/NW.ZooSketches.csproj
-dotnet add tests/NW.ZooSketches.UnitTests/NW.ZooSketches.UnitTests.csproj package Microsoft.NET.Test.Sdk
-dotnet add tests/NW.ZooSketches.UnitTests/NW.ZooSketches.UnitTests.csproj package NUnit3TestAdapter
-dotnet add tests/NW.ZooSketches.UnitTests/NW.ZooSketches.UnitTests.csproj package NSubstitute
+dotnet new nunit -n NW.NGramTextClassification.UnitTests -o tests/NW.NGramTextClassification.UnitTests
+dotnet sln add tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj
+dotnet add tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj reference src/NW.NGramTextClassification/NW.NGramTextClassification.csproj
+dotnet add tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj package Microsoft.NET.Test.Sdk
+dotnet add tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj package NUnit3TestAdapter
+dotnet add tests/NW.NGramTextClassification.UnitTests/NW.NGramTextClassification.UnitTests.csproj package NSubstitute
 ```
 
 ```bash
-dotnet run --project src/NW.ZooSketches.CLI
+dotnet run --project src/NW.NGramTextClassification.CLI
 ```
 
 ```bash
@@ -124,8 +121,8 @@ To create a new class starting from the template:
 
 ```bash
 dotnet new install ./data/TemplateClass
-cd src/NW.ZooSketches/Sketches/
-dotnet new classtemplate -n SketchCollection --namespace NW.ZooSketches
+cd src/NW.NGramTextClassification/LabeledExamples/
+dotnet new classtemplate -n DiscardedExample --namespace NW.NGramTextClassification
 ```
 
 If problems arise:
@@ -249,6 +246,12 @@ If you are loading a VSCode project built upon a devcontainer defined using a SH
 ```
 docker pull mcr.microsoft.com/devcontainers/dotnet@sha256:<DIGEST>
 ```
+
+## Source
+
+Most of the code used in the example blocks comes from the following project:
+
+- [NW.NGramTextClassification](https://github.com/numbworks/NW.NGramTextClassification)
 
 ## Markdown Toolset
 

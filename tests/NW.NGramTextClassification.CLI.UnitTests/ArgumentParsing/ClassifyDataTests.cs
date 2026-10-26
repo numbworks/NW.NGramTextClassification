@@ -33,7 +33,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
                         minAccuracyMultiple: 0.7,
                         saveSession: true,
                         cleanLabeledExamples: true,
-                        disableIndexSerialization: false
+                        disableIndexSerialization: false,
+                        enableUTC: true
                     );
 
             // Assert
@@ -48,6 +49,7 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             Assert.That(actual.SaveSession, Is.InstanceOf<bool>());
             Assert.That(actual.CleanLabeledExamples, Is.InstanceOf<bool>());
             Assert.That(actual.DisableIndexSerialization, Is.InstanceOf<bool>());
+            Assert.That(actual.EnableUTC, Is.InstanceOf<bool>());
 
         }
 

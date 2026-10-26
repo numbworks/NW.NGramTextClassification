@@ -16,7 +16,7 @@ nwngram
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
 |session|||Success|
-|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*|Success<br />Failure|
+|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enableutc*|Success<br />Failure|
 
 ## Examples
 
@@ -42,7 +42,7 @@ The command above will log something like this to the console:
  ##:. ###: ##: ##: ##: ##:. ###: ##::: ##:: ##::. ##:: ##.... ##: ##:.:: ##:
  ##::. ##:. ###. ###:: ##::. ##:. ######::: ##:::. ##: ##:::: ##: ##:::: ##:
 ..::::..:::...::...:::..::::..:::......::::..:::::..::..:::::..::..:::::..::
-*********************************************************Version: 4.2.1*****
+*********************************************************Version: 4.3.0*****
 
 
 [2026-07-19 20:28:06:229] Attempting to load a collection of 'LabeledExample' objects from: C:\Users\Rubèn\Desktop\nw.ngramtextclassification\LabeledExamples.json.
@@ -161,7 +161,7 @@ The produced JSON will look like:
       ]
     }
   ],
-  "Version": "4.2.1"
+  "Version": "4.3.0"
 }
 ```
 
