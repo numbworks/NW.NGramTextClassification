@@ -323,6 +323,12 @@ This project includes portions of the `nwmakefiles` project, which is documented
 
 - [docs-nwmakefiles-csharp.md](SeeAlso-nwmakefiles/docs-nwmakefiles-csharp.md)
 
+## See Also: `nwpublishers`
+
+To know more about the package publishing logic, please give a look to the following document:
+
+- [docs-nwpublishers-csharp.md](SeeAlso-nwpublishers/docs-nwpublishers-csharp.md)
+
 ## See Also: `userguide`
 
 To get started with this project as a user, please give a look to the following document:
