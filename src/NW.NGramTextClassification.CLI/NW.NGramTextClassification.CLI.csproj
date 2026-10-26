@@ -22,7 +22,7 @@
   <PropertyGroup>
     <AssemblyName>NW.NGramTextClassification.CLI</AssemblyName>
     <ExecutableName>nwngram</ExecutableName>
-    <Version>4.2.1</Version>
+    <Version>4.3.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <Authors>numbworks</Authors>
     <Company>numbworks</Company>
