@@ -317,6 +317,12 @@ This project includes portions of the `nwbuilders` project, which is documented 
 
 - [docs-nwbuilders-csharp.md](SeeAlso-nwbuilders/docs-nwbuilders-csharp.md)
 
+## See Also: `nwmakefiles`
+
+This project includes portions of the `nwmakefiles` project, which is documented here:
+
+- [docs-nwmakefiles-csharp.md](SeeAlso-nwmakefiles/docs-nwmakefiles-csharp.md)
+
 ## See Also: `userguide`
 
 To get started with this project as a user, please give a look to the following document:
