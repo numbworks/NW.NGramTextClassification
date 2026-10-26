@@ -6,7 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2021-10-13 | numbworks | Created. |
-| 2026-07-19 | numbworks | Last update (v4.2.1). |
+| 2026-10-26 | numbworks | Last update (v4.3.0). |
 
 ## Introduction
 
@@ -17,7 +17,7 @@ Contact: numbworks@gmail.com
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
 |session|||Success|
-|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*|Success<br />Failure|
+|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
 
 ## Examples
 
@@ -43,7 +43,7 @@ The command above will log something like this to the console:
  ##:. ###: ##: ##: ##: ##:. ###: ##::: ##:: ##::. ##:: ##.... ##: ##:.:: ##:
  ##::. ##:. ###. ###:: ##::. ##:. ######::: ##:::. ##: ##:::: ##: ##:::: ##:
 ..::::..:::...::...:::..::::..:::......::::..:::::..::..:::::..::..:::::..::
-*********************************************************Version: 4.2.1*****
+*********************************************************Version: 4.3.0*****
 
 
 [2026-07-19 20:28:06:229] Attempting to load a collection of 'LabeledExample' objects from: C:\Users\Rubèn\Desktop\nw.ngramtextclassification\LabeledExamples.json.
@@ -162,7 +162,7 @@ The produced JSON will look like:
       ]
     }
   ],
-  "Version": "4.2.1"
+  "Version": "4.3.0"
 }
 ```
 
