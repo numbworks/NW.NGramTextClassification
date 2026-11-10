@@ -17,6 +17,13 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #region Properties
 
+        public static Func<string, string> LoadingFileNameReturnedDefault =
+            (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
+
+
+        // ----
+
+
         public static Func<int, string> ProvidedSnippetsAre = (count) => $"The provided snippets are: '{count}'.";
 
         public static string AttemptingToClassifyProvidedSnippet = "Attempting to classify the provided snippet of text...";

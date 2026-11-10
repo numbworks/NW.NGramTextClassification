@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Serialization;

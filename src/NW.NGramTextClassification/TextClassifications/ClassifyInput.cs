@@ -1,6 +1,7 @@
 namespace NW.NGramTextClassification.TextClassifications
 {
 
+	/// <summary>Collects all the data required by the <c>classify</c> sub-command.</summary>
     public class ClassifyInput
     {
 	
@@ -8,9 +9,33 @@ namespace NW.NGramTextClassification.TextClassifications
 		#endregion
 		
 		#region Properties
+
+		public string FolderPath { get; }
+        public string LabeledExamplesFileName { get; }
+        public string TextSnippetsFileName { get; }
+		public string TokenizerRuleSetFileName { get; }
+
+		public const string DefaultTokenizerRuleSetFileName = "";
+
 		#endregion
 		
 		#region Constructors
+
+		/// <summary>Initializes a <see cref="ClassifyInput"/> instance.</summary>
+		public ClassifyInput(
+			string folderPath, 
+			string labeledExamplesFileName, 
+			string textSnippetsFileName, 
+			string tokenizerRuleSetFileName = DefaultTokenizerRuleSetFileName)
+        {
+            
+			FolderPath = folderPath;
+			LabeledExamplesFileName = labeledExamplesFileName;
+			TextSnippetsFileName = textSnippetsFileName;
+			TokenizerRuleSetFileName = tokenizerRuleSetFileName;
+
+        }
+
 		#endregion
 		
 		#region Methods (public)
