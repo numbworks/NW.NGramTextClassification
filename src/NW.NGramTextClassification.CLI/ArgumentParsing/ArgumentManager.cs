@@ -1,15 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.CLI.AsciiBanners;
 using NW.NGramTextClassification.CLI.TerminalWindows;
-using NW.Shared.Files;
-using NW.Shared.Serialization;
 using McMaster.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils.Validation;
 using McMaster.Extensions.CommandLineUtils.HelpText;
@@ -163,21 +156,23 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 subCommand.OnExecute(() =>
                 {
 
-                    ClassifyData classifyData
-                        = new ClassifyData(
-                                labeledExamples: labeledExamplesOption.Value(),
-                                textSnippets: textSnippetsOption.Value(),
-                                folderPath: folderPathOption.Value(),
-                                tokenizerRuleSet: tokenizerRuleSetOption.Value(),
-                                minAccuracySingle: DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
-                                minAccuracyMultiple: DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
-                                saveSession: saveSessionOption.HasValue(),
-                                cleanLabeledExamples: cleanLabeledExamplesOption.HasValue(),
-                                disableIndexSerialization: disableIndexSerializationOption.HasValue(),
-                                enableUTC: enableUTCOption.HasValue()
-                        );
+                    SettingBag settingBag = new SettingBag(
+                        folderPath: folderPathOption.Value(),
+                        minimumAccuracySingleLabel: DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
+                        minimumAccuracyMultipleLabels: DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
+                        saveSession: saveSessionOption.HasValue(),
+                        cleanLabeledExamples: cleanLabeledExamplesOption.HasValue(),
+                        disableIndexSerialization: disableIndexSerializationOption.HasValue(),
+                        enableUTC: enableUTCOption.HasValue()
+                    );
 
-                    return RunSessionClassify(classifyData);
+                    ClassifyInput classifyInput = new ClassifyInput(
+                        labeledExamplesFileName: labeledExamplesOption.Value(),
+                        textSnippetsFileName: textSnippetsOption.Value(),
+                        tokenizerRuleSetFileName: tokenizerRuleSetOption.Value() ?? string.Empty
+                    );
+
+                    return RunSessionClassify(settingBag, classifyInput);
 
                 });
 
@@ -374,15 +369,14 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             return Success;
 
         }
-        private int RunSessionClassify(ClassifyData classifyData)
+        private int RunSessionClassify(SettingBag settingBag, ClassifyInput classifyInput)
         {
             
             LogAsciiBanner();
 
             ITextClassificationManager textClassificationManager 
-                = TextClassificationManagerFactory.Create(enableUTC: classifyData.EnableUTC);
+                = TextClassificationManagerFactory.Create(settingBag: settingBag);
 
-            ClassifyInput classifyInput = null;
             textClassificationManager.Classify(classifyInput);
 
             return Success;

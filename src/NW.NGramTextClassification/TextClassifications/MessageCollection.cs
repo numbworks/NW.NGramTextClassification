@@ -8,7 +8,6 @@ using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifiers;
 
-
 namespace NW.NGramTextClassification.TextClassifications
 {
     ///<summary>Collects all the messages used for logging and exceptions for <see cref="NW.NGramTextClassification.TextClassifications"/>.</summary>

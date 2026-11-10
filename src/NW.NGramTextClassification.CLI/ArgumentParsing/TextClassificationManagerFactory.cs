@@ -24,13 +24,13 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         #region Methods (public)
 
-        public ITextClassificationManager Create(bool enableUTC = false)
+        public ITextClassificationManager Create(SettingBag settingBag)
         {
 
             Func<DateTime> nowFunction = TextClassifier.DefaultNowFunction;
             Action<string> loggingAction = ComponentBag.DefaultLoggingAction; 
 
-            if (enableUTC)
+            if (settingBag.EnableUTC)
             {
                 nowFunction = TextClassifier.DefaultUTCNowFunction;
                 loggingAction = ComponentBag.DefaultUTCLoggingAction; 
