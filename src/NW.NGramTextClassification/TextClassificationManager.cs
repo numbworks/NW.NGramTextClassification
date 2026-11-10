@@ -5,7 +5,6 @@ using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
-using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
@@ -19,8 +18,7 @@ namespace NW.NGramTextClassification
 	
 		#region Fields
 
-        private IFileManager _fileManager;
-		private ITextClassifier _textClassifier;
+		private ComponentBag _componentBag;
 		private SettingBag _settingBag;
 
 		#endregion
@@ -34,11 +32,10 @@ namespace NW.NGramTextClassification
 		#region Constructors
 		
         /// <summary>Initializes a <see cref="TextClassificationManager"/> instance.</summary>
-        public TextClassificationManager(IFileManager fileManager = null, ITextClassifier textClassifier = null, SettingBag settingBag = null)
+        public TextClassificationManager(ComponentBag componentBag = null, SettingBag settingBag = null)
         {
 
-            _fileManager = fileManager ?? new FileManager();
-			_textClassifier = textClassifier ?? new TextClassifier();
+			_componentBag = componentBag ?? new ComponentBag();
 			_settingBag = settingBag;
 
         }
@@ -61,10 +58,10 @@ namespace NW.NGramTextClassification
             NGramTokenizerRuleSet tokenizerRuleSet = EstablishTokenizerRuleSet(classifyInput);
 
 			if (_settingBag.CleanLabeledExamples)
-				labeledExamples = _textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
+				labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
 			ClassifyOutput classifyOutput 
-				= _textClassifier.ClassifyMany(
+				= _componentBag.TextClassifier.ClassifyMany(
 					textSnippets: textSnippets, 
 					tokenizerRuleSet: tokenizerRuleSet, 
 					labeledExamples: labeledExamples, 
@@ -72,7 +69,7 @@ namespace NW.NGramTextClassification
 					minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
 			if (_settingBag.SaveSession)
-				_textClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
+				_componentBag.TextClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
 
 			return classifyOutput;
 
@@ -86,7 +83,7 @@ namespace NW.NGramTextClassification
         {
             
 			string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter file = _fileManager.Create(filePath);
+            IFileInfoAdapter file = _componentBag.FileManager.Create(filePath);
 
 			return file;
 
@@ -94,7 +91,7 @@ namespace NW.NGramTextClassification
         private List<LabeledExample> LoadLabeledExamplesOrThrow(IFileInfoAdapter labeledExamplesFile)
         {
 
-            List<LabeledExample> labeledExamples = _textClassifier.LoadLabeledExamplesOrDefault(labeledExamplesFile);
+            List<LabeledExample> labeledExamples = _componentBag.TextClassifier.LoadLabeledExamplesOrDefault(labeledExamplesFile);
 			
             if (labeledExamples == Serializer<LabeledExample>.Default)
                 throw new Exception(TextClassifications.MessageCollection.LoadingFileNameReturnedDefault(labeledExamplesFile.FullName));
@@ -105,7 +102,7 @@ namespace NW.NGramTextClassification
         private List<TextSnippet> LoadTextSnippetsOrThrow(IFileInfoAdapter textSnippetsFile)
         {
 
-            List<TextSnippet> textSnippets = _textClassifier.LoadTextSnippetsOrDefault(textSnippetsFile);
+            List<TextSnippet> textSnippets = _componentBag.TextClassifier.LoadTextSnippetsOrDefault(textSnippetsFile);
 
             if (textSnippets == Serializer<TextSnippet>.Default)
                 throw new Exception(TextClassifications.MessageCollection.LoadingFileNameReturnedDefault(textSnippetsFile.FullName));
@@ -133,7 +130,7 @@ namespace NW.NGramTextClassification
 		private NGramTokenizerRuleSet LoadTokenizerRuleSetOrThrow(IFileInfoAdapter tokenizerRuleSetFile)
         {
 
-            NGramTokenizerRuleSet tokenizerRuleset = _textClassifier.LoadTokenizerRuleSetOrDefault(tokenizerRuleSetFile);
+            NGramTokenizerRuleSet tokenizerRuleset = _componentBag.TextClassifier.LoadTokenizerRuleSetOrDefault(tokenizerRuleSetFile);
 
             if (tokenizerRuleset == default(NGramTokenizerRuleSet))
                 throw new Exception(TextClassifications.MessageCollection.LoadingFileNameReturnedDefault(tokenizerRuleSetFile.FullName));
