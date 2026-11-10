@@ -19,24 +19,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                         () => new TextClassifierSession(
                                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                                     minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                                    results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
-                                    version: ComponentBag.DefaultVersionFunction()
-                                )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("settingBag").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_01"),
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new TextClassifierSession(
-                                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                                     results: null,
                                     version: ComponentBag.DefaultVersionFunction()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("results").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_02"),
+                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
@@ -48,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("version").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_03")
+                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_02")
 
         };
 
