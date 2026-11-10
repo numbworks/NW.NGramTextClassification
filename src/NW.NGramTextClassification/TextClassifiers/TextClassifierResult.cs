@@ -2,7 +2,7 @@
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextSnippets;
 
-namespace NW.NGramTextClassification.TextClassifications
+namespace NW.NGramTextClassification.TextClassifiers
 {
     /// <summary>The result of a text classification.</summary>
     public class TextClassifierResult

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NW.Shared.Validation;
 
-namespace NW.NGramTextClassification.TextClassifications
+namespace NW.NGramTextClassification.TextClassifiers
 {
     /// <summary>The outcome of a text classification session.</summary>
     public class TextClassifierSession

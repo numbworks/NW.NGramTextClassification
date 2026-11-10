@@ -5,7 +5,7 @@ using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextSnippets;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.CLI.AsciiBanners;
 using NW.NGramTextClassification.CLI.TerminalWindows;
 using NW.Shared.Files;

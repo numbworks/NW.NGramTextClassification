@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Serialization;
 using NUnit.Framework;
@@ -141,8 +141,8 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         {
 
             // Arrange
-            TextClassifierSession obj = TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00;
-            string expected = TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content.Replace("\r\n", "\n");
+            TextClassifierSession obj = TextClassifiers.ObjectMother.TextClassifierSession_CompleteLabeledExamples00;
+            string expected = TextClassifiers.ObjectMother.TextClassifierrSessionCLE00AsJson_Content.Replace("\r\n", "\n");
 
             // Act
             string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj).Replace("\r\n", "\n");
@@ -223,8 +223,8 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         {
 
             // Arrange
-            string json = TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content;
-            NGramTokenizerRuleSet expected = TextClassifications.ObjectMother.TokenizerRuleSet;
+            string json = TextClassifiers.ObjectMother.TokenizerRuleSetAsJson_Content;
+            NGramTokenizerRuleSet expected = TextClassifiers.ObjectMother.TokenizerRuleSet;
 
             // Act
             NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);

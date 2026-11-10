@@ -9,14 +9,14 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.UnitTests.Utilities;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests
+namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 {
     [TestFixture]
     public class TextClassifierTests
@@ -83,7 +83,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierSession_Default
+                    TextClassifiers.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
             new TestCaseData(
@@ -96,7 +96,7 @@ namespace NW.NGramTextClassification.UnitTests
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifications.ObjectMother.TextClassifierSession_Default
+                    TextClassifiers.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_02"),
 
 
@@ -109,7 +109,7 @@ namespace NW.NGramTextClassification.UnitTests
                             text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.ShortLabeledExamples_Untokenizable,
-                    TextClassifications.ObjectMother.TextClassifierSession_Default
+                    TextClassifiers.ObjectMother.TextClassifierSession_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
         };
@@ -150,7 +150,7 @@ namespace NW.NGramTextClassification.UnitTests
                     new TextClassifierSession(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                            results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: ComponentBag.DefaultVersionFunction()
                         )
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification)}_01")
@@ -177,7 +177,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyMany(
-                                        textSnippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
+                                        textSnippets: TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                                         tokenizerRuleSet: null,
                                         labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
                                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
@@ -191,7 +191,7 @@ namespace NW.NGramTextClassification.UnitTests
                 new TestDelegate(
                         () => new TextClassifier()
                                     .ClassifyMany(
-                                        textSnippets: TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
+                                        textSnippets: TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: null,
                                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
@@ -206,7 +206,7 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             new TestCaseData(
-                    TextClassifications.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
+                    TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                     TextClassifier.DefaultNGramTokenizerRuleSet,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
                     0.0,
@@ -214,13 +214,13 @@ namespace NW.NGramTextClassification.UnitTests
                     new TextClassifierSession(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                            results: TextClassifications.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                            results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: ComponentBag.DefaultVersionFunction()
                         )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01"),
 
             new TestCaseData(
-                    TextClassifications.ObjectMother.Snippets_Untokenizable.Select(text => new TextSnippet(text: text)).ToList(),
+                    TextClassifiers.ObjectMother.Snippets_Untokenizable.Select(text => new TextSnippet(text: text)).ToList(),
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
                     0.0,
@@ -228,7 +228,7 @@ namespace NW.NGramTextClassification.UnitTests
                     new TextClassifierSession(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                            results: TextClassifications.ObjectMother.TextClassifierResults_Untokenizable,
+                            results: TextClassifiers.ObjectMother.TextClassifierResults_Untokenizable,
                             version: ComponentBag.DefaultVersionFunction()
                         )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_02")
@@ -247,10 +247,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadLabeledExamplesOrDefault(jsonFile: ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadLabeledExamplesOrDefault(jsonFile: Utilities.ObjectMother.FileInfoAdapterDoesntExist)
                     ),
             typeof(ArgumentException),
-                Shared.Files.Validation.MessageCollection.ProvidedPathDoesntExist(ObjectMother.FileInfoAdapterDoesntExist)
+                Shared.Files.Validation.MessageCollection.ProvidedPathDoesntExist(Utilities.ObjectMother.FileInfoAdapterDoesntExist)
             ).SetArgDisplayNames($"{nameof(loadLabeledExamplesOrDefaultExceptionTestCases)}_02")
 
         };
@@ -267,10 +267,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTextSnippetsOrDefault(jsonFile: ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadTextSnippetsOrDefault(jsonFile: Utilities.ObjectMother.FileInfoAdapterDoesntExist)
                     ),
                 typeof(ArgumentException),
-                Shared.Files.Validation.MessageCollection.ProvidedPathDoesntExist(ObjectMother.FileInfoAdapterDoesntExist)
+                Shared.Files.Validation.MessageCollection.ProvidedPathDoesntExist(Utilities.ObjectMother.FileInfoAdapterDoesntExist)
             ).SetArgDisplayNames($"{nameof(loadTextSnippetsOrDefaultExceptionTestCases)}_02")
 
         };
@@ -287,10 +287,10 @@ namespace NW.NGramTextClassification.UnitTests
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifier().LoadTokenizerRuleSetOrDefault(jsonFile: ObjectMother.FileInfoAdapterDoesntExist)
+                        () => new TextClassifier().LoadTokenizerRuleSetOrDefault(jsonFile: Utilities.ObjectMother.FileInfoAdapterDoesntExist)
                     ),
                 typeof(ArgumentException),
-                Shared.Files.Validation.MessageCollection.ProvidedPathDoesntExist(ObjectMother.FileInfoAdapterDoesntExist)
+                Shared.Files.Validation.MessageCollection.ProvidedPathDoesntExist(Utilities.ObjectMother.FileInfoAdapterDoesntExist)
             ).SetArgDisplayNames($"{nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases)}_02")
 
         };
@@ -343,7 +343,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(classifyOrDefaultExceptionTestCases))]
         public void ClassifyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void TextClassifier_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -383,7 +383,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.That(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    TextClassifiers.ObjectMother.AreEqual(expected, actual),
                     Is.True
                 );
 
@@ -406,7 +406,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.That(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    TextClassifiers.ObjectMother.AreEqual(expected, actual),
                     Is.True
                 );
 
@@ -454,7 +454,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.That(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    TextClassifiers.ObjectMother.AreEqual(expected, actual),
                     Is.True
                 );
 
@@ -479,7 +479,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels]
@@ -508,7 +508,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels]
@@ -537,7 +537,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, 1.0, SettingBag.DefaultMinimumAccuracyMultipleLabels]
@@ -568,7 +568,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels]
@@ -599,7 +599,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels]
@@ -630,7 +630,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, SettingBag.DefaultMinimumAccuracySingleLabel, 1.0]
@@ -661,7 +661,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Act
             string actual
-                = ObjectMother.CallPrivateMethod<TextClassifier, string>(
+                = Utilities.ObjectMother.CallPrivateMethod<TextClassifier, string>(
                         obj: textClassifier,
                         methodName: "GetLabel",
                         args: [indexAverages, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels]
@@ -675,7 +675,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(classifyManyExceptionTestCases))]
         public void ClassifyMany_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(classifyManyTestCases))]
         public void ClassifyMany_ShouldReturnExpectedTextClassifierSession_WhenInvoked(
@@ -699,7 +699,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.That(
-                    TextClassifications.ObjectMother.AreEqual(expected, actual),
+                    TextClassifiers.ObjectMother.AreEqual(expected, actual),
                     Is.True
                 );
 
@@ -709,7 +709,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(loadLabeledExamplesOrDefaultExceptionTestCases))]
         public void LoadLabeledExamplesOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void LoadLabeledExamplesOrDefault_ShouldReturnExpectedCollectionOfLabeledExamples_WhenProperJsonFileContent()
@@ -754,7 +754,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(loadTextSnippetsOrDefaultExceptionTestCases))]
         public void LoadTextSnippetsOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void LoadTextSnippetsOrDefault_ShouldReturnExpectedCollectionOfTextSnippets_WhenProperJsonFileContent()
@@ -797,7 +797,7 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases))]
         public void LoadTokenizerRuleSetOrDefault_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void LoadTokenizerRuleSetOrDefault_ShouldReturnExpectedTokenizerRuleSet_WhenProperJsonFileContent()
@@ -805,7 +805,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             TextClassifier textClassifier 
-                = new TextClassifier(fileManager: new FakeFileManager(TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content));
+                = new TextClassifier(fileManager: new FakeFileManager(TextClassifiers.ObjectMother.TokenizerRuleSetAsJson_Content));
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TokenizerRuleSet.json");
 
@@ -814,7 +814,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Assert
             Assert.That(
-                    NGramTokenization.ObjectMother.AreEqual(TextClassifications.ObjectMother.TokenizerRuleSet, actual),
+                    NGramTokenization.ObjectMother.AreEqual(TextClassifiers.ObjectMother.TokenizerRuleSet, actual),
                     Is.True
                 );
 
@@ -900,7 +900,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             TextClassifier textClassifier 
                 = new TextClassifier(
-                        fileManager: new FakeFileManager(TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content),
+                        fileManager: new FakeFileManager(TextClassifiers.ObjectMother.TextClassifierrSessionCLE00AsJson_Content),
                         nowFunction: fakeNowFunction,
                         versionFunction: fakeVersionFunction);
 
@@ -912,7 +912,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             // Assert
             Assert.DoesNotThrow(() => 
-                textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, disableIndexSerialization));
+                textClassifier.SaveSession(TextClassifiers.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, disableIndexSerialization));
 
         }
 
@@ -994,7 +994,7 @@ namespace NW.NGramTextClassification.UnitTests
             TextClassifier textClassifier 
                 = new TextClassifier(
                         fileManager: new FakeFileManagerThrowingWriteExceptions(
-                                        content: TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content,
+                                        content: TextClassifiers.ObjectMother.TextClassifierrSessionCLE00AsJson_Content,
                                         writeExceptionMessage: writeExceptionMessage),
                         nowFunction: fakeNowFunction,
                         versionFunction: fakeVersionFunction);
@@ -1007,7 +1007,7 @@ namespace NW.NGramTextClassification.UnitTests
             // Act
             // Assert
             Exception e = Assert.Throws<Exception>(() => 
-                textClassifier.SaveSession(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, false));
+                textClassifier.SaveSession(TextClassifiers.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, false));
 
             Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
 
@@ -1026,7 +1026,7 @@ namespace NW.NGramTextClassification.UnitTests
 
                 // Act
                 IFileInfoAdapter actual
-                    = ObjectMother.CallPrivateGenericMethod<TextClassifier, IFileInfoAdapter>(
+                    = Utilities.ObjectMother.CallPrivateGenericMethod<TextClassifier, IFileInfoAdapter>(
                             obj: textClassifier,
                             methodName: "Create",
                             args: [@"C:\", DateTime.Now],
@@ -1050,12 +1050,12 @@ namespace NW.NGramTextClassification.UnitTests
         [TestCaseSource(nameof(convertExceptionTestCases))]
         public void Convert_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
         public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
-                => ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void CleanLabeledExamples_ShouldReturnExpectedList_WhenAllLabeledExamplesAreRemoved()
@@ -1113,7 +1113,7 @@ namespace NW.NGramTextClassification.UnitTests
 
             // Arrange
             // Act
-            dynamic actual = TextClassifier.SimilarityIndexDisabler(TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00);
+            dynamic actual = TextClassifier.SimilarityIndexDisabler(ObjectMother.TextClassifierSession_CompleteLabeledExamples00);
 
             // Assert
             foreach (ExpandoObject result in actual.Results)

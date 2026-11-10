@@ -1,9 +1,9 @@
 ﻿using System;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests.TextClassifications
+namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 {
     [TestFixture]
     public class TextClassifierSessionTests

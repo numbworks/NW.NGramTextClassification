@@ -1,5 +1,6 @@
 ﻿using System;
 using NW.NGramTextClassification.Bags;
+using NW.NGramTextClassification.TextClassifiers;
 
 namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {

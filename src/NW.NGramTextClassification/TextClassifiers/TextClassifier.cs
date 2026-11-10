@@ -10,14 +10,14 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Files.Validation;
 using NW.Shared.Serialization;
 using NW.Shared.Validation;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.TextClassifiers
 {
     /// <inheritdoc cref="ITextClassifier"/>
     public class TextClassifier : ITextClassifier

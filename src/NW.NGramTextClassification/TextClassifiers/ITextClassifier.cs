@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
 
-namespace NW.NGramTextClassification
+namespace NW.NGramTextClassification.TextClassifiers
 {
     /// <summary>The entry point of this library.</summary>
     public interface ITextClassifier

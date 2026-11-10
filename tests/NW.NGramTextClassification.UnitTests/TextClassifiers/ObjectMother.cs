@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 
-namespace NW.NGramTextClassification.UnitTests.TextClassifications
+namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 {
     public static class ObjectMother
     {

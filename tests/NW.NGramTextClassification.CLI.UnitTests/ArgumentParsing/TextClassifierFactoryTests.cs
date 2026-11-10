@@ -1,5 +1,5 @@
-﻿using NW.NGramTextClassification;
-using NW.NGramTextClassification.Bags;
+﻿using NW.NGramTextClassification.Bags;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.CLI.ArgumentParsing;
 using NUnit.Framework;
 
