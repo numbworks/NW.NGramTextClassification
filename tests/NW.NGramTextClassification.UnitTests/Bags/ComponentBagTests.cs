@@ -84,7 +84,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
 
             Assert.That(ComponentBag.DefaultLoggingActionDateFormat, Is.InstanceOf<string>());
             Assert.That(ComponentBag.DefaultLoggingAction, Is.InstanceOf<Action<string>>());
-            Assert.That(ComponentBag.DefaultLoggingActionUTC, Is.InstanceOf<Action<string>>());
+            Assert.That(ComponentBag.DefaultUTCLoggingAction, Is.InstanceOf<Action<string>>());
 
         }
 

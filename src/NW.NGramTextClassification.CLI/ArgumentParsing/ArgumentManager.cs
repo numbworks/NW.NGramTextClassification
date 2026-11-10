@@ -31,15 +31,15 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         public static int Failure { get; } = ((int)ExitCodes.Failure);
         public static string SeparatorLine { get; } = string.Empty;
         public static Func<string, string> ErrorMessageFormatter = (message) => $"ERROR: {message}";
-        public static NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
+        public static Action<string> DefaultLoggingActionAsciiBanner { get; }
+            = (message) => Console.WriteLine($"{message}");
 
         public IDoubleManager DoubleManager { get; }
         public IOptionValidator MinimumAccuracyValidator { get; }
         public IAsciiBannerManager AsciiBannerManager { get; }
         public ITerminalWindowManager TerminalWindowManager { get; }
-        public ITextClassifierFactory TextClassifierFactory { get; }
-        public IComponentBagFactory ComponentBagFactory { get; }
-        public ISettingBagFactory SettingBagFactory { get; }
+        public ITextClassificationManagerFactory TextClassificationManagerFactory { get; }
+        public Action<string> LoggingActionAsciiBanner { get; }
 
         #endregion
 
@@ -51,18 +51,17 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             IDoubleManager doubleManager = null,
             IAsciiBannerManager asciiBannerManager = null,
             ITerminalWindowManager terminalWindowManager = null,
-            ITextClassifierFactory textClassifierFactory = null,
-            IComponentBagFactory componentBagFactory = null,
-            ISettingBagFactory settingBagFactory = null)
+            ITextClassificationManagerFactory textClassificationManagerFactory = null,
+            Action<string> loggingActionAsciiBanner = null
+            )
         {
             
             DoubleManager = doubleManager ?? new DoubleManager();
             MinimumAccuracyValidator = new MinimumAccuracyValidator(DoubleManager);
             AsciiBannerManager = asciiBannerManager ?? new AsciiBannerManager();
             TerminalWindowManager = terminalWindowManager ?? new TerminalWindowManager();
-            TextClassifierFactory = textClassifierFactory ?? new TextClassifierFactory();
-            ComponentBagFactory = componentBagFactory ?? new ComponentBagFactory();
-            SettingBagFactory = settingBagFactory ?? new SettingBagFactory();
+            TextClassificationManagerFactory = textClassificationManagerFactory ?? new TextClassificationManagerFactory();
+            LoggingActionAsciiBanner = loggingActionAsciiBanner ?? DefaultLoggingActionAsciiBanner;
 
         }
         #endregion
@@ -310,9 +309,8 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         private string CreateAsciiBanner()
         {
 
-            ComponentBag componentBag = ComponentBagFactory.Create();
 
-            string version = componentBag.VersionFunction();
+            string version = TextClassifier.DefaultVersionFunction();
             uint terminalWidth = TerminalWindowManager.GetOrCutoff();
             string asciiBanner = AsciiBannerManager.Create(version, terminalWidth);
 
@@ -322,33 +320,11 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         private void LogAsciiBanner()
         {
 
-            ComponentBag componentBag = ComponentBagFactory.Create();
             string asciiBanner = CreateAsciiBanner();
 
-            componentBag.LoggingActionAsciiBanner(SeparatorLine);
-            componentBag.LoggingActionAsciiBanner(asciiBanner);
-            componentBag.LoggingActionAsciiBanner(SeparatorLine);
-
-        }
-        private void LogFooter()
-        {
-            
-            ComponentBag componentBag = ComponentBagFactory.Create();
-            componentBag.LoggingActionAsciiBanner(SeparatorLine);
-
-        }
-        private int LogAndReturnFailure(Exception e)
-        {
-
-            ComponentBag componentBag = ComponentBagFactory.Create();
-            componentBag.LoggingAction(ErrorMessageFormatter(e.Message));
-
-            if (e.InnerException != null)
-                componentBag.LoggingAction(ErrorMessageFormatter(e.InnerException.Message));
-
-            LogFooter();
-
-            return Failure;
+            LoggingActionAsciiBanner(SeparatorLine);
+            LoggingActionAsciiBanner(asciiBanner);
+            LoggingActionAsciiBanner(SeparatorLine);
 
         }
 
@@ -379,11 +355,8 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
                 ShowHeader();
                 
-                ComponentBag componentBag = ComponentBagFactory.Create();
-                componentBag.LoggingAction(ErrorMessageFormatter(validationResult.ErrorMessage));
+                LoggingActionAsciiBanner(ErrorMessageFormatter(validationResult.ErrorMessage));
                 
-                LogFooter();
-
                 return Failure;
                 
             });
@@ -392,65 +365,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 AddValidationErrorHandling(command);
 
         }        
-
-        private ClassifyData Defaultize(ClassifyData classifyData)
-        {
-
-            ClassifyData updated = new ClassifyData(
-                    labeledExamples: classifyData.LabeledExamples,
-                    textSnippets: classifyData.TextSnippets,
-                    folderPath: classifyData.FolderPath ?? SettingBag.DefaultFolderPath,
-                    tokenizerRuleSet: classifyData.TokenizerRuleSet,
-                    minAccuracySingle: classifyData.MinAccuracySingle ?? SettingBag.DefaultMinimumAccuracySingleLabel,
-                    minAccuracyMultiple: classifyData.MinAccuracyMultiple ?? SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                    saveSession: classifyData.SaveSession,
-                    cleanLabeledExamples: classifyData.CleanLabeledExamples,
-                    disableIndexSerialization: classifyData.DisableIndexSerialization, 
-                    enableUTC: classifyData.EnableUTC
-                );
-
-            return updated;
-
-        }
-        private List<LabeledExample> LoadLabeledExamplesOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
-        {
-
-            string filePath = Path.Combine(classifyData.FolderPath, classifyData.LabeledExamples);
-            IFileInfoAdapter file = textClassifier.Convert(filePath);
-
-            List<LabeledExample> labeledExamples = textClassifier.LoadLabeledExamplesOrDefault(file);
-            if (labeledExamples == Serializer<LabeledExample>.Default)
-                throw new Exception(Messages.MessageCollection.LoadingFileNameReturnedDefault(classifyData.LabeledExamples));
-
-            return labeledExamples;
-
-        }
-        private List<TextSnippet> LoadTextSnippetsOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
-        {
-
-            string filePath = Path.Combine(classifyData.FolderPath, classifyData.TextSnippets);
-            IFileInfoAdapter file = textClassifier.Convert(filePath);
-
-            List<TextSnippet> textSnippets = textClassifier.LoadTextSnippetsOrDefault(file);
-            if (textSnippets == Serializer<TextSnippet>.Default)
-                throw new Exception(Messages.MessageCollection.LoadingFileNameReturnedDefault(classifyData.TextSnippets));
-
-            return textSnippets;
-
-        }
-        private NGramTokenizerRuleSet LoadTokenizerRuleSetOrThrow(ClassifyData classifyData, TextClassifier textClassifier)
-        {
-
-            string filePath = Path.Combine(classifyData.FolderPath, classifyData.TokenizerRuleSet);
-            IFileInfoAdapter file = textClassifier.Convert(filePath);
-
-            NGramTokenizerRuleSet tokenizerRuleset = textClassifier.LoadTokenizerRuleSetOrDefault(file);
-            if (tokenizerRuleset == default(NGramTokenizerRuleSet))
-                throw new Exception(Messages.MessageCollection.LoadingFileNameReturnedDefault(classifyData.TokenizerRuleSet));
-
-            return tokenizerRuleset;
-
-        }
 
         private int ShowHeader()
         {
@@ -463,45 +377,15 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         private int RunSessionClassify(ClassifyData classifyData)
         {
             
-            try
-            {
+            LogAsciiBanner();
 
-                LogAsciiBanner();
+            ITextClassificationManager textClassificationManager 
+                = TextClassificationManagerFactory.Create(enableUTC: classifyData.EnableUTC);
 
-                classifyData = Defaultize(classifyData);
+            ClassifyInput classifyInput = null;
+            textClassificationManager.Classify(classifyInput);
 
-                ComponentBag componentBag = ComponentBagFactory.Create(classifyData.EnableUTC);
-                SettingBag settingBag = SettingBagFactory.Create(classifyData);
-                TextClassifier textClassifier = TextClassifierFactory.Create(componentBag, settingBag);
-
-                List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(classifyData, textClassifier);
-                List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(classifyData, textClassifier);
-
-                NGramTokenizerRuleSet tokenizerRuleSet;
-                if (string.IsNullOrWhiteSpace(classifyData.TokenizerRuleSet))
-                    tokenizerRuleSet = DefaultTokenizerRuleSet;
-                else
-                    tokenizerRuleSet = LoadTokenizerRuleSetOrThrow(classifyData, textClassifier);
-
-                if (classifyData.CleanLabeledExamples)
-                    labeledExamples = textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
-
-                ClassifyOutput session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels);
-
-                if (classifyData.SaveSession)
-                    textClassifier.SaveClassifyOutput(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);
-
-                LogFooter();
-
-                return Success;
-
-            }
-            catch (Exception e)
-            {
-
-                return LogAndReturnFailure(e);
-
-            }
+            return Success;
 
         }
 

@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification.Bags
         public static string DefaultLoggingActionDateFormat { get; } = "yyyy-MM-dd HH:mm:ss:fff";
         public static Action<string> DefaultLoggingAction { get; }
             = (message) => Console.WriteLine($"[{TextClassifiers.TextClassifier.DefaultNowFunction().ToString(DefaultLoggingActionDateFormat)}] {message}");
-        public static Action<string> DefaultLoggingActionUTC { get; }
+        public static Action<string> DefaultUTCLoggingAction { get; }
             = (message) => Console.WriteLine($"[{TextClassifiers.TextClassifier.DefaultUTCNowFunction().ToString(DefaultLoggingActionDateFormat)}] {message}");
 
         public IFileManager FileManager { get; }

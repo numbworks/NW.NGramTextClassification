@@ -13,7 +13,8 @@ using NW.Shared.Validation;
 namespace NW.NGramTextClassification
 {
 
-    public class TextClassificationManager
+    /// <inheritdoc cref="ITextClassifier"/>
+    public class TextClassificationManager : ITextClassificationManager
     {
 	
 		#region Fields

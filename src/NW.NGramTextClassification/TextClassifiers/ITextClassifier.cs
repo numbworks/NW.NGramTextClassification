@@ -9,7 +9,7 @@ using NW.Shared.Serialization;
 
 namespace NW.NGramTextClassification.TextClassifiers
 {
-    /// <summary>The entry point of this library.</summary>
+    /// <summary>Represents a text classifier.</summary>
     public interface ITextClassifier
     {
 
