@@ -1,5 +1,5 @@
-﻿using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.TextClassifications;
+﻿using System;
+using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
@@ -7,8 +7,11 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
     public interface ITextClassificationManagerFactory
     {
 
+        /// <summary>The VersioFunction used by <see cref="Create"/>.</summary>
+        public static Func<string> DefaultVersionFunction { get; }
+
         /// <summary>Creates an instance of <see cref="TextClassificationManagerFactory"/>.</summary>
-        public ITextClassificationManager Create(SettingBag settingBag);
+        public ITextClassificationManager Create(SettingBag settingBag, out Action<string> loggingAction);
 
     }
 }

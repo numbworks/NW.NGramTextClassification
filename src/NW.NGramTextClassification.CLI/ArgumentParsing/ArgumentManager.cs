@@ -304,8 +304,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         private string CreateAsciiBanner()
         {
 
-
-            string version = TextClassifier.DefaultVersionFunction();
+            string version = ArgumentParsing.TextClassificationManagerFactory.DefaultVersionFunction();
             uint terminalWidth = TerminalWindowManager.GetOrCutoff();
             string asciiBanner = AsciiBannerManager.Create(version, terminalWidth);
 
@@ -375,7 +374,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             LogAsciiBanner();
 
             ITextClassificationManager textClassificationManager 
-                = TextClassificationManagerFactory.Create(settingBag: settingBag);
+                = TextClassificationManagerFactory.Create(settingBag: settingBag, out _);
 
             textClassificationManager.Classify(classifyInput);
 

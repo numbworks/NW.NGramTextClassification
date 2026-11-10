@@ -13,6 +13,9 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         #endregion
 
         #region Properties
+
+        public static Func<string> DefaultVersionFunction { get; } = TextClassifier.DefaultVersionFunction;
+
         #endregion
 
         #region Constructors
@@ -24,19 +27,19 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         #region Methods (public)
 
-        public ITextClassificationManager Create(SettingBag settingBag)
+        public ITextClassificationManager Create(SettingBag settingBag, out Action<string> loggingAction)
         {
 
+            loggingAction = ComponentBag.DefaultLoggingAction;
             Func<DateTime> nowFunction = TextClassifier.DefaultNowFunction;
-            Action<string> loggingAction = ComponentBag.DefaultLoggingAction; 
 
             if (settingBag.EnableUTC)
             {
-                nowFunction = TextClassifier.DefaultUTCNowFunction;
                 loggingAction = ComponentBag.DefaultUTCLoggingAction; 
+                nowFunction = TextClassifier.DefaultUTCNowFunction;
             }
 
-            ITextClassifier textClassifier = new TextClassifier(nowFunction: nowFunction);
+            ITextClassifier textClassifier = new TextClassifier(nowFunction: nowFunction, versionFunction : DefaultVersionFunction);
             ComponentBag componentBag = new ComponentBag(textClassifier: textClassifier, loggingAction: loggingAction);
 
             TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag);
