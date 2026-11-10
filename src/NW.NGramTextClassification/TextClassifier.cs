@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
@@ -97,16 +96,12 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            LogInitialMessages(textSnippet, tokenizerRuleSet, labeledExamples);
-
             List<TokenizedExample> tokenizedExamples = TokenizeAndLog(tokenizerRuleSet, labeledExamples);
             string version = _componentBag.VersionFunction();
 
             if (tokenizedExamples == null)
             {
 
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
-               
                 TextClassifierResult result = DefaultTextClassifierResult;
                 TextClassifierSession session = CreateSession(_settingBag, result, version);
 
@@ -134,19 +129,13 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.ProvidedSnippetsAre(textSnippets.Count));
-
             List<TokenizedExample> tokenizedExamples = TokenizeAndLog(tokenizerRuleSet, labeledExamples);
             string version = _componentBag.VersionFunction();
 
             if (tokenizedExamples == null)
             {
 
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.AtLeastOneLabeledExampleFailedTokenized);
-
-                List<TextClassifierResult> results = new List<TextClassifierResult>();
-                results.Add(DefaultTextClassifierResult);
-
+                List<TextClassifierResult> results = [DefaultTextClassifierResult];
                 TextClassifierSession session = CreateSession(_settingBag, results, version);
 
                 return session;
@@ -207,38 +196,16 @@ namespace NW.NGramTextClassification
         public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToCleanLabeledExamples);
-
-            List<LabeledExample> removed;
-            List<LabeledExample> clean = _componentBag.LabeledExampleManager.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out removed);
-
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.ProvidedLabeledExamplesThruCleaningProcess);
-
-            if (removed.Count > 0)
-                foreach (LabeledExample labeledExample in removed)
-                    _componentBag.LoggingAction(TextClassifications.MessageCollection.ThisLabeledExampleHasBeenRemoved(labeledExample));
-            else
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.NoLabeledExampleHasBeenRemoved);
+            List<LabeledExample> clean = _componentBag.LabeledExampleManager.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out _);
 
             return clean;
-
         }
 
         #endregion
 
         #region Methods (private)
 
-        private void LogInitialMessages(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
-        {
 
-            string truncated = _componentBag.TextTruncatingFunction(textSnippet.Text, _settingBag.TruncateTextInLogMessagesAfter);
-
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToClassifyProvidedSnippet);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingSnippetHasBeenProvided(truncated));
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingNGramsTokenizerRuleSetWillBeUsed(tokenizerRuleSet));
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.XLabeledExamplesHaveBeenProvided(labeledExamples));
-
-        }
         private List<TokenizedExample> TokenizeAndLog(INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
@@ -252,14 +219,9 @@ namespace NW.NGramTextClassification
         {
 
             List<INGram> nGrams = _componentBag.NGramsTokenizer.DoForRuleSetOrDefault(textSnippet.Text, tokenizerRuleSet);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.ProvidedTextHasBeenTokenizedIntoXNGrams(nGrams));
+
             if (nGrams == null)
-            {
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.AllRulesInProvidedRulesetFailed(textSnippet.Text));
                 return DefaultTextClassifierResult;
-
-            }
 
             return CreateResult(textSnippet, nGrams, tokenizedExamples);
 
@@ -268,19 +230,9 @@ namespace NW.NGramTextClassification
         {
 
             List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TokenizedSnippetComparedAgainstProvidedTokenizedExamples);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.XSimilarityIndexObjectsHaveBeenComputed(indexes));
-
             List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.XSimilarityIndexAverageObjectsHaveBeenComputed(indexAverages));
 
             string label = GetLabel(indexAverages);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.ResultOfClassificationTaskIs(label));
-
-            if (label == null)
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ClassificationTaskHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
-            else
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ClassificationTaskHasBeenSuccessful);
 
             TextClassifierResult result = new TextClassifierResult(textSnippet, label, indexes, indexAverages);
 
@@ -290,10 +242,10 @@ namespace NW.NGramTextClassification
         private TextClassifierSession CreateSession(SettingBag settingBag, TextClassifierResult result, string version)
         {
 
-            List<TextClassifierResult> results = new List<TextClassifierResult>();
-            results.Add(result);
+            List<TextClassifierResult> results = [result];
+            TextClassifierSession session = new TextClassifierSession(settingBag: settingBag, results: results, version: version);
 
-            return new TextClassifierSession(settingBag: settingBag, results: results, version: version);
+            return session;
 
         }
         private TextClassifierSession CreateSession(SettingBag settingBag, List<TextClassifierResult> results, string version)
@@ -316,18 +268,11 @@ namespace NW.NGramTextClassification
             for (int i = 0; i < tokenizedExamples.Count; i++)
             {
 
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ComparingProvidedSnippetAgainstFollowingTokenizedExample(tokenizedExamples[i]));
-
                 double indexValue = _componentBag.SimilarityIndexCalculator.Do(nGrams, tokenizedExamples[i].NGrams, _componentBag.RoundingFunction);
                 double roundedValue = _componentBag.RoundingFunction(indexValue);
 
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.CalculatedSimilarityIndexValueIs(indexValue));
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.RoundedSimilarityIndexValueIs(roundedValue));
-
                 SimilarityIndex similarityIndex = new SimilarityIndex(tokenizedExamples[i].LabeledExample.Text, tokenizedExamples[i].LabeledExample.Label, roundedValue);
                 similarityIndexes.Add(similarityIndex);
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingSimilarityIndexObjectHasBeenAddedToTheList(similarityIndex));
 
             }
 
@@ -338,26 +283,19 @@ namespace NW.NGramTextClassification
         {
 
             List<string> uniqueLabels = GetUniqueLabels(indexes);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingUniqueLabelsHaveBeenFound(uniqueLabels));
-
             List<SimilarityIndexAverage> similarityAverages = new List<SimilarityIndexAverage>();
+
             for (int i = 0; i < uniqueLabels.Count; i++)
             {
 
                 string currentLabel = uniqueLabels[i];
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.CalculatingIndexAverageForTheFollowingLabel(currentLabel));
 
                 List<double> indexValues = GetSimilarityIndexValues(currentLabel, indexes);
                 double averageValue = CalculateAverage(indexValues);
                 double roundedValue = _componentBag.RoundingFunction(averageValue);
 
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.CalculatedSimilarityIndexAverageValueIs(averageValue));
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.RoundedSimilarityIndexAverageValueIs(roundedValue));
-
                 SimilarityIndexAverage indexAverage = new SimilarityIndexAverage(currentLabel, roundedValue);
                 similarityAverages.Add(indexAverage);
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingSimilarityIndexAverageObjectHasBeenAddedToTheList(indexAverage));
 
             }
 
@@ -433,50 +371,26 @@ namespace NW.NGramTextClassification
              */
 
             if (AreAllIndexAveragesEqualToZero(indexAverages))
-            {
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreAllIndexAveragesEqualToZero)));
                 return null;
-            }
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreAllIndexAveragesEqualToZero)));
 
             if (IsSingleLabelAndHigherEqualThanMinimumAccuracy(indexAverages, _settingBag))
-            {
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsSingleLabelAndHigherEqualThanMinimumAccuracy)));           
-                return LogAndReturnLabel(indexAverages);
-            }
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsSingleLabelAndHigherEqualThanMinimumAccuracy)));
-
+                return ReturnLabel(indexAverages);
+           
             if (IsSingleLabelAndLessThanMinimumAccuracy(indexAverages, _settingBag))
-            {
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsSingleLabelAndLessThanMinimumAccuracy)));
                 return null;
-            }
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsSingleLabelAndLessThanMinimumAccuracy)));
 
             if (AreAllIndexAveragesSameValue(indexAverages))
-            {
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreAllIndexAveragesSameValue)));
                 return null;
-            }
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreAllIndexAveragesSameValue)));
-
+            
             indexAverages = OrderByHighest(indexAverages);
             
             if (AreTwoHighestIndexAveragesSameValue(indexAverages))
-            {
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(AreTwoHighestIndexAveragesSameValue)));
                 return null;
-            }
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(AreTwoHighestIndexAveragesSameValue)));
 
             if (IsLessThanMinimumAccuracyMultipleLabels(indexAverages, _settingBag))
-            {
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedTrue(nameof(IsLessThanMinimumAccuracyMultipleLabels)));
                 return null;
-            }
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingVerificationReturnedFalse(nameof(IsLessThanMinimumAccuracyMultipleLabels)));
-
-            return LogAndReturnLabel(indexAverages);
+            
+            return ReturnLabel(indexAverages);
 
         }
         private bool AreAllIndexAveragesEqualToZero(List<SimilarityIndexAverage> indexAverages)
@@ -500,9 +414,9 @@ namespace NW.NGramTextClassification
 
         }
         private bool IsSingleLabelAndHigherEqualThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, SettingBag settingBag)
-            => (indexAverages.Count == 1 && indexAverages[0].Value >= settingBag.MinimumAccuracySingleLabel);
+            => indexAverages.Count == 1 && indexAverages[0].Value >= settingBag.MinimumAccuracySingleLabel;
         private bool IsSingleLabelAndLessThanMinimumAccuracy(List<SimilarityIndexAverage> indexAverages, SettingBag settingBag)
-            => (indexAverages.Count == 1 && indexAverages[0].Value < settingBag.MinimumAccuracySingleLabel);
+            => indexAverages.Count == 1 && indexAverages[0].Value < settingBag.MinimumAccuracySingleLabel;
         private bool AreAllIndexAveragesSameValue(List<SimilarityIndexAverage> indexAverages)
         {
 
@@ -541,19 +455,13 @@ namespace NW.NGramTextClassification
              * 
              */
 
-            return (indexAverages[0].Value == indexAverages[1].Value);
+            return indexAverages[0].Value == indexAverages[1].Value;
 
         }
         private bool IsLessThanMinimumAccuracyMultipleLabels(List<SimilarityIndexAverage> indexAverages, SettingBag settingBag)
-            => (indexAverages[0].Value < settingBag.MinimumAccuracyMultipleLabels);
-        private string LogAndReturnLabel(List<SimilarityIndexAverage> indexAverages)
-        {
-
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.SimilarityIndexAverageWithTheHighestValueIs(indexAverages[0]));
-
-            return indexAverages[0].Label;
-
-        }
+            => indexAverages[0].Value < settingBag.MinimumAccuracyMultipleLabels;
+        private string ReturnLabel(List<SimilarityIndexAverage> indexAverages)
+            => indexAverages[0].Label;
         private List<SimilarityIndexAverage> OrderByHighest(List<SimilarityIndexAverage> indexAverages)
             => indexAverages.OrderByDescending(Item => Item.Value).ToList();
 
@@ -563,17 +471,10 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(jsonFile, nameof(jsonFile));
             FilesValidator.ValidateFileExistance(jsonFile);
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadObjectsFrom(typeof(T), jsonFile));
-
             string content = _componentBag.FileManager.ReadAllText(jsonFile);
 
             ISerializer<T> serializer = _componentBag.SerializerFactory.Create<T>();
             List<T> objects = serializer.DeserializeManyOrDefault(content);
-
-            if (objects == Serializer<T>.Default)
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectsFailedToLoad(typeof(T)));
-            else
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectsSuccessfullyLoaded(typeof(T)));
 
             return objects;
 
@@ -584,17 +485,10 @@ namespace NW.NGramTextClassification
             Validator.ValidateObject(jsonFile, nameof(jsonFile));
             FilesValidator.ValidateFileExistance(jsonFile);
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToLoadObjectFrom(typeof(T), jsonFile));
-
             string content = _componentBag.FileManager.ReadAllText(jsonFile);
 
             ISerializer<T> serializer = _componentBag.SerializerFactory.Create<T>();
             T obj = serializer.DeserializeOrDefault(content);
-
-            if (EqualityComparer<T>.Default.Equals(obj, default(T)))
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectFailedToLoad(typeof(T)));
-            else
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectSuccessfullyLoaded(typeof(T)));
 
             return obj;
 
@@ -602,49 +496,19 @@ namespace NW.NGramTextClassification
         private void Save<T>(List<T> objects, IFileInfoAdapter jsonFile)
         {
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToSaveObjectsAs(typeof(T), jsonFile));
+            ISerializer<T> serializer = _componentBag.SerializerFactory.Create<T>();
+            string content = serializer.Serialize(objects);
 
-            try
-            {
-
-                ISerializer<T> serializer = _componentBag.SerializerFactory.Create<T>();
-                string content = serializer.Serialize(objects);
-
-                _componentBag.FileManager.WriteAllText(jsonFile, content);
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectsSuccessfullySaved(typeof(T)));
-
-            }
-            catch
-            {
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectsFailedToSave(typeof(T)));
-
-            }
+            _componentBag.FileManager.WriteAllText(jsonFile, content);
 
         }
         private void Save<T>(T obj, IFileInfoAdapter jsonFile)
         {
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.AttemptingToSaveObjectAs(typeof(T), jsonFile));
+            ISerializer<T> serializer = _componentBag.SerializerFactory.Create<T>();              
+            string content = serializer.Serialize(obj);
 
-            try
-            {
-
-                ISerializer<T> serializer = _componentBag.SerializerFactory.Create<T>();              
-                string content = serializer.Serialize(obj);
-
-                _componentBag.FileManager.WriteAllText(jsonFile, content);
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectSuccessfullySaved(typeof(T)));
-
-            }
-            catch
-            {
-
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.ObjectFailedToSave(typeof(T)));
-
-            }
+            _componentBag.FileManager.WriteAllText(jsonFile, content);
 
         }
         private IFileInfoAdapter Create<T>(string folderPath, DateTime now)
