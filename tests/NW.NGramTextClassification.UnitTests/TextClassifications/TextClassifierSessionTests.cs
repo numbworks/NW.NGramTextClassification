@@ -17,7 +17,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settingBag: null,
+                                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: ComponentBag.DefaultVersionFunction()
                                 )),
@@ -28,7 +29,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settingBag: new SettingBag(),
+                                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                                     results: null,
                                     version: ComponentBag.DefaultVersionFunction()
                                 )),
@@ -39,7 +41,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifierSession(
-                                    settingBag: new SettingBag(),
+                                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                                     results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: null
                                 )),
@@ -69,7 +72,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             // Act
             TextClassifierSession actual
                 = new TextClassifierSession(
-                        settingBag: new SettingBag(),
+                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                         results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                         version: ComponentBag.DefaultVersionFunction()
                     );

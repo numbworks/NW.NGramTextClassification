@@ -485,7 +485,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 if (classifyData.CleanLabeledExamples)
                     labeledExamples = textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
-                TextClassifierSession session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples);
+                TextClassifierSession session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels);
 
                 if (classifyData.SaveSession)
                     textClassifier.SaveSession(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);

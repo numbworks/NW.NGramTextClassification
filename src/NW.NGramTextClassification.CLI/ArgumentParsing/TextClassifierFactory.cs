@@ -22,7 +22,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         #region Methods (public)
 
         public TextClassifier Create(ComponentBag componentBag, SettingBag settingBag)
-            => new TextClassifier(componentBag, settingBag);
+            => new TextClassifier();
 
         #endregion
 

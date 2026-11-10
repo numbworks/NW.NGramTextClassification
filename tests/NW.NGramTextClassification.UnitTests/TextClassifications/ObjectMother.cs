@@ -82,7 +82,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         public static TextClassifierSession TextClassifierSession_Default
             = new TextClassifierSession(
-                settingBag: new SettingBag(),
+                minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                 results: new List<TextClassifierResult>() {
                                 TextClassifier.DefaultTextClassifierResult },
                 version: ComponentBag.DefaultVersionFunction()
@@ -91,7 +92,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
         public static TextClassifierSession TextClassifierSession_CompleteLabeledExamples00
             = new TextClassifierSession(
-                    settingBag: new SettingBag(),
+                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                     results: TextClassifierResults_CompleteLabeledExamples00,
                     version: "3.6.0.0"
                 );

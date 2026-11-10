@@ -20,7 +20,12 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierSession ClassifyOrDefault(TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples);
+        TextClassifierSession ClassifyOrDefault(
+            TextSnippet textSnippet, 
+            INGramTokenizerRuleSet tokenizerRuleSet, 
+            List<LabeledExample> labeledExamples,
+            double minimumAccuracySingleLabel, 
+            double minimumAccuracyMultipleLabels);
 
         /// <summary>
         /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
@@ -29,7 +34,11 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>       
-        TextClassifierSession ClassifyOrDefault(TextSnippet textSnippet, List<LabeledExample> labeledExamples);
+        TextClassifierSession ClassifyOrDefault(
+            TextSnippet textSnippet, 
+            List<LabeledExample> labeledExamples,
+            double minimumAccuracySingleLabel, 
+            double minimumAccuracyMultipleLabels);
 
         /// <summary>
         /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="labeledExamples"/>.
@@ -38,7 +47,12 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierSession ClassifyMany(List<TextSnippet> textSnippets, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples);
+        TextClassifierSession ClassifyMany(
+            List<TextSnippet> textSnippets, 
+            INGramTokenizerRuleSet tokenizerRuleSet, 
+            List<LabeledExample> labeledExamples,
+            double minimumAccuracySingleLabel, 
+            double minimumAccuracyMultipleLabels);
 
         /// <summary>
         /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="labeledExamples"/>.
@@ -47,7 +61,11 @@ namespace NW.NGramTextClassification
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierSession ClassifyMany(List<TextSnippet> textSnippets, List<LabeledExample> labeledExamples);
+        TextClassifierSession ClassifyMany(
+            List<TextSnippet> textSnippets, 
+            List<LabeledExample> labeledExamples,
+            double minimumAccuracySingleLabel, 
+            double minimumAccuracyMultipleLabels);
 
         /// <summary>
         /// Convert <paramref name="filePath"/> to <see cref="IFileInfoAdapter"/>
