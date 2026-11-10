@@ -1,6 +1,5 @@
 ﻿using System;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextClassifiers;
 
 namespace NW.NGramTextClassification.CLI.ArgumentParsing
@@ -15,6 +14,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         #region Properties
 
         public static Func<string> DefaultVersionFunction { get; } = TextClassifier.DefaultVersionFunction;
+        public static Func<string, string> DefaultErrorFormattingFunction { get; } = ComponentBag.DefaultErrorFormattingFunction;
 
         #endregion
 
@@ -40,8 +40,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             }
 
             ITextClassifier textClassifier = new TextClassifier(nowFunction: nowFunction, versionFunction : DefaultVersionFunction);
-            ComponentBag componentBag = new ComponentBag(textClassifier: textClassifier, loggingAction: loggingAction);
-
+            ComponentBag componentBag = new ComponentBag(textClassifier: textClassifier, loggingAction: loggingAction, errorFormattingFunction: DefaultErrorFormattingFunction);
             TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag);
 
             return textClassificationManager;

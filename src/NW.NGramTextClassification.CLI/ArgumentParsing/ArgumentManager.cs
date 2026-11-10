@@ -23,7 +23,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         public static int Success { get; } = ((int)ExitCodes.Success);
         public static int Failure { get; } = ((int)ExitCodes.Failure);
         public static string SeparatorLine { get; } = string.Empty;
-        public static Func<string, string> ErrorMessageFormatter = (message) => $"ERROR: {message}";
         public static Action<string> DefaultLoggingActionAsciiBanner { get; }
             = (message) => Console.WriteLine($"{message}");
 
@@ -349,7 +348,8 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
                 ShowHeader();
                 
-                LoggingActionAsciiBanner(ErrorMessageFormatter(validationResult.ErrorMessage));
+                string errorMessage = ArgumentParsing.TextClassificationManagerFactory.DefaultErrorFormattingFunction(validationResult.ErrorMessage);
+                LoggingActionAsciiBanner(errorMessage);
                 
                 return Failure;
                 
