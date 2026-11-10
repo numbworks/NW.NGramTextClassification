@@ -111,7 +111,7 @@ namespace NW.NGramTextClassification.TextClassifications
                 {
 
                     if (type == typeof(ExpandoObject))
-                        return $"Attempting to save the provided '{typeof(TextClassifierSession).Name}' object as: {jsonFile.FullName}.";
+                        return $"Attempting to save the provided '{typeof(ClassifyOutput).Name}' object as: {jsonFile.FullName}.";
 
                     return $"Attempting to save the provided '{type.Name}' object as: {jsonFile.FullName}.";
 
@@ -121,7 +121,7 @@ namespace NW.NGramTextClassification.TextClassifications
                 {
 
                     if (type == typeof(ExpandoObject))
-                        return $"The provided '{typeof(TextClassifierSession).Name}' object has been successfully saved.";
+                        return $"The provided '{typeof(ClassifyOutput).Name}' object has been successfully saved.";
 
                     return $"The provided '{type.Name}' object has been successfully saved.";
 
@@ -131,7 +131,7 @@ namespace NW.NGramTextClassification.TextClassifications
                 {
 
                     if (type == typeof(ExpandoObject))
-                        return $"The provided '{typeof(TextClassifierSession).Name}' object failed to save.";
+                        return $"The provided '{typeof(ClassifyOutput).Name}' object failed to save.";
 
                     return $"The provided '{type.Name}' object failed to save.";
 

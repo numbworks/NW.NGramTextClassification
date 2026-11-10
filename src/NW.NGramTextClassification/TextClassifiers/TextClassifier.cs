@@ -10,6 +10,7 @@ using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Files.Validation;
@@ -41,12 +42,12 @@ namespace NW.NGramTextClassification.TextClassifiers
         public static INGramTokenizerRuleSet DefaultNGramTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
         public static TextClassifierResult DefaultTextClassifierResult { get; } 
             = new TextClassifierResult(null, null, new List<SimilarityIndex>(), new List<SimilarityIndexAverage>());
-        public static Func<TextClassifierSession, dynamic> SimilarityIndexDisabler
-            = (textClassifierSession) =>
+        public static Func<ClassifyOutput, dynamic> SimilarityIndexDisabler
+            = (classifyOutput) =>
             {
 
                 List<dynamic> newResults = new List<dynamic>();
-                foreach(TextClassifierResult result in textClassifierSession.Results)
+                foreach(TextClassifierResult result in classifyOutput.Results)
                 {
 
                     dynamic newResult = new ExpandoObject();
@@ -62,10 +63,10 @@ namespace NW.NGramTextClassification.TextClassifiers
 
                 dynamic newSession = new ExpandoObject();
 
-                newSession.MinimumAccuracySingleLabel = textClassifierSession.MinimumAccuracySingleLabel;
-                newSession.MinimumAccuracyMultipleLabels = textClassifierSession.MinimumAccuracyMultipleLabels;
+                newSession.MinimumAccuracySingleLabel = classifyOutput.MinimumAccuracySingleLabel;
+                newSession.MinimumAccuracyMultipleLabels = classifyOutput.MinimumAccuracyMultipleLabels;
                 newSession.Results = newResults;
-                newSession.Version = textClassifierSession.Version;
+                newSession.Version = classifyOutput.Version;
 
                 return newSession;
             };
@@ -120,7 +121,7 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         #region Methods (public)
 
-        public TextClassifierSession ClassifyOrDefault(
+        public ClassifyOutput ClassifyOrDefault(
             TextSnippet textSnippet, 
             INGramTokenizerRuleSet tokenizerRuleSet, 
             List<LabeledExample> labeledExamples,
@@ -139,7 +140,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             {
 
                 TextClassifierResult result = DefaultTextClassifierResult;
-                TextClassifierSession session = new TextClassifierSession(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
+                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
 
                 return session;
 
@@ -148,7 +149,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             {
 
                 TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
-                TextClassifierSession session = new TextClassifierSession(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
+                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
 
                 return session;
 
@@ -156,14 +157,14 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         }
         
-        public TextClassifierSession ClassifyOrDefault(
+        public ClassifyOutput ClassifyOrDefault(
             TextSnippet textSnippet, 
             List<LabeledExample> labeledExamples, 
             double minimumAccuracySingleLabel, 
             double minimumAccuracyMultipleLabels)
                 => ClassifyOrDefault(textSnippet, DefaultNGramTokenizerRuleSet, labeledExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
 
-        public TextClassifierSession ClassifyMany(
+        public ClassifyOutput ClassifyMany(
             List<TextSnippet> textSnippets, 
             INGramTokenizerRuleSet tokenizerRuleSet, 
             List<LabeledExample> labeledExamples,
@@ -182,7 +183,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             {
 
                 List<TextClassifierResult> results = [DefaultTextClassifierResult];
-                TextClassifierSession session = new TextClassifierSession(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, results, version);
+                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, results, version);
 
                 return session;
 
@@ -200,7 +201,7 @@ namespace NW.NGramTextClassification.TextClassifiers
                 });
 
                 List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
-                TextClassifierSession session = new TextClassifierSession(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, finalResults, version);
+                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, finalResults, version);
 
                 return session;
 
@@ -208,7 +209,7 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         }
         
-        public TextClassifierSession ClassifyMany(
+        public ClassifyOutput ClassifyMany(
             List<TextSnippet> textSnippets, 
             List<LabeledExample> labeledExamples,
             double minimumAccuracySingleLabel, 
@@ -229,18 +230,18 @@ namespace NW.NGramTextClassification.TextClassifiers
             => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _nowFunction()));
         public void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath)
             => Save(objects: textSnippets, jsonFile: Create<TextSnippet>(folderPath: folderPath, now: _nowFunction()));
-        public void SaveSession(TextClassifierSession session, string folderPath, bool disableIndexSerialization)
+        public void SaveClassifyOutput(ClassifyOutput classifyOutput, string folderPath, bool disableIndexSerialization)
         {
 
             if(disableIndexSerialization)
             {
 
-                dynamic newSession = SimilarityIndexDisabler(session);
-                Save(obj: newSession, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _nowFunction()));
+                dynamic newSession = SimilarityIndexDisabler(classifyOutput);
+                Save(obj: newSession, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
 
             }
             else
-                Save(obj: session, jsonFile: Create<TextClassifierSession>(folderPath: folderPath, now: _nowFunction()));
+                Save(obj: classifyOutput, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
 
         }
 
@@ -564,7 +565,7 @@ namespace NW.NGramTextClassification.TextClassifiers
                 filePath = _filenameFactory.CreateForLabeledExamplesJson(folderPath: folderPath, now: now);
             else if (typeof(T) == typeof(TextSnippet))
                 filePath = _filenameFactory.CreateForTextSnippetsJson(folderPath: folderPath, now: now);
-            else if (typeof(T) == typeof(TextClassifierSession))
+            else if (typeof(T) == typeof(ClassifyOutput))
                 filePath = _filenameFactory.CreateForSessionJson(folderPath: folderPath, now: now);
             else
                 throw new Exception(TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(T)));

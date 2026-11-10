@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
@@ -15,11 +16,11 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// <summary>
         /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="labeledExamples"/>.
         /// <para>If one rule in <paramref name="tokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="TextClassifierSession"/>.</para>
+        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="ClassifyOutput"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierSession ClassifyOrDefault(
+        ClassifyOutput ClassifyOrDefault(
             TextSnippet textSnippet, 
             INGramTokenizerRuleSet tokenizerRuleSet, 
             List<LabeledExample> labeledExamples,
@@ -29,11 +30,11 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// <summary>
         /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
         /// <para>If one rule in the default <see cref="INGramTokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="TextClassifierSession"/>.</para>
+        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="ClassifyOutput"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>       
-        TextClassifierSession ClassifyOrDefault(
+        ClassifyOutput ClassifyOrDefault(
             TextSnippet textSnippet, 
             List<LabeledExample> labeledExamples,
             double minimumAccuracySingleLabel, 
@@ -46,7 +47,7 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierSession ClassifyMany(
+        ClassifyOutput ClassifyMany(
             List<TextSnippet> textSnippets, 
             INGramTokenizerRuleSet tokenizerRuleSet, 
             List<LabeledExample> labeledExamples,
@@ -60,7 +61,7 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        TextClassifierSession ClassifyMany(
+        ClassifyOutput ClassifyMany(
             List<TextSnippet> textSnippets, 
             List<LabeledExample> labeledExamples,
             double minimumAccuracySingleLabel, 
@@ -111,11 +112,11 @@ namespace NW.NGramTextClassification.TextClassifiers
         void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath);
 
         /// <summary>
-        /// Saves the provided <see cref="TextClassifierSession"/> object as JSON into <paramref name="folderPath"/>. 
+        /// Saves the provided <see cref="ClassifyOutput"/> object as JSON into <paramref name="folderPath"/>. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="Exception"/>
-        void SaveSession(TextClassifierSession session, string folderPath, bool disableIndexSerialization);
+        void SaveClassifyOutput(ClassifyOutput classifyOutput, string folderPath, bool disableIndexSerialization);
 
         /// <summary>
         /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.

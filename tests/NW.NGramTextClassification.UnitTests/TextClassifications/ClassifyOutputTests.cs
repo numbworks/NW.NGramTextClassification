@@ -1,22 +1,22 @@
 ﻿using System;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.TextClassifiers;
+using NW.NGramTextClassification.TextClassifications;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests.TextClassifiers
+namespace NW.NGramTextClassification.UnitTests.TextClassifications
 {
     [TestFixture]
-    public class TextClassifierSessionTests
+    public class ClassifyOutputTests
     {
 
         #region Fields
 
-        private static TestCaseData[] textClassifierSessionExceptionTestCases =
+        private static TestCaseData[] classifyOutputExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifierSession(
+                        () => new ClassifyOutput(
                                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                                     minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                                     results: null,
@@ -24,19 +24,19 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("results").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(classifyOutputExceptionTestCases)}_01"),
 
             new TestCaseData(
                 new TestDelegate(
-                        () => new TextClassifierSession(
+                        () => new ClassifyOutput(
                                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                                     minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                                    results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                                    results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                                     version: null
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("version").Message
-                ).SetArgDisplayNames($"{nameof(textClassifierSessionExceptionTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(classifyOutputExceptionTestCases)}_02")
 
         };
 
@@ -47,27 +47,27 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         #region Tests
 
-        [TestCaseSource(nameof(textClassifierSessionExceptionTestCases))]
-        public void TextClassifierSession_ShouldThrowACertainException_WhenUnproperArguments
+        [TestCaseSource(nameof(classifyOutputExceptionTestCases))]
+        public void ClassifyOutput_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
-        public void TextClassifierSession_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
+        public void ClassifyOutput_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
         {
 
             // Arrange
             // Act
-            TextClassifierSession actual
-                = new TextClassifierSession(
+            ClassifyOutput actual
+                = new ClassifyOutput(
                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                         minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                        results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                        results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                         version: ComponentBag.DefaultVersionFunction()
                     );
 
             // Assert
-            Assert.That(actual, Is.InstanceOf<TextClassifierSession>());
+            Assert.That(actual, Is.InstanceOf<ClassifyOutput>());
 
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
-using NW.NGramTextClassification.TextClassifiers;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Serialization;
 using NUnit.Framework;
@@ -141,11 +141,11 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         {
 
             // Arrange
-            TextClassifierSession obj = TextClassifiers.ObjectMother.TextClassifierSession_CompleteLabeledExamples00;
-            string expected = TextClassifiers.ObjectMother.TextClassifierrSessionCLE00AsJson_Content.Replace("\r\n", "\n");
+            ClassifyOutput obj = TextClassifiers.ObjectMother.ClassifyOutput_CompleteLabeledExamples00;
+            string expected = TextClassifiers.ObjectMother.ClassifyOutputCLE00AsJson_Content.Replace("\r\n", "\n");
 
             // Act
-            string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj).Replace("\r\n", "\n");
+            string actual = new Serializer<ClassifyOutput>().Serialize(obj: obj).Replace("\r\n", "\n");
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));

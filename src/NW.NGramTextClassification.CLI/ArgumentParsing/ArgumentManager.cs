@@ -13,6 +13,7 @@ using NW.Shared.Serialization;
 using McMaster.Extensions.CommandLineUtils;
 using McMaster.Extensions.CommandLineUtils.Validation;
 using McMaster.Extensions.CommandLineUtils.HelpText;
+using NW.NGramTextClassification.TextClassifications;
 
 namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
@@ -485,10 +486,10 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 if (classifyData.CleanLabeledExamples)
                     labeledExamples = textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
-                TextClassifierSession session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels);
+                ClassifyOutput session = textClassifier.ClassifyMany(textSnippets, tokenizerRuleSet, labeledExamples, SettingBag.DefaultMinimumAccuracySingleLabel, SettingBag.DefaultMinimumAccuracyMultipleLabels);
 
                 if (classifyData.SaveSession)
-                    textClassifier.SaveSession(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);
+                    textClassifier.SaveClassifyOutput(session, classifyData.FolderPath, classifyData.DisableIndexSerialization);
 
                 LogFooter();
 

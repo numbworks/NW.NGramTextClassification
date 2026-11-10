@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGramTokenization;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 
@@ -80,8 +81,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         };
 
-        public static TextClassifierSession TextClassifierSession_Default
-            = new TextClassifierSession(
+        public static ClassifyOutput ClassifyOutput_Default
+            = new ClassifyOutput(
                 minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                 minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                 results: new List<TextClassifierResult>() {
@@ -89,9 +90,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                 version: ComponentBag.DefaultVersionFunction()
                 );
 
-        public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
-        public static TextClassifierSession TextClassifierSession_CompleteLabeledExamples00
-            = new TextClassifierSession(
+        public static string ClassifyOutputCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
+        public static ClassifyOutput ClassifyOutput_CompleteLabeledExamples00
+            = new ClassifyOutput(
                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                     minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                     results: TextClassifierResults_CompleteLabeledExamples00,
@@ -108,7 +109,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     doForFivegram: true
                     );
 
-        public static string TextClassifierrSessionCLE00DisabledAsJson_Content = Properties.Resources.TextClassifierrSessionCLE00DisabledAsJson;
+        public static string ClassifyOutputCLE00DisabledAsJson_Content = Properties.Resources.TextClassifierrSessionCLE00DisabledAsJson;
 
         #endregion
 
@@ -127,7 +128,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
         public static bool AreEqual(double double1, double double2)
             => Math.Abs(double1 - double2) < 0.0001;
-        public static bool AreEqual(TextClassifierSession obj1, TextClassifierSession obj2)
+        public static bool AreEqual(ClassifyOutput obj1, ClassifyOutput obj2)
         {
 
             return AreEqual(obj1.MinimumAccuracySingleLabel, obj2.MinimumAccuracySingleLabel)

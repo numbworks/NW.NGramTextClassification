@@ -47,7 +47,7 @@ namespace NW.NGramTextClassification
 		
 		#region Methods (public)
 
-		public TextClassifierSession Classify(ClassifyInput classifyInput)
+		public ClassifyOutput Classify(ClassifyInput classifyInput)
         {
 
             Validator.ValidateObject(classifyInput, nameof(classifyInput));
@@ -63,7 +63,7 @@ namespace NW.NGramTextClassification
 			if (_settingBag.CleanLabeledExamples)
 				labeledExamples = _textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
-			TextClassifierSession session 
+			ClassifyOutput classifyOutput 
 				= _textClassifier.ClassifyMany(
 					textSnippets: textSnippets, 
 					tokenizerRuleSet: tokenizerRuleSet, 
@@ -72,9 +72,9 @@ namespace NW.NGramTextClassification
 					minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
 			if (_settingBag.SaveSession)
-				_textClassifier.SaveSession(session, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
+				_textClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
 
-			return session;
+			return classifyOutput;
 
         }
 

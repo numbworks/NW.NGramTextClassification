@@ -10,6 +10,7 @@ using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifiers;
+using NW.NGramTextClassification.TextClassifications;
 using NW.NGramTextClassification.TextSnippets;
 using NW.NGramTextClassification.UnitTests.Utilities;
 using NW.Shared.Files;
@@ -83,7 +84,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifiers.ObjectMother.TextClassifierSession_Default
+                    TextClassifiers.ObjectMother.ClassifyOutput_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
             new TestCaseData(
@@ -96,7 +97,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             doForFivegram: true
                         ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    TextClassifiers.ObjectMother.TextClassifierSession_Default
+                    TextClassifiers.ObjectMother.ClassifyOutput_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_02"),
 
 
@@ -109,7 +110,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
                     NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
                     LabeledExamples.ObjectMother.ShortLabeledExamples_Untokenizable,
-                    TextClassifiers.ObjectMother.TextClassifierSession_Default
+                    TextClassifiers.ObjectMother.ClassifyOutput_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
         };
@@ -147,7 +148,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
                     0.0,
                     SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                    new TextClassifierSession(
+                    new ClassifyOutput(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                             results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
@@ -211,7 +212,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
                     0.0,
                     SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                    new TextClassifierSession(
+                    new ClassifyOutput(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                             results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
@@ -225,7 +226,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
                     0.0,
                     SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                    new TextClassifierSession(
+                    new ClassifyOutput(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                             results: TextClassifiers.ObjectMother.TextClassifierResults_Untokenizable,
@@ -358,7 +359,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             Assert.That(TextClassifier.DefaultNGramTokenizerRuleSet, Is.InstanceOf<INGramTokenizerRuleSet>());
             Assert.That(TextClassifier.DefaultTextClassifierResult, Is.InstanceOf<TextClassifierResult>());
-            Assert.That(TextClassifier.SimilarityIndexDisabler, Is.InstanceOf<Func<TextClassifierSession, dynamic>>());
+            Assert.That(TextClassifier.SimilarityIndexDisabler, Is.InstanceOf<Func<ClassifyOutput, dynamic>>());
             Assert.That(TextClassifier.DefaultNowFunction, Is.InstanceOf<Func<DateTime>>());
             Assert.That(TextClassifier.DefaultUTCNowFunction, Is.InstanceOf<Func<DateTime>>());
             Assert.That(TextClassifier.DefaultVersionFunction, Is.InstanceOf<Func<string>>());
@@ -368,12 +369,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         [TestCaseSource(nameof(classifyOrDefaultWhenAllRulesFailedTestCases))]
         public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenAllRulesFailed
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierSession expected)
+            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, ClassifyOutput expected)
         {
 
             // Arrange
             // Act
-            TextClassifierSession actual 
+            ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
                     tokenizerRuleSet, 
@@ -391,12 +392,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableExamples))]
         public void ClassifyOrDefault_ShouldReturnSessionWithDefaultClassifierResult_WhenUntokenizableExamples
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, TextClassifierSession expected)
+            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, ClassifyOutput expected)
         {
 
             // Arrange
             // Act
-            TextClassifierSession actual 
+            ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
                     tokenizerRuleSet, 
@@ -419,7 +420,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             // Arrange
             // Act
-            TextClassifierSession actual 
+            ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
                     tokenizerRuleSet, 
@@ -439,12 +440,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             List<LabeledExample> labeledExamples,
             double minimumAccuracySingleLabel,
             double minimumAccuracyMultipleLabels,
-            TextClassifierSession expected)
+            ClassifyOutput expected)
         {
 
             // Arrange
             // Act
-            TextClassifierSession actual 
+            ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
                     tokenizerRuleSet, 
@@ -684,12 +685,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             List<LabeledExample> labeledExamples, 
             double minimumAccuracySingleLabel,
             double minimumAccuracyMultipleLabels,
-            TextClassifierSession expected)
+            ClassifyOutput expected)
         {
 
             // Arrange
             // Act
-            TextClassifierSession actual
+            ClassifyOutput actual
                 = new TextClassifier().ClassifyMany(
                     textSnippets: textSnippets, 
                     tokenizerRuleSet: tokenizerRuleSet, 
@@ -900,7 +901,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             TextClassifier textClassifier 
                 = new TextClassifier(
-                        fileManager: new FakeFileManager(TextClassifiers.ObjectMother.TextClassifierrSessionCLE00AsJson_Content),
+                        fileManager: new FakeFileManager(TextClassifiers.ObjectMother.ClassifyOutputCLE00AsJson_Content),
                         nowFunction: fakeNowFunction,
                         versionFunction: fakeVersionFunction);
 
@@ -912,7 +913,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             // Act
             // Assert
             Assert.DoesNotThrow(() => 
-                textClassifier.SaveSession(TextClassifiers.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, disableIndexSerialization));
+                textClassifier.SaveClassifyOutput(TextClassifiers.ObjectMother.ClassifyOutput_CompleteLabeledExamples00, folderPath, disableIndexSerialization));
 
         }
 
@@ -994,7 +995,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             TextClassifier textClassifier 
                 = new TextClassifier(
                         fileManager: new FakeFileManagerThrowingWriteExceptions(
-                                        content: TextClassifiers.ObjectMother.TextClassifierrSessionCLE00AsJson_Content,
+                                        content: TextClassifiers.ObjectMother.ClassifyOutputCLE00AsJson_Content,
                                         writeExceptionMessage: writeExceptionMessage),
                         nowFunction: fakeNowFunction,
                         versionFunction: fakeVersionFunction);
@@ -1007,7 +1008,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             // Act
             // Assert
             Exception e = Assert.Throws<Exception>(() => 
-                textClassifier.SaveSession(TextClassifiers.ObjectMother.TextClassifierSession_CompleteLabeledExamples00, folderPath, false));
+                textClassifier.SaveClassifyOutput(TextClassifiers.ObjectMother.ClassifyOutput_CompleteLabeledExamples00, folderPath, false));
 
             Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
 
@@ -1113,7 +1114,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             // Arrange
             // Act
-            dynamic actual = TextClassifier.SimilarityIndexDisabler(ObjectMother.TextClassifierSession_CompleteLabeledExamples00);
+            dynamic actual = TextClassifier.SimilarityIndexDisabler(ObjectMother.ClassifyOutput_CompleteLabeledExamples00);
 
             // Assert
             foreach (ExpandoObject result in actual.Results)
