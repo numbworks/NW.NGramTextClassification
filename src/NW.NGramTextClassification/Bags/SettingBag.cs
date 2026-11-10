@@ -20,8 +20,8 @@ namespace NW.NGramTextClassification.Bags
         public static bool DefaultEnableUTC { get; } = true;
 
         public string FolderPath { get; }
-        public double? MinimumAccuracySingleLabel { get; }
-        public double? MinimumAccuracyMultipleLabels { get; }
+        public double MinimumAccuracySingleLabel { get; }
+        public double MinimumAccuracyMultipleLabels { get; }
         public bool SaveSession { get; }
         public bool CleanLabeledExamples { get; }
         public bool DisableIndexSerialization { get; }
@@ -43,8 +43,8 @@ namespace NW.NGramTextClassification.Bags
         {
 
             FolderPath = folderPath ?? DefaultFolderPath;
-            MinimumAccuracySingleLabel = minimumAccuracySingleLabel;
-            MinimumAccuracyMultipleLabels = minimumAccuracyMultipleLabels;
+            MinimumAccuracySingleLabel = minimumAccuracySingleLabel ?? DefaultMinimumAccuracySingleLabel;
+            MinimumAccuracyMultipleLabels = minimumAccuracyMultipleLabels ?? DefaultMinimumAccuracyMultipleLabels;
             SaveSession = saveSession ?? DefaultSaveSession;
             CleanLabeledExamples = cleanLabeledExamples ?? DefaultCleanLabeledExamples;
             DisableIndexSerialization = disableIndexSerialization ?? DefaultDisableIndexSerialization;

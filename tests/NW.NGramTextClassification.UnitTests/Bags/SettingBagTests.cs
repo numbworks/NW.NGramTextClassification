@@ -38,8 +38,8 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(actual2, Is.InstanceOf<SettingBag>());
 
             Assert.That(actual1.FolderPath, Is.InstanceOf<string>());
-            Assert.That(actual1.MinimumAccuracySingleLabel, Is.Null);
-            Assert.That(actual1.MinimumAccuracyMultipleLabels, Is.Null);
+            Assert.That(actual1.MinimumAccuracySingleLabel, Is.InstanceOf<double>());
+            Assert.That(actual1.MinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
             Assert.That(actual1.SaveSession, Is.InstanceOf<bool>());
             Assert.That(actual1.CleanLabeledExamples, Is.InstanceOf<bool>());
             Assert.That(actual1.DisableIndexSerialization, Is.InstanceOf<bool>());
