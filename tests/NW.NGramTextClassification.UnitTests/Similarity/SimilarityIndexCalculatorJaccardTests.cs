@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.Similarity;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.Shared.Validation;
 using NUnit.Framework;
 
@@ -24,7 +24,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         null,
                                         LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
-                                        ComponentBag.DefaultRoundingFunction
+                                        TextClassifier.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("list1").Message
@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         new List<INGram>(),
                                         LabeledExamples.ObjectMother.ShortLabeledExample02_NGrams,
-                                        ComponentBag.DefaultRoundingFunction
+                                        TextClassifier.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
                 MessageCollection.VariableContainsZeroItems("list1")
@@ -49,7 +49,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                                         null,
-                                        ComponentBag.DefaultRoundingFunction
+                                        TextClassifier.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("list2").Message
@@ -61,7 +61,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
                                     .Do(
                                         LabeledExamples.ObjectMother.ShortLabeledExample01_NGrams,
                                         new List<INGram>(),
-                                        ComponentBag.DefaultRoundingFunction
+                                        TextClassifier.DefaultRoundingFunction
                                 )),
                 typeof(ArgumentException),
                 MessageCollection.VariableContainsZeroItems("list2")
@@ -125,7 +125,7 @@ namespace NW.NGramTextClassification.UnitTests.Similarity
             // Act
             double actual
                 = new SimilarityIndexCalculatorJaccard()
-                        .Do(list1, list2, ComponentBag.DefaultRoundingFunction);
+                        .Do(list1, list2, TextClassifier.DefaultRoundingFunction);
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));

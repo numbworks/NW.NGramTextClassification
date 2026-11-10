@@ -1,5 +1,4 @@
-﻿using System;
-using NW.NGramTextClassification.Bags;
+﻿using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.CLI.ArgumentParsing
 {
@@ -28,7 +27,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             ComponentBag componentBag = new ComponentBag();
 
             if (enableUTC)
-                componentBag = new ComponentBag(nowFunction : ComponentBag.DefaultUTCNowFunction);           
+                componentBag = new ComponentBag(loggingAction: ComponentBag.DefaultLoggingActionUTC);
             
             return componentBag;
 

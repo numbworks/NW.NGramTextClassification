@@ -152,7 +152,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                             results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
-                            version: ComponentBag.DefaultVersionFunction()
+                            version: TextClassifier.DefaultVersionFunction()
                         )
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification)}_01")
 
@@ -216,7 +216,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                             results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
-                            version: ComponentBag.DefaultVersionFunction()
+                            version: TextClassifier.DefaultVersionFunction()
                         )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01"),
 
@@ -230,7 +230,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                             results: TextClassifiers.ObjectMother.TextClassifierResults_Untokenizable,
-                            version: ComponentBag.DefaultVersionFunction()
+                            version: TextClassifier.DefaultVersionFunction()
                         )
                 ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_02")
 

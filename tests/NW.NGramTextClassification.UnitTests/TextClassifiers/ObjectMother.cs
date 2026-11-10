@@ -87,7 +87,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                 minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                 results: new List<TextClassifierResult>() {
                                 TextClassifier.DefaultTextClassifierResult },
-                version: ComponentBag.DefaultVersionFunction()
+                version: TextClassifier.DefaultVersionFunction()
                 );
 
         public static string ClassifyOutputCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;

@@ -1,7 +1,9 @@
 ﻿using System;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NUnit.Framework;
+
 
 namespace NW.NGramTextClassification.UnitTests.TextClassifications
 {
@@ -20,7 +22,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                                     minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                                     results: null,
-                                    version: ComponentBag.DefaultVersionFunction()
+                                    version: TextClassifier.DefaultVersionFunction()
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("results").Message
@@ -63,7 +65,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                         minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                         results: TextClassifiers.ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
-                        version: ComponentBag.DefaultVersionFunction()
+                        version: TextClassifier.DefaultVersionFunction()
                     );
 
             // Assert
