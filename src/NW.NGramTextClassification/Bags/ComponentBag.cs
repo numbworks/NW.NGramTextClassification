@@ -18,22 +18,29 @@ namespace NW.NGramTextClassification.Bags
             = (message) => Console.WriteLine($"[{TextClassifiers.TextClassifier.DefaultNowFunction().ToString(DefaultLoggingActionDateFormat)}] {message}");
         public static Action<string> DefaultUTCLoggingAction { get; }
             = (message) => Console.WriteLine($"[{TextClassifiers.TextClassifier.DefaultUTCNowFunction().ToString(DefaultLoggingActionDateFormat)}] {message}");
+        public static Func<string, string> DefaultErrorFormattingFunction = (message) => $"ERROR: {message}";
 
         public IFileManager FileManager { get; }
         public ITextClassifier TextClassifier { get; }
         public Action<string> LoggingAction { get; }
+        public Func<string, string> ErrorFormattingFunction { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>Initializes a <see cref="ComponentBag"/> instance.</summary>
-        public ComponentBag(IFileManager fileManager = null, ITextClassifier textClassifier = null, Action<string> loggingAction = null)
+        public ComponentBag(
+            IFileManager fileManager = null, 
+            ITextClassifier textClassifier = null, 
+            Action<string> loggingAction = null,
+            Func<string, string> errorFormattingFunction = null)
         {
 
             FileManager = fileManager ?? new FileManager();
             TextClassifier = textClassifier ?? new TextClassifier();
             LoggingAction = loggingAction ?? DefaultLoggingAction;
+            ErrorFormattingFunction = errorFormattingFunction ?? DefaultErrorFormattingFunction;
 
         }
 

@@ -376,9 +376,12 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             ITextClassificationManager textClassificationManager 
                 = TextClassificationManagerFactory.Create(settingBag: settingBag, out _);
 
-            textClassificationManager.Classify(classifyInput);
+            ClassifyOutput classifyOutput = textClassificationManager.ClassifyOrNull(classifyInput);
 
-            return Success;
+            if (classifyOutput is not null)
+                return Success;
+
+            return Failure;
 
         }
 

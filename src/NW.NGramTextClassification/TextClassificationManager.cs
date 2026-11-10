@@ -45,9 +45,9 @@ namespace NW.NGramTextClassification
 		
 		#region Methods (public)
 
-		public ClassifyOutput Classify(ClassifyInput classifyInput)
+        public ClassifyOutput Classify(ClassifyInput classifyInput)
         {
-
+            
             Validator.ValidateObject(classifyInput, nameof(classifyInput));
 
             IFileInfoAdapter labeledExamplesFile = CreateFile(_settingBag.FolderPath, classifyInput.LabeledExamplesFileName);
@@ -58,21 +58,39 @@ namespace NW.NGramTextClassification
 
             NGramTokenizerRuleSet tokenizerRuleSet = EstablishTokenizerRuleSet(classifyInput);
 
-			if (_settingBag.CleanLabeledExamples)
-				labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
+            if (_settingBag.CleanLabeledExamples)
+                labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
-			ClassifyOutput classifyOutput 
-				= _componentBag.TextClassifier.ClassifyMany(
-					textSnippets: textSnippets, 
-					tokenizerRuleSet: tokenizerRuleSet, 
-					labeledExamples: labeledExamples, 
-					minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel, 
-					minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
+            ClassifyOutput classifyOutput 
+                = _componentBag.TextClassifier.ClassifyMany(
+                    textSnippets: textSnippets, 
+                    tokenizerRuleSet: tokenizerRuleSet, 
+                    labeledExamples: labeledExamples, 
+                    minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel, 
+                    minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
-			if (_settingBag.SaveSession)
-				_componentBag.TextClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
+            if (_settingBag.SaveSession)
+                _componentBag.TextClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
 
-			return classifyOutput;
+            return classifyOutput;
+
+        }
+		public ClassifyOutput ClassifyOrNull(ClassifyInput classifyInput)
+        {
+
+            try
+            {
+
+                return ClassifyOrNull(classifyInput);
+
+            }
+            catch (Exception e)
+            {
+                
+                LogException(e);
+                return null;
+
+            }
 
         }
 
@@ -137,6 +155,16 @@ namespace NW.NGramTextClassification
                 throw new Exception(TextClassifications.MessageCollection.LoadingFileNameReturnedDefault(tokenizerRuleSetFile.FullName));
 
             return tokenizerRuleset;
+
+        }
+
+        private void LogException(Exception e)
+        {
+
+            _componentBag.LoggingAction(_componentBag.ErrorFormattingFunction(e.Message));
+
+            if (e.InnerException != null)
+                _componentBag.LoggingAction(_componentBag.ErrorFormattingFunction(e.InnerException.Message));
 
         }
 
