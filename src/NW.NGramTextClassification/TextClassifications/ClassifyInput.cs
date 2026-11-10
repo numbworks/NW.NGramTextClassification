@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace NW.NGramTextClassification.TextClassifications
 {
 
@@ -10,7 +12,6 @@ namespace NW.NGramTextClassification.TextClassifications
 		
 		#region Properties
 
-		public string FolderPath { get; }
         public string LabeledExamplesFileName { get; }
         public string TextSnippetsFileName { get; }
 		public string TokenizerRuleSetFileName { get; }
@@ -23,13 +24,11 @@ namespace NW.NGramTextClassification.TextClassifications
 
 		/// <summary>Initializes a <see cref="ClassifyInput"/> instance.</summary>
 		public ClassifyInput(
-			string folderPath, 
 			string labeledExamplesFileName, 
 			string textSnippetsFileName, 
 			string tokenizerRuleSetFileName = DefaultTokenizerRuleSetFileName)
         {
             
-			FolderPath = folderPath;
 			LabeledExamplesFileName = labeledExamplesFileName;
 			TextSnippetsFileName = textSnippetsFileName;
 			TokenizerRuleSetFileName = tokenizerRuleSetFileName;

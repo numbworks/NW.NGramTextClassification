@@ -1,6 +1,5 @@
-﻿using System;
+﻿using NW.NGramTextClassification.Bags;
 using NUnit.Framework;
-using NW.NGramTextClassification.Bags;
 
 namespace NW.NGramTextClassification.UnitTests.Bags
 {
@@ -9,35 +8,12 @@ namespace NW.NGramTextClassification.UnitTests.Bags
     {
 
         #region Fields
-
-        private static TestCaseData[] settingBagExceptionTestCases =
-        {
-
-            new TestCaseData(
-                new TestDelegate(
-                        () => new SettingBag(
-                                    truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
-                                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                                    folderPath: null
-                            )),
-                typeof(ArgumentNullException),
-                new ArgumentNullException("folderPath").Message
-                ).SetArgDisplayNames($"{nameof(settingBagExceptionTestCases)}_01")
-
-        };
-
         #endregion
 
         #region SetUp
         #endregion
 
         #region Tests
-
-        [TestCaseSource(nameof(settingBagExceptionTestCases))]
-        public void SettingBag_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
 
         [Test]
         public void SettingBag_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -48,25 +24,42 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             SettingBag actual1 = new SettingBag();
             SettingBag actual2
                 = new SettingBag(
-                        truncateTextInLogMessagesAfter: 10,
+                        folderPath: SettingBag.DefaultFolderPath,
                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                         minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                        folderPath: SettingBag.DefaultFolderPath
+                        saveSession: SettingBag.DefaultSaveSession,
+                        cleanLabeledExamples: SettingBag.DefaultCleanLabeledExamples,
+                        disableIndexSerialization: SettingBag.DefaultDisableIndexSerialization,
+                        enableUTC: SettingBag.DefaultEnableUTC
                         );
 
             // Assert
             Assert.That(actual1, Is.InstanceOf<SettingBag>());
             Assert.That(actual2, Is.InstanceOf<SettingBag>());
 
-            Assert.That(actual1.TruncateTextInLogMessagesAfter,Is.InstanceOf<uint>());
-            Assert.That(actual1.MinimumAccuracySingleLabel,Is.InstanceOf<double>());
-            Assert.That(actual1.MinimumAccuracyMultipleLabels,Is.InstanceOf<double>());
             Assert.That(actual1.FolderPath, Is.InstanceOf<string>());
+            Assert.That(actual1.MinimumAccuracySingleLabel, Is.Null);
+            Assert.That(actual1.MinimumAccuracyMultipleLabels, Is.Null);
+            Assert.That(actual1.SaveSession, Is.InstanceOf<bool>());
+            Assert.That(actual1.CleanLabeledExamples, Is.InstanceOf<bool>());
+            Assert.That(actual1.DisableIndexSerialization, Is.InstanceOf<bool>());
+            Assert.That(actual1.EnableUTC, Is.InstanceOf<bool>());
 
-            Assert.That(SettingBag.DefaultTruncateTextInLogMessagesAfter, Is.InstanceOf<uint>());
+            Assert.That(actual2.FolderPath, Is.InstanceOf<string>());
+            Assert.That(actual2.MinimumAccuracySingleLabel, Is.InstanceOf<double>());
+            Assert.That(actual2.MinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
+            Assert.That(actual2.SaveSession, Is.InstanceOf<bool>());
+            Assert.That(actual2.CleanLabeledExamples, Is.InstanceOf<bool>());
+            Assert.That(actual2.DisableIndexSerialization, Is.InstanceOf<bool>());
+            Assert.That(actual2.EnableUTC, Is.InstanceOf<bool>());
+
             Assert.That(SettingBag.DefaultMinimumAccuracySingleLabel, Is.InstanceOf<double>());
             Assert.That(SettingBag.DefaultMinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
             Assert.That(SettingBag.DefaultFolderPath, Is.InstanceOf<string>());
+            Assert.That(SettingBag.DefaultSaveSession, Is.InstanceOf<bool>());
+            Assert.That(SettingBag.DefaultCleanLabeledExamples, Is.InstanceOf<bool>());
+            Assert.That(SettingBag.DefaultDisableIndexSerialization, Is.InstanceOf<bool>());
+            Assert.That(SettingBag.DefaultEnableUTC, Is.InstanceOf<bool>());
 
         }
 

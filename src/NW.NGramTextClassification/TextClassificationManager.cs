@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
@@ -20,6 +21,7 @@ namespace NW.NGramTextClassification
 
         private IFileManager _fileManager;
 		private ITextClassifier _textClassifier;
+		private SettingBag _settingBag;
 
 		#endregion
 		
@@ -32,11 +34,12 @@ namespace NW.NGramTextClassification
 		#region Constructors
 		
         /// <summary>Initializes a <see cref="TextClassificationManager"/> instance.</summary>
-        public TextClassificationManager(IFileManager fileManager = null, ITextClassifier textClassifier = null)
+        public TextClassificationManager(IFileManager fileManager = null, ITextClassifier textClassifier = null, SettingBag settingBag = null)
         {
 
             _fileManager = fileManager ?? new FileManager();
 			_textClassifier = textClassifier ?? new TextClassifier();
+			_settingBag = settingBag;
 
         }
 		
@@ -49,13 +52,16 @@ namespace NW.NGramTextClassification
 
             Validator.ValidateObject(classifyInput, nameof(classifyInput));
 
-            IFileInfoAdapter labeledExamplesFile = CreateFile(classifyInput.FolderPath, classifyInput.LabeledExamplesFileName);
+            IFileInfoAdapter labeledExamplesFile = CreateFile(_settingBag.FolderPath, classifyInput.LabeledExamplesFileName);
             List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(labeledExamplesFile);
 
-            IFileInfoAdapter textSnippetsFile = CreateFile(classifyInput.FolderPath, classifyInput.TextSnippetsFileName);
+            IFileInfoAdapter textSnippetsFile = CreateFile(_settingBag.FolderPath, classifyInput.TextSnippetsFileName);
             List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(textSnippetsFile);
 
             NGramTokenizerRuleSet tokenizerRuleSet = EstablishTokenizerRuleSet(classifyInput);
+
+			if (_settingBag.CleanLabeledExamples)
+				labeledExamples = _textClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
             throw new NotImplementedException();
 
@@ -108,7 +114,7 @@ namespace NW.NGramTextClassification
                 tokenizerRuleSet = DefaultTokenizerRuleSet;
             else
             {
-                IFileInfoAdapter tokenizerRuleSetFile = CreateFile(classifyInput.FolderPath, classifyInput.TokenizerRuleSetFileName);
+                IFileInfoAdapter tokenizerRuleSetFile = CreateFile(_settingBag.FolderPath, classifyInput.TokenizerRuleSetFileName);
                 tokenizerRuleSet = LoadTokenizerRuleSetOrThrow(tokenizerRuleSetFile);
             }
 

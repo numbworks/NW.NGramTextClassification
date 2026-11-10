@@ -119,7 +119,6 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         /// <summary>
         /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.
-        /// <para>The method logs the objects that get removed.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>

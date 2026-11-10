@@ -27,16 +27,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         public SettingBag Create(ClassifyData classifyData)
         {
 
-            SettingBag settingBag = new SettingBag(
-
-                  truncateTextInLogMessagesAfter: SettingBag.DefaultTruncateTextInLogMessagesAfter,
-                  minimumAccuracySingleLabel: classifyData.MinAccuracySingle ?? SettingBag.DefaultMinimumAccuracySingleLabel,
-                  minimumAccuracyMultipleLabels: classifyData.MinAccuracyMultiple ?? SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                  folderPath: classifyData.FolderPath ?? SettingBag.DefaultFolderPath
-
-                );
-
-            return settingBag;
+            throw new System.NotImplementedException();
 
         }
 
