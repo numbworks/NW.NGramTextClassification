@@ -46,14 +46,12 @@ namespace NW.NGramTextClassification.TextClassifiers
             string content
                 = string.Join(
                     ", ",
-                    $"{nameof(TextSnippet)}: '{TextSnippet?.ToString() ?? "null"}'",
-                    $"{nameof(Label)}: '{Label ?? "null"}'",
-                    $"{nameof(SimilarityIndexes)}: '{SimilarityIndexes?.Count.ToString() ?? "null"}'",
-                    $"{nameof(SimilarityIndexAverages)}: '{SimilarityIndexAverages?.Count.ToString() ?? "null"}'"
+                    $"Text: '{TextSnippet?.Text ?? "null"}'",
+                    $"Label: '{Label ?? "null"}'"
                     );
 
             return $"[ {content} ]";
-
+        
         }
 
         #endregion

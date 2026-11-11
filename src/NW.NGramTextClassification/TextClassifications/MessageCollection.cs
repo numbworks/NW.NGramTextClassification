@@ -31,8 +31,8 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static string TextClassificationSessionHasBeenSuccessful = "The text classification session has been successful.";
 
-        public static Func<List<TextClassifierResult>, string> TextClassificationSessionFollowingResults =
-            (results) => $"The text classification session has produced the following results: {RollOutCollection(results?.Cast<object>() ?? Enumerable.Empty<object>())}";
+        public static string TextClassificationSessionFollowingResults
+            => $"The text classification session has produced the following results:";
 
         public static Func<string, string> ClassifyOutputSuccessfullySaved =
             (folderPath) => $"The {nameof(ClassifyOutput)} object has been successfully saved in '{folderPath}'.";

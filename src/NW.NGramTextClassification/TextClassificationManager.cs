@@ -5,6 +5,7 @@ using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NW.Shared.Files;
 using NW.Shared.Serialization;
@@ -80,8 +81,7 @@ namespace NW.NGramTextClassification
                     minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel,
                     minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionHasBeenSuccessful);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionFollowingResults(classifyOutput.Results));
+            LogTextClassificationResults(classifyOutput);
 
             if (_settingBag.SaveSession)
             {
@@ -197,6 +197,16 @@ namespace NW.NGramTextClassification
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(ClassifyInput.TokenizerRuleSetFileName), classifyInput.TokenizerRuleSetFileName));
         
         }
+        private void LogTextClassificationResults(ClassifyOutput classifyOutput)
+        {
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionHasBeenSuccessful);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionFollowingResults);
+
+            foreach (TextClassifierResult result in classifyOutput.Results)
+                _componentBag.LoggingAction(result.ToString());
+
+        }        
         private void LogException(Exception e)
         {
 
