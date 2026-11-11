@@ -41,7 +41,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
             ITextClassifier textClassifier = new TextClassifier(nowFunction: nowFunction, versionFunction : DefaultVersionFunction);
             ComponentBag componentBag = new ComponentBag(textClassifier: textClassifier, loggingAction: loggingAction, errorFormattingFunction: DefaultErrorFormattingFunction);
-            TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag);
+            TextClassificationManager textClassificationManager = new TextClassificationManager(settingBag: settingBag, componentBag: componentBag);
 
             return textClassificationManager;
 

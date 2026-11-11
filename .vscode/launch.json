@@ -29,7 +29,21 @@
             "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
             "console": "integratedTerminal",
             "program": "/usr/bin/dotnet",
-            "args": [ "run", "--project", "${workspaceFolder}/src/NW.NGramTextClassification.CLI" ],
+            "args": [
+                "run", 
+                "--project", 
+                "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
+                "--",
+                "session",
+                "classify",
+                "--folderpath",
+                "/workspaces/NW.NGramTextClassification/docs/ExampleFiles/",
+                "--labeledexamples",
+                "LabeledExamples.json",
+                "--textsnippets",
+                "TextSnippets.json"
+
+            ],
             "stopAtEntry": false
         }
     ]

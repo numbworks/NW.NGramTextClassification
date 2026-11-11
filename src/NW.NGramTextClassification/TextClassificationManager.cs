@@ -100,7 +100,7 @@ namespace NW.NGramTextClassification
             try
             {
 
-                return ClassifyOrNull(classifyInput);
+                return Classify(classifyInput);
 
             }
             catch (Exception e)
