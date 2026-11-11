@@ -39,6 +39,13 @@ namespace NW.NGramTextClassification.TextClassifications
 
         #endregion
 
+        #region TextClassifier
+
+        public static Func<Type, string> ThereIsNoStrategyOutOfType =
+            (type) => $"There is no built-in strategy to create a filename out of a '{type.Name}' object.";
+
+        #endregion
+
         #region Methods
 
         private static string RollOutCollection(IEnumerable<object> coll)
