@@ -14,10 +14,22 @@ namespace NW.NGramTextClassification.TextClassifications
     public static class MessageCollection
     {
 
-        #region Properties
+        #region TextClassificationManager
 
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
+
+        public static string TextClassificationSessionStarted = "Text classification session started.";
+        public static string TextClassificationSessionCompleted = "Text classification session completed.";
+
+        public static Func<string, string, string> TheProvidedIs = (name, value) => $"The provided '{name}' is: '{value}'.";
+
+        #endregion
+
+
+        #region Properties
+
+
 
 
         // ----

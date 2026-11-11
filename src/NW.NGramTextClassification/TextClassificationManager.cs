@@ -47,8 +47,10 @@ namespace NW.NGramTextClassification
 
         public ClassifyOutput Classify(ClassifyInput classifyInput)
         {
-            
+
             Validator.ValidateObject(classifyInput, nameof(classifyInput));
+
+            LogStartup(classifyInput);
 
             IFileInfoAdapter labeledExamplesFile = CreateFile(_settingBag.FolderPath, classifyInput.LabeledExamplesFileName);
             List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(labeledExamplesFile);
@@ -61,12 +63,12 @@ namespace NW.NGramTextClassification
             if (_settingBag.CleanLabeledExamples)
                 labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
 
-            ClassifyOutput classifyOutput 
+            ClassifyOutput classifyOutput
                 = _componentBag.TextClassifier.ClassifyMany(
-                    textSnippets: textSnippets, 
-                    tokenizerRuleSet: tokenizerRuleSet, 
-                    labeledExamples: labeledExamples, 
-                    minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel, 
+                    textSnippets: textSnippets,
+                    tokenizerRuleSet: tokenizerRuleSet,
+                    labeledExamples: labeledExamples,
+                    minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel,
                     minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
             if (_settingBag.SaveSession)
@@ -75,7 +77,7 @@ namespace NW.NGramTextClassification
             return classifyOutput;
 
         }
-		public ClassifyOutput ClassifyOrNull(ClassifyInput classifyInput)
+        public ClassifyOutput ClassifyOrNull(ClassifyInput classifyInput)
         {
 
             try
@@ -158,6 +160,26 @@ namespace NW.NGramTextClassification
 
         }
 
+        private void LogStartup(ClassifyInput classifyInput)
+        {
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionStarted);
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.FolderPath), _settingBag.FolderPath));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracySingleLabel), _settingBag.MinimumAccuracySingleLabel.ToString()));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracyMultipleLabels), _settingBag.MinimumAccuracyMultipleLabels.ToString()));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.SaveSession), _settingBag.SaveSession.ToString()));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.CleanLabeledExamples), _settingBag.CleanLabeledExamples.ToString()));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.DisableIndexSerialization), _settingBag.DisableIndexSerialization.ToString()));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.EnableUTC), _settingBag.EnableUTC.ToString()));
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(ClassifyInput.LabeledExamplesFileName), classifyInput.LabeledExamplesFileName));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(ClassifyInput.TextSnippetsFileName), classifyInput.TextSnippetsFileName));
+
+            if (!string.IsNullOrEmpty(classifyInput.TokenizerRuleSetFileName))
+                _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(ClassifyInput.TokenizerRuleSetFileName), classifyInput.TokenizerRuleSetFileName));
+        
+        }
         private void LogException(Exception e)
         {
 
