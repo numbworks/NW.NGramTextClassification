@@ -70,7 +70,6 @@ namespace NW.NGramTextClassification
             {
                 labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(labeledExamples));
-
             }
 
             ClassifyOutput classifyOutput
@@ -82,12 +81,15 @@ namespace NW.NGramTextClassification
                     minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionHasBeenSuccessful);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionFollowingResults(classifyOutput.Results));
 
             if (_settingBag.SaveSession)
             {
                 _componentBag.TextClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.ClassifyOutputSuccessfullySaved(_settingBag.FolderPath));
             }
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionCompleted);
 
             return classifyOutput;
 
