@@ -55,13 +55,23 @@ namespace NW.NGramTextClassification
             IFileInfoAdapter labeledExamplesFile = CreateFile(_settingBag.FolderPath, classifyInput.LabeledExamplesFileName);
             List<LabeledExample> labeledExamples = LoadLabeledExamplesOrThrow(labeledExamplesFile);
 
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.XLabeledExamplesHaveBeenLoaded(labeledExamples));
+
             IFileInfoAdapter textSnippetsFile = CreateFile(_settingBag.FolderPath, classifyInput.TextSnippetsFileName);
             List<TextSnippet> textSnippets = LoadTextSnippetsOrThrow(textSnippetsFile);
 
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.XTextSnippetsHaveBeenLoaded(textSnippets));
+
             NGramTokenizerRuleSet tokenizerRuleSet = EstablishTokenizerRuleSet(classifyInput);
 
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(NGramTokenizerRuleSet), tokenizerRuleSet.ToString()));
+
             if (_settingBag.CleanLabeledExamples)
+            {
                 labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
+                _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(labeledExamples));
+
+            }
 
             ClassifyOutput classifyOutput
                 = _componentBag.TextClassifier.ClassifyMany(
@@ -71,8 +81,13 @@ namespace NW.NGramTextClassification
                     minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel,
                     minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
 
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionHasBeenSuccessful);
+
             if (_settingBag.SaveSession)
+            {
                 _componentBag.TextClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
+                _componentBag.LoggingAction(TextClassifications.MessageCollection.ClassifyOutputSuccessfullySaved(_settingBag.FolderPath));
+            }
 
             return classifyOutput;
 

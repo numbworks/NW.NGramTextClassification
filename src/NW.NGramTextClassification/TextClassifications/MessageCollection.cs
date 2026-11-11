@@ -7,6 +7,7 @@ using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextClassifiers;
+using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
@@ -19,10 +20,23 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
 
-        public static string TextClassificationSessionStarted = "Text classification session started.";
-        public static string TextClassificationSessionCompleted = "Text classification session completed.";
+        public static string TextClassificationSessionStarted = "The text classification session has been started.";
+        public static string TextClassificationSessionCompleted = "The text classification session has been completed.";
 
         public static Func<string, string, string> TheProvidedIs = (name, value) => $"The provided '{name}' is: '{value}'.";
+        
+        public static Func<List<LabeledExample>, string> XLabeledExamplesHaveBeenLoaded =
+            (labeledExamples) => $"'{labeledExamples.Count}' {nameof(LabeledExample)} objects have been loaded.";
+        public static Func<List<TextSnippet>, string> XTextSnippetsHaveBeenLoaded =
+            (textSnippets) => $"'{textSnippets.Count}' {nameof(TextSnippet)} objects have been loaded.";
+
+        public static Func<List<LabeledExample>, string> LabeledExamplesHaveBeenThruCleaningProcess =
+            (labeledExamples) =>$"The provided {nameof(LabeledExample)} objects have been thru the cleaning process. Now they are: '{labeledExamples.Count}'.";
+
+        public static string TextClassificationSessionHasBeenSuccessful = "The text classification session has been successful.";
+
+        public static Func<string, string> ClassifyOutputSuccessfullySaved =
+            (folderPath) => $"The {nameof(ClassifyOutput)} object has been successfully saved in '{folderPath}'.";
 
         #endregion
 
@@ -40,8 +54,6 @@ namespace NW.NGramTextClassification.TextClassifications
         public static string AttemptingToClassifyProvidedSnippet = "Attempting to classify the provided snippet of text...";
         public static Func<string, string> FollowingSnippetHasBeenProvided =
             (snippet) => $"The following snippet has been provided: '{snippet}'.";
-        public static Func<List<LabeledExample>, string> XLabeledExamplesHaveBeenProvided =
-            (labeledExamples) => $"'{labeledExamples.Count}' {nameof(LabeledExample)} objects have been provided.";
         public static Func<List<INGram>, string> ProvidedTextHasBeenTokenizedIntoXNGrams =
             (nGrams) => $"The provided snippet has been tokenized into '{nGrams?.Count ?? 0}' {nameof(INGram)} object.";
 
@@ -63,8 +75,7 @@ namespace NW.NGramTextClassification.TextClassifications
             (label) => $"The result of the classification task is: '{label}'.";
         public static string ClassificationTaskHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples =
                 $"The classification task has failed. Try increasing the amount of provided {nameof(LabeledExample)} objects.";
-        public static string ClassificationTaskHasBeenSuccessful =
-                $"The classification task has been successful.";
+
 
         public static Func<TokenizedExample, string> ComparingProvidedSnippetAgainstFollowingTokenizedExample =
             (tokenizedExample) => $"Comparing the provided snippet against the following {nameof(TokenizedExample)}: '{tokenizedExample}'...";
@@ -112,8 +123,7 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static Func<Type, IFileInfoAdapter, string> AttemptingToSaveObjectsAs =
             (type, jsonFile) => $"Attempting to save the provided collection of '{type.Name}' objects as: {jsonFile.FullName}.";
-        public static Func<Type, string> ObjectsSuccessfullySaved =
-            (type) => $"The provided collection of '{type.Name}' objects has been successfully saved.";
+
         public static Func<Type, string> ObjectsFailedToSave =
             (type) => $"The provided collection of '{type.Name}' objects failed to save.";
 
@@ -153,10 +163,8 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static string AttemptingToCleanLabeledExamples = 
             $"Attempting to clean the provided {nameof(LabeledExample)} objects...";
-        public static string ProvidedLabeledExamplesThruCleaningProcess = 
-            $"The provided {nameof(LabeledExample)} objects have been thru the cleaning process.";
-        public static Func<LabeledExample, string> ThisLabeledExampleHasBeenRemoved =
-            (labeledExample) => $"This {nameof(LabeledExample)} object has been removed: '{labeledExample.Text}'.";
+
+
         public static string NoLabeledExampleHasBeenRemoved =
             $"No {nameof(LabeledExample)} object has been removed.";
 
