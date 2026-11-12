@@ -47,7 +47,7 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        ClassifyOutput ClassifyMany(
+        ClassifyOutput ClassifyManyOrDefault(
             List<TextSnippet> textSnippets, 
             INGramTokenizerRuleSet tokenizerRuleSet, 
             List<LabeledExample> labeledExamples,
@@ -61,7 +61,7 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        ClassifyOutput ClassifyMany(
+        ClassifyOutput ClassifyManyOrDefault(
             List<TextSnippet> textSnippets, 
             List<LabeledExample> labeledExamples,
             double minimumAccuracySingleLabel, 

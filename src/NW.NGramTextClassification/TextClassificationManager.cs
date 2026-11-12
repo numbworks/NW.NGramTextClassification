@@ -74,7 +74,7 @@ namespace NW.NGramTextClassification
             }
 
             ClassifyOutput classifyOutput
-                = _componentBag.TextClassifier.ClassifyMany(
+                = _componentBag.TextClassifier.ClassifyManyOrDefault(
                     textSnippets: textSnippets,
                     tokenizerRuleSet: tokenizerRuleSet,
                     labeledExamples: labeledExamples,

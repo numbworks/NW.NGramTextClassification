@@ -163,7 +163,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .ClassifyMany(
+                                    .ClassifyManyOrDefault(
                                         textSnippets: null,
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
@@ -177,7 +177,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .ClassifyMany(
+                                    .ClassifyManyOrDefault(
                                         textSnippets: TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                                         tokenizerRuleSet: null,
                                         labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
@@ -191,7 +191,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .ClassifyMany(
+                                    .ClassifyManyOrDefault(
                                         textSnippets: TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                                         tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
                                         labeledExamples: null,
@@ -691,7 +691,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             // Arrange
             // Act
             ClassifyOutput actual
-                = new TextClassifier().ClassifyMany(
+                = new TextClassifier().ClassifyManyOrDefault(
                     textSnippets: textSnippets, 
                     tokenizerRuleSet: tokenizerRuleSet, 
                     labeledExamples: labeledExamples,

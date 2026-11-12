@@ -164,7 +164,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             double minimumAccuracyMultipleLabels)
                 => ClassifyOrDefault(textSnippet, DefaultNGramTokenizerRuleSet, labeledExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
 
-        public ClassifyOutput ClassifyMany(
+        public ClassifyOutput ClassifyManyOrDefault(
             List<TextSnippet> textSnippets, 
             INGramTokenizerRuleSet tokenizerRuleSet, 
             List<LabeledExample> labeledExamples,
@@ -209,12 +209,12 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         }
         
-        public ClassifyOutput ClassifyMany(
+        public ClassifyOutput ClassifyManyOrDefault(
             List<TextSnippet> textSnippets, 
             List<LabeledExample> labeledExamples,
             double minimumAccuracySingleLabel, 
             double minimumAccuracyMultipleLabels)
-                => ClassifyMany(textSnippets, DefaultNGramTokenizerRuleSet, labeledExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
+                => ClassifyManyOrDefault(textSnippets, DefaultNGramTokenizerRuleSet, labeledExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
 
         public IFileInfoAdapter Convert(string filePath)
             => _fileManager.Create(filePath);
