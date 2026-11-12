@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.Shared.Validation;
@@ -12,7 +11,7 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Fields
 
-        private NGramTokenization.INGramTokenizer _tokenizer;
+        private INGramTokenizer _tokenizer;
 
         #endregion
 
