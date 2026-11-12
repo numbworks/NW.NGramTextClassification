@@ -133,7 +133,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            List<TokenizedExample> tokenizedExamples = Tokenize(tokenizerRuleSet, labeledExamples);
+            List<TokenizedExample> tokenizedExamples = TokenizeOrDefault(tokenizerRuleSet, labeledExamples);
             string version = _versionFunction();
 
             if (tokenizedExamples == null)
@@ -176,7 +176,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
             Validator.ValidateList(labeledExamples, nameof(labeledExamples));
 
-            List<TokenizedExample> tokenizedExamples = Tokenize(tokenizerRuleSet, labeledExamples);
+            List<TokenizedExample> tokenizedExamples = TokenizeOrDefault(tokenizerRuleSet, labeledExamples);
             string version = _versionFunction();
 
             if (tokenizedExamples == null)
@@ -274,7 +274,7 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         }
         
-        private List<TokenizedExample> Tokenize(INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        private List<TokenizedExample> TokenizeOrDefault(INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
             List<TokenizedExample> tokenizedExamples = _labeledExampleManager.CreateOrDefault(labeledExamples, tokenizerRuleSet);
