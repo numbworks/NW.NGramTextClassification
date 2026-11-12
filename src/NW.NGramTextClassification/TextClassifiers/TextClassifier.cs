@@ -140,18 +140,18 @@ namespace NW.NGramTextClassification.TextClassifiers
             {
 
                 TextClassifierResult result = DefaultTextClassifierResult;
-                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
 
-                return session;
+                return classifyOutput;
 
             }
             else
             {
 
                 TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
-                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
 
-                return session;
+                return classifyOutput;
 
             }               
 
@@ -183,9 +183,9 @@ namespace NW.NGramTextClassification.TextClassifiers
             {
 
                 List<TextClassifierResult> results = [DefaultTextClassifierResult];
-                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, results, version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, results, version);
 
-                return session;
+                return classifyOutput;
 
             }
             else
@@ -201,9 +201,9 @@ namespace NW.NGramTextClassification.TextClassifiers
                 });
 
                 List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
-                ClassifyOutput session = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, finalResults, version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, finalResults, version);
 
-                return session;
+                return classifyOutput;
 
             }
 
@@ -236,8 +236,8 @@ namespace NW.NGramTextClassification.TextClassifiers
             if(disableIndexSerialization)
             {
 
-                dynamic newSession = SimilarityIndexDisabler(classifyOutput);
-                Save(obj: newSession, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
+                dynamic updatedOutput = SimilarityIndexDisabler(classifyOutput);
+                Save(obj: updatedOutput, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
 
             }
             else
