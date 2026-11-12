@@ -16,7 +16,7 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
 
-        public static string TextClassificationProcessStarted = "The text classification process has been started.";
+        public static string TextClassificationProcessStarted = "The text classification process has started.";
         public static string TextClassificationProcessCompleted = "The text classification process has been completed.";
 
         public static Func<string, string, string> TheProvidedIs = (name, value) => $"The provided '{name}' is: '{value}'.";
