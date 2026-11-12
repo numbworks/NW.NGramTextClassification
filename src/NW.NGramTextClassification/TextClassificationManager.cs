@@ -89,7 +89,7 @@ namespace NW.NGramTextClassification
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.ClassifyOutputSuccessfullySaved(_settingBag.FolderPath));
             }
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionCompleted);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationProcessCompleted);
 
             return classifyOutput;
 
@@ -180,7 +180,7 @@ namespace NW.NGramTextClassification
         private void LogStartup(ClassifyInput classifyInput)
         {
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionStarted);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationProcessStarted);
 
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.FolderPath), _settingBag.FolderPath));
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracySingleLabel), _settingBag.MinimumAccuracySingleLabel.ToString()));
@@ -200,8 +200,8 @@ namespace NW.NGramTextClassification
         private void LogTextClassificationResults(ClassifyOutput classifyOutput)
         {
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionHasBeenSuccessful);
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationSessionFollowingResults);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationOutputSuccessfullyCreated);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TextClassificationOutputContainsResults);
 
             foreach (TextClassifierResult result in classifyOutput.Results)
                 _componentBag.LoggingAction(result.ToString());

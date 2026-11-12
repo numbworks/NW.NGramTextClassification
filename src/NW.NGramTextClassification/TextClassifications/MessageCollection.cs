@@ -16,8 +16,8 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<string, string> LoadingFileNameReturnedDefault =
             (fileName) => $"Loading the content of '{fileName}' returned a default value. Please check the content of the file, it may be null or invalid.";
 
-        public static string TextClassificationSessionStarted = "The text classification session has been started.";
-        public static string TextClassificationSessionCompleted = "The text classification session has been completed.";
+        public static string TextClassificationProcessStarted = "The text classification process has been started.";
+        public static string TextClassificationProcessCompleted = "The text classification process has been completed.";
 
         public static Func<string, string, string> TheProvidedIs = (name, value) => $"The provided '{name}' is: '{value}'.";
         
@@ -29,10 +29,10 @@ namespace NW.NGramTextClassification.TextClassifications
         public static Func<List<LabeledExample>, string> LabeledExamplesHaveBeenThruCleaningProcess =
             (labeledExamples) =>$"The provided {nameof(LabeledExample)} objects have been thru the cleaning process. Now they are: '{labeledExamples.Count}'.";
 
-        public static string TextClassificationSessionHasBeenSuccessful = "The text classification session has been successful.";
+        public static string TextClassificationOutputSuccessfullyCreated = "The text classification output has been successfully created.";
 
-        public static string TextClassificationSessionFollowingResults
-            => $"The text classification session has produced the following results:";
+        public static string TextClassificationOutputContainsResults
+            => $"The text classification output contains the following results:";
 
         public static Func<string, string> ClassifyOutputSuccessfullySaved =
             (folderPath) => $"The {nameof(ClassifyOutput)} object has been successfully saved in '{folderPath}'.";
