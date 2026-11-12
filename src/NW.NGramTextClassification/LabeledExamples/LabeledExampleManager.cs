@@ -59,7 +59,6 @@ namespace NW.NGramTextClassification.LabeledExamples
         }
         public TokenizedExample CreateOrDefault(LabeledExample labeledExample)
             => CreateOrDefault(labeledExample, DefaultTokenizerRuleSet);
-
         public List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
