@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NW.NGramTextClassification.LabeledExamples;
-using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 
 namespace NW.NGramTextClassification.TextClassifications
