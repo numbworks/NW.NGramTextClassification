@@ -1,6 +1,5 @@
 using System;
 using NW.NGramTextClassification.Bags;
-using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.CLI.AsciiBanners;
 using NW.NGramTextClassification.CLI.TerminalWindows;
 using McMaster.Extensions.CommandLineUtils;
