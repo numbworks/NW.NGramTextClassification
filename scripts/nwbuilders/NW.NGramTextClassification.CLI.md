@@ -15,7 +15,6 @@ nwngram
 
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
-|classify|||Success|
 |classify||--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--saveoutput*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
 
 ## Examples
