@@ -43,7 +43,7 @@ The command above will log something like this to the console:
  ##:. ###: ##: ##: ##: ##:. ###: ##::: ##:: ##::. ##:: ##.... ##: ##:.:: ##:
  ##::. ##:. ###. ###:: ##::. ##:. ######::: ##:::. ##: ##:::: ##: ##:::: ##:
 ..::::..:::...::...:::..::::..:::......::::..:::::..::..:::::..::..:::::..::
-*********************************************************Version: 4.3.0*****
+*********************************************************Version: 5.0.0*****
 
 
 [2026-07-19 20:28:06:229] Attempting to load a collection of 'LabeledExample' objects from: C:\Users\Rubèn\Desktop\nw.ngramtextclassification\LabeledExamples.json.
@@ -162,7 +162,7 @@ The produced JSON will look like:
       ]
     }
   ],
-  "Version": "4.3.0"
+  "Version": "5.0.0"
 }
 ```
 
