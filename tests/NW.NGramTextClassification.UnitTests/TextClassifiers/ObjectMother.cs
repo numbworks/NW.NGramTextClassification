@@ -16,35 +16,29 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
         public static string TextClassifierResult_AsString
             = string.Concat(
                     $"[ ",
-                    $"TextSnippet: '{TextSnippets.ObjectMother.TextSnippet}', ",
-                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', ",
-                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
-                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
-                    "]"
+                    $"Text: '{TextSnippets.ObjectMother.TextSnippet.Text}', ",
+                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}'",
+                    " ]"
                 );
 
         public static string TextClassifierResult_AsStringWithNullLabel
             = string.Concat(
                     $"[ ",
-                    $"TextSnippet: '{TextSnippets.ObjectMother.TextSnippet}', ",
-                    $"Label: 'null', ",
-                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
-                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
-                    "]"
+                    $"Text: '{TextSnippets.ObjectMother.TextSnippet.Text}', ",
+                    $"Label: 'null'",
+                    " ]"
                 );
 
         public static string TextClassifierResult_AsStringWithNullTextSnippet
             = string.Concat(
                     $"[ ",
-                    $"TextSnippet: 'null', ",
-                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', ",
-                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
-                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
-                    "]"
+                    $"Text: 'null', ",
+                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}'",
+                    " ]"
                 );
 
         public static string TextClassifierResult_AllNulls
-            = $"[ TextSnippet: 'null', Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
+            = $"[ Text: 'null', Label: 'null' ]";
 
         public static TextClassifierResult TextClassifierResult_CompleteLabeledExamples00
             = new TextClassifierResult(
@@ -53,7 +47,6 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     indexes: Similarity.ObjectMother.CreateSimilarityIndexesForCompleteLabeledExample00(),
                     indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample00()
                 );
-
 
         public static List<string> Snippets_CompleteLabeledExamples00 = new List<string>()
         {
