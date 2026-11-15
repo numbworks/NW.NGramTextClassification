@@ -476,6 +476,20 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             ).SetArgDisplayNames($"{nameof(convertExceptionTestCases)}_01")
 
         };
+        private static TestCaseData[] saveTestCases =
+        {
+
+            new TestCaseData(
+                TextClassificationManager.DefaultLabeledExamples,
+                TextClassificationManager.DefaultLabeledExamplesFileName
+            ).SetArgDisplayNames($"{nameof(saveTestCases)}_01"),
+
+            new TestCaseData(
+                TextClassificationManager.DefaultTokenizerRuleSet,
+                TextClassificationManager.DefaultTokenizerRuleSetFileName
+            ).SetArgDisplayNames($"{nameof(saveTestCases)}_02")
+        
+        };        
         private static TestCaseData[] cleanLabeledExamplesExceptionTestCases =
         {
 
@@ -1060,25 +1074,25 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         #region Tests (Save)
 
-        [Test]
-        public void Save_ShouldSaveCollectionOfLabeledExamplesAndNotThrowException_WhenProperArguments()
+        [TestCaseSource(nameof(saveTestCases))]
+        public void Save_ShouldSaveObject_WhenProperArguments(object obj, string fileName)
         {
 
             // Arrange
             TextClassifier textClassifier = new TextClassifier(fileManager: new FakeFileManager(""));
 
-            string filePath = Path.Combine(@"C:\", TextClassificationManager.DefaultLabeledExamplesFileName);
+            string filePath = Path.Combine(@"C:\", fileName);
             IFileInfoAdapter jsonFile = new FakeFileInfoAdapter(true, filePath);
 
             // Act
             // Assert
             Assert.DoesNotThrow(() => 
-                textClassifier.Save(TextClassificationManager.DefaultLabeledExamples, jsonFile));
+                textClassifier.Save(obj, jsonFile));
 
         }
 
-        [Test]
-        public void Save_ShouldThrowExpectedException_WhenWriteAllTextFailsWithLabeledExamplesCollection()
+        [TestCaseSource(nameof(saveTestCases))]
+        public void Save_ShouldThrowExpectedException_WhenWriteAllTextFails(object obj, string fileName)
         {
 
             // Arrange
@@ -1086,13 +1100,13 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             IFileManager fileManager = new FakeFileManagerThrowingWriteExceptions(content: "", writeExceptionMessage: writeExceptionMessage);
             TextClassifier textClassifier = new TextClassifier(fileManager: fileManager);
 
-            string filePath = Path.Combine(@"C:\", TextClassificationManager.DefaultLabeledExamplesFileName);
+            string filePath = Path.Combine(@"C:\", fileName);
             IFileInfoAdapter jsonFile = new FakeFileInfoAdapter(true, filePath);
 
             // Act
             // Assert
             Exception e = Assert.Throws<Exception>(() => 
-                textClassifier.Save(TextClassificationManager.DefaultLabeledExamples, jsonFile));
+                textClassifier.Save(obj, jsonFile));
 
             Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
 
