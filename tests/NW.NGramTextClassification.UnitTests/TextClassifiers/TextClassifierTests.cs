@@ -1060,11 +1060,47 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         #region Tests (Save)
 
-        // Add missing ones
+        [Test]
+        public void Save_ShouldSaveCollectionOfLabeledExamplesAndNotThrowException_WhenProperArguments()
+        {
+
+            // Arrange
+            TextClassifier textClassifier = new TextClassifier(fileManager: new FakeFileManager(""));
+
+            string filePath = Path.Combine(@"C:\", TextClassificationManager.DefaultLabeledExamplesFileName);
+            IFileInfoAdapter jsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            // Act
+            // Assert
+            Assert.DoesNotThrow(() => 
+                textClassifier.Save(TextClassificationManager.DefaultLabeledExamples, jsonFile));
+
+        }
+
+        [Test]
+        public void Save_ShouldThrowExpectedException_WhenWriteAllTextFailsWithLabeledExamplesCollection()
+        {
+
+            // Arrange
+            string writeExceptionMessage = "A random write-to-disk issue.";
+            IFileManager fileManager = new FakeFileManagerThrowingWriteExceptions(content: "", writeExceptionMessage: writeExceptionMessage);
+            TextClassifier textClassifier = new TextClassifier(fileManager: fileManager);
+
+            string filePath = Path.Combine(@"C:\", TextClassificationManager.DefaultLabeledExamplesFileName);
+            IFileInfoAdapter jsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            // Act
+            // Assert
+            Exception e = Assert.Throws<Exception>(() => 
+                textClassifier.Save(TextClassificationManager.DefaultLabeledExamples, jsonFile));
+
+            Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
+
+        }
 
         #endregion
 
-        #region Tests (SaveOutput)
+        #region Tests (SaveClassifyOutput)
 
         [TestCase(false)]
         [TestCase(true)]

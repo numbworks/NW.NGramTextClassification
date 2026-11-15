@@ -27,7 +27,18 @@ namespace NW.NGramTextClassification
 		
 		#region Properties
 
-		public static NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
+        public static List<LabeledExample> DefaultLabeledExamples { get; } = new List<LabeledExample>()
+            {
+                new LabeledExample(label: "en", text: "We are looking for several skilled and driven developers to join our team."),
+                new LabeledExample(label: "sv", text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.")
+            };
+        public static List<TextSnippet> DefaultTextSnippets { get; } = new List<TextSnippet>()
+            {
+                new TextSnippet(text: "We are looking for several skilled and driven developers to join our team."),
+                new TextSnippet(text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.")
+            };
+        public static NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
+
         public static string DefaultLabeledExamplesFileName { get; } = "LabeledExamples.json";
         public static string DefaultTextSnippetsFileName { get; } = "TextSnippets.json";
         public static string DefaultTokenizerRuleSetFileName { get; } = "TokenizerRuleSet.json";
@@ -122,25 +133,13 @@ namespace NW.NGramTextClassification
         public void Scaffold()
         {
             
-            List<LabeledExample> labeledExamples = new List<LabeledExample>()
-            {
-                new LabeledExample(label: "en", text: "We are looking for several skilled and driven developers to join our team."),
-                new LabeledExample(label: "sv", text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.")
-            };
-            List<TextSnippet> textSnippets = new List<TextSnippet>()
-            {
-                new TextSnippet(text: "We are looking for several skilled and driven developers to join our team."),
-                new TextSnippet(text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.")
-            };
-            INGramTokenizerRuleSet tokenizerRuleSet = new NGramTokenizerRuleSet(true, true, true, true, true);
-
             IFileInfoAdapter labeledExamplesFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultLabeledExamplesFileName));
             IFileInfoAdapter textSnippetsFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTextSnippetsFileName));
             IFileInfoAdapter tokenizerRuleSetFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTokenizerRuleSetFileName));
 
-            _componentBag.TextClassifier.Save(labeledExamples, labeledExamplesFile);
-            _componentBag.TextClassifier.Save(textSnippets, textSnippetsFile);
-            _componentBag.TextClassifier.Save(tokenizerRuleSet, tokenizerRuleSetFile);
+            _componentBag.TextClassifier.Save(DefaultLabeledExamples, labeledExamplesFile);
+            _componentBag.TextClassifier.Save(DefaultTextSnippets, textSnippetsFile);
+            _componentBag.TextClassifier.Save(DefaultTokenizerRuleSet, tokenizerRuleSetFile);
 
         }
 
