@@ -70,9 +70,9 @@ namespace NW.NGramTextClassification
 
             if (_settingBag.CleanLabeledExamples)
             {
-                List<LabeledExample> removed;
-                labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out removed);
-                LogRemovedLabeledExamples(removed);
+                List<LabeledExample> removedExamples;
+                labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out removedExamples);
+                LogRemovedLabeledExamples(cleanExamples: labeledExamples, removedExamples: removedExamples);
             }
 
             TextClassifierContext textClassifierContext = new TextClassifierContext(
@@ -202,14 +202,14 @@ namespace NW.NGramTextClassification
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(ClassifyInput.TokenizerRuleSetFileName), classifyInput.TokenizerRuleSetFileName));
         
         }
-        private void LogRemovedLabeledExamples(List<LabeledExample> labeledExamples)
+        private void LogRemovedLabeledExamples(List<LabeledExample> cleanExamples, List<LabeledExample> removedExamples)
         {
 
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(labeledExamples));
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenRemoved);
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(cleanExamples));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenRemoved(removedExamples));
 
-            foreach (LabeledExample labeledExample in labeledExamples)
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.RemovedLabeledExample(labeledExample));
+            foreach (LabeledExample removedExample in removedExamples)
+                _componentBag.LoggingAction(TextClassifications.MessageCollection.RemovedLabeledExample(removedExample));
 
         }
         private void LogTextClassificationResults(ClassifyOutput classifyOutput)

@@ -26,8 +26,8 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static Func<List<LabeledExample>, string> LabeledExamplesHaveBeenThruCleaningProcess =
             (labeledExamples) => $"The provided {nameof(LabeledExample)} objects have been thru the cleaning process. Now they are: '{labeledExamples.Count}'.";
-        public static string LabeledExamplesHaveBeenRemoved
-            => "The following LabeledExamples have been removed:";
+        public static Func<List<LabeledExample>, string> LabeledExamplesHaveBeenRemoved = 
+            (labeledExamples) => $"The following '{labeledExamples.Count}' LabeledExamples have been removed:";
         public static Func<LabeledExample, string> RemovedLabeledExample =
             (labeledExample) => $"Removed: {labeledExample}";
 
