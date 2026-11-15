@@ -29,7 +29,7 @@ namespace NW.NGramTextClassification.Bags
 
         #region Constructors
 
-        /// <summary>Initializes a <see cref="ComponentBag"/> instance.</summary>
+        /// <summary>Initializes an instance of <see cref="ComponentBag"/>.</summary>
         public ComponentBag(
             IFileManager fileManager = null, 
             ITextClassifier textClassifier = null, 
