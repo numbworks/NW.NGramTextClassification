@@ -87,9 +87,9 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
         ///      &quot;TextSnippet&quot;: {
         ///        &quot;Text&quot;: &quot;VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most popular gift [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string TextClassifierrSessionCLE00AsJson {
+        public static string ClassifyOutputCLE00AsJson {
             get {
-                return ResourceManager.GetString("TextClassifierrSessionCLE00AsJson", resourceCulture);
+                return ResourceManager.GetString("ClassifyOutputCLE00AsJson", resourceCulture);
             }
         }
         
@@ -102,9 +102,9 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
         ///        &quot;TextSnippet&quot;: {
         ///          &quot;Text&quot;: &quot;VerksamhetsbeskrivningGoGift is a company which focuses on innovative gifts and gift cards solutions. GoGift has activities in every Nordic country and addresses both private as well as corporate customers. GoGift distributes gift cards for thousands of shops, brands and experiences delivered with post, email or SMS. The Super Gift Card, one of the most  [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string TextClassifierrSessionCLE00DisabledAsJson {
+        public static string ClassifyOutputCLE00DisabledAsJson {
             get {
-                return ResourceManager.GetString("TextClassifierrSessionCLE00DisabledAsJson", resourceCulture);
+                return ResourceManager.GetString("ClassifyOutputCLE00DisabledAsJson", resourceCulture);
             }
         }
         

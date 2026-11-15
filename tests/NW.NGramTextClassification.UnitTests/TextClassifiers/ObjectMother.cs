@@ -83,7 +83,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                 version: TextClassifier.DefaultVersionFunction()
                 );
 
-        public static string ClassifyOutputCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
+        public static string ClassifyOutputCLE00AsJson_Content = Properties.Resources.ClassifyOutputCLE00AsJson;
         public static ClassifyOutput ClassifyOutput_CompleteLabeledExamples00
             = new ClassifyOutput(
                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
@@ -102,7 +102,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     doForFivegram: true
                     );
 
-        public static string ClassifyOutputCLE00DisabledAsJson_Content = Properties.Resources.TextClassifierrSessionCLE00DisabledAsJson;
+        public static string ClassifyOutputCLE00DisabledAsJson_Content = Properties.Resources.ClassifyOutputCLE00DisabledAsJson;
 
         #endregion
 

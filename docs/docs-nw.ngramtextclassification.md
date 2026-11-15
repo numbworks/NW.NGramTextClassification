@@ -277,9 +277,9 @@ Here an example of each JSON file supported by the library (load and save):
 
 1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
 2. [TextSnippets.json](ExampleFiles/TextSnippets.json)
-3. [Session.json](ExampleFiles/Session.json) - v.3.6.0.0
-4. [SessionWithDisabledIndexSerialization.json](ExampleFiles/SessionWithDisabledIndexSerialization.json) - v.3.6.0.0
-5. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
+3. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
+4. [ClassifyOutput.json](ExampleFiles/ClassifyOutput.json) - v.3.6.0.0
+5. [ClassifyOutputWithDisabledIndexSerialization.json](ExampleFiles/ClassifyOutputWithDisabledIndexSerialization.json) - v.3.6.0.0
 
 ## See Also: `asciibannermanager`
 
