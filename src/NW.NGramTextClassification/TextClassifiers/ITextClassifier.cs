@@ -17,12 +17,26 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         /// <summary>
         /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="textClassifierContext"/>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>      
+        ClassifyOutput Classify(TextSnippet textSnippet, TextClassifierContext textClassifierContext);
+
+        /// <summary>
+        /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="textClassifierContext"/>.
         /// <para>If one rule in <see cref="TextClassifierContext.TokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="ClassifyOutput"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
         ClassifyOutput ClassifyOrDefault(TextSnippet textSnippet, TextClassifierContext textClassifierContext);
+
+        /// <summary>
+        /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="textClassifierContext"/>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>      
+        ClassifyOutput ClassifyMany(List<TextSnippet> textSnippets, TextClassifierContext textClassifierContext);
 
         /// <summary>
         /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="textClassifierContext"/>.
