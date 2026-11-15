@@ -89,7 +89,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                     minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                     minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                     results: TextClassifierResults_CompleteLabeledExamples00,
-                    version: "3.6.0.0"
+                    version: "5.0.0"
                 );
 
         public static string TokenizerRuleSetAsJson_Content = Properties.Resources.TokenizerRuleSetAsJson;
