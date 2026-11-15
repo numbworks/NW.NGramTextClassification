@@ -85,7 +85,7 @@ namespace NW.NGramTextClassification.UnitTests
             List<string> logMessages = new List<string>();
             Action<string> loggingAction = (msg) => logMessages.Add(msg);
 
-            string jsonContent = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content;
+            string jsonContent = LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content;
             FakeFileManager fileManager = new FakeFileManager(jsonContent);
             TextClassifier textClassifier = new TextClassifier(fileManager: fileManager);
 
@@ -194,7 +194,7 @@ namespace NW.NGramTextClassification.UnitTests
         {
 
             // Arrange
-            FakeFileManager fileManager = new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content);
+            FakeFileManager fileManager = new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content);
             TextClassifier textClassifier = new TextClassifier(fileManager: fileManager);
             ComponentBag componentBag = new ComponentBag(fileManager: fileManager, textClassifier: textClassifier);
             TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag);

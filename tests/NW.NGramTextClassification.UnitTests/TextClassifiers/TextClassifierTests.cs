@@ -930,7 +930,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             // Arrange
             TextClassifier textClassifier 
                 = new TextClassifier(
-                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content));
+                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content));
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\LabeledExamples.json");
 
@@ -977,7 +977,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             // Arrange
             TextClassifier textClassifier 
-                = new TextClassifier(fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content));
+                = new TextClassifier(fileManager: new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content));
 
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, @"C:\TextSnippets.json");
 
@@ -1068,7 +1068,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             TextClassifier textClassifier 
                 = new TextClassifier(
-                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content),
                     nowFunction: fakeNowFunction,
                     versionFunction: fakeVersionFunction);
 
@@ -1097,7 +1097,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             TextClassifier textClassifier 
                 = new TextClassifier(
                         fileManager: new FakeFileManagerThrowingWriteExceptions(
-                                            content: LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content,
+                                            content: LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content,
                                             writeExceptionMessage: writeExceptionMessage),
                         nowFunction: fakeNowFunction,
                         versionFunction: fakeVersionFunction);
@@ -1130,7 +1130,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             TextClassifier textClassifier 
                 = new TextClassifier(
-                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content),
                     nowFunction: fakeNowFunction,
                     versionFunction: fakeVersionFunction);
 
@@ -1159,7 +1159,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             TextClassifier textClassifier 
                 = new TextClassifier(
                     fileManager: new FakeFileManagerThrowingWriteExceptions(
-                                    content: LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content,
+                                    content: LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content,
                                     writeExceptionMessage: writeExceptionMessage),
                     nowFunction: fakeNowFunction,
                     versionFunction: fakeVersionFunction);

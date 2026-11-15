@@ -93,7 +93,7 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
             // Arrange
             List<LabeledExample> objects = LabeledExamples.ObjectMother.ShortLabeledExamples;
-            string expected = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content.Replace("\r\n", "\n");
+            string expected = LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content.Replace("\r\n", "\n");
 
             // Act
             string actual = new Serializer<LabeledExample>().Serialize(objects: objects).Replace("\r\n", "\n");
@@ -171,7 +171,7 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         {
 
             // Arrange
-            string json = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content;
+            string json = LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content;
             List<LabeledExample> expected = LabeledExamples.ObjectMother.ShortLabeledExamples;
 
             // Act

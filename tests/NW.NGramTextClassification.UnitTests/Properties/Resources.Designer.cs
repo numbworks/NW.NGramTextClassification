@@ -72,9 +72,9 @@ namespace NW.NGramTextClassification.UnitTests.Properties {
         ///  }
         ///].
         /// </summary>
-        public static string ShortLabeledExamplesAsJson {
+        public static string LabeledExamplesAsJson {
             get {
-                return ResourceManager.GetString("ShortLabeledExamplesAsJson", resourceCulture);
+                return ResourceManager.GetString("LabeledExamplesAsJson", resourceCulture);
             }
         }
         

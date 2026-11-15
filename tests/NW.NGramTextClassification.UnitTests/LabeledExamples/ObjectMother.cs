@@ -390,7 +390,7 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         };
 
-        public static string ShortLabeledExamplesAsJson_Content = Properties.Resources.ShortLabeledExamplesAsJson;
+        public static string LabeledExamplesAsJson_Content = Properties.Resources.LabeledExamplesAsJson;
 
         public static List<LabeledExample> UntokenizableLabeledExamples = new List<LabeledExample>()
             {
