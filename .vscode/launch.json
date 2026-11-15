@@ -7,7 +7,16 @@
             "request": "launch",
             "preLaunchTask": "solution: build",
             "program": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI/bin/net8.0/NW.NGramTextClassification.CLI.dll",
-            "args": [],
+            "args": [
+                "session",
+                "classify",
+                "--folderpath",
+                "/workspaces/NW.NGramTextClassification/docs/ExampleFiles/",
+                "--labeledexamples",
+                "LabeledExamples.json",
+                "--textsnippets",
+                "TextSnippets.json"
+            ],
             "cwd": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI",
             "console": "integratedTerminal",
             "stopAtEntry": false

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.Shared.Validation;
@@ -44,46 +45,6 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         #region Methods (public)
 
-        public TokenizedExample CreateOrDefault(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet)
-        {
-
-            Validator.ValidateObject(labeledExample, nameof(labeledExample));
-            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
-
-            List<INGram> ngrams = _tokenizer.DoForRuleSetOrDefault(labeledExample.Text, tokenizerRuleSet);
-            if (ngrams != null)
-                return new TokenizedExample(labeledExample, ngrams);
-
-            return DefaultTokenizedExample;
-
-        }
-        public TokenizedExample CreateOrDefault(LabeledExample labeledExample)
-            => CreateOrDefault(labeledExample, DefaultTokenizerRuleSet);
-        public List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
-        {
-
-            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
-            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
-
-            List<TokenizedExample> tokenizedExamples = new List<TokenizedExample>();
-            foreach (LabeledExample labeledExample in labeledExamples)
-            {
-
-                TokenizedExample tokenizedExample = CreateOrDefault(labeledExample, tokenizerRuleSet);
-                if (tokenizedExample != null)
-                    tokenizedExamples.Add(tokenizedExample);
-
-            }
-
-            if (tokenizedExamples.Count != labeledExamples.Count)
-                return DefaultTokenizedExamples;
-
-            return tokenizedExamples;
-
-        }
-        public List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples)
-            => CreateOrDefault(labeledExamples, DefaultTokenizerRuleSet);
-
         public List<LabeledExample> CleanLabeledExamples
             (List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed)
         {
@@ -110,9 +71,73 @@ namespace NW.NGramTextClassification.LabeledExamples
 
         }
 
+        public TokenizedExample CreateOrDefault(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet)
+            => CreateInternal(labeledExample, tokenizerRuleSet, _tokenizer.DoForRuleSetOrDefault, () => DefaultTokenizedExample);
+        public TokenizedExample CreateOrDefault(LabeledExample labeledExample)
+            => CreateOrDefault(labeledExample, DefaultTokenizerRuleSet);
+        public List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
+            => CreateListInternal(labeledExamples, tokenizerRuleSet, CreateOrDefault, () => DefaultTokenizedExamples);
+        public List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples)
+            => CreateOrDefault(labeledExamples, DefaultTokenizerRuleSet);
+                
+        public TokenizedExample Create(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet)
+            => CreateInternal(labeledExample, tokenizerRuleSet, _tokenizer.DoForRuleSet, () => null);
+        public TokenizedExample Create(LabeledExample labeledExample)
+            => Create(labeledExample, DefaultTokenizerRuleSet);
+        public List<TokenizedExample> Create(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
+            => CreateListInternal(labeledExamples, tokenizerRuleSet, Create, () => null);
+        public List<TokenizedExample> Create(List<LabeledExample> labeledExamples)
+            => Create(labeledExamples, DefaultTokenizerRuleSet);
+
         #endregion
 
         #region Methods (private)
+
+        private TokenizedExample CreateInternal(
+            LabeledExample labeledExample,
+            INGramTokenizerRuleSet tokenizerRuleSet,
+            Func<string, INGramTokenizerRuleSet, List<INGram>> tokenizeFunction,
+            Func<TokenizedExample> defaultValueFactory)
+        {
+
+            Validator.ValidateObject(labeledExample, nameof(labeledExample));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
+
+            List<INGram> ngrams = tokenizeFunction(labeledExample.Text, tokenizerRuleSet);
+
+            if (ngrams != null)
+                return new TokenizedExample(labeledExample, ngrams);
+
+            return defaultValueFactory?.Invoke();
+
+        }
+
+        private List<TokenizedExample> CreateListInternal(
+            List<LabeledExample> labeledExamples,
+            INGramTokenizerRuleSet tokenizerRuleSet,
+            Func<LabeledExample, INGramTokenizerRuleSet, TokenizedExample> createFunction,
+            Func<List<TokenizedExample>> defaultValueFactory)
+        {
+
+            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
+            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
+
+            List<TokenizedExample> tokenizedExamples = new();
+
+            foreach (LabeledExample labeledExample in labeledExamples)
+            {
+                TokenizedExample tokenizedExample = createFunction(labeledExample, tokenizerRuleSet);
+
+                if (tokenizedExample != null)
+                    tokenizedExamples.Add(tokenizedExample);
+            }
+
+            if (tokenizedExamples.Count != labeledExamples.Count)
+                return defaultValueFactory?.Invoke();
+
+            return tokenizedExamples;
+
+        }
 
         #endregion
 

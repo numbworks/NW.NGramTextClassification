@@ -9,6 +9,13 @@ namespace NW.NGramTextClassification.LabeledExamples
     {
 
         /// <summary>
+        /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed);
+
+        /// <summary>
         /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters.
         /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail, <see cref="LabeledExampleManager.DefaultTokenizedExample"/> will be returned.</para>
@@ -42,12 +49,10 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <exception cref="ArgumentException"/>
         List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples);
 
-        /// <summary>
-        /// Returns all the <see cref="LabeledExample"/> objects in <paramref name="labeledExamples"/> that don't make the tokenizer to fail.
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>
-        List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed);
+        TokenizedExample Create(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet);
+        TokenizedExample Create(LabeledExample labeledExample);
+        List<TokenizedExample> Create(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet);
+        List<TokenizedExample> Create(List<LabeledExample> labeledExamples);
 
     }
 }

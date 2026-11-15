@@ -218,14 +218,12 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         public IFileInfoAdapter Convert(string filePath)
             => _fileManager.Create(filePath);
-
         public List<LabeledExample> LoadLabeledExamplesOrDefault(IFileInfoAdapter jsonFile)
             => LoadManyOrDefault<LabeledExample>(jsonFile);
         public List<TextSnippet> LoadTextSnippetsOrDefault(IFileInfoAdapter jsonFile)
             => LoadManyOrDefault<TextSnippet>(jsonFile);
         public NGramTokenizerRuleSet LoadTokenizerRuleSetOrDefault(IFileInfoAdapter jsonFile)
             => LoadOrDefault<NGramTokenizerRuleSet>(jsonFile);
-
         public void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath)
             => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _nowFunction()));
         public void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath)
@@ -244,7 +242,6 @@ namespace NW.NGramTextClassification.TextClassifiers
                 Save(obj: classifyOutput, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
 
         }
-
         public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
         {
 
@@ -273,7 +270,15 @@ namespace NW.NGramTextClassification.TextClassifiers
             return CreateResult(textSnippet, nGrams, tokenizedExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
 
         }
-        
+
+        private List<TokenizedExample> Tokenize(INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
+        {
+
+            List<TokenizedExample> tokenizedExamples = _labeledExampleManager.Create(labeledExamples, tokenizerRuleSet);
+
+            return tokenizedExamples;
+
+        }
         private List<TokenizedExample> TokenizeOrDefault(INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples)
         {
 
@@ -281,7 +286,8 @@ namespace NW.NGramTextClassification.TextClassifiers
 
             return tokenizedExamples;
 
-        }        
+        }
+        
         private TextClassifierResult CreateResult(TextSnippet textSnippet, List<INGram> nGrams, List<TokenizedExample> tokenizedExamples, double minimumAccuracySingleLabel, double minimumAccuracyMultipleLabels)
         {
 
@@ -295,7 +301,6 @@ namespace NW.NGramTextClassification.TextClassifiers
             return result;
 
         }        
-
         private List<SimilarityIndex> GetSimilarityIndexes(List<INGram> nGrams, List<TokenizedExample> tokenizedExamples)
         {
 
