@@ -15,6 +15,7 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <exception cref="ArgumentException"/>
         List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed);
 
+
         /// <summary>
         /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters.
         /// <para>If one rule fails, no exception will be thrown and the method will continue processing the other rules.</para>
@@ -49,9 +50,41 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <exception cref="ArgumentException"/>
         List<TokenizedExample> CreateOrDefault(List<LabeledExample> labeledExamples);
 
+
+        /// <summary>
+        /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters.
+        /// <para>If one rule fails, an exception will be thrown and the method won't continue processing the other rules.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="Exception"/>
         TokenizedExample Create(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet);
+
+        /// <summary>
+        /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters and <see cref="LabeledExampleManager.DefaultTokenizerRuleSet"/>.
+        /// <para>If one rule fails, an exception will be thrown and the method won't continue processing the other rules.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="Exception"/>
         TokenizedExample Create(LabeledExample labeledExample);
+
+        /// <summary>
+        /// Initializes a collection of <see cref="TokenizedExample"/> objects out of the provided parameters.
+        /// <para>If one rule fails, an exception will be thrown and the method won't continue processing the other rules.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="Exception"/>
         List<TokenizedExample> Create(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet);
+
+        /// <summary>
+        /// Initializes a collection of <see cref="TokenizedExample"/> objects out of the provided parameters and <see cref="LabeledExampleManager.DefaultTokenizerRuleSet"/>.
+        /// <para>If one rule fails, an exception will be thrown and the method won't continue processing the other rules.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        /// <exception cref="Exception"/>
         List<TokenizedExample> Create(List<LabeledExample> labeledExamples);
 
     }
