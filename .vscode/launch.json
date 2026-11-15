@@ -14,7 +14,10 @@
                 "--labeledexamples",
                 "LabeledExamples.json",
                 "--textsnippets",
-                "TextSnippets.json"
+                "TextSnippets.json",
+                "--tokenizerruleset",
+                "TokenizerRuleSet.json",
+                "--cleanlabeledexamples"
             ],
             "cwd": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI",
             "console": "integratedTerminal",
