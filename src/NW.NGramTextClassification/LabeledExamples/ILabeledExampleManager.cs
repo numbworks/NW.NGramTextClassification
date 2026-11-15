@@ -87,5 +87,13 @@ namespace NW.NGramTextClassification.LabeledExamples
         /// <exception cref="Exception"/>
         List<TokenizedExample> Create(List<LabeledExample> labeledExamples);
 
+        /// <summary>
+        /// Initializes a <see cref="TokenizedExample"/> out of the provided parameters.
+        /// <para>If one rule fails, null is returned.</para>
+        /// </summary>
+        /// <exception cref="ArgumentNullException"/>
+        /// <exception cref="ArgumentException"/>
+        TokenizedExample CreateOrNull(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet);
+
     }
 }

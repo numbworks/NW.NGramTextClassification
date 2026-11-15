@@ -218,6 +218,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             List<LabeledExample> clean = _labeledExampleManager.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out _);
 
             return clean;
+
         }
 
         #endregion

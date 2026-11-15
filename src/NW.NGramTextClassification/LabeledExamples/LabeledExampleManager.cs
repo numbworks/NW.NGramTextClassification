@@ -58,7 +58,7 @@ namespace NW.NGramTextClassification.LabeledExamples
             foreach (LabeledExample labeledExample in labeledExamples)
             {
 
-                TokenizedExample tokenizedExample = CreateOrDefault(labeledExample, tokenizerRuleSet);
+                TokenizedExample tokenizedExample = CreateOrNull(labeledExample, tokenizerRuleSet);
 
                 if (tokenizedExample == null)
                     removed.Add(labeledExample);
@@ -88,6 +88,22 @@ namespace NW.NGramTextClassification.LabeledExamples
             => CreateTokenizedExamples(labeledExamples, tokenizerRuleSet, Create, () => null);
         public List<TokenizedExample> Create(List<LabeledExample> labeledExamples)
             => Create(labeledExamples, DefaultTokenizerRuleSet);
+
+        public TokenizedExample CreateOrNull(LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet)
+        {
+            
+            try
+            {
+                
+                return Create(labeledExample, tokenizerRuleSet);
+
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
 
         #endregion
 
