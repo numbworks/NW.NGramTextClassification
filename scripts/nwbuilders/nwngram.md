@@ -15,7 +15,7 @@ Show help and usage information.
 
 # COMMANDS
 
-### session classify
+### classify
 Performs a text classification task on the data you provide.
 
 **--labeledexamples:{filename}**
@@ -25,7 +25,7 @@ Performs a text classification task on the data you provide.
     Defines the name of the JSON file containing the raw, unlabeled text strings that you want the application to classify. This file must be located in the working folder.
 
 **--folderpath:{path}**
-    Defines the custom path to the working directory where the application will look for input files and save any session outputs, overriding the default application folder.
+    Defines the custom path to the working directory where the application will look for input files and save the output, overriding the default application folder.
 
 **--tokenizerruleset:{filename}**
     Defines the name of the JSON file that specifies the rules and configurations for how the text should be broken down into n-grams during tokenization.
@@ -52,7 +52,7 @@ Performs a text classification task on the data you provide.
 **Performs a text classification task on the data you provide:**
 
 ```text
-./nwngram session classify --labeledexamples:LabeledExamples.json --textsnippets:TextSnippets.json
+./nwngram classify --labeledexamples:LabeledExamples.json --textsnippets:TextSnippets.json
 ```
 
 # AUTHOR
