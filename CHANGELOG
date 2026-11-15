@@ -1,3 +1,13 @@
+v5.0.0 - BREAKING CHANGES
+  - Library:
+			- Feature: TextClassifier is now a dependendy, not the entry-point class, which is TextClassificationManager
+      - Feature: removed all log messages coming from dependencies and consolidated them in TextClassificationManager.
+      - Feature: now the log explicitly mention the text snippet that makes the tokenizer fail.
+  - CLI:
+      - Feature: removed the "session" command and promoted "classify" from subcommand to command.
+  - Documentation:
+      - Feature: updated to v5.0.0.
+
 v4.3.0
 - CLI:
 	- Feature: added support for the --enableutc flag.
