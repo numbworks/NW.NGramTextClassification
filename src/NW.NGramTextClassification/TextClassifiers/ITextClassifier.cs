@@ -13,59 +13,29 @@ namespace NW.NGramTextClassification.TextClassifiers
     public interface ITextClassifier
     {
 
+        #region Methods (public)
+
         /// <summary>
-        /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="labeledExamples"/>.
-        /// <para>If one rule in <paramref name="tokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="context"/>.
+        /// <para>If one rule in <see cref="TextClassifierContext.TokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="ClassifyOutput"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
         ClassifyOutput ClassifyOrDefault(
             TextSnippet textSnippet, 
-            INGramTokenizerRuleSet tokenizerRuleSet, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels);
+            TextClassifierContext context);
 
         /// <summary>
-        /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="labeledExamples"/> and by using a default <see cref="INGramTokenizerRuleSet"/>.
-        /// <para>If one rule in the default <see cref="INGramTokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="ClassifyOutput"/>.</para>
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>       
-        ClassifyOutput ClassifyOrDefault(
-            TextSnippet textSnippet, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels);
-
-        /// <summary>
-        /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="labeledExamples"/>.
-        /// <para>If one rule in <paramref name="tokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
+        /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="context"/>.
+        /// <para>If one rule in <see cref="TextClassifierContext.TokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail for one snippet, the corresponding <see cref="TextClassifierResult"/> will be <see cref="TextClassifier.DefaultTextClassifierResult"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
         ClassifyOutput ClassifyManyOrDefault(
             List<TextSnippet> textSnippets, 
-            INGramTokenizerRuleSet tokenizerRuleSet, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels);
-
-        /// <summary>
-        /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="labeledExamples"/>.
-        /// <para>If one rule in the default <see cref="INGramTokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
-        /// <para>If all rules will fail for one snippet, the corresponding <see cref="TextClassifierResult"/> will be <see cref="TextClassifier.DefaultTextClassifierResult"/>.</para>
-        /// </summary>
-        /// <exception cref="ArgumentNullException"/>
-        /// <exception cref="ArgumentException"/>      
-        ClassifyOutput ClassifyManyOrDefault(
-            List<TextSnippet> textSnippets, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels);
+            TextClassifierContext context);
 
         /// <summary>
         /// Convert <paramref name="filePath"/> to <see cref="IFileInfoAdapter"/>
@@ -124,6 +94,8 @@ namespace NW.NGramTextClassification.TextClassifiers
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>
         List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet);
+
+        #endregion
 
     }
 }

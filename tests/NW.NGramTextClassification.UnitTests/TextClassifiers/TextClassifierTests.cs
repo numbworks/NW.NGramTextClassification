@@ -33,10 +33,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
                                         textSnippet: null,
-                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
-                                        labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
-                                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        context: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textSnippet").Message
@@ -47,13 +49,10 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
                                         textSnippet: new TextSnippet(text: LabeledExamples.ObjectMother.ShortLabeledExample01.Text),
-                                        tokenizerRuleSet: null,
-                                        labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
-                                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        context: null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("tokenizerRuleSet").Message
+                new ArgumentNullException("context").Message
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultExceptionTestCases)}_02"),
 
             new TestCaseData(
@@ -61,13 +60,15 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .ClassifyOrDefault(
                                         textSnippet: new TextSnippet(text: LabeledExamples.ObjectMother.ShortLabeledExample01.Text),
-                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
-                                        labeledExamples: null,
-                                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        context: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: null,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("labeledExamples").Message
+                new ArgumentNullException("context.LabeledExamples").Message
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultExceptionTestCases)}_03")
 
         };
@@ -76,27 +77,35 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
            new TestCaseData(
                     new TextSnippet(text: "/"),
-                    new NGramTokenizerRuleSet(
-                            doForMonogram: true,
-                            doForBigram: true,
-                            doForTrigram: true,
-                            doForFourgram: true,
-                            doForFivegram: true
-                        ),
-                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                    new TextClassifierContext(
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(
+                                doForMonogram: true,
+                                doForBigram: true,
+                                doForTrigram: true,
+                                doForFourgram: true,
+                                doForFivegram: true
+                            ),
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     TextClassifiers.ObjectMother.ClassifyOutput_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_01"),
 
             new TestCaseData(
                     new TextSnippet(text: "hi"),
-                    new NGramTokenizerRuleSet(
-                            doForMonogram: false,
-                            doForBigram: false,
-                            doForTrigram: false,
-                            doForFourgram: false,
-                            doForFivegram: true
-                        ),
-                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                    new TextClassifierContext(
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(
+                                doForMonogram: false,
+                                doForBigram: false,
+                                doForTrigram: false,
+                                doForFourgram: false,
+                                doForFivegram: true
+                            ),
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     TextClassifiers.ObjectMother.ClassifyOutput_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenAllRulesFailedTestCases)}_02"),
 
@@ -108,8 +117,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                     new TextSnippet(
                             text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
-                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
-                    LabeledExamples.ObjectMother.ShortLabeledExamples_Untokenizable,
+                    new TextClassifierContext(
+                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
+                        labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples_Untokenizable,
+                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     TextClassifiers.ObjectMother.ClassifyOutput_Default
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
 
@@ -120,14 +133,18 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                     new TextSnippet(
                             text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
-                    new NGramTokenizerRuleSet(
-                            doForMonogram: true,
-                            doForBigram: true,
-                            doForTrigram: true,
-                            doForFourgram: true,
-                            doForFivegram: true
-                        ),
-                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples().GetRange(0, 1),
+                    new TextClassifierContext(
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(
+                                doForMonogram: true,
+                                doForBigram: true,
+                                doForTrigram: true,
+                                doForFourgram: true,
+                                doForFivegram: true
+                            ),
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples().GetRange(0, 1),
+                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Label
                 ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification)}_01")
 
@@ -138,16 +155,18 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                     new TextSnippet(
                             text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
-                    new NGramTokenizerRuleSet(
-                            doForMonogram: true,
-                            doForBigram: true,
-                            doForTrigram: true,
-                            doForFourgram: true,
-                            doForFivegram: true
-                        ),
-                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    0.0,
-                    SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                    new TextClassifierContext(
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(
+                                doForMonogram: true,
+                                doForBigram: true,
+                                doForTrigram: true,
+                                doForFourgram: true,
+                                doForFivegram: true
+                            ),
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: 0.0,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     new ClassifyOutput(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
@@ -165,10 +184,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .ClassifyManyOrDefault(
                                         textSnippets: null,
-                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
-                                        labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
-                                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        context: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
                                 )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("textSnippets").Message
@@ -179,13 +200,10 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .ClassifyManyOrDefault(
                                         textSnippets: TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
-                                        tokenizerRuleSet: null,
-                                        labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
-                                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        context: null
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("tokenizerRuleSet").Message
+                new ArgumentNullException("context").Message
                 ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_02"),
 
             new TestCaseData(
@@ -193,13 +211,15 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .ClassifyManyOrDefault(
                                         textSnippets: TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
-                                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
-                                        labeledExamples: null,
-                                        minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
-                                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        context: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: null,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
                                 )),
                 typeof(ArgumentNullException),
-                new ArgumentNullException("labeledExamples").Message
+                new ArgumentNullException("context.LabeledExamples").Message
                 ).SetArgDisplayNames($"{nameof(classifyManyExceptionTestCases)}_03")
 
         };
@@ -208,10 +228,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             new TestCaseData(
                     TextClassifiers.ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
-                    TextClassifier.DefaultNGramTokenizerRuleSet,
-                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    0.0,
-                    SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                    new TextClassifierContext(
+                        tokenizerRuleSet: TextClassifier.DefaultNGramTokenizerRuleSet,
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: 0.0,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     new ClassifyOutput(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
@@ -222,10 +244,12 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
             new TestCaseData(
                     TextClassifiers.ObjectMother.Snippets_Untokenizable.Select(text => new TextSnippet(text: text)).ToList(),
-                    NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
-                    LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
-                    0.0,
-                    SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                    new TextClassifierContext(
+                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Five,
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: 0.0,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
                     new ClassifyOutput(
                             minimumAccuracySingleLabel: 0.0,
                             minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
@@ -369,7 +393,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         [TestCaseSource(nameof(classifyOrDefaultWhenAllRulesFailedTestCases))]
         public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenAllRulesFailed
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, ClassifyOutput expected)
+            (TextSnippet textSnippet, TextClassifierContext context, ClassifyOutput expected)
         {
 
             // Arrange
@@ -377,10 +401,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
-                    tokenizerRuleSet, 
-                    labeledExamples, 
-                    SettingBag.DefaultMinimumAccuracySingleLabel,
-                    SettingBag.DefaultMinimumAccuracyMultipleLabels);
+                    context);
 
             // Assert
             Assert.That(
@@ -392,7 +413,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableExamples))]
         public void ClassifyOrDefault_ShouldReturnSessionWithDefaultClassifierResult_WhenUntokenizableExamples
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, ClassifyOutput expected)
+            (TextSnippet textSnippet, TextClassifierContext context, ClassifyOutput expected)
         {
 
             // Arrange
@@ -400,10 +421,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
-                    tokenizerRuleSet, 
-                    labeledExamples, 
-                    SettingBag.DefaultMinimumAccuracySingleLabel,
-                    SettingBag.DefaultMinimumAccuracyMultipleLabels);
+                    context);
 
             // Assert
             Assert.That(
@@ -415,7 +433,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         [TestCaseSource(nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification))]
         public void ClassifyOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulClassification
-            (TextSnippet textSnippet, INGramTokenizerRuleSet tokenizerRuleSet, List<LabeledExample> labeledExamples, string expectedLabel)
+            (TextSnippet textSnippet, TextClassifierContext context, string expectedLabel)
         {
 
             // Arrange
@@ -423,10 +441,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
-                    tokenizerRuleSet, 
-                    labeledExamples,
-                    SettingBag.DefaultMinimumAccuracySingleLabel,
-                    SettingBag.DefaultMinimumAccuracyMultipleLabels);
+                    context);
 
             // Assert
             Assert.That(expectedLabel, Is.EqualTo(actual.Results[0].Label));
@@ -436,10 +451,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
         [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification))]
         public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenThirtyLabeledExamplesAndSuccessfulClassification(
             TextSnippet textSnippet, 
-            INGramTokenizerRuleSet tokenizerRuleSet, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel,
-            double minimumAccuracyMultipleLabels,
+            TextClassifierContext context,
             ClassifyOutput expected)
         {
 
@@ -448,10 +460,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             ClassifyOutput actual 
                 = new TextClassifier().ClassifyOrDefault(
                     textSnippet, 
-                    tokenizerRuleSet, 
-                    labeledExamples,
-                    minimumAccuracySingleLabel,
-                    minimumAccuracyMultipleLabels);
+                    context);
 
             // Assert
             Assert.That(
@@ -681,10 +690,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
         [TestCaseSource(nameof(classifyManyTestCases))]
         public void ClassifyMany_ShouldReturnExpectedTextClassifierSession_WhenInvoked(
             List<TextSnippet> textSnippets, 
-            INGramTokenizerRuleSet tokenizerRuleSet, 
-            List<LabeledExample> labeledExamples, 
-            double minimumAccuracySingleLabel,
-            double minimumAccuracyMultipleLabels,
+            TextClassifierContext context,
             ClassifyOutput expected)
         {
 
@@ -693,10 +699,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             ClassifyOutput actual
                 = new TextClassifier().ClassifyManyOrDefault(
                     textSnippets: textSnippets, 
-                    tokenizerRuleSet: tokenizerRuleSet, 
-                    labeledExamples: labeledExamples,
-                    minimumAccuracySingleLabel: minimumAccuracySingleLabel, 
-                    minimumAccuracyMultipleLabels: minimumAccuracyMultipleLabels);
+                    context: context);
 
             // Assert
             Assert.That(

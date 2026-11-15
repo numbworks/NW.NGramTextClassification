@@ -73,13 +73,14 @@ namespace NW.NGramTextClassification
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(labeledExamples));
             }
 
-            ClassifyOutput classifyOutput
-                = _componentBag.TextClassifier.ClassifyManyOrDefault(
-                    textSnippets: textSnippets,
-                    tokenizerRuleSet: tokenizerRuleSet,
-                    labeledExamples: labeledExamples,
-                    minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel,
-                    minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels);
+            TextClassifierContext textClassifierContext = new TextClassifierContext(
+                tokenizerRuleSet: tokenizerRuleSet,
+                labeledExamples: labeledExamples,
+                minimumAccuracySingleLabel: _settingBag.MinimumAccuracySingleLabel,
+                minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels
+            );
+
+            ClassifyOutput classifyOutput = _componentBag.TextClassifier.ClassifyManyOrDefault(textSnippets: textSnippets, context: textClassifierContext);
 
             LogTextClassificationResults(classifyOutput);
 

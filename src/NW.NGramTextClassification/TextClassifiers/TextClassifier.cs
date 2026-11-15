@@ -121,26 +121,22 @@ namespace NW.NGramTextClassification.TextClassifiers
 
         #region Methods (public)
 
-        public ClassifyOutput ClassifyOrDefault(
-            TextSnippet textSnippet, 
-            INGramTokenizerRuleSet tokenizerRuleSet, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels)
+        public ClassifyOutput ClassifyOrDefault(TextSnippet textSnippet, TextClassifierContext context)
         {
 
             Validator.ValidateObject(textSnippet, nameof(textSnippet));
-            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
-            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
+            Validator.ValidateObject(context, nameof(context));
+            Validator.ValidateList(context.LabeledExamples, nameof(context.LabeledExamples));
 
-            List<TokenizedExample> tokenizedExamples = TokenizeOrDefault(tokenizerRuleSet, labeledExamples);
+            INGramTokenizerRuleSet tokenizerRuleSet = context.TokenizerRuleSet ?? DefaultNGramTokenizerRuleSet;
+            List<TokenizedExample> tokenizedExamples = TokenizeOrDefault(tokenizerRuleSet, context.LabeledExamples);
             string version = _versionFunction();
 
             if (tokenizedExamples == null)
             {
 
                 TextClassifierResult result = DefaultTextClassifierResult;
-                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(context.MinimumAccuracySingleLabel, context.MinimumAccuracyMultipleLabels, [result], version);
 
                 return classifyOutput;
 
@@ -148,42 +144,30 @@ namespace NW.NGramTextClassification.TextClassifiers
             else
             {
 
-                TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
-                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, [result], version);
+                TextClassifierResult result = ClassifySingleOrDefault(textSnippet, tokenizerRuleSet, tokenizedExamples, context.MinimumAccuracySingleLabel, context.MinimumAccuracyMultipleLabels);
+                ClassifyOutput classifyOutput = new ClassifyOutput(context.MinimumAccuracySingleLabel, context.MinimumAccuracyMultipleLabels, [result], version);
 
                 return classifyOutput;
 
             }               
 
         }
-        
-        public ClassifyOutput ClassifyOrDefault(
-            TextSnippet textSnippet, 
-            List<LabeledExample> labeledExamples, 
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels)
-                => ClassifyOrDefault(textSnippet, DefaultNGramTokenizerRuleSet, labeledExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
-
-        public ClassifyOutput ClassifyManyOrDefault(
-            List<TextSnippet> textSnippets, 
-            INGramTokenizerRuleSet tokenizerRuleSet, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels) 
+        public ClassifyOutput ClassifyManyOrDefault(List<TextSnippet> textSnippets, TextClassifierContext context) 
         {
 
             Validator.ValidateList(textSnippets, nameof(textSnippets));
-            Validator.ValidateObject(tokenizerRuleSet, nameof(tokenizerRuleSet));
-            Validator.ValidateList(labeledExamples, nameof(labeledExamples));
+            Validator.ValidateObject(context, nameof(context));
+            Validator.ValidateList(context.LabeledExamples, nameof(context.LabeledExamples));
 
-            List<TokenizedExample> tokenizedExamples = TokenizeOrDefault(tokenizerRuleSet, labeledExamples);
+            INGramTokenizerRuleSet tokenizerRuleSet = context.TokenizerRuleSet ?? DefaultNGramTokenizerRuleSet;
+            List<TokenizedExample> tokenizedExamples = TokenizeOrDefault(tokenizerRuleSet, context.LabeledExamples);
             string version = _versionFunction();
 
             if (tokenizedExamples == null)
             {
 
                 List<TextClassifierResult> results = [DefaultTextClassifierResult];
-                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, results, version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(context.MinimumAccuracySingleLabel, context.MinimumAccuracyMultipleLabels, results, version);
 
                 return classifyOutput;
 
@@ -195,26 +179,19 @@ namespace NW.NGramTextClassification.TextClassifiers
                 Parallel.For(0, textSnippets.Count, i =>
                 {
 
-                    TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
+                    TextClassifierResult result = ClassifySingleOrDefault(textSnippets[i], tokenizerRuleSet, tokenizedExamples, context.MinimumAccuracySingleLabel, context.MinimumAccuracyMultipleLabels);
                     tempResults.Add(result);
 
                 });
 
                 List<TextClassifierResult> finalResults = RestoreOrderOrDefault(tempResults, textSnippets);
-                ClassifyOutput classifyOutput = new ClassifyOutput(minimumAccuracySingleLabel, minimumAccuracyMultipleLabels, finalResults, version);
+                ClassifyOutput classifyOutput = new ClassifyOutput(context.MinimumAccuracySingleLabel, context.MinimumAccuracyMultipleLabels, finalResults, version);
 
                 return classifyOutput;
 
             }
 
         }
-        
-        public ClassifyOutput ClassifyManyOrDefault(
-            List<TextSnippet> textSnippets, 
-            List<LabeledExample> labeledExamples,
-            double minimumAccuracySingleLabel, 
-            double minimumAccuracyMultipleLabels)
-                => ClassifyManyOrDefault(textSnippets, DefaultNGramTokenizerRuleSet, labeledExamples, minimumAccuracySingleLabel, minimumAccuracyMultipleLabels);
 
         public IFileInfoAdapter Convert(string filePath)
             => _fileManager.Create(filePath);
