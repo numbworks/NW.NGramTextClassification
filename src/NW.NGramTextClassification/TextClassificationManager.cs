@@ -80,7 +80,9 @@ namespace NW.NGramTextClassification
                 minimumAccuracyMultipleLabels: _settingBag.MinimumAccuracyMultipleLabels
             );
 
-            ClassifyOutput classifyOutput = _componentBag.TextClassifier.ClassifyManyOrDefault(textSnippets: textSnippets, context: textClassifierContext);
+            ClassifyOutput classifyOutput = _componentBag.TextClassifier.ClassifyManyOrDefault(
+                textSnippets: textSnippets, 
+                textClassifierContext: textClassifierContext);
 
             LogTextClassificationResults(classifyOutput);
 

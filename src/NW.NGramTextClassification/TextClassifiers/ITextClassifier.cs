@@ -16,26 +16,22 @@ namespace NW.NGramTextClassification.TextClassifiers
         #region Methods (public)
 
         /// <summary>
-        /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="context"/>.
+        /// Attempts to assign a label to <paramref name="textSnippet"/> by learning from <paramref name="textClassifierContext"/>.
         /// <para>If one rule in <see cref="TextClassifierContext.TokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail, <see cref="TextClassifier.DefaultTextClassifierResult"/> will be added to the <see cref="ClassifyOutput"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        ClassifyOutput ClassifyOrDefault(
-            TextSnippet textSnippet, 
-            TextClassifierContext context);
+        ClassifyOutput ClassifyOrDefault(TextSnippet textSnippet, TextClassifierContext textClassifierContext);
 
         /// <summary>
-        /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="context"/>.
+        /// Attempts to assign a label to every snippet of text in <paramref name="textSnippets"/> by learning from <paramref name="textClassifierContext"/>.
         /// <para>If one rule in <see cref="TextClassifierContext.TokenizerRuleSet"/> fails, no exception will be thrown and the method will continue processing the other rules.</para>
         /// <para>If all rules will fail for one snippet, the corresponding <see cref="TextClassifierResult"/> will be <see cref="TextClassifier.DefaultTextClassifierResult"/>.</para>
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="ArgumentException"/>      
-        ClassifyOutput ClassifyManyOrDefault(
-            List<TextSnippet> textSnippets, 
-            TextClassifierContext context);
+        ClassifyOutput ClassifyManyOrDefault(List<TextSnippet> textSnippets, TextClassifierContext textClassifierContext);
 
         /// <summary>
         /// Convert <paramref name="filePath"/> to <see cref="IFileInfoAdapter"/>
