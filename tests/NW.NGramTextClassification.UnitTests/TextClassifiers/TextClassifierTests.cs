@@ -25,6 +25,81 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         #region Fields
 
+        private static TestCaseData[] classifyExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .Classify(
+                                        textSnippet: null,
+                                        textClassifierContext: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("textSnippet").Message
+                ).SetArgDisplayNames($"{nameof(classifyExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .Classify(
+                                        textSnippet: new TextSnippet(text: LabeledExamples.ObjectMother.ShortLabeledExample01.Text),
+                                        textClassifierContext: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("textClassifierContext").Message
+                ).SetArgDisplayNames($"{nameof(classifyExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .Classify(
+                                        textSnippet: new TextSnippet(text: LabeledExamples.ObjectMother.ShortLabeledExample01.Text),
+                                        textClassifierContext: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: null,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("LabeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(classifyExceptionTestCases)}_03")
+
+        };
+        private static TestCaseData[] classifyTestCases =
+        {
+
+            new TestCaseData(
+                    new TextSnippet(
+                            text: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Text),
+                    new TextClassifierContext(
+                        tokenizerRuleSet: new NGramTokenizerRuleSet(
+                                doForMonogram: true,
+                                doForBigram: true,
+                                doForTrigram: true,
+                                doForFourgram: true,
+                                doForFivegram: true
+                            ),
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: 0.0,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
+                    new ClassifyOutput(
+                            minimumAccuracySingleLabel: 0.0,
+                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                            results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                            version: TextClassifier.DefaultVersionFunction()
+                        )
+                ).SetArgDisplayNames($"{nameof(classifyTestCases)}_01")
+
+        };
+
         private static TestCaseData[] classifyOrDefaultExceptionTestCases =
         {
 
@@ -111,7 +186,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
 
         };
-        private static TestCaseData[] classifyOrDefaultWhenUntokenizableExamples =
+        private static TestCaseData[] classifyOrDefaultWhenUntokenizableTestCases =
         {
 
             new TestCaseData(
@@ -124,10 +199,10 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
                     ),
                     ObjectMother.ClassifyOutput_Default
-                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableExamples)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenUntokenizableTestCases)}_01")
 
         };
-        private static TestCaseData[] classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification =
+        private static TestCaseData[] classifyOrDefaultWhenOneLabeledTestCases =
         {
 
             new TestCaseData(
@@ -146,10 +221,10 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
                     ),
                     LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples()[0].Label
-                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenOneLabeledTestCases)}_01")
 
         };
-        private static TestCaseData[] classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification =
+        private static TestCaseData[] classifyOrDefaultWhenThirtyLabeledTestCases =
         {
 
             new TestCaseData(
@@ -173,16 +248,17 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: TextClassifier.DefaultVersionFunction()
                         )
-                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification)}_01")
+                ).SetArgDisplayNames($"{nameof(classifyOrDefaultWhenThirtyLabeledTestCases)}_01")
 
         };
+        
         private static TestCaseData[] classifyManyExceptionTestCases =
         {
 
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .ClassifyManyOrDefault(
+                                    .ClassifyMany(
                                         textSnippets: null,
                                         textClassifierContext: new TextClassifierContext(
                                             tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
@@ -198,7 +274,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .ClassifyManyOrDefault(
+                                    .ClassifyMany(
                                         textSnippets: ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                                         textClassifierContext: null
                                 )),
@@ -209,7 +285,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             new TestCaseData(
                 new TestDelegate(
                         () => new TextClassifier()
-                                    .ClassifyManyOrDefault(
+                                    .ClassifyMany(
                                         textSnippets: ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
                                         textClassifierContext: new TextClassifierContext(
                                             tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
@@ -240,7 +316,75 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
                             version: TextClassifier.DefaultVersionFunction()
                         )
-                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01"),
+                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_01")
+
+        };
+
+        private static TestCaseData[] classifyManyOrDefaultExceptionTestCases =
+        {
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyManyOrDefault(
+                                        textSnippets: null,
+                                        textClassifierContext: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("textSnippets").Message
+                ).SetArgDisplayNames($"{nameof(classifyManyOrDefaultExceptionTestCases)}_01"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyManyOrDefault(
+                                        textSnippets: ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
+                                        textClassifierContext: null
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("textClassifierContext").Message
+                ).SetArgDisplayNames($"{nameof(classifyManyOrDefaultExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                new TestDelegate(
+                        () => new TextClassifier()
+                                    .ClassifyManyOrDefault(
+                                        textSnippets: ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
+                                        textClassifierContext: new TextClassifierContext(
+                                            tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_MonoBiTriFourFive,
+                                            labeledExamples: null,
+                                            minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                                        )
+                                )),
+                typeof(ArgumentNullException),
+                new ArgumentNullException("LabeledExamples").Message
+                ).SetArgDisplayNames($"{nameof(classifyManyOrDefaultExceptionTestCases)}_03")
+
+        };
+        private static TestCaseData[] classifyManyOrDefaultTestCases =
+        {
+
+            new TestCaseData(
+                    ObjectMother.Snippets_CompleteLabeledExamples00.Select(text => new TextSnippet(text: text)).ToList(),
+                    new TextClassifierContext(
+                        tokenizerRuleSet: TextClassifier.DefaultNGramTokenizerRuleSet,
+                        labeledExamples: LabeledExamples.ObjectMother.CreateThirtyCompleteLabeledExamples(),
+                        minimumAccuracySingleLabel: 0.0,
+                        minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels
+                    ),
+                    new ClassifyOutput(
+                            minimumAccuracySingleLabel: 0.0,
+                            minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
+                            results: ObjectMother.TextClassifierResults_CompleteLabeledExamples00,
+                            version: TextClassifier.DefaultVersionFunction()
+                        )
+                ).SetArgDisplayNames($"{nameof(classifyManyOrDefaultTestCases)}_01"),
 
             new TestCaseData(
                     ObjectMother.Snippets_Untokenizable.Select(text => new TextSnippet(text: text)).ToList(),
@@ -256,9 +400,10 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                             results: ObjectMother.TextClassifierResults_Untokenizable,
                             version: TextClassifier.DefaultVersionFunction()
                         )
-                ).SetArgDisplayNames($"{nameof(classifyManyTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(classifyManyOrDefaultTestCases)}_02")
 
         };
+        
         private static TestCaseData[] loadLabeledExamplesOrDefaultExceptionTestCases =
         {
 
@@ -363,12 +508,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
         #region SetUp
         #endregion
 
-        #region Tests
-
-        [TestCaseSource(nameof(classifyOrDefaultExceptionTestCases))]
-        public void ClassifyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        #region Tests (TextClassifier)
 
         [Test]
         public void TextClassifier_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -391,8 +531,46 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
+
+        #region Tests (Classify)
+
+        [TestCaseSource(nameof(classifyExceptionTestCases))]
+        public void Classify_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(classifyTestCases))]
+        public void Classify_ShouldReturnExpectedClassifyOutput_WhenSuccessfulClassification
+            (TextSnippet textSnippet, TextClassifierContext textClassifierContext, ClassifyOutput expected)
+        {
+
+            // Arrange
+            // Act
+            ClassifyOutput actual 
+                = new TextClassifier().Classify(
+                    textSnippet, 
+                    textClassifierContext);
+
+            // Assert
+            Assert.That(
+                    ObjectMother.AreEqual(expected, actual),
+                    Is.True
+                );
+
+        }
+
+        #endregion
+
+        #region Tests (ClassifyOrDefault)
+
+        [TestCaseSource(nameof(classifyOrDefaultExceptionTestCases))]
+        public void ClassifyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [TestCaseSource(nameof(classifyOrDefaultWhenAllRulesFailedTestCases))]
-        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenAllRulesFailed
+        public void ClassifyOrDefault_ShouldReturnExpectedClassifyOutput_WhenAllRulesFailed
             (TextSnippet textSnippet, TextClassifierContext textClassifierContext, ClassifyOutput expected)
         {
 
@@ -411,7 +589,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
-        [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableExamples))]
+        [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableTestCases))]
         public void ClassifyOrDefault_ShouldReturnSessionWithDefaultClassifierResult_WhenUntokenizableExamples
             (TextSnippet textSnippet, TextClassifierContext textClassifierContext, ClassifyOutput expected)
         {
@@ -431,7 +609,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
-        [TestCaseSource(nameof(classifyOrDefaultWhenOneLabeledExampleAndSuccessfulClassification))]
+        [TestCaseSource(nameof(classifyOrDefaultWhenOneLabeledTestCases))]
         public void ClassifyOrDefault_ShouldReturnExpectedLabel_WhenOneLabeledExampleAndSuccessfulClassification
             (TextSnippet textSnippet, TextClassifierContext textClassifierContext, string expectedLabel)
         {
@@ -448,11 +626,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
-        [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledExamplesAndSuccessfulClassification))]
-        public void ClassifyOrDefault_ShouldReturnExpectedTextClassifierSession_WhenThirtyLabeledExamplesAndSuccessfulClassification(
-            TextSnippet textSnippet, 
-            TextClassifierContext textClassifierContext,
-            ClassifyOutput expected)
+        [TestCaseSource(nameof(classifyOrDefaultWhenThirtyLabeledTestCases))]
+        public void ClassifyOrDefault_ShouldReturnExpectedClassifyOutput_WhenThirtyLabeledExamplesAndSuccessfulClassification
+            (TextSnippet textSnippet, TextClassifierContext textClassifierContext, ClassifyOutput expected)
         {
 
             // Arrange
@@ -469,6 +645,62 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                 );
 
         }
+
+        #endregion
+
+        #region Tests (ClassifyMany)
+
+        [TestCaseSource(nameof(classifyManyExceptionTestCases))]
+        public void ClassifyMany_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(classifyManyTestCases))]
+        public void ClassifyMany_ShouldReturnExpectedClassifyOutput_WhenInvoked
+            (List<TextSnippet> textSnippets, TextClassifierContext context, ClassifyOutput expected)
+        {
+
+            // Arrange
+            // Act
+            ClassifyOutput actual
+                = new TextClassifier().ClassifyMany(
+                    textSnippets: textSnippets, 
+                    textClassifierContext: context);
+
+            // Assert
+            Assert.That(ObjectMother.AreEqual(expected, actual), Is.True);
+
+        }
+
+        #endregion
+
+        #region Tests (ClassifyManyOrDefault)
+
+        [TestCaseSource(nameof(classifyManyOrDefaultExceptionTestCases))]
+        public void ClassifyManyOrDefault_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(classifyManyOrDefaultTestCases))]
+        public void ClassifyManyOrDefault_ShouldReturnExpectedClassifyOutput_WhenInvoked
+            (List<TextSnippet> textSnippets, TextClassifierContext context, ClassifyOutput expected)
+        {
+
+            // Arrange
+            // Act
+            ClassifyOutput actual
+                = new TextClassifier().ClassifyManyOrDefault(
+                    textSnippets: textSnippets, 
+                    textClassifierContext: context);
+
+            // Assert
+            Assert.That(ObjectMother.AreEqual(expected, actual), Is.True);
+
+        }
+
+        #endregion
+
+        #region Tests (GetLabel)
 
         [Test]
         public void GetLabel_ShouldReturnNull_WhenAreAllIndexAveragesEqualToZeroReturnsTrue()
@@ -682,30 +914,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
-        [TestCaseSource(nameof(classifyManyExceptionTestCases))]
-        public void ClassifyMany_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        #endregion
 
-        [TestCaseSource(nameof(classifyManyTestCases))]
-        public void ClassifyMany_ShouldReturnExpectedTextClassifierSession_WhenInvoked(
-            List<TextSnippet> textSnippets, 
-            TextClassifierContext context,
-            ClassifyOutput expected)
-        {
-
-            // Arrange
-            // Act
-            ClassifyOutput actual
-                = new TextClassifier().ClassifyManyOrDefault(
-                    textSnippets: textSnippets, 
-                    textClassifierContext: context);
-
-            // Assert
-            Assert.That(ObjectMother.AreEqual(expected, actual), Is.True);
-
-        }
-
+        #region Tests (LoadLabeledExamplesOrDefault)
 
         [TestCaseSource(nameof(loadLabeledExamplesOrDefaultExceptionTestCases))]
         public void LoadLabeledExamplesOrDefault_ShouldThrowACertainException_WhenUnproperArguments
@@ -751,6 +962,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
+
+        #region Tests (LoadTextSnippetsOrDefault)
 
         [TestCaseSource(nameof(loadTextSnippetsOrDefaultExceptionTestCases))]
         public void LoadTextSnippetsOrDefault_ShouldThrowACertainException_WhenUnproperArguments
@@ -794,6 +1008,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
+
+        #region Tests (LoadTokenizerRuleSetOrDefault)
 
         [TestCaseSource(nameof(loadTokenizerRuleSetOrDefaultExceptionTestCases))]
         public void LoadTokenizerRuleSetOrDefault_ShouldThrowACertainException_WhenUnproperArguments
@@ -837,6 +1054,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
+
+        #region Tests (SaveLabeledExamples)
 
         [Test]
         public void SaveLabeledExamples_ShouldSaveCollectionOfLabeledExamplesAndNotThrowException_WhenProperArguments()
@@ -863,60 +1083,6 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                 textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath));
 
         }
-
-        [Test]
-        public void SaveTextSnippets_ShouldSaveCollectionOfTextSnippetsAndNotThrowException_WhenProperArguments()
-        {
-
-            // Arrange
-            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
-            Func<string> fakeVersionFunction = () => "1.0.0";
-
-            TextClassifier textClassifier 
-                = new TextClassifier(
-                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
-                    nowFunction: fakeNowFunction,
-                    versionFunction: fakeVersionFunction);
-
-            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
-            string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
-
-            // Act
-            // Assert
-            Assert.DoesNotThrow(() => 
-                textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath));
-
-        }
-
-        [TestCase(false)]
-        [TestCase(true)]
-        public void SaveSession_ShouldSaveSessionAndNotThrowException_WhenInvoked(bool disableIndexSerialization)
-        {
-
-            // Arrange
-            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
-            Func<string> fakeVersionFunction = () => "1.0.0";
-
-            TextClassifier textClassifier 
-                = new TextClassifier(
-                        fileManager: new FakeFileManager(ObjectMother.ClassifyOutputCLE00AsJson_Content),
-                        nowFunction: fakeNowFunction,
-                        versionFunction: fakeVersionFunction);
-
-            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_session_{Filenames.ObjectMother.FakeNowString}.json";
-            string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
-
-            // Act
-            // Assert
-            Assert.DoesNotThrow(() => 
-                textClassifier.SaveClassifyOutput(ObjectMother.ClassifyOutput_CompleteLabeledExamples00, folderPath, disableIndexSerialization));
-
-        }
-
 
         [Test]
         public void SaveLabeledExamples_ShouldThrowExpectedException_WhenWriteAllTextFails()
@@ -947,6 +1113,36 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                 textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath));
 
             Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
+
+        }
+
+        #endregion
+
+        #region Tests (SaveTextSnippets)
+
+        [Test]
+        public void SaveTextSnippets_ShouldSaveCollectionOfTextSnippetsAndNotThrowException_WhenProperArguments()
+        {
+
+            // Arrange
+            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+            Func<string> fakeVersionFunction = () => "1.0.0";
+
+            TextClassifier textClassifier 
+                = new TextClassifier(
+                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content),
+                    nowFunction: fakeNowFunction,
+                    versionFunction: fakeVersionFunction);
+
+            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
+            string fileName = $"nwngram_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
+            string filePath = Path.Combine(folderPath, fileName);
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            // Act
+            // Assert
+            Assert.DoesNotThrow(() => 
+                textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath));
 
         }
 
@@ -982,6 +1178,37 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
+
+        #region Tests (SaveSession)
+
+        [TestCase(false)]
+        [TestCase(true)]
+        public void SaveSession_ShouldSaveSessionAndNotThrowException_WhenInvoked(bool disableIndexSerialization)
+        {
+
+            // Arrange
+            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
+            Func<string> fakeVersionFunction = () => "1.0.0";
+
+            TextClassifier textClassifier 
+                = new TextClassifier(
+                        fileManager: new FakeFileManager(ObjectMother.ClassifyOutputCLE00AsJson_Content),
+                        nowFunction: fakeNowFunction,
+                        versionFunction: fakeVersionFunction);
+
+            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
+            string fileName = $"nwngram_session_{Filenames.ObjectMother.FakeNowString}.json";
+            string filePath = Path.Combine(folderPath, fileName);
+            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
+
+            // Act
+            // Assert
+            Assert.DoesNotThrow(() => 
+                textClassifier.SaveClassifyOutput(ObjectMother.ClassifyOutput_CompleteLabeledExamples00, folderPath, disableIndexSerialization));
+
+        }
+
         [Test]
         public void SaveSession_ShouldThrowExpectedException_WhenWriteAllTextFails()
         {
@@ -1014,44 +1241,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
 
-        [Test]
-        public void Create_ShouldThrowExpectedException_WhenProvidedTypeIsNotSupported()
-        {
-
-            // Arrange
-            TextClassifier textClassifier = new TextClassifier();
-
-            try
-            {
-
-                // Act
-                IFileInfoAdapter actual
-                    = Utilities.ObjectMother.CallPrivateGenericMethod<TextClassifier, IFileInfoAdapter>(
-                            obj: textClassifier,
-                            methodName: "Create",
-                            args: [@"C:\", DateTime.Now],
-                            methodType: typeof(Monogram) // "Monogram" is a not supported type.
-                        );
-
-            }
-            catch(TargetInvocationException e)
-            {
-
-                // Assert
-                Assert.That(e.InnerException, Is.InstanceOf<Exception>());
-                Assert.That(
-                    NGramTextClassification.TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(Monogram)),
-                    Is.EqualTo(e.InnerException.Message));
-
-            }
-
-        }
-
-        [TestCaseSource(nameof(convertExceptionTestCases))]
-        public void Convert_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+        #region Tests (CleanLabeledExamples)
 
         [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
         public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
@@ -1108,6 +1300,19 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         }
 
+        #endregion
+
+        #region Tests (Convert)
+
+        [TestCaseSource(nameof(convertExceptionTestCases))]
+        public void Convert_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        #endregion
+
+        #region Tests (SimilarityIndexDisabler)
+
         [Test]
         public void SimilarityIndexDisabler_ShouldReplaceEverySimilarityIndexesWithAnEmptyCollection_WhenInvoked()
         {
@@ -1122,6 +1327,43 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
                 var similarityIndexes = ((ExpandoObject)actual.Results[0]).FirstOrDefault(x => x.Key == "SimilarityIndexes").Value;
                 Assert.That(((List<SimilarityIndex>)similarityIndexes).Count, Is.EqualTo(0));
+
+            }
+
+        }
+
+        #endregion
+
+        #region Tests (Private Methods)
+
+        [Test]
+        public void Create_ShouldThrowExpectedException_WhenProvidedTypeIsNotSupported()
+        {
+
+            // Arrange
+            TextClassifier textClassifier = new TextClassifier();
+
+            try
+            {
+
+                // Act
+                IFileInfoAdapter actual
+                    = Utilities.ObjectMother.CallPrivateGenericMethod<TextClassifier, IFileInfoAdapter>(
+                            obj: textClassifier,
+                            methodName: "Create",
+                            args: [@"C:\", DateTime.Now],
+                            methodType: typeof(Monogram) // "Monogram" is a not supported type.
+                        );
+
+            }
+            catch(TargetInvocationException e)
+            {
+
+                // Assert
+                Assert.That(e.InnerException, Is.InstanceOf<Exception>());
+                Assert.That(
+                    NGramTextClassification.TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(Monogram)),
+                    Is.EqualTo(e.InnerException.Message));
 
             }
 
