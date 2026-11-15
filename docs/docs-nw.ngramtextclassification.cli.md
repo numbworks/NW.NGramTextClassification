@@ -6,7 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2021-10-13 | numbworks | Created. |
-| 2026-10-26 | numbworks | Last update (v4.3.0). |
+| 2026-11-15 | numbworks | Last update (v5.0.0). |
 
 ## Introduction
 
@@ -17,7 +17,7 @@ Contact: numbworks@gmail.com
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
 |session|||Success|
-|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--savesession*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
+|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--saveoutput*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
 
 ## Examples
 
@@ -114,10 +114,10 @@ The command above will log something like this to the console:
 [2026-07-19 20:28:06:291] The classification task has been successful.
 ```
 
-If you wish to store the outcome to a handy JSON file, you can use the `--savesession` option and (optionally) the `--disableindexserialization` option for a shorter output. 
+If you wish to store the outcome to a handy JSON file, you can use the `--saveoutput` option and (optionally) the `--disableindexserialization` option for a shorter output. 
 
 ```
-.\nwngram.exe session classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json --savesession --disableindexserialization
+.\nwngram.exe session classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json --saveoutput --disableindexserialization
 ```
 
 The produced JSON will look like:

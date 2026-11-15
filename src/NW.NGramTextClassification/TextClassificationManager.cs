@@ -86,7 +86,7 @@ namespace NW.NGramTextClassification
 
             LogTextClassificationResults(classifyOutput);
 
-            if (_settingBag.SaveSession)
+            if (_settingBag.SaveOutput)
             {
                 _componentBag.TextClassifier.SaveClassifyOutput(classifyOutput, _settingBag.FolderPath, _settingBag.DisableIndexSerialization);
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.ClassifyOutputSuccessfullySaved(_settingBag.FolderPath));
@@ -188,7 +188,7 @@ namespace NW.NGramTextClassification
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.FolderPath), _settingBag.FolderPath));
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracySingleLabel), _settingBag.MinimumAccuracySingleLabel.ToString()));
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracyMultipleLabels), _settingBag.MinimumAccuracyMultipleLabels.ToString()));
-            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.SaveSession), _settingBag.SaveSession.ToString()));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.SaveOutput), _settingBag.SaveOutput.ToString()));
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.CleanLabeledExamples), _settingBag.CleanLabeledExamples.ToString()));
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.DisableIndexSerialization), _settingBag.DisableIndexSerialization.ToString()));
             _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.EnableUTC), _settingBag.EnableUTC.ToString()));

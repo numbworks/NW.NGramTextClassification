@@ -36,8 +36,8 @@ Performs a text classification task on the data you provide.
 **--minaccuracymultiple:{number}**
     Defines the minimum average accuracy or confidence threshold required when evaluating multiple text snippets across the session.
 
-**--savesession**
-    Defines whether the application should automatically save the results, metrics, and logs of the current classification session to the working folder upon completion.
+**--saveoutput**
+    Defines whether the application should automatically save the results, metrics, and logs of the current classification output to the working folder upon completion.
 
 **--cleanlabeledexamples**
     Defines whether the application should sanitize the labeled examples before running the tokenization process.

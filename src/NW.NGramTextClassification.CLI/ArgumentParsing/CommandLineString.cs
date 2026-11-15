@@ -73,23 +73,23 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 "Value can be between 0.0 and 1.0. ",
                 $"If not specified, '{SettingBag.DefaultMinimumAccuracyMultipleLabels}' will be used.");
 
-        public static string OPTION_SAVESESSION_TEMPL { get; } = "--savesession";
-        public static string OPTION_SAVESESSION_DESCR { get; }
+        public static string OPTION_SAVEOUTPUT_TEMPL { get; } = "--saveoutput";
+        public static string OPTION_SAVEOUTPUT_DESCR { get; }
             = string.Concat(
                 "(Optional) ",
-                "If provided, the text classification session will be saved as JSON in the working folder.");
+                "If provided, the text classification output will be saved as JSON in the working folder.");
 
         public static string OPTION_CLEANLABELEDEXAMPLES_TEMPL { get; } = "--cleanlabeledexamples";
         public static string OPTION_CLEANLABELEDEXAMPLES_DESCR { get; }
             = string.Concat(
                 "(Optional) ",
-                "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification session.");
+                "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification output.");
 
         public static string OPTION_DISABLEINDEXSERIALIZATION_TEMPL { get; } = "--disableindexserialization";
         public static string OPTION_DISABLEINDEXSERIALIZATION_DESCR { get; }
             = string.Concat(
                 "(Optional) ",
-                "To use in conjunction with '--savesession'. It has no effect if provided by its own.");
+                "To use in conjunction with '--saveoutput'. It has no effect if provided by its own.");
 
         public static string OPTION_ENABLEUTC_TEMPL { get; } = "--enableutc";
         public static string OPTION_ENABLEUTC_DESCR { get; }

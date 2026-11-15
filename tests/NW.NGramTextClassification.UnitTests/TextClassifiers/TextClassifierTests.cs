@@ -1180,11 +1180,11 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         #endregion
 
-        #region Tests (SaveSession)
+        #region Tests (SaveOutput)
 
         [TestCase(false)]
         [TestCase(true)]
-        public void SaveSession_ShouldSaveSessionAndNotThrowException_WhenInvoked(bool disableIndexSerialization)
+        public void SaveOutput_ShouldSaveOutputAndNotThrowException_WhenInvoked(bool disableIndexSerialization)
         {
 
             // Arrange
@@ -1210,7 +1210,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
         }
 
         [Test]
-        public void SaveSession_ShouldThrowExpectedException_WhenWriteAllTextFails()
+        public void SaveOutput_ShouldThrowExpectedException_WhenWriteAllTextFails()
         {
 
             // Arrange

@@ -27,7 +27,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
                         folderPath: SettingBag.DefaultFolderPath,
                         minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                         minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                        saveSession: SettingBag.DefaultSaveSession,
+                        saveOutput: SettingBag.DefaultSaveOutput,
                         cleanLabeledExamples: SettingBag.DefaultCleanLabeledExamples,
                         disableIndexSerialization: SettingBag.DefaultDisableIndexSerialization,
                         enableUTC: SettingBag.DefaultEnableUTC
@@ -40,7 +40,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(actual1.FolderPath, Is.InstanceOf<string>());
             Assert.That(actual1.MinimumAccuracySingleLabel, Is.InstanceOf<double>());
             Assert.That(actual1.MinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
-            Assert.That(actual1.SaveSession, Is.InstanceOf<bool>());
+            Assert.That(actual1.SaveOutput, Is.InstanceOf<bool>());
             Assert.That(actual1.CleanLabeledExamples, Is.InstanceOf<bool>());
             Assert.That(actual1.DisableIndexSerialization, Is.InstanceOf<bool>());
             Assert.That(actual1.EnableUTC, Is.InstanceOf<bool>());
@@ -48,7 +48,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(actual2.FolderPath, Is.InstanceOf<string>());
             Assert.That(actual2.MinimumAccuracySingleLabel, Is.InstanceOf<double>());
             Assert.That(actual2.MinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
-            Assert.That(actual2.SaveSession, Is.InstanceOf<bool>());
+            Assert.That(actual2.SaveOutput, Is.InstanceOf<bool>());
             Assert.That(actual2.CleanLabeledExamples, Is.InstanceOf<bool>());
             Assert.That(actual2.DisableIndexSerialization, Is.InstanceOf<bool>());
             Assert.That(actual2.EnableUTC, Is.InstanceOf<bool>());
@@ -56,7 +56,7 @@ namespace NW.NGramTextClassification.UnitTests.Bags
             Assert.That(SettingBag.DefaultMinimumAccuracySingleLabel, Is.InstanceOf<double>());
             Assert.That(SettingBag.DefaultMinimumAccuracyMultipleLabels, Is.InstanceOf<double>());
             Assert.That(SettingBag.DefaultFolderPath, Is.InstanceOf<string>());
-            Assert.That(SettingBag.DefaultSaveSession, Is.InstanceOf<bool>());
+            Assert.That(SettingBag.DefaultSaveOutput, Is.InstanceOf<bool>());
             Assert.That(SettingBag.DefaultCleanLabeledExamples, Is.InstanceOf<bool>());
             Assert.That(SettingBag.DefaultDisableIndexSerialization, Is.InstanceOf<bool>());
             Assert.That(SettingBag.DefaultEnableUTC, Is.InstanceOf<bool>());

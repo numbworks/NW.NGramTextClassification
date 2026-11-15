@@ -14,7 +14,7 @@ namespace NW.NGramTextClassification.Bags
         public static double DefaultMinimumAccuracySingleLabel { get; } = 0.5;
         public static double DefaultMinimumAccuracyMultipleLabels { get; } = 0.0;
         public static string DefaultFolderPath { get; } = Directory.GetCurrentDirectory();
-        public static bool DefaultSaveSession { get; } = false;
+        public static bool DefaultSaveOutput { get; } = false;
         public static bool DefaultCleanLabeledExamples { get; } = true;
         public static bool DefaultDisableIndexSerialization { get; } = true;
         public static bool DefaultEnableUTC { get; } = true;
@@ -22,7 +22,7 @@ namespace NW.NGramTextClassification.Bags
         public string FolderPath { get; }
         public double MinimumAccuracySingleLabel { get; }
         public double MinimumAccuracyMultipleLabels { get; }
-        public bool SaveSession { get; }
+        public bool SaveOutput { get; }
         public bool CleanLabeledExamples { get; }
         public bool DisableIndexSerialization { get; }
         public bool EnableUTC { get; }
@@ -36,7 +36,7 @@ namespace NW.NGramTextClassification.Bags
                 string folderPath = null,
                 double? minimumAccuracySingleLabel = null,
                 double? minimumAccuracyMultipleLabels = null,
-                bool? saveSession = null,
+                bool? saveOutput = null,
                 bool? cleanLabeledExamples = null,
                 bool? disableIndexSerialization = null,
                 bool? enableUTC = null)
@@ -45,7 +45,7 @@ namespace NW.NGramTextClassification.Bags
             FolderPath = folderPath ?? DefaultFolderPath;
             MinimumAccuracySingleLabel = minimumAccuracySingleLabel ?? DefaultMinimumAccuracySingleLabel;
             MinimumAccuracyMultipleLabels = minimumAccuracyMultipleLabels ?? DefaultMinimumAccuracyMultipleLabels;
-            SaveSession = saveSession ?? DefaultSaveSession;
+            SaveOutput = saveOutput ?? DefaultSaveOutput;
             CleanLabeledExamples = cleanLabeledExamples ?? DefaultCleanLabeledExamples;
             DisableIndexSerialization = disableIndexSerialization ?? DefaultDisableIndexSerialization;
             EnableUTC = enableUTC ?? DefaultEnableUTC;

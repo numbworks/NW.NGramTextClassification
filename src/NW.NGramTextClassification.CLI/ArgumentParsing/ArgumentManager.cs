@@ -147,7 +147,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 CommandOption tokenizerRuleSetOption = CreateTokenizerRuleSetOption(subCommand);
                 CommandOption minAccuracySingleOption = CreateMinAccuracySingleOption(subCommand);
                 CommandOption minAccuracyMultipleOption = CreateMinAccuracyMultipleOption(subCommand);
-                CommandOption saveSessionOption = CreateSaveSessionOption(subCommand);
+                CommandOption saveOutputOption = CreateSaveOutputOption(subCommand);
                 CommandOption cleanLabeledExamplesOption = CreateCleanLabeledExamplesOption(subCommand);
                 CommandOption disableIndexSerializationOption = CreateDisableIndexSerializationOption(subCommand);
                 CommandOption enableUTCOption = CreateEnableUTCOption(subCommand);
@@ -159,7 +159,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                         folderPath: folderPathOption.Value(),
                         minimumAccuracySingleLabel: DoubleManager.ParseOrDefault(minAccuracySingleOption.Value()),
                         minimumAccuracyMultipleLabels: DoubleManager.ParseOrDefault(minAccuracyMultipleOption.Value()),
-                        saveSession: saveSessionOption.HasValue(),
+                        saveOutput: saveOutputOption.HasValue(),
                         cleanLabeledExamples: cleanLabeledExamplesOption.HasValue(),
                         disableIndexSerialization: disableIndexSerializationOption.HasValue(),
                         enableUTC: enableUTCOption.HasValue()
@@ -259,13 +259,13 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                     .Accepts(validator => validator.Use(MinimumAccuracyValidator));
 
         }
-        private CommandOption CreateSaveSessionOption(CommandLineApplication subCommand)
+        private CommandOption CreateSaveOutputOption(CommandLineApplication subCommand)
         {
 
             return subCommand
                     .Option(
-                        CommandLineString.OPTION_SAVESESSION_TEMPL,
-                        CommandLineString.OPTION_SAVESESSION_DESCR,
+                        CommandLineString.OPTION_SAVEOUTPUT_TEMPL,
+                        CommandLineString.OPTION_SAVEOUTPUT_DESCR,
                         CommandOptionType.NoValue);
 
         }

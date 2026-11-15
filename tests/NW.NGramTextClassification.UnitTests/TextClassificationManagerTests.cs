@@ -99,7 +99,7 @@ namespace NW.NGramTextClassification.UnitTests
                 folderPath: @"C:\",
                 minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
                 minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
-                saveSession: false,
+                saveOutput: false,
                 cleanLabeledExamples: false,
                 disableIndexSerialization: false,
                 enableUTC: false
@@ -121,7 +121,7 @@ namespace NW.NGramTextClassification.UnitTests
             Assert.That(logMessages[1], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.FolderPath), settingBag.FolderPath)));
             Assert.That(logMessages[2], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracySingleLabel), settingBag.MinimumAccuracySingleLabel.ToString())));
             Assert.That(logMessages[3], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.MinimumAccuracyMultipleLabels), settingBag.MinimumAccuracyMultipleLabels.ToString())));
-            Assert.That(logMessages[4], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.SaveSession), settingBag.SaveSession.ToString())));
+            Assert.That(logMessages[4], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.SaveOutput), settingBag.SaveOutput.ToString())));
             Assert.That(logMessages[5], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.CleanLabeledExamples), settingBag.CleanLabeledExamples.ToString())));
             Assert.That(logMessages[6], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.DisableIndexSerialization), settingBag.DisableIndexSerialization.ToString())));
             Assert.That(logMessages[7], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TheProvidedIs(nameof(SettingBag.EnableUTC), settingBag.EnableUTC.ToString())));
