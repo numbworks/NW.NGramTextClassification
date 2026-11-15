@@ -1058,127 +1058,9 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         #endregion
 
-        #region Tests (SaveLabeledExamples)
+        #region Tests (Save)
 
-        [Test]
-        public void SaveLabeledExamples_ShouldSaveCollectionOfLabeledExamplesAndNotThrowException_WhenProperArguments()
-        {
-
-            // Arrange
-            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
-            Func<string> fakeVersionFunction = () => "1.0.0";
-
-            TextClassifier textClassifier 
-                = new TextClassifier(
-                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content),
-                    nowFunction: fakeNowFunction,
-                    versionFunction: fakeVersionFunction);
-
-            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
-            string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
-
-            // Act
-            // Assert
-            Assert.DoesNotThrow(() => 
-                textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath));
-
-        }
-
-        [Test]
-        public void SaveLabeledExamples_ShouldThrowExpectedException_WhenWriteAllTextFails()
-        {
-
-            // Arrange
-            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
-            Func<string> fakeVersionFunction = () => "1.0.0";
-
-            string writeExceptionMessage = "A random write-to-disk issue.";
-
-            TextClassifier textClassifier 
-                = new TextClassifier(
-                        fileManager: new FakeFileManagerThrowingWriteExceptions(
-                                            content: LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content,
-                                            writeExceptionMessage: writeExceptionMessage),
-                        nowFunction: fakeNowFunction,
-                        versionFunction: fakeVersionFunction);
-
-            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_labeledexamples_{Filenames.ObjectMother.FakeNowString}.json";
-            string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
-
-            // Act
-            // Assert
-            Exception e = Assert.Throws<Exception>(() => 
-                textClassifier.SaveLabeledExamples(LabeledExamples.ObjectMother.ShortLabeledExamples, folderPath));
-
-            Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
-
-        }
-
-        #endregion
-
-        #region Tests (SaveTextSnippets)
-
-        [Test]
-        public void SaveTextSnippets_ShouldSaveCollectionOfTextSnippetsAndNotThrowException_WhenProperArguments()
-        {
-
-            // Arrange
-            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
-            Func<string> fakeVersionFunction = () => "1.0.0";
-
-            TextClassifier textClassifier 
-                = new TextClassifier(
-                    fileManager: new FakeFileManager(LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content),
-                    nowFunction: fakeNowFunction,
-                    versionFunction: fakeVersionFunction);
-
-            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
-            string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
-
-            // Act
-            // Assert
-            Assert.DoesNotThrow(() => 
-                textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath));
-
-        }
-
-        [Test]
-        public void SaveTextSnippets_ShouldThrowExpectedException_WhenWriteAllTextFails()
-        {
-
-            // Arrange
-            Func<DateTime> fakeNowFunction = () => Filenames.ObjectMother.FakeNow;
-            Func<string> fakeVersionFunction = () => "1.0.0";
-
-            string writeExceptionMessage = "A random write-to-disk issue.";
-
-            TextClassifier textClassifier 
-                = new TextClassifier(
-                    fileManager: new FakeFileManagerThrowingWriteExceptions(
-                                    content: LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content,
-                                    writeExceptionMessage: writeExceptionMessage),
-                    nowFunction: fakeNowFunction,
-                    versionFunction: fakeVersionFunction);
-
-            string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_textsnippets_{Filenames.ObjectMother.FakeNowString}.json";
-            string filePath = Path.Combine(folderPath, fileName);
-            IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
-
-            // Act
-            // Assert
-            Exception e = Assert.Throws<Exception>(() => 
-                textClassifier.SaveTextSnippets(TextSnippets.ObjectMother.TextSnippets, folderPath));
-
-            Assert.That(e.Message, Is.EqualTo(writeExceptionMessage));
-
-        }
+        // Add missing ones
 
         #endregion
 
@@ -1186,7 +1068,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 
         [TestCase(false)]
         [TestCase(true)]
-        public void SaveOutput_ShouldSaveOutputAndNotThrowException_WhenInvoked(bool disableIndexSerialization)
+        public void SaveClassifyOutput_ShouldSaveOutputAndNotThrowException_WhenInvoked(bool disableIndexSerialization)
         {
 
             // Arrange

@@ -78,18 +78,18 @@ namespace NW.NGramTextClassification.TextClassifiers
         NGramTokenizerRuleSet LoadTokenizerRuleSetOrDefault(IFileInfoAdapter jsonFile);
 
         /// <summary>
-        /// Saves the provided collection of <see cref="LabeledExample"/> objects as JSON into <paramref name="folderPath"/>. 
+        /// Saves the provided collection of <see cref="T"/> objects as JSON into <paramref name="jsonFile"/>. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="Exception"/>
-        void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath);
+        void Save<T>(List<T> objects, IFileInfoAdapter jsonFile);
 
         /// <summary>
-        /// Saves the provided collection of <see cref="TextSnippet"/> objects as JSON into <paramref name="folderPath"/>. 
+        /// Saves the <see cref="T"/> object as JSON into <paramref name="jsonFile"/>. 
         /// </summary>
         /// <exception cref="ArgumentNullException"/>
         /// <exception cref="Exception"/>
-        void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath);
+        void Save<T>(T obj, IFileInfoAdapter jsonFile);
 
         /// <summary>
         /// Saves the provided <see cref="ClassifyOutput"/> object as JSON into <paramref name="folderPath"/>. 

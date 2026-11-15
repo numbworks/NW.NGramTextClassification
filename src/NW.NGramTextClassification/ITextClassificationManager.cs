@@ -1,4 +1,5 @@
 using System;
+using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.TextClassifications;
 
 namespace NW.NGramTextClassification
@@ -9,10 +10,13 @@ namespace NW.NGramTextClassification
 
         /// <summary>Performs a complete text classification pipeline.</summary>
         /// <exception cref="Exception"/>
-        public ClassifyOutput Classify(ClassifyInput classifyInput);
+        ClassifyOutput Classify(ClassifyInput classifyInput);
 
         /// <summary>Performs a complete text classification pipeline and returns a null if an Exception is thrown.</summary>
-        public ClassifyOutput ClassifyOrNull(ClassifyInput classifyInput);
+        ClassifyOutput ClassifyOrNull(ClassifyInput classifyInput);
+
+        /// <summary>Saves example JSON files into <see cref="SettingBag.FolderPath"/>.</summary>
+        void Scaffold();
 
     }
 

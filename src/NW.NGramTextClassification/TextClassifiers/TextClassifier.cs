@@ -194,10 +194,25 @@ namespace NW.NGramTextClassification.TextClassifiers
             => LoadManyOrDefault<TextSnippet>(jsonFile);
         public NGramTokenizerRuleSet LoadTokenizerRuleSetOrDefault(IFileInfoAdapter jsonFile)
             => LoadOrDefault<NGramTokenizerRuleSet>(jsonFile);
-        public void SaveLabeledExamples(List<LabeledExample> labeledExamples, string folderPath)
-            => Save(objects: labeledExamples, jsonFile: Create<LabeledExample>(folderPath: folderPath, now: _nowFunction()));
-        public void SaveTextSnippets(List<TextSnippet> textSnippets, string folderPath)
-            => Save(objects: textSnippets, jsonFile: Create<TextSnippet>(folderPath: folderPath, now: _nowFunction()));
+        
+        public void Save<T>(List<T> objects, IFileInfoAdapter jsonFile)
+        {
+
+            ISerializer<T> serializer = _serializerFactory.Create<T>();
+            string content = serializer.Serialize(objects);
+
+            _fileManager.WriteAllText(jsonFile, content);
+
+        }
+        public void Save<T>(T obj, IFileInfoAdapter jsonFile)
+        {
+
+            ISerializer<T> serializer = _serializerFactory.Create<T>();              
+            string content = serializer.Serialize(obj);
+
+            _fileManager.WriteAllText(jsonFile, content);
+
+        }
         public void SaveClassifyOutput(ClassifyOutput classifyOutput, string folderPath, bool disableIndexSerialization)
         {
 
@@ -212,6 +227,7 @@ namespace NW.NGramTextClassification.TextClassifiers
                 Save(obj: classifyOutput, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
 
         }
+        
         public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed)
         {
 
@@ -560,24 +576,6 @@ namespace NW.NGramTextClassification.TextClassifiers
             return obj;
 
         }
-        private void Save<T>(List<T> objects, IFileInfoAdapter jsonFile)
-        {
-
-            ISerializer<T> serializer = _serializerFactory.Create<T>();
-            string content = serializer.Serialize(objects);
-
-            _fileManager.WriteAllText(jsonFile, content);
-
-        }
-        private void Save<T>(T obj, IFileInfoAdapter jsonFile)
-        {
-
-            ISerializer<T> serializer = _serializerFactory.Create<T>();              
-            string content = serializer.Serialize(obj);
-
-            _fileManager.WriteAllText(jsonFile, content);
-
-        }
         private IFileInfoAdapter Create<T>(string folderPath, DateTime now)
         {
 
@@ -597,7 +595,6 @@ namespace NW.NGramTextClassification.TextClassifiers
             return jsonFile;
 
         }
-
         private List<TextClassifierResult> RestoreOrderOrDefault(ConcurrentBag<TextClassifierResult> tempResults, List<TextSnippet> textSnippets)
         {
 

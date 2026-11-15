@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection.Emit;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
@@ -29,6 +28,9 @@ namespace NW.NGramTextClassification
 		#region Properties
 
 		public static NGramTokenizerRuleSet DefaultTokenizerRuleSet { get; } = new NGramTokenizerRuleSet();
+        public static string DefaultLabeledExamplesFileName { get; } = "LabeledExamples.json";
+        public static string DefaultTextSnippetsFileName { get; } = "TextSnippets.json";
+        public static string DefaultTokenizerRuleSetFileName { get; } = "TokenizerRuleSet.json";
 
 		#endregion
 		
@@ -115,6 +117,30 @@ namespace NW.NGramTextClassification
                 return null;
 
             }
+
+        }
+        public void Scaffold()
+        {
+            
+            List<LabeledExample> labeledExamples = new List<LabeledExample>()
+            {
+                new LabeledExample(label: "en", text: "We are looking for several skilled and driven developers to join our team."),
+                new LabeledExample(label: "sv", text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.")
+            };
+            List<TextSnippet> textSnippets = new List<TextSnippet>()
+            {
+                new TextSnippet(text: "We are looking for several skilled and driven developers to join our team."),
+                new TextSnippet(text: "Vår kund erbjuder trivsel, arbetsglädje och en trygg arbetsmiljö.")
+            };
+            INGramTokenizerRuleSet tokenizerRuleSet = new NGramTokenizerRuleSet(true, true, true, true, true);
+
+            IFileInfoAdapter labeledExamplesFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultLabeledExamplesFileName));
+            IFileInfoAdapter textSnippetsFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTextSnippetsFileName));
+            IFileInfoAdapter tokenizerRuleSetFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTokenizerRuleSetFileName));
+
+            _componentBag.TextClassifier.Save(labeledExamples, labeledExamplesFile);
+            _componentBag.TextClassifier.Save(textSnippets, textSnippetsFile);
+            _componentBag.TextClassifier.Save(tokenizerRuleSet, tokenizerRuleSetFile);
 
         }
 
