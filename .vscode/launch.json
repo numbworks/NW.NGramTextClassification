@@ -8,7 +8,6 @@
             "preLaunchTask": "solution: build",
             "program": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI/bin/net8.0/NW.NGramTextClassification.CLI.dll",
             "args": [
-                "session",
                 "classify",
                 "--folderpath",
                 "/workspaces/NW.NGramTextClassification/docs/ExampleFiles/",
@@ -43,7 +42,6 @@
                 "--project", 
                 "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
                 "--",
-                "session",
                 "classify",
                 "--folderpath",
                 "/workspaces/NW.NGramTextClassification/docs/ExampleFiles/",

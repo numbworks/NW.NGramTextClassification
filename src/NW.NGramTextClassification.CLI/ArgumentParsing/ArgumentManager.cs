@@ -72,7 +72,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             };
 
             app = AddRoot(app);
-            app = AddSession(app);
+            app = AddClassify(app);
 
             app.HelpOption(inherited: true);
 
@@ -102,44 +102,13 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             return app;
 
         }
-
-        private CommandLineApplication AddSession(CommandLineApplication app)
+        private CommandLineApplication AddClassify(CommandLineApplication command)
         {
 
-            app.Command(CommandLineString.COMMAND_SESSION_NAME, sessionCommand =>
+            command.Command(CommandLineString.COMMAND_CLASSIFY_NAME, subCommand =>
             {
 
-                sessionCommand = AddSessionMain(sessionCommand);
-                sessionCommand = AddSessionClassify(sessionCommand);
-
-            });
-
-            return app;
-
-        }
-        private CommandLineApplication AddSessionMain(CommandLineApplication command)
-        {
-
-            command.Description = CommandLineString.COMMAND_SESSION_DESCR;
-            command.OnExecute(() =>
-            {
-
-                command.ShowHelp();
-
-                return Success;
-
-            });
-
-            return command;
-
-        }
-        private CommandLineApplication AddSessionClassify(CommandLineApplication command)
-        {
-
-            command.Command(CommandLineString.SUBCOMMAND_CLASSIFY_NAME, subCommand =>
-            {
-
-                subCommand.Description = CommandLineString.SUBCOMMAND_CLASSIFY_DESCR;
+                subCommand.Description = CommandLineString.COMMAND_CLASSIFY_DESCR;
 
                 CommandOption labeledExamplesOption = CreateLabeledExamplesOption(subCommand);
                 CommandOption textSnippetsOption = CreateTextSnippetsOption(subCommand);
@@ -171,7 +140,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                         tokenizerRuleSetFileName: tokenizerRuleSetOption.Value() ?? string.Empty
                     );
 
-                    return RunSessionClassify(settingBag, classifyInput);
+                    return RunClassify(settingBag, classifyInput);
 
                 });
 
@@ -368,7 +337,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             return Success;
 
         }
-        private int RunSessionClassify(SettingBag settingBag, ClassifyInput classifyInput)
+        private int RunClassify(SettingBag settingBag, ClassifyInput classifyInput)
         {
             
             LogAsciiBanner();

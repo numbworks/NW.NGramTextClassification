@@ -11,19 +11,11 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         public static string APPLICATION_DESCRIPTION { get; } = "Command-line application to perform text classification tasks.";
         
         #endregion
-
-        #region Session
+       
+        #region Classify
         
-        public static string COMMAND_SESSION_NAME { get; } = "session";
-        public static string COMMAND_SESSION_DESCR { get; } 
-            = "Groups all the features related to a single text classification session.";
-        
-        #endregion
-        
-        #region Session Classify
-        
-        public static string SUBCOMMAND_CLASSIFY_NAME { get; } = "classify";
-        public static string SUBCOMMAND_CLASSIFY_DESCR { get; } 
+        public static string COMMAND_CLASSIFY_NAME { get; } = "classify";
+        public static string COMMAND_CLASSIFY_DESCR { get; } 
             = "Attempt to classify the provided text snippet(s) according to the provided labeled examples.";
 
         public static string OPTION_LABELEDEXAMPLES_TEMPL { get; } = "--labeledexamples";

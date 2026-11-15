@@ -16,19 +16,19 @@ Contact: numbworks@gmail.com
 
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
-|session|||Success|
-|session|classify|--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--saveoutput*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
+|classify|||Success|
+|classify||--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--saveoutput*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
 
 ## Examples
 
-The simplest command you can run is `session classify`, which performs a text classification task on the data you provide. 
+The simplest command you can run is `classify`, which performs a text classification task on the data you provide. 
 
 The command above requires that you have the two required files (`LabeledExamples.json` and `TextSnippets.json`) located in the same folder as the application, which by default it's the working folder for all the application's activities. 
 
 At very least, the command will look like:
 
 ```
-.\nwngram.exe session classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json
+.\nwngram.exe classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json
 ```
 
 The command above will log something like this to the console:
@@ -117,7 +117,7 @@ The command above will log something like this to the console:
 If you wish to store the outcome to a handy JSON file, you can use the `--saveoutput` option and (optionally) the `--disableindexserialization` option for a shorter output. 
 
 ```
-.\nwngram.exe session classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json --saveoutput --disableindexserialization
+.\nwngram.exe classify --labeledexamples .\LabeledExamples.json --textsnippets .\TextSnippets.json --saveoutput --disableindexserialization
 ```
 
 The produced JSON will look like:
