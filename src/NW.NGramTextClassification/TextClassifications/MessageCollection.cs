@@ -25,9 +25,14 @@ namespace NW.NGramTextClassification.TextClassifications
             (textSnippets) => $"'{textSnippets.Count}' {nameof(TextSnippet)} objects have been loaded.";
 
         public static Func<List<LabeledExample>, string> LabeledExamplesHaveBeenThruCleaningProcess =
-            (labeledExamples) =>$"The provided {nameof(LabeledExample)} objects have been thru the cleaning process. Now they are: '{labeledExamples.Count}'.";
+            (labeledExamples) => $"The provided {nameof(LabeledExample)} objects have been thru the cleaning process. Now they are: '{labeledExamples.Count}'.";
+        public static string LabeledExamplesHaveBeenRemoved
+            => "The following LabeledExamples have been removed:";
+        public static Func<LabeledExample, string> RemovedLabeledExample =
+            (labeledExample) => $"Removed: {labeledExample}";
 
-        public static string TextClassificationOutputSuccessfullyCreated = "The text classification output has been successfully created.";
+        public static string TextClassificationOutputSuccessfullyCreated 
+            = "The text classification output has been successfully created.";
 
         public static string TextClassificationOutputContainsResults
             => $"The text classification output contains the following results:";

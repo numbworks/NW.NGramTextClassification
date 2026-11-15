@@ -212,10 +212,10 @@ namespace NW.NGramTextClassification.TextClassifiers
                 Save(obj: classifyOutput, jsonFile: Create<ClassifyOutput>(folderPath: folderPath, now: _nowFunction()));
 
         }
-        public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet)
+        public List<LabeledExample> CleanLabeledExamples(List<LabeledExample> labeledExamples, INGramTokenizerRuleSet tokenizerRuleSet, out List<LabeledExample> removed)
         {
 
-            List<LabeledExample> clean = _labeledExampleManager.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out _);
+            List<LabeledExample> clean = _labeledExampleManager.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out removed);
 
             return clean;
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Emit;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
@@ -38,7 +39,7 @@ namespace NW.NGramTextClassification
         {
 
 			_componentBag = componentBag ?? new ComponentBag();
-			_settingBag = settingBag;
+			_settingBag = settingBag ?? new SettingBag();
 
         }
 		
@@ -69,8 +70,9 @@ namespace NW.NGramTextClassification
 
             if (_settingBag.CleanLabeledExamples)
             {
-                labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet);
-                _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(labeledExamples));
+                List<LabeledExample> removed;
+                labeledExamples = _componentBag.TextClassifier.CleanLabeledExamples(labeledExamples, tokenizerRuleSet, out removed);
+                LogRemovedLabeledExamples(removed);
             }
 
             TextClassifierContext textClassifierContext = new TextClassifierContext(
@@ -199,6 +201,16 @@ namespace NW.NGramTextClassification
             if (!string.IsNullOrEmpty(classifyInput.TokenizerRuleSetFileName))
                 _componentBag.LoggingAction(TextClassifications.MessageCollection.TheProvidedIs(nameof(ClassifyInput.TokenizerRuleSetFileName), classifyInput.TokenizerRuleSetFileName));
         
+        }
+        private void LogRemovedLabeledExamples(List<LabeledExample> labeledExamples)
+        {
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenThruCleaningProcess(labeledExamples));
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.LabeledExamplesHaveBeenRemoved);
+
+            foreach (LabeledExample labeledExample in labeledExamples)
+                _componentBag.LoggingAction(TextClassifications.MessageCollection.RemovedLabeledExample(labeledExample));
+
         }
         private void LogTextClassificationResults(ClassifyOutput classifyOutput)
         {

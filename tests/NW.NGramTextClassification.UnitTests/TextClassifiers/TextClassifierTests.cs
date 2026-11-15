@@ -484,7 +484,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .CleanLabeledExamples(
                                         labeledExamples: null,
-                                        tokenizerRuleSet: new NGramTokenizerRuleSet()
+                                        tokenizerRuleSet: new NGramTokenizerRuleSet(),
+                                        removed: out _
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("labeledExamples").Message
@@ -495,7 +496,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         () => new TextClassifier()
                                     .CleanLabeledExamples(
                                         labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
-                                        tokenizerRuleSet: null
+                                        tokenizerRuleSet: null,
+                                        removed: out _
                             )),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("tokenizerRuleSet").Message
@@ -1267,7 +1269,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             List<LabeledExample> actual = 
                 textClassifier.CleanLabeledExamples(
                     labeledExamples: LabeledExamples.ObjectMother.UntokenizableLabeledExamples,
-                    tokenizerRuleSet: new NGramTokenizerRuleSet()
+                    tokenizerRuleSet: new NGramTokenizerRuleSet(),
+                    removed: out _
                 );
 
             // Assert
@@ -1292,7 +1295,8 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
             List<LabeledExample> actual = 
                 textClassifier.CleanLabeledExamples(
                     labeledExamples: LabeledExamples.ObjectMother.ShortLabeledExamples,
-                    tokenizerRuleSet: new NGramTokenizerRuleSet()
+                    tokenizerRuleSet: new NGramTokenizerRuleSet(),
+                    removed: out _
                 );
 
             // Assert
