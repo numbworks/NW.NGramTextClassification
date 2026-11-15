@@ -590,7 +590,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
         }
 
         [TestCaseSource(nameof(classifyOrDefaultWhenUntokenizableTestCases))]
-        public void ClassifyOrDefault_ShouldReturnSessionWithDefaultClassifierResult_WhenUntokenizableExamples
+        public void ClassifyOrDefault_ShouldReturnOutputWithDefaultClassifierResult_WhenUntokenizableExamples
             (TextSnippet textSnippet, TextClassifierContext textClassifierContext, ClassifyOutput expected)
         {
 
@@ -1198,7 +1198,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         versionFunction: fakeVersionFunction);
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_session_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_output_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 
@@ -1228,7 +1228,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifiers
                         versionFunction: fakeVersionFunction);
 
             string folderPath = Path.GetFullPath(Filenames.ObjectMother.FakeFilePath);
-            string fileName = $"nwngram_session_{Filenames.ObjectMother.FakeNowString}.json";
+            string fileName = $"nwngram_output_{Filenames.ObjectMother.FakeNowString}.json";
             string filePath = Path.Combine(folderPath, fileName);
             IFileInfoAdapter fakeJsonFile = new FakeFileInfoAdapter(true, filePath);
 

@@ -17,7 +17,7 @@ namespace NW.NGramTextClassification.Filenames
         public static string DefaultMainToken { get; } = "nwngram";
         public static string DefaultTextSnippetsToken { get; } = "textsnippets";
         public static string DefaultLabeledExamplesToken { get; } = "labeledexamples";
-        public static string DefaultSessionToken { get; } = "session";
+        public static string DefaultOutputToken { get; } = "output";
         public static string DefaultFormatNow { get; } = "yyyyMMddHHmmssfff";
         public static string DefaultJsonExtension { get; } = "json";
 
@@ -36,8 +36,8 @@ namespace NW.NGramTextClassification.Filenames
             => ValidateAndCreate(folderPath, DefaultMainToken, DefaultTextSnippetsToken, now, DefaultJsonExtension);
         public string CreateForLabeledExamplesJson(string folderPath, DateTime now)
             => ValidateAndCreate(folderPath, DefaultMainToken, DefaultLabeledExamplesToken, now, DefaultJsonExtension);
-        public string CreateForSessionJson(string folderPath, DateTime now)
-            => ValidateAndCreate(folderPath, DefaultMainToken, DefaultSessionToken, now, DefaultJsonExtension);
+        public string CreateForOutputJson(string folderPath, DateTime now)
+            => ValidateAndCreate(folderPath, DefaultMainToken, DefaultOutputToken, now, DefaultJsonExtension);
 
         #endregion
 

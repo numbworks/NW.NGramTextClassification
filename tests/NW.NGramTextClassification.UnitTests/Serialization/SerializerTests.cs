@@ -137,7 +137,7 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         }
 
         [Test]
-        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsTextClassifierSession()
+        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsClassifyOutput()
         {
 
             // Arrange

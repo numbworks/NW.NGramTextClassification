@@ -61,14 +61,15 @@ namespace NW.NGramTextClassification.TextClassifiers
 
                 }
 
-                dynamic newSession = new ExpandoObject();
+                dynamic newOutput = new ExpandoObject();
 
-                newSession.MinimumAccuracySingleLabel = classifyOutput.MinimumAccuracySingleLabel;
-                newSession.MinimumAccuracyMultipleLabels = classifyOutput.MinimumAccuracyMultipleLabels;
-                newSession.Results = newResults;
-                newSession.Version = classifyOutput.Version;
+                newOutput.MinimumAccuracySingleLabel = classifyOutput.MinimumAccuracySingleLabel;
+                newOutput.MinimumAccuracyMultipleLabels = classifyOutput.MinimumAccuracyMultipleLabels;
+                newOutput.Results = newResults;
+                newOutput.Version = classifyOutput.Version;
 
-                return newSession;
+                return newOutput;
+                
             };
         public static Func<DateTime> DefaultNowFunction { get; } = () => DateTime.Now;
         public static Func<DateTime> DefaultUTCNowFunction { get; }= () => DateTime.UtcNow;
@@ -586,7 +587,7 @@ namespace NW.NGramTextClassification.TextClassifiers
             else if (typeof(T) == typeof(TextSnippet))
                 filePath = _filenameFactory.CreateForTextSnippetsJson(folderPath: folderPath, now: now);
             else if (typeof(T) == typeof(ClassifyOutput))
-                filePath = _filenameFactory.CreateForSessionJson(folderPath: folderPath, now: now);
+                filePath = _filenameFactory.CreateForOutputJson(folderPath: folderPath, now: now);
             else
                 throw new Exception(TextClassifications.MessageCollection.ThereIsNoStrategyOutOfType(typeof(T)));
 

@@ -31,7 +31,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
 
             new TestCaseData(
                 new TestDelegate(
-                    () => new FilenameFactory().CreateForSessionJson(folderPath: null, now: ObjectMother.FakeNow)
+                    () => new FilenameFactory().CreateForOutputJson(folderPath: null, now: ObjectMother.FakeNow)
                 ),
                 typeof(ArgumentNullException),
                 new ArgumentNullException("folderPath").Message
@@ -64,11 +64,11 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
             new TestCaseData(
                     new Func<string>(
                             () => new FilenameFactory()
-                                        .CreateForSessionJson(
+                                        .CreateForOutputJson(
                                             folderPath: ObjectMother.FakeFilePath,
                                             now: ObjectMother.FakeNow)
                         ),
-                    ObjectMother.Filename_SessionJson
+                    ObjectMother.Filename_OutputJson
                 ).SetArgDisplayNames($"{nameof(createMethodTestCases)}_03")
 
         };
@@ -115,7 +115,7 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
             Assert.That(FilenameFactory.DefaultJsonExtension, Is.InstanceOf<string>());
             Assert.That(FilenameFactory.DefaultLabeledExamplesToken, Is.InstanceOf<string>());
             Assert.That(FilenameFactory.DefaultMainToken, Is.InstanceOf<string>());
-            Assert.That(FilenameFactory.DefaultSessionToken, Is.InstanceOf<string>());
+            Assert.That(FilenameFactory.DefaultOutputToken, Is.InstanceOf<string>());
             Assert.That(FilenameFactory.DefaultTextSnippetsToken, Is.InstanceOf<string>());
 
         }

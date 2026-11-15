@@ -4,7 +4,7 @@ using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
-    /// <summary>The outcome of a text classification session.</summary>
+    /// <summary>A text classification output.</summary>
     public class ClassifyOutput
     {
 
