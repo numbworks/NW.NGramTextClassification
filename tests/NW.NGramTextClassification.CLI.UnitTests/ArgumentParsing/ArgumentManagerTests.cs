@@ -115,10 +115,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
         {
 
             // Arrange
-            ArgumentManager argumentManager = new ArgumentManager();
-
             // Act
-            CommandLineApplication actual = argumentManager.Create();
+            CommandLineApplication actual = new ArgumentManager().Create();
 
             // Assert
             Assert.That(actual, Is.InstanceOf<CommandLineApplication>());
@@ -130,10 +128,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
         {
 
             // Arrange
-            ArgumentManager argumentManager = new ArgumentManager();
-
             // Act
-            CommandLineApplication actual = argumentManager.Create();
+            CommandLineApplication actual = new ArgumentManager().Create();
 
             // Assert
             Assert.That(CommandLineString.APPLICATION_NAME, Is.EqualTo(actual.Name));
@@ -146,10 +142,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
         {
 
             // Arrange
-            ArgumentManager argumentManager = new ArgumentManager();
-
             // Act
-            CommandLineApplication actual = argumentManager.Create();
+            CommandLineApplication actual = new ArgumentManager().Create();
 
             CommandLineApplication classifyCommand
                 = actual.Commands.Single(
@@ -166,10 +160,8 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
         {
 
             // Arrange
-            ArgumentManager argumentManager = new ArgumentManager();
-
             // Act
-            CommandLineApplication actual = argumentManager.Create();
+            CommandLineApplication actual = new ArgumentManager().Create();
 
             CommandLineApplication classifyCommand
                 = actual.Commands.Single(
