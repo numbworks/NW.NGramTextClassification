@@ -156,6 +156,27 @@ All the labeled examples that might prevent the application to run can be ignore
 [2026-11-15 19:22:43:409] ERROR: 'LabeledExamples' contains zero items.
 ```
 
+The `--cleanlabeledexamples` option can also ignore any text excerpts incompatible with your specified `--tokenizerruleset` (or the default one). When this occurs, the log lists the affected excerpts, so that you can finetune your `TokenizerRuleSet.json` accordingly:
+
+```
+...
+[2026-11-15 21:54:23:565] The provided 'CleanLabeledExamples' is: 'True'.
+...
+[2026-11-15 21:54:23:737] '5572' LabeledExample objects have been loaded.
+[2026-11-15 21:54:23:744] '6' TextSnippet objects have been loaded.
+[2026-11-15 21:54:23:754] The provided 'NGramTokenizerRuleSet' is: '[ DoForMonogram: 'True', DoForBigram: 'True', DoForTrigram: 'True', DoForFourgram: 'True', DoForFivegram: 'False' ]'.
+[2026-11-15 21:54:26:541] The provided LabeledExample objects have been thru the cleaning process. Now they are: '5450'.
+[2026-11-15 21:54:26:541] The following '122' LabeledExamples have been removed:
+[2026-11-15 21:54:26:542] Removed: [ Label: 'ham', Text: 'Yup next stop.' ]
+[2026-11-15 21:54:26:542] Removed: [ Label: 'ham', Text: 'I'm home.' ]
+[2026-11-15 21:54:26:542] Removed: [ Label: 'ham', Text: 'Goodmorning sleeping ga.' ]
+...
+[2026-11-15 21:54:26:542] The text classification output has been successfully created.
+...
+```
+
+Providing the `--cleanlabeledexamples` option runs the removal process in memory without modifying the `LabeledExamples.json` file.
+
 ## Markdown Toolset
 
 Suggested toolset to view and edit this Markdown file:
