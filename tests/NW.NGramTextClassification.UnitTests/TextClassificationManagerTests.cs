@@ -242,6 +242,65 @@ namespace NW.NGramTextClassification.UnitTests
 
         }
 
+        [Test]
+        public void LogStartup_ShouldLogExpectedMessages_WhenInvoked()
+        {
+
+            // Arrange
+            List<string> logMessages = new List<string>();
+            Action<string> fakeLoggingAction = (msg) => logMessages.Add(msg);
+            ComponentBag componentBag = new ComponentBag(loggingAction: fakeLoggingAction);
+            SettingBag settingBag = new SettingBag(folderPath: @"C:\");
+            TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag, settingBag: settingBag);
+
+            ClassifyInput classifyInput = new ClassifyInput(
+                labeledExamplesFileName: "LabeledExamples.json",
+                textSnippetsFileName: "TextSnippets.json",
+                tokenizerRuleSetFileName: "RuleSet.json"
+            );
+
+            // Act
+            ObjectMother.CallPrivateMethod<TextClassificationManager, object>(
+                    obj: textClassificationManager,
+                    methodName: "LogStartup",
+                    args: [classifyInput]
+                );
+
+            // Assert
+            Assert.That(logMessages.Count, Is.GreaterThan(0));
+            Assert.That(logMessages[0], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.TextClassificationProcessStarted));
+
+        }
+
+        [Test]
+        public void LogException_ShouldLogFormattedException_WhenInvoked()
+        {
+
+            // Arrange
+            List<string> logMessages = new List<string>();
+            Action<string> fakeLoggingAction = (msg) => logMessages.Add(msg);
+            Func<string, string> fakeErrorFormatting = (msg) => $"Error: {msg}";
+            ComponentBag componentBag = new ComponentBag(
+                loggingAction: fakeLoggingAction,
+                errorFormattingFunction: fakeErrorFormatting
+            );
+            TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag);
+
+            Exception e = new Exception("Test exception message");
+
+            // Act
+            ObjectMother.CallPrivateMethod<TextClassificationManager, object>(
+                    obj: textClassificationManager,
+                    methodName: "LogException",
+                    args: [e]
+                );
+
+            // Assert
+            Assert.That(logMessages.Count, Is.EqualTo(1));
+            Assert.That(logMessages[0], Is.EqualTo($"Error: {e.Message}"));
+
+        }
+
         #endregion
 
         #region TearDown
