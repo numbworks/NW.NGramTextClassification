@@ -49,6 +49,7 @@ The command above will log something like this to the console:
 ..::::..:::...::...:::..::::..:::......::::..:::::..::..:::::..::..:::::..::
 *********************************************************Version: 5.0.0*****
 
+
 [2026-11-16 11:31:17:072] The scaffolding process has started.
 [2026-11-16 11:31:17:217] The following example JSON file has been created: '/workspaces/LabeledExamples.json'.
 [2026-11-16 11:31:17:222] The following example JSON file has been created: '/workspaces/TextSnippets.json'.
