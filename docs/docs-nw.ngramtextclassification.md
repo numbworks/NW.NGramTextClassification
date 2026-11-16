@@ -6,7 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2020-12-27 | numbworks | Created. |
-| 2026-10-26 | numbworks | Last update (v4.3.0). |
+| 2026-11-16 | numbworks | Last update (v5.0.0). |
 
 ## Introduction
 
@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using NW.NGramTextClassification;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 
 ...
@@ -44,12 +45,10 @@ TextSnippet textSnippet
 List<LabeledExample> labeledExamples = CreateLabeledExamples();
 
 ITextClassifier textClassifier = new TextClassifier();
-TextClassifierSession session = textClassifier.ClassifyOrDefault(textSnippet, labeledExamples);
+ClassifyOutput classifyOutput = textClassifier.ClassifyOrDefault(textSnippet, labeledExamples);
 
-Console.WriteLine(session.Results[0].Label);
+Console.WriteLine(classifyOutput.Results[0].Label);
 ```
-
-The entry point of the library (`TextClassifier`) offers a quite self-explanatory `ClassifyOrDefault` method.
 
 The `textSnippet` object contains the string of text that we need to categorize, while the `labeledExamples` is a collection of strings that already have a label associated to them and that we will use to train the library.
 
@@ -108,33 +107,38 @@ public class TextClassifierResult
 }
 ```
 
-The core logic of the `ClassifyOrDefault` method is the following one (some logging statements have been removed for readibility purpose):
+The core logic behind the `ClassifyOrDefault` method is the following one:
 
 ```csharp
 private TextClassifierResult CreateResult(
+    TextSnippet textSnippet, 
     List<INGram> nGrams, 
-    List<TokenizedExample> tokenizedExamples)
+    List<TokenizedExample> tokenizedExamples, 
+    double minimumAccuracySingleLabel, 
+    double minimumAccuracyMultipleLabels)
 {
 
-    List<SimilarityIndex> indexes = GetSimilarityIndexes(nGrams, tokenizedExamples);
-    List<SimilarityIndexAverage> indexAverages = GetSimilarityIndexAverages(indexes);
+    List<SimilarityIndex> indexes 
+        = GetSimilarityIndexes(nGrams, tokenizedExamples);
+    List<SimilarityIndexAverage> indexAverages 
+        = GetSimilarityIndexAverages(indexes);
 
-    string label = GetLabel(indexAverages);
-    _components.LoggingAction.Invoke(
-        MessageCollection.TextClassifier_PredictedLabelIs(label));
+    string label 
+        = GetLabel(
+            indexAverages, 
+            minimumAccuracySingleLabel, 
+            minimumAccuracyMultipleLabels);
 
-    if (label == null)
-        _components.LoggingAction.Invoke(
-            MessageCollection.TextClassifier_PredictionHasFailedTryIncreasingTheAmountOfProvidedLabeledExamples);
-    else
-        _components.LoggingAction.Invoke(
-            MessageCollection.TextClassifier_PredictionHasBeenSuccessful);
-
-    TextClassifierResult result = new TextClassifierResult(label, indexes, indexAverages);
+    TextClassifierResult result 
+        = new TextClassifierResult(
+            textSnippet, 
+            label, 
+            indexes, 
+            indexAverages);
 
     return result;
 
-} 
+}  
 ```
 
 The content of the `textSnippet` variable gets tokenized into a collection of `INGrams`, and each of them is compared to the provided collection of `LabeledExamples`.
@@ -168,12 +172,12 @@ The `GetLabel` method will run this collection of `SimilarityIndexAverage` objec
 - a `TextClassifierResult` object containing the presumed label
 - a `TextClassifierResult` object containing a `null` label.
 
-The `TextClassifierResult` object is contained into a `TextClassifierSession` object, which contains additional information about the classification process. 
+The `TextClassifierResult` object is contained into a `ClassifyOutput` object, which contains additional information about the classification process. 
 
-The `TextClassifierSession` class definition looks like:
+The `ClassifyOutput` class definition looks like:
 
 ```csharp
-public class TextClassifierSession
+public class ClassifyOutput
 {
 
     public double MinimumAccuracySingleLabel { get; }
@@ -276,10 +280,11 @@ The accuracy of the classification can be improved:
 Here an example of each JSON file supported by the library (load and save):
 
 1. [LabeledExamples.json](ExampleFiles/LabeledExamples.json)
-2. [TextSnippets.json](ExampleFiles/TextSnippets.json)
-3. [Session.json](ExampleFiles/Session.json) - v.3.6.0.0
-4. [SessionWithDisabledIndexSerialization.json](ExampleFiles/SessionWithDisabledIndexSerialization.json) - v.3.6.0.0
-5. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
+2. [LabeledExamplesInvalid.json](ExampleFiles/LabeledExamplesInvalid.json)
+3. [TextSnippets.json](ExampleFiles/TextSnippets.json)
+4. [TokenizerRuleSet.json](ExampleFiles/TokenizerRuleSet.json)
+5. [ClassifyOutput.json](ExampleFiles/ClassifyOutput.json) - v.5.0.0
+6. [ClassifyOutputWithDisabledIndexSerialization.json](ExampleFiles/ClassifyOutputWithDisabledIndexSerialization.json) - v.5.0.0
 
 ## See Also: `asciibannermanager`
 

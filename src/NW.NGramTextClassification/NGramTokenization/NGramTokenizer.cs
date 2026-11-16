@@ -204,10 +204,12 @@ namespace NW.NGramTextClassification.NGramTokenization
 
             MatchCollection matches = GetMatches(text);
             if (matches.Count == 0)
-                throw new ArgumentException(MessageCollection.ProvidedTokenizationStrategyPatternReturnsZeroMatches(_tokenizationStrategy));
+                throw new ArgumentException(MessageCollection.ProvidedTokenizationStrategyPatternReturnsZeroMatches(_tokenizationStrategy, text));
 
             ushort N = GetN<T>();
-            Validator.ThrowIfFirstIsGreater<ArgumentException>(N, nameof(N), matches.Count, nameof(matches.Count));
+
+            if (N > matches.Count)
+                throw new Exception(MessageCollection.ProvidedTextCantBeTokenized(N, text));
 
         }
         private List<T> DoFor<T>(string text) where T : INGram

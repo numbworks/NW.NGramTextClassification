@@ -9,21 +9,26 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         
         public static string APPLICATION_NAME { get; } = "nwngram";
         public static string APPLICATION_DESCRIPTION { get; } = "Command-line application to perform text classification tasks.";
-        
-        #endregion
 
-        #region Session
-        
-        public static string COMMAND_SESSION_NAME { get; } = "session";
-        public static string COMMAND_SESSION_DESCR { get; } 
-            = "Groups all the features related to a single text classification session.";
-        
+        public static string OPTION_FOLDERPATH_TEMPL { get; } = "--folderpath";
+        public static string OPTION_FOLDERPATH_DESCR { get; } 
+            = string.Concat(
+                "(Optional) ",
+                "The path of the working folder. ",
+                $"If not specified, '{SettingBag.DefaultFolderPath}' will be used.");
+
+        public static string OPTION_ENABLEUTC_TEMPL { get; } = "--enableutc";
+        public static string OPTION_ENABLEUTC_DESCR { get; }
+            = string.Concat(
+                "(Optional) ",
+                "Replaces local time with UTC time in timestamps.");
+
         #endregion
+       
+        #region Classify
         
-        #region Session Classify
-        
-        public static string SUBCOMMAND_CLASSIFY_NAME { get; } = "classify";
-        public static string SUBCOMMAND_CLASSIFY_DESCR { get; } 
+        public static string COMMAND_CLASSIFY_NAME { get; } = "classify";
+        public static string COMMAND_CLASSIFY_DESCR { get; } 
             = "Attempt to classify the provided text snippet(s) according to the provided labeled examples.";
 
         public static string OPTION_LABELEDEXAMPLES_TEMPL { get; } = "--labeledexamples";
@@ -50,13 +55,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 "The file needs to be stored in the working folder. ",
                 "If not specified, default rules will be used.");
 
-        public static string OPTION_FOLDERPATH_TEMPL { get; } = "--folderpath";
-        public static string OPTION_FOLDERPATH_DESCR { get; } 
-            = string.Concat(
-                "(Optional) ",
-                "The path of the working folder. ",
-                $"If not specified, '{SettingBag.DefaultFolderPath}' will be used.");
-
         public static string OPTION_MINACCURACYSINGLE_TEMPL { get; } = "--minaccuracysingle";
         public static string OPTION_MINACCURACYSINGLE_DESCR { get; }
             = string.Concat(
@@ -73,29 +71,31 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 "Value can be between 0.0 and 1.0. ",
                 $"If not specified, '{SettingBag.DefaultMinimumAccuracyMultipleLabels}' will be used.");
 
-        public static string OPTION_SAVESESSION_TEMPL { get; } = "--savesession";
-        public static string OPTION_SAVESESSION_DESCR { get; }
+        public static string OPTION_SAVEOUTPUT_TEMPL { get; } = "--saveoutput";
+        public static string OPTION_SAVEOUTPUT_DESCR { get; }
             = string.Concat(
                 "(Optional) ",
-                "If provided, the text classification session will be saved as JSON in the working folder.");
+                "If provided, the text classification output will be saved as JSON in the working folder.");
 
         public static string OPTION_CLEANLABELEDEXAMPLES_TEMPL { get; } = "--cleanlabeledexamples";
         public static string OPTION_CLEANLABELEDEXAMPLES_DESCR { get; }
             = string.Concat(
                 "(Optional) ",
-                "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification session.");
+                "If provided, any labeled examples that cause the tokenizer to fail will be removed before starting the classification output.");
 
         public static string OPTION_DISABLEINDEXSERIALIZATION_TEMPL { get; } = "--disableindexserialization";
         public static string OPTION_DISABLEINDEXSERIALIZATION_DESCR { get; }
             = string.Concat(
                 "(Optional) ",
-                "To use in conjunction with '--savesession'. It has no effect if provided by its own.");
+                "To use in conjunction with '--saveoutput'. It has no effect if provided by its own.");
 
-        public static string OPTION_ENABLEUTC_TEMPL { get; } = "--enableutc";
-        public static string OPTION_ENABLEUTC_DESCR { get; }
-            = string.Concat(
-                "(Optional) ",
-                "Replaces local time with UTC time in timestamps.");
+        #endregion
+
+        #region Scaffold
+
+        public static string COMMAND_SCAFFOLD_NAME { get; } = "scaffold";
+        public static string COMMAND_SCAFFOLD_DESCR { get; } 
+            = "Create three example JSON files on disk from which you can start your text classification process.";
 
         #endregion
 

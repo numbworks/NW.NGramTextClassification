@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using NW.NGramTextClassification.Bags;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.Shared.Validation;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
-    /// <summary>The outcome of a text classification session.</summary>
-    public class TextClassifierSession
+    /// <summary>A text classification output.</summary>
+    public class ClassifyOutput
     {
 
         #region Fields
@@ -23,18 +23,20 @@ namespace NW.NGramTextClassification.TextClassifications
         #region Constructors
 
         /// <summary>
-        /// Initializes a <see cref="TextClassifierSession"/> instance.
+        /// Initializes a <see cref="ClassifyOutput"/> instance.
         /// </summary>
-        public TextClassifierSession(SettingBag settingBag, List<TextClassifierResult> results, string version)
+        public ClassifyOutput(
+            double minimumAccuracySingleLabel, 
+            double minimumAccuracyMultipleLabels, 
+            List<TextClassifierResult> results, 
+            string version)
         {
 
-            Validator.ValidateObject(settingBag, nameof(settingBag));
             Validator.ValidateList(results, nameof(results));
             Validator.ValidateStringNullOrWhiteSpace(version, nameof(version));
 
-            MinimumAccuracySingleLabel = settingBag.MinimumAccuracySingleLabel;
-            MinimumAccuracyMultipleLabels = settingBag.MinimumAccuracyMultipleLabels;
-
+            MinimumAccuracySingleLabel = minimumAccuracySingleLabel;
+            MinimumAccuracyMultipleLabels = minimumAccuracyMultipleLabels;
             Results = results;
             Version = version;
 

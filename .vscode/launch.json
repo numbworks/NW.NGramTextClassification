@@ -7,7 +7,18 @@
             "request": "launch",
             "preLaunchTask": "solution: build",
             "program": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI/bin/net8.0/NW.NGramTextClassification.CLI.dll",
-            "args": [],
+            "args": [
+                "classify",
+                "--folderpath",
+                "/workspaces/NW.NGramTextClassification/docs/ExampleFiles/",
+                "--labeledexamples",
+                "LabeledExamples.json",
+                "--textsnippets",
+                "TextSnippets.json",
+                "--tokenizerruleset",
+                "TokenizerRuleSet.json",
+                "--cleanlabeledexamples"
+            ],
             "cwd": "${env:DOTNET_BIN_PATH}/NW.NGramTextClassification.CLI",
             "console": "integratedTerminal",
             "stopAtEntry": false
@@ -29,7 +40,20 @@
             "cwd": "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
             "console": "integratedTerminal",
             "program": "/usr/bin/dotnet",
-            "args": [ "run", "--project", "${workspaceFolder}/src/NW.NGramTextClassification.CLI" ],
+            "args": [
+                "run", 
+                "--project", 
+                "${workspaceFolder}/src/NW.NGramTextClassification.CLI",
+                "--",
+                "classify",
+                "--folderpath",
+                "/workspaces/NW.NGramTextClassification/docs/ExampleFiles/",
+                "--labeledexamples",
+                "LabeledExamples.json",
+                "--textsnippets",
+                "TextSnippets.json"
+
+            ],
             "stopAtEntry": false
         }
     ]

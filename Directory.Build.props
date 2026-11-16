@@ -1,10 +1,10 @@
 <Project>
 
   <PropertyGroup>
-    <AssemblyVersion>4.2.1</AssemblyVersion>
-    <FileVersion>4.2.1</FileVersion>
-    <Version>4.2.1</Version>
-    <InformationalVersion>4.2.1</InformationalVersion>
+    <AssemblyVersion>5.0.0</AssemblyVersion>
+    <FileVersion>5.0.0</FileVersion>
+    <Version>5.0.0</Version>
+    <InformationalVersion>5.0.0</InformationalVersion>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Deterministic>true</Deterministic>
   </PropertyGroup>

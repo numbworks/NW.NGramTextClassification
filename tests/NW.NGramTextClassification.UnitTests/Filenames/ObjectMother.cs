@@ -38,12 +38,12 @@ namespace NW.NGramTextClassification.UnitTests.Filenames
                         FilenameFactory.DefaultJsonExtension
                         );
 
-        public static string Filename_SessionJson
+        public static string Filename_OutputJson
             = string.Concat(
                         FakeFilePath,
                         FilenameFactory.DefaultMainToken,
                         "_",
-                        FilenameFactory.DefaultSessionToken,
+                        FilenameFactory.DefaultOutputToken,
                         "_",
                         FakeNowString,
                         ".",
