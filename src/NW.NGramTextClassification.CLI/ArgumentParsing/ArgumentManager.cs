@@ -72,6 +72,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
             app = AddRoot(app);
             app = AddClassify(app);
+            app = AddScaffold(app);
 
             app.HelpOption(inherited: true);
 
@@ -140,6 +141,30 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                     );
 
                     return RunClassify(settingBag, classifyInput);
+
+                });
+
+            });
+
+            return command;
+
+        }
+        private CommandLineApplication AddScaffold(CommandLineApplication command)
+        {
+
+            command.Command(CommandLineString.COMMAND_SCAFFOLD_NAME, subCommand =>
+            {
+
+                subCommand.Description = CommandLineString.COMMAND_SCAFFOLD_DESCR;
+
+                CommandOption folderPathOption = CreateFolderPathOption(subCommand);
+
+                subCommand.OnExecute(() =>
+                {
+
+                    SettingBag settingBag = new SettingBag(folderPath: folderPathOption.Value());
+
+                    return RunScaffold(settingBag);
 
                 });
 
@@ -347,6 +372,23 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             ClassifyOutput classifyOutput = textClassificationManager.ClassifyOrNull(classifyInput);
 
             if (classifyOutput is not null)
+                return Success;
+
+            return Failure;
+
+        }
+        private int RunScaffold(SettingBag settingBag)
+        {
+            
+            LogAsciiBanner();
+
+            ITextClassificationManager textClassificationManager 
+                = TextClassificationManagerFactory.Create(settingBag: settingBag, out _);
+
+            bool success;
+            textClassificationManager.Scaffold(out success);
+
+            if (success)
                 return Success;
 
             return Failure;

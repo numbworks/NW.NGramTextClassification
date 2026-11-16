@@ -42,8 +42,8 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static string ScaffoldingProcessStarted = "The scaffolding process has started.";
         public static string ScaffoldingProcessCompleted = "The scaffolding process has been completed.";
-        public static Func<IFileInfoAdapter, string> FollowingExampleJSONFileSaved =
-            (file) => $"The following example JSON file has been saved as: '{file.FullName}'.";
+        public static Func<IFileInfoAdapter, string> FollowingExampleJSONFileCreated =
+            (file) => $"The following example JSON file has been created: '{file.FullName}'.";
 
         #endregion
 

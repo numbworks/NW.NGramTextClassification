@@ -9,7 +9,14 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
         
         public static string APPLICATION_NAME { get; } = "nwngram";
         public static string APPLICATION_DESCRIPTION { get; } = "Command-line application to perform text classification tasks.";
-        
+
+        public static string OPTION_FOLDERPATH_TEMPL { get; } = "--folderpath";
+        public static string OPTION_FOLDERPATH_DESCR { get; } 
+            = string.Concat(
+                "(Optional) ",
+                "The path of the working folder. ",
+                $"If not specified, '{SettingBag.DefaultFolderPath}' will be used.");
+
         #endregion
        
         #region Classify
@@ -41,13 +48,6 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 "The filename of the JSON file containing the tokenizer ruleset. ",
                 "The file needs to be stored in the working folder. ",
                 "If not specified, default rules will be used.");
-
-        public static string OPTION_FOLDERPATH_TEMPL { get; } = "--folderpath";
-        public static string OPTION_FOLDERPATH_DESCR { get; } 
-            = string.Concat(
-                "(Optional) ",
-                "The path of the working folder. ",
-                $"If not specified, '{SettingBag.DefaultFolderPath}' will be used.");
 
         public static string OPTION_MINACCURACYSINGLE_TEMPL { get; } = "--minaccuracysingle";
         public static string OPTION_MINACCURACYSINGLE_DESCR { get; }
@@ -88,6 +88,14 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
             = string.Concat(
                 "(Optional) ",
                 "Replaces local time with UTC time in timestamps.");
+
+        #endregion
+
+        #region Scaffold
+
+        public static string COMMAND_SCAFFOLD_NAME { get; } = "scaffold";
+        public static string COMMAND_SCAFFOLD_DESCR { get; } 
+            = "Create three example JSON files on disk from which you can start your classification session.";
 
         #endregion
 
