@@ -95,7 +95,7 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
 
         public static string COMMAND_SCAFFOLD_NAME { get; } = "scaffold";
         public static string COMMAND_SCAFFOLD_DESCR { get; } 
-            = "Create three example JSON files on disk from which you can start your classification session.";
+            = "Create three example JSON files on disk from which you can start your text classification process.";
 
         #endregion
 
