@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.TextSnippets;
+using NW.Shared.Files;
 
 namespace NW.NGramTextClassification.TextClassifications
 {
@@ -33,12 +34,16 @@ namespace NW.NGramTextClassification.TextClassifications
 
         public static string TextClassificationOutputSuccessfullyCreated 
             = "The text classification output has been successfully created.";
-
         public static string TextClassificationOutputContainsResults
             => $"The text classification output contains the following results:";
 
         public static Func<string, string> ClassifyOutputSuccessfullySaved =
             (folderPath) => $"The {nameof(ClassifyOutput)} object has been successfully saved in '{folderPath}'.";
+
+        public static string ScaffoldingProcessStarted = "The scaffolding process has started.";
+        public static string ScaffoldingProcessCompleted = "The scaffolding process has been completed.";
+        public static Func<IFileInfoAdapter, string> FollowingExampleJSONFileSaved =
+            (file) => $"The following example JSON file has been saved as: '{file.FullName}'.";
 
         #endregion
 

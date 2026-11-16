@@ -130,16 +130,48 @@ namespace NW.NGramTextClassification
             }
 
         }
+        
         public void Scaffold()
         {
             
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.ScaffoldingProcessStarted);
+
             IFileInfoAdapter labeledExamplesFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultLabeledExamplesFileName));
             IFileInfoAdapter textSnippetsFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTextSnippetsFileName));
             IFileInfoAdapter tokenizerRuleSetFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTokenizerRuleSetFileName));
 
             _componentBag.TextClassifier.Save(DefaultLabeledExamples, labeledExamplesFile);
+            // Log json content (?)
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingExampleJSONFileSaved(labeledExamplesFile));
+
             _componentBag.TextClassifier.Save(DefaultTextSnippets, textSnippetsFile);
+            // Log json content (?)
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingExampleJSONFileSaved(textSnippetsFile));
+
             _componentBag.TextClassifier.Save(DefaultTokenizerRuleSet, tokenizerRuleSetFile);
+            // Log json content (?)
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingExampleJSONFileSaved(tokenizerRuleSetFile));
+
+            _componentBag.LoggingAction(TextClassifications.MessageCollection.ScaffoldingProcessCompleted);
+
+        }
+        public void Scaffold(out bool success)
+        {
+
+            try
+            {
+
+                Scaffold();
+                success = true;
+
+            }
+            catch (Exception e)
+            {
+                
+                LogException(e);
+                success = false;
+
+            }
 
         }
 
