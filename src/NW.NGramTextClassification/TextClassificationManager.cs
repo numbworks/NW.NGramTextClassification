@@ -141,15 +141,12 @@ namespace NW.NGramTextClassification
             IFileInfoAdapter tokenizerRuleSetFile = new FileInfoAdapter(Path.Combine(_settingBag.FolderPath, DefaultTokenizerRuleSetFileName));
 
             _componentBag.TextClassifier.Save(DefaultLabeledExamples, labeledExamplesFile);
-            // Log json content (?)
             _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingExampleJSONFileSaved(labeledExamplesFile));
 
             _componentBag.TextClassifier.Save(DefaultTextSnippets, textSnippetsFile);
-            // Log json content (?)
             _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingExampleJSONFileSaved(textSnippetsFile));
 
             _componentBag.TextClassifier.Save(DefaultTokenizerRuleSet, tokenizerRuleSetFile);
-            // Log json content (?)
             _componentBag.LoggingAction(TextClassifications.MessageCollection.FollowingExampleJSONFileSaved(tokenizerRuleSetFile));
 
             _componentBag.LoggingAction(TextClassifications.MessageCollection.ScaffoldingProcessCompleted);
