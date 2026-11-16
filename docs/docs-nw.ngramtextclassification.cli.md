@@ -6,7 +6,7 @@ Contact: numbworks@gmail.com
 | Date | Author | Description |
 |---|---|---|
 | 2021-10-13 | numbworks | Created. |
-| 2026-11-15 | numbworks | Last update (v5.0.0). |
+| 2026-11-16 | numbworks | Last update (v5.0.0). |
 
 ## Introduction
 
@@ -16,13 +16,55 @@ Contact: numbworks@gmail.com
 
 |Command|Sub Command|Options|Exit Codes|
 |---|---|---|---|
-|classify||--labeledexamples:{filename}<br />--textsnippets:{filename}<br />*--folderpath:{path}*<br />*--tokenizerruleset:{filename}*<br />*--minaccuracysingle:{number}*<br />*--minaccuracymultiple:{number}*<br />*--saveoutput*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enabletrue*|Success<br />Failure|
+|scaffold||*--folderpath {path}*<br />*--enableutc*|Success<br />Failure|
+|classify||--labeledexamples {filename}<br />--textsnippets {filename}<br />*--folderpath {path}*<br />*--tokenizerruleset {filename}*<br />*--minaccuracysingle {number}*<br />*--minaccuracymultiple {number}*<br />*--saveoutput*<br />*--cleanlabeledexamples*<br />*--disableindexserialization*<br />*--enableutc*|Success<br />Failure|
 
-## Examples
+## The scaffold command
 
-The simplest command you can run is `classify`, which performs a text classification task on the data you provide. 
+To get started with this application, you need three files:
 
-The command above requires that you have the two required files (`LabeledExamples.json` and `TextSnippets.json`) located in the same folder as the application, which by default it's the working folder for all the application's activities. 
+- `LabeledExamples.json` (required)
+- `TextSnippets.json` (required)
+- `TokenizerRuleSet.json` (optional)
+
+The `scaffold` command creates an example file for each of them in the same folder as the application, which by default it's the working folder for all the application's activities. 
+
+At very least, the command will look like:
+
+```
+.\nwngram.exe scaffold
+```
+
+The command above will log something like this to the console:
+
+```
+****************************************************************************
+'##::: ##:'##:::::'##:'##::: ##::'######:::'########:::::'###::::'##::::'##:
+ ###:: ##: ##:'##: ##: ###:: ##:'##... ##:: ##.... ##:::'## ##::: ###::'###:
+ ####: ##: ##: ##: ##: ####: ##: ##:::..::: ##:::: ##::'##:. ##:: ####'####:
+ ## ## ##: ##: ##: ##: ## ## ##: ##::'####: ########::'##:::. ##: ## ### ##:
+ ##. ####: ##: ##: ##: ##. ####: ##::: ##:: ##.. ##::: #########: ##. #: ##:
+ ##:. ###: ##: ##: ##: ##:. ###: ##::: ##:: ##::. ##:: ##.... ##: ##:.:: ##:
+ ##::. ##:. ###. ###:: ##::. ##:. ######::: ##:::. ##: ##:::: ##: ##:::: ##:
+..::::..:::...::...:::..::::..:::......::::..:::::..::..:::::..::..:::::..::
+*********************************************************Version: 5.0.0*****
+
+[2026-11-16 11:31:17:072] The scaffolding process has started.
+[2026-11-16 11:31:17:217] The following example JSON file has been created: '/workspaces/LabeledExamples.json'.
+[2026-11-16 11:31:17:222] The following example JSON file has been created: '/workspaces/TextSnippets.json'.
+[2026-11-16 11:31:17:231] The following example JSON file has been created: '/workspaces/TokenizerRuleSet.json'.
+[2026-11-16 11:31:17:231] The scaffolding process has been completed.
+```
+
+If you wish to store the files elsewhere, you can specify a new working folder by using the `--folderpath` option - i.e. `--folderpath:C:\Documents`
+
+By default, the application's logger adopts the local time for the timestamps. If you want to enable UTC timestamps instead, you can provide the `--enableutc` option.
+
+## The classify command
+
+Once you scaffolded the required files and added your own data inside, you are ready to perform a text classification task on them by using the `classify` command. 
+
+The command above requires that you have the two required files (`LabeledExamples.json` and `TextSnippets.json`) located in the working folder. 
 
 At very least, the command will look like:
 
@@ -46,7 +88,7 @@ The command above will log something like this to the console:
 
 
 [2026-11-15 19:16:09:545] The text classification process has started.
-[2026-11-15 19:16:09:552] The provided 'FolderPath' is: '/workspaces/NW.NGramTextClassification/docs/ExampleFiles/'.
+[2026-11-15 19:16:09:552] The provided 'FolderPath' is: '/workspaces/'.
 [2026-11-15 19:16:09:552] The provided 'MinimumAccuracySingleLabel' is: '0.5'.
 [2026-11-15 19:16:09:553] The provided 'MinimumAccuracyMultipleLabels' is: '0'.
 [2026-11-15 19:16:09:553] The provided 'SaveOutput' is: 'False'.
@@ -116,8 +158,6 @@ The produced JSON will look like:
   "Version": "5.0.0"
 }
 ```
-
-If you wish to store the files elsewhere, you can specify a new working folder by using the `--folderpath` option - i.e. `--folderpath:C:\Documents`
 
 If your `LabeledExamples.json` file contains invalid text excerpts, such as:
 
