@@ -1,3 +1,14 @@
+v5.0.0 - BREAKING CHANGES
+  - Library:
+			- Feature: TextClassifier is now a dependency, and TextClassificationManager is now the entry point.
+      - Feature: TextClassificationManager is now the sole source for log output, eliminating all logging from internal dependencies.
+      - Feature: the log now shows core information that was previously omitted - e.g. the text snippet causing a tokenizer failure.
+  - CLI:
+      - Feature: removed the "session" command and promoted "classify" from subcommand to command.
+      - Feature: added "scaffold" command that creates the example JSON files on disk from which you can start your text classification process.
+  - Documentation:
+      - Feature: updated to v5.0.0.
+
 v4.3.0
 - CLI:
 	- Feature: added support for the --enableutc flag.

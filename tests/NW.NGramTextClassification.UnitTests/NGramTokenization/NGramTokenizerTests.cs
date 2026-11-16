@@ -43,7 +43,10 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                                         tokenizerRuleSet: new NGramTokenizerRuleSet()
                         )),
                     typeof(ArgumentException),
-                    MessageCollection.ProvidedTokenizationStrategyPatternReturnsZeroMatches(ObjectMother.TokenizationStrategy_NonAlphanumerical)
+                    MessageCollection.ProvidedTokenizationStrategyPatternReturnsZeroMatches(
+                        ObjectMother.TokenizationStrategy_NonAlphanumerical,
+                        LabeledExamples.ObjectMother.ShortLabeledExample03_Untokenizable.Text
+                    )
                 ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_01"),
 
             new TestCaseData(
@@ -55,7 +58,15 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                         )),
                     typeof(ArgumentNullException),
                     new ArgumentNullException("text").Message
-                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                    new TestDelegate(
+                            () => new NGramTokenizer().DoForFivegram(text: "SingleWord"
+                        )),
+                    typeof(Exception),
+                    MessageCollection.ProvidedTextCantBeTokenized(5, "SingleWord")
+                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_03")
 
         };
         private static TestCaseData[] doForRuleSetOrDefaultTestCases = CreateTestCases(nameof(doForRuleSetOrDefaultTestCases));

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification.Similarity;
-using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 using NUnit.Framework;
 
-namespace NW.NGramTextClassification.UnitTests.TextClassifications
+namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 {
     [TestFixture]
     public class TextClassifierResultTests

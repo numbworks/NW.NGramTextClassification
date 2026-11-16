@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using NW.NGramTextClassification.Bags;
 using NW.NGramTextClassification.NGramTokenization;
 using NW.NGramTextClassification.TextClassifications;
+using NW.NGramTextClassification.TextClassifiers;
 using NW.NGramTextClassification.TextSnippets;
 
-namespace NW.NGramTextClassification.UnitTests.TextClassifications
+namespace NW.NGramTextClassification.UnitTests.TextClassifiers
 {
     public static class ObjectMother
     {
@@ -15,35 +16,29 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
         public static string TextClassifierResult_AsString
             = string.Concat(
                     $"[ ",
-                    $"TextSnippet: '{TextSnippets.ObjectMother.TextSnippet}', ",
-                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', ",
-                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
-                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
-                    "]"
+                    $"Text: '{TextSnippets.ObjectMother.TextSnippet.Text}', ",
+                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}'",
+                    " ]"
                 );
 
         public static string TextClassifierResult_AsStringWithNullLabel
             = string.Concat(
                     $"[ ",
-                    $"TextSnippet: '{TextSnippets.ObjectMother.TextSnippet}', ",
-                    $"Label: 'null', ",
-                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
-                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
-                    "]"
+                    $"Text: '{TextSnippets.ObjectMother.TextSnippet.Text}', ",
+                    $"Label: 'null'",
+                    " ]"
                 );
 
         public static string TextClassifierResult_AsStringWithNullTextSnippet
             = string.Concat(
                     $"[ ",
-                    $"TextSnippet: 'null', ",
-                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}', ",
-                    $"SimilarityIndexes: '{Similarity.ObjectMother.SimilarityIndexes.Count}', ",
-                    $"SimilarityIndexAverages: '{Similarity.ObjectMother.SimilarityIndexAverages.Count}' ",
-                    "]"
+                    $"Text: 'null', ",
+                    $"Label: '{LabeledExamples.ObjectMother.ShortLabeledExample01.Label}'",
+                    " ]"
                 );
 
         public static string TextClassifierResult_AllNulls
-            = $"[ TextSnippet: 'null', Label: 'null', SimilarityIndexes: 'null', SimilarityIndexAverages: 'null' ]";
+            = $"[ Text: 'null', Label: 'null' ]";
 
         public static TextClassifierResult TextClassifierResult_CompleteLabeledExamples00
             = new TextClassifierResult(
@@ -52,7 +47,6 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     indexes: Similarity.ObjectMother.CreateSimilarityIndexesForCompleteLabeledExample00(),
                     indexAverages: Similarity.ObjectMother.CreateSimilarityIndexAveragesForCompleteLabeledExample00()
                 );
-
 
         public static List<string> Snippets_CompleteLabeledExamples00 = new List<string>()
         {
@@ -80,20 +74,22 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
 
         };
 
-        public static TextClassifierSession TextClassifierSession_Default
-            = new TextClassifierSession(
-                settingBag: new SettingBag(),
+        public static ClassifyOutput ClassifyOutput_Default
+            = new ClassifyOutput(
+                minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                 results: new List<TextClassifierResult>() {
                                 TextClassifier.DefaultTextClassifierResult },
-                version: ComponentBag.DefaultVersionFunction()
+                version: TextClassifier.DefaultVersionFunction()
                 );
 
-        public static string TextClassifierrSessionCLE00AsJson_Content = Properties.Resources.TextClassifierrSessionCLE00AsJson;
-        public static TextClassifierSession TextClassifierSession_CompleteLabeledExamples00
-            = new TextClassifierSession(
-                    settingBag: new SettingBag(),
+        public static string ClassifyOutputCLE00AsJson_Content = Properties.Resources.ClassifyOutputCLE00AsJson;
+        public static ClassifyOutput ClassifyOutput_CompleteLabeledExamples00
+            = new ClassifyOutput(
+                    minimumAccuracySingleLabel: SettingBag.DefaultMinimumAccuracySingleLabel,
+                    minimumAccuracyMultipleLabels: SettingBag.DefaultMinimumAccuracyMultipleLabels,
                     results: TextClassifierResults_CompleteLabeledExamples00,
-                    version: "3.6.0.0"
+                    version: "5.0.0"
                 );
 
         public static string TokenizerRuleSetAsJson_Content = Properties.Resources.TokenizerRuleSetAsJson;
@@ -106,7 +102,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
                     doForFivegram: true
                     );
 
-        public static string TextClassifierrSessionCLE00DisabledAsJson_Content = Properties.Resources.TextClassifierrSessionCLE00DisabledAsJson;
+        public static string ClassifyOutputCLE00DisabledAsJson_Content = Properties.Resources.ClassifyOutputCLE00DisabledAsJson;
 
         #endregion
 
@@ -125,7 +121,7 @@ namespace NW.NGramTextClassification.UnitTests.TextClassifications
             => Utilities.ObjectMother.AreEqual(list1, list2, (obj1, obj2) => AreEqual(obj1, obj2));
         public static bool AreEqual(double double1, double double2)
             => Math.Abs(double1 - double2) < 0.0001;
-        public static bool AreEqual(TextClassifierSession obj1, TextClassifierSession obj2)
+        public static bool AreEqual(ClassifyOutput obj1, ClassifyOutput obj2)
         {
 
             return AreEqual(obj1.MinimumAccuracySingleLabel, obj2.MinimumAccuracySingleLabel)

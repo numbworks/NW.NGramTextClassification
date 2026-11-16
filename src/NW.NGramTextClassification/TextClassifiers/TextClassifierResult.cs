@@ -2,7 +2,7 @@
 using NW.NGramTextClassification.Similarity;
 using NW.NGramTextClassification.TextSnippets;
 
-namespace NW.NGramTextClassification.TextClassifications
+namespace NW.NGramTextClassification.TextClassifiers
 {
     /// <summary>The result of a text classification.</summary>
     public class TextClassifierResult
@@ -46,14 +46,12 @@ namespace NW.NGramTextClassification.TextClassifications
             string content
                 = string.Join(
                     ", ",
-                    $"{nameof(TextSnippet)}: '{TextSnippet?.ToString() ?? "null"}'",
-                    $"{nameof(Label)}: '{Label ?? "null"}'",
-                    $"{nameof(SimilarityIndexes)}: '{SimilarityIndexes?.Count.ToString() ?? "null"}'",
-                    $"{nameof(SimilarityIndexAverages)}: '{SimilarityIndexAverages?.Count.ToString() ?? "null"}'"
+                    $"Text: '{TextSnippet?.Text ?? "null"}'",
+                    $"Label: '{Label ?? "null"}'"
                     );
 
             return $"[ {content} ]";
-
+        
         }
 
         #endregion

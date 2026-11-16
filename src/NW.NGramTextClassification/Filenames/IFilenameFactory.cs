@@ -13,10 +13,10 @@ namespace NW.NGramTextClassification.Filenames
         string CreateForLabeledExamplesJson(string folderPath, DateTime now);
 
         /// <summary>
-        /// Returns a dated filename based on <paramref name="folderPath"/> and <see cref="FilenameFactory.DefaultSessionToken"/>.
+        /// Returns a dated filename based on <paramref name="folderPath"/> and <see cref="FilenameFactory.DefaultOutputToken"/>.
         /// </summary>
         /// <exception cref="ArgumentNullException"/>        
-        string CreateForSessionJson(string folderPath, DateTime now);
+        string CreateForOutputJson(string folderPath, DateTime now);
 
         /// <summary>
         /// Returns a dated filename based on <paramref name="folderPath"/> and <see cref="FilenameFactory.DefaultTextSnippetsToken"/>.

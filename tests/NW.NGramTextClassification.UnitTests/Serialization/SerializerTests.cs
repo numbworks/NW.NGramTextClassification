@@ -93,7 +93,7 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
 
             // Arrange
             List<LabeledExample> objects = LabeledExamples.ObjectMother.ShortLabeledExamples;
-            string expected = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content.Replace("\r\n", "\n");
+            string expected = LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content.Replace("\r\n", "\n");
 
             // Act
             string actual = new Serializer<LabeledExample>().Serialize(objects: objects).Replace("\r\n", "\n");
@@ -137,15 +137,15 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         }
 
         [Test]
-        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsTextClassifierSession()
+        public void Serialize_ShouldReturnExpectedString_WhenArgumentIsSingleObjectAndTypeIsClassifyOutput()
         {
 
             // Arrange
-            TextClassifierSession obj = TextClassifications.ObjectMother.TextClassifierSession_CompleteLabeledExamples00;
-            string expected = TextClassifications.ObjectMother.TextClassifierrSessionCLE00AsJson_Content.Replace("\r\n", "\n");
+            ClassifyOutput obj = TextClassifiers.ObjectMother.ClassifyOutput_CompleteLabeledExamples00;
+            string expected = TextClassifiers.ObjectMother.ClassifyOutputCLE00AsJson_Content.Replace("\r\n", "\n");
 
             // Act
-            string actual = new Serializer<TextClassifierSession>().Serialize(obj: obj).Replace("\r\n", "\n");
+            string actual = new Serializer<ClassifyOutput>().Serialize(obj: obj).Replace("\r\n", "\n");
 
             // Assert
             Assert.That(expected, Is.EqualTo(actual));
@@ -171,7 +171,7 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         {
 
             // Arrange
-            string json = LabeledExamples.ObjectMother.ShortLabeledExamplesAsJson_Content;
+            string json = LabeledExamples.ObjectMother.LabeledExamplesAsJson_Content;
             List<LabeledExample> expected = LabeledExamples.ObjectMother.ShortLabeledExamples;
 
             // Act
@@ -223,8 +223,8 @@ namespace NW.NGramTextClassification.UnitTests.Serialization
         {
 
             // Arrange
-            string json = TextClassifications.ObjectMother.TokenizerRuleSetAsJson_Content;
-            NGramTokenizerRuleSet expected = TextClassifications.ObjectMother.TokenizerRuleSet;
+            string json = TextClassifiers.ObjectMother.TokenizerRuleSetAsJson_Content;
+            NGramTokenizerRuleSet expected = TextClassifiers.ObjectMother.TokenizerRuleSet;
 
             // Act
             NGramTokenizerRuleSet actual = new Serializer<NGramTokenizerRuleSet>().DeserializeOrDefault(json: json);
