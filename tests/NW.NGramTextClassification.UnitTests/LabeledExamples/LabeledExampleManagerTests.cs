@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
+using NW.NGramTextClassification.NGrams;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
-using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 {
@@ -391,6 +391,65 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
                     Is.True
                 );
 
+        }
+
+        #endregion
+
+        #region Tests (Create)
+
+        [Test]
+        public void Create_ShouldReturnExpectedTokenizedExample_WhenProperParameters()
+        {
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            TokenizedExample actual = labeledExampleManager.Create(
+                labeledExample: ObjectMother.ShortLabeledExample01,
+                tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Mono
+            );
+
+            // Assert
+            Assert.That(
+                ObjectMother.AreEqual(ObjectMother.ShortTokenizedExample01_Mono, actual),
+                Is.True
+            );
+        }
+
+        [Test]
+        public void Create_ShouldReturnExpectedTokenizedExample_WhenDefaultConstructor()
+        {
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            TokenizedExample actual = labeledExampleManager.Create(
+                labeledExample: ObjectMother.ShortLabeledExample01
+            );
+
+            // Assert
+            Assert.That(
+                ObjectMother.AreEqual(ObjectMother.ShortTokenizedExample01, actual),
+                Is.True
+            );
+        }
+
+        [Test]
+        public void Create_ShouldReturnExpectedTokenizedExamples_WhenDefaultConstructorList()
+        {
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            List<TokenizedExample> actual = labeledExampleManager.Create(
+                labeledExamples: ObjectMother.ShortLabeledExamples
+            );
+
+            // Assert
+            Assert.That(
+                ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual),
+                Is.True
+            );
         }
 
         #endregion
