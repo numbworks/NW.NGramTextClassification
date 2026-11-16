@@ -160,6 +160,65 @@ namespace NW.NGramTextClassification.UnitTests
 
         #endregion
 
+        #region Tests (Scaffold)
+
+        [Test]
+        public void Scaffold_ShouldReturnFalse_WhenExceptionIsThrown()
+        {
+
+            // Arrange
+            string writeExceptionMessage = "A random write-to-disk issue.";
+            IFileManager fileManager = new FakeFileManagerThrowingWriteExceptions(content: "", writeExceptionMessage: writeExceptionMessage);
+            TextClassifier textClassifier = new TextClassifier(fileManager: fileManager);
+            ComponentBag componentBag = new ComponentBag(fileManager: fileManager, textClassifier: textClassifier);
+            SettingBag settingBag = new SettingBag(folderPath: @"C:\");
+            TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag, settingBag: settingBag);
+
+            // Act
+            textClassificationManager.Scaffold(out bool success);
+
+            // Assert
+            Assert.That(success, Is.False);
+
+        }
+
+        [Test]
+        public void Scaffold_ShouldLogExpectedMessages_WhenInvoked()
+        {
+
+            // Arrange
+            List<string> logMessages = new List<string>();
+            Action<string> fakeLoggingAction = (msg) => logMessages.Add(msg);
+
+            string folderPath = @"C:\";
+            FakeFileManager fileManager = new FakeFileManager("Some content");
+            TextClassifier textClassifier = new TextClassifier(fileManager: fileManager);
+            ComponentBag componentBag = new ComponentBag(
+                fileManager: fileManager,
+                textClassifier: textClassifier,
+                loggingAction: fakeLoggingAction
+            );
+            SettingBag settingBag = new SettingBag(folderPath: folderPath);
+            TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag, settingBag: settingBag);
+
+            IFileInfoAdapter labeledExamplesFile = new FileInfoAdapter(Path.Combine(folderPath, TextClassificationManager.DefaultLabeledExamplesFileName));
+            IFileInfoAdapter textSnippetsFile = new FileInfoAdapter(Path.Combine(folderPath, TextClassificationManager.DefaultTextSnippetsFileName));
+            IFileInfoAdapter tokenizerRuleSetFile = new FileInfoAdapter(Path.Combine(folderPath, TextClassificationManager.DefaultTokenizerRuleSetFileName));
+
+            // Act
+            textClassificationManager.Scaffold();
+
+            // Assert
+            Assert.That(logMessages[0], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.ScaffoldingProcessStarted));
+            Assert.That(logMessages[1], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.FollowingExampleJSONFileCreated(labeledExamplesFile)));
+            Assert.That(logMessages[2], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.FollowingExampleJSONFileCreated(textSnippetsFile)));
+            Assert.That(logMessages[3], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.FollowingExampleJSONFileCreated(tokenizerRuleSetFile)));
+            Assert.That(logMessages[4], Is.EqualTo(NGramTextClassification.TextClassifications.MessageCollection.ScaffoldingProcessCompleted));
+
+        }
+
+        #endregion
+
         #region Tests (Private Methods)
 
         [Test]
@@ -298,6 +357,37 @@ namespace NW.NGramTextClassification.UnitTests
             // Assert
             Assert.That(logMessages.Count, Is.EqualTo(1));
             Assert.That(logMessages[0], Is.EqualTo($"Error: {e.Message}"));
+
+        }
+
+        [Test]
+        public void LogRemovedLabeledExamples_ShouldLogExpectedMessages_WhenInvoked()
+        {
+
+            // Arrange
+            List<string> logMessages = new List<string>();
+            Action<string> fakeLoggingAction = (msg) => logMessages.Add(msg);
+            ComponentBag componentBag = new ComponentBag(loggingAction: fakeLoggingAction);
+            TextClassificationManager textClassificationManager = new TextClassificationManager(componentBag: componentBag);
+
+            List<LabeledExample> cleanExamples = new List<LabeledExample>()
+            {
+                new LabeledExample(label: "en", text: "Clean example")
+            };
+            List<LabeledExample> removedExamples = new List<LabeledExample>()
+            {
+                new LabeledExample(label: "en", text: "Removed example")
+            };
+
+            // Act
+            ObjectMother.CallPrivateMethod<TextClassificationManager, object>(
+                    obj: textClassificationManager,
+                    methodName: "LogRemovedLabeledExamples",
+                    args: [cleanExamples, removedExamples]
+                );
+
+            // Assert
+            Assert.That(logMessages.Count, Is.GreaterThan(0));
 
         }
 
