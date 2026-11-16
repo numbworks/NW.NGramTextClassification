@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NW.NGramTextClassification.LabeledExamples;
 using NW.NGramTextClassification.NGramTokenization;
 using NUnit.Framework;
+using NW.NGramTextClassification.NGrams;
 
 namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 {
@@ -142,60 +143,12 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
         #region SetUp
         #endregion
 
-        #region Tests
+        #region Tests (LabeledExampleManager)
 
         [TestCaseSource(nameof(labeledExampleManagerExceptionTestCases))]
         public void LabeledExampleManager_ShouldThrowACertainException_WhenUnproperArguments
             (TestDelegate del, Type expectedType, string expectedMessage)
                 => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
-        [TestCaseSource(nameof(createOrDefaultExceptionTestCases))]
-        public void CreateOrDefault_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
-        [TestCaseSource(nameof(createOrDefaultTestCases))]
-        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenProperParameters
-            (LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet, TokenizedExample expected)
-        {
-
-            // Arrange
-            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
-
-            // Act
-            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample, tokenizerRuleSet);
-
-            // Assert
-            Assert.That(
-                    ObjectMother.AreEqual(expected, actual),
-                    Is.True
-                );
-
-        }
-
-        [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
-        public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
-            (TestDelegate del, Type expectedType, string expectedMessage)
-                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
-
-        [Test]
-        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenListLabeledExamplesAndProperParameters()
-        {
-
-            // Arrange
-            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
-
-            // Act
-            List<TokenizedExample> actual 
-                = labeledExampleManager.CreateOrDefault(ObjectMother.ShortLabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
-
-            // Assert
-            Assert.That(
-                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual),
-                    Is.True
-                );
-
-        }
 
         [Test]
         public void LabeledExampleManager_ShouldCreateAnInstanceOfThisType_WhenProperArgument()
@@ -225,6 +178,53 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
             // Assert
             Assert.That(actual, Is.InstanceOf<LabeledExampleManager>());
+
+        }
+
+        #endregion
+
+        #region Tests (CreateOrDefault)
+
+        [TestCaseSource(nameof(createOrDefaultExceptionTestCases))]
+        public void CreateOrDefault_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
+        [TestCaseSource(nameof(createOrDefaultTestCases))]
+        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenProperParameters
+            (LabeledExample labeledExample, INGramTokenizerRuleSet tokenizerRuleSet, TokenizedExample expected)
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            TokenizedExample actual = labeledExampleManager.CreateOrDefault(labeledExample, tokenizerRuleSet);
+
+            // Assert
+            Assert.That(
+                    ObjectMother.AreEqual(expected, actual),
+                    Is.True
+                );
+
+        }
+
+        [Test]
+        public void CreateOrDefault_ShouldReturnExpectedTokenizedExample_WhenListLabeledExamplesAndProperParameters()
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+
+            // Act
+            List<TokenizedExample> actual 
+                = labeledExampleManager.CreateOrDefault(ObjectMother.ShortLabeledExamples, LabeledExampleManager.DefaultTokenizerRuleSet);
+
+            // Assert
+            Assert.That(
+                    ObjectMother.AreEqual(ObjectMother.ShortTokenizedExamples, actual),
+                    Is.True
+                );
 
         }
 
@@ -304,6 +304,37 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         }
 
+        #endregion
+
+        #region Tests (CreateOrNull)
+
+        [Test]
+        public void CreateOrNull_ShouldReturnNull_WhenExceptionIsThrown()
+        {
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager(new FakeNGramTokenizer());
+
+            // Act
+            TokenizedExample actual 
+                = labeledExampleManager
+                    .CreateOrNull(
+                        labeledExample: ObjectMother.ShortLabeledExample01,
+                        tokenizerRuleSet: new NGramTokenizerRuleSet()
+                        );
+
+            // Assert
+            Assert.That(actual, Is.Null);
+        }
+
+        #endregion
+
+        #region Tests (CleanLabeledExamples)
+
+        [TestCaseSource(nameof(cleanLabeledExamplesExceptionTestCases))]
+        public void CleanLabeledExamples_ShouldThrowACertainException_WhenUnproperArguments
+            (TestDelegate del, Type expectedType, string expectedMessage)
+                => Utilities.ObjectMother.Method_ShouldThrowACertainException_WhenUnproperArguments(del, expectedType, expectedMessage);
+
         [Test]
         public void CleanLabeledExamples_ShouldReturnExpectedCollections_WhenUntokenizableLabeledExamples()
         {
@@ -333,9 +364,60 @@ namespace NW.NGramTextClassification.UnitTests.LabeledExamples
 
         }
 
+        [Test]
+        public void CleanLabeledExamples_ShouldReturnExpectedCollections_WhenAllValidExamples()
+        {
+
+            // Arrange
+            LabeledExampleManager labeledExampleManager = new LabeledExampleManager();
+            List<LabeledExample> expected = new List<LabeledExample>();
+
+            // Act
+            List<LabeledExample> actualRemoved;
+            List<LabeledExample> actualClean 
+                = labeledExampleManager
+                    .CleanLabeledExamples(
+                        labeledExamples: ObjectMother.ShortLabeledExamples,
+                        tokenizerRuleSet: NGramTokenization.ObjectMother.NGramTokenizerRuleSet_Mono,
+                        out actualRemoved);
+
+            // Assert
+            Assert.That(
+                    ObjectMother.AreEqual(expected, actualRemoved),
+                    Is.True
+                );
+            Assert.That(
+                    ObjectMother.AreEqual(ObjectMother.ShortLabeledExamples, actualClean),
+                    Is.True
+                );
+
+        }
+
         #endregion
 
         #region TearDown
+        #endregion
+
+        #region Support Classes
+
+        private class FakeNGramTokenizer : INGramTokenizer
+        {
+
+            public List<INGram> DoForRuleSet(string text, INGramTokenizerRuleSet ruleSet)
+                => throw new Exception("Simulated exception");
+
+            public List<INGram> DoForRuleSetOrDefault(string text, INGramTokenizerRuleSet ruleSet)
+                => throw new Exception("Simulated exception");
+
+            public List<Monogram> DoForMonogram(string text) => throw new NotImplementedException();
+            public List<Bigram> DoForBigram(string text) => throw new NotImplementedException();
+            public List<Trigram> DoForTrigram(string text) => throw new NotImplementedException();
+            public List<Fourgram> DoForFourgram(string text) => throw new NotImplementedException();
+            public List<Fivegram> DoForFivegram(string text) => throw new NotImplementedException();
+            public ushort GetN<T>() where T : INGram => throw new NotImplementedException();
+
+        }
+
         #endregion
 
     }
