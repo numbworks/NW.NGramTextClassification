@@ -15,6 +15,15 @@ Show help and usage information.
 
 # COMMANDS
 
+### scaffold
+Creates three example JSON files on disk from which you can start your text classification process.
+
+**--folderpath:{path}**
+    Defines the custom path to the working directory where the application will save the three example JSON files, overriding the default application folder.
+
+**--enableutc**
+    Replaces local time with UTC time in timestamps.
+
 ### classify
 Performs a text classification task on the data you provide.
 
@@ -49,6 +58,12 @@ Performs a text classification task on the data you provide.
     Replaces local time with UTC time in timestamps.
 
 # EXAMPLES
+**Creates three example JSON files on disk:**
+
+```text
+./nwngram scaffold
+```
+
 **Performs a text classification task on the data you provide:**
 
 ```text
