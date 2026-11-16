@@ -158,11 +158,14 @@ namespace NW.NGramTextClassification.CLI.ArgumentParsing
                 subCommand.Description = CommandLineString.COMMAND_SCAFFOLD_DESCR;
 
                 CommandOption folderPathOption = CreateFolderPathOption(subCommand);
+                CommandOption enableUTCOption = CreateEnableUTCOption(subCommand);
 
                 subCommand.OnExecute(() =>
                 {
 
-                    SettingBag settingBag = new SettingBag(folderPath: folderPathOption.Value());
+                    SettingBag settingBag = new SettingBag(
+                        folderPath: folderPathOption.Value(),
+                        enableUTC: enableUTCOption.HasValue());
 
                     return RunScaffold(settingBag);
 
