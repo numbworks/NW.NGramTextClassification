@@ -58,7 +58,15 @@ namespace NW.NGramTextClassification.UnitTests.NGramTokenization
                         )),
                     typeof(ArgumentNullException),
                     new ArgumentNullException("text").Message
-                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_02")
+                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_02"),
+
+            new TestCaseData(
+                    new TestDelegate(
+                            () => new NGramTokenizer().DoForFivegram(text: "SingleWord"
+                        )),
+                    typeof(Exception),
+                    MessageCollection.ProvidedTextCantBeTokenized(5, "SingleWord")
+                ).SetArgDisplayNames($"{nameof(validateExceptionTestCases)}_03")
 
         };
         private static TestCaseData[] doForRuleSetOrDefaultTestCases = CreateTestCases(nameof(doForRuleSetOrDefaultTestCases));
