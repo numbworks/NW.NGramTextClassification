@@ -27,7 +27,12 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             new TestCaseData(
                 new string[] { CommandLineString.COMMAND_CLASSIFY_NAME },
                 ArgumentManager.Failure
-            ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_02")
+            ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_02"),
+
+            new TestCaseData(
+                new string[] { CommandLineString.COMMAND_SCAFFOLD_NAME },
+                ArgumentManager.Success
+            ).SetArgDisplayNames($"{nameof(createExecuteTestCases)}_03")
 
         };
 
@@ -216,6 +221,44 @@ namespace NW.NGramTextClassification.CLI.UnitTests.ArgumentParsing
             Assert.That(
                 classifyCommand.Options.Single(
                     option => option.Description == CommandLineString.OPTION_ENABLEUTC_DESCR),
+                Is.InstanceOf<CommandOption>());
+
+        }
+
+        [Test]
+        public void Create_ShouldAddExpectedScaffoldCommand_WhenInvoked()
+        {
+
+            // Arrange
+            // Act
+            CommandLineApplication actual = new ArgumentManager().Create();
+
+            CommandLineApplication scaffoldCommand
+                = actual.Commands.Single(
+                    command => command.Name == CommandLineString.COMMAND_SCAFFOLD_NAME);
+
+            // Assert
+            Assert.That(scaffoldCommand, Is.InstanceOf<CommandLineApplication>());
+            Assert.That(CommandLineString.COMMAND_SCAFFOLD_DESCR, Is.EqualTo(scaffoldCommand.Description));
+
+        }
+
+        [Test]
+        public void Create_ShouldAddExpectedScaffoldOptions_WhenInvoked()
+        {
+
+            // Arrange
+            // Act
+            CommandLineApplication actual = new ArgumentManager().Create();
+
+            CommandLineApplication scaffoldCommand
+                = actual.Commands.Single(
+                    command => command.Name == CommandLineString.COMMAND_SCAFFOLD_NAME);
+
+            // Assert
+            Assert.That(
+                scaffoldCommand.Options.Single(
+                    option => option.Description == CommandLineString.OPTION_FOLDERPATH_DESCR),
                 Is.InstanceOf<CommandOption>());
 
         }
